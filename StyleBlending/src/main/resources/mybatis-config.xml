@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration 
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<!-- 
+	>> DTD 설정하기
+	  1) Window - Preferences - XML - XML Catalog - User Specified Entries - Add
+		- Config
+		  Location : http://mybatis.org/dtd/mybatis-3-config.dtd => System ID로 사용
+		  Key type : Public ID
+		  Key		 : -//mybatis.org//DTD Config 3.0//EN
+		  
+	    - Mapper
+		  Location : http://mybatis.org/dtd/mybatis-3-mapper.dtd => System ID로 사용
+		  Key type : Public ID
+		  Key		 : -//mybatis.org//DTD Mapper 3.0//EN
+		  
+   >> dtd 파일로 부터 xml 파일 생성
+   	  1) resources 오른쪽 버튼 - Next - XML File - Next
+   	  2) Create XML file from a DTD File - Next
+   	  3) Select XML Catalog entry - 해당 entry 선택 - 생성
+ -->
+
+<configuration>
+
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+	
+	<typeAliases>
+		<typeAlias type="com.kh.styleblending.admin.model.vo.Ad" alias="Ad"/>
+		
+		<typeAlias type="com.kh.styleblending.board.model.vo.Board" alias="Board"/>
+		<typeAlias type="com.kh.styleblending.board.model.vo.BoardReply" alias="BoardReply"/>
+		<typeAlias type="com.kh.styleblending.board.model.vo.FashionBoard" alias="FashionBoard"/>
+		<typeAlias type="com.kh.styleblending.board.model.vo.Image" alias="Image"/>
+		
+		<typeAlias type="com.kh.styleblending.main.model.vo.Live" alias="Live"/>
+		<typeAlias type="com.kh.styleblending.main.model.vo.Notice" alias="Notice"/>
+		
+		<typeAlias type="com.kh.styleblending.member.model.vo.Alarm" alias="Alarm"/>
+		<typeAlias type="com.kh.styleblending.member.model.vo.Fan" alias="Fan"/>
+		<typeAlias type="com.kh.styleblending.member.model.vo.Member" alias="Member"/>
+		
+		<typeAlias type="com.kh.styleblending.posting.model.vo.Posting" alias="Posting"/>
+		<typeAlias type="com.kh.styleblending.posting.model.vo.PostingReply" alias="PostingReply"/>
+		<typeAlias type="com.kh.styleblending.posting.model.vo.Style" alias="Style"/>
+
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="mappers/member-mapper.xml"/>
+		<mapper resource="mappers/board-mapper.xml"/>
+		<mapper resource="mappers/admin-mapper.xml"/>
+		<mapper resource="mappers/main-mapper.xml"/>
+		<mapper resource="mappers/posting-mapper.xml"/>
+	</mappers>
+
+</configuration>
+
+
+
+
+
