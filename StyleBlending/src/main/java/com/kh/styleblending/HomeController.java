@@ -1,5 +1,7 @@
 package com.kh.styleblending;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -35,7 +37,7 @@ public class HomeController {
 	}
 	
 	@RequestMapping("join.do")
-	public String insertMember(Member m, ModelAndView mv) {
+	public ModelAndView insertMember(Member m, ModelAndView mv) {
 		
 		String encPass = bcryptPasswordEncoder.encode(m.getPass());
 		
@@ -44,12 +46,69 @@ public class HomeController {
 		int result = mService.insertMember(m);
 		
 		if(result > 0) {
-			return "redirect:main.do";
+			mv.setViewName("redirect:main.do");
 		}else {
 			mv.addObject("msg", "회원가입실패").setViewName("common/errorPage");
 		}
+		return mv;
 	}
 	
+	
+	@RequestMapping("login.do")
+	public ModelAndView loginMember(Member m, HttpSession session, ModelAndView mv) {
+		
+		Member loginUser = mService.loginMember(m);
+		
+		/* 암호화
+		//if(loginUser != null) { // 로그인 성공
+		if(loginUser != null && bcryptPasswordEncoder.matches(m.getPass(), loginUser.getPass())) {
+			session.setAttribute("loginUser", loginUser);
+			
+			mv.setViewName("redirect:main.do");
+			
+		}else { // 로그인 실패
+			
+			mv.addObject("msg", "로그인 실패").setViewName("common/errorPage");
+		}
+		*/
+		
+		if(loginUser != null) { // 로그인 성공
+			mv.setViewName("redirect:main.do");
+		}else {
+			mv.addObject("msg", "로그인 실패").setViewName("common/errorPage");
+		}
+		
+		return mv;
+		
+		
+	}
+	
+	@RequestMapping("logout.do")
+	public String logout(HttpSession session) {
+		
+		session.invalidate(); // 세션 무효화
+		
+		return "redirect:main.do";
+		
+	}
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	
 	
 	

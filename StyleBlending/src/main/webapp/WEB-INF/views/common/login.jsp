@@ -45,7 +45,7 @@
 				</div>
 				
 				<div style="margin-top:10px;">
-					<button type="button" class="form-control btn btn-dark" style="height:50px;"><b>로그인</b></button>
+					<button type="submit" class="form-control btn btn-dark" style="height:50px;"><b>로그인</b></button>
 				</div>
 				<div style="margin-top:35px;">
 					<button type="button" class="form-control btn btn-warning" id="kakaoBtn"><b>카카오톡 로그인</b></button>

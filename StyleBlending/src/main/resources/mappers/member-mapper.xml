@@ -21,9 +21,15 @@
 	</resultMap>
 	
 	<select id="loginMember" resultMap="memberResultSet">
+	<!-- 암호화
 		select *
 		from member
 		where email=#{email} and isdelete='N'
+	-->
+		select *
+		from member
+		where email=#{email} and pass=#{pass} and isdelete='N'
+	
 	</select>
 	
 	<insert id="insertMember">

@@ -7,5 +7,8 @@
 </head>
 <body>
 	<button onclick="location.href='main.do'"> StyleBlending 들어가기</button>
+	
+	
+	<jsp:forward page="main.do"></jsp:forward>
 </body>
 </html>
