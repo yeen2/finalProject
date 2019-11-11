@@ -11,6 +11,8 @@
 invest_table .title .date {
     color: #cbcbcb;
     font-size: .7rem;
+    
+    
 }
 .invest_table .title {
     padding: 15px 40px 15px 15px;
