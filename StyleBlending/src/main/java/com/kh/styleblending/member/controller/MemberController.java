@@ -12,13 +12,15 @@ public class MemberController {
 	@Autowired
 	private MemberService mService;
 	
-	@RequestMapping("mPage.do")
-	public String myPage() {
-		return "member/myPage";
+	@RequestMapping("mProfile.do")
+	public String profile() {
+		return "member/profile";
 	}
 	
-	
-	
+	@RequestMapping("mMyPage.do")
+	public String MyPage() {
+		return "member/myPage";
+	}
 	
 	
 }

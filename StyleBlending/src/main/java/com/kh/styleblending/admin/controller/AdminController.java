@@ -12,10 +12,40 @@ public class AdminController {
 	@Autowired
 	private AdminService aService;
 	
-	@RequestMapping("aPage")
+	@RequestMapping("aPage.do")
 	public String adminPage() {
-		return "admin/";
+		return "admin/adminPage";
 	}
+	
+	@RequestMapping("aUser.do")
+	public String user() {
+		return "admin/user";
+	}
+	
+	@RequestMapping("aDeclare.do")
+	public String declare() {
+		return "admin/declare";
+	}
+	
+	@RequestMapping("aAdvertisment.do")
+	public String advertisment() {
+		return "admin/advertisment";
+	}
+	
+	@RequestMapping("aStatistics.do")
+	public String statistics() {
+		return "admin/statistics";
+	}
+	
+	@RequestMapping("aNotice.do")
+	public String notice() {
+		return "admin/notice";
+	}
+	
+	
+	
+	
+	
 	
 	
 	

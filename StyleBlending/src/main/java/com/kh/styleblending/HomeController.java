@@ -77,6 +77,7 @@ public class HomeController {
 		*/
 		
 		if(loginUser != null) { // 로그인 성공
+			session.setAttribute("loginUser", loginUser);
 			mv.setViewName("redirect:main.do");
 		}else {
 			mv.addObject("msg", "로그인 실패").setViewName("common/errorPage");

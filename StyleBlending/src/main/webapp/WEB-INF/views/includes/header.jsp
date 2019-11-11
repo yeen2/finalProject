@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%
-	String conPath = request.getContextPath();
-%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,11 +12,11 @@
     <meta name="author" content="BootstrapBay">
 
 <link rel="stylesheet"
-	href="<%=conPath %>/resources/assets/vendor/bootstrap/bootstrap.min.css">
+	href="${pageContext.request.contextPath}/resources/assets/vendor/bootstrap/bootstrap.min.css">
 <link rel="stylesheet"
-	href="<%=conPath %>/resources/assets/css/lazy.css">
+	href="${pageContext.request.contextPath}/resources/assets/css/lazy.css">
 <link rel="stylesheet"
-	href="<%=conPath %>/resources/assets/css/demo.css">
+	href="${pageContext.request.contextPath}/resources/assets/css/demo.css">
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.6.0/css/all.css"
 	integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h"
@@ -114,8 +112,8 @@
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
 		<div class="container">
 
-			<a class="navbar-brand d-flex align-items-center" href="<%=conPath %>"> 
-				<img src="<%=conPath %>/resources/assets/img/logo.svg" class="mr-2" height="30"> Stlye Blending
+			<a class="navbar-brand d-flex align-items-center" href="${pageContext.request.contextPath}"> 
+				<img src="${pageContext.request.contextPath}/resources/assets/img/logo.svg" class="mr-2" height="30"> Stlye Blending
 			</a>
 
 
@@ -153,10 +151,10 @@
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="<%=conPath%>/views/board/list.jsp">Notice</a>
+						<a class="nav-link" href="mainNotice.do">Notice</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="<%=conPath%>/views/board/list.jsp">Free board</a>
+						<a class="nav-link" href="">Free board</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="joinForm.do">Join</a>
@@ -183,9 +181,14 @@
 						</a>
 							<div class="dropdown-menu"
 								aria-labelledby="navbarDropdownMenuLink">
-								<a class="dropdown-item" href="mPage.do">myPage</a> 
+								<a class="dropdown-item" href="mProfile.do">myPage</a> 
 								<a class="dropdown-item" href="aPage.do">adminPage</a> 
-								<a class="dropdown-item" href="logout.do">LogOut</a>
+								<c:if test="${ empty loginUser }">
+									<a class="dropdown-item" href="loginForm.do">Sign In</a>
+								</c:if>
+								<c:if test="${ !empty loginUser }">
+									<a class="dropdown-item" href="logout.do">LogOut</a>
+								</c:if>
 							</div>
 					</li>
 
@@ -441,15 +444,15 @@ function select(){
 </script> -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script
-		src="<%=conPath %>/resources/assets/vendor/jquery/jquery.min.js"></script>
+		src="${pageContext.request.contextPath}/resources/assets/vendor/jquery/jquery.min.js"></script>
 	<script
-		src="<%=conPath %>/resources/assets/vendor/popper/popper.min.js"></script>
+		src="${pageContext.request.contextPath}/resources/assets/vendor/popper/popper.min.js"></script>
 	<script
-		src="<%=conPath %>/resources/assets/vendor/bootstrap/bootstrap.min.js"></script>
+		src="${pageContext.request.contextPath}/resources/assets/vendor/bootstrap/bootstrap.min.js"></script>
 
 	<!-- optional plugins -->
 	<script
-		src="<%=conPath %>//resources/assets/vendor/nouislider/js/nouislider.min.js"></script>
+		src="${pageContext.request.contextPath}//resources/assets/vendor/nouislider/js/nouislider.min.js"></script>
 
 	<!--   lazy javascript -->
-	<script src="<%=conPath %>//resources/assets/js/lazy.js"></script>
+	<script src="${pageContext.request.contextPath}//resources/assets/js/lazy.js"></script>
