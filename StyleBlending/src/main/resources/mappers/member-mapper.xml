@@ -4,7 +4,30 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="memberMapper">
 
-
+	<resultMap id="memberResultSet" type="Member">
+		<id property="mNo" column="m_no"></id>
+		<result property="loginType" column="logintype"/>
+		<result property="snsId" column="snsid"/>
+		<result property="email" column="email"/>
+		<result property="pass" column="pass"/>
+		<result property="nickName" column="nickname"/>
+		<result property="profile" column="profile"/>
+		<result property="location" column="location"/>
+		<result property="profileImg" column="prifile_img"/>
+		<result property="profilePath" column="profile_path"/>
+		<result property="enrollDate" column="enroll_date"/>
+		<result property="updateDate" column="update_date"/>
+		<result property="idDelete" column="isdelete"/>
+	</resultMap>
+	
+	
+	<insert id="insertMember">
+		insert into member
+		values(seq_member.nextval, #{email}, )
+	</insert>
+	
+	
+	
 
 
 
