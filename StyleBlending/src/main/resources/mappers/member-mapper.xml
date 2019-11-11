@@ -38,9 +38,20 @@
 				null, null, null, null, sysdate, null, default)
 	</insert>
 	
+	<select id="joinCheckEmail" resultType="_int">
+		select count(*)
+		from member
+		where email=#{email}
+	</select>
 	
+	<select id="joinCheckNickName" resultType="_int">
+		select count(*)
+		from member
+		where nickname=#{nickName}
+	</select>
 	
 
+	
 
 
 

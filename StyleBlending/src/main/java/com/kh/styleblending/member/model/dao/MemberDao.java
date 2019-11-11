@@ -20,6 +20,15 @@ public class MemberDao {
 		return sqlSession.selectOne("memberMapper.loginMember", m);
 	}
 	
+	public int joinCheckEmail(String id) {
+		return sqlSession.selectOne("memberMapper.joinCheckEmail", id);
+	}
+	
+	public int joinCheckNickName(String nickName) {
+		return sqlSession.selectOne("memberMapper.joinCheckNickName", nickName);
+	}
+	
+	
 	
 	
 }

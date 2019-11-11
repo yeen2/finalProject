@@ -1,5 +1,7 @@
 package com.kh.styleblending;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.styleblending.member.model.service.MemberService;
@@ -54,6 +57,7 @@ public class HomeController {
 	}
 	
 	
+	
 	@RequestMapping("login.do")
 	public ModelAndView loginMember(Member m, HttpSession session, ModelAndView mv) {
 		
@@ -79,8 +83,6 @@ public class HomeController {
 		}
 		
 		return mv;
-		
-		
 	}
 	
 	@RequestMapping("logout.do")
@@ -89,7 +91,33 @@ public class HomeController {
 		session.invalidate(); // 세션 무효화
 		
 		return "redirect:main.do";
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping("joinCheckEmail.do")
+	public String joinCheckEmail(String id) throws IOException {
 		
+		int result = mService.joinCheckEmail(id);
+		
+		if(result > 0) {
+			return "2";
+		}else {
+			return "1";
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping("joinCheckNickName.do")
+	public String joinCheckNickName(String nickName) throws IOException {
+		
+		int result = mService.joinCheckNickName(nickName);
+		
+		if(result > 0) {
+			return "2";
+		}else {
+			return "1";
+		}
 	}
 	
 

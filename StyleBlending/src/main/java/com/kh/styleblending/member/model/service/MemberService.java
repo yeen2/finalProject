@@ -10,8 +10,12 @@ public interface MemberService {
 	// 2. 로그인
 	Member loginMember(Member m);
 	
+	// 3. 비밀번호 찾기
 	
+	// 4. 이메일ajax
+	int joinCheckEmail(String id);
 	
-	
+	// 5. 닉네임ajax
+	int joinCheckNickName(String nickName);
 	
 }

@@ -40,8 +40,8 @@
 				</div>
 				
 				<div class="input-group-prepend" style="margin-top:10px;">
-					<a href="#" style="margin-right:235px;">Forgot Password?</a>
-					<a href="#">회원가입</a>
+					<a href="searchPass.do" style="margin-right:235px;">Forgot Password?</a>
+					<a href="joinForm.do">회원가입</a>
 				</div>
 				
 				<div style="margin-top:10px;">
