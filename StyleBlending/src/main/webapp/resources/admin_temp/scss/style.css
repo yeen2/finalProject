@@ -842,7 +842,7 @@ aside.left-panel {
     min-height: 50px;
     margin: 0px;
     padding: 0px 15px;
-    background: #ffffff;
+    background: /* #ffffff; */ #000000;
     border-bottom: 0px; }
     .right-panel .page-header h1 {
       font-size: 18px;
@@ -858,7 +858,7 @@ aside.left-panel {
       content: "/\00a0"; }
 
 .right-panel header.header {
-  background: #fff;
+  background: /* #fff */ #000000;
   border-bottom: 1px solid #e8e9ed;
   -webkit-box-shadow: none;
           box-shadow: none;
@@ -878,7 +878,7 @@ aside.left-panel {
   padding-top: 7px; }
 .right-panel .navbar-header {
   width: 100%;
-  background-color: #fff;
+  background-color:/*  #fff; */ #000000; 
   padding: 0 1.25em 0 0; }
   .right-panel .navbar-header > a {
     display: inline-block; }
@@ -895,7 +895,7 @@ aside.left-panel {
   z-index: 999; }
 
 header.fixed-top {
-  background: #fff;
+  background: /* #fff; */ #000000;
   padding: 20px; }
 
 .menutoggle {
