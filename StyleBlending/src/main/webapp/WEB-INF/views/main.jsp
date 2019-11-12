@@ -74,39 +74,12 @@
 		transition: transform .5s;
 	}
 	
-	.block {
-		border: 0px solid #d81f25;
-		padding: 0 5px;
-		height: 20px;
-		overflow: hidden;
-		background: #fff;
-		width: 100px;
-		font-family: Gulim;
-		font-size: 12px;
-	}
-	
-	.block, #ticker, .block li {
-		margin: 0;
-		padding: 0;
-		list-style: none;
-	}
-	
-	.block li a {
-		display: block;
-		height: 20px;
-		line-height: 20px;
-		color: #555;
-		text-decoration: none;
-		font-size: large;
-	}
-	
-	.block li span {
-		padding: 3px 5px;
-		background: black;
-		color: #fff;
-		font-weight: bold;
-		margin-right: 3px;
-	}
+.block {border:0px solid #d81f25; padding:0 5px; height:20px; overflow:hidden; background:#fff; width:100px; font-family:Gulim; font-size:12px;}
+.block, #ticker, #ticker2,
+.block li {margin:0; padding:0; list-style:none;}
+.block li a {display:block; height:20px; line-height:20px; color:#555; text-decoration:none; font-size: large;}
+.block li span {padding:3px 5px; background:black; color:#fff; font-weight:bold; margin-right:3px;}
+ 
 </style>
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -123,7 +96,7 @@
 
 		<!-- <figure id="banner" style="margin-top: 0px; height:230px;">
 		 -->
-		<div style="border: 1px solid black; padding: 0px; height: 230px;"
+		<div style="padding: 0px; height: 230px;"
 			class="form-inline">
 			<div class="form-group col-9" style="padding: 0px;">
 				<img style="width: 820px; height: 230px;"
@@ -134,7 +107,12 @@
 
 				</ul>
 				<ul id="ticker2" style="height: 230px">
+					<li	
+						style="font-family: Gulim; font-size: large; margin-bottom: 10px;"><i
+						class="fa fa-search"></i>&nbsp;급상승 겁색어
+					</li>
 				</ul>
+
 
 			</div>
 			<div class="form-group col-1" style="margin-bottom: 191px">
@@ -482,25 +460,29 @@
 	</div>
 
 	<script>
-		var page = 2;
+	var page = 2;
 
-		$(window).scroll(
-				function() {
-					if ($(window).scrollTop() == $(document).height()
-							- $(window).height()) {
-						console.log(++page);
-						// $("i").removeClass('fa-spinner');
-						//$("#ddd").append("<div class='row mt-3' style='border:1px solid black;'>");
-						var dlendud = $('#ttt').clone();
-						//   dlendud.find('img').eq(0).attr('src','~~~"')
+	$(window).scroll(function() {
+		console.log($(window).scrollTop());
+		console.log($(document).height());
+		console.log($(window).height());
+		
+		var height = $(window).height() - 920;
+		
+		
+	    if($(window).scrollTop() == height){    	
+	      console.log(++page);
+	     // $("i").removeClass('fa-spinner');
+	      //$("#ddd").append("<div class='row mt-3' style='border:1px solid black;'>");
+	      var dlendud=$('#ttt').clone();
+	   //   dlendud.find('img').eq(0).attr('src','~~~"')
 
-						$('.eee').append(
-								'<div class="row mt-3">' + dlendud.html()
-										+ '</div>');
-
-					}
-
-				});
+	      $('.eee').append('<div class="row mt-3">'+dlendud.html()+'</div>');
+	   	  
+	    }
+	   
+	 
+	});
 
 		var sel;
 		$(document).on("click", ".b", function() {
@@ -602,92 +584,100 @@
 						});
 	</script>
 
-	<script>
-		$(function() {
-			//	$("#ticker2").css("display","none");
-			topSearch();
+<script>
+ 	$(function(){
+		$("#ticker2").css("display","none");
+		console.log("ddd");
+		topSearch();
+	});
+	
+	function topSearch(){
+		
+		
+		var $ul = $("#ticker");
+		
+		
+		$.ajax({
+			url:"topSearch.do",
+			dataType:"json",
+			success:function(data){
+				console.log("성공");
+				$.each(data, function(index, value){
+					
+					$ul.append("<li class='ddd'><a href='#'><span style='margin-right:9px;'>"+value.liveNo+"</span>"+value.keyword+"</a></li>");
+					
+				
+				});
+			},
+			error:function(){
+				console.log("서버통신실패");
+			}
 		});
-
-		function topSearch() {
-
-			var $ul = $("#ticker");
-
-			$.ajax({
-				url : "topSearch",
-				dataType : "json",
-				success : function(data) {
-					console.log("성공");
-					$.each(data, function(index, value) {
-
-						$ul.append("<li class='ddd'><a href='#'><span>"
-								+ value.rank + "</span>" + value.name
-								+ "</a></li>");
-
-					});
-				},
-				error : function() {
-					console.log("서버통신실패");
-				}
-			});
-
-		}
-
-		function topSearch2() {
-
-			var $ul = $("#ticker");
-
-			$.ajax({
-				url : "topSearch",
-				dataType : "json",
-				success : function(data) {
-					console.log("성공");
-					$.each(data, function(index, value) {
-
-						$ul.append("<li class='ddd'><a href='#'><span>"
-								+ value.rank + "</span>" + value.name
-								+ "</a></li>");
-
-					});
-				},
-				error : function() {
-					console.log("서버통신실패");
-				}
-			});
-
-		}
-
-		$(function() {
-			var ticker = function() {
-				setTimeout(function() {
-					$('#ticker li:first').animate(
-							{
-								marginTop : '-20px'
-							},
-							400,
-							function() {
-								$(this).detach().appendTo('ul#ticker')
-										.removeAttr('style');
-							});
-					ticker();
-				}, 3000);
-			};
-			ticker();
+		
+	}
+ 
+	function topSearch2(){
+		
+		var $ul = $("#ticker2");
+		
+		
+		$.ajax({
+			url:"topSearch.do",
+			dataType:"json",
+			success:function(data){
+				$.each(data, function(index, value){
+					
+					$ul.append("<li class='ddd' style='margin-bottom:10px;'><a href='#'><span style='margin-right:9px;'>"+value.liveNo+"</span>"+value.keyword+"</a></li>");
+				
+				});
+			},
+			error:function(){
+				console.log("서버통신실패");
+			}
 		});
-	</script>
-	<script>
-		$('#aDrop').mouseenter(function() {
-			//$(".ddd").remove();
-			$("#ticker").css("display", "none");
-			topSearch2();
-		});
-		$('#aDrop').mouseleave(function() {
-			$("#ticker").css("display", "block");
-			topSearch();
+		
+	}
+ 
+ 
+ 
+ $(function()
+		 {
+		     var ticker = function()
+		     {
+		         setTimeout(function(){
+		             $('#ticker li:first').animate( {marginTop: '-20px'}, 400, function()
+		             {
+		                 $(this).detach().appendTo('ul#ticker').removeAttr('style');
+		             });
+		             ticker();
+		         }, 3000);
+		     };
+		     ticker();
+		 });
 
-		});
-	</script>
+</script>
+<script>
+$('#aDrop').mouseenter(function() {
+	//$(".ddd").remove();
+	$("#ticker").css("display","none");
+	$("#ticker2").css("display","block");
+	$(".block").css("overflow","visible");	
+	$(".ddd").remove();
+	
+	topSearch2();
+});
+$('#aDrop').mouseleave(function() {
+	$("#ticker").css("display","block");
+	$("#ticker2").css("display","none");
+	$(".block").css("overflow","hidden");
+	
+	topSearch();
+	
+	
+});
 
 
+</script>
 
 
 	<div id="loading" style="width: 100%; height: 50px; margin-left: 900px;"></div>

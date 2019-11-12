@@ -8,7 +8,7 @@
 			<div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
 				<div class="links">
 					<ul class="footer-menu list-unstyled d-flex flex-row text-center text-md-left">
-						<li><a href="views/includes/notice.jsp" target="_blank">공지사항</a></li>
+						<li><a href="${pageContext.request.contextPath}/WEB-INF/views/includes/notice.jsp" target="_blank">공지사항</a></li>
 						<li><a href="https://bootstrapbay.com/about" target="_blank">사이트소개</a></li>
 						<li><a href="https://bootstrapbay.com/blog/" target="_blank">광고문의</a></li>
 						<li><a href="https://bootstrapbay.com/terms" target="_blank">비즈니스</a></li>
