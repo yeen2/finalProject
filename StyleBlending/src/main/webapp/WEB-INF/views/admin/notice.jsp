@@ -6,10 +6,10 @@
 <head>
 <meta charset="UTF-8">
 
-<meta name="description" content="Ela Admin - HTML5 Admin Template">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<%-- <meta name="description" content="Ela Admin - HTML5 Admin Template">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 	
-	 <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
+	<link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
     <link rel="shortcut icon" href="https://i.imgur.com/QRAUqs9.png">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/admin_temp/css/style.css">
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
-
+ --%>
 
 
 <!-- jQuery -->
@@ -72,7 +72,7 @@
       <jsp:include page="header.jsp" />
       
       
-      
+      <jsp:include page="footer.jsp" />
     </div>
 </body>
 </html>

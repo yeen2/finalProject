@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="description" content="Ela Admin - HTML5 Admin Template">
+<%-- <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
@@ -23,8 +23,8 @@
     <link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">
 
     <link href="https://cdn.jsdelivr.net/npm/weathericons@2.1.0/css/weather-icons.css" rel="stylesheet" />
+ --%>
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.css" rel="stylesheet" />
-
    <style>
     #weatherWidget .currentDesc {
         color: #ffffff!important;
@@ -294,8 +294,19 @@
 	                    </div>
 	     
                 	<!-- /Calender  -->
-						
-						
+	                	<div class="col-md-5 col-lg-5">
+							<div class="card  ">
+								<div class="card-body">
+									<div class="h1 text-muted text-right mb-1">
+										<i class="fa fa-clock-o"></i>
+									</div>
+									<div class="h4 mb-0">5:34:11</div>
+									<small class="text-muted text-uppercase font-weight-bold">Avg. Time</small>
+									<div class="progress progress-xs mt-3 mb-0 bg-flat-color-5" style="width: 40%; height: 5px;"></div>
+								</div>
+							</div>	
+						</div>	
+										
 					<div class="col-lg-8">
                         <div class="card">
                             <div class="card-body">
@@ -424,21 +435,7 @@
             <!-- .animated -->
         </div>
         <!-- /.content -->
-        <div class="clearfix"></div>
-        <!-- Footer -->
-        <footer class="site-footer">
-            <div class="footer-inner bg-white">
-                <div class="row">
-                    <div class="col-sm-6">
-                        Copyright &copy; 2018 Ela Admin
-                    </div>
-                    <div class="col-sm-6 text-right">
-                        Designed by <a href="https://colorlib.com">Colorlib</a>
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <!-- /.site-footer -->
+       <jsp:include page="footer.jsp" />
     </div>
     <!-- /#right-panel -->
     
