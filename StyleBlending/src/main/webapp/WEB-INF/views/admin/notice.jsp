@@ -6,30 +6,10 @@
 <head>
 <meta charset="UTF-8">
 
-<%-- <meta name="description" content="Ela Admin - HTML5 Admin Template">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-	
-	<link rel="apple-touch-icon" href="https://i.imgur.com/QRAUqs9.png">
-    <link rel="shortcut icon" href="https://i.imgur.com/QRAUqs9.png">
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.0/normalize.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/admin_temp/css/cs-skin-elastic.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/admin_temp/css/lib/datatable/dataTables.bootstrap.min.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/admin_temp/css/style.css">
-
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
- --%>
-
-
-<!-- jQuery -->
+	<!-- jQuery -->
     <script src="https://code.jquery.com/jquery.min.js"></script>
     <!-- google charts -->
-       <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 </head>
 <body>
@@ -69,7 +49,132 @@
 
     <div id="right-panel" class="right-panel">
 
-      <jsp:include page="header.jsp" />
+    <jsp:include page="header.jsp" />
+      
+      
+    	<div class="content">
+            <div class="animated fadeIn">
+               <div class="card-header" >
+                   <strong class="card-title">공지사항</strong>
+               </div>
+              
+              <div class="card-header" style="background:white;">
+                  <div class="row">
+                  	<div class="card-body card-block">
+                 		   <button type="button" class="btn btn-outline-danger btn-sm" style="float:right; " data-toggle="modal" data-target="#staticModal">
+                 		   	삭제
+                 		   </button>
+                 		   <button type="button" class="btn btn-outline-danger btn-sm" style="float:right; margin-right:10px;" data-toggle="modal" data-target="#staticModal">
+                 		   	수정
+                 		   </button>
+                    </div>
+                  </div>
+                	       
+                    <div class=" table-stats order-table ov-h ">                            	
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                	<th>
+                                		<label class="switch switch-3d switch-danger mr-3">
+                                			<input type="checkbox" class="switch-input" checked="true">
+                               				<span class="switch-label"></span> 
+                               				<span class="switch-handle"></span>
+                                		</label>
+                                	</th>
+                                    <th>No.</th>
+                                    <th>제목</th>
+                                    <th>작성자</th>
+                                    <th>조회수</th>
+                                    <th>작성일</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                 <tr>
+                                	<td><label class="switch switch-3d switch-danger mr-3"><input type="checkbox" class="switch-input" checked="true"> <span class="switch-label"></span> <span class="switch-handle"></span></label>
+                                	</td>
+                                    <td>4</td>
+                                    <td>
+                                    	<div data-toggle="modal" data-target="#smallmodal">
+                                            <a href="#">HYEN</a>
+                                        </div>
+                                    </td>
+                                    <td>패션</td>
+                                    <td>2019-11-04</td>
+                                    <td><span class="badge badge-pending">N</span></td>
+                                </tr>
+                                 <tr>
+                                 	<td><label class="switch switch-3d switch-danger mr-3"><input type="checkbox" class="switch-input" checked="true"> <span class="switch-label"></span> <span class="switch-handle"></span></label>
+                                	</td>
+                                    <td>6</td>
+                                    <td>
+                                    	<div data-toggle="modal" data-target="#smallmodal">
+                                            <a href="#">Edinburgh</a>
+                                        </div>
+                                    </td>
+                                    <td>패션</td>
+                                    <td>2019-11-04</td>
+                                    <td><span class="badge badge-pending">N</span></td>
+                                </tr>
+                                <tr>
+                                	<td><label class="switch switch-3d switch-danger mr-3"><input type="checkbox" class="switch-input" checked="true"> <span class="switch-label"></span> <span class="switch-handle"></span></label>
+                                	</td>
+                                    <td>7</td>
+                                    <td>
+                                    	<div data-toggle="modal" data-target="#smallmodal">
+                                            <a href="#">Edinburgh</a>
+                                        </div>
+                                    </td>
+                                    <td>패션</td>
+                                    <td>2019-11-04</td>
+                                    <td><span class="badge" style="background:gray">Y</span></td>
+                                </tr>
+                                <tr>
+                                	<td><label class="switch switch-3d switch-danger mr-3"><input type="checkbox" class="switch-input" checked="true"> <span class="switch-label"></span> <span class="switch-handle"></span></label>
+                                	</td>
+                                    <td>8</td>
+                                    <td>
+                                    	<div data-toggle="modal" data-target="#smallmodal">
+                                            <a href="#">Edinburgh</a>
+                                        </div>
+                                    </td>
+                                    <td>패션</td>
+                                    <td>2019-11-04</td>
+                                    <td><span class="badge" style="background:gray">Y</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <div class="row">
+                         <div class="col-sm-4" style="margin-left:10px;">
+                         	Showing 1 to 10 of 12 entries	
+                         </div>
+                         
+                         <div class=".col-md-6 .offset-md-3">
+                         	<div class="dataTables_paginate paging_simple_numbers" id="bootstrap-data-table_paginate">
+                         		<ul class="pagination">
+                         			<li class="paginate_button page-item previous disabled" id="bootstrap-data-table_previous">
+                         				<a href="#" aria-controls="bootstrap-data-table" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
+                         			</li>
+                         			<li class="paginate_button page-item active">
+                         				<a href="#" aria-controls="bootstrap-data-table" data-dt-idx="1" tabindex="0" class="page-link">1</a>
+                         			</li>
+                         			<li class="paginate_button page-item ">
+                         				<a href="#" aria-controls="bootstrap-data-table" data-dt-idx="2" tabindex="0" class="page-link">2</a>
+                         			</li>
+                         			<li class="paginate_button page-item next" id="bootstrap-data-table_next">
+                         				<a href="#" aria-controls="bootstrap-data-table" data-dt-idx="3" tabindex="0" class="page-link">Next</a>
+                         			</li>
+                         		</ul>
+                         	</div>
+                         </div>
+                        </div>
+                        
+                    </div> <!-- /.table-stats -->
+                </div>
+            </div><!-- .animated -->
+        </div><!-- .content -->
+		
+      
       
       
       <jsp:include page="footer.jsp" />
