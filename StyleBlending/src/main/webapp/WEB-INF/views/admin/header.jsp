@@ -8,11 +8,11 @@
 </head>
 <body>
 	  <!-- Header-->
-        <header id="header" class="header">
+        <header id="header" class="header" style="background-color: #000000 !important;">
             <div class="top-left">
-                <div class="navbar-header">
+                <div class="navbar-header" style="background-color: #000000 !important;">
                     <a class="navbar-brand" href="./"><img class="mr-2" height="30" src="${pageContext.request.contextPath}/resources/admin_temp/images/logo.svg" alt="Logo">Style Bleding</a>
-                    <a class="navbar-brand hidden" href="./"><img src="${pageContext.request.contextPath}/resources/admin_temp/images/logo.svg"  alt="Logo">Style Bleding</a>
+                    <a class="navbar-brand hidden" href="./"><img src="${pageContext.request.contextPath}/resources/admin_temp/images/logo.svg" alt="Logo">Style Bleding</a>
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
                 </div>
             </div>
