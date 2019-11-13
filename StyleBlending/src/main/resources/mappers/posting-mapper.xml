@@ -5,7 +5,12 @@
 <mapper namespace="styleMapper">
 
 
-
+	<insert id="">
+		insert into ~~~
+		<selectKey keyProperty="seq" resultType="_int" order="AFTER">
+			select seq_member.currval from dual
+		</selectKey>
+	</insert>
 
 
 

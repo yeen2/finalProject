@@ -16,11 +16,14 @@ public class PostingServiceImpl implements PostingService{
 	private PostingDao pDao;
 	
 	@Override
-	public int insertPosting(Posting p, ArrayList<Style> s) {
-		return pDao.insertPosting(p,s);
+	public int insertPosting(Posting p) {
+		return pDao.insertPosting(p);
 	}
 	
-	
+	@Override
+	public int insertStyle(Style s) {
+		return pDao.insertStyle(s);
+	}
 	
 	
 	

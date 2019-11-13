@@ -260,7 +260,7 @@
 			
 			<!-- 사진업로드 부분 (hidden) -->
 			<div id="fileArea">
-				<input type="file" id="fileImg" name="originalImg" onchange="loadImg(this, 1);"> 
+				<input type="file" id="fileImg" name="fileImg" onchange="loadImg(this, 1);"> 
 			</div>
 			
 			<script>
@@ -343,6 +343,7 @@
 					</div>
 					<br><br>
 					
+					
 					<%-- <% for(int i=0; i<3; i++){ %> --%>
 					<div class="card-body" id="addDiv"
 						style="border-radius: 0; border: none; box-shadow: 0 0 2rem rgba(0, 0, 0, 0.1);
@@ -350,6 +351,13 @@
     							margin-right: 10px; margin-left: 10px; margin-bottom: 10px;">
 						<!-- 동적 추가 삭제 -->
 						<div>
+						
+						<!-- <div style="display: inline-block; float: right;">
+							<button type="button" id="removeDiv" style="cursor: pointer; background-color: transparent; border: none; text-decoration: none;">
+								<i class="fas fa-times"></i>
+							</button>
+						</div> -->
+						
 							<!-- 1.카테고리 -->
 							<label>카테고리</label> 
 							&nbsp;&nbsp;&nbsp;&nbsp;
@@ -515,22 +523,28 @@
 						</div> <!-- 동적 div end  -->
 					</div> 	<!-- card-body end -->
 					
-					<br>
+					<br><br>
 				<%-- <% } %>  --%>
 				 <script>            
 			        $(document).ready (function () {                
 			            $('#btnAdd').click (function () {
 			            	
 			            	var addContent = $('#addDiv').html();
-			            	console.log(addContent);
+			            	//console.log(addContent);
+			            	
+			            	//var origin = $("#addDiv").clone();
+			            	//$('#addLocation').append(origin);
+			            	
 			            	
 			                $('#addLocation').append(
-			                	'<br>'
+			                	
 			                ).append(
 			                	'<div class="card-body" id="addDiv" style="border-radius: 0; border: none; box-shadow: 0 0 2rem rgba(0, 0, 0, 0.1); transition: transform 800ms cubic-bezier(0.165, 0.84, 0.44, 1); display: inline-block; margin-right: 10px; margin-left: 10px;"><div><br><div style="display: inline-block; float: right;"><button type="button" id="removeDiv" style="cursor: pointer; background-color: transparent; border: none; text-decoration: none;"><i class="fas fa-times"></i></button></div>' + addContent + '</div>' 
 			               	).append(
-			               		'<br>'		
+			               		'<br><br>'		
 			               	); // end append    
+			                
+			                
 			                
 			               /*  $('#removeDiv').on('click', function () { 
 			                    $(this).parent().parent().parent().remove (); // remove the textbox
@@ -542,12 +556,15 @@
 			        
 			        $(document).on("click", "#removeDiv", function(){
 			        	var removeThis = $("#removeDiv");
-			      
+			      		var div_=$(this).closest('div#addDiv')
+			      		$(div_).next().remove();
+			      		$(div_).next().remove();
+			      		$(div_).remove();
 			        	
-			        	removeThis.parent().parent().parent().prev().remove (); // remove the textbox
-			        	removeThis.parent().parent().parent().remove (); // remove the textbox
-			        	removeThis.next().remove (); // remove the <br>
-			        	removeThis.remove (); // remove the button
+			        	//removeThis.parent().parent().parent().prev().remove (); // remove the textbox
+			        	//removeThis.parent().parent().parent().remove (); // remove the textbox
+			        	//removeThis.next().remove(); // remove the <br>
+			        	//removeThis.remove (); // remove the button
 			        
 			        	//$(this).parent().parent().parent().prev().remove (); // remove the textbox
 			        	//$(this).parent().parent().parent().remove (); // remove the textbox

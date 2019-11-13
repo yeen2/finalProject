@@ -15,11 +15,13 @@ public class PostingDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	public int insertPosting(Posting p, ArrayList<Style> s) {
-		return sqlSession.insert("postingMapper.insertPosting");
+	public int insertPosting(Posting p) {
+		return sqlSession.insert("postingMapper.insertPosting", p);
 	}
 	
-	
+	public int insertStyle(Style s) {
+		return sqlSession.insert("styleMapper.insertStyle", s);
+	}
 	
 	
 }
