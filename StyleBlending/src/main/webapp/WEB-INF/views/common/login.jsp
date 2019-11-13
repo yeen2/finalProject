@@ -56,19 +56,6 @@
 				<div style="margin-top:10px;" id="naver_id_login">
 					<button type="button" class="form-control btn btn-success" id="navarBtn"><b>네이버 로그인</b></button>
 				</div>
-				
-				<!-- facebook login btn -->
-				<div style="margin-top:10px;" id="facebook_id_login">
-					<div class="fb-login-button" data-width="" data-size="medium" data-button-type="login_with" data-auto-logout-link="false" data-use-continue-as="true"></div>
-				</div>
-			
-				<div id="fb-root"></div>
-				<script async defer crossorigin="anonymous" 
-				src="https://connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v5.0&appId=1346956158812116&autoLogAppEvents=1">
-				</script>
-				
-				<!-- facebook loginbtn end -->
-				
 			</div>
 		</div>
 		</form>
