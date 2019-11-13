@@ -3,6 +3,8 @@ package com.kh.styleblending.admin.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.styleblending.admin.model.service.AdminService;
 
@@ -18,8 +20,10 @@ public class AdminController {
 	}
 	
 	@RequestMapping("aUser.do")
-	public String user() {
-		return "admin/user";
+	public ModelAndView selectUserList(ModelAndView mv, @RequestParam(value="currentPage", defaultValue="1")int currentPage) {
+		mv.setViewName("admin/user");
+		return mv;
+		
 	}
 	
 	@RequestMapping("aDeclare.do")
