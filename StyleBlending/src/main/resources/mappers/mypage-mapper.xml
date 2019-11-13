@@ -2,4 +2,112 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="mypageMapper">
 
+	<resultMap id="memberResultSet" type="Member">
+		<id property="mno" column="m_no"/>
+		<result property="loginType" column="logintype"/>
+		<result property="snsId" column="snsid"/>
+		<result property="email" column="email"/>
+		<result property="pass" column="pass"/>
+		<result property="nickName" column="nickname"/>
+		<result property="profile" column="profile"/>
+		<result property="location" column="location"/>
+		<result property="profileImg" column="profile_img"/>
+		<result property="profilePath" column="profile_path"/>
+		<result property="enrollDate" column="enroll_date"/>
+		<result property="updateDate" column="update_date"/>
+		<result property="idDelete" column="isdelete"/>
+	</resultMap>
+	
+	<resultMap id="postingResultSet" type="Posting">
+		<id property="pno" column="p_no"/>
+		<result property="mno" column="m_no"/>
+		<result property="originalImg" column="original_img"/>
+		<result property="renameImg" column="rename_img"/>
+		<result property="imgPath" column="img_path"/>
+		<result property="content" column="content"/>
+		<result property="hashtag" column="hashtag"/>
+		<result property="gender" column="gender"/>
+		<result property="location" column="location"/>
+		<result property="likeCount" column="like_count"/>
+		<result property="declareCount" column="declare_count"/>
+		<result property="enrollDate" column="enroll_date"/>
+		<result property="updateDate" column="update_date"/>
+		<result property="idDelete" column="isdelete"/>
+	</resultMap>
+	
+	<resultMap id="adResultSet" type="Ad">
+		<id property="adNo" column="ad_no"/>
+		<result property="mno" column="m_no"/>
+		<result property="payNo" column="pay_no"/>
+		<result property="name" column="name"/>
+		<result property="url" column="url"/>
+		<result property="originalImg" column="original_img"/>
+		<result property="renameImg" column="rename_img"/>
+		<result property="imgPath" column="img_path"/>
+		<result property="enrollDate" column="enroll_date"/>
+		<result property="startDate" column="start_date"/>
+		<result property="endDate" column="end_date"/>
+		<result property="status" column="status"/>
+	</resultMap>
+	
+	<select id="selectProfile">
+		select m.*, (select count(*) from posting p where m.m_no=p.m_no)pCount, (select count(*) from fan f where f.me_no=m.m_no)fanCount,
+			(select count(*) from fan f where f.you_no=m.m_no)followingCount
+		from member m
+		where m_no=#{mno}
+	</select>
+	
+	<select id="selectPostingList">
+		select *
+		from posting
+		where m_no=#{mno}
+	</select>
+	
+	<select id="selectLikeList">
+		select *
+		from posting p
+		left join p_like l on(l.p_no=p.p_no)
+		where l.m_no=#{mno}
+	</select>
+	
+	<select id="selectFanList">
+		select m.*, (select count(*) from posting p where m.m_no=p.m_no)pCount, (select count(*) from p_like l where m.m_no=l.m_no)lCount,
+            (select count(*) from p_reply r left join posting p on(p.p_no=r.p_no) where p.p_no=r.p_no)rCount
+		from member m
+		left join fan f on(m.m_no=f.me_no)
+		where f.me_no=#{m_no}
+	</select>
+	
+	<select id="selectFollowingList">
+		select m.*, (select count(*) from posting p where m.m_no=p.m_no)pCount, (select count(*) from p_like l where m.m_no=l.m_no)lCount,
+            (select count(*) from p_reply r left join posting p on(p.p_no=r.p_no) where p.p_no=r.p_no)rCount
+		from member m
+		left join fan f on(m.m_no=f.you_no)
+		where f.you_no=#{m_no}
+	</select>
+	
+	<update id="updateProfile">
+		update member
+		set nickname=#{nickName}, profile=#{profile}, location=#{location}, profile_img=#{profileImg}, profile_path=#{profilePath}
+		where email=#{email}
+	</update>
+	
+	<select id="selectAdList">
+		select *
+		from ad
+		where m_no=#{mno}
+	</select>
+	
+	<update id="updatePass">
+		update member
+		set pass=#{pass}
+		where email=#{email}
+	</update>
+	
+	<update id="deleteMember">
+		update member
+		set isdelete='Y'
+		where email=#{email}
+	</update>
+
 </mapper>
