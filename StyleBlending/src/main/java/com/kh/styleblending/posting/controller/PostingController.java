@@ -1,8 +1,9 @@
 package com.kh.styleblending.posting.controller;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -30,7 +31,9 @@ public class PostingController {
 	
 	// 포스팅등록 처리
 	@RequestMapping("pInsert.do")
-	public ModelAndView insert(Posting po, Style st, ModelAndView mv) {
+	public ModelAndView insert(Posting po, ArrayList<Style> st, ModelAndView mv) {
+		
+		System.out.println(st);
 		
 		int result = pService.insertPosting(po, st);
 		
@@ -39,7 +42,6 @@ public class PostingController {
 		}else {
 			mv.addObject("msg", "포스팅 등록 실패").setViewName("common/errorPage");
 		}
-		
 		return mv;
 	}
 	

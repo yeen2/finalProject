@@ -1,5 +1,7 @@
 package com.kh.styleblending.posting.model.dao;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -13,8 +15,8 @@ public class PostingDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	public int insertPosting(Posting p, Style s) {
-		return 
+	public int insertPosting(Posting p, ArrayList<Style> s) {
+		return sqlSession.insert("postingMapper.insertPosting");
 	}
 	
 	
