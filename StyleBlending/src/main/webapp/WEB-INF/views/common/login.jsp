@@ -68,6 +68,7 @@
 				</script>
 				
 				<!-- facebook loginbtn end -->
+				
 			</div>
 		</div>
 		</form>
