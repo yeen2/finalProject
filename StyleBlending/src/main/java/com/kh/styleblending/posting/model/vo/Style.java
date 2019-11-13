@@ -13,8 +13,8 @@ import lombok.ToString;
 @ToString
 public class Style {
 
-	private int sNo;
-	private int pNo;
+	private int sno;
+	private int pno;
 	private String cate;
 	private String brand;
 	private String color;

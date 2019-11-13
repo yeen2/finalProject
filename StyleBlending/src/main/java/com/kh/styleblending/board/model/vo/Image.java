@@ -13,8 +13,8 @@ import lombok.ToString;
 @ToString
 public class Image {
 
-	private int imgNo;
-	private int bNo;
+	private int imgno;
+	private int bno;
 	private String originalImg;
 	private String renameImg;
 	private String imgPath;

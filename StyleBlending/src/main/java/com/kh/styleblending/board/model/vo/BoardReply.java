@@ -15,8 +15,8 @@ import lombok.ToString;
 @ToString
 public class BoardReply {
 
-	private int brNo;
-	private int bNo;
+	private int brno;
+	private int bno;
 	private String content;
 	private Date enrollDate;
 	private String isDelete;

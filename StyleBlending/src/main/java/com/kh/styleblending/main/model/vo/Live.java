@@ -14,7 +14,7 @@ import lombok.ToString;
 @ToString
 public class Live {
 
-	private int liveNo;
+	private int liveno;
 	private String keyword;
 	
 }

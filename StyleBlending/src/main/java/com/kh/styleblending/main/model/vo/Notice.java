@@ -15,7 +15,7 @@ import lombok.ToString;
 @ToString
 public class Notice {
 
-	private int nNo;
+	private int nno;
 	private String title;
 	private String content;
 	private Date enrollDate;

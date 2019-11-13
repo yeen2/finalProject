@@ -15,8 +15,8 @@ import lombok.ToString;
 @ToString
 public class Posting {
 
-	private int pNo;
-	private int mNo;
+	private int pno;
+	private int mno;
 	private String originalImg;
 	private String renameImg;
 	private String imgPath;

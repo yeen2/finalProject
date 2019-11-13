@@ -15,9 +15,9 @@ import lombok.ToString;
 @ToString
 public class Alarm {
 
-	private int alNo;
-	private int tNo;
-	private int mNo;
+	private int alno;
+	private int tno;
+	private int mno;
 	private Date enrollDate;
 	private String status;
 	private String type;

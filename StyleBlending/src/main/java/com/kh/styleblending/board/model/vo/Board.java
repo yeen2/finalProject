@@ -15,8 +15,8 @@ import lombok.ToString;
 @ToString
 public class Board {
 
-	private int bNo;
-	private int mNo;
+	private int bno;
+	private int mno;
 	private String title;
 	private String content;
 	private int count;

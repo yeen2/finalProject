@@ -15,8 +15,8 @@ import lombok.ToString;
 @ToString
 public class Ad {
 
-	private int adNo;
-	private int mNo;
+	private int adno;
+	private int mno;
 	private int payNo;
 	private String name;  // 업체명
 	private String url;

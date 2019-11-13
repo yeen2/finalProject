@@ -15,8 +15,8 @@ import lombok.ToString;
 @ToString
 public class FashionBoard {
 
-	private int fbNo;
-	private int mNo;
+	private int fbno;
+	private int mno;
 	private String title;
 	private String content;
 	private int count;
