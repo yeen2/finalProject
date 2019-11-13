@@ -338,7 +338,7 @@
 					</div>
 				</div>
 				<div class="d-flex justify-content-center my-5">
-					<button id="btn1" class="btn btn-outline-primary btn-pill" onclick="plus();">더보기</button>
+					<button id="btn1" class="btn btn-danger btn-pill" onclick="plus();">더보기</button>
 				</div>
 			</div>
 			
@@ -385,7 +385,7 @@
 					</div>
 				</div>
 				<div class="d-flex justify-content-center my-5">
-					<button class="btn btn-outline-primary btn-pill" onclick="plus2();">더보기</button>
+					<button class="btn btn-danger btn-pill" onclick="plus2();">더보기</button>
 				</div>
 			</div>
 			
