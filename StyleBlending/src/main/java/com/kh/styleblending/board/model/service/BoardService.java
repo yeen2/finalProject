@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import com.kh.styleblending.board.model.vo.Board;
 import com.kh.styleblending.board.model.vo.BoardReply;
+import com.kh.styleblending.board.model.vo.FashionBoard;
+import com.kh.styleblending.board.model.vo.PageInfo;
 
 public interface BoardService {
 	
@@ -24,4 +26,14 @@ public interface BoardService {
 	
 	// 댓글 작성
 	int insertBoardReply(BoardReply r);
+	
+	// 게시판 갯수조회
+	int getListCount();
+
+	// 자유게시판과 패션게시판 listselect
+	ArrayList<Board> selectList(PageInfo pi);
+
+	ArrayList<FashionBoard> fashionSelectList(PageInfo pi);
+	//*********************************************************
+	
 }

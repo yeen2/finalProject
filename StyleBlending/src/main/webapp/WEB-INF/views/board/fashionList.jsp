@@ -36,7 +36,6 @@ body {padding-top: 20px;}
 </style>
 </head>
 <body>
-
 	<jsp:include page="../includes/header.jsp"/>
 
 	<div class="fashionListOuter">

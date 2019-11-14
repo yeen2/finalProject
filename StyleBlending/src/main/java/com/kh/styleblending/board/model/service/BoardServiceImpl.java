@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.kh.styleblending.board.model.dao.BoardDao;
 import com.kh.styleblending.board.model.vo.Board;
 import com.kh.styleblending.board.model.vo.BoardReply;
+import com.kh.styleblending.board.model.vo.FashionBoard;
+import com.kh.styleblending.board.model.vo.PageInfo;
 
 @Service("bService")
 public class BoardServiceImpl implements BoardService{
@@ -49,6 +51,24 @@ public class BoardServiceImpl implements BoardService{
 	public int insertBoardReply(BoardReply r) {
 
 		return bDao.insertBoardReply(r);
+	}
+
+	@Override
+	public int getListCount() {
+
+		return bDao.getListCount();
+	}
+
+	@Override
+	public ArrayList<Board> selectList(PageInfo pi) {
+
+		return bDao.selectList(pi);
+	}
+
+	@Override
+	public ArrayList<FashionBoard> fashionSelectList(PageInfo pi) {
+
+		return bDao.fashionSelectList(pi);
 	}
 	
 	
