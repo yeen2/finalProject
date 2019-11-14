@@ -27,6 +27,7 @@ public class Member {
 	private String profilePath;
 	private Date enrollDate;
 	private Date updateDate;
+	private Date deleteDate;
 	private String isDelete;
 	
 	

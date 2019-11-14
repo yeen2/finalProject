@@ -17,6 +17,7 @@
 		<result property="profilePath" column="profile_path"/>
 		<result property="enrollDate" column="enroll_date"/>
 		<result property="updateDate" column="update_date"/>
+		<result property="deleteDate" column="delete_date"/>
 		<result property="isDelete" column="isdelete"/>
 	</resultMap>
 	
@@ -35,7 +36,7 @@
 	<insert id="insertMember">
 		insert into member
 		values(seq_member.nextval, default, null, #{email}, #{pass}, #{nickName}, 
-				null, null, null, null, sysdate, null, default)
+				null, null, null, null, sysdate, null, null, default)
 	</insert>
 	
 	<select id="joinCheckEmail" resultType="_int">

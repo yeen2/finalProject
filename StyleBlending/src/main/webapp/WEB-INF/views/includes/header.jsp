@@ -164,7 +164,7 @@
 							<a class="nav-link" href="loginForm.do">Sign In</a>
 						</c:if>
 						<c:if test="${ !empty loginUser }">
-							<a class="dropdown-item" href="logout.do">LogOut</a>
+							<a class="nav-link" href="logout.do">LogOut</a>
 						</c:if>
 					</li>
 					<li class="nav-item">
