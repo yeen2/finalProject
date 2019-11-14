@@ -669,7 +669,7 @@
 			
 			//content에서 hashtag추출해서 저장
 			var str = content.val();
-			//var regExp = /#
+			var regExp = /#
 			
 			test2 = test.match(regExp);
 			$("#hashtag").val();
