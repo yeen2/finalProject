@@ -29,7 +29,7 @@ public class Posting {
 	private int declareCount;
 	private Date enrollDate;
 	private Date updateDate;
-	private String idDelete;
+	private String isDelete;
 	
 	private List<Style> style;
 	

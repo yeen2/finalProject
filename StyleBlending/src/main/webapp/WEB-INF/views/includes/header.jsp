@@ -160,7 +160,12 @@
 						<a class="nav-link" href="joinForm.do">Join</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="loginForm.do">Sign In</a>
+						<c:if test="${ empty loginUser }">
+							<a class="nav-link" href="loginForm.do">Sign In</a>
+						</c:if>
+						<c:if test="${ !empty loginUser }">
+							<a class="dropdown-item" href="logout.do">LogOut</a>
+						</c:if>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="mPage.do"> 

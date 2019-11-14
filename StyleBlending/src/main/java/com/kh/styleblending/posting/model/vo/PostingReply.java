@@ -23,6 +23,6 @@ public class PostingReply {
 	private Date updateDate;
 	private int prno2;
 	private String level;
-	private String idDelete;
+	private String isDelete;
 	
 }

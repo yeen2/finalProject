@@ -74,7 +74,6 @@
 
 	<%-- 가입정보 체크  --%>
 		<script>
-		
 			function joinValidate() {
 				// 각각의 input 요소들 변수에 담아두기 
 				var email = $("#joinForm input[name=email]");

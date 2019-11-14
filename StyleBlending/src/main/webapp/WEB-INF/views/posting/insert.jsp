@@ -229,7 +229,8 @@
 
 	<!-- Page Content -->
 	<div class="container" style="margin-top: 150px; margin-bottom: 70px;">
-		<form action="pInsert.do" method="post">
+		<form action="pInsert.do" method="post" id="insertForm" onsubmit="return insertValidate();">
+		
 		<div class="row">
 
 			<!-- 왼쪽 -->
@@ -237,7 +238,7 @@
 
 				<!-- Title -->
 				<h1 class="mt-4">**의 Today's Posting</h1>
-
+				<input type="hidden" name="mno" value="${ loginUser.mno }">
 				<hr>
 				<!-- 이미지 -->
 				<div class="img" id="divImg" style="width: 500px; height:600px;">
@@ -253,10 +254,11 @@
 				<hr>
 				
 				<!-- Post Content -->
-				<textarea rows="10" cols="70" id="content" name="content"
-						placeholder="사진에 대한 내용과 #해시태그는 이 안에 입력해주세요."></textarea>
+				<textarea rows="10" cols="70" id="content" name="content" placeholder="사진에 대한 내용과 #해시태그는 이 안에 입력해주세요."></textarea>
 
 			</div>
+			<!-- 해쉬태그 담기 -->
+			<input type="hidden" name="hashtag" id="hashtag">
 			
 			<!-- 사진업로드 부분 (hidden) -->
 			<div id="fileArea">
@@ -521,6 +523,8 @@
 									
 									$(this).parent().parent().parent().children("#selectColor").val(c);
 									//console.log($(this).parent().parent().parent().children("#selectColor").attr('value')) ;
+									
+									
 								});
 							
 							</script>
@@ -642,17 +646,47 @@
 		</div>
 	</div>
 	
+	
+	<script>
+		function insertValidate() {
+			
+			// 각각의 input 요소들 변수에 담아두기 
+			var fileImg = $("#insertForm input[name=fileImg]");
+			var content = $("#insertForm #content");
+			
+			console.log(content);
 
-	<!-- 지도api -->
+			// 값 다 있나 검사
+			if(fileImg.val().trim() == ""){
+				alert("이미지를 등록해주세요.");
+				fileImg.focus();
+				return false;
+			}else if(content.val().trim() == ""){
+				alert("내용을 입력해주세요");
+				content.focus();
+				return false;
+			}
+			
+			//content에서 hashtag추출해서 저장
+			var str = content.val();
+			//var regExp = /#
+			
+			test2 = test.match(regExp);
+			$("#hashtag").val();
+
+		}
+		
+	</script>
+
+
+	<!------------------------------------- 지도api ----------------------------->
+	
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8ef4b8fd4aebaa69e9172f4cc49921ca&libraries=services"></script>
 	<script>
 		$("#addSelectBtn").click(function () {
 			$('#addModal').modal("hide");
-		});
-		
-		
+		});	
 	</script>
-	
 	<script>
 
 		// 마커를 담을 배열입니다

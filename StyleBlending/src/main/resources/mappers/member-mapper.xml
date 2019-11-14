@@ -17,7 +17,7 @@
 		<result property="profilePath" column="profile_path"/>
 		<result property="enrollDate" column="enroll_date"/>
 		<result property="updateDate" column="update_date"/>
-		<result property="idDelete" column="isdelete"/>
+		<result property="isDelete" column="isdelete"/>
 	</resultMap>
 	
 	<select id="loginMember" resultMap="memberResultSet">
