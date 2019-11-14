@@ -23,6 +23,9 @@ public class AdminDao {
 		return (ArrayList)sqlSession.selectList("adminMapper.selectMemberList", pi);
 	}
 	
+	public int getDeclareListCount() {
+		return sqlSession.selectOne("adminMapper.getDeclareListCount");
+	}
 	
 	
 }

@@ -40,8 +40,18 @@ public class AdminController {
 		return mv;
 	}
 	
+	@RequestMapping("aDeleteMember.do")
+	public String deleteMember(String mno) {
+		System.out.println(mno);
+		return "redirect:aUser.do";
+	}
+	
 	@RequestMapping("aDeclare.do")
-	public String declare() {
+	public String selectDeclareList(ModelAndView mv, @RequestParam(value="currentPage", defaultValue="1")int currentPage) {
+		
+		int listCount = aService.getDeclareListCount();
+		
+		
 		return "admin/declare";
 	}
 	

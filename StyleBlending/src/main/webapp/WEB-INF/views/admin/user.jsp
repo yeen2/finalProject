@@ -52,7 +52,7 @@
                 <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <strong class="card-title">Custom Table</strong>
+                                <strong class="card-title">회원 목록</strong>
                             </div>
                           
                           
@@ -108,11 +108,38 @@
                                     <tbody>
                                         <tr>
                                         	<td>
+                                        	<form action="aDeleteMember.do" method="get">
+                                        		<!-- 회원삭제 모달창  -->
+                                        		<div class="modal fade" id="staticModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="true">
+										          <div class="modal-dialog modal-sm" role="document">
+										               <div class="modal-content">
+										                   <div class="modal-header">
+										                       <h5 class="modal-title" id="staticModalLabel"><b>회원 탈퇴</b></h5>
+										                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										                           <span aria-hidden="true">&times;</span>
+										                       </button>
+										                   </div>
+										                   <div class="modal-body">
+										                       <p>
+										                           	해당 회원을 탈퇴하시겠습니까?
+										                      </p>
+										                      <p>
+										                           	이미 탈퇴된 회원인 경우 회원목록에서 삭제됩니다.
+										                      </p>
+										                    </div>
+										                    <div class="modal-footer">
+										                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+										                       <button type="submit" class="btn btn-primary">Confirm</button>
+										                    </div>
+										                </div>
+										            </div>
+										        </div>
                                         		<label class="switch switch-3d switch-danger mr-3">
-                                        			<input type="checkbox" class="switch-input" checked="true">
+                                        			<input type="checkbox" class="switch-input" checked="true" >
                                        				<span class="switch-label"></span> 
                                        				<span class="switch-handle"></span>
                                         		</label>
+                                        	</form>
                                         	</td>
                                             <td class="serial">${m.mno}</td>
                                             <td class="avatar">
@@ -123,9 +150,13 @@
                                             <td>${m.email}</td>
                                             <td> <span class="name">${m.nickName }</span> </td>
                                             <td> <span class="product">${m.enrollDate }</span> </td>
-                                            <td><span class="count">${m.deleteDate}</span></td>
                                             <td>
-                                                <span class="badge badge-complete">N</span>
+                                            	<c:if test="${m.isDelete eq 'Y' }">
+                                            	<span class="count">${m.deleteDate}</span>
+                                            	</c:if>
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-complete">${m.isDelete}</span>
                                                <!--  <span class="badge badge-pending">Y</span> -->
                                             </td>
                                         </tr>
@@ -135,7 +166,7 @@
                                 
                                 <div class="row">
 	                                <div class="col-sm-4" style="margin-left:10px;">
-	                                	Showing 1 to 10 of 12 entries	
+	                                	Showing ${pi.currentPage } to ${pi.maxPage } of ${pi.listCount } entries	
 	                                </div>
 	                                
 	                                <div class=".col-md-6 .offset-md-3">
@@ -205,27 +236,27 @@
             
             
             
-            
-             <div class="modal fade" id="staticModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-sm" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="staticModalLabel"><b>회원 탈퇴</b></h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <p>
-                                	해당 회원을 탈퇴하시겠습니까?
-                           </p>
-                           <p>
-                                	이미 탈퇴된 회원인 경우 회원목록에서 삭제됩니다.
-                           </p>
-                       </div>
-                       <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-primary">Confirm</button>
+      <!-- 회원 삭제 모달창 -->     
+      <div class="modal fade" id="staticModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-sm" role="document">
+               <div class="modal-content">
+                   <div class="modal-header">
+                       <h5 class="modal-title" id="staticModalLabel"><b>회원 탈퇴</b></h5>
+                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                           <span aria-hidden="true">&times;</span>
+                       </button>
+                   </div>
+                   <div class="modal-body">
+                       <p>
+                           	해당 회원을 탈퇴하시겠습니까?
+                      </p>
+                      <p>
+                           	이미 탈퇴된 회원인 경우 회원목록에서 삭제됩니다.
+                      </p>
+                    </div>
+                    <div class="modal-footer">
+                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                       <button type="button" class="btn btn-primary" onclick="location.href='aDeleteMember.do';">Confirm</button>
                     </div>
                 </div>
             </div>

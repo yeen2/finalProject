@@ -26,6 +26,12 @@ public class AdminServiceImpl implements AdminService{
 		// 회원목록 조회용
 		return aDao.selectMemberList(pi);
 	}
+
+	@Override
+	public int getDeclareListCount() {
+		// 총 신고수 조회용
+		return aDao.getDeclareListCount();
+	}
 	
 	
 }
