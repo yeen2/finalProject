@@ -229,7 +229,7 @@
 
 	<!-- Page Content -->
 	<div class="container" style="margin-top: 150px; margin-bottom: 70px;">
-		<form action="pInsert.do" method="post" id="insertForm" onsubmit="return insertValidate();">
+		<form action="pInsert.do" method="post" id="insertForm" enctype="multipart/form-data" onsubmit="return insertValidate();">
 		
 		<div class="row">
 
