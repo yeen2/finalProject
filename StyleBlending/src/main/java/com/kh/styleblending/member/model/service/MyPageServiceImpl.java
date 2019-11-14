@@ -17,28 +17,28 @@ public class MyPageServiceImpl implements MyPageService {
 	private MyPageDao mpDao;
 	
 	@Override
-	public Member selectProfile(Member m) {
-		return mpDao.selectProfile(m);
+	public Member selectProfile(int mno) {
+		return mpDao.selectProfile(mno);
 	}
 
 	@Override
-	public ArrayList<Posting> selectPostingList(Member m) {
-		return mpDao.selectPostingList(m);
+	public ArrayList<Posting> selectPostingList(int mno) {
+		return mpDao.selectPostingList(mno);
 	}
 
 	@Override
-	public ArrayList<Posting> selectLikeList(Member m) {
-		return mpDao.selectLikeList(m);
+	public ArrayList<Posting> selectLikeList(int mno) {
+		return mpDao.selectLikeList(mno);
 	}
 
 	@Override
-	public ArrayList<Member> selectFanList(Member m) {
-		return mpDao.selectFanList(m);
+	public ArrayList<Member> selectFanList(int mno) {
+		return mpDao.selectFanList(mno);
 	}
 
 	@Override
-	public ArrayList<Member> selectFollowingList(Member m) {
-		return mpDao.selectFollowingList(m);
+	public ArrayList<Member> selectFwList(int mno) {
+		return mpDao.selectFwList(mno);
 	}
 
 	@Override
@@ -47,8 +47,8 @@ public class MyPageServiceImpl implements MyPageService {
 	}
 
 	@Override
-	public ArrayList<Ad> selectAdList(Member m) {
-		return mpDao.selectAdList(m);
+	public ArrayList<Ad> selectAdList(int mno) {
+		return mpDao.selectAdList(mno);
 	}
 
 	@Override
@@ -57,8 +57,8 @@ public class MyPageServiceImpl implements MyPageService {
 	}
 
 	@Override
-	public int deleteMember(String email) {
-		return mpDao.deleteMember(email);
+	public int deleteMember(int mno) {
+		return mpDao.deleteMember(mno);
 	}
 
 }

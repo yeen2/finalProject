@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,212 +52,37 @@
 						
 						<!-- 팔로워버튼  -->
 						<a href="#a" class="btn btn-dark ml-3"><i class="fa fa-plus"></i> <b>Fan</b></a>
-						
-						<div style="position:relative; margin-left:100px;">
-							<button class="btn btn-warning dropdown-toggle" type="button" id="alarmBtn">
-							    검색창 테스트
+						<%--<c:if test="${ loginUser.mno == m.mno }"> --%>
+							<button class="btn btn-info btn-pill" style="margin-left:400px;"onclick="location.href='mMyPage.do';">
+							    <i class="fa fa-edit mr-1"></i>
+						    	프로필 관리
 							</button>
-							
-							
-							<!-------------------------------------- 알림창 테스트 --------------------------------------->
-							
-							<div style="position:absolute; top:45px; right:-135px; width:400px; max-height:255px;
-										overflow-y:auto; overflow-x:hidden; background:lightgray; display:none; z-index:1000;" id="alarmDiv">
-								<div style="width:100%; height:40px;">
-									<ul>
-										<li class="btn btn-dark" style="width:30%;"><a href="#">브랜드</a></li>
-										<li class="btn btn-dark" style="width:30%;"><a href="#">위치</a></li>
-										<li class="btn btn-dark" style="width:30%;"><a href="#">#태그</a></li>
-									</ul>
-								</div>
-							    <!-- 알림 추가될 때마다 div 추가 -->
-							    <div id="addAlarm">
-							    	<div id="addAlarmImg">
-							    		<i class="fas fa-search"></i>
-							    	</div>
-							    	<div id="addAlarmNick">
-							    		<p>브랜드명</p>
-							    	</div>
-							    </div>
-							    <div id="addAlarm">
-							    	<div id="addAlarmImg">
-							    		<i class="fas fa-map-marker-alt"></i>
-							    	</div>
-							    	<div id="addAlarmNick">
-							    		<p>위치</p>
-							    	</div>
-							    </div>
-							    <div id="addAlarm">
-							    	<div id="addAlarmImg">
-							    		<i class="fas fa-hashtag"></i>
-							    	</div>
-							    	<div id="addAlarmNick">
-							    		<p>#태그</p>
-							    	</div>
-							    </div>
-							    <div id="addAlarm">
-							    	<div id="addAlarmImg">
-							    		<i class="fas fa-search"></i>
-							    	</div>
-							    	<div id="addAlarmNick">
-							    		<p>브랜드명</p>
-							    	</div>
-							    </div>
-							    <div id="addAlarm">
-							    	<div id="addAlarmImg">
-							    		<i class="fas fa-map-marker-alt"></i>
-							    	</div>
-							    	<div id="addAlarmNick">
-							    		<p>위치</p>
-							    	</div>
-							    </div>
-							    <div id="addAlarm">
-							    	<div id="addAlarmImg">
-							    		<i class="fas fa-hashtag"></i>
-							    	</div>
-							    	<div id="addAlarmNick">
-							    		<p>#태그</p>
-							    	</div>
-							    </div>
-							    
-							</div>
-							
-						</div>
-						
-						<!-------------------------------------- 알림창 테스트 --------------------------------------->
-						<!-------------------------------------- 알림창 테스트 --------------------------------------->
-						<!-------------------------------------- 알림창 테스트 --------------------------------------->
-						<div style="position:relative;">
-							<button class="btn btn-secondary dropdown-toggle" type="button" id="alarmBtn1">
-								알림창 테스트
-							</button>
-							
-							<div style="position:absolute; top:45px; right:-135px; width:400px; max-height:255px;
-										overflow-y:auto; overflow-x:hidden; display:none; background:skyblue; z-index:1000;" id="alarmDiv1">
-								<div align="right">
-									<button type="button" class="btn btn-danger">알림 전체 삭제</button>
-								</div>
-								
-							    <!-- 알림 추가될 때마다 div 추가 -->
-							    <div id="addAlarm1">
-							    	<div id="addAlarmImg1">
-							    		<img src="${pageContext.request.contextPath}/resources/assets/img/lorde.png">
-							    	</div>
-							    	<div id="addAlarmNick1">
-							    		<p>닉네임</p>
-							    	</div>
-							    	<div id="addAlarmDate1">
-							    		<p>30초전</p>
-							    	</div>
-							    	<div id="addAlarmCon1">
-							    		~~~님이 팬이 되었습니다.
-							    	</div>
-							    </div>
-							    <div id="addAlarm1">
-							    	<div id="addAlarmImg1">
-							    		<img src="${pageContext.request.contextPath}/resources/assets/img/lorde.png">
-							    	</div>
-							    	<div id="addAlarmNick1">
-							    		<p>닉네임</p>
-							    	</div>
-							    	<div id="addAlarmDate1">
-							    		<p>10분전</p>
-							    	</div>
-							    	<div id="addAlarmCon1">
-							    		나의 게시물이 신고되었습니다.
-							    	</div>
-							    </div>
-							    <div id="addAlarm1">
-							    	<div id="addAlarmImg1">
-							    		<img src="${pageContext.request.contextPath}/resources/assets/img/lorde.png">
-							    	</div>
-							    	<div id="addAlarmNick1">
-							    		<p>닉네임</p>
-							    	</div>
-							    	<div id="addAlarmDate1">
-							    		<p>2시간전</p>
-							    	</div>
-							    	<div id="addAlarmCon1">
-							    		나의 게시물이 좋아요되었습니다.
-							    	</div>
-							    </div>
-							    <div id="addAlarm1">
-							    	<div id="addAlarmImg1">
-							    		<img src="${pageContext.request.contextPath}/resources/assets/img/lorde.png">
-							    	</div>
-							    	<div id="addAlarmNick1">
-							    		<p>닉네임</p>
-							    	</div>
-							    	<div id="addAlarmDate1">
-							    		<p>2일전</p>
-							    	</div>
-							    	<div id="addAlarmCon1">
-							    		~~~님이 팬이 되었습니다.
-							    	</div>
-							    </div>
-							    <div id="addAlarm1">
-							    	<div id="addAlarmImg1">
-							    		<img src="${pageContext.request.contextPath}/resources/assets/img/lorde.png">
-							    	</div>
-							    	<div id="addAlarmNick1">
-							    		<p>닉네임</p>
-							    	</div>
-							    	<div id="addAlarmDate1">
-							    		<p>30일전</p>
-							    	</div>
-							    	<div id="addAlarmCon1">
-							    		~~~님이 팬이 되었습니다.
-							    	</div>
-							    </div>
-							    <div id="addAlarm1">
-							    	<div id="addAlarmImg1">
-							    		<img src="${pageContext.request.contextPath}/resources/assets/img/lorde.png">
-							    	</div>
-							    	<div id="addAlarmNick1">
-							    		<p>닉네임</p>
-							    	</div>
-							    	<div id="addAlarmDate1">
-							    		<p>320일전</p>
-							    	</div>
-							    	<div id="addAlarmCon1">
-							    		~~~님이 팬이 되었습니다.
-							    	</div>
-							    </div>
-							    
-							</div>
-							
-						</div>
-						<!-------------------------------------- 알림창 테스트 --------------------------------------->
-						<!-------------------------------------- 알림창 테스트 --------------------------------------->
-						<!-------------------------------------- 알림창 테스트 --------------------------------------->	
-				
-						<button class="btn btn-info btn-pill" onclick="location.href='mMyPage.do';">
-						    <i class="fa fa-edit mr-1"></i>
-					    	프로필 관리
-						</button>
+						<%--</c:if> --%>
 					</div>
 						
 					<div class="stats d-flex flex-row align-items-center align-items-lg-start text-center text-lg-left">
 						<div class="posts ml-2 ml-lg-0">
 							<p class="lead">
-								<b>134</b> Board
+								<b>${ m.pCount }</b> Board
 							</p>
 						</div>
 						<div class="posts">
 							<p class="lead">
-								<b>6.6m</b> Fan
+								<b>${ m.fanCount }</b> Fan
 							</p>
 						</div>
 						<div class="posts">
 							<p class="lead">
-								<b>201</b> Following
+								<b>${ m.fwCount }</b> Following
 							</p>
 						</div>
 					</div>
 					<p class="lead mb-0 mt-2">
-						<b>About Me</b>
+						<c:if test="${ m.profile != null }">
+							<b>About Me</b>
+						</c:if>
 					</p>
-					<p class="lead text-center text-lg-left">자기소개 내용</p>
+					<p class="lead text-center text-lg-left">${ m.profile }</p>
 				</div>
 			</div>
 		</div>
@@ -265,25 +91,25 @@
 			<!-- 메뉴바 -->
 			<ul id="tabMenu" class="nav nav-primary nav-tabs mt-3 d-flex flex-column flex-md-row">
 				<li class="nav-item">
-					<a class="nav-link active" data-toggle="tab" href="#photos"> 
+					<a class="nav-link active" data-toggle="tab" href="#board" id="boardBtn"> 
 					<i class="fas fa-th"></i>
 						Board
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="tab" href="#like"> 
+					<a class="nav-link" data-toggle="tab" href="#like" id="likeBtn"> 
 					<i class="far fa-heart"></i>
 						Like
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="tab" href="#fan"> 
+					<a class="nav-link" data-toggle="tab" href="#fan" id="fanBtn"> 
 					<i class="far fa-id-badge"></i> 
 						Fan
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="tab" href="#following"> 
+					<a class="nav-link" data-toggle="tab" href="#following" id="fwBtn"> 
 					<i class="far fa-id-badge"></i> 
 						Following
 					</a>
@@ -294,51 +120,12 @@
 
 		<div class="profile-tabs tab-content">
 			<!-- 내 업로드 사진목록 -->
-			<div class="tab-pane fade show active" id="photos">
+			<div class="tab-pane fade show active" id="board">
 				<div class="row" id="plus">
-					<div class="col-12 col-md-4" style="position:relative;">
-						<div id="imgH" class="square"
-							style="background-image: url('${pageContext.request.contextPath}/resources/assets/img/profile1.jpg');">
-						</div>
-						<div id="aaa" style="position:absolute; display:none; bottom:16px; width:350px; height:300px; background:rgba(0,0,0,0.6);">
-							<div style="margin-left:48px; margin-top:135px; color:white; position:relative;">
-								<div style="float:left;"><i class="fas fa-heart"></i></div>
-								<div style="float:left; left:30px; position:absolute;">100</div>
-								<div style="float:left; left:100px; position:absolute;"><i class="fas fa-thumbs-down"></i></div>
-								<div style="float:left; left:130px; position:absolute;">400</div>
-								<div style="float:left; left:200px; position:absolute;"><i class="fas fa-comment"></i></div>
-								<div style="float:left; left:230px; position:absolute;">700</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-12 col-md-4">
-						<div class="square"
-							style="background-image: url('${pageContext.request.contextPath}/resources/assets/img/profile2.jpg');">
-						</div>
-					</div>
-					<div class="col-12 col-md-4">
-						<div class="square"
-							style="background-image: url('${pageContext.request.contextPath}/resources/assets/img/profile3.jpg');">
-						</div>
-					</div>
-					<div class="col-12 col-md-4">
-						<div class="square"
-							style="background-image: url('${pageContext.request.contextPath}/resources/assets/img/profile4.jpg');">
-						</div>
-					</div>
-					<div class="col-12 col-md-4">
-						<div class="square"
-							style="background-image: url('${pageContext.request.contextPath}/resources/assets/img/profile5.jpg');">
-						</div>
-					</div>
-					<div class="col-12 col-md-4">
-						<div class="square"
-							style="background-image: url('${pageContext.request.contextPath}/resources/assets/img/profile6.jpg');">
-						</div>
-					</div>
+					
 				</div>
 				<div class="d-flex justify-content-center my-5">
-					<button id="btn1" class="btn btn-danger btn-pill" onclick="plus();">더보기</button>
+					<button class="btn btn-danger btn-pill" id="pBtn">더보기</button>
 				</div>
 			</div>
 			
@@ -349,47 +136,14 @@
 					좋아요한 게시물이 없습니다.
 				</p> -->
 				<div class="row" id="plus2">
-					<div class="col-12 col-md-4">
-						<div id="imgL" class="square"
-							style="background-image: url('${pageContext.request.contextPath}/resources/assets/img/profile1.jpg');"></div>
-						<div id="aaa1" style="position:absolute; display:none; bottom:16px; width:350px; height:300px; background:rgba(0,0,0,0.6);">
-							<div style="margin-left:48px; margin-top:135px; color:white; position:relative;">
-								<div style="float:left;"><i class="fas fa-heart"></i></div>
-								<div style="float:left; left:30px; position:absolute;">100</div>
-								<div style="float:left; left:100px; position:absolute;"><i class="fas fa-thumbs-down"></i></div>
-								<div style="float:left; left:130px; position:absolute;">400</div>
-								<div style="float:left; left:200px; position:absolute;"><i class="fas fa-comment"></i></div>
-								<div style="float:left; left:230px; position:absolute;">700</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-12 col-md-4">
-						<div class="square"
-							style="background-image: url('${pageContext.request.contextPath}/resources/assets/img/profile2.jpg');"></div>
-					</div>
-					<div class="col-12 col-md-4">
-						<div class="square"
-							style="background-image: url('${pageContext.request.contextPath}/resources/assets/img/profile3.jpg');"></div>
-					</div>
-					<div class="col-12 col-md-4">
-						<div class="square"
-							style="background-image: url('${pageContext.request.contextPath}/resources/assets/img/profile4.jpg');"></div>
-					</div>
-					<div class="col-12 col-md-4">
-						<div class="square"
-							style="background-image: url('${pageContext.request.contextPath}/resources/assets/img/profile5.jpg');"></div>
-					</div>
-					<div class="col-12 col-md-4">
-						<div class="square"
-							style="background-image: url('${pageContext.request.contextPath}/resources/assets/img/profile6.jpg');"></div>
-					</div>
+					
 				</div>
 				<div class="d-flex justify-content-center my-5">
-					<button class="btn btn-danger btn-pill" onclick="plus2();">더보기</button>
+					<button class="btn btn-danger btn-pill" id="lBtn">더보기</button>
 				</div>
 			</div>
 			
-			<!-- 내가 팔로우한 친구 목록 -->
+			<!-- 나를 팔로우한 친구 목록 -->
 			<div class="tab-pane fade text-center" id="fan">
 				<!-- <p class="lead">
 					<span class="text-danger"><i class="far fa-frown-open"></i></span>
@@ -455,8 +209,14 @@
 						<hr>
 					</div>
 				</div>
+				
+				<div class="d-flex justify-content-center my-5">
+					<button class="btn btn-danger btn-pill" id="fanBtn">더보기</button>
+				</div>
+				
 			</div>
 			
+			<!-- 내가 팔로잉한 친구 목록 -->
 			<div class="tab-pane fade text-center" id="following">
 				<div align="center">
 					<div style="width:50%;">
@@ -517,6 +277,11 @@
 						<hr>
 					</div>
 				</div>
+				
+				<div class="d-flex justify-content-center my-5">
+					<button class="btn btn-danger btn-pill" id="fwBtn">더보기</button>
+				</div>
+				
 			</div>
 		</div>
 
@@ -528,77 +293,110 @@
 	
 	
 	<script>
-		function plus(){
-			var $copy1 = $("<div>").attr("class", "col-12 col-md-4");
-			$copy1.append($("<div>").attr({"class":"square", "style":"background-image: url(" + "'${pageContext.request.contextPath}/resources/assets/img/profile1.jpg'" + ");"}));
-			var $copy2 = $("<div>").attr("class", "col-12 col-md-4");
-			$copy2.append($("<div>").attr({"class":"square", "style":"background-image: url(" + "'${pageContext.request.contextPath}/resources/assets/img/profile2.jpg'" + ");"}));
-			var $copy3 = $("<div>").attr("class", "col-12 col-md-4");
-			$copy3.append($("<div>").attr({"class":"square", "style":"background-image: url(" + "'${pageContext.request.contextPath}/resources/assets/img/profile3.jpg'" + ");"}));
-			var $copy4 = $("<div>").attr("class", "col-12 col-md-4");
-			$copy4.append($("<div>").attr({"class":"square", "style":"background-image: url(" + "'${pageContext.request.contextPath}/resources/assets/img/profile4.jpg'" + ");"}));
-			var $copy5 = $("<div>").attr("class", "col-12 col-md-4");
-			$copy5.append($("<div>").attr({"class":"square", "style":"background-image: url(" + "'${pageContext.request.contextPath}/resources/assets/img/profile5.jpg'" + ");"}));
-			var $copy6 = $("<div>").attr("class", "col-12 col-md-4");
-			$copy6.append($("<div>").attr({"class":"square", "style":"background-image: url(" + "'${pageContext.request.contextPath}/resources/assets/img/profile6.jpg'" + ");"}));
-			
-			$("#plus").append($copy1);
-			$("#plus").append($copy2);
-			$("#plus").append($copy3);
-			$("#plus").append($copy4);
-			$("#plus").append($copy5);
-			$("#plus").append($copy6);
-		}
-		
-		function plus2(){
-			var $copy1 = $("<div>").attr("class", "col-12 col-md-4");
-			$copy1.append($("<div>").attr({"class":"square", "style":"background-image: url(" + "'${pageContext.request.contextPath}/resources/assets/img/profile1.jpg'" + ");"}));
-			var $copy2 = $("<div>").attr("class", "col-12 col-md-4");
-			$copy2.append($("<div>").attr({"class":"square", "style":"background-image: url(" + "'${pageContext.request.contextPath}/resources/assets/img/profile2.jpg'" + ");"}));
-			var $copy3 = $("<div>").attr("class", "col-12 col-md-4");
-			$copy3.append($("<div>").attr({"class":"square", "style":"background-image: url(" + "'${pageContext.request.contextPath}/resources/assets/img/profile3.jpg'" + ");"}));
-			var $copy4 = $("<div>").attr("class", "col-12 col-md-4");
-			$copy4.append($("<div>").attr({"class":"square", "style":"background-image: url(" + "'${pageContext.request.contextPath}/resources/assets/img/profile4.jpg'" + ");"}));
-			var $copy5 = $("<div>").attr("class", "col-12 col-md-4");
-			$copy5.append($("<div>").attr({"class":"square", "style":"background-image: url(" + "'${pageContext.request.contextPath}/resources/assets/img/profile5.jpg'" + ");"}));
-			var $copy6 = $("<div>").attr("class", "col-12 col-md-4");
-			$copy6.append($("<div>").attr({"class":"square", "style":"background-image: url(" + "'${pageContext.request.contextPath}/resources/assets/img/profile6.jpg'" + ");"}));
-			
-			$("#plus2").append($copy1);
-			$("#plus2").append($copy2);
-			$("#plus2").append($copy3);
-			$("#plus2").append($copy4);
-			$("#plus2").append($copy5);
-			$("#plus2").append($copy6);
-		}
-		
 		$(function(){
-			$("#alarmBtn").click(function(){
-				if($("#alarmDiv").css("display") == "block"){
-					$("#alarmDiv").css("display", "none");
-				}else{
-					$("#alarmDiv").css("display", "block");
-				}
-				
-			});
-			
-			$("#alarmBtn1").click(function(){
-				if($("#alarmDiv1").css("display") == "block"){
-					$("#alarmDiv1").css("display", "none");
-				}else{
-					$("#alarmDiv1").css("display", "block");
-				}
-				
-			});
+			selectPostingList();
+			selectLikeList();
+			selectFanList();
+			selectFwList();
 		});
 		
-		$(document).ready(function(){
-			console.log(123);
-			var url = document.location.href;
-			var tab = url.split('/').pop();
-			$(tab).trigger("click");
-			console.log(33);
+		var countP = 0;
+		var countL = 0;
+		var countFan = 0;
+		var countFw = 0;
+		
+		function selectPostingList(){
+			
+			$.ajax({
+				url:"mpSPostingList.do",
+				dataType:"json",
+				success:function(list){
+					console.log("ajax 통신 성공");
+					if(list.length == 0){
+						var $a1 = $("<p>").attr("class", "lead");
+						var $a2 = a1.append($("<span>").attr("class", "text-danger"));
+						$a2.append($("<i>").attr("class", "far fa-frown-open"));
+						$("#plus").append($a2);
+					}else{
+						for(var i=countP; i<countP+6; i++){
+							var $copy1 = $("<div>").attr("class", "col-12 col-md-4");
+							$copy1.append($("<div>").attr({"class":"square", "style":"background-image: url(" + "'resources/assets/img/" + list[i].renameImg + "');"}));
+							
+							$("#plus").append($copy1);
+						}
+					}
+				},
+				error:function(){
+					console.log("ajax 통신 실패");
+				}
+			});
+			
+		}
+		$("#pBtn").on("click", function(){
+			countP += 6;
+			selectPostingList();
 		});
+		
+		function selectLikeList(){
+			
+			$.ajax({
+				url:"mpSLikeList.do",
+				dataType:"json",
+				success:function(list){
+					for(var i=countL; i<countL+6; i++){
+						var $copy1 = $("<div>").attr("class", "col-12 col-md-4");
+						$copy1.append($("<div>").attr({"class":"square", "style":"background-image: url(" + "'resources/assets/img/" + list[i].renameImg + "');"}));
+						
+						$("#plus2").append($copy1);
+					}
+				},
+				error:function(){
+					console.log("ajax 통신 실패");
+				}
+			});
+			
+		}
+		$("#lBtn").on("click", function(){
+			countL += 6;
+			selectLikeList();
+		});
+		
+		function selectFanList(){
+			
+			$.ajax({
+				url:"mpSFanList.do",
+				dataType:"json",
+				success:function(list){
+					console.log("ajax 통신 성공");
+				},
+				error:function(){
+					console.log("ajax 통신 실패");
+				}
+			});
+		}
+		$("#fanBtn").on("click", function(){
+			countFan += 12;
+			selectFanList();
+		});
+		
+		function selectFwList(){
+			
+			$.ajax({
+				url:"mpSFwList.do",
+				dataType:"json",
+				success:function(list){
+					console.log("ajax 통신 성공");
+				},
+				error:function(){
+					console.log("ajax 통신 실패");
+				}
+			});
+		}
+		$("#fwBtn").on("click", function(){
+			countFw += 12;
+			selectFwList();
+		});
+		
 		
 	</script>
 	<script>
@@ -614,6 +412,13 @@
 			}).mouseout(function(){
 				$("#aaa1").css("display", "none");
 			});
+		});
+	</script>
+	<script>
+		$(document).ready(function(){
+			var url = document.location.href;
+			var tab = url.split('/').pop();
+			$(tab).trigger("click");
 		});
 	</script>
 	

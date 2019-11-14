@@ -7,13 +7,15 @@
 
 	<insert id="insertPosting">
 		insert into member
-		values(seq_posting.nextval, #{mno}, #{originalImg}, #{renameImg}, null, #{content}, )
+		values(seq_posting.nextval, #{mno}, #{originalImg}, #{renameImg}, null, #{content}, #{hashtag}, #{gender},
+				#{location}, default, default, sysdate, null, 'N')
 	</insert>
 	
 	<insert id="insertStyle">
-	
+		insert into style
+		values(seq_style.nextval, seq_posting.currval, #{cate}, #{brand}, #{color})
 	</insert>
-
+	
 
 
 
