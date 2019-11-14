@@ -16,40 +16,40 @@ public class MyPageDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	public Member selectProfile(Member m) {
-		return sqlSession.selectOne("mypageMapper.selectProfile", m);
+	public Member selectProfile(int mno) {
+		return sqlSession.selectOne("mypageMapper.selectProfile", mno);
 	}
 
-	public ArrayList<Posting> selectPostingList(Member m) {
-		return (ArrayList)sqlSession.selectList("mypageMapper.selectPostingList", m);
+	public ArrayList<Posting> selectPostingList(int mno) {
+		return (ArrayList)sqlSession.selectList("mypageMapper.selectPostingList", mno);
 	}
 
-	public ArrayList<Posting> selectLikeList(Member m) {
-		return (ArrayList)sqlSession.selectList("mypageMapper.selectLikeList", m);
+	public ArrayList<Posting> selectLikeList(int mno) {
+		return (ArrayList)sqlSession.selectList("mypageMapper.selectLikeList", mno);
 	}
 
-	public ArrayList<Member> selectFanList(Member m) {
-		return (ArrayList)sqlSession.selectList("mypageMapper.selectFanList", m);
+	public ArrayList<Member> selectFanList(int mno) {
+		return (ArrayList)sqlSession.selectList("mypageMapper.selectFanList", mno);
 	}
 
-	public ArrayList<Member> selectFollowingList(Member m) {
-		return (ArrayList)sqlSession.selectList("mypageMapper.selectFollowingList", m);
+	public ArrayList<Member> selectFwList(int mno) {
+		return (ArrayList)sqlSession.selectList("mypageMapper.selectFwList", mno);
 	}
 
 	public int updateProfile(Member m) {
 		return sqlSession.update("mypageMapper.updateProfile", m);
 	}
 
-	public ArrayList<Ad> selectAdList(Member m) {
-		return (ArrayList)sqlSession.selectList("mypageMapper.selectAdList", m);
+	public ArrayList<Ad> selectAdList(int mno) {
+		return (ArrayList)sqlSession.selectList("mypageMapper.selectAdList", mno);
 	}
 
 	public int updatePass(Member m) {
 		return sqlSession.update("mypageMapper.updatePass", m);
 	}
 
-	public int deleteMember(String email) {
-		return sqlSession.update("mypageMapper.deleteMember", email);
+	public int deleteMember(int mno) {
+		return sqlSession.update("mypageMapper.deleteMember", mno);
 	}
 	
 	
