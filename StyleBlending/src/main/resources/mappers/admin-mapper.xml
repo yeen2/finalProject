@@ -17,6 +17,7 @@
 		<result property="profilePath" column="profile_Path"/>
 		<result property="enrollDate" column="enroll_Date"/>
 		<result property="updateDate" column="update_Date"/>
+		<result property="deleteDate" column="delete_Date"/>
 		<result property="isDelete" column="isDelete"/>
 	</resultMap>
 
