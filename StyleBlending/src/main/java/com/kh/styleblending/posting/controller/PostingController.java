@@ -46,12 +46,16 @@ public class PostingController {
 		
 		System.out.println(p);
 		
+		// 1. 첨부파일 처리
 		if(!file.getOriginalFilename().equals("")) { // 첨부파일이 넘어오는 경우
 			String renameFileName = saveFile(file, request);
 			
 			p.setOriginalImg(file.getOriginalFilename());
 			p.setRenameImg(renameFileName);
 		}
+		
+		
+		// 2. 
 		
 		int result = pService.insertPosting(p, cate, brand, color);
 		
@@ -62,6 +66,9 @@ public class PostingController {
 			return "common/errorPage";
 		}
 	}
+	
+	
+	
 	
 	// 파일 업로드 하고 업로드한 파일명(수정명) 반환하는 메소드 --> 재사용하기 위해 따로 빼둠
 		public String saveFile(MultipartFile file, HttpServletRequest request) {
