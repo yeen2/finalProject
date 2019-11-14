@@ -1,0 +1,793 @@
+--create user styleblending IDENTIFIED by styleblending;
+--grant connect, resource to styleblending;
+
+DROP TABLE style;
+DROP TABLE p_like;
+DROP TABLE p_declare;
+DROP TABLE notice;
+DROP TABLE ad;
+DROP TABLE fan;
+DROP TABLE pay;
+DROP TABLE alarm;
+DROP TABLE image;
+DROP TABLE b_like;
+DROP TABLE r_like;
+DROP TABLE b_declare;
+DROP TABLE live;
+DROP TABLE b_reply;
+DROP TABLE p_reply;
+DROP TABLE fashion_board;
+DROP TABLE board;
+DROP TABLE posting;
+DROP TABLE member;
+
+drop sequence seq_member;
+drop sequence seq_posting;
+drop sequence seq_style;
+drop sequence seq_p_reply;
+drop sequence seq_p_like;
+drop sequence seq_p_declare;
+
+drop sequence seq_ad;
+drop sequence seq_fan;
+drop sequence seq_pay;
+drop sequence seq_alarm;
+drop sequence seq_live;
+drop sequence seq_notice;
+drop sequence seq_fashion_board;
+
+drop sequence seq_board;
+drop sequence seq_image;
+drop sequence seq_b_reply;
+drop sequence seq_r_like;
+drop sequence seq_b_like;
+drop sequence seq_b_declare;
+
+
+create sequence seq_member;
+create sequence seq_posting;
+create sequence seq_style;
+create sequence seq_p_reply;
+create sequence seq_p_like;
+create sequence seq_p_declare;
+
+create sequence seq_ad;
+create sequence seq_fan;
+create sequence seq_pay;
+create sequence seq_alarm;
+create sequence seq_live;
+create sequence seq_notice;
+create sequence seq_fashion_board;
+
+create sequence seq_board;
+create sequence seq_image;
+create sequence seq_b_reply;
+create sequence seq_r_like;
+create sequence seq_b_like;
+create sequence seq_b_declare;
+
+
+
+
+
+CREATE TABLE member (
+	m_no	number		NOT NULL,
+	logintype	varchar2(50)	DEFAULT 'general'	NOT NULL,
+	snsid	varchar2(100)		NULL,
+	email	varchar2(100)		NOT NULL,
+	pass	varchar2(100)		NOT NULL,
+	nickname	varchar2(50)		NOT NULL,
+	profile	varchar2(1000)		NULL,
+	location	varchar2(1000)		NULL,
+	profile_img	varchar2(1000)	DEFAULT 'profile.jpg'	NULL,
+	profile_path	varchar2(1000)		NULL,
+	enroll_date	date	DEFAULT sysdate	NOT NULL,
+	update_date	date	 NULL,
+	delete_date	date	 NULL,
+	isdelete	varchar2(1)	DEFAULT 'N'	NOT NULL
+);
+
+COMMENT ON COLUMN member.m_no IS '회원번호';
+
+COMMENT ON COLUMN member.logintype IS '로그인타입';
+
+COMMENT ON COLUMN member.snsid IS 'sns아이디';
+
+COMMENT ON COLUMN member.email IS '회원이메일';
+
+COMMENT ON COLUMN member.pass IS '비밀번호';
+
+COMMENT ON COLUMN member.nickname IS '닉네임';
+
+COMMENT ON COLUMN member.profile IS '자기소개';
+
+COMMENT ON COLUMN member.location IS '위치';
+
+COMMENT ON COLUMN member.profile_img IS '프로필사진';
+
+COMMENT ON COLUMN member.profile_path IS '프로필경로';
+
+COMMENT ON COLUMN member.enroll_date IS '가입일자';
+
+COMMENT ON COLUMN member.update_date IS '수정날짜';
+
+COMMENT ON COLUMN member.delete_date IS '탈퇴날짜';
+
+COMMENT ON COLUMN member.isdelete IS '탈퇴여부';
+
+
+
+CREATE TABLE posting (
+	p_no	number		NOT NULL,
+	m_no	number		NOT NULL,
+	original_img	varchar2(1000)		NOT NULL,
+	rename_img	varchar2(1000)		NOT NULL,
+	img_path	varchar2(1000)		NOT NULL,
+	content	varchar2(4000)		NOT NULL,
+	hashtag	varchar2(500)		NULL,
+	gender	varchar2(1)		NOT NULL,
+	location	varchar2(1000)		NULL,
+	like_count	number	DEFAULT 0	NOT NULL,
+	declare_count	number	DEFAULT 0	NOT NULL,
+	enroll_date	date	DEFAULT sysdate	NOT NULL,
+	update_date	date		NULL,
+	isdelete	varchar2(1)	DEFAULT 'N'	NOT NULL
+);
+
+COMMENT ON COLUMN posting.p_no IS '포스팅번호';
+
+COMMENT ON COLUMN posting.m_no IS '회원번호';
+
+COMMENT ON COLUMN posting.original_img IS '이미지명';
+
+COMMENT ON COLUMN posting.rename_img IS '이미지수정명';
+
+COMMENT ON COLUMN posting.img_path IS '이미지 경로';
+
+COMMENT ON COLUMN posting.content IS '내용';
+
+COMMENT ON COLUMN posting.hashtag IS '해시태그';
+
+COMMENT ON COLUMN posting.gender IS '성별';
+
+COMMENT ON COLUMN posting.location IS '촬영위치';
+
+COMMENT ON COLUMN posting.like_count IS '좋아요수';
+
+COMMENT ON COLUMN posting.declare_count IS '신고수';
+
+COMMENT ON COLUMN posting.enroll_date IS '등록날짜';
+
+COMMENT ON COLUMN posting.update_date IS '수정날짜';
+
+COMMENT ON COLUMN posting.isdelete IS '삭제여부';
+
+
+CREATE TABLE p_reply (
+	pr_no	number		NOT NULL,
+	p_no	number		NOT NULL,
+	m_no	number		NOT NULL,
+	content	varchar2(1000)		NOT NULL,
+	enroll_date	date	DEFAULT 	sysdate	NOT NULL,
+	update_date	date		NULL,
+	prr_no	number		NULL,
+	r_level	varchar2(1)	DEFAULT '1'	NOT NULL,
+	isdelete	varchar2(1)	DEFAULT 'N'	NOT NULL
+);
+
+COMMENT ON COLUMN p_reply.pr_no IS '포스팅댓글 번호';
+
+COMMENT ON COLUMN p_reply.p_no IS '포스팅번호';
+
+COMMENT ON COLUMN p_reply.m_no IS '회원번호';
+
+COMMENT ON COLUMN p_reply.content IS '내용';
+
+COMMENT ON COLUMN p_reply.enroll_date IS '작성날짜';
+
+COMMENT ON COLUMN p_reply.update_date IS '수정날짜';
+
+COMMENT ON COLUMN p_reply.prr_no IS '포스팅대댓글 번호';
+
+COMMENT ON COLUMN p_reply.r_level IS '1-댓글, 2-대댓글';
+
+COMMENT ON COLUMN p_reply.isdelete IS '삭제여부';
+
+
+
+CREATE TABLE p_like (
+	m_no	number		NOT NULL,
+	p_no	number		NOT NULL
+);
+
+COMMENT ON COLUMN p_like.m_no IS '회원번호';
+
+COMMENT ON COLUMN p_like.p_no IS '포스팅번호';
+
+
+
+CREATE TABLE style (
+	s_no	number		NOT NULL,
+	p_no	number		NOT NULL,
+	cate	varchar2(100)		NOT NULL,
+	brand	varchar2(500)		NOT NULL,
+	color	varchar2(100)		NOT NULL
+);
+
+COMMENT ON COLUMN style.s_no IS '카테고리번호';
+
+COMMENT ON COLUMN style.p_no IS '포스팅번호';
+
+COMMENT ON COLUMN style.cate IS '카테고리';
+
+COMMENT ON COLUMN style.brand IS '브랜드';
+
+COMMENT ON COLUMN style.color IS '컬러';
+
+
+CREATE TABLE p_declare (
+	d_no	number		NOT NULL,
+	m_no	number		NOT NULL,
+	p_no	number		NOT NULL,
+	category	varchar2(100)		NOT NULL,
+	content	varchar2(200)		NULL,
+	enroll_date	date	DEFAULT sysdate	NOT NULL,
+	isCheck	varchar2(10)	DEFAULT 1	NOT NULL
+);
+
+COMMENT ON COLUMN p_declare.d_no IS '신고번호';
+
+COMMENT ON COLUMN p_declare.m_no IS '신고한 회원번호';
+
+COMMENT ON COLUMN p_declare.p_no IS '신고당한 포스팅번호';
+
+COMMENT ON COLUMN p_declare.category IS '신고사유 카테고리';
+
+COMMENT ON COLUMN p_declare.content IS '신고사유기타 내용';
+
+COMMENT ON COLUMN p_declare.enroll_date IS '신고일자';
+
+COMMENT ON COLUMN p_declare.isCheck IS '신고상태(1-확인안함,2-확인,3-삭제완료)';
+
+CREATE TABLE fan (
+	f_no	number		NOT NULL,
+	me_no	number		NOT NULL,
+	you_no	number		NOT NULL,
+	enroll_date	Date	DEFAULT sysdate	NOT NULL
+);
+
+COMMENT ON COLUMN fan.f_no IS '팬번호';
+
+COMMENT ON COLUMN fan.me_no IS '회원번호';
+
+COMMENT ON COLUMN fan.you_no IS '팔로워 회원번호';
+
+COMMENT ON COLUMN fan.enroll_date IS '시작날짜';
+
+
+CREATE TABLE board (
+	b_no	number		NOT NULL,
+	m_no	number		NOT NULL,
+	title	varchar2(50)		NOT NULL,
+	content	varchar2(4000)		NOT NULL,
+	count	number	DEFAULT 0	NOT NULL,
+	enroll_date	Date	DEFAULT SYSDATE	NOT NULL,
+	update_date	Date		NULL,
+	isdelete	varchar2(1)	DEFAULT 'N'	NOT NULL,
+	like_count	number	DEFAULT 0	NOT NULL
+);
+
+COMMENT ON COLUMN board.b_no IS '게시판번호';
+
+COMMENT ON COLUMN board.m_no IS '회원번호';
+
+COMMENT ON COLUMN board.title IS '제목';
+
+COMMENT ON COLUMN board.content IS '내용';
+
+COMMENT ON COLUMN board.count IS '조회수';
+
+COMMENT ON COLUMN board.enroll_date IS '작성날짜';
+
+COMMENT ON COLUMN board.update_date IS '수정날짜';
+
+COMMENT ON COLUMN board.isdelete IS '삭제여부';
+
+COMMENT ON COLUMN board.like_count IS '받은 좋아요수';
+
+CREATE TABLE notice (
+	n_no	NUMBER		NOT NULL,
+	title	varchar2(50)		NOT NULL,
+	content	varchar2(3000)		NOT NULL,
+	enroll_date	Date	DEFAULT sysdate	NOT NULL,
+	isDelete	varchar2(1)	DEFAULT 'N'	NOT NULL
+);
+
+COMMENT ON COLUMN notice.n_no IS '공지사항번호';
+
+COMMENT ON COLUMN notice.title IS '공지사항 제목';
+
+COMMENT ON COLUMN notice.content IS '공지사항 내용';
+
+COMMENT ON COLUMN notice.enroll_date IS '공지사항 등록날짜';
+
+COMMENT ON COLUMN notice.isDelete IS '공지사항삭제';
+
+
+CREATE TABLE ad (
+	ad_no	number		NOT NULL,
+	m_no	number		NOT NULL,
+	pay_no	number		NOT NULL,
+	name	varchar2(300)		NOT NULL,
+	url	varchar2(500)		NOT NULL,
+	original_img	varchar2(500)		NOT NULL,
+	rename_img	varchar2(500)		NOT NULL,
+	img_path	varchar2(1000)		NOT NULL,
+	enroll_date	date	DEFAULT sysdate	NOT NULL,
+	start_date	date		NULL,
+	end_date	date		NULL,
+	status	number	DEFAULT 1	NOT NULL
+);
+
+COMMENT ON COLUMN ad.ad_no IS '광고 번호';
+
+COMMENT ON COLUMN ad.m_no IS '신청한 회원번호';
+
+COMMENT ON COLUMN ad.pay_no IS '결제번호';
+
+COMMENT ON COLUMN ad.name IS '광고신청 업체명';
+
+COMMENT ON COLUMN ad.url IS '광고신청 사이트주소';
+
+COMMENT ON COLUMN ad.original_img IS '이미지원본이름';
+
+COMMENT ON COLUMN ad.rename_img IS '이미지수정본이름';
+
+COMMENT ON COLUMN ad.img_path IS '이미지경로';
+
+COMMENT ON COLUMN ad.enroll_date IS '광고신청 날짜';
+
+COMMENT ON COLUMN ad.start_date IS '광고시작 날짜';
+
+COMMENT ON COLUMN ad.end_date IS '광고마감 날짜';
+
+COMMENT ON COLUMN ad.status IS '광고상태(1-승인요청,2-진행중,3-마감)';
+
+
+
+CREATE TABLE fashion_board (
+	fb_no	number		NOT NULL,
+	m_no	number		NOT NULL,
+	title	varchar2(500)		NOT NULL,
+	content	varchar2(4000)		NOT NULL,
+	count	number	DEFAULT 0	NOT NULL,
+	enroll_date	Date	DEFAULT SYSDATE	NOT NULL,
+	update_date	Date		NULL,
+	isdelete	varchar2(1)	DEFAULT 'N'	NOT NULL
+);
+
+COMMENT ON COLUMN fashion_board.fb_no IS '게시판번호';
+
+COMMENT ON COLUMN fashion_board.m_no IS '회원번호';
+
+COMMENT ON COLUMN fashion_board.title IS '제목';
+
+COMMENT ON COLUMN fashion_board.content IS '내용';
+
+COMMENT ON COLUMN fashion_board.count IS '조회수';
+
+COMMENT ON COLUMN fashion_board.enroll_date IS '작성날짜';
+
+COMMENT ON COLUMN fashion_board.update_date IS '수정날짜';
+
+COMMENT ON COLUMN fashion_board.isdelete IS '삭제여부';
+
+
+
+CREATE TABLE pay (
+	pay_no	number		NOT NULL,
+	m_no	number		NOT NULL,
+	price	number		NOT NULL,
+	enroll_date	Date	DEFAULT sysdate	NOT NULL,
+	status	varchar2(10)	DEFAULT 1	NOT NULL
+);
+
+COMMENT ON COLUMN pay.pay_no IS '결제번호';
+
+COMMENT ON COLUMN pay.m_no IS '회원번호';
+
+COMMENT ON COLUMN pay.price IS '결제금액';
+
+COMMENT ON COLUMN pay.enroll_date IS '결제날짜';
+
+COMMENT ON COLUMN pay.status IS '1-default, 2-취소';
+
+
+
+CREATE TABLE alarm (
+	al_no	number		NOT NULL,
+	t_no	number		NOT NULL,
+	m_no	number		NOT NULL,
+	enroll_date	date	DEFAULT sysdate	NOT NULL,
+	status	varchar2(1)	DEFAULT 1	NOT NULL,
+	type	varchar2(1)		NOT NULL
+);
+
+COMMENT ON COLUMN alarm.al_no IS '알림좋아요번호';
+
+COMMENT ON COLUMN alarm.t_no IS '알람게시물번호(좋아요,신고,팬)';
+
+COMMENT ON COLUMN alarm.m_no IS '해당회원번호';
+
+COMMENT ON COLUMN alarm.enroll_date IS '알림등록날짜';
+
+COMMENT ON COLUMN alarm.status IS '1-읽지않음, 2-읽음';
+
+COMMENT ON COLUMN alarm.type IS '1-좋아요, 2-신고, 3-팬';
+
+
+
+CREATE TABLE image (
+	img_no	number		NOT NULL,
+	b_no	number		NOT NULL,
+	origin_img	varchar2(500)		NOT NULL,
+	rename_img	varchar2(500)		NOT NULL,
+	img_path	varchar2(1000)		NOT NULL,
+	type	varchar2(1)		NOT NULL
+);
+
+COMMENT ON COLUMN image.img_no IS '자유,패션이미지 번호';
+
+COMMENT ON COLUMN image.b_no IS '자유or패션 게시판 번호';
+
+COMMENT ON COLUMN image.origin_img IS '원본명';
+
+COMMENT ON COLUMN image.rename_img IS '수정명';
+
+COMMENT ON COLUMN image.img_path IS '이미지경로';
+
+COMMENT ON COLUMN image.type IS '1-자유,2-패션';
+
+
+CREATE TABLE b_reply (
+	br_no	number		NOT NULL,
+	b_no	number		NOT NULL,
+	content	varchar2(500)		NOT NULL,
+	enroll_date	Date	DEFAULT sysdate	NOT NULL,
+	isdelete	varchar2(1)	DEFAULT 'N'	NOT NULL
+);
+
+COMMENT ON COLUMN b_reply.br_no IS '댓글번호';
+
+COMMENT ON COLUMN b_reply.content IS '댓글내용';
+
+COMMENT ON COLUMN b_reply.enroll_date IS '댓글작성일';
+
+COMMENT ON COLUMN b_reply.isdelete IS '삭제여부';
+
+
+
+CREATE TABLE b_like (
+	m_no	number		NOT NULL,
+	b_no	number		NOT NULL
+);
+
+COMMENT ON COLUMN b_like.m_no IS '회원번호';
+
+COMMENT ON COLUMN b_like.b_no IS '자유게시판 번호';
+
+
+
+CREATE TABLE r_like (
+	m_no	number		NOT NULL,
+	r_no	number		NOT NULL
+);
+
+COMMENT ON COLUMN r_like.m_no IS '회원번호';
+
+COMMENT ON COLUMN r_like.r_no IS '댓글번호';
+
+
+
+CREATE TABLE b_declare (
+	d_no	number		NOT NULL,
+	m_no	number		NOT NULL,
+	b_no	number		NOT NULL,
+	category	varchar2(100)		NOT NULL,
+	content	varchar2(200)		NULL,
+	enroll_date	date	DEFAULT sysdate	NOT NULL,
+	isCheck	varchar2(10)	DEFAULT 1	NOT NULL
+);
+
+COMMENT ON COLUMN b_declare.d_no IS '신고번호';
+
+COMMENT ON COLUMN b_declare.m_no IS '신고한 회원번호';
+
+COMMENT ON COLUMN b_declare.b_no IS '신고 게시판 번호';
+
+COMMENT ON COLUMN b_declare.category IS '신고사유 카테고리';
+
+COMMENT ON COLUMN b_declare.content IS '신고사유기타 내용';
+
+COMMENT ON COLUMN b_declare.enroll_date IS '신고일자';
+
+COMMENT ON COLUMN b_declare.isCheck IS '신고상태(1-확인안함,2-확인,3-삭제완료)';
+
+
+
+CREATE TABLE live (
+	live_no	number		NOT NULL,
+	keyword	varchar2(100)		NOT NULL,
+	enroll_date	date	DEFAULT sysdate	NOT NULL
+);
+
+COMMENT ON COLUMN live.live_no IS '실시간검색어 번호';
+
+COMMENT ON COLUMN live.keyword IS '검색어';
+
+COMMENT ON COLUMN live.enroll_date IS '검색시간';
+
+
+-- PK
+
+ALTER TABLE member ADD CONSTRAINT PK_MEMBER PRIMARY KEY (
+	m_no
+);
+
+ALTER TABLE posting ADD CONSTRAINT PK_POSTING PRIMARY KEY (
+	p_no
+);
+
+ALTER TABLE p_like ADD CONSTRAINT PK_P_LIKE PRIMARY KEY (
+	m_no,
+	p_no
+);
+
+ALTER TABLE style ADD CONSTRAINT PK_STYLE PRIMARY KEY (
+	s_no
+);
+
+ALTER TABLE p_declare ADD CONSTRAINT PK_P_DECLARE PRIMARY KEY (
+	d_no
+);
+
+ALTER TABLE fan ADD CONSTRAINT PK_FAN PRIMARY KEY (
+	f_no
+);
+
+ALTER TABLE p_reply ADD CONSTRAINT PK_P_REPLY PRIMARY KEY (
+	pr_no
+);
+
+ALTER TABLE board ADD CONSTRAINT PK_BOARD PRIMARY KEY (
+	b_no
+);
+
+ALTER TABLE notice ADD CONSTRAINT PK_NOTICE PRIMARY KEY (
+	n_no
+);
+
+ALTER TABLE ad ADD CONSTRAINT PK_AD PRIMARY KEY (
+	ad_no
+);
+
+ALTER TABLE fashion_board ADD CONSTRAINT PK_FASHION_BOARD PRIMARY KEY (
+	fb_no
+);
+
+ALTER TABLE pay ADD CONSTRAINT PK_PAY PRIMARY KEY (
+	pay_no
+);
+
+ALTER TABLE alarm ADD CONSTRAINT PK_ALARM PRIMARY KEY (
+	al_no
+);
+
+ALTER TABLE image ADD CONSTRAINT PK_IMAGE PRIMARY KEY (
+	img_no
+);
+
+ALTER TABLE b_reply ADD CONSTRAINT PK_B_REPLY PRIMARY KEY (
+	br_no
+);
+
+ALTER TABLE b_like ADD CONSTRAINT PK_B_LIKE PRIMARY KEY (
+	m_no,
+	b_no
+);
+
+ALTER TABLE r_like ADD CONSTRAINT PK_R_LIKE PRIMARY KEY (
+	m_no,
+	r_no
+);
+
+ALTER TABLE b_declare ADD CONSTRAINT PK_B_DECLARE PRIMARY KEY (
+	d_no
+);
+
+ALTER TABLE live ADD CONSTRAINT PK_LIVE PRIMARY KEY (
+	live_no
+);
+
+
+
+--FK
+
+ALTER TABLE posting ADD CONSTRAINT FK_member_TO_posting_1 FOREIGN KEY (
+	m_no
+)
+REFERENCES member (
+	m_no
+);
+
+ALTER TABLE p_like ADD CONSTRAINT FK_member_TO_p_like_1 FOREIGN KEY (
+	m_no
+)
+REFERENCES member (
+	m_no
+);
+
+ALTER TABLE p_like ADD CONSTRAINT FK_posting_TO_p_like_1 FOREIGN KEY (
+	p_no
+)
+REFERENCES posting (
+	p_no
+);
+
+ALTER TABLE style ADD CONSTRAINT FK_posting_TO_style_1 FOREIGN KEY (
+	p_no
+)
+REFERENCES posting (
+	p_no
+);
+
+ALTER TABLE p_declare ADD CONSTRAINT FK_member_TO_p_declare_1 FOREIGN KEY (
+	m_no
+)
+REFERENCES member (
+	m_no
+);
+
+ALTER TABLE p_declare ADD CONSTRAINT FK_posting_TO_p_declare_1 FOREIGN KEY (
+	p_no
+)
+REFERENCES posting (
+	p_no
+);
+
+ALTER TABLE fan ADD CONSTRAINT FK_member_TO_fan_1 FOREIGN KEY (
+	me_no
+)
+REFERENCES member (
+	m_no
+);
+
+ALTER TABLE fan ADD CONSTRAINT FK_member_TO_fan_2 FOREIGN KEY (
+	you_no
+)
+REFERENCES member (
+	m_no
+);
+
+ALTER TABLE p_reply ADD CONSTRAINT FK_posting_TO_p_reply_1 FOREIGN KEY (
+	p_no
+)
+REFERENCES posting (
+	p_no
+);
+
+ALTER TABLE p_reply ADD CONSTRAINT FK_member_TO_p_reply_1 FOREIGN KEY (
+	m_no
+)
+REFERENCES member (
+	m_no
+);
+
+ALTER TABLE p_reply ADD CONSTRAINT FK_p_reply_TO_p_reply_1 FOREIGN KEY (
+	prr_no
+)
+REFERENCES p_reply (
+	pr_no
+);
+
+ALTER TABLE board ADD CONSTRAINT FK_member_TO_board_1 FOREIGN KEY (
+	m_no
+)
+REFERENCES member (
+	m_no
+);
+
+ALTER TABLE ad ADD CONSTRAINT FK_member_TO_ad_1 FOREIGN KEY (
+	m_no
+)
+REFERENCES member (
+	m_no
+);
+
+ALTER TABLE ad ADD CONSTRAINT FK_pay_TO_ad_1 FOREIGN KEY (
+	pay_no
+)
+REFERENCES pay (
+	pay_no
+);
+
+ALTER TABLE fashion_board ADD CONSTRAINT FK_member_TO_fashion_board_1 FOREIGN KEY (
+	m_no
+)
+REFERENCES member (
+	m_no
+);
+
+ALTER TABLE pay ADD CONSTRAINT FK_member_TO_pay_1 FOREIGN KEY (
+	m_no
+)
+REFERENCES member (
+	m_no
+);
+
+ALTER TABLE alarm ADD CONSTRAINT FK_member_TO_alarm_1 FOREIGN KEY (
+	m_no
+)
+REFERENCES member (
+	m_no
+);
+
+ALTER TABLE b_reply ADD CONSTRAINT FK_board_TO_b_reply_1 FOREIGN KEY (
+	b_no
+)
+REFERENCES board (
+	b_no
+);
+
+ALTER TABLE b_like ADD CONSTRAINT FK_member_TO_b_like_1 FOREIGN KEY (
+	m_no
+)
+REFERENCES member (
+	m_no
+);
+
+ALTER TABLE b_like ADD CONSTRAINT FK_board_TO_b_like_1 FOREIGN KEY (
+	b_no
+)
+REFERENCES board (
+	b_no
+);
+
+ALTER TABLE r_like ADD CONSTRAINT FK_member_TO_r_like_1 FOREIGN KEY (
+	m_no
+)
+REFERENCES member (
+	m_no
+);
+
+ALTER TABLE r_like ADD CONSTRAINT FK_b_reply_TO_r_like_1 FOREIGN KEY (
+	r_no
+)
+REFERENCES b_reply (
+	br_no
+);
+
+ALTER TABLE b_declare ADD CONSTRAINT FK_member_TO_b_declare_1 FOREIGN KEY (
+	m_no
+)
+REFERENCES member (
+	m_no
+);
+
+ALTER TABLE b_declare ADD CONSTRAINT FK_board_TO_b_declare_1 FOREIGN KEY (
+	b_no
+)
+REFERENCES board (
+	b_no
+);
+
+
+
+--샘플데이터
+
+insert into member values(seq_member.nextval, default, null, 'admin', '1234', '관리자', null, null, null, null, sysdate, null, null, default);
+
+commit;
+
+
+

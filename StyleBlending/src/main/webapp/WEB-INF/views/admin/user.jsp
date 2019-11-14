@@ -95,14 +95,16 @@
                                         		</label>
                                         	</th>
                                             <th class="serial">No.</th>
-                                            <th class="">Avatar</th>
-                                            <th>아이디</th>
+                                            <th>이미지</th>
+                                            <th>이메일</th>
                                             <th>닉네임</th>
                                             <th>가입일</th>
                                             <th>게시글수</th>
                                             <th>탈퇴유무</th>
                                         </tr>
                                     </thead>
+                                    
+                                    <c:forEach items="${list}" var="m">
                                     <tbody>
                                         <tr>
                                         	<td>
@@ -112,87 +114,23 @@
                                        				<span class="switch-handle"></span>
                                         		</label>
                                         	</td>
-                                            <td class="serial">1.</td>
+                                            <td class="serial">${m.mno}</td>
                                             <td class="avatar">
                                                 <div class="round-img">
                                                     <a href="#"><img class="rounded-circle" src="${pageContext.request.contextPath}/resources/admin_temp/images/avatar/1.jpg" alt=""></a>
                                                 </div>
                                             </td>
-                                            <td> #5469 </td>
-                                            <td>  <span class="name">Louis Stanley</span> </td>
-                                            <td> <span class="product">iMax</span> </td>
-                                            <td><span class="count">231</span></td>
+                                            <td>${m.email}</td>
+                                            <td> <span class="name">${m.nickName }</span> </td>
+                                            <td> <span class="product">${m.enrollDate }</span> </td>
+                                            <td><span class="count">${m.deleteDate}</span></td>
                                             <td>
                                                 <span class="badge badge-complete">N</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                        	<td>
-                                        		<label class="switch switch-3d switch-danger mr-3">
-                                        			<input type="checkbox" class="switch-input" checked="true">
-                                       				<span class="switch-label"></span> 
-                                       				<span class="switch-handle"></span>
-                                        		</label>
-                                        	</td>
-                                            <td class="serial">2.</td>
-                                            <td class="avatar">
-                                                <div class="round-img">
-                                                    <a href="#"><img class="rounded-circle" src="${pageContext.request.contextPath}/resources/admin_temp/images/avatar/2.jpg" alt=""></a>
-                                                </div>
-                                            </td>
-                                            <td> #5468 </td>
-                                            <td>  <span class="name">Gregory Dixon</span> </td>
-                                            <td> <span class="product">iPad</span> </td>
-                                            <td><span class="count">250</span></td>
-                                            <td>
-                                                <span class="badge badge-complete">N</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                        	<td>
-                                        		<label class="switch switch-3d switch-danger mr-3">
-                                        			<input type="checkbox" class="switch-input" checked="true">
-                                       				<span class="switch-label"></span> 
-                                       				<span class="switch-handle"></span>
-                                        		</label>
-                                        	</td>
-                                            <td class="serial">3.</td>
-                                            <td class="avatar">
-                                                <div class="round-img">
-                                                    <a href="#"><img class="rounded-circle" src="${pageContext.request.contextPath}/resources/admin_temp/images/avatar/3.jpg" alt=""></a>
-                                                </div>
-                                            </td>
-                                            <td> #5467 </td>
-                                            <td>  <span class="name">Catherine Dixon</span> </td>
-                                            <td> <span class="product">SSD</span> </td>
-                                            <td><span class="count">250</span></td>
-                                            <td>
-                                                <span class="badge badge-complete">N</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                        	<td>
-                                        		<label class="switch switch-3d switch-danger mr-3">
-                                        			<input type="checkbox" class="switch-input" checked="true">
-                                       				<span class="switch-label"></span> 
-                                       				<span class="switch-handle"></span>
-                                        		</label>
-                                        	</td>
-                                            <td class="serial">4.</td>
-                                            <td class="avatar">
-                                                <div class="round-img" data-toggle="modal" data-target="#smallmodal">
-                                                    <a href="#"><img class="rounded-circle" src="${pageContext.request.contextPath}/resources/admin_temp/images/avatar/4.jpg" alt=""></a>
-                                                </div>
-                                            </td>
-                                            <td> #5466 </td>
-                                            <td>  <span class="name">Mary Silva</span> </td>
-                                            <td> <span class="product">Magic Mouse</span> </td>
-                                            <td><span class="count">250</span></td>
-                                            <td>
-                                                <span class="badge badge-pending">Y</span>
+                                               <!--  <span class="badge badge-pending">Y</span> -->
                                             </td>
                                         </tr>
                                     </tbody>
+                                    </c:forEach>
                                 </table>
                                 
                                 <div class="row">

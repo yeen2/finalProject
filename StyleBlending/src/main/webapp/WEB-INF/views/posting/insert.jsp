@@ -229,7 +229,7 @@
 
 	<!-- Page Content -->
 	<div class="container" style="margin-top: 150px; margin-bottom: 70px;">
-		<form action="pInsert.do" method="post" id="insertForm" onsubmit="return insertValidate();">
+		<form action="pInsert.do" method="post" id="insertForm" enctype="multipart/form-data" onsubmit="return insertValidate();">
 		
 		<div class="row">
 
@@ -544,14 +544,11 @@
 			            	//var origin = $("#addDiv").clone();
 			            	//$('#addLocation').append(origin);
 			            	
-			            	
 			                $('#addLocation').append(
 			                	'<div class="card-body" id="addDiv" style="border-radius: 0; border: none; box-shadow: 0 0 2rem rgba(0, 0, 0, 0.1); transition: transform 800ms cubic-bezier(0.165, 0.84, 0.44, 1); display: inline-block; margin-right: 10px; margin-left: 10px;"><div><br><div style="display: inline-block; float: right;"><button type="button" id="removeDiv" style="cursor: pointer; background-color: transparent; border: none; text-decoration: none;"><i class="fas fa-times"></i></button></div>' + addContent + '</div>' 
 			               	).append(
 			               		'<br><br>'		
 			               	); // end append    
-			                
-			                
 			                
 			               /*  $('#removeDiv').on('click', function () { 
 			                    $(this).parent().parent().parent().remove (); // remove the textbox
@@ -588,7 +585,7 @@
 		<br><br>
 		<div style="margin-right: auto; margin-left: auto; text-align: center;" class="col-12">
 			<button type="submit" class="btn btn-dark">등록</button> &nbsp;&nbsp;
-			<button type="reset" class="btn btn-outline-dark">취소</button>
+			<button type="button" class="btn btn-outline-dark" onclick="location.href='main.do';">취소</button>
 		</div>
 		<!-- /.row -->
 		</form>
@@ -669,9 +666,9 @@
 			
 			//content에서 hashtag추출해서 저장
 			var str = content.val();
-			var regExp = /#
+			var regExp = /#;
+			var test = str.match(regExp);
 			
-			test2 = test.match(regExp);
 			$("#hashtag").val();
 
 		}
