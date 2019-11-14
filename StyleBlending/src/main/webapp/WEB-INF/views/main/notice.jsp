@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -9,34 +9,38 @@
 <title>Insert title here</title>
 <style>
 invest_table .title .date {
-    color: #cbcbcb;
-    font-size: .7rem;
-    
-    
-}
-.invest_table .title {
-    padding: 15px 40px 15px 15px;
-    color: #4f4f4f;
-    position: relative;
-    line-height: 1.2rem;
+	color: #cbcbcb;
+	font-size: .7rem;
 }
 
+.invest_table .title {
+	padding: 15px 40px 15px 15px;
+	color: #4f4f4f;
+	position: relative;
+	line-height: 1.2rem;
+}
 </style>
 </head>
 <body>
-<jsp:include page="../includes/header.jsp" />
+	<jsp:include page="../includes/header.jsp" />
 
-	<script type="text/javascript" src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
 
 	<!-- 공지사항 리스트 -->
 	<div class="container" style="margin: 200px;">
 		<h2>공지사항</h2>
-	
-	<div id=noticeDiv>
+
+
+		<div id="noticeDiv"></div>
+
+
+
+		<!-- 	<div id=noticeDiv>
 		<div class="title form-inline" style="margin: 15px;">
 			<div class="col-11">
 				[공지] 이달의 업데이트 안내<br> <span class="date"
-					style="color: #cbcbcb; font-size: .7rem;">2019-09-24</span> <!-- 날짜 -->
+					style="color: #cbcbcb; font-size: .7rem;">2019-09-24</span> 날짜
 			</div>
 			<div class="col-1">
 				<a style="margin-left: 210px;" id="down"><i
@@ -44,8 +48,8 @@ invest_table .title .date {
 			</div>
 		</div>
 		<div style="border:0.5px solid #e9e9e9; width:1250px;" id="notice" class="notice" >
-		<!-- append div class="appendNotice" -->
-		
+		append div class="appendNotice"
+			
 		</div>
 	</div>
 		
@@ -55,7 +59,7 @@ invest_table .title .date {
 		<div class="title form-inline" style="margin: 15px;">
 			<div class="col-11">
 				[공지] style blending 관련 안내 <br> <span class="date"
-					style="color: #cbcbcb; font-size: .7rem;">2019-09-24</span> <!-- 날짜 -->
+					style="color: #cbcbcb; font-size: .7rem;">2019-09-24</span> 날짜
 			</div>
 			<div class="col-1">
 				<a style="margin-left: 210px;"><i
@@ -63,7 +67,7 @@ invest_table .title .date {
 			</div>
 		</div>
 		<div style="border:0.5px solid #e9e9e9; width:1250px;" id="notice2" class="notice" >
-		<!-- append div class="appendNotice" -->
+		append div class="appendNotice"
 		
 		</div>
 
@@ -73,7 +77,7 @@ invest_table .title .date {
 		<div class="title form-inline" style="margin: 15px;">
 			<div class="col-11">
 				[공지] 리뷰 사진 선택 기능 업데이트 안내 <br> 
-				<span class="date" style="color: #cbcbcb; font-size: .7rem;">2019-09-24</span> <!-- 날짜 -->
+				<span class="date" style="color: #cbcbcb; font-size: .7rem;">2019-09-24</span> 날짜
 			</div>
 			<div class="col-1">
 				<a style="margin-left: 210px;"><i
@@ -81,53 +85,66 @@ invest_table .title .date {
 			</div>
 		</div>
 		<div style="border:0.5px solid #e9e9e9; width:1250px;" id="notice2" class="notice" >
-		<!-- append div class="appendNotice" -->
-		
+			append div class="appendNotice"
+			
+			<div>asdasdasdas</div>
+			
 		</div>
 
-	</div>
+	</div> -->
 
 
-		
+
 		<!-- 공지사항 등록 폼 -->
 		<div class="row">
 			<div style="margin-left: 1215px; margin-top: 30px;">
-			<a style="float: right"class="btn btn-dark mx-1 mt-2" data-toggle ="modal" href="#registerNotice"><i class="fa fa-plus fa-3x"></i></a>
-		</div>
+				<a style="float: right" class="btn btn-dark mx-1 mt-2"
+					data-toggle="modal" href="#registerNotice"><i
+					class="fa fa-plus fa-3x"></i></a>
+			</div>
 		</div>
 		<!-- <hr style="height: 3px; color:gray; width:1250px;"/> -->
-		
+
 	</div>
-	
-	
-	
-<!-- 	
-<script>	
+
+
+
+
+	<script>	
 	$(function(){
 		noticeList();
 		
 	});
-	
 	function noticeList(){
 		$.ajax({
-			url:"noticeList.do",
+			url:"mainNoticeList.do",
 			dataType:"json",
 			success:function(data){
 				
 				var $noticeDiv = $("#noticeDiv");
+				
 				$noticeDiv.html("");
 				
 				$.each(data, function(index, value){
 					
 					var $div1 = $("<div class='title form-inline' style='margin: 15px;'></div>");
-					var $div1_1 = $("<div class='col-11'>[공지] 리뷰 사진 선택 기능 업데이트 안내 <br> <span class='date'style='color: #cbcbcb; font-size: .7rem;'>2019-09-24</span></div>");
+					var $div1_1 = $("<div class='col-11'>"+value.title+"<br> <span class='date'style='color: #cbcbcb; font-size: .7rem;'>"+value.enrollDate+"</span></div>");
 					var $div1_2 = $("<div class='col-1'><a style='margin-left: 210px;'><i class='fa fa-chevron-down dn2' style='color: black; font-size: 30px;' id='asd'></i></a></div>");
 					
-					var $div2 = $("	<div style='border:0.5px solid #e9e9e9; width:1250px;' id='notice2' class='notice' ></div>");
+					$div1.append($div1_1);
+					$div1.append($div1_2);
+									
+					$noticeDiv.append($div1);
 					
+					var $div2 = $("<div style='border:0.5px solid #e9e9e9; width:1250px;'></div>");
+					$noticeDiv.append($div2);
+					/* 
+						
+						
 					//아이콘 class명으로 if 문 잡고 a태그 this값으로 $div2 어펜드 처리 해주면 됌.
-					$div2.append("<div class='appendNotice' style='height:100%; color: #4f4f4f; padding: 20px 15px; background-color: #e9e9e9; font-size: .8rem; line-height: 1.2rem;'>안녕하세요.<br> 공지사항 입니다. <br>수고하세요.</div>");
-				
+					$div2.append("<div class='appendNotice' style='height:100%; color: #4f4f4f; padding: 20px 15px; background-color: #e9e9e9; font-size: .8rem; line-height: 1.2rem;'>"+value.content +"</div>");
+					
+					$noticeDiv.append($div2); */
 				});
 			
 				
@@ -137,24 +154,39 @@ invest_table .title .date {
 		});
 	}
 	
+	$(document).on("click", "#asd", function(){
+		var iconClass = $(this).attr('class');
+		var icon = $(this);
+		console.log(this);
+		
+		
+		$(icon).parent().parent().parent().next().append("<div class='appendNotice' style='height:100%; color: #4f4f4f; padding: 20px 15px; background-color: #e9e9e9; font-size: .8rem; line-height: 1.2rem;'>안녕하세요.<br> 공지사항 입니다. <br>수고하세요.</div>");
+		console.log($(this).parent().parent().parent().parent().children().siblings().eq(1));
+		
+		/* if(iconClass == "fa fa-chevron-down dn2"){
+			$div2.append("<div class='appendNotice' style='height:100%; color: #4f4f4f; padding: 20px 15px; background-color: #e9e9e9; font-size: .8rem; line-height: 1.2rem;'>"+value.content +"</div>");				
+			$noticeDiv.append($div2);
+		}
+		 */
+		
+	});
+
+</script>
 
 
-</script>	
-	 -->
-	
-	
-	
-	
-	
-	
 
-	
-	
-	
-	
-	
- <script>
-$(document).on("click", ".dn2", function(){
+
+
+
+
+
+
+
+
+
+
+	<script>
+/* $(document).on("click", ".dn2", function(){
 	console.log("ddd");
 	console.log(this);
 	// div 위치 : console.log($(this).parent().parent().parent().parent().children().eq(2));
@@ -181,7 +213,7 @@ $(document).on("click", ".dn2", function(){
 	 }
 	
 });
-
+ */
 /*  	function openNotice(){
 		var notice = $("#notice");
 		var iconClass = $("#down2").attr('class');
@@ -204,13 +236,18 @@ $(document).on("click", ".dn2", function(){
 
 
 
-<div class="modal fade" id ="registerNotice" tabindex="-1" role ="dialog" aria-labelledby="modal"aria-hidden="true">
+	<div class="modal fade" id="registerNotice" tabindex="-1" role="dialog"
+		aria-labelledby="modal" aria-hidden="true">
 		<div class="modal-dialog modal-lg">
-			<div class= "modal-content"> <!-- modal 1  -->
-			
-				<div class="modal-header"> <!-- modal header -->
-					<h5 class="modal-title" id="modal" style="margin-left: 300px;">공지사항 등록</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<div class="modal-content">
+				<!-- modal 1  -->
+
+				<div class="modal-header">
+					<!-- modal header -->
+					<h5 class="modal-title" id="modal" style="margin-left: 450px;">공지사항
+						등록</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
 						<span aria-hidden="true"> &times; </span>
 					</button>
 				</div>
@@ -261,7 +298,7 @@ $(document).on("click", ".dn2", function(){
 		</div>
 	</div>
 
-<jsp:include page="../includes/footer.jsp" />
-	
+	<jsp:include page="../includes/footer.jsp" />
+
 </body>
 </html>
