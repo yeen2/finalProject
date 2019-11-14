@@ -520,7 +520,7 @@
 									console.log(inputColor);
 									
 									$(this).parent().parent().parent().children("#selectColor").val(c);
-									//console.log($(this).parent().parent().parent().children("#selectColor").attr('value'));
+									//console.log($(this).parent().parent().parent().children("#selectColor").attr('value')) ;
 								});
 							
 							</script>
