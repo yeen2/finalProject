@@ -99,7 +99,7 @@
                                             <th>이메일</th>
                                             <th>닉네임</th>
                                             <th>가입일</th>
-                                            <th>게시글수</th>
+                                            <th>탈퇴일</th>
                                             <th>탈퇴유무</th>
                                         </tr>
                                     </thead>
@@ -149,15 +149,19 @@
                                             </td>
                                             <td>${m.email}</td>
                                             <td> <span class="name">${m.nickName }</span> </td>
-                                            <td> <span class="product">${m.enrollDate }</span> </td>
+                                            <td> <span>${m.enrollDate }</span> </td>
                                             <td>
                                             	<c:if test="${m.isDelete eq 'Y' }">
-                                            	<span class="count">${m.deleteDate}</span>
+                                            	<span>${m.deleteDate}</span>
                                             	</c:if>
                                             </td>
                                             <td>
+                                            	<c:if test="${m.isDelete eq 'N' }">
                                                 <span class="badge badge-complete">${m.isDelete}</span>
-                                               <!--  <span class="badge badge-pending">Y</span> -->
+                                                </c:if>
+                                                <c:if test="${m.isDelete eq 'Y' }">
+                                               	<span class="badge badge-pending">${m.isDelete}</span>
+                                            	</c:if>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -166,21 +170,29 @@
                                 
                                 <div class="row">
 	                                <div class="col-sm-4" style="margin-left:10px;">
-	                                	Showing ${pi.currentPage } to ${pi.maxPage } of ${pi.listCount } entries	
+	                                	Showing ${pi.currentPage } to ${pi.endPage } of ${pi.listCount } entries	
 	                                </div>
 	                                
 	                                <div class=".col-md-6 .offset-md-3">
 	                                	<div class="dataTables_paginate paging_simple_numbers" id="bootstrap-data-table_paginate">
 	                                		<ul class="pagination">
-	                                			<li class="paginate_button page-item previous disabled" id="bootstrap-data-table_previous">
-	                                				<a href="#" aria-controls="bootstrap-data-table" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
+	                                		<!-- 이전 -->
+	                                			<li class="paginate_button page-item previous" id="bootstrap-data-table_previous">
+	                                			<c:if test="${pi.currentPage ne 1 }">
+	                                				<c:url value="aUser.do" var="previous">	
+														<c:param name="currentPage" value="${pi.currentPage-1 }"/>
+	                                				</c:url>
+	                                				<a href="${previous }" aria-controls="bootstrap-data-table" class="page-link">Previous</a>
+	                                			</c:if>
+	                                			<c:if test="${pi.currentPage eq 1 }">
+	                                				<button class="page-link disabled" style="color:black; cursor:text;" disabled>Previous</button>
+	                                			</c:if>
 	                                			</li>
+	                                		<!-- 페이지 -->	
 	                                			<li class="paginate_button page-item active">
 	                                				<a href="#" aria-controls="bootstrap-data-table" data-dt-idx="1" tabindex="0" class="page-link">1</a>
 	                                			</li>
-	                                			<li class="paginate_button page-item ">
-	                                				<a href="#" aria-controls="bootstrap-data-table" data-dt-idx="2" tabindex="0" class="page-link">2</a>
-	                                			</li>
+	                                		<!-- 다음 -->	
 	                                			<li class="paginate_button page-item next" id="bootstrap-data-table_next">
 	                                				<a href="#" aria-controls="bootstrap-data-table" data-dt-idx="3" tabindex="0" class="page-link">Next</a>
 	                                			</li>

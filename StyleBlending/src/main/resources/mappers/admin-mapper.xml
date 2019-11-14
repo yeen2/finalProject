@@ -39,7 +39,7 @@
 	<select id="selectMemberList" resultMap="MemberResultSet">
 		select *
 		from member
-		order by m_no desc
+		order by delete_date desc ,m_no desc
 	</select>
 	
 	<select id="getDeclareListCount" resultType="_int">
@@ -52,11 +52,13 @@
 	</select>
 	
 	<select id="selectDeclareList" resultMap="DeclareResultSet">
-		select *
-		from p_declare
+		select p.*,m.email
+		from p_declare p
+		join member m on(m.m_no=p.m_no)
 		union
-		select *
-		from b_declare
+		select b.*,m.email
+		from b_declare b
+		join member m on(m.m_no=b.m_no)
 	</select>
 
 
