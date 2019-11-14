@@ -154,7 +154,7 @@
 						<a class="nav-link" href="mainNotice.do">Notice</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="">Free board</a>
+						<a class="nav-link" href="blist.do">Free board</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="joinForm.do">Join</a>
