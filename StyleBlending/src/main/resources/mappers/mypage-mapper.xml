@@ -15,7 +15,7 @@
 		<result property="profilePath" column="profile_path"/>
 		<result property="enrollDate" column="enroll_date"/>
 		<result property="updateDate" column="update_date"/>
-		<result property="idDelete" column="isdelete"/>
+		<result property="isDelete" column="isdelete"/>
 	</resultMap>
 	
 	<resultMap id="postingResultSet" type="Posting">
@@ -32,7 +32,7 @@
 		<result property="declareCount" column="declare_count"/>
 		<result property="enrollDate" column="enroll_date"/>
 		<result property="updateDate" column="update_date"/>
-		<result property="idDelete" column="isdelete"/>
+		<result property="isDelete" column="isdelete"/>
 	</resultMap>
 	
 	<resultMap id="adResultSet" type="Ad">
@@ -52,47 +52,47 @@
 	
 	<select id="selectProfile">
 		select m.*, (select count(*) from posting p where m.m_no=p.m_no)pCount, (select count(*) from fan f where f.me_no=m.m_no)fanCount,
-			(select count(*) from fan f where f.you_no=m.m_no)followingCount
+			(select count(*) from fan f where f.you_no=m.m_no)fwCount
 		from member m
 		where m_no=#{mno}
 	</select>
 	
-	<select id="selectPostingList">
+	<select id="selectPostingList" resultMap="postingResultSet">
 		select *
 		from posting
 		where m_no=#{mno}
 	</select>
 	
-	<select id="selectLikeList">
+	<select id="selectLikeList" resultMap="postingResultSet">
 		select *
 		from posting p
 		left join p_like l on(l.p_no=p.p_no)
 		where l.m_no=#{mno}
 	</select>
 	
-	<select id="selectFanList">
+	<select id="selectFanList" resultMap="memberResultSet">
 		select m.*, (select count(*) from posting p where m.m_no=p.m_no)pCount, (select count(*) from p_like l where m.m_no=l.m_no)lCount,
             (select count(*) from p_reply r left join posting p on(p.p_no=r.p_no) where p.p_no=r.p_no)rCount
 		from member m
 		left join fan f on(m.m_no=f.me_no)
-		where f.me_no=#{m_no}
+		where f.me_no=#{mno}
 	</select>
 	
-	<select id="selectFollowingList">
+	<select id="selectFwList" resultMap="memberResultSet">
 		select m.*, (select count(*) from posting p where m.m_no=p.m_no)pCount, (select count(*) from p_like l where m.m_no=l.m_no)lCount,
             (select count(*) from p_reply r left join posting p on(p.p_no=r.p_no) where p.p_no=r.p_no)rCount
 		from member m
 		left join fan f on(m.m_no=f.you_no)
-		where f.you_no=#{m_no}
+		where f.you_no=#{mno}
 	</select>
 	
 	<update id="updateProfile">
 		update member
 		set nickname=#{nickName}, profile=#{profile}, location=#{location}, profile_img=#{profileImg}, profile_path=#{profilePath}
-		where email=#{email}
+		where m_no=#{mno}
 	</update>
 	
-	<select id="selectAdList">
+	<select id="selectAdList" resultMap="adResultSet">
 		select *
 		from ad
 		where m_no=#{mno}
@@ -101,13 +101,13 @@
 	<update id="updatePass">
 		update member
 		set pass=#{pass}
-		where email=#{email}
+		where m_no=#{mno}
 	</update>
 	
 	<update id="deleteMember">
 		update member
 		set isdelete='Y'
-		where email=#{email}
+		where m_no=#{mno}
 	</update>
 
 </mapper>
