@@ -33,11 +33,11 @@ public class AdminController {
 		
 		ArrayList<Member> list = aService.selectMemberList(pi);
 		
-		//System.out.println(listCount);
+		// System.out.println("회원리스트" + list +"\n 회원총명수" + listCount);
 		
-		mv.setViewName("admin/user");
+		mv.addObject("pi",pi).addObject("list", list).setViewName("admin/user");
+		
 		return mv;
-		
 	}
 	
 	@RequestMapping("aDeclare.do")
