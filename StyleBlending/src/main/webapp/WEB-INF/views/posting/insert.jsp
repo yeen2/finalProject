@@ -229,7 +229,7 @@
 
 	<!-- Page Content -->
 	<div class="container" style="margin-top: 150px; margin-bottom: 70px;">
-		<form>
+		<form action="pInsert.do" method="post">
 		<div class="row">
 
 			<!-- 왼쪽 -->
@@ -498,8 +498,8 @@
 									<i class="fa fa-circle fa-2x" aria-hidden="true" style="color: aqua;" id="aqua"></i>
 								</a> 
 							</div>
-							<input type="hidden" name="color" id="selectColor">
 							</div>
+							<input type="hidden" name="color" id="selectColor">
 							
 							
 							<script>
@@ -508,14 +508,7 @@
 									var c = $(this).attr('id');
 									var thisAttr = $(this).children().attr('class');
 									//console.log(c);
-									
-									/*
-									if(thisAttr == 'fa fa-circle fa-2x' ){
-										$(this).children().attr('class', 'fa fa-check fa-2x');
-									}else{
-										$(this).children().attr('class', 'fa fa-circle fa-2x');
-									}
-									*/
+
 									//$(this).children().attr('class', 'fa fa-circle fa-2x');
 									$(this).parent().siblings().children().children().attr('class', 'fa fa-circle fa-2x');
 									//$(this).children().siblings().attr('class', 'fa fa-circle fa-2x');
@@ -524,8 +517,10 @@
 									$("#selectColor").val(c);
 									
 									var inputColor = $("#selectColor").val();
-									//console.log(inputColor);
+									console.log(inputColor);
 									
+									$(this).parent().parent().parent().children("#selectColor").val(c);
+									//console.log($(this).parent().parent().parent().children("#selectColor").attr('value'));
 								});
 							
 							</script>
