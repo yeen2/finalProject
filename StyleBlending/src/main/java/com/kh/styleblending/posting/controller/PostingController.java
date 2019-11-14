@@ -47,6 +47,7 @@ public class PostingController {
 		System.out.println(cate);
 		System.out.println(brand);
 		System.out.println(color);
+		System.out.println(p.getStyle());
 		
 		if(!file.getOriginalFilename().equals("")) { // 첨부파일이 넘어오는 경우
 			String renameFileName = saveFile(file, request);

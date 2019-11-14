@@ -498,17 +498,27 @@
 									<i class="fa fa-circle fa-2x" aria-hidden="true" style="color: aqua;" id="aqua"></i>
 								</a> 
 							</div>
-							</div>
 							<input type="hidden" name="color" id="selectColor">
+							</div>
 							
 							
 							<script>
-								$(document).on("click", ".bb", function() {
+								$(document).on("click", ".bb", function(event) {
 
 									var c = $(this).attr('id');
+									var thisAttr = $(this).children().attr('class');
 									//console.log(c);
 									
-									$(".bb").children().attr('class', 'fa fa-circle fa-2x');
+									/*
+									if(thisAttr == 'fa fa-circle fa-2x' ){
+										$(this).children().attr('class', 'fa fa-check fa-2x');
+									}else{
+										$(this).children().attr('class', 'fa fa-circle fa-2x');
+									}
+									*/
+									//$(this).children().attr('class', 'fa fa-circle fa-2x');
+									$(this).parent().siblings().children().children().attr('class', 'fa fa-circle fa-2x');
+									//$(this).children().siblings().attr('class', 'fa fa-circle fa-2x');
 									$(this).children().attr('class', 'fa fa-check fa-2x');
 									
 									$("#selectColor").val(c);

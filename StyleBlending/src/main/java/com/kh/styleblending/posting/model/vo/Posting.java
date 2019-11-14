@@ -1,6 +1,7 @@
 package com.kh.styleblending.posting.model.vo;
 
 import java.sql.Date;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,6 +31,6 @@ public class Posting {
 	private Date updateDate;
 	private String idDelete;
 	
-	
+	private List<Style> style;
 	
 }
