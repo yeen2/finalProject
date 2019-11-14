@@ -229,7 +229,7 @@
 
 	<!-- Page Content -->
 	<div class="container" style="margin-top: 150px; margin-bottom: 70px;">
-		<form action="pInsert.do" method="post" onsubmit="return insertValidate();">
+		<form action="pInsert.do" method="post" id="insertForm" onsubmit="return insertValidate();">
 		
 		<div class="row">
 
@@ -254,8 +254,7 @@
 				<hr>
 				
 				<!-- Post Content -->
-				<textarea rows="10" cols="70" id="content" name="content"
-						placeholder="사진에 대한 내용과 #해시태그는 이 안에 입력해주세요."></textarea>
+				<textarea rows="10" cols="70" id="content" name="content" placeholder="사진에 대한 내용과 #해시태그는 이 안에 입력해주세요."></textarea>
 
 			</div>
 			<!-- 해쉬태그 담기 -->
@@ -524,6 +523,8 @@
 									
 									$(this).parent().parent().parent().children("#selectColor").val(c);
 									//console.log($(this).parent().parent().parent().children("#selectColor").attr('value')) ;
+									
+									
 								});
 							
 							</script>
@@ -648,10 +649,13 @@
 	
 	<script>
 		function insertValidate() {
-			// 각각의 input 요소들 변수에 담아두기 
-			var fileImg = $("#fileImg");
-			var content = $("#content");
 			
+			// 각각의 input 요소들 변수에 담아두기 
+			var fileImg = $("#insertForm input[name=fileImg]");
+			var content = $("#insertForm #content");
+			
+			console.log(content);
+
 			// 값 다 있나 검사
 			if(fileImg.val().trim() == ""){
 				alert("이미지를 등록해주세요.");
@@ -663,7 +667,12 @@
 				return false;
 			}
 			
-			$()
+			//content에서 hashtag추출해서 저장
+			var str = content.val();
+			//var regExp = /#
+			
+			test2 = test.match(regExp);
+			$("#hashtag").val();
 
 		}
 		
