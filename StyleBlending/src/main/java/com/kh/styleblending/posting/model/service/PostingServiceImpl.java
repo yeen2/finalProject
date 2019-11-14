@@ -15,8 +15,10 @@ import com.kh.styleblending.posting.model.dao.PostingDao;
 import com.kh.styleblending.posting.model.vo.Posting;
 import com.kh.styleblending.posting.model.vo.Style;
 
+import oracle.net.aso.b;
+
 @Service("pService")
-public class PostingServiceImpl implements PostingService{
+public class PostingServiceImpl implements PostingService {
 
 	@Autowired
 	private PostingDao pDao;
@@ -45,13 +47,16 @@ public class PostingServiceImpl implements PostingService{
 		
 		
 		int result1 = pDao.insertPosting(p);
-		
+		int result2 = 0;
 		for(int i=0; i<cate.length; i++) {
+			p.getStyle().get(i).setCate(cate[i]);
+			p.getStyle().get(i).setBrand(brand[i]);
+			p.getStyle().get(i).setColor(color[i]);
 			
+			result2 = pDao.insertStyle(p.getStyle().get(i));
 		}
-		int result2 = mDao.updateBoard();
 		
-		if(result1 > 0 && result2 > 0) {
+		if(result1 > 0 && result2 >= p.getStyle().size()) {
 			transactionManager.commit(status);
 			return 1;
 		}else {

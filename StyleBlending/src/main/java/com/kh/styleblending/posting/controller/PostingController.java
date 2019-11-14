@@ -44,10 +44,9 @@ public class PostingController {
 								@RequestParam(value="fileImg", required=false) MultipartFile file,
 								String[] cate, String[] brand, String[] color) {
 		
-		System.out.println(cate);
-		System.out.println(brand);
-		System.out.println(color);
-		System.out.println(p.getStyle());
+		//System.out.println(cate[1]);
+		//System.out.println(brand[1]);
+		//System.out.println(color[1]);
 		
 		if(!file.getOriginalFilename().equals("")) { // 첨부파일이 넘어오는 경우
 			String renameFileName = saveFile(file, request);
