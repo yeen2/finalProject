@@ -15,7 +15,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.styleblending.member.model.service.MemberService;
 import com.kh.styleblending.member.model.vo.Member;
 
+<<<<<<< HEAD
 // jang hhf
+=======
+// jang hhdd hh
+>>>>>>> refs/remotes/origin/hye
 
 @Controller
 public class HomeController {
