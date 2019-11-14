@@ -15,6 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.styleblending.member.model.service.MemberService;
 import com.kh.styleblending.member.model.vo.Member;
 
+// jang hhf
+
 @Controller
 public class HomeController {
 	

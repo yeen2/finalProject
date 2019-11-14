@@ -41,7 +41,9 @@
 	  	property : Setter
 	   	constructor-arg : 생성자 
 	   -->
-	 
+	 <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	 	<property name="dataSource" ref="dataSource"/>
+	 </bean> 
 	 
 	 <!-- 파일 업로드 시 사용 (파일 크기 지정) -->
 	 <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

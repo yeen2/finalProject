@@ -169,7 +169,7 @@
 					</li>
 					<!-- 포스팅 등록 -->
 					<li class="nav-item">
-						<a class="nav-link" href="pInsert.do"> 
+						<a class="nav-link" href="pInsertForm.do"> 
 							<i class="fas fa-camera fa-lg" style="font-size: 25px;"></i>
 						</a>
 					</li>

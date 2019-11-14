@@ -1,6 +1,8 @@
 package com.kh.styleblending.main.model.vo;
 
 
+import java.sql.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +16,8 @@ import lombok.ToString;
 @ToString
 public class Live {
 
-	private int liveNo;
+	private int liveno;
 	private String keyword;
+	private Date enrollDate;
 	
 }

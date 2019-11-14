@@ -15,13 +15,13 @@ import lombok.ToString;
 @ToString
 public class PostingReply {
 
-	private int prNo;
-	private int pNo;
-	private int mNo;
+	private int prno;
+	private int pno;
+	private int mno;
 	private String content;
 	private Date enrollDate;
 	private Date updateDate;
-	private int prNo2;
+	private int prno2;
 	private String level;
 	private String idDelete;
 	

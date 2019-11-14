@@ -15,7 +15,7 @@ import lombok.ToString;
 @ToString
 public class Member {
 
-	private int mNo;
+	private int mno;
 	private String loginType;
 	private String snsId;
 	private String email;
@@ -27,7 +27,7 @@ public class Member {
 	private String profilePath;
 	private Date enrollDate;
 	private Date updateDate;
-	private String idDelete;
+	private String isDelete;
 	
 	
 }

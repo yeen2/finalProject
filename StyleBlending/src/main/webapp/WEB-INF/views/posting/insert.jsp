@@ -229,7 +229,7 @@
 
 	<!-- Page Content -->
 	<div class="container" style="margin-top: 150px; margin-bottom: 70px;">
-		<form>
+		<form action="pInsert.do" method="post">
 		<div class="row">
 
 			<!-- 왼쪽 -->
@@ -241,7 +241,7 @@
 				<hr>
 				<!-- 이미지 -->
 				<div class="img" id="divImg" style="width: 500px; height:600px;">
-					<img id="img" width="100%" height="100%" >
+					<img id="img" width="100%" height="100%">
 				</div>
 				<!-- 좋아요,신고-->
 				<div>
@@ -324,7 +324,7 @@
 					<div class="card-body">
 						<div class="input-group">
 							<!-- 주소 담길 text  -->
-							<input type="text" class="form-control" name="add" id="add">
+							<input type="text" class="form-control" name="location" id="add">
 							<!-- 지도버튼  -->
 							<!-- <button type="button" class="btn btn-info" data-toggle="modal"
 								id="addOpenBtn" data-target="#addModal">지도</button> -->
@@ -343,6 +343,7 @@
 					</div>
 					<br><br>
 					
+					
 					<%-- <% for(int i=0; i<3; i++){ %> --%>
 					<div class="card-body" id="addDiv"
 						style="border-radius: 0; border: none; box-shadow: 0 0 2rem rgba(0, 0, 0, 0.1);
@@ -350,63 +351,70 @@
     							margin-right: 10px; margin-left: 10px; margin-bottom: 10px;">
 						<!-- 동적 추가 삭제 -->
 						<div>
+						
+						<!-- <div style="display: inline-block; float: right;">
+							<button type="button" id="removeDiv" style="cursor: pointer; background-color: transparent; border: none; text-decoration: none;">
+								<i class="fas fa-times"></i>
+							</button>
+						</div> -->
+						
 							<!-- 1.카테고리 -->
 							<label>카테고리</label> 
 							&nbsp;&nbsp;&nbsp;&nbsp;
 							<div class="form-group" style="display: inline-block;">
-								<select class="custom-select">
-									<option value="1" disabled>상의</option>
-									<option value="2">&nbsp;&nbsp;&nbsp;T-SHIRT</option>
-									<option value="3">&nbsp;&nbsp;&nbsp;SWEATSHIRT</option>
-									<option value="4">&nbsp;&nbsp;&nbsp;SHIRT</option>
-									<option value="5">&nbsp;&nbsp;&nbsp;BLAZER</option>
-									<option value="6">&nbsp;&nbsp;&nbsp;JACKET</option>
-									<option value="7">&nbsp;&nbsp;&nbsp;OUTER</option>
-									<option value="8">&nbsp;&nbsp;&nbsp;SLEEVELESS</option>
-									<option value="9">&nbsp;&nbsp;&nbsp;CROP TEE</option>
-									<option value="10">&nbsp;&nbsp;&nbsp;HOODIE</option>
-									<option value="11">&nbsp;&nbsp;&nbsp;POLO</option>
-									<option value="12">&nbsp;&nbsp;&nbsp;KNIT</option>
-									<option value="13">&nbsp;&nbsp;&nbsp;TANK TOP</option>
-									<option value="14">&nbsp;&nbsp;&nbsp;VEST</option>
-									<option value="44">&nbsp;&nbsp;&nbsp;CARDIGAN</option>
-									<option value="45">&nbsp;&nbsp;&nbsp;COAT</option>
-									<option value="15" disabled>하의</option>
-									<option value="16">&nbsp;&nbsp;&nbsp;JEANS</option>
-									<option value="17">&nbsp;&nbsp;&nbsp;PANTS</option>
-									<option value="18">&nbsp;&nbsp;&nbsp;SHORTS</option>
-									<option value="19">&nbsp;&nbsp;&nbsp;SKIRT</option>
-									<option value="20" disabled>신발</option>
-									<option value="21">&nbsp;&nbsp;&nbsp;SNEAKERS</option>
-									<option value="22">&nbsp;&nbsp;&nbsp;BOOTS</option>
-									<option value="23">&nbsp;&nbsp;&nbsp;HEELS</option>
-									<option value="24">&nbsp;&nbsp;&nbsp;SANDALS</option>
-									<option value="25">&nbsp;&nbsp;&nbsp;CASUAL SHOES</option>
-									<option value="26">&nbsp;&nbsp;&nbsp;FORMAL SHOES</option>
-									<option value="27" disabled>악세서리</option>
-									<option value="28">&nbsp;&nbsp;&nbsp;BAG</option>
-									<option value="29">&nbsp;&nbsp;&nbsp;JEWELRY</option>
-									<option value="30">&nbsp;&nbsp;&nbsp;BRACELET</option>
-									<option value="31">&nbsp;&nbsp;&nbsp;WATCH</option>
-									<option value="32">&nbsp;&nbsp;&nbsp;HAT</option>
-									<option value="33">&nbsp;&nbsp;&nbsp;EYEWEAR</option>
-									<option value="34">&nbsp;&nbsp;&nbsp;GLOVES</option>
-									<option value="35">&nbsp;&nbsp;&nbsp;SCARF</option>
-									<option value="36">&nbsp;&nbsp;&nbsp;SOCKS</option>
-									<option value="37">&nbsp;&nbsp;&nbsp;WALLET</option>
-									<option value="50">&nbsp;&nbsp;&nbsp;TIE</option>
-									<option value="38" disabled>기타</option>
-									<option value="39">&nbsp;&nbsp;&nbsp;SWIMWEAR</option>
-									<option value="40">&nbsp;&nbsp;&nbsp;DRESS</option>
-									<option value="41">&nbsp;&nbsp;&nbsp;JUMPSUIT</option>
-									<option value="42">&nbsp;&nbsp;&nbsp;OVERALL</option>
-									<option value="43">&nbsp;&nbsp;&nbsp;SUIT</option>
-									<option value="46">&nbsp;&nbsp;&nbsp;ONE-PIECE</option>
-									<option value="47">&nbsp;&nbsp;&nbsp;CAMERA</option>
-									<option value="48">&nbsp;&nbsp;&nbsp;PHONE</option>
-									<option value="49">&nbsp;&nbsp;&nbsp;SNACK</option>
-									<option value="51">&nbsp;&nbsp;&nbsp;ETC.</option>
-									<option value="52">&nbsp;&nbsp;&nbsp;BIKE</option>
+								<select class="custom-select" name="cate">
+									<option value="" disabled>상의</option>
+									<option value="T-SHIRT">&nbsp;&nbsp;&nbsp;T-SHIRT</option>
+									<option value="SWEATSHIRT">&nbsp;&nbsp;&nbsp;SWEATSHIRT</option>
+									<option value="SHIRT">&nbsp;&nbsp;&nbsp;SHIRT</option>
+									<option value="BLAZER">&nbsp;&nbsp;&nbsp;BLAZER</option>
+									<option value="JACKET">&nbsp;&nbsp;&nbsp;JACKET</option>
+									<option value="OUTER">&nbsp;&nbsp;&nbsp;OUTER</option>
+									<option value="SLEEVELESS">&nbsp;&nbsp;&nbsp;SLEEVELESS</option>
+									<option value="CROP TEE">&nbsp;&nbsp;&nbsp;CROP TEE</option>
+									<option value="HOODIE">&nbsp;&nbsp;&nbsp;HOODIE</option>
+									<option value="POLO">&nbsp;&nbsp;&nbsp;POLO</option>
+									<option value="KNIT">&nbsp;&nbsp;&nbsp;KNIT</option>
+									<option value="TANK TOP">&nbsp;&nbsp;&nbsp;TANK TOP</option>
+									<option value="VEST">&nbsp;&nbsp;&nbsp;VEST</option>
+									<option value="CARDIGAN">&nbsp;&nbsp;&nbsp;CARDIGAN</option>
+									<option value="COAT">&nbsp;&nbsp;&nbsp;COAT</option>
+									<option value="" disabled>하의</option>
+									<option value="JEANS">&nbsp;&nbsp;&nbsp;JEANS</option>
+									<option value="PANTS">&nbsp;&nbsp;&nbsp;PANTS</option>
+									<option value="SHORTS">&nbsp;&nbsp;&nbsp;SHORTS</option>
+									<option value="SKIRT">&nbsp;&nbsp;&nbsp;SKIRT</option>
+									<option value="" disabled>신발</option>
+									<option value="SNEAKERS">&nbsp;&nbsp;&nbsp;SNEAKERS</option>
+									<option value="BOOTS">&nbsp;&nbsp;&nbsp;BOOTS</option>
+									<option value="HEELS">&nbsp;&nbsp;&nbsp;HEELS</option>
+									<option value="SANDALS">&nbsp;&nbsp;&nbsp;SANDALS</option>
+									<option value="CASUAL SHOES">&nbsp;&nbsp;&nbsp;CASUAL SHOES</option>
+									<option value="FORMAL SHOES">&nbsp;&nbsp;&nbsp;FORMAL SHOES</option>
+									<option value="" disabled>악세서리</option>
+									<option value="BAG">&nbsp;&nbsp;&nbsp;BAG</option>
+									<option value="JEWELRY">&nbsp;&nbsp;&nbsp;JEWELRY</option>
+									<option value="BRACELET">&nbsp;&nbsp;&nbsp;BRACELET</option>
+									<option value="WATCH">&nbsp;&nbsp;&nbsp;WATCH</option>
+									<option value="HAT">&nbsp;&nbsp;&nbsp;HAT</option>
+									<option value="EYEWEAR">&nbsp;&nbsp;&nbsp;EYEWEAR</option>
+									<option value="GLOVES">&nbsp;&nbsp;&nbsp;GLOVES</option>
+									<option value="SCARF">&nbsp;&nbsp;&nbsp;SCARF</option>
+									<option value="SOCKS">&nbsp;&nbsp;&nbsp;SOCKS</option>
+									<option value="WALLET">&nbsp;&nbsp;&nbsp;WALLET</option>
+									<option value="TIE">&nbsp;&nbsp;&nbsp;TIE</option>
+									<option value="" disabled>기타</option>
+									<option value="SWIMWEAR">&nbsp;&nbsp;&nbsp;SWIMWEAR</option>
+									<option value="DRESS">&nbsp;&nbsp;&nbsp;DRESS</option>
+									<option value="JUMPSUIT">&nbsp;&nbsp;&nbsp;JUMPSUIT</option>
+									<option value="OVERALL">&nbsp;&nbsp;&nbsp;OVERALL</option>
+									<option value="SUIT">&nbsp;&nbsp;&nbsp;SUIT</option>
+									<option value="ONE-PIECE">&nbsp;&nbsp;&nbsp;ONE-PIECE</option>
+									<option value="CAMERA">&nbsp;&nbsp;&nbsp;CAMERA</option>
+									<option value="PHONE">&nbsp;&nbsp;&nbsp;PHONE</option>
+									<option value="SNACK">&nbsp;&nbsp;&nbsp;SNACK</option>
+									<option value="ETC.">&nbsp;&nbsp;&nbsp;ETC.</option>
+									<option value="BIKE">&nbsp;&nbsp;&nbsp;BIKE</option>
 								</select>
 							</div>
 							
@@ -421,37 +429,37 @@
 							<label>브랜드</label>
 							&nbsp;&nbsp;&nbsp;&nbsp;
 							<div class="form-group" style="display: inline-block;">
-								<input type="email" class="form-control" id="text" placeholder="브랜드를 적어주세요">
+								<input type="text" class="form-control" name="brand" placeholder="브랜드를 적어주세요">
 							</div>
 							
 							<br>
 							
 							<!-- 3. 컬러 -->
 							<label>컬러</label>
-							<div style="margin: auto; text-align: center;">
+							<div style="margin: auto; text-align: center; background-color: #F2F2F2">
 							
 							<div style="padding:0; margin: 0px; display: inline-block; width: 28px; height: 28px;">
-								<a id="navy" class="btn bb" style="padding:0; margin: 0px;"> 
+								<a id="red" class="btn bb" style="padding:0; margin: 0px;"> 
 									<i class="fa fa-circle fa-2x" aria-hidden="true" style="color: red;" id="red"></i>
 								</a> 
 							</div>
 							<div style="padding:0; margin: 0px; display: inline-block; width: 28px; height: 28px;">
-								<a id="navy" class="btn bb" style="padding:0; margin: 0px;"> 
+								<a id="orange" class="btn bb" style="padding:0; margin: 0px;"> 
 									<i class="fa fa-circle fa-2x" aria-hidden="true" style="color: orange;" id="orange"></i>
 								</a> 
 							</div>
 							<div style="padding:0; margin: 0px; display: inline-block; width: 28px; height: 28px;">
-								<a id="navy" class="btn bb" style="padding:0; margin: 0px;"> 
+								<a id="yellow" class="btn bb" style="padding:0; margin: 0px;"> 
 									<i class="fa fa-circle fa-2x" aria-hidden="true" style="color:yellow;" id="yellow"></i>
 								</a> 
 							</div>
 							<div style="padding:0; margin: 0px; display: inline-block; width: 28px; height: 28px;">
-								<a id="navy" class="btn bb" style="padding:0; margin: 0px;"> 
+								<a id="green" class="btn bb" style="padding:0; margin: 0px;"> 
 									<i class="fa fa-circle fa-2x" aria-hidden="true" style="color: green;" id="green"></i>
 								</a> 
 							</div>
 							<div style="padding:0; margin: 0px; display: inline-block; width: 28px; height: 28px;">
-								<a id="navy" class="btn bb" style="padding:0; margin: 0px;"> 
+								<a id="blue" class="btn bb" style="padding:0; margin: 0px;"> 
 									<i class="fa fa-circle fa-2x" aria-hidden="true" style="color: blue;" id="blue"></i>
 								</a> 
 							</div>
@@ -460,61 +468,86 @@
 									<i class="fa fa-circle fa-2x" aria-hidden="true" style="color:navy;" id="navy"></i>
 								</a> 
 							</div>
-							
-							
-							
 							<div style="padding:0; margin: 0px; display: inline-block; width: 28px; height: 28px;">
-								<a id="navy" class="btn bb" style="padding:0; margin: 0px;"> 
+								<a id="black" class="btn bb" style="padding:0; margin: 0px;"> 
 									<i class="fa fa-circle fa-2x" aria-hidden="true" style="color: black;" id="black"></i>
 								</a> 
 							</div>
 							<div style="padding:0; margin: 0px; display: inline-block; width: 28px; height: 28px;">
-								<a id="navy" class="btn bb" style="padding:0; margin: 0px;"> 
-									<i class="fa fa-circle fa-2x" aria-hidden="true" style="color: white;" id="white"></i>
+								<a id="white" class="btn bb" style="padding:0; margin: 0px;"> 
+									<i class="fa fa-circle fa-2x" aria-hidden="true" style="color: white; border-color: gray;" id="white"></i>
 								</a> 
 							</div>
 							<div style="padding:0; margin: 0px; display: inline-block; width: 28px; height: 28px;">
-								<a id="navy" class="btn bb" style="padding:0; margin: 0px;"> 
+								<a id="pink" class="btn bb" style="padding:0; margin: 0px;"> 
 									<i class="fa fa-circle fa-2x" aria-hidden="true" style="color: pink;" id="pink"></i>
 								</a> 
 							</div>
 							<div style="padding:0; margin: 0px; display: inline-block; width: 28px; height: 28px;">
-								<a id="navy" class="btn bb" style="padding:0; margin: 0px;"> 
+								<a id="brown" class="btn bb" style="padding:0; margin: 0px;"> 
 									<i class="fa fa-circle fa-2x" aria-hidden="true" style="color: brown;" id="brown"></i>
 								</a> 
 							</div>
 							<div style="padding:0; margin: 0px; display: inline-block; width: 28px; height: 28px;">
-								<a id="navy" class="btn bb" style="padding:0; margin: 0px;"> 
-									<i class="fa fa-circle fa-2x" aria-hidden="true" style="color: beige;" id="beige"></i>
+								<a id="gray" class="btn bb" style="padding:0; margin: 0px;"> 
+									<i class="fa fa-circle fa-2x" aria-hidden="true" style="color: gray;" id="gray"></i>
 								</a> 
 							</div>
 							<div style="padding:0; margin: 0px; display: inline-block; width: 28px; height: 28px;">
-								<a id="navy" class="btn bb" style="padding:0; margin: 0px;"> 
+								<a id="aqua" class="btn bb" style="padding:0; margin: 0px;"> 
 									<i class="fa fa-circle fa-2x" aria-hidden="true" style="color: aqua;" id="aqua"></i>
 								</a> 
 							</div>
-							
 							</div>
+							<input type="hidden" name="color" id="selectColor">
+							
+							
+							<script>
+								$(document).on("click", ".bb", function(event) {
+
+									var c = $(this).attr('id');
+									var thisAttr = $(this).children().attr('class');
+									//console.log(c);
+
+									//$(this).children().attr('class', 'fa fa-circle fa-2x');
+									$(this).parent().siblings().children().children().attr('class', 'fa fa-circle fa-2x');
+									//$(this).children().siblings().attr('class', 'fa fa-circle fa-2x');
+									$(this).children().attr('class', 'fa fa-check fa-2x');
+									
+									$("#selectColor").val(c);
+									
+									var inputColor = $("#selectColor").val();
+									console.log(inputColor);
+									
+									$(this).parent().parent().parent().children("#selectColor").val(c);
+									//console.log($(this).parent().parent().parent().children("#selectColor").attr('value')) ;
+								});
+							
+							</script>
 							
 						</div> <!-- 동적 div end  -->
 					</div> 	<!-- card-body end -->
 					
-					<br>
+					<br><br>
 				<%-- <% } %>  --%>
 				 <script>            
 			        $(document).ready (function () {                
 			            $('#btnAdd').click (function () {
 			            	
 			            	var addContent = $('#addDiv').html();
-			            	console.log(addContent);
+			            	//console.log(addContent);
+			            	
+			            	//var origin = $("#addDiv").clone();
+			            	//$('#addLocation').append(origin);
+			            	
 			            	
 			                $('#addLocation').append(
-			                	'<br>'
-			                ).append(
 			                	'<div class="card-body" id="addDiv" style="border-radius: 0; border: none; box-shadow: 0 0 2rem rgba(0, 0, 0, 0.1); transition: transform 800ms cubic-bezier(0.165, 0.84, 0.44, 1); display: inline-block; margin-right: 10px; margin-left: 10px;"><div><br><div style="display: inline-block; float: right;"><button type="button" id="removeDiv" style="cursor: pointer; background-color: transparent; border: none; text-decoration: none;"><i class="fas fa-times"></i></button></div>' + addContent + '</div>' 
 			               	).append(
-			               		'<br>'		
+			               		'<br><br>'		
 			               	); // end append    
+			                
+			                
 			                
 			               /*  $('#removeDiv').on('click', function () { 
 			                    $(this).parent().parent().parent().remove (); // remove the textbox
@@ -526,12 +559,15 @@
 			        
 			        $(document).on("click", "#removeDiv", function(){
 			        	var removeThis = $("#removeDiv");
-			      
+			      		var div_=$(this).closest('div#addDiv')
+			      		$(div_).next().remove();
+			      		$(div_).next().remove();
+			      		$(div_).remove();
 			        	
-			        	removeThis.parent().parent().parent().prev().remove (); // remove the textbox
-			        	removeThis.parent().parent().parent().remove (); // remove the textbox
-			        	removeThis.next().remove (); // remove the <br>
-			        	removeThis.remove (); // remove the button
+			        	//removeThis.parent().parent().parent().prev().remove (); // remove the textbox
+			        	//removeThis.parent().parent().parent().remove (); // remove the textbox
+			        	//removeThis.next().remove(); // remove the <br>
+			        	//removeThis.remove (); // remove the button
 			        
 			        	//$(this).parent().parent().parent().prev().remove (); // remove the textbox
 			        	//$(this).parent().parent().parent().remove (); // remove the textbox

@@ -15,7 +15,7 @@ import lombok.ToString;
 @ToString
 public class Fan {
 
-	private int fNo;
+	private int fno;
 	private int meNo;
 	private int youNo;
 	private Date enrollDate;

@@ -1,6 +1,7 @@
 package com.kh.styleblending.posting.model.vo;
 
 import java.sql.Date;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,8 +16,8 @@ import lombok.ToString;
 @ToString
 public class Posting {
 
-	private int pNo;
-	private int mNo;
+	private int pno;
+	private int mno;
 	private String originalImg;
 	private String renameImg;
 	private String imgPath;
@@ -30,6 +31,6 @@ public class Posting {
 	private Date updateDate;
 	private String idDelete;
 	
-	
+	private List<Style> style;
 	
 }
