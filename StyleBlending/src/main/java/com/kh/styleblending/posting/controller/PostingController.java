@@ -55,7 +55,15 @@ public class PostingController {
 		}
 		
 		
-		// 2. 
+		// 2. 해시태그 추출
+		String str = p.getContent();
+		String [] strArr = str.split(" ");
+		
+		for (String s : strArr){
+            System.out.println(s);
+        }
+
+
 		
 		int result = pService.insertPosting(p, cate, brand, color);
 		
