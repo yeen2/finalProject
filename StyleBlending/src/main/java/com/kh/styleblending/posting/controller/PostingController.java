@@ -42,7 +42,7 @@ public class PostingController {
 	@RequestMapping("pInsert.do")
 	public String insert(Posting p, HttpServletRequest request, Model model,
 								@RequestParam(value="fileImg", required=false) MultipartFile file,
-								String[] cate, String[] brand, String[] color, Style s ) {
+								String[] cate, String[] brand, String[] color) {
 		
 		System.out.println(cate);
 		System.out.println(brand);
@@ -55,27 +55,10 @@ public class PostingController {
 			p.setRenameImg(renameFileName);
 		}
 		
-		int result1 = pService.insertPosting(p);
-		int result2 = 0;
+		int result = pService.insertPosting(p, cate, brand, color);
 		
-		if(result1 > 0) {
-			
-			for(int i=0; i<cate.length; i++) {
-				s.setCate(cate[i]);
-				s.setBrand(brand[i]);
-				s.setColor(color[i]);
-				
-				result2 += pService.insertStyle(s);
-			}
-			
-			System.out.println("result2 : " + result2);
-			
-			if(result2 >= cate.length) {
-				return "redirect:home.do";
-			}else {
-				model.addAttribute("msg", "포스팅 작성하기 실패");
-				return "common/errorPage";
-			}
+		if(result > 0) {
+			return "redirect:home.do";
 		}else {
 			model.addAttribute("msg", "포스팅 작성하기 실패");
 			return "common/errorPage";
