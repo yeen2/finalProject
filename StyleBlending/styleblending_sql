@@ -784,8 +784,49 @@ REFERENCES board (
 
 
 --샘플데이터
+--멤버 20개
+insert into member values(seq_member.nextval,default,null,'admin','1234','관리자',null,null,null,null,sysdate,null,default,default);
+insert into member values(seq_member.nextval,default,null,'user01','pass01','유저1',null,null,null,null,sysdate,null,default,default);
+insert into member values(seq_member.nextval,default,null,'user02','pass02','유저2',null,null,null,null,sysdate,null,default,default);
+insert into member values(seq_member.nextval,default,null,'user03','pass03','유저3',null,null,null,null,sysdate,null,default,default);
+insert into member values(seq_member.nextval,default,null,'user04','pass04','유저4',null,null,null,null,sysdate,null,default,default);
+insert into member values(seq_member.nextval,default,null,'user05','pass05','유저5',null,null,null,null,sysdate,null,default,default);
+insert into member values(seq_member.nextval,default,null,'user06','pass06','유저6',null,null,null,null,sysdate,null,default,default);
+insert into member values(seq_member.nextval,default,null,'user07','pass07','유저7',null,null,null,null,sysdate,null,default,default);
+insert into member values(seq_member.nextval,default,null,'user08','pass08','유저8',null,null,null,null,sysdate,null,default,default);
+insert into member values(seq_member.nextval,default,null,'user09','pass09','유저9',null,null,null,null,sysdate,null,default,default);
+insert into member values(seq_member.nextval,default,null,'user10','pass10','유저10',null,null,null,null,sysdate,null,default,default);
+insert into member values(seq_member.nextval,default,null,'user11','pass11','유저11',null,null,null,null,sysdate,null,default,default);
+insert into member values(seq_member.nextval,default,null,'user12','pass12','유저12',null,null,null,null,sysdate,null,default,default);
+insert into member values(seq_member.nextval,default,null,'user13','pass13','유저13',null,null,null,null,sysdate,null,default,default);
+insert into member values(seq_member.nextval,default,null,'user14','pass14','유저14',null,null,null,null,sysdate,null,default,default);
+insert into member values(seq_member.nextval,default,null,'user15','pass15','유저15',null,null,null,null,sysdate,null,default,default);
+insert into member values(seq_member.nextval,default,null,'user16','pass16','유저16',null,null,null,null,sysdate,null,default,default);
+insert into member values(seq_member.nextval,default,null,'user17','pass17','유저17',null,null,null,null,sysdate,null,default,default);
+insert into member values(seq_member.nextval,default,null,'user18','pass18','유저18',null,null,null,null,sysdate,null,default,default);
+insert into member values(seq_member.nextval,default,null,'user19','pass19','유저19',null,null,null,null,sysdate,null,default,default);
 
-insert into member values(seq_member.nextval, default, null, 'admin', '1234', '관리자', null, null, null, null, sysdate, null, null, default);
+--포스팅 20개(admin 계정에만 포스팅 20개)
+insert into posting values(seq_posting.nextval,1,'a','profile1.jpg','resources/assets/img/','내용1',default,'M',default,1,1,sysdate,default, default);
+insert into posting values(seq_posting.nextval,1,'a','profile2.jpg','resources/assets/img/','내용2',default,'M',default,2,0,sysdate,default, default);
+insert into posting values(seq_posting.nextval,1,'a','profile3.jpg','resources/assets/img/','내용3',default,'M',default,3,1,sysdate,default, default);
+insert into posting values(seq_posting.nextval,1,'a','profile4.jpg','resources/assets/img/','내용4',default,'M',default,4,0,sysdate,default, default);
+insert into posting values(seq_posting.nextval,1,'a','profile5.jpg','resources/assets/img/','내용5',default,'M',default,5,1,sysdate,default, default);
+insert into posting values(seq_posting.nextval,1,'a','profile6.jpg','resources/assets/img/','내용6',default,'M',default,6,0,sysdate,default, default);
+insert into posting values(seq_posting.nextval,1,'a','profile7.jpg','resources/assets/img/','내용7',default,'M',default,7,1,sysdate,default, default);
+insert into posting values(seq_posting.nextval,1,'a','profile8.jpg','resources/assets/img/','내용8',default,'M',default,8,0,sysdate,default, default);
+insert into posting values(seq_posting.nextval,1,'a','profile9.jpg','resources/assets/img/','내용9',default,'M',default,9,1,sysdate,default, default);
+insert into posting values(seq_posting.nextval,1,'a','profile10.jpg','resources/assets/img/','내용10',default,'M',default,10,0,sysdate,default, default);
+insert into posting values(seq_posting.nextval,1,'a','profile11.jpg','resources/assets/img/','내용11',default,'F',default,11,1,sysdate,default, default);
+insert into posting values(seq_posting.nextval,1,'a','profile12.jpg','resources/assets/img/','내용12',default,'F',default,12,0,sysdate,default, default);
+insert into posting values(seq_posting.nextval,1,'a','profile13.jpg','resources/assets/img/','내용13',default,'F',default,13,1,sysdate,default, default);
+insert into posting values(seq_posting.nextval,1,'a','profile14.jpg','resources/assets/img/','내용14',default,'F',default,14,0,sysdate,default, default);
+insert into posting values(seq_posting.nextval,1,'a','profile15.jpg','resources/assets/img/','내용15',default,'F',default,15,1,sysdate,default, default);
+insert into posting values(seq_posting.nextval,1,'a','profile16.jpg','resources/assets/img/','내용16',default,'F',default,16,0,sysdate,default, default);
+insert into posting values(seq_posting.nextval,1,'a','profile17.jpg','resources/assets/img/','내용17',default,'F',default,17,1,sysdate,default, default);
+insert into posting values(seq_posting.nextval,1,'a','profile18.jpg','resources/assets/img/','내용18',default,'F',default,18,0,sysdate,default, default);
+insert into posting values(seq_posting.nextval,1,'a','profile19.jpg','resources/assets/img/','내용19',default,'F',default,19,1,sysdate,default, default);
+insert into posting values(seq_posting.nextval,1,'a','profile20.jpg','resources/assets/img/','내용20',default,'F',default,20,0,sysdate,default, default);
 
 commit;
 
