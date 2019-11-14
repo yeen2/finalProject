@@ -123,7 +123,7 @@
                                             <td>${m.email}</td>
                                             <td> <span class="name">${m.nickName }</span> </td>
                                             <td> <span class="product">${m.enrollDate }</span> </td>
-                                            <td><span class="count">게시글수</span></td>
+                                            <td><span class="count">${m.deleteDate}</span></td>
                                             <td>
                                                 <span class="badge badge-complete">N</span>
                                                <!--  <span class="badge badge-pending">Y</span> -->
