@@ -4,8 +4,32 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="adminMapper">
 
+	<resultMap id="MemberResultSet" type="Member">
+		<id property="mno" column="m_no"/>
+		<result property="loginType" column="loginType"/>
+		<result property="snsId" column="snsid"/>
+		<result property="email" column="email"/>
+		<result property="pass" column="pass"/>
+		<result property="nickName" column="nickName"/>
+		<result property="profile" column="profile"/>
+		<result property="location" column="location"/>
+		<result property="profileImg" column="profile_Img"/>
+		<result property="profilePath" column="profile_Path"/>
+		<result property="enrollDate" column="enroll_Date"/>
+		<result property="updateDate" column="update_Date"/>
+		<result property="isDelete" column="isDelete"/>
+	</resultMap>
 
+	<select id="getMemberListCount" resultType="_int">
+		select count(*)
+		from member
+	</select>
 
+	<select id="selectMemberList" resultMap="MemberResultSet">
+		select *
+		from member
+		order by m_no desc
+	</select>
 
 
 
