@@ -66,14 +66,5 @@
 		where type=2) t2
 	</select>
 
-	<!-- <select id="selectAllDeclareList" resultMap="">
-		select p.*,m.email 
-		from p_declare p
-		join member m on(m.m_no=p.m_no)
-		union
-		select b.*,m.email
-		from b_declare b
-		join member m on(m.m_no=b.m_no)
-	</select>
- -->
+	
 </mapper>

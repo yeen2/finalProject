@@ -87,9 +87,9 @@
                                         	</th>
                                             <th>No.</th>
                                             <th>신고자</th>
-                                            <th>게시글명</th>
+                                            <th>게시판명</th>
+                                            <th>게시글</th>
                                             <th>신고일자</th>
-                                            <th>신고수</th>
                                             <th>신고사유</th>
                                             <th>확인유무</th>
                                         </tr>
@@ -105,13 +105,19 @@
                                                     <a href="#">${p.email }</a>
                                                 </div>
                                             </td>
+                                            <c:if test="${p.type eq 1 }">
+                                            <td>포스팅</td>
                                             <td>
                                             	<div class="round-img">
-                                                    <a href="#"><img class="" src="${pageContext.request.contextPath}/resources/admin_temp/images/avatar/1.jpg" alt=""></a>
+                                                    <a href="#포스팅게시글로"><img class="" src="${pageContext.request.contextPath}/resources/admin_temp/images/avatar/1.jpg" alt=""></a>
                                                 </div>
                                             </td>
+                                            </c:if>
+                                            <c:if test="${p.type eq 2 }">
+                                            <td>자유</td>
+                                            <td>${p.bname}</td>
+                                            </c:if>
                                             <td>${p.enrollDate }</td>
-                                            <td>${p.type}</td>
                                             <td>${p.category }</td>
                                             <td>
 	                                            <c:if test="${p.isCheck eq 1 }">
@@ -137,17 +143,43 @@
 	                                <div class=".col-md-6 .offset-md-3">
 	                                	<div class="dataTables_paginate paging_simple_numbers" id="bootstrap-data-table_paginate">
 	                                		<ul class="pagination">
-	                                			<!-- 이전 -->
-	                                			<li class="paginate_button page-item previous disabled" id="bootstrap-data-table_previous">
-	                                				<a href="#" aria-controls="bootstrap-data-table" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
+	                                		<!-- 이전 -->
+	                                			<li class="paginate_button page-item previous" >
+                                				<c:if test="${pi.currentPage ne 1 }">
+                                					<c:url value="aDeclare.do" var="previous">
+                                						<c:param name="currentPage" value="${pi.currentPage -1 }"/>
+                                					</c:url>
+                                					<a href="${previous}" aria-controls="bootstrap-data-table" class="page-link">Previous</a>
+                                				</c:if>
+                                				<c:if test="${pi.currentPage eq 1}">
+                                					<button class="page-link disabled" style="color:black; cursor:text;" disabled>Previous</button>
+                                				</c:if>
 	                                			</li>
-	                                			<!-- 페이지 -->
-	                                			<li class="paginate_button page-item active">
-	                                				<a href="#" aria-controls="bootstrap-data-table" data-dt-idx="1" tabindex="0" class="page-link">1</a>
-	                                			</li>
-	                                			<!-- 다음 -->
+	                                		<!-- 페이지 -->
+	                                			<c:forEach begin="${pi.startPage}" end="${pi.endPage }" var="p">
+		                                			<c:if test="${p ne pi.currentPage }">
+			                                			<c:url value="aDeclare.do" var="page">
+			                                				<c:param name="currentPage" value="${p}"/>
+			                                			</c:url>
+			                                			<li class="paginate_button page-item active">
+			                                				<a href="${page}" aria-controls="bootstrap-data-table" class="page-link">${p}</a>
+			                                			</li>
+		                                			</c:if>
+		                                			<c:if test="${p eq pi.currentPage }">
+		                                				<button class="page-link disabled" style="color:black; cursor:text;" disabled>${p}</button>
+		                                			</c:if>
+	                                			</c:forEach>
+	                                		<!-- 다음 -->
 	                                			<li class="paginate_button page-item next" id="bootstrap-data-table_next">
-	                                				<a href="#" aria-controls="bootstrap-data-table" data-dt-idx="3" tabindex="0" class="page-link">Next</a>
+	                                			<c:if test="${pi.currentPage ne pi.endPage }">
+	                                				<c:url value="aDeclare.do" var="next">
+	                                					<c:param name="currentPage" value="${pi.currentPage +1 }" />
+	                                				</c:url>
+	                                				<a href="${next}" aria-controls="bootstrap-data-table" class="page-link">Next</a>
+	                                			</c:if>
+	                                			<c:if test="${pi.currentPage eq pi.endPage }">
+	                                				<button class="page-link disabled" style="color:black; cursor:text;" disabled>Next</button>
+	                                			</c:if>
 	                                			</li>
 	                                		</ul>
 	                                	</div>
