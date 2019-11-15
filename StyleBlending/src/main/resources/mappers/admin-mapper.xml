@@ -24,27 +24,16 @@
 	<resultMap id="DeclareResultSet" type="Declare">
 		<id property="dno" column="d_no"/>
 		<result property="mno" column="m_no"/>
-		<result property="email" column="email"/>
-		<result property="pno" column="p_no"/>
+		<result property="bno" column="b_no"/>
 		<result property="category" column="category"/>
 		<result property="content" column="content"/>
 		<result property="enrollDate" column="enroll_Date"/>
 		<result property="isCheck" column="isCheck"/>
+		<result property="type" column="type"/>
+		<result property="email" column="email"/>
+		<result property="bname" column="bname"/>
 	</resultMap>
 	
-	<resultMap id="postingDeclareResultSet" type="Declare">
-		<id property="dno" column="d_no"/>
-		<result property="mno" column="m_no"/>
-		<result property="email" column="email"/>
-		<result property="pno" column="p_no"/>
-		<result property="imgName" column="original_img"/>
-		<result property="category" column="category"/>
-		<result property="content" column="content"/>
-		<result property="enrollDate" column="enroll_Date"/>
-		<result property="isCheck" column="isCheck"/>
-		<result property="declareCount" column="declare_count"/>
-	</resultMap>
-
 	<select id="getMemberListCount" resultType="_int">
 		select count(*)
 		from member
@@ -58,18 +47,23 @@
 	
 	<select id="getDeclareListCount" resultType="_int">
 		select count(*)
-		from (select *
-		from p_declare
-		union
-		select *
-		from b_declare)
+		from declare
 	</select>
 	
-	<select id="selectPostingDeclareList" resultMap="postingDeclareResultSet">
-		select pd.*,m.email,p.original_img,p.declare_count
-		from p_declare pd
-		join member m on(m.m_no=pd.m_no)
-		join posting p on(p.p_no=pd.p_no)
+	<select id="selectDeclareList" resultMap="DeclareResultSet">
+		select * from
+		(select d.*,m.email,p.original_img bname
+		from declare d
+		join member m on(m.m_no=d.m_no)
+		join posting p on(p.p_no=d.b_no)
+		where type=1) t1
+		union
+		select * from
+		(select d.*,m.email,b.title
+		from declare d
+		join member m on(m.m_no=d.m_no)
+		join board b on(b.b_no=d.b_no)
+		where type=2) t2
 	</select>
 
 	<!-- <select id="selectAllDeclareList" resultMap="">

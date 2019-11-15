@@ -111,7 +111,7 @@
                                                 </div>
                                             </td>
                                             <td>${p.enrollDate }</td>
-                                            <td>${p.declareCount}</td>
+                                            <td>${p.type}</td>
                                             <td>${p.category }</td>
                                             <td>
 	                                            <c:if test="${p.isCheck eq 1 }">
