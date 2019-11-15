@@ -12,7 +12,7 @@ public interface PostingService {
 	
 	Posting selectOnePosting(int id);
 	
-	ArrayList<PostingReply> selectReplyList(int id);
+	ArrayList<PostingReply> selectReplyList(int pno);
 	
 	int insertReply(PostingReply r);
 	

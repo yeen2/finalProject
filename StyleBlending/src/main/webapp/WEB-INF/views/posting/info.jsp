@@ -47,14 +47,13 @@
 				<hr>
 
 				<!-- 댓글 -->
-				<!-- for문 돌릴떄, 전index랑 같으면  -->
 				<p>View all <b id="rCount">4</b> comments</p>
 				<br>
 				
+				<!-- for문 돌릴떄, 전index랑 같으면  -->
 				<div id="replyForm">
 					<div class="media mb-4">
-						<img class="d-flex mr-3 rounded-circle"
-							src="http://placehold.it/50x50" alt="">
+						<img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50">
 						<div class="media-body">
 							<!-- 닉네임 -->
 							<h5 class="mt-0">Commenter Name</h5>
@@ -139,12 +138,32 @@
 							$("#rBtn").attr("disabled", false);
 							
 							var content = $("#rContent").val();
-							var refBid = ${b.id};
-							var writer = "${loginUser.id}"; // var writer = admin;
+							var pno = ${p.pno};
+							var mno = "${loginUser.mno}"; // var writer = admin;
 							
+							// 댓글 insert
+							$.ajax({
+								url:"pReplyInsert.do",
+								data:{content:content, 
+									  pno:pno,
+									  mno:mno},
+								success:function(data){
+									
+									if(data == "success"){
+										getReplyList();
+										$("#rContent").val("");
+									}else{
+										alert("댓글 작성 실패");
+									}
+									
+								},error:function(){
+									console.log("ajax 통신 실패");
+								}
+							});
 						}
 					});
 					
+					// 댓글내용 있는지 확인
 					$("#rBtn").on("click", function(){
 						if($("#rContent").val().length == 0){
 							alert("댓글내용을 입력해 주세요");
@@ -154,18 +173,19 @@
 				});
 				
 
-				/* function getReplyList(){
+				function getReplyList(){
+					
 					$.ajax({
 						url:"pReplyList.do",
-						data:{id:${p.no}},
+						data:{pno:${p.pno}},
 						dataType:"json",
 						success:function(data){
 							//console.log(data);
 							
-							$tbody = $("#rtb tbody");
-							$tbody.html("");
+							$replyForm = $("#replyForm");
+							$replyForm.html("");
 							
-							$("#rCount").text("댓글(" + data.length + ")");
+							$("#rCount").text(data.length);
 							
 							if(data.length > 0){ // 댓글이 존재할 경우
 								
@@ -201,7 +221,8 @@
 							console.log("ajax 통신 실패");
 						}
 					});
-				} //getReplyList end */
+				} //getReplyList end 
+				
 			</script>
 			
 			

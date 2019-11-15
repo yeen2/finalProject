@@ -29,9 +29,11 @@
 		<result property="enrollDate" column="enroll_date"/>
 		<result property="updateDate" column="update_date"/>
 		<result property="prrno" column="prr_no"/>
-		<result property="isDelete" column="isdelete"/>
 		<result property="level" column="r_level"/>
+		<result property="likeCount" column="like_count"/>
 		<result property="isDelete" column="isdelete"/>
+		<result property="nickName" column="nickname"/>
+		<result property="profileImg" column="profile_img"/>
 	</resultMap>
 	
 
@@ -53,14 +55,21 @@
 	</select>
 	
 	<select id="selectReplyList" resultMap="postingReplyResultSet">
+		<!-- 
 		select * 
 		from p_reply
-		where p_no=#{id}
+		where p_no=#{pno} 
+		-->
+		select pr_no, p_no, m.m_no, content, r.enroll_date, r.update_date, prr_no, r_level, 
+				like_count, r.isdelete, m.nickname, m.profile_img
+		from p_reply r
+		join member m on(r.m_no = m.m_no);
 	</select>
 
 	<insert id="insertReply">
 		insert into p_reply
-		values(seq_p_reply.nextval, #{id}, )
+		values(seq_p_reply.nextval, #{pno}, #{mno}, #{content}, sysdate, null, seq_p_reply.currval,
+				1, default, default)
 	</insert>
 	
 	

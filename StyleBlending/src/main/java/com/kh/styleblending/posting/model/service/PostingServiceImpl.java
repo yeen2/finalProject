@@ -75,8 +75,8 @@ public class PostingServiceImpl implements PostingService {
 	}
 	
 	@Override
-	public ArrayList<PostingReply> selectReplyList(int id) {
-		return pDao.selectReplyList(id);
+	public ArrayList<PostingReply> selectReplyList(int pno) {
+		return pDao.selectReplyList(pno);
 	}
 	
 	@Override

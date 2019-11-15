@@ -128,9 +128,9 @@ public class PostingController {
 	// 댓글
 	@ResponseBody
 	@RequestMapping(value="pReplyList.do", produces="application/json; charset=UTF-8")
-	public String replyList(int id) {
+	public String replyList(int pno) {
 		
-		ArrayList<PostingReply> list = pService.selectReplyList(id);
+		ArrayList<PostingReply> list = pService.selectReplyList(pno);
 		
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		return gson.toJson(list);
