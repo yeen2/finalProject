@@ -54,7 +54,7 @@ public class AdminController {
 		
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		
-		ArrayList<Declare> list = aService.selectPostingDeclareList(pi);
+		ArrayList<Declare> list = aService.selectDeclareList(pi);
 		
 		mv.addObject("pi",pi).addObject("list",list).setViewName("admin/declare");
 		System.out.println("신고리스트" + list +"\n 신고총횟수" + listCount);

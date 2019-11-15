@@ -33,12 +33,12 @@ public class AdminDao {
 		return sqlSession.selectOne("adminMapper.getDeclareListCount");
 	}
 	
-	public ArrayList<Declare> selectPostingDeclareList(PageInfo pi){
+	public ArrayList<Declare> selectDeclareList(PageInfo pi){
 		
 		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		
-		return (ArrayList)sqlSession.selectList("adminMapper.selectPostingDeclareList", null, rowBounds);
+		return (ArrayList)sqlSession.selectList("adminMapper.selectDeclareList", null, rowBounds);
 	}
 	
 	

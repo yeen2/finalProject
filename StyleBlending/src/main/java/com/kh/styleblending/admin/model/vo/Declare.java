@@ -18,13 +18,14 @@ public class Declare {
 	private int dno; // 신고번호
 	private int mno; // 신고한 회원번호
 	private String email; // 신고한 회원이메일
-	private int pno; // 신고한 포스팅,게시판 번호
+	private int bno; // 신고한 포스팅,게시판 번호
 	private String category; // 신고사유 카테고리
 	private String content; // 사유 기타시 내용
 	private Date enrollDate; // 신고일자
 	private String isCheck; // 신고상태 
-	private String imgName; // 포스팅 이미지
-	private int declareCount; // 신고수
+	private int type; // 게시판 타입(1-포스팅,2-자유)
+	private String bname; // type1-포스팅 이미지, 2-게시물제목
+	
 	
 
 }

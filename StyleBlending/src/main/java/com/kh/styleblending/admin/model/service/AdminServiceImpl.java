@@ -35,9 +35,9 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public ArrayList<Declare> selectPostingDeclareList(PageInfo pi) {
+	public ArrayList<Declare> selectDeclareList(PageInfo pi) {
 		// 포스팅 신고목록 조회
-		return aDao.selectPostingDeclareList(pi);
+		return aDao.selectDeclareList(pi);
 	}
 	
 	

@@ -18,6 +18,6 @@ public interface AdminService {
 	int getDeclareListCount();
 	
 	// 포스팅 신고목록 조회
-	ArrayList<Declare> selectPostingDeclareList(PageInfo pi);
+	ArrayList<Declare> selectDeclareList(PageInfo pi);
 
 }
