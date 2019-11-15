@@ -69,7 +69,7 @@
 					</div>
 	
 					<!-- 댓글 -->
-					<div class="media mb-4">
+					<!-- <div class="media mb-4">
 						<img class="d-flex mr-3 rounded-circle"
 							src="http://placehold.it/50x50" alt="">
 						<div class="media-body">
@@ -95,7 +95,7 @@
 							</div>
 	
 						</div>
-					</div>
+					</div> -->
 		
  				</div>  <!-- #replyForm end -->
  
@@ -131,12 +131,17 @@
 					$("#rContent").on("click", function () {
 						var loginUser = "${loginUser.email}";
 
-						
 						if(loginUser == null || loginUser == ""){
 							alert("로그인 후 이용 가능하세요");
 							return;
-						}else{
+							
+						}else{ // 로그인 되어있을때
 							$("#rBtn").attr("disabled", false);
+							
+							var content = $("#rContent").val();
+							var refBid = ${b.id};
+							var writer = "${loginUser.id}"; // var writer = admin;
+							
 						}
 					});
 					
@@ -146,9 +151,7 @@
 						}
 					});
 					
-					
-					
-				})
+				});
 				
 
 				/* function getReplyList(){
@@ -312,19 +315,6 @@
 
 	</div>
 	<!-- /.container -->
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	
