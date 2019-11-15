@@ -15,7 +15,7 @@
 
 		<div class="row">
 
-			<!-- Post Content Column -->
+			<!-- 왼쪽부분 -->
 			<div class="col-lg-8">
 
 				<!-- Title -->
@@ -47,82 +47,162 @@
 				<hr>
 
 				<!-- 댓글 -->
-				<p>View all 4 comments</p>
+				<!-- for문 돌릴떄, 전index랑 같으면  -->
+				<p>View all <b id="rCount">4</b> comments</p>
 				<br>
-				<div class="media mb-4">
-					<img class="d-flex mr-3 rounded-circle"
-						src="http://placehold.it/50x50" alt="">
-					<div class="media-body">
-						<!-- 닉네임 -->
-						<h5 class="mt-0">Commenter Name</h5>
-						<!-- 댓글내용 -->
-						Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
-						scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-						vulputate at, tempus viverra turpis. Fusce condimentum nunc ac
-						nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-						<!-- 대댓글달기  -->
-						<br>
-						3<i class="fas fa-caret-up"></i>
-						· <a href="#"><i style="color: gray;">reply</i></a>
-						· 1 day ago
-					</div>
-				</div>
-
-				<!-- 댓글 -->
-				<div class="media mb-4">
-					<img class="d-flex mr-3 rounded-circle"
-						src="http://placehold.it/50x50" alt="">
-					<div class="media-body">
-						<h5 class="mt-0">Commenter Name</h5>
-						Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
-						scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-						vulputate at, tempus viverra turpis. Fusce condimentum nunc ac
-						nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-
-						<!-- 대댓글 -->
-						<div class="media mt-4">
-							<img class="d-flex mr-3 rounded-circle"
-								src="http://placehold.it/50x50" alt="">
-							<div class="media-body">
-								<h5 class="mt-0">Commenter Name</h5>
-								Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
-								scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-								vulputate at, tempus viverra turpis. Fusce condimentum nunc ac
-								nisi vulputate fringilla. Donec lacinia congue felis in
-								faucibus.
-							</div>
+				
+				<div id="replyForm">
+					<div class="media mb-4">
+						<img class="d-flex mr-3 rounded-circle"
+							src="http://placehold.it/50x50" alt="">
+						<div class="media-body">
+							<!-- 닉네임 -->
+							<h5 class="mt-0">Commenter Name</h5>
+							<!-- 댓글내용 -->
+							조아용
+							<!-- 대댓글달기  -->
+							<br>
+							3<i class="fas fa-caret-up"></i>
+							· <a href="#"><i style="color: gray;">reply</i></a>
+							· 1 day ago
 						</div>
-						<!-- 대댓글 -->
-						<div class="media mt-4">
-							<img class="d-flex mr-3 rounded-circle"
-								src="http://placehold.it/50x50" alt="">
-							<div class="media-body">
-								<h5 class="mt-0">Commenter Name</h5>
-								Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
-								scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-								vulputate at, tempus viverra turpis. Fusce condimentum nunc ac
-								nisi vulputate fringilla. Donec lacinia congue felis in
-								faucibus.
-							</div>
-						</div>
-
 					</div>
-				</div>
-
+	
+					<!-- 댓글 -->
+					<div class="media mb-4">
+						<img class="d-flex mr-3 rounded-circle"
+							src="http://placehold.it/50x50" alt="">
+						<div class="media-body">
+							<h5 class="mt-0">Commenter Name</h5>
+							Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
+							scelerisque ante sollicitudin. Cras purus odio, vestibulum in
+							vulputate at, tempus viverra turpis. Fusce condimentum nunc ac
+							nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+	
+							
+							대댓글
+							<div class="media mt-4">
+								<img class="d-flex mr-3 rounded-circle"
+									src="http://placehold.it/50x50" alt="">
+								<div class="media-body">
+									<h5 class="mt-0">Commenter Name</h5>
+									Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
+									scelerisque ante sollicitudin. Cras purus odio, vestibulum in
+									vulputate at, tempus viverra turpis. Fusce condimentum nunc ac
+									nisi vulputate fringilla. Donec lacinia congue felis in
+									faucibus.
+								</div>
+							</div>
+	
+						</div>
+					</div>
+		
+ 				</div>  <!-- #replyForm end -->
+ 
 				<!-- 댓글 달기 폼 : 마우스로 textarea클릭시, 로그인 안되있으면 로그인해달라는 alert띄우기 -->
-				<div class="card my-4">
-					<div class="card-body">
-						<form>
+ 				<div id="replyTextarea">
+					<div class="card my-4">
+						<div class="card-body">
 							<div class="form-group">
-								<textarea class="form-control" rows="3" placeholder="Post comment.."></textarea>
+								<textarea class="form-control" rows="3" id="rContent" placeholder="Post comment.."
+										style="resize: none;"></textarea>
 							</div>
-							<button type="submit" class="btn btn-dark">Post comment</button>
-						</form>
+							<button class="btn btn-dark" id="rBtn" disabled>Post comment</button>
+						</div>
 					</div>
-				</div>
+				</div> <!-- #replyTextarea end -->
+				
+			</div> <!-- col-lg-8 end -->
+			
+			
+			
+			
+<!------------------------------------------ 댓글 ajax -------------------------------------->
+			<script type="text/javascript">
+				$(function() {
+					/* getReplyList();
+					
+					setInterval(function(){
+						getReplyList();
+					}, 5000); */
+					
+					
+					// 댓글폼 클릭시 로그인되있는지 확인
+					$("#rContent").on("click", function () {
+						var loginUser = "${loginUser.email}";
 
+						
+						if(loginUser == null || loginUser == ""){
+							alert("로그인 후 이용 가능하세요");
+							return;
+						}else{
+							$("#rBtn").attr("disabled", false);
+						}
+					});
+					
+					$("#rBtn").on("click", function(){
+						if($("#rContent").val().length == 0){
+							alert("댓글내용을 입력해 주세요");
+						}
+					});
+					
+					
+					
+				})
+				
 
-			</div>
+				/* function getReplyList(){
+					$.ajax({
+						url:"pReplyList.do",
+						data:{id:${p.no}},
+						dataType:"json",
+						success:function(data){
+							//console.log(data);
+							
+							$tbody = $("#rtb tbody");
+							$tbody.html("");
+							
+							$("#rCount").text("댓글(" + data.length + ")");
+							
+							if(data.length > 0){ // 댓글이 존재할 경우
+								
+								// 반복문을 통해서 한 행씩 추가될 수 있도록
+								$.each(data, function(index, value){ // value == data[index]
+									// 작성자 내용 작성일
+									$tr = $("<tr></tr>");
+									
+									$writerTd = $("<td width='100'></td>").text(value.writer);
+									$contentTd = $("<td></td>").text(value.content);
+									$dateTd = $("<td></td>").text(value.createDate);
+									
+									$tr.append($writerTd);
+									$tr.append($contentTd);
+									$tr.append($dateTd);
+									
+									$tbody.append($tr);
+								
+								});
+								
+							}else{ // 댓글이 존재하지 않을 경우
+								
+								$tr = $("<tr></tr>");
+								
+								$contentTd = $("<td colspan='3'></td>").text("등록된 댓글이 없습니다.");
+								$tr.append($contentTd);
+								
+								$tbody.append($tr);
+							}
+							
+						},
+						error:function(){
+							console.log("ajax 통신 실패");
+						}
+					});
+				} //getReplyList end */
+			</script>
+			
+			
+
 
 			<!-- 오른쪽 -->
 			<div class="col-md-4">
@@ -232,6 +312,25 @@
 
 	</div>
 	<!-- /.container -->
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	<!-------------------------------------------------------- 지도api  -------------------------------------->
 
 
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8ef4b8fd4aebaa69e9172f4cc49921ca&libraries=services"></script>
