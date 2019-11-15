@@ -23,6 +23,10 @@ public class PostingReply {
 	private Date updateDate;
 	private int prrno;
 	private String level;
+	private int likeCount;
 	private String isDelete;
+	
+	private String nickName;
+	private String profileImg;
 	
 }

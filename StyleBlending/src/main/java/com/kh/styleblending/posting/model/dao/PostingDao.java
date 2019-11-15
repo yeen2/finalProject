@@ -28,8 +28,8 @@ public class PostingDao {
 		return sqlSession.selectOne("postingMapper.selectOnePosting", id);
 	}
 	
-	public ArrayList<PostingReply> selectReplyList(int id) {
-		return (ArrayList)sqlSession.selectList("postingMapper.selectReplyList", id);
+	public ArrayList<PostingReply> selectReplyList(int pno) {
+		return (ArrayList)sqlSession.selectList("postingMapper.selectReplyList", pno);
 	}
 	
 	public int insertReply(PostingReply r) {

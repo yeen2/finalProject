@@ -180,6 +180,7 @@ CREATE TABLE p_reply (
 	update_date	date		NULL,
 	prr_no	number		NULL,
 	r_level	number DEFAULT 1	NOT NULL,
+	like_count	number DEFAULT 0	NOT NULL,
 	isdelete	varchar2(1)	DEFAULT 'N'	NOT NULL
 );
 
@@ -198,6 +199,8 @@ COMMENT ON COLUMN p_reply.update_date IS '수정날짜';
 COMMENT ON COLUMN p_reply.prr_no IS '포스팅대댓글 번호';
 
 COMMENT ON COLUMN p_reply.r_level IS '1-댓글, 2-대댓글';
+
+COMMENT ON COLUMN p_reply.like_count IS '좋아요수';
 
 COMMENT ON COLUMN p_reply.isdelete IS '삭제여부';
 
