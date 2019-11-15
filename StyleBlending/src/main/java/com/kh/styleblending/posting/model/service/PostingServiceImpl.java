@@ -48,15 +48,17 @@ public class PostingServiceImpl implements PostingService {
 		
 		int result1 = pDao.insertPosting(p);
 		int result2 = 0;
+		Style s = new Style();
 		for(int i=0; i<cate.length; i++) {
-			p.getStyle().get(i).setCate(cate[i]);
-			p.getStyle().get(i).setBrand(brand[i]);
-			p.getStyle().get(i).setColor(color[i]);
 			
-			result2 = pDao.insertStyle(p.getStyle().get(i));
+			s.setCate(cate[i]);
+			s.setBrand(brand[i]);
+			s.setColor(color[i]);
+			
+			result2 += pDao.insertStyle(s);
 		}
 		
-		if(result1 > 0 && result2 >= p.getStyle().size()) {
+		if(result1 > 0 && result2 >= cate.length) {
 			transactionManager.commit(status);
 			return 1;
 		}else {

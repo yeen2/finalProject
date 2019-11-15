@@ -27,6 +27,7 @@ public class PostingController {
 	private PostingService pService;
 	
 	// 좋아요,신고 정보 보여주려면 loginUser정보 가져와야 함
+	// 매개변수로 int id 추가해야함
 	@RequestMapping("pInfo.do")
 	public String info() {
 		return "posting/info";
@@ -44,11 +45,6 @@ public class PostingController {
 								@RequestParam(value="fileImg", required=false) MultipartFile file,
 								String[] cate, String[] brand, String[] color) {
 		
-		System.out.println(p);
-		System.out.println(cate[0]);
-		System.out.println(brand[0]);
-		System.out.println(color[0]);
-		
 		// 1. 첨부파일 처리
 		if(!file.getOriginalFilename().equals("")) { // 첨부파일이 넘어오는 경우
 			String renameFileName = saveFile(file, request);
@@ -57,11 +53,13 @@ public class PostingController {
 			p.setRenameImg(renameFileName);
 		}
 		
+		System.out.println(p);
 		
 		// 2. 해시태그 추출
 		String str = p.getContent();
 		String [] strArr = str.split(" ");
 		String hashtag = "";
+		
 		
 		for(int i=0; i<strArr.length; i++) {
 			if(strArr[i].charAt(0) == '#') {
@@ -70,20 +68,16 @@ public class PostingController {
 		}
 		p.setHashtag(hashtag);
 		
-		
 		int result = pService.insertPosting(p, cate, brand, color);
 		
 		if(result > 0) {
-			return "redirect:home.do";
+			return "redirect:main.do";
 		}else {
 			model.addAttribute("msg", "포스팅 작성하기 실패");
 			return "common/errorPage";
 		}
 	}
-	
-	
-	
-	
+
 	// 파일 업로드 하고 업로드한 파일명(수정명) 반환하는 메소드 --> 재사용하기 위해 따로 빼둠
 		public String saveFile(MultipartFile file, HttpServletRequest request) {
 			
@@ -118,8 +112,6 @@ public class PostingController {
 			return renameFileName;
 		}
 		
-	
-	
 	
 	
 	
