@@ -30,5 +30,13 @@ public class Member {
 	private Date deleteDate;
 	private String isDelete;
 	
+	// 프로필 페이지 변수
+	private int posCount;
+	private int fanCount;
+	private int fwCount;
+	
+	// 팬 리스트 호출 변수
+	private int likeCount;
+	private int replyCount;
 	
 }

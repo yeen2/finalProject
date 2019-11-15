@@ -16,6 +16,13 @@
 		<result property="enrollDate" column="enroll_date"/>
 		<result property="updateDate" column="update_date"/>
 		<result property="isDelete" column="isdelete"/>
+		
+		<result property="posCount" column="posCount"/>
+		<result property="fanCount" column="fanCount"/>
+		<result property="fwCount" column="fwCount"/>
+		
+		<result property="likeCount" column="likeCount"/>
+		<result property="replyCount" column="replyCount"/>
 	</resultMap>
 	
 	<resultMap id="postingResultSet" type="Posting">
@@ -50,8 +57,8 @@
 		<result property="status" column="status"/>
 	</resultMap>
 	
-	<select id="selectProfile">
-		select m.*, (select count(*) from posting p where m.m_no=p.m_no)pCount, (select count(*) from fan f where f.me_no=m.m_no)fanCount,
+	<select id="selectProfile" resultMap="memberResultSet">
+		select m.*, (select count(*) from posting p where m.m_no=p.m_no)posCount, (select count(*) from fan f where f.me_no=m.m_no)fanCount,
 			(select count(*) from fan f where f.you_no=m.m_no)fwCount
 		from member m
 		where m_no=#{mno}
@@ -71,16 +78,16 @@
 	</select>
 	
 	<select id="selectFanList" resultMap="memberResultSet">
-		select m.*, (select count(*) from posting p where m.m_no=p.m_no)pCount, (select count(*) from p_like l where m.m_no=l.m_no)lCount,
-            (select count(*) from p_reply r left join posting p on(p.p_no=r.p_no) where p.p_no=r.p_no)rCount
+		select m.*, (select count(*) from posting p where m.m_no=p.m_no)posCount, (select count(*) from p_like l where m.m_no=l.m_no)likeCount,
+            (select count(*) from p_reply r left join posting p on(p.p_no=r.p_no) where p.p_no=r.p_no)replyCount
 		from member m
 		left join fan f on(m.m_no=f.me_no)
 		where f.me_no=#{mno}
 	</select>
 	
 	<select id="selectFwList" resultMap="memberResultSet">
-		select m.*, (select count(*) from posting p where m.m_no=p.m_no)pCount, (select count(*) from p_like l where m.m_no=l.m_no)lCount,
-            (select count(*) from p_reply r left join posting p on(p.p_no=r.p_no) where p.p_no=r.p_no)rCount
+		select m.*, (select count(*) from posting p where m.m_no=p.m_no)posCount, (select count(*) from p_like l where m.m_no=l.m_no)likeCount,
+            (select count(*) from p_reply r left join posting p on(p.p_no=r.p_no) where p.p_no=r.p_no)replyCount
 		from member m
 		left join fan f on(m.m_no=f.you_no)
 		where f.you_no=#{mno}
