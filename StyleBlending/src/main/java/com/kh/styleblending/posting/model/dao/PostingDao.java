@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.styleblending.posting.model.vo.Posting;
+import com.kh.styleblending.posting.model.vo.PostingReply;
 import com.kh.styleblending.posting.model.vo.Style;
 
 @Repository("pDao")
@@ -23,5 +24,16 @@ public class PostingDao {
 		return sqlSession.insert("postingMapper.insertStyle", s);
 	}
 	
+	public Posting selectOnePosting(int id) {
+		return sqlSession.selectOne("postingMapper.selectOnePosting", id);
+	}
+	
+	public ArrayList<PostingReply> selectReplyList(int id) {
+		return (ArrayList)sqlSession.selectList("postingMapper.selectReplyList", id);
+	}
+	
+	public int insertReply(PostingReply r) {
+		return sqlSession.insert("postingMapper.insertReply", r);
+	}
 	
 }

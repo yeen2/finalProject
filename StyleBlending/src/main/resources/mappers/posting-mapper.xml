@@ -3,7 +3,37 @@
 "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="postingMapper">
-
+	
+	<resultMap id="postingOneResultSet" type="Posting">
+		<id property="pno" column="p_no"/>
+		<result property="mno" column="m_no"/>
+		<result property="originalImg" column="original_img"/>
+		<result property="renameImg" column="rename_img"/>
+		<result property="imgPath" column="img_path"/>
+		<result property="content" column="content"/>
+		<result property="hashtag" column="hashtag"/>
+		<result property="gender" column="gender"/>
+		<result property="location" column="location"/>
+		<result property="likeCount" column="like_count"/>
+		<result property="declareCount" column="declare_count"/>
+		<result property="enrollDate" column="enroll_date"/>
+		<result property="updateDate" column="update_date"/>
+		<result property="isDelete" column="isdelete"/>
+	</resultMap>
+	
+	<resultMap id="postingReplyResultSet" type="PostingReply">
+		<id property="prno" column="pr_no"/>
+		<result property="pno" column="p_no"/>
+		<result property="mno" column="m_no"/>
+		<result property="content" column="content"/>
+		<result property="enrollDate" column="enroll_date"/>
+		<result property="updateDate" column="update_date"/>
+		<result property="prrno" column="prr_no"/>
+		<result property="isDelete" column="isdelete"/>
+		<result property="level" column="r_level"/>
+		<result property="isDelete" column="isdelete"/>
+	</resultMap>
+	
 
 	<insert id="insertPosting">
 		insert into posting
@@ -16,9 +46,27 @@
 		values(seq_style.nextval, seq_posting.currval, #{cate}, #{brand}, #{color})
 	</insert>
 	
+	<select id="selectOnePosting" resultMap="postingOneResultSet">
+		select * 
+		from posting
+		where p_no=#{id}
+	</select>
+	
+	<select id="selectReplyList" resultMap="postingReplyResultSet">
+		select * 
+		from p_reply
+		where p_no=#{id}
+	</select>
 
-
-
-
-
+	<insert id="insertReply">
+		insert into p_reply
+		values(seq_p_reply.nextval, #{id}, )
+	</insert>
+	
+	
+	
+	
+	
+	
+	
 </mapper>

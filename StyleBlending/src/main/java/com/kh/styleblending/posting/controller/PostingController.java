@@ -13,11 +13,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.kh.styleblending.posting.model.service.PostingService;
 import com.kh.styleblending.posting.model.vo.Posting;
+import com.kh.styleblending.posting.model.vo.PostingReply;
 import com.kh.styleblending.posting.model.vo.Style;
 
 @Controller
@@ -29,7 +33,15 @@ public class PostingController {
 	// 좋아요,신고 정보 보여주려면 loginUser정보 가져와야 함
 	// 매개변수로 int id 추가해야함
 	@RequestMapping("pInfo.do")
-	public String info() {
+	public String info(int id, ModelAndView mv) {
+		Posting p = pService.selectOnePosting(id);
+		
+		if(p != null) {
+			mv.addObject("p", p).setViewName("posting/info");
+		}else {
+			mv.addObject("msg", "게시글 상세조회 실패").setViewName("common/errorPage");
+		}
+		
 		return "posting/info";
 	}
 	
@@ -79,40 +91,77 @@ public class PostingController {
 	}
 
 	// 파일 업로드 하고 업로드한 파일명(수정명) 반환하는 메소드 --> 재사용하기 위해 따로 빼둠
-		public String saveFile(MultipartFile file, HttpServletRequest request) {
-			
-			String root = request.getSession().getServletContext().getRealPath("resources");
-			String savePath = root + "/upload/posting";
-			
-			File folder = new File(savePath);
-			
-			if(!folder.exists()) {
-				folder.mkdirs(); // savePath까지의 경로가 존재하지 않다면 폴더 생성
-			}
-			
-			String originFileName = file.getOriginalFilename();
-			
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-			
-			// 201911051717.PNG
-			String renameFileName = sdf.format(new Date(System.currentTimeMillis())) + "." 
-									+ originFileName.substring(originFileName.lastIndexOf(".")+1);
-			
-			// ~~~/resources/buploadFiles/201911051717.PNG
-			String renamePath = savePath + "/" + renameFileName;
-			
-			
-			try {
-				file.transferTo(new File(renamePath)); // 수정명으로 파일 업로드
-
-			} catch (IllegalStateException | IOException e) {
-				e.printStackTrace();
-			} 
-			
-			return renameFileName;
+	public String saveFile(MultipartFile file, HttpServletRequest request) {
+		
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = root + "/upload/posting";
+		
+		File folder = new File(savePath);
+		
+		if(!folder.exists()) {
+			folder.mkdirs(); // savePath까지의 경로가 존재하지 않다면 폴더 생성
 		}
 		
+		String originFileName = file.getOriginalFilename();
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		
+		// 201911051717.PNG
+		String renameFileName = sdf.format(new Date(System.currentTimeMillis())) + "." 
+								+ originFileName.substring(originFileName.lastIndexOf(".")+1);
+		
+		// ~~~/resources/buploadFiles/201911051717.PNG
+		String renamePath = savePath + "/" + renameFileName;
+		
+		
+		try {
+			file.transferTo(new File(renamePath)); // 수정명으로 파일 업로드
+
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+		} 
+		
+		return renameFileName;
+	}
+		
 	
+	// 댓글
+	@ResponseBody
+	@RequestMapping(value="pReplyList.do", produces="application/json; charset=UTF-8")
+	public String replyList(int id) {
+		
+		ArrayList<PostingReply> list = pService.selectReplyList(id);
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		return gson.toJson(list);
+		
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping("pReplyInsert.do")
+	public String insertReply(PostingReply r) {
+		//System.out.println(r);
+		
+		int result = pService.insertReply(r);
+		
+		if(result > 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+		
+		
+		
 	
 	
 }

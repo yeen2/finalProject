@@ -21,7 +21,7 @@ public class PostingReply {
 	private String content;
 	private Date enrollDate;
 	private Date updateDate;
-	private int prno2;
+	private int prrno;
 	private String level;
 	private String isDelete;
 	
