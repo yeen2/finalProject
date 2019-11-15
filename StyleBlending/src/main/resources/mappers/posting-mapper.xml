@@ -2,11 +2,11 @@
 <!DOCTYPE mapper PUBLIC 
 "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="styleMapper">
+<mapper namespace="postingMapper">
 
 
 	<insert id="insertPosting">
-		insert into member
+		insert into posting
 		values(seq_posting.nextval, #{mno}, #{originalImg}, #{renameImg}, null, #{content}, #{hashtag}, #{gender},
 				#{location}, default, default, sysdate, null, 'N')
 	</insert>

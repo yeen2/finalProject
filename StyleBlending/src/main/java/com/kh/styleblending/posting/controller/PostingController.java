@@ -45,6 +45,9 @@ public class PostingController {
 								String[] cate, String[] brand, String[] color) {
 		
 		System.out.println(p);
+		System.out.println(cate[0]);
+		System.out.println(brand[0]);
+		System.out.println(color[0]);
 		
 		// 1. 첨부파일 처리
 		if(!file.getOriginalFilename().equals("")) { // 첨부파일이 넘어오는 경우
@@ -60,16 +63,13 @@ public class PostingController {
 		String [] strArr = str.split(" ");
 		String hashtag = "";
 		
-		for (String s : strArr){
-            System.out.println(s);
-        }
-
 		for(int i=0; i<strArr.length; i++) {
 			if(strArr[i].charAt(0) == '#') {
 				hashtag += strArr[i];
 			}
 		}
-		System.out.println("해시태그값 : " + hashtag);
+		p.setHashtag(hashtag);
+		
 		
 		int result = pService.insertPosting(p, cate, brand, color);
 		

@@ -46,7 +46,7 @@
 
 				<!-- 아이디기억 /  -->
 				<div class="custom-control custom-checkbox" style="text-align:left !important; margin-top: 10px;">
-               		<input type="checkbox" class="custom-control-input" id="customCheck2">
+               		<input type="checkbox" class="custom-control-input" id="customCheck2" name="remember">
                 	<label class="custom-control-label" for="customCheck2">Remember me</label>
               	</div>
 				<hr>
