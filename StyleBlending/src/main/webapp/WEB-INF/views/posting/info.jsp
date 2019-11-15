@@ -47,6 +47,7 @@
 				<hr>
 
 				<!-- 댓글 -->
+				<!-- for문 돌릴떄, 전index랑 같으면  -->
 				<p>View all <b id="rCount">4</b> comments</p>
 				<br>
 				
@@ -68,7 +69,7 @@
 					</div>
 	
 					<!-- 댓글 -->
-					<!-- <div class="media mb-4">
+					<div class="media mb-4">
 						<img class="d-flex mr-3 rounded-circle"
 							src="http://placehold.it/50x50" alt="">
 						<div class="media-body">
@@ -95,7 +96,7 @@
 	
 						</div>
 					</div>
- -->			
+		
  				</div>  <!-- #replyForm end -->
  
 				<!-- 댓글 달기 폼 : 마우스로 textarea클릭시, 로그인 안되있으면 로그인해달라는 alert띄우기 -->
@@ -201,12 +202,7 @@
 			</script>
 			
 			
-			
-			
-			
-			
-			
-			
+
 
 			<!-- 오른쪽 -->
 			<div class="col-md-4">
