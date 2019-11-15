@@ -1,87 +1,147 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 
 <head>
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+				<script async src="https://www.youtube.com/iframe_api"></script>
+				
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style>
-	@charset "EUC-KR";
-	
-	@import url(https://fonts.googleapis.com/earlyaccess/jejugothic.css);
-	
-	@import url(https://fonts.googleapis.com/earlyaccess/nanumgothic.css);
-	/* /* p{
+
+
+
+@media ( min-aspect-ratio : 16/9) {
+	.video-foreground {
+		height: 300%;
+		top: -100%;
+	}
+}
+
+@media ( max-aspect-ratio : 16/9) {
+	.video-foreground {
+		width: 300%;
+		left: -100%;
+	}
+}
+
+h1 {
+	color: white;
+}
+
+
+@charset "EUC-KR";
+
+@import url(https://fonts.googleapis.com/earlyaccess/jejugothic.css);
+
+@import url(https://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+/* /* p{
 		font-family: 'Jeju Gothic';
 	} */
-	p {
-		font-family: 'Jeju Gothic';
-		font-size: 18px;
-	}
-	
-	body {
-		font-family: 'Nanum Gothic';
-	}
-	
-	p {
-		margin: 0px;
-	}
-	
-	li {
-		font-weight: bold;
-	}
-	
-	#aDrop:hover {
-		cursor: pointer;
-	}
-	
-	.imggg {
-		background-size: cover;
-		background-position: center center;
-	}
-	
-	.card-caption {
-		display: block;
-		position: absolute;
-		bottom: 0;
-		left: 5px;
-		right: 5px;
-		color: #fff;
-		background-color: rgba(0, 0, 0, .5);
-	}
-	
-	.pop-user-card .pop-rank {
-		line-height: 41px;
-		font-size: 30px;
-		padding: 7px 12px 6px;
-	}
-	
-	.pop-user-card .photographer {
-		padding-top: 7px;
-		padding-bottom: 7px;
-		line-height: 20px;
-		font-size: 14px;
-	}
-	
-	.card-body img:hover {
-		transform: scale(1.5);
-		transition: transform .5s;
-	}
-	
-	.card-body img {
-		transform: scale(1.0);
-		transition: transform .5s;
-	}
-	
-.block {border:0px solid #d81f25; padding:0 5px; height:20px; overflow:hidden; background:#fff; width:100px; font-family:Gulim; font-size:12px;}
-.block, #ticker, #ticker2,
-.block li {margin:0; padding:0; list-style:none;}
-.block li a {display:block; height:20px; line-height:20px; color:#555; text-decoration:none; font-size: large;}
-.block li span {padding:3px 5px; background:black; color:#fff; font-weight:bold; margin-right:3px;}
- 
+p {
+	font-family: 'Jeju Gothic';
+	font-size: 18px;
+}
+
+body {
+	font-family: 'Nanum Gothic';
+}
+
+p {
+	margin: 0px;
+}
+
+li {
+	font-weight: bold;
+}
+
+#aDrop:hover {
+	cursor: pointer;
+}
+
+.imggg {
+	background-size: cover;
+	background-position: center center;
+}
+
+.card-caption {
+	display: block;
+	position: absolute;
+	bottom: 0;
+	left: 5px;
+	right: 5px;
+	color: #fff;
+	background-color: rgba(0, 0, 0, .5);
+}
+
+.pop-user-card .pop-rank {
+	line-height: 41px;
+	font-size: 30px;
+	padding: 7px 12px 6px;
+}
+
+.pop-user-card .photographer {
+	padding-top: 7px;
+	padding-bottom: 7px;
+	line-height: 20px;
+	font-size: 14px;
+}
+
+.card-body img:hover {
+	transform: scale(1.5);
+	transition: transform .5s;
+}
+
+
+.card-body img {
+	transform: scale(1.0);
+	transition: transform .5s;
+}
+
+.block {
+	border: 0px solid #d81f25;
+	padding: 0 5px;
+	height: 20px;
+	overflow: hidden;
+	background: #fff;
+	width: 100px;
+	font-family: Gulim;
+	font-size: 12px;
+}
+
+.block, #ticker, #ticker2, .block li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.block li a {
+	display: block;
+	height: 20px;
+	line-height: 20px;
+	color: #555;
+	text-decoration: none;
+	font-size: large;
+}
+
+.block li span {
+	padding: 3px 5px;
+	background: black;
+	color: #fff;
+	font-weight: bold;
+	margin-right: 3px;
+}
+#muteYouTubeVideoPlayer:hover{
+	width: 300px;
+	height: 300px;
+}
+
 </style>
-<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 
@@ -96,26 +156,27 @@
 
 		<!-- <figure id="banner" style="margin-top: 0px; height:230px;">
 		 -->
-		<div style="padding: 0px; height: 230px;"
-			class="form-inline">
+		<div style="padding: 0px; height: 230px;" class="form-inline">
 			<div class="form-group col-9" style="padding: 0px;">
 				<img style="width: 820px; height: 230px;"
 					src="${pageContext.request.contextPath}/resources/assets/img/배너삼.jpg">
 			</div>
-			<div class="form-group col-2 block" style="margin-bottom: 191px; position:relative;">
+			<div class="form-group col-2 block"
+				style="margin-bottom: 191px; position: relative;">
 				<ul id="ticker" style="height: 230px">
 
 				</ul>
 				<ul id="ticker2" style="height: 230px">
-					<li	
+					<li
 						style="font-family: Gulim; font-size: large; margin-bottom: 10px;"><i
-						class="fa fa-search"></i>&nbsp;급상승 겁색어
-					</li>
+						class="fa fa-search"></i>&nbsp;급상승 겁색어</li>
 				</ul>
 
 
 			</div>
-			<div style="position:absolute; border: 1px solid black; margin-left:840px; width: 250px; height:190px; margin-top:15px;">아아아아아아아아아아아아아아</div>
+				<div id="muteYouTubeVideoPlayer" class="youtube" style="position: absolute; border: 1px solid black; margin-left: 840px; width: 270px; height: 190px; margin-top: 15px;">
+					<!-- style="position: absolute; border: 1px solid black; margin-left:100px; width: 1000px; height: 500px; margin-top: 300px; z-index: 1;">-->
+				</div>
 			<div class="form-group col-1" style="margin-bottom: 191px">
 				<a href="" id="aDrop"><i class="fa fa-chevron-down"
 					style="color: black;"></i></a>
@@ -135,8 +196,8 @@
 
 						<div class="card-body" style="height: 400px; padding: 0px;">
 							<img class="card-img"
-								src="${pageContext.request.contextPath}/resources/assets/img/dog-2.jpg" alt="dog"
-								style="height: 100%;">
+								src="${pageContext.request.contextPath}/resources/assets/img/dog-2.jpg"
+								alt="dog" style="height: 100%;">
 						</div>
 						<div class="card-footer" style="padding: 0px">
 							<figcaption class="card-caption form-inline"
@@ -162,8 +223,8 @@
 
 						<div class="card-body" style="height: 400px; padding: 0px;">
 							<img class="card-img"
-								src="${pageContext.request.contextPath}/resources/assets/img/dog-2.jpg" alt="dog"
-								style="height: 100%;">
+								src="${pageContext.request.contextPath}/resources/assets/img/dog-2.jpg"
+								alt="dog" style="height: 100%;">
 						</div>
 						<div class="card-footer" style="padding: 0px">
 							<figcaption class="card-caption form-inline"
@@ -188,8 +249,8 @@
 
 						<div class="card-body" style="height: 400px; padding: 0px;">
 							<img class="card-img"
-								src="${pageContext.request.contextPath}/resources/assets/img/dog-2.jpg" alt="dog"
-								style="height: 100%;">
+								src="${pageContext.request.contextPath}/resources/assets/img/dog-2.jpg"
+								alt="dog" style="height: 100%;">
 						</div>
 						<div class="card-footer" style="padding: 0px">
 							<figcaption class="card-caption form-inline"
@@ -214,8 +275,8 @@
 
 						<div class="card-body" style="height: 400px; padding: 0px;">
 							<img class="card-img"
-								src="${pageContext.request.contextPath}/resources/assets/img/dog-2.jpg" alt="dog"
-								style="height: 100%;">
+								src="${pageContext.request.contextPath}/resources/assets/img/dog-2.jpg"
+								alt="dog" style="height: 100%;">
 						</div>
 						<div class="card-footer" style="padding: 0px">
 							<figcaption class="card-caption form-inline"
@@ -244,8 +305,9 @@
 
 								<div class="col-2"
 									style="width: 30%; height: 50px; padding: 0px;">
-									<img src="${pageContext.request.contextPath}/resources/assets/img/배너일.png" alt=""
-										style="width: 80px; height: 50px; margin-left: 20px;" />
+									<img
+										src="${pageContext.request.contextPath}/resources/assets/img/배너일.png"
+										alt="" style="width: 80px; height: 50px; margin-left: 20px;" />
 								</div>
 								<div class="col-6"
 									style="width: 50%; height: 50px; margin-left: 30px;">
@@ -263,11 +325,11 @@
 							</div>
 
 							<div class="card-body" style="height: 400px; padding: 0px;">
-								<a href="pInfo.do"
+								<a href="pInfo.do?id=1"
 									style="border-bottom: 0px !important; text-decoration: none black;">
 									<img class="card-img"
-									src="${pageContext.request.contextPath}/resources/assets/img/dog-2.jpg" alt="dog"
-									style="height: 100%;">
+									src="${pageContext.request.contextPath}/resources/assets/img/dog-2.jpg"
+									alt="dog" style="height: 100%;">
 								</a>
 							</div>
 							<div class="card-footer row">
@@ -292,7 +354,8 @@
 						<div class="card">
 							<div class="card-header">
 								<img class="card-img"
-									src="${pageContext.request.contextPath}/resources/assets/img/dog-2.jpg" alt="dog">
+									src="${pageContext.request.contextPath}/resources/assets/img/dog-2.jpg"
+									alt="dog">
 							</div>
 							<div class="card-body">
 								<span class="badge badge-warning mb-2">Vacation</span>
@@ -313,7 +376,8 @@
 						<div class="card">
 							<div class="card-header">
 								<img class="card-img"
-									src="${pageContext.request.contextPath}/resources/assets/img/dog-3.jpg" alt="dog">
+									src="${pageContext.request.contextPath}/resources/assets/img/dog-3.jpg"
+									alt="dog">
 							</div>
 							<div class="card-body">
 								<span class="badge badge-secondary mb-2">Hobby</span>
@@ -335,7 +399,8 @@
 							<a href="pInfo.do">
 								<div class="card-header">
 									<img class="card-img"
-										src="${pageContext.request.contextPath}/resources/assets/img/dog-1.jpg" alt="dog">
+										src="${pageContext.request.contextPath}/resources/assets/img/dog-1.jpg"
+										alt="dog">
 								</div>
 							</a>
 							<div class="card-body">
@@ -356,7 +421,8 @@
 						<div class="card">
 							<div class="card-header">
 								<img class="card-img"
-									src="${pageContext.request.contextPath}/resources/assets/img/dog-2.jpg" alt="dog">
+									src="${pageContext.request.contextPath}/resources/assets/img/dog-2.jpg"
+									alt="dog">
 							</div>
 							<div class="card-body">
 								<span class="badge badge-warning mb-2">Vacation</span>
@@ -377,7 +443,8 @@
 						<div class="card">
 							<div class="card-header">
 								<img class="card-img"
-									src="${pageContext.request.contextPath}/resources/assets/img/dog-3.jpg" alt="dog">
+									src="${pageContext.request.contextPath}/resources/assets/img/dog-3.jpg"
+									alt="dog">
 							</div>
 							<div class="card-body">
 								<span class="badge badge-secondary mb-2">Hobby</span>
@@ -399,7 +466,8 @@
 							<a href="pInfo">
 								<div class="card-header">
 									<img class="card-img"
-										src="${pageContext.request.contextPath}/resources/assets/img/dog-1.jpg" alt="dog">
+										src="${pageContext.request.contextPath}/resources/assets/img/dog-1.jpg"
+										alt="dog">
 								</div>
 							</a>
 							<div class="card-body">
@@ -420,7 +488,8 @@
 						<div class="card">
 							<div class="card-header">
 								<img class="card-img"
-									src="${pageContext.request.contextPath}/resources/assets/img/dog-2.jpg" alt="dog">
+									src="${pageContext.request.contextPath}/resources/assets/img/dog-2.jpg"
+									alt="dog">
 							</div>
 							<div class="card-body">
 								<span class="badge badge-warning mb-2">Vacation</span>
@@ -441,7 +510,8 @@
 						<div class="card">
 							<div class="card-header">
 								<img class="card-img"
-									src="${pageContext.request.contextPath}/resources/assets/img/dog-3.jpg" alt="dog">
+									src="${pageContext.request.contextPath}/resources/assets/img/dog-3.jpg"
+									alt="dog">
 							</div>
 							<div class="card-body">
 								<span class="badge badge-secondary mb-2">Hobby</span>
@@ -461,29 +531,30 @@
 	</div>
 
 	<script>
-	var page = 2;
+		var page = 2;
 
-	$(window).scroll(function() {
-		console.log($(window).scrollTop());
-		console.log($(document).height());
-		console.log($(window).height());
-		
-		var height = $(window).height() - 920;
-		
-		
-	    if($(window).scrollTop() == height){    	
-	      console.log(++page);
-	     // $("i").removeClass('fa-spinner');
-	      //$("#ddd").append("<div class='row mt-3' style='border:1px solid black;'>");
-	      var dlendud=$('#ttt').clone();
-	   //   dlendud.find('img').eq(0).attr('src','~~~"')
+		$(window).scroll(
+				function() {
+					console.log($(window).scrollTop());
+					console.log($(document).height());
+					console.log($(window).height());
 
-	      $('.eee').append('<div class="row mt-3">'+dlendud.html()+'</div>');
-	   	  
-	    }
-	   
-	 
-	});
+					var height = $(window).height() - 920;
+
+					if ($(window).scrollTop() == height) {
+						console.log(++page);
+						// $("i").removeClass('fa-spinner');
+						//$("#ddd").append("<div class='row mt-3' style='border:1px solid black;'>");
+						var dlendud = $('#ttt').clone();
+						//   dlendud.find('img').eq(0).attr('src','~~~"')
+
+						$('.eee').append(
+								'<div class="row mt-3">' + dlendud.html()
+										+ '</div>');
+
+					}
+
+				});
 
 		var sel;
 		$(document).on("click", ".b", function() {
@@ -585,104 +656,163 @@
 						});
 	</script>
 
-<script>
- 	$(function(){
-		$("#ticker2").css("display","none");
-		console.log("ddd");
-		topSearch();
-	});
-	
-	function topSearch(){
-		
-		
-		var $ul = $("#ticker");
-		
-		
-		$.ajax({
-			url:"topSearch.do",
-			dataType:"json",
-			success:function(data){
-				console.log("성공");
-				$.each(data, function(index, value){
-					
-					$ul.append("<li class='ddd'><a href='#'><span style='margin-right:9px;'>"+value.liveno+"</span>"+value.keyword+"</a></li>");
-					
-				
-				});
-			},
-			error:function(){
-				console.log("서버통신실패");
-			}
+	<script>
+		$(function() {
+			$("#ticker2").css("display", "none");
+			console.log("ddd");
+			topSearch();
 		});
-		
-	}
- 
-	function topSearch2(){
-		
-		var $ul = $("#ticker2");
-		
-		
-		$.ajax({
-			url:"topSearch.do",
-			dataType:"json",
-			success:function(data){
-				$.each(data, function(index, value){
-					
-					$ul.append("<li class='ddd' style='margin-bottom:10px;'><a href='#'><span style='margin-right:9px;'>"+value.liveno+"</span>"+value.keyword+"</a></li>");
-				
-				});
-			},
-			error:function(){
-				console.log("서버통신실패");
-			}
+
+		function topSearch() {
+
+			var $ul = $("#ticker");
+
+			$
+					.ajax({
+						url : "topSearch.do",
+						dataType : "json",
+						success : function(data) {
+							console.log("성공");
+							$
+									.each(
+											data,
+											function(index, value) {
+
+												$ul
+														.append("<li class='ddd'><a href='#'><span style='margin-right:9px;'>"
+																+ value.liveno
+																+ "</span>"
+																+ value.keyword
+																+ "</a></li>");
+
+											});
+						},
+						error : function() {
+							console.log("서버통신실패");
+						}
+					});
+
+		}
+
+		function topSearch2() {
+
+			var $ul = $("#ticker2");
+
+			$
+					.ajax({
+						url : "topSearch.do",
+						dataType : "json",
+						success : function(data) {
+							$
+									.each(
+											data,
+											function(index, value) {
+
+												$ul
+														.append("<li class='ddd' style='margin-bottom:10px;'><a href='#'><span style='margin-right:9px;'>"
+																+ value.liveno
+																+ "</span>"
+																+ value.keyword
+																+ "</a></li>");
+
+											});
+						},
+						error : function() {
+							console.log("서버통신실패");
+						}
+					});
+
+		}
+
+		$(function() {
+			var ticker = function() {
+				setTimeout(function() {
+					$('#ticker li:first').animate(
+							{
+								marginTop : '-20px'
+							},
+							400,
+							function() {
+								$(this).detach().appendTo('ul#ticker')
+										.removeAttr('style');
+							});
+					ticker();
+				}, 3000);
+			};
+			ticker();
 		});
-		
-	}
- 
- 
- 
- $(function()
-		 {
-		     var ticker = function()
-		     {
-		         setTimeout(function(){
-		             $('#ticker li:first').animate( {marginTop: '-20px'}, 400, function()
-		             {
-		                 $(this).detach().appendTo('ul#ticker').removeAttr('style');
-		             });
-		             ticker();
-		         }, 3000);
-		     };
-		     ticker();
-		 });
+	</script>
+	<script>
+		$('#aDrop').mouseenter(function() {
+			console.log("asdasdasd");
+			
+			//$(".ddd").remove();
+			$("#ticker").css("display", "none");
+			$("#ticker2").css("display", "block");
+			$(".block").css("overflow", "visible");
+			$(".ddd").remove();
 
-</script>
-<script>
-$('#aDrop').mouseenter(function() {
-	//$(".ddd").remove();
-	$("#ticker").css("display","none");
-	$("#ticker2").css("display","block");
-	$(".block").css("overflow","visible");	
-	$(".ddd").remove();
+			topSearch2();
+		});
+		$('#aDrop').mouseleave(function() {
+			$("#ticker").css("display", "block");
+			$("#ticker2").css("display", "none");
+			$(".block").css("overflow", "hidden");
+
+			topSearch();
+
+		});
+	</script>
+		<script type="text/javascript">				
+					var player;
+
+					function onYouTubePlayerAPIReady() {
+						
+						player = new YT.Player('muteYouTubeVideoPlayer', {
+							videoId : 'LNIpr3efeeI',
+							playerVars : {
+								autoplay : 1, // Auto-play the video on load
+								controls : 0, // Show pause/play buttons in player
+								rel : 0,
+								start : 105,
+								end : 301,
+								showinfo : 0,
+								showinfo : 0, // Hide the video title
+								modestbranding : 1, // Hide the Youtube Logo
+								loop : 1, // Run the video in a loop
+								playlist : 'LNIpr3efeeI',
+								fs : 0, // Hide the full screen button
+								cc_load_policy : 0, // Hide closed captions
+								iv_load_policy : 3, // Hide the Video Annotations
+								autohide : 1
+							// Hide video controls when playing
+							},
+							events : {
+								onReady : function(e) {
+									e.target.mute();
+								}
+							}
+						});
+					}
+				</script>
+
+				<script type="text/javascript" src="resources/js/typeit.min.js"></script>
+
+	<script>
 	
-	topSearch2();
-});
-$('#aDrop').mouseleave(function() {
-	$("#ticker").css("display","block");
-	$("#ticker2").css("display","none");
-	$(".block").css("overflow","hidden");
+		$("#muteYouTubeVideoPlayer").hover(
+		function(){
+			alert("들어옴");	
+		},
+		function(){
+			alert("나감");
+		}
+	);
 	
-	topSearch();
-	
-	
-});
+	</script>
+	<div id="loading"
+		style="width: 100%; height: 50px; margin-left: 900px;"></div>
 
-
-</script>
-
-
-	<div id="loading" style="width: 100%; height: 50px; margin-left: 900px;"></div>
-
-	<jsp:include page="includes/footer.jsp"/>
+	<jsp:include page="includes/footer.jsp" />
 </body>
 </html>
