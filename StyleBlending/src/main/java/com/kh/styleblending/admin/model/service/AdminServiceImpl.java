@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.styleblending.admin.model.dao.AdminDao;
+import com.kh.styleblending.admin.model.vo.Declare;
 import com.kh.styleblending.admin.model.vo.PageInfo;
 import com.kh.styleblending.member.model.vo.Member;
 
@@ -31,6 +32,12 @@ public class AdminServiceImpl implements AdminService{
 	public int getDeclareListCount() {
 		// 총 신고수 조회용
 		return aDao.getDeclareListCount();
+	}
+
+	@Override
+	public ArrayList<Declare> selectPostingDeclareList(PageInfo pi) {
+		// 포스팅 신고목록 조회
+		return aDao.selectPostingDeclareList(pi);
 	}
 	
 	

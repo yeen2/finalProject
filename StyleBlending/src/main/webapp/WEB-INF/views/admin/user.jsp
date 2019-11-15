@@ -188,13 +188,31 @@
 	                                				<button class="page-link disabled" style="color:black; cursor:text;" disabled>Previous</button>
 	                                			</c:if>
 	                                			</li>
-	                                		<!-- 페이지 -->	
-	                                			<li class="paginate_button page-item active">
-	                                				<a href="#" aria-controls="bootstrap-data-table" data-dt-idx="1" tabindex="0" class="page-link">1</a>
-	                                			</li>
+	                                		<!-- 페이지 -->
+	                                			<c:forEach begin="${pi.startPage}" end="${pi.endPage }" var="p">
+	                                			<c:if test="${p ne pi.currentPage }">
+	                                				<c:url value="aUser.do" var="page">	
+	                                					<c:param name="currentPage" value="${p}"/>
+	                                				</c:url>
+		                                			<li class="paginate_button page-item active">
+		                                				<a href="${page}" aria-controls="bootstrap-data-table" class="page-link">${p }</a>
+		                                			</li>
+	                                			</c:if>
+	                                			<c:if test="${p eq pi.currentPage }">
+	                                				<button class="page-link disabled" style="color:black; cursor:text;" disabled>${p}</button>
+	                                			</c:if>
+	                                			</c:forEach>
 	                                		<!-- 다음 -->	
 	                                			<li class="paginate_button page-item next" id="bootstrap-data-table_next">
-	                                				<a href="#" aria-controls="bootstrap-data-table" data-dt-idx="3" tabindex="0" class="page-link">Next</a>
+	                                			<c:if test="${pi.currentPage ne pi.endPage }">	
+	                                				<c:url value="aUser.do" var="next" >
+	                                					<c:param name="currentPage" value="${pi.currentPage+1 }"/>
+	                                				</c:url>
+	                                				<a href="${next }" aria-controls="bootstrap-data-table" class="page-link">Next</a>
+	                                			</c:if>
+	                                			<c:if test="${pi.currentPage eq pi.endPage }">
+	                                				<button class="page-link disabled" style="color:black; cursor:text;" disabled>Next</button>
+	                                			</c:if>
 	                                			</li>
 	                                		</ul>
 	                                	</div>

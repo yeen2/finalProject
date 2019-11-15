@@ -663,13 +663,6 @@
 				content.focus();
 				return false;
 			}
-			
-			//content에서 hashtag추출해서 저장
-			var str = content.val();
-			var regExp = /#;
-			var test = str.match(regExp);
-			
-			$("#hashtag").val();
 
 		}
 		

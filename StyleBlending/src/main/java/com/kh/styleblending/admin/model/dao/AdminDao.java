@@ -2,10 +2,12 @@ package com.kh.styleblending.admin.model.dao;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.styleblending.admin.model.vo.Declare;
 import com.kh.styleblending.admin.model.vo.PageInfo;
 import com.kh.styleblending.member.model.vo.Member;
 
@@ -20,11 +22,23 @@ public class AdminDao {
 	}
 	
 	public ArrayList<Member> selectMemberList(PageInfo pi){
-		return (ArrayList)sqlSession.selectList("adminMapper.selectMemberList", pi);
+		
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("adminMapper.selectMemberList", null, rowBounds);
 	}
 	
 	public int getDeclareListCount() {
 		return sqlSession.selectOne("adminMapper.getDeclareListCount");
+	}
+	
+	public ArrayList<Declare> selectPostingDeclareList(PageInfo pi){
+		
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("adminMapper.selectPostingDeclareList", null, rowBounds);
 	}
 	
 	

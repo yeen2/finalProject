@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -88,107 +89,63 @@
                                             <th>신고자</th>
                                             <th>게시글명</th>
                                             <th>신고일자</th>
-                                            <th>처리일자</th>
+                                            <th>신고수</th>
                                             <th>신고사유</th>
                                             <th>확인유무</th>
                                         </tr>
                                     </thead>
+                                    <c:forEach items="${list}" var="p">
                                     <tbody>
                                          <tr>
                                         	<td><label class="switch switch-3d switch-danger mr-3"><input type="checkbox" class="switch-input" checked="true"> <span class="switch-label"></span> <span class="switch-handle"></span></label>
                                         	</td>
-                                            <td>4</td>
+                                            <td>${p.dno}</td>
                                             <td>
                                             	<div data-toggle="modal" data-target="#smallmodal">
-                                                    <a href="#">HYEN</a>
+                                                    <a href="#">${p.email }</a>
                                                 </div>
                                             </td>
-                                            <td>패션</td>
-                                            <td>2019-11-04</td>
-                                            <td></td>
-                                            <td>비방</td>
-                                            <td><span class="badge badge-pending">N</span></td>
-                                        </tr>
-                                         <tr>
-                                         	<td><label class="switch switch-3d switch-danger mr-3"><input type="checkbox" class="switch-input" checked="true"> <span class="switch-label"></span> <span class="switch-handle"></span></label>
-                                        	</td>
-                                            <td>5</td>
                                             <td>
-                                            	<div data-toggle="modal" data-target="#smallmodal">
-                                                    <a href="#">Edinburgh</a>
+                                            	<div class="round-img">
+                                                    <a href="#"><img class="" src="${pageContext.request.contextPath}/resources/admin_temp/images/avatar/1.jpg" alt=""></a>
                                                 </div>
                                             </td>
-                                            <td>패션</td>
-                                            <td>2019-11-04</td>
-                                            <td></td>
-                                            <td>비방</td>
-                                            <td><span class="badge badge-pending">N</span></td>
-                                        </tr>
-                                         <tr>
-                                         	<td><label class="switch switch-3d switch-danger mr-3"><input type="checkbox" class="switch-input" checked="true"> <span class="switch-label"></span> <span class="switch-handle"></span></label>
-                                        	</td>
-                                            <td>6</td>
+                                            <td>${p.enrollDate }</td>
+                                            <td>${p.declareCount}</td>
+                                            <td>${p.category }</td>
                                             <td>
-                                            	<div data-toggle="modal" data-target="#smallmodal">
-                                                    <a href="#">Edinburgh</a>
-                                                </div>
+	                                            <c:if test="${p.isCheck eq 1 }">
+	                                            <span class="badge badge-pending">확인요청</span>
+	                                        	</c:if>
+	                                        	<c:if test="${p.isCheck eq 2 }">
+	                                        	<span class="badge badge-pending">확인</span>
+	                                        	</c:if>
+	                                        	<c:if test="${p.isCheck eq 3 }">
+	                                        	<span class="badge" style="background:gray">삭제완료</span>
+	                                        	</c:if>
                                             </td>
-                                            <td>패션</td>
-                                            <td>2019-11-04</td>
-                                            <td></td>
-                                            <td>비방</td>
-                                            <td><span class="badge badge-pending">N</span></td>
-                                        </tr>
-                                        <tr>
-                                        	<td><label class="switch switch-3d switch-danger mr-3"><input type="checkbox" class="switch-input" checked="true"> <span class="switch-label"></span> <span class="switch-handle"></span></label>
-                                        	</td>
-                                            <td>7</td>
-                                            <td>
-                                            	<div data-toggle="modal" data-target="#smallmodal">
-                                                    <a href="#">Edinburgh</a>
-                                                </div>
-                                            </td>
-                                            <td>패션</td>
-                                            <td>2019-11-04</td>
-                                            <td></td>
-                                            <td>비방</td>
-                                            <td><span class="badge" style="background:gray">Y</span></td>
-                                        </tr>
-                                        <tr>
-                                        	<td><label class="switch switch-3d switch-danger mr-3"><input type="checkbox" class="switch-input" checked="true"> <span class="switch-label"></span> <span class="switch-handle"></span></label>
-                                        	</td>
-                                            <td>8</td>
-                                            <td>
-                                            	<div data-toggle="modal" data-target="#smallmodal">
-                                                    <a href="#">Edinburgh</a>
-                                                </div>
-                                            </td>
-                                            <td>패션</td>
-                                            <td>2019-11-04</td>
-                                            <td>2019-11-04</td>
-                                            <td>비방</td>
-                                            <td><span class="badge" style="background:gray">Y</span></td>
                                         </tr>
                                     </tbody>
+                                    </c:forEach>
                                 </table>
                                 
                                 <div class="row">
 	                                <div class="col-sm-4" style="margin-left:10px;">
-	                                	Showing 1 to 10 of 12 entries	
+	                                	Showing ${pi.currentPage } to ${pi.endPage } of ${pi.listCount } entries	
 	                                </div>
 	                                
 	                                <div class=".col-md-6 .offset-md-3">
 	                                	<div class="dataTables_paginate paging_simple_numbers" id="bootstrap-data-table_paginate">
 	                                		<ul class="pagination">
+	                                			<!-- 이전 -->
 	                                			<li class="paginate_button page-item previous disabled" id="bootstrap-data-table_previous">
 	                                				<a href="#" aria-controls="bootstrap-data-table" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
 	                                			</li>
+	                                			<!-- 페이지 -->
 	                                			<li class="paginate_button page-item active">
 	                                				<a href="#" aria-controls="bootstrap-data-table" data-dt-idx="1" tabindex="0" class="page-link">1</a>
 	                                			</li>
-	                                			<li class="paginate_button page-item ">
-	                                				<a href="#" aria-controls="bootstrap-data-table" data-dt-idx="2" tabindex="0" class="page-link">2</a>
-	                                			</li>
+	                                			<!-- 다음 -->
 	                                			<li class="paginate_button page-item next" id="bootstrap-data-table_next">
 	                                				<a href="#" aria-controls="bootstrap-data-table" data-dt-idx="3" tabindex="0" class="page-link">Next</a>
 	                                			</li>

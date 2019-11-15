@@ -53,7 +53,7 @@
 						<!-- 팔로워버튼  -->
 						<a href="#a" class="btn btn-dark ml-3"><i class="fa fa-plus"></i> <b>Fan</b></a>
 						<%--<c:if test="${ loginUser.mno == m.mno }"> --%>
-							<button class="btn btn-info btn-pill" style="margin-left:400px;"onclick="location.href='mMyPage.do';">
+							<button class="btn btn-info btn-pill" style="margin-left:400px;"onclick="location.href='mpUpdatePage.do';">
 							    <i class="fa fa-edit mr-1"></i>
 						    	프로필 관리
 							</button>
@@ -63,7 +63,7 @@
 					<div class="stats d-flex flex-row align-items-center align-items-lg-start text-center text-lg-left">
 						<div class="posts ml-2 ml-lg-0">
 							<p class="lead">
-								<b>${ m.pCount }</b> Board
+								<b>${ m.posCount }</b> Board
 							</p>
 						</div>
 						<div class="posts">
@@ -125,93 +125,30 @@
 					
 				</div>
 				<div class="d-flex justify-content-center my-5">
-					<button class="btn btn-danger btn-pill" id="pBtn">더보기</button>
+					<button class="btn btn-danger btn-pill" id="pBtn" style="display:none;">더보기</button>
 				</div>
 			</div>
 			
 			<!-- 내 좋아요 사진목록-->
 			<div class="tab-pane fade text-center" id="like">
-				<!-- <p class="lead">
-					<span class="text-danger"><i class="far fa-frown-open"></i></span>
-					좋아요한 게시물이 없습니다.
-				</p> -->
 				<div class="row" id="plus2">
 					
 				</div>
 				<div class="d-flex justify-content-center my-5">
-					<button class="btn btn-danger btn-pill" id="lBtn">더보기</button>
+					<button class="btn btn-danger btn-pill" id="lBtn" style="display:none;">더보기</button>
 				</div>
 			</div>
 			
 			<!-- 나를 팔로우한 친구 목록 -->
 			<div class="tab-pane fade text-center" id="fan">
-				<!-- <p class="lead">
-					<span class="text-danger"><i class="far fa-frown-open"></i></span>
-					팔로우한 친구가 없습니다.
-				</p>
-				<a href="#header" class="btn btn-info btn-pill">Find Friend</a> -->
 				<div align="center">
-					<div style="width:50%;">
-						<hr>
-						<div style="height:60px;">
-							<div style="float:left;">
-								<img src="${pageContext.request.contextPath}/resources/assets/img/lorde.png" alt="Raised circle image"
-								class="img-fluid rounded-circle shadow-lg" style="width: 50px;">
-							</div>
-							<div style="float:left; margin-left:15px;">
-								<div style="text-align:left;">닉네임</div>
-								<div id="abc" style="text-align:left;">
-									<i class="fas fa-clipboard-list"></i><div>123</div>
-									<i class="fas fa-heart"></i><div>123</div>
-									<i class="fas fa-comment"></i><div>123</div>
-								</div>
-							</div>
-							<div style="float:left; margin-left:210px;">
-								<button class="btn btn-dark"><i class="fa fa-plus"></i> Fan</button>
-							</div>
-						</div>
-						<hr>
-						<div style="height:60px;">
-							<div style="float:left;">
-								<img src="${pageContext.request.contextPath}/resources/assets/img/lorde.png" alt="Raised circle image"
-								class="img-fluid rounded-circle shadow-lg" style="width: 50px;">
-							</div>
-							<div style="float:left; margin-left:15px;">
-								<div style="text-align:left;">닉네임</div>
-								<div id="abc" style="text-align:left;">
-									<i class="fas fa-clipboard-list"></i><div>123</div>
-									<i class="fas fa-heart"></i><div>123</div>
-									<i class="fas fa-comment"></i><div>123</div>
-								</div>
-							</div>
-							<div style="float:left; margin-left:210px;">
-								<button class="btn btn-dark"><i class="fa fa-plus"></i> Fan</button>
-							</div>
-						</div>
-						<hr>
-						<div style="height:60px;">
-							<div style="float:left;">
-								<img src="${pageContext.request.contextPath}/resources/assets/img/lorde.png" alt="Raised circle image"
-								class="img-fluid rounded-circle shadow-lg" style="width: 50px;">
-							</div>
-							<div style="float:left; margin-left:15px;">
-								<div style="text-align:left;">닉네임</div>
-								<div id="abc" style="text-align:left;">
-									<i class="fas fa-clipboard-list"></i><div>123</div>
-									<i class="fas fa-heart"></i><div>123</div>
-									<i class="fas fa-comment"></i><div>123</div>
-								</div>
-							</div>
-							<div style="float:left; margin-left:210px;">
-								<button class="btn btn-dark"><i class="fa fa-plus"></i> Fan</button>
-							</div>
-						</div>
-						<hr>
+					<div id="fList" style="width:50%;">
+						
 					</div>
 				</div>
 				
 				<div class="d-flex justify-content-center my-5">
-					<button class="btn btn-danger btn-pill" id="fanBtn">더보기</button>
+					<button class="btn btn-danger btn-pill" id="fBtn" style="display:none;">더보기</button>
 				</div>
 				
 			</div>
@@ -219,67 +156,13 @@
 			<!-- 내가 팔로잉한 친구 목록 -->
 			<div class="tab-pane fade text-center" id="following">
 				<div align="center">
-					<div style="width:50%;">
-						<hr>
-						<div style="height:60px;">
-							<div style="float:left;">
-								<img src="${pageContext.request.contextPath}/resources/assets/img/lorde.png" alt="Raised circle image"
-								class="img-fluid rounded-circle shadow-lg" style="width: 50px;">
-							</div>
-							<div style="float:left; margin-left:15px;">
-								<div style="text-align:left;">닉네임</div>
-								<div id="abc" style="text-align:left;">
-									<i class="fas fa-clipboard-list"></i><div>123</div>
-									<i class="fas fa-heart"></i><div>123</div>
-									<i class="fas fa-comment"></i><div>123</div>
-								</div>
-							</div>
-							<div style="float:left; margin-left:210px;">
-								<button class="btn btn-dark"><i class="fa fa-plus"></i> Fan</button>
-							</div>
-						</div>
-						<hr>
-						<div style="height:60px;">
-							<div style="float:left;">
-								<img src="${pageContext.request.contextPath}/resources/assets/img/lorde.png" alt="Raised circle image"
-								class="img-fluid rounded-circle shadow-lg" style="width: 50px;">
-							</div>
-							<div style="float:left; margin-left:15px;">
-								<div style="text-align:left;">닉네임</div>
-								<div id="abc" style="text-align:left;">
-									<i class="fas fa-clipboard-list"></i><div>123</div>
-									<i class="fas fa-heart"></i><div>123</div>
-									<i class="fas fa-comment"></i><div>123</div>
-								</div>
-							</div>
-							<div style="float:left; margin-left:210px;">
-								<button class="btn btn-dark"><i class="fa fa-plus"></i> Fan</button>
-							</div>
-						</div>
-						<hr>
-						<div style="height:60px;">
-							<div style="float:left;">
-								<img src="${pageContext.request.contextPath}/resources/assets/img/lorde.png" alt="Raised circle image"
-								class="img-fluid rounded-circle shadow-lg" style="width: 50px;">
-							</div>
-							<div style="float:left; margin-left:15px;">
-								<div style="text-align:left;">닉네임</div>
-								<div id="abc" style="text-align:left;">
-									<i class="fas fa-clipboard-list"></i><div>123</div>
-									<i class="fas fa-heart"></i><div>123</div>
-									<i class="fas fa-comment"></i><div>123</div>
-								</div>
-							</div>
-							<div style="float:left; margin-left:210px;">
-								<button class="btn btn-dark"><i class="fa fa-plus"></i> Fan</button>
-							</div>
-						</div>
-						<hr>
+					<div id="fwList" style="width:50%;">
+						
 					</div>
 				</div>
 				
 				<div class="d-flex justify-content-center my-5">
-					<button class="btn btn-danger btn-pill" id="fwBtn">더보기</button>
+					<button class="btn btn-danger btn-pill" id="wBtn" style="display:none;">더보기</button>
 				</div>
 				
 			</div>
@@ -309,16 +192,26 @@
 			
 			$.ajax({
 				url:"mpSPostingList.do",
+				data:{mno:${m.mno}},
 				dataType:"json",
 				success:function(list){
 					console.log("ajax 통신 성공");
 					if(list.length == 0){
 						var $a1 = $("<p>").attr("class", "lead");
-						var $a2 = a1.append($("<span>").attr("class", "text-danger"));
+						var $a2 = $("<span>").attr("class", "text-danger");
 						$a2.append($("<i>").attr("class", "far fa-frown-open"));
-						$("#plus").append($a2);
+						$a1.append($a2);
+						$a1.append(" 포스팅한 게시물이 없습니다.");
+						
+						$("#board").prepend($a1);
 					}else{
+						if(list.length > 6){
+							$("#pBtn").css("display", "block");
+						}
 						for(var i=countP; i<countP+6; i++){
+							if(i == list.length-1){
+								$("#pBtn").css("display", "none");
+							}
 							var $copy1 = $("<div>").attr("class", "col-12 col-md-4");
 							$copy1.append($("<div>").attr({"class":"square", "style":"background-image: url(" + "'resources/assets/img/" + list[i].renameImg + "');"}));
 							
@@ -341,13 +234,30 @@
 			
 			$.ajax({
 				url:"mpSLikeList.do",
+				data:{mno:${m.mno}},
 				dataType:"json",
 				success:function(list){
-					for(var i=countL; i<countL+6; i++){
-						var $copy1 = $("<div>").attr("class", "col-12 col-md-4");
-						$copy1.append($("<div>").attr({"class":"square", "style":"background-image: url(" + "'resources/assets/img/" + list[i].renameImg + "');"}));
+					if(list.length == 0){
+						var $a1 = $("<p>").attr("class", "lead");
+						var $a2 = $("<span>").attr("class", "text-danger");
+						$a2.append($("<i>").attr("class", "far fa-frown-open"));
+						$a1.append($a2);
+						$a1.append(" 좋아요한 게시물이 없습니다.");
 						
-						$("#plus2").append($copy1);
+						$("#like").prepend($a1);
+					}else{
+						if(list.length > 6){
+							$("#lBtn").css("display", "block");
+						}
+						for(var i=countL; i<countL+6; i++){
+							if(i == list.length-1){
+								$("#lBtn").css("display", "none");
+							}
+							var $copy1 = $("<div>").attr("class", "col-12 col-md-4");
+							$copy1.append($("<div>").attr({"class":"square", "style":"background-image: url(" + "'resources/assets/img/" + list[i].renameImg + "');"}));
+							
+							$("#plus2").append($copy1);
+						}
 					}
 				},
 				error:function(){
@@ -365,16 +275,54 @@
 			
 			$.ajax({
 				url:"mpSFanList.do",
+				data:{mno:${m.mno}},
 				dataType:"json",
 				success:function(list){
-					console.log("ajax 통신 성공");
+					if(list.length == 0){
+						var $a1 = $("<p>").attr("class", "lead");
+						var $a2 = $("<span>").attr("class", "text-danger");
+						$a2.append($("<i>").attr("class", "far fa-frown-open"));
+						$a1.append($a2);
+						$a1.append(" ${m.nickName}님을 팔로우한 팬이 없습니다.");
+						
+						$("#fan").prepend($a1);
+					}else{
+						if(list.length > 12){
+							$("#fBtn").css("display", "block");
+						}
+						for(var i=countFan; i<countFan+12; i++){
+							if(i == list.length-1){
+								$("#fBtn").css("display", "none");
+							}
+							var $fan1 = "<div style='height:60px;'>"
+							+"<div style='float:left;'>"
+							+"<img src='resources/assets/img/lorde.png' alt='Raised circle image'"
+							+"class='img-fluid rounded-circle shadow-lg' style='width: 50px;'>"
+							+"</div>"
+							+"<div style='float:left; margin-left:15px;'>"
+							+"<div style='text-align:left;'>닉네임</div>"
+							+"<div id='abc' style='text-align:left;'>"
+							+"<i class='fas fa-clipboard-list'></i><div>123</div>"
+							+"<i class='fas fa-heart'></i><div>123</div>"
+							+"<i class='fas fa-comment'></i><div>123</div>"
+							+"</div>"
+							+"</div>"
+							+"<div style='float:left; margin-left:210px;'>"
+							+"<button class='btn btn-dark'><i class='fa fa-plus'></i> Fan</button>"
+							+"</div>"
+							+"</div>"
+							+"<hr>";
+							
+							$("#fList").append($fan1);
+						}
+					}
 				},
 				error:function(){
 					console.log("ajax 통신 실패");
 				}
 			});
 		}
-		$("#fanBtn").on("click", function(){
+		$("#fBtn").on("click", function(){
 			countFan += 12;
 			selectFanList();
 		});
@@ -383,16 +331,54 @@
 			
 			$.ajax({
 				url:"mpSFwList.do",
+				data:{mno:${m.mno}},
 				dataType:"json",
 				success:function(list){
-					console.log("ajax 통신 성공");
+					if(list.length == 0){
+						var $a1 = $("<p>").attr("class", "lead");
+						var $a2 = $("<span>").attr("class", "text-danger");
+						$a2.append($("<i>").attr("class", "far fa-frown-open"));
+						$a1.append($a2);
+						$a1.append(" 마음에 드는 사람의 팬이 되어주세요.");
+						
+						$("#following").prepend($a1);
+					}else{
+						if(list.length > 12){
+							$("#wBtn").css("display", "block");
+						}
+						for(var i=countFw; i<countFw+12; i++){
+							if(i == list.length-1){
+								$("#wBtn").css("display", "none");
+							}
+							var $fan1 = "<div style='height:60px;'>"
+							+"<div style='float:left;'>"
+							+"<img src='resources/assets/img/lorde.png' alt='Raised circle image'"
+							+"class='img-fluid rounded-circle shadow-lg' style='width: 50px;'>"
+							+"</div>"
+							+"<div style='float:left; margin-left:15px;'>"
+							+"<div style='text-align:left;'>닉네임</div>"
+							+"<div id='abc' style='text-align:left;'>"
+							+"<i class='fas fa-clipboard-list'></i><div>123</div>"
+							+"<i class='fas fa-heart'></i><div>123</div>"
+							+"<i class='fas fa-comment'></i><div>123</div>"
+							+"</div>"
+							+"</div>"
+							+"<div style='float:left; margin-left:210px;'>"
+							+"<button class='btn btn-dark'><i class='fa fa-plus'></i> Fan</button>"
+							+"</div>"
+							+"</div>"
+							+"<hr>";
+							
+							$("#fwList").append($fan1);
+						}
+					}
 				},
 				error:function(){
 					console.log("ajax 통신 실패");
 				}
 			});
 		}
-		$("#fwBtn").on("click", function(){
+		$("#wBtn").on("click", function(){
 			countFw += 12;
 			selectFwList();
 		});
