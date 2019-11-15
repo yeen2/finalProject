@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.styleblending.admin.model.service.AdminService;
+import com.kh.styleblending.admin.model.vo.Declare;
 import com.kh.styleblending.admin.model.vo.PageInfo;
 import com.kh.styleblending.admin.model.vo.Pagination;
 import com.kh.styleblending.member.model.vo.Member;
@@ -47,12 +48,18 @@ public class AdminController {
 	}
 	
 	@RequestMapping("aDeclare.do")
-	public String selectDeclareList(ModelAndView mv, @RequestParam(value="currentPage", defaultValue="1")int currentPage) {
+	public ModelAndView selectDeclareList(ModelAndView mv, @RequestParam(value="currentPage", defaultValue="1")int currentPage) {
 		
 		int listCount = aService.getDeclareListCount();
 		
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		
-		return "admin/declare";
+		ArrayList<Declare> list = aService.selectPostingDeclareList(pi);
+		
+		mv.addObject("pi",pi).addObject("list",list).setViewName("admin/declare");
+		System.out.println("신고리스트" + list +"\n 신고총횟수" + listCount);
+		
+		return mv;
 	}
 	
 	@RequestMapping("aAdvertisment.do")

@@ -24,11 +24,25 @@
 	<resultMap id="DeclareResultSet" type="Declare">
 		<id property="dno" column="d_no"/>
 		<result property="mno" column="m_no"/>
+		<result property="email" column="email"/>
 		<result property="pno" column="p_no"/>
 		<result property="category" column="category"/>
 		<result property="content" column="content"/>
 		<result property="enrollDate" column="enroll_Date"/>
 		<result property="isCheck" column="isCheck"/>
+	</resultMap>
+	
+	<resultMap id="postingDeclareResultSet" type="Declare">
+		<id property="dno" column="d_no"/>
+		<result property="mno" column="m_no"/>
+		<result property="email" column="email"/>
+		<result property="pno" column="p_no"/>
+		<result property="imgName" column="original_img"/>
+		<result property="category" column="category"/>
+		<result property="content" column="content"/>
+		<result property="enrollDate" column="enroll_Date"/>
+		<result property="isCheck" column="isCheck"/>
+		<result property="declareCount" column="declare_count"/>
 	</resultMap>
 
 	<select id="getMemberListCount" resultType="_int">
@@ -51,8 +65,15 @@
 		from b_declare)
 	</select>
 	
-	<select id="selectDeclareList" resultMap="DeclareResultSet">
-		select p.*,m.email
+	<select id="selectPostingDeclareList" resultMap="postingDeclareResultSet">
+		select pd.*,m.email,p.original_img,p.declare_count
+		from p_declare pd
+		join member m on(m.m_no=pd.m_no)
+		join posting p on(p.p_no=pd.p_no)
+	</select>
+
+	<!-- <select id="selectAllDeclareList" resultMap="">
+		select p.*,m.email 
 		from p_declare p
 		join member m on(m.m_no=p.m_no)
 		union
@@ -60,7 +81,5 @@
 		from b_declare b
 		join member m on(m.m_no=b.m_no)
 	</select>
-
-
-
+ -->
 </mapper>
