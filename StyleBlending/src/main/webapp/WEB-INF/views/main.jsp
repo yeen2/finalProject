@@ -102,7 +102,7 @@
 				<img style="width: 820px; height: 230px;"
 					src="${pageContext.request.contextPath}/resources/assets/img/배너삼.jpg">
 			</div>
-			<div class="form-group col-2 block" style="margin-bottom: 191px">
+			<div class="form-group col-2 block" style="margin-bottom: 191px; position:relative;">
 				<ul id="ticker" style="height: 230px">
 
 				</ul>
@@ -115,6 +115,7 @@
 
 
 			</div>
+			<div style="position:absolute; border: 1px solid black; margin-left:840px; width: 250px; height:190px; margin-top:15px;">아아아아아아아아아아아아아아</div>
 			<div class="form-group col-1" style="margin-bottom: 191px">
 				<a href="" id="aDrop"><i class="fa fa-chevron-down"
 					style="color: black;"></i></a>
@@ -604,7 +605,7 @@
 				console.log("성공");
 				$.each(data, function(index, value){
 					
-					$ul.append("<li class='ddd'><a href='#'><span style='margin-right:9px;'>"+value.liveNo+"</span>"+value.keyword+"</a></li>");
+					$ul.append("<li class='ddd'><a href='#'><span style='margin-right:9px;'>"+value.liveno+"</span>"+value.keyword+"</a></li>");
 					
 				
 				});
@@ -627,7 +628,7 @@
 			success:function(data){
 				$.each(data, function(index, value){
 					
-					$ul.append("<li class='ddd' style='margin-bottom:10px;'><a href='#'><span style='margin-right:9px;'>"+value.liveNo+"</span>"+value.keyword+"</a></li>");
+					$ul.append("<li class='ddd' style='margin-bottom:10px;'><a href='#'><span style='margin-right:9px;'>"+value.liveno+"</span>"+value.keyword+"</a></li>");
 				
 				});
 			},

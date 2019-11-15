@@ -32,7 +32,10 @@ invest_table .title .date {
 		<h2>공지사항</h2>
 
 
-		<div id="noticeDiv"></div>
+		<div id="noticeDiv">
+		
+		
+		</div>
 
 
 
@@ -129,7 +132,7 @@ invest_table .title .date {
 					
 					var $div1 = $("<div class='title form-inline' style='margin: 15px;'></div>");
 					var $div1_1 = $("<div class='col-11'>"+value.title+"<br> <span class='date'style='color: #cbcbcb; font-size: .7rem;'>"+value.enrollDate+"</span></div>");
-					var $div1_2 = $("<div class='col-1'><a style='margin-left: 210px;'><i class='fa fa-chevron-down dn2' style='color: black; font-size: 30px;' id='asd'></i></a></div>");
+					var $div1_2 = $("<div class='col-1'><a style='margin-left: 210px;'><i class='fa fa-chevron-down' style='color: black; font-size: 30px;' id='asd'></i></a></div>");
 					
 					$div1.append($div1_1);
 					$div1.append($div1_2);
@@ -158,12 +161,26 @@ invest_table .title .date {
 		var iconClass = $(this).attr('class');
 		var icon = $(this);
 		console.log(this);
+		if(iconClass == "fa fa-chevron-down"){
 		
+		//if문으로 관리자계정이면 삭제 수정 버튼 생성
+		/* if(userid == "admin"){
+			
+			$(icon).parent().parent().parent().next().append("<div class='appendNotice' style='height:100%; color: #4f4f4f; padding: 20px 15px; background-color: #e9e9e9; font-size: .8rem; line-height: 1.2rem;'>안녕하세요.<br> 공지사항 입니다. <br>수고하세요.<button class='btn btn-danger btn-sm' style='float:right'>삭제</button><button style='float:right' class='btn btn-dark btn-sm'>수정</button></div>");
+				
+		}else{
+			$(icon).parent().parent().parent().next().append("<div class='appendNotice' style='height:100%; color: #4f4f4f; padding: 20px 15px; background-color: #e9e9e9; font-size: .8rem; line-height: 1.2rem;'>안녕하세요.<br> 공지사항 입니다. <br>수고하세요/</div>");
+				
+		} */
+		$(icon).parent().parent().parent().next().append("<div class='appendNotice' style='height:100%; color: #4f4f4f; padding: 20px 15px; background-color: #e9e9e9; font-size: .8rem; line-height: 1.2rem;'>안녕하세요.<br> 공지사항 입니다. <br>수고하세요.<button class='btn btn-danger btn-sm' style='float:right'>삭제</button><button style='float:right' class='btn btn-dark btn-sm'>수정</button></div>");
 		
-		$(icon).parent().parent().parent().next().append("<div class='appendNotice' style='height:100%; color: #4f4f4f; padding: 20px 15px; background-color: #e9e9e9; font-size: .8rem; line-height: 1.2rem;'>안녕하세요.<br> 공지사항 입니다. <br>수고하세요.</div>");
 		console.log($(this).parent().parent().parent().parent().children().siblings().eq(1));
-		
-		/* if(iconClass == "fa fa-chevron-down dn2"){
+		$(this).attr('class','fa fa-chevron-up');	
+		}else{
+			$(this).attr('class','fa fa-chevron-down');
+			$(icon).parent().parent().parent().next().children().remove();
+			
+		}/* if(iconClass == "fa fa-chevron-down dn2"){
 			$div2.append("<div class='appendNotice' style='height:100%; color: #4f4f4f; padding: 20px 15px; background-color: #e9e9e9; font-size: .8rem; line-height: 1.2rem;'>"+value.content +"</div>");				
 			$noticeDiv.append($div2);
 		}
@@ -278,7 +295,7 @@ invest_table .title .date {
 								</script>
 							</div>
 						</div>
-						<div class="modal-footer">
+						<div class="modal-footer"style="margin:auto;">
 							<button class="btn btn-danger btn-lg" type="button"
 								data-dismiss="modal" id="reset1">취소</button>
 							<button type="submit" class="btn btn-success btn-lg">등록</button>
