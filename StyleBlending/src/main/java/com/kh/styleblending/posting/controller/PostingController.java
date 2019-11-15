@@ -58,12 +58,18 @@ public class PostingController {
 		// 2. 해시태그 추출
 		String str = p.getContent();
 		String [] strArr = str.split(" ");
+		String hashtag = "";
 		
 		for (String s : strArr){
             System.out.println(s);
         }
 
-
+		for(int i=0; i<strArr.length; i++) {
+			if(strArr[i].charAt(0) == '#') {
+				hashtag += strArr[i];
+			}
+		}
+		System.out.println("해시태그값 : " + hashtag);
 		
 		int result = pService.insertPosting(p, cate, brand, color);
 		

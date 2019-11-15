@@ -25,7 +25,8 @@
 				  </div>
 				  	<!-- 이메일 입력창 -->
 					<input type="text" class="form-control" id="email" name="email"
-						placeholder="Email" aria-label="Email" aria-describedby="basic-addon1">
+						placeholder="Email" aria-label="Email" aria-describedby="basic-addon1" 
+						style="padding-left: 2.5rem !important;">
 				</div>
 				
 				<div class="input-group mt-3">
@@ -36,17 +37,25 @@
 					</div>
 					<!-- 비번 입력창 -->
 					<input type="password" class="form-control"name="pass" id="pass"
-						aria-label="Password" aria-describedby="basic-addon2" placeholder="Password" >
+						aria-label="Password" aria-describedby="basic-addon2" placeholder="Password" 
+						style="padding-left: 2.5rem !important;">
 				</div>
+				<div style="margin-top:10px;">
+					<button type="submit" class="form-control btn btn-dark" style="height:50px;"><b>로그인</b></button>
+				</div>
+
+				<!-- 아이디기억 /  -->
+				<div class="custom-control custom-checkbox" style="text-align:left !important; margin-top: 10px;">
+               		<input type="checkbox" class="custom-control-input" id="customCheck2">
+                	<label class="custom-control-label" for="customCheck2">Remember me</label>
+              	</div>
+				<hr>
 				
 				<div class="input-group-prepend" style="margin-top:10px;">
 					<a href="searchPass.do" style="margin-right:235px;">Forgot Password?</a>
 					<a href="joinForm.do">회원가입</a>
 				</div>
 				
-				<div style="margin-top:10px;">
-					<button type="submit" class="form-control btn btn-dark" style="height:50px;"><b>로그인</b></button>
-				</div>
 				<div style="margin-top:35px;">
 					<button type="button" class="form-control btn btn-warning" id="kakaoBtn"><b>카카오톡 로그인</b></button>
 				</div>
