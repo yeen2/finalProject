@@ -8,7 +8,7 @@ import com.kh.styleblending.member.model.service.MemberService;
 
 @Controller
 public class MemberController {
-
+	/*
 	@Autowired
 	private MemberService mService;
 	
@@ -21,6 +21,6 @@ public class MemberController {
 	public String MyPage() {
 		return "member/myPage";
 	}
-	
+	*/
 	
 }

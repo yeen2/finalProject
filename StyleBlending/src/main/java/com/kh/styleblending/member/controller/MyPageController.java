@@ -23,8 +23,23 @@ public class MyPageController {
 	@Autowired
 	private MyPageService mpService;
 	
-	// 내 프로필 호출 메소드
-	@RequestMapping("mpSProfile.do")
+	// 다른 사람 프로필 호출 메소드 (일반 프로필 페이지)
+	@RequestMapping("mpViewProfile.do")
+	public ModelAndView profileViewPage(ModelAndView mv, int mno) {
+		
+		Member m = mpService.selectProfile(mno);
+		
+		if(m != null) {
+			mv.addObject("m", m).setViewName("member/profile");
+		}else {
+			mv.addObject("msg", "프로필 페이지 불러오기에 실패하였습니다.").setViewName("common/errorPage");
+		}
+		
+		return mv;
+	}
+	
+	// 마이페이지 프로필 호출 메소드 (내 프로필페이지)
+	@RequestMapping("mProfile.do")
 	public ModelAndView profileViewPage(HttpSession session, ModelAndView mv) {
 		int mno = ((Member)session.getAttribute("loginUser")).getMno();
 		
@@ -48,8 +63,7 @@ public class MyPageController {
 	// 내 포스팅 리스트 호출 메소드
 	@ResponseBody
 	@RequestMapping(value="mpSPostingList.do", produces="application/json; charset=UTF-8")
-	public String selectPostingList(HttpSession session){
-		int mno = ((Member)session.getAttribute("loginUser")).getMno();
+	public String selectPostingList(int mno){
 		
 		ArrayList<Posting> list = mpService.selectPostingList(mno);
 		
@@ -61,8 +75,7 @@ public class MyPageController {
 	// 내 좋아요 포스팅 리스트 호출 메소드
 	@ResponseBody
 	@RequestMapping(value="mpSLikeList.do", produces="application/json; charset=UTF-8")
-	public String selectLikeList(HttpSession session, ModelAndView mv){
-		int mno = ((Member)session.getAttribute("loginUser")).getMno();
+	public String selectLikeList(int mno){
 		
 		ArrayList<Posting> list = mpService.selectLikeList(mno);
 		
@@ -74,8 +87,7 @@ public class MyPageController {
 	// 내 팬 리스트 호출 메소드
 	@ResponseBody
 	@RequestMapping(value="mpSFanList.do", produces="application/json; charset=UTF-8")
-	public String selectFanList(HttpSession session, ModelAndView mv){
-		int mno = ((Member)session.getAttribute("loginUser")).getMno();
+	public String selectFanList(int mno){
 		
 		ArrayList<Member> list = mpService.selectFanList(mno);
 		
@@ -87,8 +99,7 @@ public class MyPageController {
 	// 내 팔로잉 리스트 호출 메소드
 	@ResponseBody
 	@RequestMapping(value="mpSFwList.do", produces="application/json; charset=UTF-8")
-	public String selectFwList(HttpSession session, ModelAndView mv){
-		int mno = ((Member)session.getAttribute("loginUser")).getMno();
+	public String selectFwList(int mno){
 		
 		ArrayList<Member> list = mpService.selectFwList(mno);
 		
@@ -127,7 +138,8 @@ public class MyPageController {
 	
 	// 비밀번호 변경 메소드
 	@RequestMapping("mpUpdatePass.do")
-	public ModelAndView updatePass(Member m, ModelAndView mv) {
+	public ModelAndView updatePass(Member m, ModelAndView mv, HttpSession session) {
+		m.setMno(((Member)session.getAttribute("loginUser")).getMno());
 		int result = mpService.updatePass(m);
 		
 		if(result > 0) {
