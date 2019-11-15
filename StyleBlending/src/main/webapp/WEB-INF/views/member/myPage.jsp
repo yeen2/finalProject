@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,25 +27,25 @@
 			<!-- 메뉴바 -->
 			<ul class="nav nav-primary nav-tabs mt-3 d-flex flex-column flex-md-row">
 				<li class="nav-item">
-					<a class="nav-link active" data-toggle="tab" href="#photos"> 
+					<a class="nav-link active" data-toggle="tab" href="#updateProfile"> 
 					<i class="fa fa-edit"></i>
 						프로필 수정
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="tab" href="#power"> 
+					<a class="nav-link" data-toggle="tab" href="#ad"> 
 					<i class="fa fa-ad"></i>
 						광고 관리
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="modal" href="#updatePwd"> 
+					<a class="nav-link" data-toggle="modal" href="#updatePass"> 
 					<i class="fa fa-key"></i>
 						비밀번호 변경
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="modal" href="#deleteMem"> 
+					<a class="nav-link" data-toggle="modal" href="#deleteMember"> 
 					<i class="fa fa-ban"></i>
 						회원 탈퇴
 					</a>
@@ -55,7 +56,7 @@
 
 		<div class="profile-tabs tab-content">
 			<!-- 프로필 수정 탭 -->
-			<div class="tab-pane fade show active" id="photos">
+			<div class="tab-pane fade show active" id="updateProfile">
 				<div class="col-12 col-md-5" style="margin-left:auto; margin-right:auto;">
 					<div class="register-form" id="updateForm">
 					
@@ -63,22 +64,22 @@
 							<div class="form-group">
 								<label for="email">Email address</label>
 								<input type="email" class="form-control" id="email" name="email"
-									aria-describedby="emailHelp" placeholder="aaa@aaa.com" disabled>
+									aria-describedby="emailHelp" placeholder="${ loginUser.email }" disabled>
 							</div>
 							<div class="form-group">
 								<label for="nickname">Nickname</label>
 								<input type="text" class="form-control" id="nickname" name="nickname"
-									aria-describedby="nicknameHelp" placeholder="Enter nickname">
+									aria-describedby="nicknameHelp" value="${ loginUser.nickName }">
 								<small id="nicknameHelp" class="form-text text-danger">이미 사용중인 닉네임입니다</small>
 							</div>
 							<div class="form-group">
 								<label for="introduce">Introduce</label>
-								<textarea cols="52" rows="5" style="resize:none;"></textarea>
+								<textarea cols="52" rows="5" style="resize:none;">${ loginUser.profile }</textarea>
 							</div>
 							<div class="form-group" style="margin-bottom:50px;">
 								<label for="userPwd2">Location</label>
 								<input type="text" class="form-control"
-									id="userPwd2" name="userPwd2" placeholder="Enter location">
+									id="userPwd2" name="userPwd2" placeholder="${ loginUser.location }">
 							</div>
 							
 							<button type="submit" class="btn btn-block btn-dark" style="height:50px;">수정</button>
@@ -89,7 +90,7 @@
 
 			</div>
 			
-			<div class="tab-pane fade show" id="power">
+			<div class="tab-pane fade show" id="ad">
 				<div class="form-group">
 	              <div class="input-group">
 		              <form id="searchForm">
@@ -139,7 +140,7 @@
 			
 			<!-- 비밀번호 변경 탭 -->
 			<!-- 비밀번호 변경 모달창 -->
-			<div class="modal fade" id="updatePwd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal fade" id="updatePass" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			  <div class="modal-dialog modal-dialog-centered" role="document">
 			    <div class="modal-content">
 			      <div class="modal-header">
@@ -156,7 +157,7 @@
 					</div>
 					<div class="form-group">
 						<label for="newPwd1">새 비밀번호</label>
-						<input type="password" class="form-control" id="newPwd1" name="newPwd1" placeholder="새 비밀번호">
+						<input type="password" class="form-control" id="newPwd1" name="pass" placeholder="새 비밀번호">
 						<p><small id="newPwd1Help" class="form-text text-danger">형식에 맞지 않습니다.</small></p>
 					</div>
 					<div class="form-group">
@@ -176,7 +177,7 @@
 			
 			<!-- 회원 탈퇴 탭 -->
 			<!-- 회원 탈퇴 모달창 -->
-			<div class="modal fade" id="deleteMem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal fade" id="deleteMember" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			  <div class="modal-dialog modal-dialog-centered" role="document">
 			    <div class="modal-content">
 			      <div class="modal-header">
@@ -196,11 +197,11 @@
 			      <div align="center">
 				      <div class="form-group">
 				      	<label>이메일</label>
-				      	<p style="color:royalblue;">aaaaa123@bbbbb.com</p>
+				      	<p style="color:royalblue;">${ loginUser.email }</p>
 				      </div>
 				      <div class="form-group">
 				      	<label>닉네임</label>
-				      	<p style="color:royalblue;">AppleOrange</p>
+				      	<p style="color:royalblue;">${ loginUser.nickName }</p>
 				      </div>
 			      </div>
 			      <form>

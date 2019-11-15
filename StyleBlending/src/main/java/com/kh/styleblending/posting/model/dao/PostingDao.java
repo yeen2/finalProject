@@ -20,7 +20,7 @@ public class PostingDao {
 	}
 	
 	public int insertStyle(Style s) {
-		return sqlSession.insert("styleMapper.insertStyle", s);
+		return sqlSession.insert("postingMapper.insertStyle", s);
 	}
 	
 	

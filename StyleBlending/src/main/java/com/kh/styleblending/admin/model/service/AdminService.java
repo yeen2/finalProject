@@ -12,5 +12,8 @@ public interface AdminService {
 	
 	// 회원 목록 조회용
 	ArrayList<Member> selectMemberList(PageInfo pi);
+	
+	// 총 신고수 조회용
+	int getDeclareListCount();
 
 }

@@ -20,6 +20,16 @@
 		<result property="deleteDate" column="delete_Date"/>
 		<result property="isDelete" column="isDelete"/>
 	</resultMap>
+	
+	<resultMap id="DeclareResultSet" type="Declare">
+		<id property="dno" column="d_no"/>
+		<result property="mno" column="m_no"/>
+		<result property="pno" column="p_no"/>
+		<result property="category" column="category"/>
+		<result property="content" column="content"/>
+		<result property="enrollDate" column="enroll_Date"/>
+		<result property="isCheck" column="isCheck"/>
+	</resultMap>
 
 	<select id="getMemberListCount" resultType="_int">
 		select count(*)
@@ -29,11 +39,27 @@
 	<select id="selectMemberList" resultMap="MemberResultSet">
 		select *
 		from member
-		order by m_no desc
+		order by delete_date desc ,m_no desc
 	</select>
-
-
-
+	
+	<select id="getDeclareListCount" resultType="_int">
+		select count(*)
+		from (select *
+		from p_declare
+		union
+		select *
+		from b_declare)
+	</select>
+	
+	<select id="selectDeclareList" resultMap="DeclareResultSet">
+		select p.*,m.email
+		from p_declare p
+		join member m on(m.m_no=p.m_no)
+		union
+		select b.*,m.email
+		from b_declare b
+		join member m on(m.m_no=b.m_no)
+	</select>
 
 
 
