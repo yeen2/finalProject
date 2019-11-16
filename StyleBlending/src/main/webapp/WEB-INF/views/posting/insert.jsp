@@ -600,7 +600,7 @@
 		$("#addOpenBtn").click(function () {
 			console.log('위치클릭');
 			//$("#addModal").css('height','500px').css('width','800px');
-			$("#addModal").modal('show');
+			$("#addModal").modal('show');		
 		});
 	</script>
 	
@@ -678,40 +678,39 @@
 		});	
 	</script>
 	<script>
-
-		// 마커를 담을 배열입니다
-		kakao.maps.disableHD();
-		
 		var markers = [];
 		var map;
-
-		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-		mapOption = {
-			center : new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
-			level : 3
-		// 지도의 확대 레벨
-		};
-
-		// 지도를 생성합니다    
-		map = new kakao.maps.Map(mapContainer, mapOption);
+		var mapContainer;
 		
-		
-		setTimeout(function(){ 
-			map.relayout(); }, 0.01
-		);
+		$("#addModal").on('shown.bs.modal', function() {
+			// 마커를 담을 배열입니다
+			kakao.maps.disableHD();
+			mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+			mapOption = {
+				center : new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+				level : 3
+			// 지도의 확대 레벨
+			};
 
-		
+			// 지도를 생성합니다    
+			map = new kakao.maps.Map(mapContainer, mapOption);
+
+		});
+			
 		// 장소 검색 객체를 생성합니다
 		var ps = new kakao.maps.services.Places();
 
 		// 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
 		var infowindow = new kakao.maps.InfoWindow({
 			zIndex : 1
+			
 		});
 
+		
 		// 키워드로 장소를 검색합니다
 		searchPlaces();
-
+		
+		
 		// 키워드 검색을 요청하는 함수입니다
 		function searchPlaces() {
 
@@ -924,6 +923,8 @@
 				el.removeChild(el.lastChild);
 			}
 		}
+
+		
 
 		
 	</script>
