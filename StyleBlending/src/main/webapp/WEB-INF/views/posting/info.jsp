@@ -29,8 +29,9 @@
 				<br><br>
 				
 				<!-- 이미지 -->
-				<div>
-					<img class="img-fluid rounded" src="http://placehold.it/500x600" alt="">
+				<div style="width: 500px; height: 600px;">
+					<img class="img-fluid rounded" style="width: 100%; height: 100%;"
+						src="${ pageContext.servletContext.contextPath }/resources/upload/posting/${p.renameImg}" alt="">
 				</div>
 				<!-- 좋아요,신고-->
 				<div>
@@ -42,7 +43,7 @@
 				<hr>
 				
 				<!-- Post Content -->
-				<p>내용</p>
+				<p>${p.content }</p>
 				
 				<hr>
 
@@ -53,8 +54,13 @@
 				<!-- for문 돌릴떄, 전index랑 같으면  -->
 				<div id="replyForm">
 					<div class="media mb-4">
-						<img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50">
-						<div class="media-body">
+						<div style="width: 15%; height: 15%; border-radius: 50%;">
+							<img class="d-flex mr-3 rounded-circle" 
+								style="width: 60%; height: 60%; border-radius: 50%;"
+								src="http://placehold.it/50x50">
+						</div>
+						
+						<div style="width: 85%; height: 85%;">
 							<!-- 닉네임 -->
 							<h5 class="mt-0">Commenter Name</h5>
 							<!-- 댓글내용 -->
@@ -117,7 +123,7 @@
 			
 			
 <!------------------------------------------ 댓글 ajax -------------------------------------->
-			<script type="text/javascript">
+			<!-- <script type="text/javascript">
 				$(function() {
 					/* getReplyList();
 					
@@ -224,7 +230,7 @@
 				} //getReplyList end 
 				
 			</script>
-			
+			 -->
 			
 
 
@@ -236,10 +242,14 @@
 					<!-- 작성자 프로필 -->
 					<div class="media mb-4" style="margin: 0 !important;">
 						<!-- 이미지 -->
-						<img class="d-flex mr-3 rounded-circle"
-							src="http://placehold.it/60x60" alt="">
+						<div style="width: 25%; height: 25%; border-radius: 50%;">
+							<img class="d-flex mr-3 rounded-circle" 
+								style="width: 80%; height: 80%; border-radius: 50%;"
+								src="http://placehold.it/60x60" 
+								<%-- src="${ pageContext.servletContext.contextPath }/resources/upload/member/${p.profileImg}" --%>>
+						</div>
 						<!-- 정보 -->
-						<div class="media-body">
+						<div style="width: 75%; height: 75%;">
 							<div >
 								<!-- 닉네임 -->
 								<h6 style="display: inline-block;">${ p.nickName }</h6>
@@ -249,9 +259,9 @@
 							</div>
 							<div>
 								<!-- 자기소개 -->
-								<span style="fint-size:xx-small;">안녕하세요~</span> <br>
+								<span style="fint-size:xx-small;">${p.profile }</span> <br>
 								<i class="fas fa-map-marker-alt"></i>
-								<span style="fint-size:xx-small;">서울시 강남구</span>
+								<span style="fint-size:xx-small;">${p.mlocation }</span>
 							</div>
 							
 						</div>
@@ -279,7 +289,7 @@
 					<div class="card-body">
 						<div id="map" style="height: 300px;"></div>
 						<br>
-						<span>주소</span>
+						<span>${p.location }</span>
 					</div>
 				</div>
 				
@@ -360,7 +370,7 @@
 	
 		// 주소로 좌표를 검색합니다
 		geocoder.addressSearch(
-			//'${c.address}' + '${c.address_detail}',
+			'${p.location}',
 				function(result, status) {
 	
 					// 정상적으로 검색이 완료됐으면 

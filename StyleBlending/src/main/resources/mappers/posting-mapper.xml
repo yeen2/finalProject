@@ -22,6 +22,7 @@
 		<result property="nickName" column="nickname"/>
 		<result property="profile" column="profile"/>
 		<result property="mlocation" column="location_1"/>
+		<result property="profileImg" column="profile_img"/>
 	</resultMap>
 	
 	<resultMap id="postingReplyResultSet" type="PostingReply">
@@ -66,7 +67,7 @@
 		-->
 		select p_no, p.m_no, original_img, rename_img, img_path, content, hashtag, gender, p.location,
         		like_count, declare_count, p.enroll_date, p.update_date, p.isdelete,
-        		m.nickname, m.profile, m.location
+        		m.nickname, m.profile, m.location, m.profile_img
 		from posting p
 		join member m on(p.m_no=m.m_no)
 		where p_no=#{id}
