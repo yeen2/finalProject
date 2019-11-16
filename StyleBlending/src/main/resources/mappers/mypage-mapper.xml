@@ -65,13 +65,15 @@
 	</select>
 	
 	<select id="selectPostingList" resultMap="postingResultSet">
-		select *
-		from posting
+		select p.*, (select count(*) from p_like l where l.p_no=p.p_no)likeCount, 
+					(select count(*) from p_reply r where r.p_no=p.p_no)replyCount
+		from posting p
 		where m_no=#{mno}
 	</select>
 	
 	<select id="selectLikeList" resultMap="postingResultSet">
-		select *
+		select p.*, (select count(*) from p_like l where l.p_no=p.p_no)likeCount, 
+					(select count(*) from p_reply r where r.p_no=p.p_no)replyCount
 		from posting p
 		left join p_like l on(l.p_no=p.p_no)
 		where l.m_no=#{mno}
@@ -81,7 +83,7 @@
 		select m.*, (select count(*) from posting p where m.m_no=p.m_no)posCount, (select count(*) from p_like l where m.m_no=l.m_no)likeCount,
             (select count(*) from p_reply r left join posting p on(p.p_no=r.p_no) where p.p_no=r.p_no)replyCount
 		from member m
-		left join fan f on(m.m_no=f.me_no)
+		left join fan f on(m.m_no=f.you_no)
 		where f.me_no=#{mno}
 	</select>
 	
@@ -89,7 +91,7 @@
 		select m.*, (select count(*) from posting p where m.m_no=p.m_no)posCount, (select count(*) from p_like l where m.m_no=l.m_no)likeCount,
             (select count(*) from p_reply r left join posting p on(p.p_no=r.p_no) where p.p_no=r.p_no)replyCount
 		from member m
-		left join fan f on(m.m_no=f.you_no)
+		left join fan f on(m.m_no=f.me_no)
 		where f.you_no=#{mno}
 	</select>
 	
@@ -99,10 +101,17 @@
 		where m_no=#{mno}
 	</update>
 	
+	<select id="getAdListCount" resultType="_int">
+		select count(*)
+		from ad
+		where m_no=#{mno}
+	</select>
+	
 	<select id="selectAdList" resultMap="adResultSet">
 		select *
 		from ad
 		where m_no=#{mno}
+		order by enroll_date desc
 	</select>
 	
 	<update id="updatePass">

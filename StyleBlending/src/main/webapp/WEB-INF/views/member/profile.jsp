@@ -121,7 +121,7 @@
 		<div class="profile-tabs tab-content">
 			<!-- 내 업로드 사진목록 -->
 			<div class="tab-pane fade show active" id="board">
-				<div class="row" id="plus">
+				<div class="row" id="postingList">
 					
 				</div>
 				<div class="d-flex justify-content-center my-5">
@@ -131,7 +131,7 @@
 			
 			<!-- 내 좋아요 사진목록-->
 			<div class="tab-pane fade text-center" id="like">
-				<div class="row" id="plus2">
+				<div class="row" id="likeList">
 					
 				</div>
 				<div class="d-flex justify-content-center my-5">
@@ -142,7 +142,7 @@
 			<!-- 나를 팔로우한 친구 목록 -->
 			<div class="tab-pane fade text-center" id="fan">
 				<div align="center">
-					<div id="fList" style="width:50%;">
+					<div id="fanList" style="width:50%;">
 						
 					</div>
 				</div>
@@ -215,7 +215,7 @@
 							var $copy1 = $("<div>").attr("class", "col-12 col-md-4");
 							$copy1.append($("<div>").attr({"class":"square", "style":"background-image: url(" + "'resources/assets/img/" + list[i].renameImg + "');"}));
 							
-							$("#plus").append($copy1);
+							$("#postingList").append($copy1);
 						}
 					}
 				},
@@ -256,7 +256,7 @@
 							var $copy1 = $("<div>").attr("class", "col-12 col-md-4");
 							$copy1.append($("<div>").attr({"class":"square", "style":"background-image: url(" + "'resources/assets/img/" + list[i].renameImg + "');"}));
 							
-							$("#plus2").append($copy1);
+							$("likeList").append($copy1);
 						}
 					}
 				},
@@ -300,11 +300,11 @@
 							+"class='img-fluid rounded-circle shadow-lg' style='width: 50px;'>"
 							+"</div>"
 							+"<div style='float:left; margin-left:15px;'>"
-							+"<div style='text-align:left;'>닉네임</div>"
+							+"<div style='text-align:left;'>" + list[i].nickName + "</div>"
 							+"<div id='abc' style='text-align:left;'>"
-							+"<i class='fas fa-clipboard-list'></i><div>123</div>"
-							+"<i class='fas fa-heart'></i><div>123</div>"
-							+"<i class='fas fa-comment'></i><div>123</div>"
+							+"<i class='fas fa-clipboard-list'></i><div>" + list[i].posCount + "</div>"
+							+"<i class='fas fa-heart'></i><div>" + list[i].likeCount + "</div>"
+							+"<i class='fas fa-comment'></i><div>" + list[i].replyCount + "</div>"
 							+"</div>"
 							+"</div>"
 							+"<div style='float:left; margin-left:210px;'>"
@@ -313,7 +313,7 @@
 							+"</div>"
 							+"<hr>";
 							
-							$("#fList").append($fan1);
+							$("#fanList").append($fan1);
 						}
 					}
 				},
@@ -356,11 +356,11 @@
 							+"class='img-fluid rounded-circle shadow-lg' style='width: 50px;'>"
 							+"</div>"
 							+"<div style='float:left; margin-left:15px;'>"
-							+"<div style='text-align:left;'>닉네임</div>"
+							+"<div style='text-align:left;'>" + list[i].nickName + "</div>"
 							+"<div id='abc' style='text-align:left;'>"
-							+"<i class='fas fa-clipboard-list'></i><div>123</div>"
-							+"<i class='fas fa-heart'></i><div>123</div>"
-							+"<i class='fas fa-comment'></i><div>123</div>"
+							+"<i class='fas fa-clipboard-list'></i><div>" + list[i].posCount + "</div>"
+							+"<i class='fas fa-heart'></i><div>" + list[i].likeCount + "</div>"
+							+"<i class='fas fa-comment'></i><div>" + list[i].replyCount + "</div>"
 							+"</div>"
 							+"</div>"
 							+"<div style='float:left; margin-left:210px;'>"
