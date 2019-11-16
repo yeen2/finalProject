@@ -23,7 +23,8 @@ public class Member {
 	private String nickName;
 	private String profile;
 	private String location;
-	private String profileImg;
+	private String originalImg;
+	private String renameImg;
 	private String profilePath;
 	private Date enrollDate;
 	private Date updateDate;
