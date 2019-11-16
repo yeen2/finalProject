@@ -34,7 +34,7 @@
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="tab" href="#ad"> 
+					<a class="nav-link" data-toggle="tab" href="#ad" id="adBtn"> 
 					<i class="fa fa-ad"></i>
 						광고 관리
 					</a>
@@ -92,31 +92,17 @@
 
 			</div>
 			
+			<!-- 내 광고 리스트 탭 -->
 			<div class="tab-pane fade show" id="ad">
 				<div class="form-group">
 	              <div class="input-group">
-		              <form id="searchForm">
-			              <div>
-			                <select class="form form-control" id="category" name="category" style="width:100px;">
-			                	<option>---</option>
-			                	<option value="cafeName">업체명</option>
-			                	<option value="content">등록여부</option>
-			                </select>
-			              </div>
-			              <div>
-			                <input class="form-control" id="exampleInputAmount" type="text" id="search" name="search">
-			              </div>
-			              <div>
-			                <button class="btn btn-info" type="submit">검색</button>
-			              </div>
-		              </form>
 		              <div style="margin-left:auto;">
 		              	<button class="btn btn-info" type="button">광고 등록 신청</button>
 		              </div>
 	              </div>
 	            </div>
 	            <br>
-				<table class="table table-hover" id="listArea" style="text-align:center; table-layout:fixed">
+				<table class="table table-hover" id="listArea" style="text-align:center; table-layout:fixed;">
 				  <thead>
 				    <tr>
 				      <th scope="col">NO.</th>
@@ -129,16 +115,97 @@
 				  </thead>
 				  <tbody>
 				  	<tr>
-				  		<td>1</td>
-				  		<td>나이키</td>
-				  		<td>2019-09-01</td>
-				  		<td>2019-09-03</td>
-				  		<td>2019-10-03</td>
-				  		<td>등록종료</td>
+				  	<c:forEach items="${ list }" var="ad">
+				  		
+				  		<c:if test="${ empty list }">
+				  			<td scope="col" colspan="6">내 광고가 없습니다.</td>
+				  		</c:if>
+				  		
+				  		<td scope="col">${ ad.adno }</td>
+				  		<td scope="col">${ ad.name }</td>
+				  		<td scope="col">${ ad.enrollDate }</td>
+				  		<td scope="col">${ ad.startDate }</td>
+				  		<td scope="col">${ ad.endDate }</td>
+				  		<td scope="col">
+					  		<c:if test="${ ad.status == 1 }">
+					  		승인 대기
+					  		</c:if>
+					  		<c:if test="${ ad.status == 2 }">
+					  		등록중
+					  		</c:if>
+					  		<c:if test="${ ad.status == 3 }">
+					  		등록 종료
+					  		</c:if>
+				  		</td>
+				  		
+				  	</c:forEach>
 				  	</tr>
 				   </tbody>
 				</table>
+				
+				<!-- 페이징 처리 -->
+			    <ul class="pagination justify-content-center">
+			    	
+			    	<!-- 맨 처음으로 -->
+			    	<c:if test="${ pi.currentPage == 1 }">
+			    		<li class="page-item disabled"><a class="page-link" href="#">&lt;&lt;</a></li>
+			    	</c:if>
+			    	<c:if test="${ pi.currentPage != 1 }">
+			    		<c:url value="mpSAdList.do" var="start">
+			    			<c:param name="currentPage" value="${ pi.startPage }"/>
+			    		</c:url>
+			    		<li class="page-item"><a class="page-link" href="${ start }">&lt;&lt;</a></li>
+			    	</c:if>
+			    	
+			    	<!-- 이전으로 -->
+			    	<c:if test="${ pi.currentPage == 1 }">
+			    		<li class="page-item disabled"><a class="page-link" href="#">&lt;</a></li>
+			    	</c:if>
+			    	<c:if test="${ pi.currentPage != 1 }">
+			    		<c:url value="mpSAdList.do" var="before">
+			    			<c:param name="currentPage" value="${ pi.currentPage - 1 }"/>
+			    		</c:url>
+			    		<li class="page-item"><a class="page-link" href="${ before }">&lt;</a></li>
+			    	</c:if>
+			    	
+			    	<!-- 페이지 -->
+	           		<c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
+	           			<c:if test="${ p == pi.currentPage }">
+	           				<li class="page-item active"><a class="page-link">${ p }</a></li>
+	           			</c:if>
+	           			<c:if test="${ p != pi.currentPage }">
+	           				<c:url value="mpSAdList.do" var="page">
+	           					<c:param name="currentPage" value="${ p }"/>
+	           				</c:url>
+	           				<li class="page-item"><a class="page-link" href="${ page }">${ p }</a></li>
+	           			</c:if>
+	           		</c:forEach>
+	           		
+	           		<!-- 다음으로 -->
+	           		<c:if test="${ pi.currentPage == pi.maxPage }">
+	           			<li class="page-item disabled"><a class="page-link" href="#">&gt;</a></li>
+	           		</c:if>
+	           		<c:if test="${ pi.currentPage != pi.maxPage }">
+	           			<c:url value="mpSAdList.do" var="next">
+	           				<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
+	           			</c:url>
+	           			<li class="page-item"><a class="page-link" href="${ next }">&gt;</a></li>
+	           		</c:if>
+	           		
+	           		<!-- 맨 마지막으로 -->
+	           		<c:if test="${ pi.currentPage == pi.maxPage }">
+	           			<li class="page-item disabled"><a class="page-link" href="#">&gt;&gt;</a></li>
+	           		</c:if>
+	           		<c:if test="${ pi.currentPage != pi.maxPage }">
+	           			<c:url value="mpSAdList.do" var="end">
+	           				<c:param name="currentPage" value="${ pi.maxPage }"/>
+	           			</c:url>
+	           			<li class="page-item"><a class="page-link" href="${ end }">&gt;&gt;</a></li>
+	           		</c:if>
+	           		
+                </ul>
 			</div>
+			
 			
 			<!-- 비밀번호 변경 탭 -->
 			<!-- 비밀번호 변경 모달창 -->
@@ -229,7 +296,7 @@
 	</div>
 	
 	<script>
-		// 비밀번호 변경 유효성검사
+		<%-- 비밀번호 변경 유효성 검사 --%>
 		$("#pass").on("input", function(){
 			if($("#pass").val().length < 8){
 				$(".fCheck1").show();
@@ -283,7 +350,7 @@
 			return true;
 		}
 		
-		// 회원탈퇴 유효성검사
+		<%-- 회원탈퇴 유효성검사 --%>
 		$("#deleteBtn").on("click", function(){
 			if($("#userPass").val() == "${loginUser.pass}"){
 				location.href="mpDeleteMem.do";
@@ -292,6 +359,9 @@
 				$("#userPass").val("").focus();
 			}
 		});
+		
+		<%-- 내 광고 리스트 호출 --%>
+		
 	</script>
 
 

@@ -2,12 +2,14 @@ package com.kh.styleblending.member.model.dao;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.styleblending.admin.model.vo.Ad;
 import com.kh.styleblending.member.model.vo.Member;
+import com.kh.styleblending.member.model.vo.PageInfo;
 import com.kh.styleblending.posting.model.vo.Posting;
 
 @Repository("mpDao")
@@ -40,8 +42,15 @@ public class MyPageDao {
 		return sqlSession.update("mypageMapper.updateProfile", m);
 	}
 
-	public ArrayList<Ad> selectAdList(int mno) {
-		return (ArrayList)sqlSession.selectList("mypageMapper.selectAdList", mno);
+	public int getAdListCount(int mno) {
+		return sqlSession.selectOne("mypageMapper.getAdListCount", mno);
+	}
+	
+	public ArrayList<Ad> selectAdList(int mno, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("mypageMapper.selectAdList", mno, rowBounds);
 	}
 
 	public int updatePass(Member m) {

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -15,6 +16,8 @@ import com.google.gson.GsonBuilder;
 import com.kh.styleblending.admin.model.vo.Ad;
 import com.kh.styleblending.member.model.service.MyPageService;
 import com.kh.styleblending.member.model.vo.Member;
+import com.kh.styleblending.member.model.vo.PageInfo;
+import com.kh.styleblending.member.model.vo.Pagination;
 import com.kh.styleblending.posting.model.vo.Posting;
 
 @Controller
@@ -115,7 +118,7 @@ public class MyPageController {
 		
 		if(result > 0) {
 			session.setAttribute("loginUser", m);
-			mv.addObject("msg", "회원 정보 수정에 성공하였습니다.").setViewName("redirect:mpUpdatePage");
+			mv.addObject("msg", "회원 정보 수정에 성공하였습니다.").setViewName("member/myPage");
 		}else {
 			mv.addObject("msg", "회원 정보 수정에 실패하였습니다.").setViewName("common/errorPage");
 		}
@@ -124,16 +127,19 @@ public class MyPageController {
 	}
 	
 	// 내 광고 리스트 호출 메소드
-	@ResponseBody
 	@RequestMapping(value="mpSAdList.do", produces="application/json; charset=UTF-8")
-	public String selectAdList(HttpSession session, ModelAndView mv){
+	public ModelAndView selectAdList(HttpSession session, ModelAndView mv, @RequestParam(value="currentPage", defaultValue="1") int currentPage){
 		int mno = ((Member)session.getAttribute("loginUser")).getMno();
 		
-		ArrayList<Ad> list = mpService.selectAdList(mno);
+		int listCount = mpService.getAdListCount(mno);
 		
-		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		
-		return gson.toJson(list);
+		ArrayList<Ad> list = mpService.selectAdList(mno, pi);
+		
+		mv.addObject("pi", pi).addObject("list", list);
+		
+		return mv;
 	}
 	
 	// 비밀번호 변경 메소드
@@ -143,7 +149,7 @@ public class MyPageController {
 		int result = mpService.updatePass(m);
 		
 		if(result > 0) {
-			mv.addObject("msg", "비밀번호 변경에 성공하였습니다.").setViewName("redirect:mpUpdatePage.do");
+			mv.addObject("msg", "비밀번호 변경에 성공하였습니다.").setViewName("member/myPage");
 		}else {
 			mv.addObject("msg", "비밀번호 변경에 실패하였습니다.").setViewName("common/errorPage");
 		}
@@ -160,7 +166,7 @@ public class MyPageController {
 		
 		if(result > 0) {
 			session.invalidate();
-			mv.addObject("msg", "회원탈퇴에 성공하였습니다.").setViewName("redirect:home.do");
+			mv.addObject("msg", "회원탈퇴에 성공하였습니다.").setViewName("main");
 		}else {
 			mv.addObject("msg", "회원탈퇴에 실패하였습니다.").setViewName("common/errorPage");
 		}

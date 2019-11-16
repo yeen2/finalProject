@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.kh.styleblending.admin.model.vo.Ad;
 import com.kh.styleblending.member.model.dao.MyPageDao;
 import com.kh.styleblending.member.model.vo.Member;
+import com.kh.styleblending.member.model.vo.PageInfo;
 import com.kh.styleblending.posting.model.vo.Posting;
 
 @Service("mpService")
@@ -47,8 +48,13 @@ public class MyPageServiceImpl implements MyPageService {
 	}
 
 	@Override
-	public ArrayList<Ad> selectAdList(int mno) {
-		return mpDao.selectAdList(mno);
+	public int getAdListCount(int mno) {
+		return mpDao.getAdListCount(mno);
+	}
+	
+	@Override
+	public ArrayList<Ad> selectAdList(int mno, PageInfo pi) {
+		return mpDao.selectAdList(mno, pi);
 	}
 
 	@Override
@@ -60,5 +66,6 @@ public class MyPageServiceImpl implements MyPageService {
 	public int deleteMember(int mno) {
 		return mpDao.deleteMember(mno);
 	}
+
 
 }

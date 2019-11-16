@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.kh.styleblending.admin.model.vo.Ad;
 import com.kh.styleblending.member.model.vo.Member;
+import com.kh.styleblending.member.model.vo.PageInfo;
 import com.kh.styleblending.posting.model.vo.Posting;
 
 public interface MyPageService {
@@ -26,8 +27,11 @@ public interface MyPageService {
 	// 프로필 관리 - 프로필 수정
 	int updateProfile(Member m);
 	
+	// 프로필 관리 - 내 광고 리스트 카운트
+	int getAdListCount(int mno);
+	
 	// 프로필 관리 - 내 광고 리스트
-	ArrayList<Ad> selectAdList(int mno);
+	ArrayList<Ad> selectAdList(int mno, PageInfo pi);
 	
 	// 프로필 관리 - 비밀번호 변경
 	int updatePass(Member m);
