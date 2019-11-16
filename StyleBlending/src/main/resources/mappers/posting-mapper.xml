@@ -19,6 +19,9 @@
 		<result property="enrollDate" column="enroll_date"/>
 		<result property="updateDate" column="update_date"/>
 		<result property="isDelete" column="isdelete"/>
+		<result property="nickName" column="nickname"/>
+		<result property="profile" column="profile"/>
+		<result property="mlocation" column="location_1"/>
 	</resultMap>
 	
 	<resultMap id="postingReplyResultSet" type="PostingReply">
@@ -36,6 +39,13 @@
 		<result property="profileImg" column="profile_img"/>
 	</resultMap>
 	
+	<resultMap type="Style" id="styleResultSet">
+		<id property="sno" column="s_no"/>
+		<result property="pno" column="p_no"/>
+		<result property="cate" column="cate"/>
+		<result property="brand" column="brand"/>
+		<result property="color" column="color"/>
+	</resultMap>
 
 	<insert id="insertPosting">
 		insert into posting
@@ -49,21 +59,24 @@
 	</insert>
 	
 	<select id="selectOnePosting" resultMap="postingOneResultSet">
+		<!-- 
 		select * 
 		from posting
+		where p_no=#{id} 
+		-->
+		select p_no, p.m_no, original_img, rename_img, img_path, content, hashtag, gender, p.location,
+        		like_count, declare_count, p.enroll_date, p.update_date, p.isdelete,
+        		m.nickname, m.profile, m.location
+		from posting p
+		join member m on(p.m_no=m.m_no)
 		where p_no=#{id}
 	</select>
 	
 	<select id="selectReplyList" resultMap="postingReplyResultSet">
-		<!-- 
-		select * 
-		from p_reply
-		where p_no=#{pno} 
-		-->
 		select pr_no, p_no, m.m_no, content, r.enroll_date, r.update_date, prr_no, r_level, 
 				like_count, r.isdelete, m.nickname, m.profile_img
 		from p_reply r
-		join member m on(r.m_no = m.m_no);
+		join member m on(r.m_no = m.m_no)
 	</select>
 
 	<insert id="insertReply">
@@ -72,7 +85,11 @@
 				1, default, default)
 	</insert>
 	
-	
+	<select id="selectStyle" resultMap="styleResultSet">
+		select * 
+		from style
+		where p_no=#{id}
+	</select>
 	
 	
 	

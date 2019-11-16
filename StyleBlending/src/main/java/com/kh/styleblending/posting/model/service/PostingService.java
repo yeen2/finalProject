@@ -16,4 +16,6 @@ public interface PostingService {
 	
 	int insertReply(PostingReply r);
 	
+	ArrayList<Style> selectStyle(int id);
+	
 }

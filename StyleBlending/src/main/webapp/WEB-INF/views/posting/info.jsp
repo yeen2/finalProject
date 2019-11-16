@@ -242,7 +242,7 @@
 						<div class="media-body">
 							<div >
 								<!-- 닉네임 -->
-								<h6 style="display: inline-block;">닉네임</h6>
+								<h6 style="display: inline-block;">${ p.nickName }</h6>
 								<!-- 팬추가 버튼 -->
 								<button type="button" class="btn btn-dark btn-sm" 
 										style="float: right; margin-right: 20px;">+ fan</button>

@@ -31,6 +31,9 @@ public class Posting {
 	private Date updateDate;
 	private String isDelete;
 	
-	private List<Style> style;
+	//info - member테이블과 join
+	private String nickName;
+	private String profile;
+	private String mlocation;
 	
 }

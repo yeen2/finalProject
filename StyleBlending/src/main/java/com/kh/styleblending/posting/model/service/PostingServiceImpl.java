@@ -84,6 +84,10 @@ public class PostingServiceImpl implements PostingService {
 		return pDao.insertReply(r);
 	}
 	
+	@Override
+	public ArrayList<Style> selectStyle(int id) {
+		return pDao.selectStyle(id);
+	}
 	
 	
 	

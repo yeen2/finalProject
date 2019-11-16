@@ -35,9 +35,13 @@ public class PostingController {
 	@RequestMapping("pInfo.do")
 	public String info(int id, ModelAndView mv) {
 		Posting p = pService.selectOnePosting(id);
+		ArrayList<Style> s = pService.selectStyle(id);
+		
+		System.out.println(p);
+		System.out.println(s);
 		
 		if(p != null) {
-			mv.addObject("p", p).setViewName("posting/info");
+			mv.addObject("p", p).addObject("s", s).setViewName("posting/info");
 		}else {
 			mv.addObject("msg", "게시글 상세조회 실패").setViewName("common/errorPage");
 		}

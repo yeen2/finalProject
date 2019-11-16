@@ -36,4 +36,8 @@ public class PostingDao {
 		return sqlSession.insert("postingMapper.insertReply", r);
 	}
 	
+	public ArrayList<Style> selectStyle(int id) {
+		return (ArrayList)sqlSession.selectList("postingMapper.selectStyle", id);
+	}
+	
 }
