@@ -561,13 +561,10 @@ function select(){
 		});
 		
 		$("html").click(function(e){
-			if(${ !empty loginUser}){
-				if($("#show").css("display") == "block"){
-					if(!$("#display").has(e.target).length){
-						$("#show").hide();
-					}
+			if($("#show").css("display") == "block"){
+				if(!$("#display").has(e.target).length){
+					$("#show").hide();
 				}
-				
 			}
 		});
 		
