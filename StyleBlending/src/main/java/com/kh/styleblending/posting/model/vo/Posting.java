@@ -35,5 +35,6 @@ public class Posting {
 	private String nickName;
 	private String profile;
 	private String mlocation;
+	private String profileImg;
 	
 }

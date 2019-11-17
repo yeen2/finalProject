@@ -33,12 +33,11 @@ public class PostingController {
 	// 좋아요,신고 정보 보여주려면 loginUser정보 가져와야 함
 	// 매개변수로 int id 추가해야함
 	@RequestMapping("pInfo.do")
-	public String info(int id, ModelAndView mv) {
+	public ModelAndView info(int id, ModelAndView mv) {
 		Posting p = pService.selectOnePosting(id);
 		ArrayList<Style> s = pService.selectStyle(id);
 		
 		System.out.println(p);
-		System.out.println(s);
 		
 		if(p != null) {
 			mv.addObject("p", p).addObject("s", s).setViewName("posting/info");
@@ -46,7 +45,7 @@ public class PostingController {
 			mv.addObject("msg", "게시글 상세조회 실패").setViewName("common/errorPage");
 		}
 		
-		return "posting/info";
+		return mv;
 	}
 	
 	// 포스팅등록
