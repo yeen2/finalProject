@@ -22,4 +22,5 @@ public class Alarm {
 	private String status;
 	private String type;
 	
+	private int alarmCount;
 }

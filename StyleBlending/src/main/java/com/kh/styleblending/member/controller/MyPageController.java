@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.kh.styleblending.admin.model.vo.Ad;
 import com.kh.styleblending.member.model.service.MyPageService;
+import com.kh.styleblending.member.model.vo.Alarm;
 import com.kh.styleblending.member.model.vo.Member;
 import com.kh.styleblending.member.model.vo.PageInfo;
 import com.kh.styleblending.member.model.vo.Pagination;
@@ -173,6 +174,33 @@ public class MyPageController {
 		
 		return mv;
 	}
+	
+	// 알람 카운트 메소드
+	@ResponseBody
+	@RequestMapping("mpSAlarmCount.do")
+	public int selectAlarmCount(HttpSession session) {
+		int mno = ((Member)session.getAttribute("loginUser")).getMno();
+		
+		int result = mpService.selectAlarmCount(mno);
+		
+		if(result > 0) {
+			return result;
+		}else {
+			return 0;
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping("mpSAlarmList.do")
+	public String selectAlarmList(HttpSession session) {
+		int mno = ((Member)session.getAttribute("loginUser")).getMno();
+		
+		ArrayList<Alarm> list = mpService.selectAlarmList(mno);
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		
+		return gson.toJson(list);
+	}
 	/*
 	@RequestMapping("mpInsertFan")
 	public ModelAndView insertFan(int mno, ModelAndView mv) {
@@ -188,7 +216,11 @@ public class MyPageController {
 	/*
 	@RequestMapping("검색어 ajax 호출")
 	
-	@RequestMapping("알림 ajax 호출")
 	*/
 
+	// 테스트 메소드 (나중에 지울거)
+	@RequestMapping("test.do")
+	public String test() {
+		return "member/test";
+	}
 }

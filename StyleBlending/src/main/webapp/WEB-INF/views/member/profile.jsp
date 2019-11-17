@@ -38,7 +38,7 @@
 			<div class="row">
 				<!-- 프로필 이미지 -->
 				<div class="col-12 col-md-4 text-center">
-					<img src="${pageContext.request.contextPath}/resources/assets/img/lorde.png" alt="Raised circle image"
+					<img src="resources/assets/img/lorde.png" alt="Raised circle image"
 						class="img-fluid rounded-circle shadow-lg" style="width: 180px;">
 				</div>
 				
@@ -51,7 +51,7 @@
 						</div>
 						
 						<!-- 팔로워버튼  -->
-						<a href="#a" class="btn btn-dark ml-3"><i class="fa fa-plus"></i> <b>Fan</b></a>
+						<a href="test.do" class="btn btn-dark ml-3"><i class="fa fa-plus"></i> <b>Fan</b></a>
 						<%--<c:if test="${ loginUser.mno == m.mno }"> --%>
 							<button class="btn btn-info btn-pill" style="margin-left:400px;"onclick="location.href='mpUpdatePage.do';">
 							    <i class="fa fa-edit mr-1"></i>

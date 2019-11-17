@@ -3,6 +3,7 @@ package com.kh.styleblending.member.model.service;
 import java.util.ArrayList;
 
 import com.kh.styleblending.admin.model.vo.Ad;
+import com.kh.styleblending.member.model.vo.Alarm;
 import com.kh.styleblending.member.model.vo.Member;
 import com.kh.styleblending.member.model.vo.PageInfo;
 import com.kh.styleblending.posting.model.vo.Posting;
@@ -38,6 +39,12 @@ public interface MyPageService {
 	
 	// 프로필 관리 - 회원 탈퇴
 	int deleteMember(int mno);
+	
+	// 알람 카운트
+	int selectAlarmCount(int mno);
+	
+	// 알람 리스트
+	ArrayList<Alarm> selectAlarmList(int mno);
 	
 	
 

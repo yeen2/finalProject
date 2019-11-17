@@ -58,6 +58,17 @@
 		<result property="status" column="status"/>
 	</resultMap>
 	
+	<resultMap id="alarmResultSet" type="Alarm">
+		<id property="alno" column="al_no"/>
+		<result property="tno" column="t_no"/>
+		<result property="mno" column="m_no"/>
+		<result property="enrollDate" column="enroll_date"/>
+		<result property="status" column="status"/>
+		<result property="type" column="type"/>
+		
+		<result property="alarmCount" column="alarmCount"/>
+	</resultMap>
+	
 	<select id="selectProfile" resultMap="memberResultSet">
 		select m.*, (select count(*) from posting p where m.m_no=p.m_no)posCount, (select count(*) from fan f where f.me_no=m.m_no)fanCount,
 			(select count(*) from fan f where f.you_no=m.m_no)fwCount
@@ -126,5 +137,17 @@
 		set isdelete='Y'
 		where m_no=#{mno}
 	</update>
+	
+	<select id="selectAlarmCount" resultType="_int">
+		select count(*) 
+		from alarm 
+		where status=1
+	</select>
+	
+	<select id="selectAlarmList" resultMap="alarmResultSet">
+		select *
+		from alarm
+		where status=1 and m_no=#{mno}
+	</select>
 
 </mapper>
