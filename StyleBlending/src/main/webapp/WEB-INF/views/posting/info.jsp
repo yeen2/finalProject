@@ -368,10 +368,15 @@
 
 				<!-- Side Widget -->
 				<div class="card my-4">
-					<h5 class="card-header">Side Widget</h5>
-					<div class="card-body">You can put anything you want inside
-						of these side widgets. They are easy to use, and feature the new
-						Bootstrap 4 card containers!</div>
+					<h5 class="card-header">Spotlight</h5>
+					<div class="card-body">
+						<div style="width: 50%; height: 50%; border: 1px solid red;">
+							<img style="width: 100%; height: 100%;">
+						</div>
+						<div style="width: 50%; height: 50%; border: 1px solid red;">
+							<img style="width: 100%; height: 100%;">
+						</div>
+					</div>
 				</div>
 
 			</div>
