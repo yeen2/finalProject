@@ -1,6 +1,7 @@
 package com.kh.styleblending.admin.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.kh.styleblending.admin.model.vo.Declare;
 import com.kh.styleblending.admin.model.vo.PageInfo;
@@ -14,10 +15,16 @@ public interface AdminService {
 	// 회원 목록 조회용
 	ArrayList<Member> selectMemberList(PageInfo pi);
 	
-	// 총 신고수 조회용
-	int getDeclareListCount();
+	// 회원 탈퇴
+	int deleteMember(ArrayList mno);
 	
-	// 포스팅 신고목록 조회
-	ArrayList<Declare> selectDeclareList(PageInfo pi);
+	// 총 신고수 조회용
+	int getDeclareListCount(HashMap cate);
+	
+	// 신고목록 조회
+	ArrayList<Declare> selectDeclareList(PageInfo pi, HashMap cate);
+	
+	// 신고게시물 삭제
+	int deleteDeclareBoard(ArrayList dno);
 
 }
