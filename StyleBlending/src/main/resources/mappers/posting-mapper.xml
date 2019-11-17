@@ -65,9 +65,9 @@
 		from posting
 		where p_no=#{id} 
 		-->
-		select p_no, p.m_no, original_img, rename_img, img_path, content, hashtag, gender, p.location,
+		select p_no, p.m_no, p.original_img, p.rename_img, img_path, content, hashtag, gender, p.location,
         		like_count, declare_count, p.enroll_date, p.update_date, p.isdelete,
-        		m.nickname, m.profile, m.location, m.profile_img
+        		m.nickname, m.profile, m.location, m.rename_img
 		from posting p
 		join member m on(p.m_no=m.m_no)
 		where p_no=#{id}
@@ -75,7 +75,7 @@
 	
 	<select id="selectReplyList" resultMap="postingReplyResultSet">
 		select pr_no, p_no, m.m_no, content, r.enroll_date, r.update_date, prr_no, r_level, 
-				like_count, r.isdelete, m.nickname, m.profile_img
+				like_count, r.isdelete, m.nickname, m.rename_img
 		from p_reply r
 		join member m on(r.m_no = m.m_no)
 	</select>

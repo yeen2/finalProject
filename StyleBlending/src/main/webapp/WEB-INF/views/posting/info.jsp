@@ -4,6 +4,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css">
+	.replyForm_imgDiv{
+		width: 10%; height: 10%; border-radius: 50%;
+	}
+	.replyForm_img{
+		width: 70%; height: 70%; border-radius: 50%;
+	}
+	.replyForm_contentDiv{
+		width: 90%; height: 90%;
+	}
+	
+</style>
 </head>
 <body>
 
@@ -52,26 +64,25 @@
 				<br>
 				
 				<!-- for문 돌릴떄, 전index랑 같으면  -->
-				<div id="replyForm">
-					<div class="media mb-4">
-						<div style="width: 15%; height: 15%; border-radius: 50%;">
-							<img class="d-flex mr-3 rounded-circle" 
-								style="width: 60%; height: 60%; border-radius: 50%;"
-								src="http://placehold.it/50x50">
+				<div id="replyForm" class="replyForm">
+					<!-- <div class="media mb-4 replyForm_div">
+						<div class="replyForm_imgDiv">
+							<img class="replyForm_img" src="http://placehold.it/50x50">
 						</div>
 						
-						<div style="width: 85%; height: 85%;">
-							<!-- 닉네임 -->
-							<h5 class="mt-0">Commenter Name</h5>
-							<!-- 댓글내용 -->
-							조아용
-							<!-- 대댓글달기  -->
+						<div class="replyForm_contentDiv">
+							닉네임
+							<h5 class="mt-0 replyForm_nickname"></h5>
+							댓글내용
+							<span class="replyForm_content"></span>
+							대댓글달기 
 							<br>
-							3<i class="fas fa-caret-up"></i>
-							· <a href="#"><i style="color: gray;">reply</i></a>
-							· 1 day ago
+							<span class="replyForm_likecount"></span>
+							<i class="fas fa-caret-up"></i>
+							· <a href="#" class="rrBtn"><i style="color: gray;">reply</i></a>
+							· <span class="replyForm_date"></span> day ago
 						</div>
-					</div>
+					</div> -->
 	
 					<!-- 댓글 -->
 					<!-- <div class="media mb-4">
@@ -100,7 +111,7 @@
 							</div>
 	
 						</div>
-					</div> -->
+					</div> --> 
 		
  				</div>  <!-- #replyForm end -->
  
@@ -123,14 +134,15 @@
 			
 			
 <!------------------------------------------ 댓글 ajax -------------------------------------->
-			<!-- <script type="text/javascript">
+			<script type="text/javascript">
 				$(function() {
-					/* getReplyList();
+					/* 
+					getReplyList();
 					
 					setInterval(function(){
 						getReplyList();
-					}, 5000); */
-					
+					}, 5000); 
+					 */
 					
 					// 댓글폼 클릭시 로그인되있는지 확인
 					$("#rContent").on("click", function () {
@@ -142,6 +154,15 @@
 							
 						}else{ // 로그인 되어있을때
 							$("#rBtn").attr("disabled", false);
+
+						}
+					});
+					
+					// 댓글내용 있는지 확인
+					$("#rBtn").on("click", function(){
+						if($("#rContent").val().length == 0){
+							alert("댓글내용을 입력해 주세요");
+						}else{
 							
 							var content = $("#rContent").val();
 							var pno = ${p.pno};
@@ -169,25 +190,19 @@
 						}
 					});
 					
-					// 댓글내용 있는지 확인
-					$("#rBtn").on("click", function(){
-						if($("#rContent").val().length == 0){
-							alert("댓글내용을 입력해 주세요");
-						}
-					});
-					
 				});
 				
-
+				//reply 전체리스트 불러오기
 				function getReplyList(){
-					
+					console.log("select리플 들어옴");
 					$.ajax({
 						url:"pReplyList.do",
 						data:{pno:${p.pno}},
 						dataType:"json",
 						success:function(data){
-							//console.log(data);
 							
+							console.log(data);
+
 							$replyForm = $("#replyForm");
 							$replyForm.html("");
 							
@@ -198,7 +213,7 @@
 								// 반복문을 통해서 한 행씩 추가될 수 있도록
 								$.each(data, function(index, value){ // value == data[index]
 									// 작성자 내용 작성일
-									$tr = $("<tr></tr>");
+									/* $tr = $("<tr></tr>");
 									
 									$writerTd = $("<td width='100'></td>").text(value.writer);
 									$contentTd = $("<td></td>").text(value.content);
@@ -208,12 +223,34 @@
 									$tr.append($contentTd);
 									$tr.append($dateTd);
 									
-									$tbody.append($tr);
-								
+									$tbody.append($tr); */
+									console.log("댓글잇움 나와야댄");
+									console.log(value.nickName);
+									console.log(value.content);
+									
+									$replyForm_div = $("<div class='media mb-4 replyForm_div'></div>");
+									
+									$replyForm_imgDiv = $("<div class='replyForm_imgDiv'></div>");	
+									$replyForm_contentDiv = $("<div class='replyForm_contentDiv'></div>");
+									
+									$img = $("<img class='replyForm_img'>").attr("src",'http://placehold.it/50x50');
+									$nickname = $("<h5 class='mt-0 replyForm_nickname'></h5>").text(value.nickName);
+									$rcontent = $("<span class='replyForm_content'></span><br>").text(value.content);
+									$likecount = $("<span class='replyForm_likecount'></span>").text(value.likeCount);
+									$likeImg = $("<i class='fas fa-caret-up'></i>");
+									$rrBtn = $("<a href=''#' class='rrBtn'><i style='color: gray;'>reply</i></a>");
+									$date = $("<span class='replyForm_date'></span>").text(value.enrollDate);
+									
+									$replyForm_imgDiv.append($img);
+									$replyForm_contentDiv.append($nickname).append($rcontent).append($likecount)
+													.append($likeImg);
+									
+									$replyForm_div.append($replyForm_imgDiv).append($replyForm_contentDiv);
+									
 								});
 								
 							}else{ // 댓글이 존재하지 않을 경우
-								
+								console.log("댓글없움");
 								$tr = $("<tr></tr>");
 								
 								$contentTd = $("<td colspan='3'></td>").text("등록된 댓글이 없습니다.");
@@ -230,7 +267,6 @@
 				} //getReplyList end 
 				
 			</script>
-			 -->
 			
 
 
@@ -243,10 +279,9 @@
 					<div class="media mb-4" style="margin: 0 !important;">
 						<!-- 이미지 -->
 						<div style="width: 25%; height: 25%; border-radius: 50%;">
-							<img class="d-flex mr-3 rounded-circle" 
-								style="width: 80%; height: 80%; border-radius: 50%;"
+							<img style="width: 80%; height: 80%; border-radius: 50%;"
 								src="http://placehold.it/60x60" 
-								<%-- src="${ pageContext.servletContext.contextPath }/resources/upload/member/${p.profileImg}" --%>>
+								<%-- src="${ pageContext.servletContext.contextPath }/resources/upload/member/${p.rename_img}" --%>>
 						</div>
 						<!-- 정보 -->
 						<div style="width: 75%; height: 75%;">
