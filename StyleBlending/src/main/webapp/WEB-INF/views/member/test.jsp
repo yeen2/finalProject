@@ -16,7 +16,7 @@
 	#addAlarm1{width:100%; height:inherit; background:lightgray; border:2px solid white;}
 	#addAlarmImg1{padding:10px 0 0 10px; width:17%; height:auto; display:inline-block;}
 	#addAlarmImg1 img{width:50px; height:50px; border-radius:1.5em;}
-	#addAlarmNick1{display:inline-block; width:50%;}
+	#addAlarmNick1{display:inline-block; width:50%; margin-left:10px;}
 	#addAlarmDate1{display:inline-block; width:25%; text-align:right;}
 	#addAlarmCon1{padding:10px 10px 10px 10px;}
 	#allDelete:hover{cursor:pointer;}
@@ -31,7 +31,7 @@
 	<!-- 알람창!!! -->
 	<div>
 	<li class="nav-item">
-		<div style="position:relative;">
+		<div style="position:relative; margin-left:700px; margin-top:-100px;" id="display">
 			<a class="nav-link" id="down"> 
 				<i class="far fa-bell fa-lg" style="font-size: 25px;"></i>
 			</a>
@@ -39,7 +39,7 @@
 					style="display:none; pointer-events:none; position:absolute; bottom:19px; left:26px;"></span>
 			
 			<div style="position:absolute; width:400px; max-height:255px; background:white; display:none; box-shadow:0 5px 10px rgba(0, 0, 0, 0.5);
-			overflow-y:auto; overflow-x:hidden; left:-180px; z-index:1000;" id="show">
+			overflow-y:auto; overflow-x:hidden; left:-180px; z-index:1000;" id="show" class="show">
 				<div style="padding:10px 10px 10px 10px;" align="right">
 					<a id="allDelete" data-toggle="tooltip" data-placement="bottom" title="모두 읽음으로 표시"><i style="font-size:30px;" class="far fa-envelope-open"></i></a>
 				</div>
@@ -259,28 +259,31 @@
 			style="background-image: url('resources/assets/img/profile6.jpg');"></div>
 	</div>
 	<!-- 좋아요리스트 -->
-	
+	<script>
+	/* $(function(){
+		$("#alarmBtn").click(function(){
+			if($("#alarmDiv").css("display") == "block"){
+				$("#alarmDiv").css("display", "none");
+			}else{
+				$("#alarmDiv").css("display", "block");
+			}
+			
+		});
+		
+	}); */
+	</script>
 	
 	
 	<script>
-		/* $(function(){
-			$("#alarmBtn").click(function(){
-				if($("#alarmDiv").css("display") == "block"){
-					$("#alarmDiv").css("display", "none");
-				}else{
-					$("#alarmDiv").css("display", "block");
-				}
-				
-			});
-			
-		}); */
-		
 		$(function(){
-			alarmCheck();
-			
-			setInterval(function(){
+			if(${loginUser != null}){
 				alarmCheck();
-			}, 5000);
+				
+				setInterval(function(){
+					alarmCheck();
+				}, 5000);
+				
+			}
 		});
 		
 		function alarmCheck(){
@@ -342,10 +345,21 @@
 		$("#down").on("click", function(){
 			if($("#show").css("display") == "block"){
 				$("#show").hide();
+				
 			}else{
 				$("#show").show();
 			}
 		});
+		
+		$("html").click(function(e){
+			if($("#show").css("display") == "block"){
+				if(!$("#display").has(e.target).length){
+					$("#show").hide();
+				}
+			}
+		});
+		
+		
 	</script>
 </body>
 </html>
