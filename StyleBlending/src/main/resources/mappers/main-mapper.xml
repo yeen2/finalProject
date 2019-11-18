@@ -3,13 +3,37 @@
 "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="mainMapper">
-
-
-
-
-
-
-
+	<resultMap id="mainResultSet" type="Posting">
+		
+		<id property="pno" column="p_no"/>
+		<result property="mno" column="m_no"/>
+		<result property="originalImg" column="original_img"/>
+		<result property="renameImg" column="rename_img"/>
+		<result property="imgPath" column="img_path"/>
+		<result property="content" column="content"/>
+		<result property="hashtag" column="hashtag"/>
+		<result property="gender" column="gender"/>
+		<result property="location" column="location"/>
+		<result property="likeCount" column="like_count"/>
+		<result property="declareCount" column="declare_count"/>
+		<result property="enrollDate" column="enroll_date"/>
+		<result property="updateDate" column="update_date"/>
+		<result property="isDelete" column="isdelete"/>
+		<result property="nickName" column="nickname"/>
+		<result property="profile" column="profile"/>
+		<result property="mlocation" column="location"/>
+		<result property="profileImg" column="profile_path"/>
+	
+	</resultMap>
+	
+	
+	<select id="selectFourWrap" resultMap="mainResultSet">
+		<![CDATA[
+		select *
+		from (select * from posting join member using(m_no) order by like_count desc)
+		where rownum <=4
+		]]>
+	</select>
 
 
 </mapper>
