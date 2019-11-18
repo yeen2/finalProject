@@ -93,6 +93,12 @@
 		where p_no=#{id}
 	</select>
 	
+	<!-- 대댓글 -->
+	<insert id="insertReReply">
+		insert into p_reply
+		values(seq_p_reply.nextval, #{pno}, #{mno}, #{content}, sysdate, null, #{prno},
+				2, default, default)
+	</insert>
 	
 	
 	

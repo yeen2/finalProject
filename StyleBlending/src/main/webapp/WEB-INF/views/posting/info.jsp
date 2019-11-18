@@ -253,18 +253,6 @@
 								
 								// 반복문을 통해서 한 행씩 추가될 수 있도록
 								$.each(data, function(index, value){ // value == data[index]
-									// 작성자 내용 작성일
-									/* $tr = $("<tr></tr>");
-									
-									$writerTd = $("<td width='100'></td>").text(value.writer);
-									$contentTd = $("<td></td>").text(value.content);
-									$dateTd = $("<td></td>").text(value.createDate);
-									
-									$tr.append($writerTd);
-									$tr.append($contentTd);
-									$tr.append($dateTd);
-									
-									$tbody.append($tr); */
 
 									$replyForm = $("#replyForm");
 									//리플하나의 큰div
@@ -286,13 +274,14 @@
 									
 									// 대댓글폼
 									$replyForm_rrForm = $("<br><br><div class='replyForm_rrForm' style='display: none;'></div>");
+									$prno = $("<input type='hidden'>").text(value.prno);
 									$rrContent = $("<textarea id='rrContent' class='rrContent'></textarea>");
 									$rrSubmit = $("<button class='btn btn-dark rrSubmit' id='rrSubmit'>등록</button>");
 									
 									if(value.level == 1){ //댓글
 										$replyForm_imgDiv.append($img);
 										//대댓글
-										$replyForm_rrForm.append($rrContent).append($rrSubmit);
+										$replyForm_rrForm.append($prno).append($rrContent).append($rrSubmit);
 										//컨텐츠
 										$replyForm_contentDiv.append($nickname).append($rcontent).append('<br>').append($likecount)
 														.append($likeImg).append($rrBtn).append($date).append($replyForm_rrForm);
@@ -347,15 +336,45 @@
 						tt.toggle();
 					}
 				});
+				
+				
+				// 대댓글내용 있는지 확인
+				$(document).on("click",".rrSubmit" , function(){
+					var content = $(this).prev().val(); //댓글내용
+					var prno = $(this).prev().prev().text();
+					
+					if(content == 0){
+						alert("내용을 입력해 주세요");
+					}else{
+						
+						var pno = ${p.pno};
+						var mno = "${loginUser.mno}"; // var writer = admin;
+						
+						// 대댓글 insert
+						$.ajax({
+							url:"pReReplyInsert.do",
+							data:{content:content, 
+								  prno:prno,	
+								  pno:pno,
+								  mno:mno},
+							success:function(data){
+								
+								if(data == "success"){
+									getReplyList();
+									$(".rrContent").val("");
+								}else{
+									alert("댓글 작성 실패");
+								}
+								
+							},error:function(){
+								console.log("ajax 통신 실패");
+							}
+						});
+					}
+				});
+				
 			
 			</script>
-
-
-
-
-
-
-
 
 
 

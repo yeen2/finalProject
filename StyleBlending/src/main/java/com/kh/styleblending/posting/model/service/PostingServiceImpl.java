@@ -89,7 +89,10 @@ public class PostingServiceImpl implements PostingService {
 		return pDao.selectStyle(id);
 	}
 	
-	
+	@Override
+	public int insertReReply(PostingReply r) {
+		return pDao.insertReReply(r);
+	}
 	
 	
 	

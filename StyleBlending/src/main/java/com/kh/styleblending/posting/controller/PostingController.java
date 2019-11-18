@@ -128,7 +128,7 @@ public class PostingController {
 	}
 		
 	
-	// 댓글
+	// 댓글 목록 가져오기
 	@ResponseBody
 	@RequestMapping(value="pReplyList.do", produces="application/json; charset=UTF-8")
 	public String replyList(int pno) {
@@ -140,7 +140,7 @@ public class PostingController {
 		
 	}
 	
-	
+	// 댓글 등록
 	@ResponseBody
 	@RequestMapping("pReplyInsert.do")
 	public String insertReply(PostingReply r) {
@@ -155,7 +155,20 @@ public class PostingController {
 		}
 	}
 	
-	
+	// 대댓글 등록
+	@ResponseBody
+	@RequestMapping("pReReplyInsert.do")
+	public String insertReReply(PostingReply r) {
+		//System.out.println(r);
+		
+		int result = pService.insertReReply(r);
+		
+		if(result > 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
 	
 	
 	

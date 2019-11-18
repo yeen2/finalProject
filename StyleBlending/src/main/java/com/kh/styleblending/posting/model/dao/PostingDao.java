@@ -40,4 +40,8 @@ public class PostingDao {
 		return (ArrayList)sqlSession.selectList("postingMapper.selectStyle", id);
 	}
 	
+	public int insertReReply(PostingReply r) {
+		return sqlSession.insert("postingMapper.insertReReply", r);
+	}
+	
 }
