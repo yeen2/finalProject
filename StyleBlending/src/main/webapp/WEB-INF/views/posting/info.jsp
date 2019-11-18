@@ -20,6 +20,35 @@
 	.replyForm_nickname {
 		font-weight: bold;
 	}
+	.rrBtn{
+		color:gray;
+		font-style : oblique;
+		margin-left: 8px;
+	}
+	.rrBtn:hover{
+		text-decoration : none;
+		color : lightblue;
+		cursor: pointer;
+	}
+	.replyForm_date {
+		margin-left: 8px;
+	}
+	textarea{
+		resize: none;
+	}
+	.rrContent {
+		border: 1px solid #787878;
+		border-radius: .25rem;
+    	padding: .5rem 1rem;
+    	border-color : none;
+    	width: 550px;
+    	rows : 3;
+	}
+	.rrContent:focus {outline:none;}
+	.rrSubmit {
+		margin-bottom: 30px;
+		margin-left: 10px;
+	}
 
 </style>
 </head>
@@ -81,14 +110,21 @@
 							<h5 class="mt-0 replyForm_nickname"></h5>
 							댓글내용
 							<span class="replyForm_content"></span>
-							대댓글달기 
 							<br>
 							<span class="replyForm_likecount"></span>
 							<i class="fas fa-caret-up"></i>
-							· <a href="#" class="rrBtn"><i style="color: gray;">reply</i></a>
+							· <a class="rrBtn">reply</a>
 							· <span class="replyForm_date"></span> day ago
+							
+							대댓글
+							<br><br>
+							<div class="replyForm_rrForm">
+								<textarea rows="3" id="rrContent" class="rrContent" 
+										style="resize: none; display: inline;"></textarea>
+								<button class="btn btn-dark rrSubmit" id="rrSubmit" >등록</button>
+							</div>
 						</div>
-					</div> 
+					</div>  -->
 	
 					<!-- 댓글 -->
 					<!-- <div class="media mb-4">
@@ -129,7 +165,7 @@
 								<textarea class="form-control" rows="3" id="rContent" placeholder="Post comment.."
 										style="resize: none;"></textarea>
 							</div>
-							<button class="btn btn-dark" id="rBtn" disabled>Post comment</button>
+							<button class="btn btn-dark" id="rBtn"disabled>Post comment</button>
 						</div>
 					</div>
 				</div> <!-- #replyTextarea end -->
@@ -142,13 +178,13 @@
 <!------------------------------------------ 댓글 ajax -------------------------------------->
 			<script type="text/javascript">
 				$(function() {
-					
+
 					getReplyList();
 					
 					setInterval(function(){
 						getReplyList();
-					}, 5000); 
-					
+					}, 50000); 
+
 					
 					// 댓글폼 클릭시 로그인되있는지 확인
 					$("#rContent").on("click", function () {
@@ -160,7 +196,6 @@
 							
 						}else{ // 로그인 되어있을때
 							$("#rBtn").attr("disabled", false);
-
 						}
 					});
 					
@@ -207,7 +242,7 @@
 						dataType:"json",
 						success:function(data){
 							
-							console.log(data);
+							//console.log(data);
 
 							$replyForm = $("#replyForm");
 							$replyForm.html("");
@@ -246,14 +281,22 @@
 									$rcontent = $("<span class='replyForm_content'></span>").text(value.content);
 									$likecount = $("<span class='replyForm_likecount'></span>").text(value.likeCount);
 									$likeImg = $("<i class='fas fa-caret-up'></i>");
-									$rrBtn = $("<a href=''#' class='rrBtn'><i style='color: gray;'>reply </i></a>");
+									$rrBtn = $("<a class='rrBtn'>reply</a>");
 									$date = $("<span class='replyForm_date'></span>").text(value.enrollDate);
+									
+									// 대댓글폼
+									$replyForm_rrForm = $("<br><br><div class='replyForm_rrForm' style='display: none;'></div>");
+									$rrContent = $("<textarea id='rrContent' class='rrContent'></textarea>");
+									$rrSubmit = $("<button class='btn btn-dark rrSubmit' id='rrSubmit'>등록</button>");
 									
 									if(value.level == 1){ //댓글
 										$replyForm_imgDiv.append($img);
+										//대댓글
+										$replyForm_rrForm.append($rrContent).append($rrSubmit);
+										//컨텐츠
 										$replyForm_contentDiv.append($nickname).append($rcontent).append('<br>').append($likecount)
-														.append($likeImg).append($rrBtn).append($date);
-										
+														.append($likeImg).append($rrBtn).append($date).append($replyForm_rrForm);
+
 										$replyForm_div.append($replyForm_imgDiv).append($replyForm_contentDiv);
 										
 										$replyForm.append($replyForm_div);
@@ -272,13 +315,9 @@
 								});
 								
 							}else{ // 댓글이 존재하지 않을 경우
-								console.log("댓글없움");
-								$tr = $("<tr></tr>");
-								
-								$contentTd = $("<td colspan='3'></td>").text("등록된 댓글이 없습니다.");
-								$tr.append($contentTd);
-								
-								$tbody.append($tr);
+								//console.log("댓글없움");
+								$replyForm = $("#replyForm");
+								$replyForm.append("<span>등록된 댓글이 없습니다.</span>");
 							}
 							
 						},
@@ -290,6 +329,34 @@
 				
 			</script>
 			
+<!------------------------------------------ 대댓글 ajax  ------------------------------------>
+
+			<script>
+				// reply쓰는 버튼 누를때 textarea 보여주기
+				$(document).on("click",".rrBtn", function () {
+					
+					var loginUser = "${loginUser.email}";
+					var tt = $(this).parent().children(".replyForm_rrForm");
+					//console.log(tt);
+					
+					if(loginUser == null || loginUser == ""){
+						alert("로그인 후 이용 가능하세요");
+						return;
+						
+					}else{ // 로그인 되어있을때
+						tt.toggle();
+					}
+				});
+			
+			</script>
+
+
+
+
+
+
+
+
 
 
 			<!-- 오른쪽 -->

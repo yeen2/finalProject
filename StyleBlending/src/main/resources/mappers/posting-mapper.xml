@@ -78,6 +78,7 @@
 				like_count, r.isdelete, m.nickname, m.rename_img
 		from p_reply r
 		join member m on(r.m_no = m.m_no)
+		order by prr_no
 	</select>
 
 	<insert id="insertReply">

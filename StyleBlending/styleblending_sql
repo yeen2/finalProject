@@ -844,18 +844,18 @@ insert into alarm values(seq_alarm.nextval, 2, 1, sysdate, default, 1);
 
 -- 포스팅 댓글, 대댓글
 insert into p_reply
-values(100, 1, 1, '댓글1',sysdate, null, 100, 1, default, default);
+values(seq_p_reply.nextval, 1, 1, '댓글1',sysdate, null, seq_p_reply.currval, 1, default, default);
 insert into p_reply
-values(101, 1, 1, '댓글2',sysdate, null, 101, 1, default, default);
+values(seq_p_reply.nextval, 1, 1, '댓글2',sysdate, null, seq_p_reply.currval, 1, default, default);
 insert into p_reply
-values(102, 1, 1, '댓글3',sysdate, null, 102, 1, default, default);
+values(seq_p_reply.nextval, 1, 1, '댓글3',sysdate, null, seq_p_reply.currval, 1, default, default);
 
 insert into p_reply
-values(103, 1, 1, '대댓글1',sysdate, null, 100, 2, default, default);
+values(seq_p_reply.nextval, 1, 1, '대댓글1',sysdate, null, 1, 2, default, default);
 insert into p_reply
-values(104, 1, 1, '대댓글2',sysdate, null, 101, 2, default, default);
+values(seq_p_reply.nextval, 1, 1, '대댓글2',sysdate, null, 2, 2, default, default);
 insert into p_reply
-values(105, 1, 1, '대댓글3',sysdate, null, 100, 2, default, default);
+values(seq_p_reply.nextval, 1, 1, '대댓글3',sysdate, null, 3, 2, default, default);
 
 commit;
 
