@@ -37,4 +37,8 @@ public class Posting {
 	private String mlocation;
 	private String profileImg;
 	
+	// 로그인한 회원이 좋아요 했는지, 안했는지 확인
+	private int loginLike;
+	private int loginDeclare;
+	
 }
