@@ -44,6 +44,9 @@ public class Posting {
 	// mypage
 	private int replyCount;
 	
+	// 로그인한 session-mno 불러오기
+	private int loginmno;
+	
 	
 	
 	
