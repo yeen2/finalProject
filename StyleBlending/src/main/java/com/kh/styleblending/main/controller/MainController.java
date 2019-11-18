@@ -10,10 +10,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 import com.kh.styleblending.main.model.service.MainService;
 import com.kh.styleblending.main.model.vo.Live;
 import com.kh.styleblending.main.model.vo.Notice;
+import com.kh.styleblending.posting.model.vo.Posting;
 
 @Controller
 public class MainController {
@@ -42,7 +44,7 @@ public class MainController {
 	}
 	@RequestMapping("mainNoticeList.do")
 	public void replyList(HttpServletResponse response) throws JsonIOException, IOException {
-		
+
 		ArrayList<Notice> list = new ArrayList<>();
 		list.add(new Notice(1,"[공지] 이달의 업데이트 안내 ","안녕하세요 스타일블랜딩입니다1. ","2019-10-03"));
 		list.add(new Notice(2,"[공지] 개인정보처리방침 일부 변경 안내 ","안녕하세요  스타일블랜딩입니다2. ","2019-10-23"));
@@ -51,8 +53,21 @@ public class MainController {
 		list.add(new Notice(5,"[공지] 평점 업데이트 ","안녕하세요 스타일블랜딩입니다5. ","2019-11-13"));
 		response.setContentType("application/json; charset=UTF-8");
 		Gson gson = new Gson();
-		
+
 		gson.toJson(list, response.getWriter());
 	}
 
+	@RequestMapping("mainFourWrap.do")
+	public void FourWrap(HttpServletResponse response) throws JsonIOException, IOException {
+
+	      ArrayList<Posting> list = mainService.selectFourWrap();
+	      
+	      System.out.println(list);
+	      
+	      response.setContentType("application/json; charset=UTF-8");
+	      
+	      Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+	      
+	      gson.toJson(list, response.getWriter());
+	}
 }
