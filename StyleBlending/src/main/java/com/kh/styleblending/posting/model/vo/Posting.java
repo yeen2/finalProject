@@ -41,4 +41,11 @@ public class Posting {
 	private int loginLike;
 	private int loginDeclare;
 	
+	// mypage
+	private int replyCount;
+	
+	
+	
+	
+	
 }
