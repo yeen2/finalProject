@@ -5,6 +5,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style type="text/css">
+	.replyForm_div_2{
+		margin-left: 50px;
+	}
 	.replyForm_imgDiv{
 		width: 10%; height: 10%; border-radius: 50%;
 	}
@@ -14,7 +17,10 @@
 	.replyForm_contentDiv{
 		width: 90%; height: 90%;
 	}
-	
+	.replyForm_nickname {
+		font-weight: bold;
+	}
+
 </style>
 </head>
 <body>
@@ -82,7 +88,7 @@
 							· <a href="#" class="rrBtn"><i style="color: gray;">reply</i></a>
 							· <span class="replyForm_date"></span> day ago
 						</div>
-					</div> -->
+					</div> 
 	
 					<!-- 댓글 -->
 					<!-- <div class="media mb-4">
@@ -111,7 +117,7 @@
 							</div>
 	
 						</div>
-					</div> --> 
+					</div>  -->
 		
  				</div>  <!-- #replyForm end -->
  
@@ -136,13 +142,13 @@
 <!------------------------------------------ 댓글 ajax -------------------------------------->
 			<script type="text/javascript">
 				$(function() {
-					/* 
+					
 					getReplyList();
 					
 					setInterval(function(){
 						getReplyList();
 					}, 5000); 
-					 */
+					
 					
 					// 댓글폼 클릭시 로그인되있는지 확인
 					$("#rContent").on("click", function () {
@@ -224,28 +230,44 @@
 									$tr.append($dateTd);
 									
 									$tbody.append($tr); */
-									console.log("댓글잇움 나와야댄");
-									console.log(value.nickName);
-									console.log(value.content);
-									
+
+									$replyForm = $("#replyForm");
+									//리플하나의 큰div
+									// 댓글일때
 									$replyForm_div = $("<div class='media mb-4 replyForm_div'></div>");
+									// 대댓글일때
+									$replyForm_div_2 = $("<div class='media mb-4 replyForm_div_2'></div>");
 									
 									$replyForm_imgDiv = $("<div class='replyForm_imgDiv'></div>");	
-									$replyForm_contentDiv = $("<div class='replyForm_contentDiv'></div>");
-									
 									$img = $("<img class='replyForm_img'>").attr("src",'http://placehold.it/50x50');
+									
+									$replyForm_contentDiv = $("<div class='replyForm_contentDiv'></div>");
 									$nickname = $("<h5 class='mt-0 replyForm_nickname'></h5>").text(value.nickName);
-									$rcontent = $("<span class='replyForm_content'></span><br>").text(value.content);
+									$rcontent = $("<span class='replyForm_content'></span>").text(value.content);
 									$likecount = $("<span class='replyForm_likecount'></span>").text(value.likeCount);
 									$likeImg = $("<i class='fas fa-caret-up'></i>");
-									$rrBtn = $("<a href=''#' class='rrBtn'><i style='color: gray;'>reply</i></a>");
+									$rrBtn = $("<a href=''#' class='rrBtn'><i style='color: gray;'>reply </i></a>");
 									$date = $("<span class='replyForm_date'></span>").text(value.enrollDate);
 									
-									$replyForm_imgDiv.append($img);
-									$replyForm_contentDiv.append($nickname).append($rcontent).append($likecount)
-													.append($likeImg);
-									
-									$replyForm_div.append($replyForm_imgDiv).append($replyForm_contentDiv);
+									if(value.level == 1){ //댓글
+										$replyForm_imgDiv.append($img);
+										$replyForm_contentDiv.append($nickname).append($rcontent).append('<br>').append($likecount)
+														.append($likeImg).append($rrBtn).append($date);
+										
+										$replyForm_div.append($replyForm_imgDiv).append($replyForm_contentDiv);
+										
+										$replyForm.append($replyForm_div);
+										
+									}else{ //대댓글
+
+										$replyForm_imgDiv.append($img);
+										$replyForm_contentDiv.append($nickname).append($rcontent).append('<br>').append($likecount)
+														.append($likeImg).append($date);
+										
+										$replyForm_div_2.append($replyForm_imgDiv).append($replyForm_contentDiv);
+										
+										$replyForm.append($replyForm_div_2);
+									}
 									
 								});
 								
