@@ -25,6 +25,9 @@ public interface MyPageService {
 	// 프로필 페이지 - 팔로잉 리스트
 	ArrayList<Member> selectFwList(int mno);
 	
+	// 프로필 페이지 - 프로필 이미지 수정, 기본이미지로 변경
+	int updateProfileImg(Member m);
+	
 	// 프로필 관리 - 프로필 수정
 	int updateProfile(Member m);
 	

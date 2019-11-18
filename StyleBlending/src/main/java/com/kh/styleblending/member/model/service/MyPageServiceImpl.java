@@ -78,5 +78,10 @@ public class MyPageServiceImpl implements MyPageService {
 		return mpDao.selectAlarmList(mno);
 	}
 
+	@Override
+	public int updateProfileImg(Member m) {
+		return mpDao.updateProfileImg(m);
+	}
+
 
 }

@@ -70,6 +70,10 @@ public class MyPageDao {
 		return (ArrayList)sqlSession.selectList("mypageMapper.selectAlarmList", mno);
 	}
 	
+	public int updateProfileImg(Member m) {
+		return sqlSession.update("mypageMapper.updateProfileImg", m);
+	}
+	
 	
 
 }

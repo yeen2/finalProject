@@ -26,6 +26,7 @@
 	#abc div, #abc i{float:left;}
 	#abc div{width:45px;}
 	#abc i{line-height:30px; margin-right:5px;}
+	#imgClick:hover{cursor:pointer;}
 </style>
 </head>
 <body class="profile" style="margin-bottom: 20px !important;">
@@ -38,8 +39,11 @@
 			<div class="row">
 				<!-- 프로필 이미지 -->
 				<div class="col-12 col-md-4 text-center">
-					<img src="resources/assets/img/lorde.png" alt="Raised circle image"
-						class="img-fluid rounded-circle shadow-lg" style="width: 180px;">
+					<img id="imgClick" src="resources/upload/member/${ m.renameImg }"
+						class="img-fluid rounded-circle" style="width: 180px; height:180px;">
+				</div>
+				<div id="fileArea">
+					<input type="file" id="uploadImg" name="uploadImg">
 				</div>
 				
 				<!-- 프로필 -->
@@ -51,7 +55,9 @@
 						</div>
 						
 						<!-- 팔로워버튼  -->
-						<a href="test.do" class="btn btn-dark ml-3"><i class="fa fa-plus"></i> <b>Fan</b></a>
+						<c:if test="${ m == loginUser }">
+							<a href="test.do" class="btn btn-dark ml-3"><i class="fa fa-plus"></i> <b>Fan</b></a>						
+						</c:if>
 						<%--<c:if test="${ loginUser.mno == m.mno }"> --%>
 							<button class="btn btn-info btn-pill" style="margin-left:400px;"onclick="location.href='mpUpdatePage.do';">
 							    <i class="fa fa-edit mr-1"></i>
@@ -195,7 +201,6 @@
 				data:{mno:${m.mno}},
 				dataType:"json",
 				success:function(list){
-					console.log("ajax 통신 성공");
 					if(list.length == 0){
 						var $a1 = $("<p>").attr("class", "lead");
 						var $a2 = $("<span>").attr("class", "text-danger");
@@ -386,6 +391,40 @@
 		
 	</script>
 	<script>
+		// input 파일
+		$(function(){
+			$("#fileArea").hide();
+			
+			$("#imgClick").click(function(){
+				$("#uploadImg").click();
+			});
+		});
+		
+		$("#uploadImg").on("input", function(){
+			var data = new FormData();
+			data.append("uploadImg", $("#uploadImg")[0].files[0]);
+			
+			$.ajax({
+				url:"mpUpdateImg.do",
+				type:"post",
+				data:data,
+				processData:false,
+				contentType:false,
+				success:function(result){
+					console.log("ajax 성공");
+					$("#imgClick").attr("src", "resources/upload/member/" + result);
+				},
+				error:function(){
+					console.log("ajax 실패");
+				}
+				
+			});
+				
+			
+		});
+		
+		
+		
 		$(function(){
 			$("#imgH").mouseenter(function(){
 				$("#aaa").css("display", "block");
