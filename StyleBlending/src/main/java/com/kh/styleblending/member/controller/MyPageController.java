@@ -140,9 +140,10 @@ public class MyPageController {
 			
 		}
 		
-		int result = mpService.updateProfileImg(m);
+		Member mem = mpService.updateProfileImg(m);
 		
-		if(result > 0) {
+		if(mem != null) {
+			session.setAttribute("loginUser", mem);
 			if(renameFileNameD != "profile.png") {
 				deleteProfileImg(renameFileNameD, request);
 			}
@@ -165,9 +166,10 @@ public class MyPageController {
 		m.setOriginalImg("profile.png");
 		m.setMno(mno);
 		
-		int result = mpService.updateProfileImg(m);
+		Member mem = mpService.updateProfileImg(m);
 		
-		if(result > 0) {
+		if(mem != null) {
+			session.setAttribute("loginUser", mem);
 			return m.getRenameImg();
 		}else {
 			return "fail";
@@ -319,7 +321,7 @@ public class MyPageController {
 	}
 	
 	/*
-	@RequestMapping("mpInsertFan")
+	@RequestMapping("mpInsertFan.do")
 	public ModelAndView insertFan(int mno, ModelAndView mv) {
 		int result = mpService.insertFan(mno);
 		
@@ -330,6 +332,7 @@ public class MyPageController {
 		}
 	}
 	*/
+	
 	/*
 	@RequestMapping("검색어 ajax 호출")
 	

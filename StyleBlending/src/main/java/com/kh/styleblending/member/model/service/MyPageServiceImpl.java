@@ -1,9 +1,15 @@
 package com.kh.styleblending.member.model.service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import com.kh.styleblending.admin.model.vo.Ad;
 import com.kh.styleblending.member.model.dao.MyPageDao;
@@ -18,6 +24,12 @@ public class MyPageServiceImpl implements MyPageService {
 
 	@Autowired
 	private MyPageDao mpDao;
+	
+	@Autowired
+	private DataSourceTransactionManager transactionManager;
+	
+	@Autowired
+	private SqlSessionTemplate sqlSession;
 	
 	@Override
 	public Member selectProfile(int mno) {
@@ -80,8 +92,31 @@ public class MyPageServiceImpl implements MyPageService {
 	}
 
 	@Override
-	public int updateProfileImg(Member m) {
-		return mpDao.updateProfileImg(m);
+	public Member updateProfileImg(Member m) {
+		int mno = m.getMno();
+		
+		DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+		def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
+		
+		// 트랜잭션 상태를 관리하는 객체
+		TransactionStatus status = transactionManager.getTransaction(def);
+		
+		try {
+			sqlSession.getConnection().setAutoCommit(false);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		int result = mpDao.updateProfileImg(m);
+		Member mem = mpDao.selectProfile(mno);
+		
+		if(result > 0 && mem != null) {
+			transactionManager.commit(status);
+			return mem;
+		}else {
+			transactionManager.rollback(status);
+			return null;
+		}
 	}
 
 	@Override
