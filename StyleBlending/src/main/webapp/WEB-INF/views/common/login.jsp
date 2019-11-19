@@ -7,6 +7,7 @@
 <!-- 네이버로그인 -->
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@beta/dist/js.cookie.min.js"></script>
 </head>
 <body>
 <jsp:include page="../includes/header.jsp" />
@@ -46,8 +47,14 @@
 
 				<!-- 아이디기억 /  -->
 				<div class="custom-control custom-checkbox" style="text-align:left !important; margin-top: 10px;">
-               		<input type="checkbox" class="custom-control-input" id="customCheck2" name="remember">
-                	<label class="custom-control-label" for="customCheck2">Remember me</label>
+					<div style="display: inline;">
+	               		<input type="checkbox" class="custom-control-input" id="remember" name="remember">
+	                	<label class="custom-control-label" for="remember">자동 로그인</label>
+	                </div>
+	               	<div style="float: right; display: inline;">
+                		<input type="checkbox" class="custom-control-input" id="idid" name="idid">
+                		<label class="custom-control-label" for="idid">아이디 기억하기</label>
+              		</div>
               	</div>
 				<hr>
 				
@@ -71,8 +78,34 @@
 		
 	</div>
 	
-	
-	
+	<!-- 아이디/비번 기억하기 -->
+	<script>
+	$(function(){
+		$("#email").val(Cookies.get('email'));      
+		$("#pass").val(Cookies.get('pass'));      
+	    if($("#email").val() != ""){
+	        $("#idid").attr("checked", true);
+	    }
+	});
+		
+	    
+	    $("#idid").change(function(){
+	        if($("#idid").is(":checked")){
+	            Cookies.set('email', $("#email").val(), { expires: 7 });
+	            Cookies.set('pass', $("#pass").val(), { expires: 7 });
+	        }else{
+	              Cookies.remove('email');
+	              Cookies.remove('pass');
+	        }
+	    });
+	    
+	    $("#email, #pass").keyup(function(){
+	        if($("#idid").is(":checked")){
+	            Cookies.set('email', $("#email").val(), { expires: 7 });
+	            Cookies.set('pass', $("#pass").val(), { expires: 7 });
+	        }
+	    });
+	</script>
 	 
     <%-- 카카오 로그인 api --%>
     <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>

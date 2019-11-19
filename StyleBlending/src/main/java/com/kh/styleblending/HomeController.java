@@ -78,7 +78,7 @@ public class HomeController {
 	
 	@RequestMapping("login.do")
 	public ModelAndView loginMember(Member m, HttpSession session, ModelAndView mv, 
-								String remember, HttpServletResponse rs) {
+								String remember, String idid , HttpServletResponse res, HttpServletRequest req) {
 		
 		Member loginUser = mService.loginMember(m);
 		
@@ -94,14 +94,49 @@ public class HomeController {
 			mv.addObject("msg", "로그인 실패").setViewName("common/errorPage");
 		}
 		*/
-		
+
 		if(loginUser != null) { // 로그인 성공
 			session.setAttribute("loginUser", loginUser);
+			
+			//자동 로그인
 			if(remember != null) {
 				Cookie cookie = new Cookie("remember", loginUser.getEmail());
 				cookie.setMaxAge(60*60*24*7); //7일
 				cookie.setPath("/");
-				rs.addCookie(cookie);
+				res.addCookie(cookie);
+			}
+			
+			// id/pass 기억
+			if(idid != null) {
+				Cookie cookie1 = new Cookie("email", loginUser.getEmail());
+				Cookie cookie2 = new Cookie("pass", loginUser.getPass());
+				cookie1.setMaxAge(60*60*24*7); //7일
+				cookie1.setPath("/");
+				res.addCookie(cookie1);
+				cookie2.setMaxAge(60*60*24*7);
+				cookie2.setPath("/");
+				res.addCookie(cookie2);
+			}else {
+				
+				Cookie[] cookies = req.getCookies();
+				if(cookies != null) {
+					for(Cookie c:cookies) {
+						if(c.getName().equals("email")) {
+							c.setMaxAge(0);
+							c.setPath("/");
+							res.addCookie(c);
+							break;
+						}
+						if(c.getName().equals("pass")) {
+							c.setMaxAge(0);
+							c.setPath("/");
+							res.addCookie(c);
+							break;
+						}
+					}
+				}
+				
+				
 			}
 			mv.setViewName("redirect:main.do");
 		}else {
@@ -112,7 +147,7 @@ public class HomeController {
 	}
 	
 	@RequestMapping("logout.do")
-	public String logout(HttpSession session, HttpServletRequest req, HttpServletResponse res) {
+	public String logout(HttpSession session, HttpServletRequest req, HttpServletResponse res, String idid) {
 		
 		session.invalidate(); // 세션 무효화
 		Cookie[] cookies=req.getCookies();
