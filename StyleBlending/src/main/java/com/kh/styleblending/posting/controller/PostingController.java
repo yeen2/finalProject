@@ -40,21 +40,22 @@ public class PostingController {
 		
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		Posting p;
-		SelectPosting sp = new SelectPosting();
-		sp.setId(id);
+		//SelectPosting sp = new SelectPosting();
+		//sp.setId(id);
 		
 		
 		if(loginUser != null) {
-			sp.setMno(loginUser.getMno());
-			p = pService.selectOnePosting(sp);
+			//sp.setMno(loginUser.getMno());
+			p = pService.selectOnePosting(id, loginUser.getMno());
 		}else {
-			sp.setMno(-10000);
-			p = pService.selectOnePosting(sp);
+			//sp.setMno(-10000);
+			p = pService.selectOnePosting(id, -10000);
 		}
 		
 		ArrayList<Style> s = pService.selectStyle(id);
 		
 		if(p != null) {
+			System.out.println(p);
 			mv.addObject("p", p).addObject("s", s).setViewName("posting/info");
 		}else {
 			mv.addObject("msg", "게시글 상세조회 실패").setViewName("common/errorPage");

@@ -11,7 +11,7 @@ public interface PostingService {
 
 	int insertPosting(Posting p, String[] cate, String[] brand, String[] color);
 	
-	Posting selectOnePosting(SelectPosting sp);
+	Posting selectOnePosting(int id, int mno);
 	
 	ArrayList<PostingReply> selectReplyList(int pno);
 	

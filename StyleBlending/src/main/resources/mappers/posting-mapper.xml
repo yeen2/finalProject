@@ -67,10 +67,13 @@
 		-->
 		select p_no, p.m_no, p.original_img, p.rename_img, img_path, content, hashtag, gender, p.location,
         		like_count, declare_count, p.enroll_date, p.update_date, p.isdelete,
-        		m.nickname, m.profile, m.location, m.rename_img
+        		m.nickname, m.profile, m.location, m.rename_img, 
+                loginLike(select count(*) from p_like where m_no=#{map.mno} and p_no=#{map.pno}), 
+                loginDeclare(select count(*) from declare where m_no=#{map.mno} and b_no=#{map.pno} and type=1), 
+                replyCount(select count(*) from p_reply where p_no=#{map.pno} and r_level=1)
 		from posting p
 		join member m on(p.m_no=m.m_no)
-		where p_no=#{id}
+		where p_no=#{map.pno};
 	</select>
 	
 	<select id="selectReplyList" resultMap="postingReplyResultSet">

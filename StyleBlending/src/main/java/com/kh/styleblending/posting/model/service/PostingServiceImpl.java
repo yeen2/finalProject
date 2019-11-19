@@ -71,8 +71,8 @@ public class PostingServiceImpl implements PostingService {
 		
 	
 	@Override
-	public Posting selectOnePosting(SelectPosting sp) {
-		return pDao.selectOnePosting(sp);
+	public Posting selectOnePosting(int id, int mno) {
+		return pDao.selectOnePosting(id,mno);
 	}
 	
 	@Override
