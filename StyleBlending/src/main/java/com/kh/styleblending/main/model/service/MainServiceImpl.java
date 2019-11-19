@@ -19,6 +19,18 @@ public class MainServiceImpl implements MainService{
 		
 		return mainDao.selectFourWrap();
 	}
+
+	@Override
+	public ArrayList<Posting> selectPostList() {
+		// TODO Auto-generated method stub
+		return mainDao.selectPostList();
+	}
+
+	@Override
+	public ArrayList<Posting> selectInfinityScroll() {
+		// TODO Auto-generated method stub
+		return mainDao.selectInfinityScroll();
+	}
 	
 	
 	
