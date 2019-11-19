@@ -32,5 +32,10 @@ public class MemberServiceImpl implements MemberService{
 		return mDao.joinCheckNickName(nickName);
 	}
 	
+	@Override
+	public Member getMember(String email) {
+		return mDao.getMember(email);
+	}
+	
 	
 }

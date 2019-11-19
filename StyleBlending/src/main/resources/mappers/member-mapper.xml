@@ -52,7 +52,11 @@
 		where nickname=#{nickName}
 	</select>
 	
-
+	<select id="getMember" resultMap="memberResultSet">
+		select * 
+		from member
+		where email=#{email}
+	</select>
 	
 
 
