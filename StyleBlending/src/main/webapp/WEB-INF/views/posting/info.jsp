@@ -248,8 +248,7 @@
 					<h5 class="card-header">Location</h5>
 					<div class="card-body">
 						<div id="map" style="height: 300px;"></div>
-						<br>
-						<span>${p.location }</span>
+						<%-- <span>${p.location }</span> --%>
 					</div>
 				</div>
 				<!-- 
@@ -588,7 +587,7 @@
 								// 인포윈도우로 장소에 대한 설명을 표시합니다
 								var infowindow = new kakao.maps.InfoWindow(
 										{
-											//content : '<div style="width:150px;text-align:center;padding:6px 0;">${c.cafe_name}</div>'
+											content : '<div style="width:150px;text-align:center;padding:6px 0;">${p.location}</div>'
 										});
 								infowindow.open(map, marker);
 	
