@@ -15,9 +15,10 @@ import lombok.ToString;
 @ToString
 public class Ad {
 
+	private int rownum;
 	private int adno;
-	private int mno;
-	private int payNo;
+	private String mno;
+	private int payno;
 	private String name;  // 업체명
 	private String url;
 	private String originalImg;
@@ -27,6 +28,6 @@ public class Ad {
 	private Date startDate;
 	private Date endDate;
 	private int status;
-	private int count;
+	private String email;
 	
 }

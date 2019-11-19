@@ -1,16 +1,24 @@
 package com.kh.styleblending.admin.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.styleblending.admin.model.service.AdminService;
+import com.kh.styleblending.admin.model.vo.Ad;
 import com.kh.styleblending.admin.model.vo.Declare;
 import com.kh.styleblending.admin.model.vo.PageInfo;
 import com.kh.styleblending.admin.model.vo.Pagination;
@@ -97,8 +105,80 @@ public class AdminController {
 	
 	
 	@RequestMapping("aAdvertisment.do")
-	public String advertisment() {
-		return "admin/advertisment";
+	public ModelAndView selectAdList(ModelAndView mv, @RequestParam(value="currentPage",defaultValue="1")int currentPage) {
+		
+		int listCount = aService.getAdListCount();
+		
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		
+		ArrayList<Ad> list = aService.selectAdList(pi);
+		
+		mv.addObject("pi",pi).addObject("list",list).setViewName("admin/advertisment");
+		
+		return mv;
+	}
+	
+	@RequestMapping("aInsertAd.do")
+	public ModelAndView insertAd(@RequestParam String mno, ModelAndView mv, Ad ad, HttpServletRequest request) {
+		
+		int result = aService.insertAd(ad);
+		
+		System.out.println(ad);
+		System.out.println(mno);
+		
+		if(result > 0) {
+			mv.setViewName("redirect:aAdvertisment.do");
+		}else {
+			mv.addObject("msg", "광고신청실패").setViewName("common/errorPage");
+		}
+		
+		return mv;
+	}
+	
+	// 광고 사진 업로드한 파일명 반환 메소드
+	public String saveFile(MultipartFile file, HttpServletRequest request) {
+		
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = root + "/upload/advertisment";
+		
+		File folder = new File(savePath);
+		
+		if(!folder.exists()) {
+			folder.mkdirs();
+		}
+		
+		String originFileName = file.getOriginalFilename();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		
+		String renameFileName = sdf.format(new Date(System.currentTimeMillis())) + "." + originFileName;
+		
+		String renamePath = savePath + "/" + renameFileName;
+		
+		try {
+			file.transferTo(new File(renamePath));
+			
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+		}
+		
+		return renameFileName;
+		
+	}
+	
+	@RequestMapping("aInsertPayView.do")
+	public String insertPayView(@RequestParam(value="uploadFile", required=false) MultipartFile file, Ad ad, Model model, HttpServletRequest request) {
+		
+		if(!file.getOriginalFilename().equals("")) {// 파일 존재시
+			
+			String renameFileName = saveFile(file,request);
+			
+			ad.setOriginalImg(file.getOriginalFilename());
+			ad.setRenameImg(renameFileName);
+		}
+		//System.out.println(ad);
+		
+		model.addAttribute("ad",ad).addAttribute("file",file);
+		return "admin/pay";
 	}
 	
 	@RequestMapping("aStatistics.do")

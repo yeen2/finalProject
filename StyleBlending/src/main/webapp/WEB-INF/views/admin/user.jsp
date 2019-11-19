@@ -71,10 +71,10 @@
                           	</div>
                           	
                           	<div class="col-sm-12 col-md-6">
-                       			<label style="display:inline-flex; padding:15px;">Search: &nbsp;
-                       				<input type="search" class="form-control form-control-sm col-sm-12" placeholder="아이디 또는 닉네임을 입력해주세요." aria-controls="bootstrap-data-table">
+                       			<label for="keyword" style="display:inline-flex; padding:15px;">Search: &nbsp;
+                       				<input type="search" id="keyword" class="form-control form-control-sm col-sm-12" placeholder="아이디 또는 닉네임을 입력해주세요." aria-controls="bootstrap-data-table">
                        			</label>
-	                        	<button type="button" class="btn btn-secondary btn-sm" style="float:right; margin-right:10px; margin-top:15px;" data-toggle="modal" data-target="#staticModal">
+	                        	<button type="button" data-toggle="modal" data-target="#userDeleteModal" class="btn btn-secondary btn-sm" style="float:right; margin-right:10px; margin-top:15px;" >
 	                        		회원삭제
 	                        	</button>
                           	</div>
@@ -105,7 +105,7 @@
                                             <td >${m.mno}</td>
                                             <td >
                                                 <div class="round-img">
-                                                    <a href="#"><img class="rounded-circle" src="${pageContext.request.contextPath}${m.profilePath }${m.profileImg}" alt=""></a>
+                                                    <a href="#"><img class="rounded-circle" src="${pageContext.request.contextPath}${m.profilePath }${m.renameImg}" alt=""></a>
                                                 </div>
                                             </td>
                                             <td>${m.email}</td>
@@ -197,6 +197,32 @@
     
     
      <script>
+     
+     
+    	 var keyword = $("#keyword").val().toUpperCase();
+    	 var choKeyword = keywordSearch($("#keyword").val());
+    	 
+    	 if(keyword!=""&& choKeyword==""){
+    		 typeCheck = 'Y'; // 초성검색
+    	 }else{
+    		 typeCheck= 'N'; // 일반검색
+    	 }
+    	 
+     function keywordSearch(str){
+    	 
+    	 cho = ["ㄱ","ㄲ","ㄴ","ㄷ","ㄸ","ㄹ","ㅁ","ㅂ","ㅃ","ㅅ","ㅆ","ㅇ","ㅈ","ㅉ","ㅊ","ㅋ","ㅌ","ㅍ","ㅎ"]; 
+    	 result = ""; 
+    	 
+    	  for(i=0;i<str.length;i++) { 
+    	    code = str.charCodeAt(i)-44032; 
+    	    if(code>-1 && code<11172){
+    	        result += cho[Math.floor(code/588)]; 
+    	    } 
+    	  }
+    	    return result; 
+     };
+     
+     
 	function allCheck(){ // 전체 선택,해제
 	      if( $("#checkAll").is(':checked') ){
 	        $("input[name=checkRow]").prop("checked", true);
@@ -262,7 +288,7 @@
             
             
       <!-- 회원 삭제 모달창 -->     
-      <div class="modal fade" id="staticModal" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="true">
+      <div class="modal fade" id="userDeleteModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-sm" role="document">
                <div class="modal-content">
                    <div class="modal-header">
