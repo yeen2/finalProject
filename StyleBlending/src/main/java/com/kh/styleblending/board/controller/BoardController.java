@@ -83,14 +83,19 @@ public class BoardController {
 	}
 	
 	
-	@PostMapping("binsert.do")
-	public String insertBoard(Board b, Image i ,HttpServletRequest request, Model model,
+	@RequestMapping("binsert.do")
+	public String insertBoard(Board b , HttpServletRequest request, Model model,
 							@RequestParam(value="content", required=false) MultipartFile upload) {
 								
 		
+		int result = bService.insertBoard(b);
 		
-		
-		return null;
+		if(result > 0) {
+			return "redirect:blist.do";
+		}else {
+			model.addAttribute("msg","자유게시판 작성 실패");
+			return "common/errorPage";
+		}
 		
 	}
 	
@@ -197,9 +202,9 @@ public class BoardController {
 
 	}
  
-	
-//	@PostMapping("dlendud.do")
-//	public ModelAndView dlendud(Board b, ModelAndView mv) {
+//	
+//	@PostMapping("bdetail.do")
+//	public ModelAndView (Board b, ModelAndView mv) {
 //	
 //		return mv;
 //	}

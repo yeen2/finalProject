@@ -9,6 +9,7 @@ import com.kh.styleblending.board.model.dao.BoardDao;
 import com.kh.styleblending.board.model.vo.Board;
 import com.kh.styleblending.board.model.vo.BoardReply;
 import com.kh.styleblending.board.model.vo.FashionBoard;
+import com.kh.styleblending.board.model.vo.Image;
 import com.kh.styleblending.board.model.vo.PageInfo;
 
 @Service("bService")
@@ -22,29 +23,34 @@ public class BoardServiceImpl implements BoardService{
 		
 		return bDao.insertBoard(b);
 	}
-
+	
 	@Override
-	public Board selectBoard(int bNo) {
-
-		return bDao.selectBoard(bNo);
+	public Board selectBoard(int bno) {
+			
+		
+			
+		Board b =  bDao.selectBoard(bno);
+		
+		System.out.println(b);
+		return b;
 	}
 
 	@Override
 	public int updateBoard(Board b) {
-
+		
 		return bDao.updateBoard(b);
 	}
 
 	@Override
-	public int deleteBoard(int bNo) {
+	public int deleteBoard(int bno) {
 
-		return bDao.deleteBoard(bNo);
+		return bDao.deleteBoard(bno);
 	}
 
 	@Override
-	public ArrayList<BoardReply> selectBoardReplyList(int brNo) {
+	public ArrayList<BoardReply> selectBoardReplyList(int brno) {
 
-		return bDao.selectBoardReplyList(brNo);
+		return bDao.selectBoardReplyList(brno);
 	}
 
 	@Override
@@ -70,6 +76,10 @@ public class BoardServiceImpl implements BoardService{
 
 		return bDao.fashionSelectList(pi);
 	}
+
+
+
+
 	
 	
 

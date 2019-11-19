@@ -50,20 +50,22 @@
 		<br>
 		<br>
 
-<form action="dlendud.do" method="post">
-		<div class="write-inputArea" style="width:auto;">
-			<h4>내용</h4>
-			<textarea id="content" name="content" rows="3" cols="80" placeholder="내용을 입력하세요">안녕하세요~</textarea>
-			<br><br>
+		<form action="dlendud.do" method="post">
+			<div class="write-inputArea" style="width: auto;">
+				<h4>내용</h4>
+				<textarea id="content" name="content" rows="3" cols="80"
+					placeholder="내용을 입력하세요">안녕하세요~</textarea>
+				<br>
+				<br>
 
-		</div>
-			<div id="btnArea" style="margin-bottom: 30px; text-align:center;">
+			</div>
+			<div id="btnArea" style="margin-bottom: 30px; text-align: center;">
 				<input type="hidden" name="member_bno" value="">
 				<button type="submit" class="btn btn-light btn-lg" id="btncheck">작성</button>
-				<button type="button" class="btn btn-light" 
-					id="btnList" style="float: right;" onclick="location.href='blist.do';">목록</button>
+				<button type="button" class="btn btn-light" id="btnList"
+					style="float: right;" onclick="location.href='blist.do';">목록</button>
 			</div>
-</form>
+		</form>
 	</div>
 
 	

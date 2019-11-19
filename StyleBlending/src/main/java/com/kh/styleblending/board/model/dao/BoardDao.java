@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.styleblending.board.model.vo.Board;
 import com.kh.styleblending.board.model.vo.BoardReply;
 import com.kh.styleblending.board.model.vo.FashionBoard;
+import com.kh.styleblending.board.model.vo.Image;
 import com.kh.styleblending.board.model.vo.PageInfo;
 
 @Repository("bDao")
@@ -20,12 +21,11 @@ public class BoardDao {
 
 	public int insertBoard(Board b) {
 
-		return 0;
+		return sqlSession.insert("boardMapper.insertBoard");
 	}
 
-	public Board selectBoard(int bNo) {
-		// TODO Auto-generated method stub
-		return null;
+	public Board selectBoard(int bno) {
+		return sqlSession.selectOne("boardMapper.selectBoard");
 	}
 
 	public int updateBoard(Board b) {
@@ -75,7 +75,8 @@ public class BoardDao {
 		
 		return list;
 	}
-	
+
+
 	
 	
 	

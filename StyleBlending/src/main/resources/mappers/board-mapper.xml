@@ -15,6 +15,8 @@
 		<result property="updateDate" column="update_date"/>
 		<result property="isDelete" column="isdelete"/>
 		<result property="likeCount" column="like_count"/>
+		<result property="imagelIST" column="image_List"/>	<!-- 컬럼별칭 설정함-->
+		
 	</resultMap>
 
 <resultMap type="FashionBoard" id="fashionBoardResultSet">
@@ -49,11 +51,21 @@
 	select * from fashion_board order by fb_no desc
 </select>
 
+<select id="selectBoard" resultMap="boardResultSet">
+	select * 
+	from board
+	where b_no=#{bno}
+</select>
+
 <select id="getListCount" resultType="_int">
 	select count(*)
 	from board
 	where isdelete='N'
 </select>
+
+<insert id="insertBoard">
+	
+</insert>
 
 
 </mapper>
