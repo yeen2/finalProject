@@ -124,5 +124,10 @@ public class MyPageServiceImpl implements MyPageService {
 		return mpDao.selectFanCheck(f);
 	}
 
+	@Override
+	public int insertFan(Fan f) {
+		return mpDao.insertFan(f);
+	}
+
 
 }

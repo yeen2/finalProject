@@ -52,5 +52,8 @@ public interface MyPageService {
 	
 	// 프로필 페이지 - 팬 버튼 체크
 	int selectFanCheck(Fan f);
+	
+	// 프로필 페이지 - insert 팬
+	int insertFan(Fan f);
 
 }
