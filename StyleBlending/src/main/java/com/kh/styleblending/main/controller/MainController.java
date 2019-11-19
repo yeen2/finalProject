@@ -70,4 +70,32 @@ public class MainController {
 	      
 	      gson.toJson(list, response.getWriter());
 	}
+	
+	@RequestMapping("mainPostList.do")
+	public void PostList(HttpServletResponse response) throws JsonIOException, IOException {
+		
+		ArrayList<Posting> list = mainService.selectPostList();
+		
+		System.out.println("PostList"+list);
+		
+		response.setContentType("application/json; charset=UTF-8");
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		
+		gson.toJson(list, response.getWriter());
+	}
+	
+	@RequestMapping("mainInfinityScroll.do")
+	public void InfinityScroll(HttpServletResponse response) throws JsonIOException, IOException {
+		
+		ArrayList<Posting> list = mainService.selectInfinityScroll();
+		
+		System.out.println("InfinityScroll"+list);
+		
+		response.setContentType("application/json; charset=UTF-8");
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		
+		gson.toJson(list, response.getWriter());
+	}
 }
