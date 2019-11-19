@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
+<!--f  -->
 <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.css" rel="stylesheet" />
    <style>
     #weatherWidget .currentDesc {
@@ -437,14 +437,14 @@
     
     
    
-    <!-- Scripts -->
+    <!-- Scripts 
     <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
     <!-- 숫자카운트 -->
-    <script src="${pageContext.request.contextPath}/resources/admin_temp/js/main.js"></script>
-    
+   <%--  <script src="${pageContext.request.contextPath}/resources/admin_temp/js/main.js"></script> --%>
+    -->
     
     <!--  Chart js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.bundle.min.js"></script>

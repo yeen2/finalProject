@@ -13,7 +13,8 @@
 		<result property="nickName" column="nickName"/>
 		<result property="profile" column="profile"/>
 		<result property="location" column="location"/>
-		<result property="profileImg" column="profile_Img"/>
+		<result property="originalImg" column="original_Img"/>
+		<result property="renameImg" column="rename_Img"/>
 		<result property="profilePath" column="profile_Path"/>
 		<result property="enrollDate" column="enroll_Date"/>
 		<result property="updateDate" column="update_Date"/>
@@ -24,62 +25,126 @@
 	<resultMap id="DeclareResultSet" type="Declare">
 		<id property="dno" column="d_no"/>
 		<result property="mno" column="m_no"/>
-		<result property="email" column="email"/>
-		<result property="pno" column="p_no"/>
+		<result property="bno" column="b_no"/>
 		<result property="category" column="category"/>
 		<result property="content" column="content"/>
 		<result property="enrollDate" column="enroll_Date"/>
 		<result property="isCheck" column="isCheck"/>
+		<result property="type" column="type"/>
+		<result property="email" column="email"/>
+		<result property="bname" column="bname"/>
 	</resultMap>
 	
-	<resultMap id="postingDeclareResultSet" type="Declare">
-		<id property="dno" column="d_no"/>
+	<resultMap id="AdResultSet" type="Ad">
+		<id property="rownum" column="rownum"/>
+		<result property="adno" column="ad_no"/>
 		<result property="mno" column="m_no"/>
+		<result property="payno" column="pay_no"/>
+		<result property="name" column="name"/>
+		<result property="url" column="url"/>
+		<result property="originalImg" column="original_img"/>
+		<result property="renameImg" column="rename_img"/>
+		<result property="imgPath" column="img_path"/>
+		<result property="enrollDate" column="enroll_date"/>
+		<result property="startDate" column="start_date"/>
+		<result property="endDate" column="end_date"/>
+		<result property="status" column="status"/>
 		<result property="email" column="email"/>
-		<result property="pno" column="p_no"/>
-		<result property="imgName" column="original_img"/>
-		<result property="category" column="category"/>
-		<result property="content" column="content"/>
-		<result property="enrollDate" column="enroll_Date"/>
-		<result property="isCheck" column="isCheck"/>
-		<result property="declareCount" column="declare_count"/>
 	</resultMap>
-
+	
 	<select id="getMemberListCount" resultType="_int">
 		select count(*)
 		from member
 	</select>
 
 	<select id="selectMemberList" resultMap="MemberResultSet">
-		select *
+		select rownum, m.* from
+       ( select *
 		from member
-		order by delete_date desc ,m_no desc
+		order by delete_date desc ,enroll_date desc,m_no desc)m
 	</select>
 	
-	<select id="getDeclareListCount" resultType="_int">
+	<update id="deleteMember" parameterType="java.util.ArrayList">
+		update Member
+		set isdelete='Y', delete_date=sysdate
+		where m_no in 
+		<if test="list.size != 0">
+		<foreach item="item" collection="list" index="index" separator="," open="(" close=")">
+		#{item}
+	    </foreach>
+		</if>
+	</update>
+	
+	<select id="getDeclareListCount" resultType="_int" parameterType="hashMap">
 		select count(*)
-		from (select *
-		from p_declare
-		union
-		select *
-		from b_declare)
+		from declare
+		<if test="posting != null">
+			where type='1'
+		</if>
+		<if test="free != null">
+			where type='2'
+		</if>
 	</select>
 	
-	<select id="selectPostingDeclareList" resultMap="postingDeclareResultSet">
-		select pd.*,m.email,p.original_img,p.declare_count
-		from p_declare pd
-		join member m on(m.m_no=pd.m_no)
-		join posting p on(p.p_no=pd.p_no)
+	<select id="selectDeclareList" resultMap="DeclareResultSet" parameterType="hashMap">
+		select rownum, t4.* from
+		(select t3.* from
+		(select * from
+		(select d.*,m.email,p.rename_img bname
+		from declare d
+		join member m on(m.m_no=d.m_no)
+		join posting p on(p.p_no=d.b_no)
+		where type=1) t1
+		union
+		select * from
+		(select d.*,m.email,b.title
+		from declare d
+		join member m on(m.m_no=d.m_no)
+		join board b on(b.b_no=d.b_no)
+		where type=2) t2)
+        t3
+        <if test="posting != null">
+			where type='1'
+		</if>
+		<if test="free != null">
+			where type='2'
+		</if>
+        order by ischeck, enroll_date desc) t4
+	</select>
+	
+	<update id="deleteDeclareBoard" parameterType="java.util.ArrayList">
+		update declare
+		set ischeck='3'
+		where d_no in 
+		<if test="list.size != 0">
+		<foreach item="item" collection="list" index="index" separator="," open="(" close=")">
+		#{item}
+	    </foreach>
+		</if>
+	</update>
+	
+	<select id="getAdListCount" resultType="_int">
+		select count(*)
+		from ad
 	</select>
 
-	<!-- <select id="selectAllDeclareList" resultMap="">
-		select p.*,m.email 
-		from p_declare p
-		join member m on(m.m_no=p.m_no)
-		union
-		select b.*,m.email
-		from b_declare b
-		join member m on(m.m_no=b.m_no)
+	<select id="selectAdList" resultMap="AdResultSet">
+		select rownum, t1.* from
+		(select ad.*,m.email
+		from ad
+		join pay p on(p.pay_no=ad.pay_no)
+		join member m on(m.m_no=ad.m_no)
+		order by ad.status, ad.enroll_date )t1
 	</select>
- -->
+	
+	<insert id="insertPay">
+		insert into pay
+		values(seq_pay.nextval,#{mno},'1000',sysdate,default)
+	</insert>
+	
+	<insert id="insertAd">
+		insert into ad
+		values(seq_ad.nextval,#{mno},seq_pay.currval,#{name},#{url},#{originalImg},#{renameImg},'/resources/upload/advertisment/',sysdate,null,null,default)
+	</insert>
+	
 </mapper>

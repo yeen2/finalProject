@@ -13,20 +13,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class PostingReply {
+public class SelectPosting {
 
-	private int prno;
-	private int pno;
+	private int id;
 	private int mno;
-	private String content;
-	private Date enrollDate;
-	private Date updateDate;
-	private int prrno;
-	private String level;
-	private int likeCount;
-	private String isDelete;
-	
-	private String nickName;
-	private String profileImg;
-	
 }

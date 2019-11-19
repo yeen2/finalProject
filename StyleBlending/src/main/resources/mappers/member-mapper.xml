@@ -13,7 +13,8 @@
 		<result property="nickName" column="nickname"/>
 		<result property="profile" column="profile"/>
 		<result property="location" column="location"/>
-		<result property="profileImg" column="prifile_img"/>
+		<result property="originalImg" column="original_img"/>
+		<result property="renameImg" column="rename_img"/>
 		<result property="profilePath" column="profile_path"/>
 		<result property="enrollDate" column="enroll_date"/>
 		<result property="updateDate" column="update_date"/>
@@ -36,7 +37,7 @@
 	<insert id="insertMember">
 		insert into member
 		values(seq_member.nextval, default, null, #{email}, #{pass}, #{nickName}, 
-				null, null, null, null, sysdate, null, null, default)
+				null, null, default, null, null, sysdate, null, null, default)
 	</insert>
 	
 	<select id="joinCheckEmail" resultType="_int">
@@ -51,7 +52,11 @@
 		where nickname=#{nickName}
 	</select>
 	
-
+	<select id="getMember" resultMap="memberResultSet">
+		select * 
+		from member
+		where email=#{email}
+	</select>
 	
 
 

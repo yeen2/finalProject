@@ -23,7 +23,8 @@ public class Member {
 	private String nickName;
 	private String profile;
 	private String location;
-	private String profileImg;
+	private String originalImg;
+	private String renameImg;
 	private String profilePath;
 	private Date enrollDate;
 	private Date updateDate;
@@ -38,5 +39,8 @@ public class Member {
 	// 팬 리스트 호출 변수
 	private int likeCount;
 	private int replyCount;
+	
+	// 팬 버튼 체크용 변수
+	private int fanMno;
 	
 }

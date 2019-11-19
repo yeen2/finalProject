@@ -13,6 +13,8 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import com.kh.styleblending.posting.model.dao.PostingDao;
 import com.kh.styleblending.posting.model.vo.Posting;
+import com.kh.styleblending.posting.model.vo.PostingReply;
+import com.kh.styleblending.posting.model.vo.SelectPosting;
 import com.kh.styleblending.posting.model.vo.Style;
 
 import oracle.net.aso.b;
@@ -65,16 +67,33 @@ public class PostingServiceImpl implements PostingService {
 			transactionManager.rollback(status);
 			return 0;
 		}
-		
-		
 	}
 		
 	
+	@Override
+	public Posting selectOnePosting(int id, int mno) {
+		return pDao.selectOnePosting(id,mno);
+	}
 	
+	@Override
+	public ArrayList<PostingReply> selectReplyList(int pno) {
+		return pDao.selectReplyList(pno);
+	}
 	
+	@Override
+	public int insertReply(PostingReply r) {
+		return pDao.insertReply(r);
+	}
 	
+	@Override
+	public ArrayList<Style> selectStyle(int id) {
+		return pDao.selectStyle(id);
+	}
 	
-	
+	@Override
+	public int insertReReply(PostingReply r) {
+		return pDao.insertReReply(r);
+	}
 	
 	
 	

@@ -1,7 +1,5 @@
 package com.kh.styleblending.member.model.vo;
 
-import java.sql.Date;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,14 +11,14 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Alarm {
+public class PageInfo {
 
-	private int alno;
-	private int tno;
-	private int mno;
-	private Date enrollDate;
-	private String status;
-	private String type;
+	private int currentPage;
+	private int listCount;
+	private int pageLimit;
+	private int maxPage;
+	private int startPage;
+	private int endPage;
+	private int boardLimit;
 	
-	private int alarmCount;
 }

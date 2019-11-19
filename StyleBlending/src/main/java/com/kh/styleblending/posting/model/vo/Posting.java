@@ -31,6 +31,24 @@ public class Posting {
 	private Date updateDate;
 	private String isDelete;
 	
-	private List<Style> style;
+	//info - member테이블과 join
+	private String nickName;
+	private String profile;
+	private String mlocation;
+	private String profileImg;
+	
+	// 로그인한 회원이 좋아요 했는지, 안했는지 확인
+	private int loginLike;
+	private int loginDeclare;
+	
+	// mypage
+	private int replyCount;
+	
+	// 로그인한 session-mno 불러오기
+	private int loginmno;
+	
+	
+	
+	
 	
 }

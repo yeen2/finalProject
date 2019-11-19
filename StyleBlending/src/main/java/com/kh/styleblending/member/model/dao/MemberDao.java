@@ -28,6 +28,9 @@ public class MemberDao {
 		return sqlSession.selectOne("memberMapper.joinCheckNickName", nickName);
 	}
 	
+	public Member getMember(String email) {
+		return sqlSession.selectOne("memberMapper.getMember", email);
+	}
 	
 	
 	

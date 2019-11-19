@@ -23,7 +23,24 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/admin_temp/css/style.css">
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+	
+	<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+ 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/admin_temp/js/main.js"></script>
 
+
+    <script src="${pageContext.request.contextPath}/resources/admin_temp/js/lib/data-table/datatables.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/admin_temp/js/lib/data-table/dataTables.bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/admin_temp/js/lib/data-table/dataTables.buttons.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/admin_temp/js/lib/data-table/buttons.bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/admin_temp/js/lib/data-table/jszip.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/admin_temp/js/lib/data-table/vfs_fonts.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/admin_temp/js/lib/data-table/buttons.html5.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/admin_temp/js/lib/data-table/buttons.print.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/admin_temp/js/lib/data-table/buttons.colVis.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/admin_temp/js/init/datatables-init.js"></script>
 
 </head>
 <body>

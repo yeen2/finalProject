@@ -1,20 +1,32 @@
 package com.kh.styleblending.member.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.kh.styleblending.admin.model.vo.Ad;
 import com.kh.styleblending.member.model.service.MyPageService;
+import com.kh.styleblending.member.model.vo.Alarm;
+import com.kh.styleblending.member.model.vo.Fan;
 import com.kh.styleblending.member.model.vo.Member;
+import com.kh.styleblending.member.model.vo.PageInfo;
+import com.kh.styleblending.member.model.vo.Pagination;
 import com.kh.styleblending.posting.model.vo.Posting;
 
 @Controller
@@ -108,6 +120,95 @@ public class MyPageController {
 		return gson.toJson(list);
 	}
 	
+	// 내 프로필 이미지 수정 메소드
+	@ResponseBody
+	@RequestMapping("mpUpdateImg.do")
+	public String updateProfileImg(Member m, HttpSession session, ModelAndView mv, HttpServletRequest request, MultipartHttpServletRequest req) {
+		int mno = ((Member)session.getAttribute("loginUser")).getMno();
+		m.setMno(mno);
+		
+		MultipartFile file = req.getFile("uploadImg");
+		
+		if(!file.getOriginalFilename().equals("")) { // 첨부파일이 넘어오는 경우
+			
+			String renameFileName = saveProfileImg(file, request);
+			
+			m.setOriginalImg(file.getOriginalFilename());
+			m.setRenameImg(renameFileName);
+			
+		}
+		
+		int result = mpService.updateProfileImg(m);
+		
+		if(result > 0) {
+			return m.getRenameImg();
+		}else {
+			return "fail";
+		}
+		
+	}
+	// 내 프로필 이미지 기본 이미지로 변경
+	@ResponseBody
+	@RequestMapping("mpUpdateBasic")
+	public String updateBasicImg(Member m, ModelAndView mv, HttpSession session, HttpServletRequest request) {
+		String renameFileName = ((Member)session.getAttribute("loginUser")).getRenameImg();
+		int mno = ((Member)session.getAttribute("loginUser")).getMno();
+		System.out.println(123);
+		deleteProfileImg(renameFileName, request);
+		
+		m.setRenameImg("profile.png");
+		m.setOriginalImg("profile.png");
+		m.setMno(mno);
+		
+		int result = mpService.updateProfileImg(m);
+		
+		if(result > 0) {
+			return m.getRenameImg();
+		}else {
+			return "fail";
+		}
+	
+	}
+	
+	// 프로필 이미지 수정명 저장 메소드
+	public String saveProfileImg(MultipartFile file, HttpServletRequest request) {
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = root + "/upload/member";
+		
+		File folder = new File(savePath);
+		
+		if(!folder.exists()) {
+			folder.mkdirs();
+		}
+		
+		String originFileName = file.getOriginalFilename();
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		
+		String renameFileName = sdf.format(new Date(System.currentTimeMillis())) + "." + originFileName.substring(originFileName.lastIndexOf(".") + 1);
+		
+		String renamePath = savePath + "/" + renameFileName;
+		
+		try {
+			file.transferTo(new File(renamePath));
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+		}
+		
+		return renameFileName;
+	}
+	
+	// 프로필 이미지 삭제 메소드
+	public void deleteProfileImg(String renameFileName, HttpServletRequest request) {
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = root + "/upload/member";
+		
+		File f = new File(savePath + "/" + renameFileName);
+		
+		if(f.exists()) {
+			f.delete();
+		}
+	}
 	// 내 프로필 수정 메소드
 	@RequestMapping("mpUpdatePf.do")
 	public ModelAndView updateProfile(Member m, ModelAndView mv, HttpSession session) {
@@ -115,7 +216,7 @@ public class MyPageController {
 		
 		if(result > 0) {
 			session.setAttribute("loginUser", m);
-			mv.addObject("msg", "회원 정보 수정에 성공하였습니다.").setViewName("redirect:mpUpdatePage");
+			mv.addObject("msg", "회원 정보 수정에 성공하였습니다.").setViewName("member/myPage");
 		}else {
 			mv.addObject("msg", "회원 정보 수정에 실패하였습니다.").setViewName("common/errorPage");
 		}
@@ -124,16 +225,19 @@ public class MyPageController {
 	}
 	
 	// 내 광고 리스트 호출 메소드
-	@ResponseBody
 	@RequestMapping(value="mpSAdList.do", produces="application/json; charset=UTF-8")
-	public String selectAdList(HttpSession session, ModelAndView mv){
+	public ModelAndView selectAdList(HttpSession session, ModelAndView mv, @RequestParam(value="currentPage", defaultValue="1") int currentPage){
 		int mno = ((Member)session.getAttribute("loginUser")).getMno();
 		
-		ArrayList<Ad> list = mpService.selectAdList(mno);
+		int listCount = mpService.getAdListCount(mno);
 		
-		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		
-		return gson.toJson(list);
+		ArrayList<Ad> list = mpService.selectAdList(mno, pi);
+		
+		mv.addObject("pi", pi).addObject("list", list);
+		
+		return mv;
 	}
 	
 	// 비밀번호 변경 메소드
@@ -143,7 +247,7 @@ public class MyPageController {
 		int result = mpService.updatePass(m);
 		
 		if(result > 0) {
-			mv.addObject("msg", "비밀번호 변경에 성공하였습니다.").setViewName("redirect:mpUpdatePage.do");
+			mv.addObject("msg", "비밀번호 변경에 성공하였습니다.").setViewName("member/myPage");
 		}else {
 			mv.addObject("msg", "비밀번호 변경에 실패하였습니다.").setViewName("common/errorPage");
 		}
@@ -160,13 +264,53 @@ public class MyPageController {
 		
 		if(result > 0) {
 			session.invalidate();
-			mv.addObject("msg", "회원탈퇴에 성공하였습니다.").setViewName("redirect:home.do");
+			mv.addObject("msg", "회원탈퇴에 성공하였습니다.").setViewName("main");
 		}else {
 			mv.addObject("msg", "회원탈퇴에 실패하였습니다.").setViewName("common/errorPage");
 		}
 		
 		return mv;
 	}
+	
+	// 알람 카운트 메소드
+	@ResponseBody
+	@RequestMapping("mpSAlarmCount.do")
+	public int selectAlarmCount(HttpSession session) {
+		int mno = ((Member)session.getAttribute("loginUser")).getMno();
+		
+		int result = mpService.selectAlarmCount(mno);
+		
+		if(result > 0) {
+			return result;
+		}else {
+			return 0;
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping("mpSAlarmList.do")
+	public String selectAlarmList(HttpSession session) {
+		int mno = ((Member)session.getAttribute("loginUser")).getMno();
+		
+		ArrayList<Alarm> list = mpService.selectAlarmList(mno);
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		
+		return gson.toJson(list);
+	}
+	
+	@ResponseBody
+	@RequestMapping("mpSFanCheck.do")
+	public int selectFanCheck(Fan f) {
+		int result = mpService.selectFanCheck(f);
+		
+		if(result > 0) {
+			return result;
+		}else {
+			return -1;
+		}
+	}
+	
 	/*
 	@RequestMapping("mpInsertFan")
 	public ModelAndView insertFan(int mno, ModelAndView mv) {
@@ -182,7 +326,11 @@ public class MyPageController {
 	/*
 	@RequestMapping("검색어 ajax 호출")
 	
-	@RequestMapping("알림 ajax 호출")
 	*/
 
+	// 테스트 메소드 (나중에 지울거)
+	@RequestMapping("test.do")
+	public String test() {
+		return "member/test";
+	}
 }
