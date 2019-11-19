@@ -76,7 +76,7 @@
                 (select count(*) from p_reply where p_no=#{pno} and r_level=1) replyCount
 		from posting p
 		join member m on(p.m_no=m.m_no)
-		where p_no=#{pno};
+		where p_no=#{pno}
 	</select>
 	
 	<select id="selectReplyList" resultMap="postingReplyResultSet">
