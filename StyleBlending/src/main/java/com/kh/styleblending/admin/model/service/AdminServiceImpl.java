@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.styleblending.admin.model.dao.AdminDao;
+import com.kh.styleblending.admin.model.vo.Ad;
 import com.kh.styleblending.admin.model.vo.Declare;
 import com.kh.styleblending.admin.model.vo.PageInfo;
 import com.kh.styleblending.member.model.vo.Member;
@@ -57,6 +58,33 @@ public class AdminServiceImpl implements AdminService{
 		 * 
 		 * }else { return null; }
 		 */
+		
+	}
+
+	@Override
+	public int getAdListCount() {
+		// 총 광고수 조회
+		return aDao.getAdListCount();
+	}
+
+	@Override
+	public ArrayList<Ad> selectAdList(PageInfo pi) {
+		// 광고 목록조회
+		return aDao.selectAdList(pi);
+	}
+
+	@Override
+	public int insertAd(Ad ad) {
+		// 광고 등록
+		
+		int result = aDao.insertPay(ad);
+		
+		if(result > 0) {
+			System.out.println("impl : 결제 성공 ");
+			return aDao.insertAd(ad);
+		}else {
+			return 0;
+		}
 		
 	}
 
