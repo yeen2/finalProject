@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.kh.styleblending.admin.model.vo.Ad;
 import com.kh.styleblending.member.model.dao.MyPageDao;
 import com.kh.styleblending.member.model.vo.Alarm;
+import com.kh.styleblending.member.model.vo.Fan;
 import com.kh.styleblending.member.model.vo.Member;
 import com.kh.styleblending.member.model.vo.PageInfo;
 import com.kh.styleblending.posting.model.vo.Posting;
@@ -81,6 +82,11 @@ public class MyPageServiceImpl implements MyPageService {
 	@Override
 	public int updateProfileImg(Member m) {
 		return mpDao.updateProfileImg(m);
+	}
+
+	@Override
+	public int selectFanCheck(Fan f) {
+		return mpDao.selectFanCheck(f);
 	}
 
 

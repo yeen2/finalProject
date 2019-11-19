@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.styleblending.admin.model.vo.Ad;
 import com.kh.styleblending.member.model.vo.Alarm;
+import com.kh.styleblending.member.model.vo.Fan;
 import com.kh.styleblending.member.model.vo.Member;
 import com.kh.styleblending.member.model.vo.PageInfo;
 import com.kh.styleblending.posting.model.vo.Posting;
@@ -72,6 +73,10 @@ public class MyPageDao {
 	
 	public int updateProfileImg(Member m) {
 		return sqlSession.update("mypageMapper.updateProfileImg", m);
+	}
+	
+	public int selectFanCheck(Fan f) {
+		return sqlSession.selectOne("mypageMapper.selectFanCheck", f);
 	}
 	
 	

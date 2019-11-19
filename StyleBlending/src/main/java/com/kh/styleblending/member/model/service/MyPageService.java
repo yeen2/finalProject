@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.kh.styleblending.admin.model.vo.Ad;
 import com.kh.styleblending.member.model.vo.Alarm;
+import com.kh.styleblending.member.model.vo.Fan;
 import com.kh.styleblending.member.model.vo.Member;
 import com.kh.styleblending.member.model.vo.PageInfo;
 import com.kh.styleblending.posting.model.vo.Posting;
@@ -49,6 +50,7 @@ public interface MyPageService {
 	// 알람 리스트
 	ArrayList<Alarm> selectAlarmList(int mno);
 	
-	
+	// 프로필 페이지 - 팬 버튼 체크
+	int selectFanCheck(Fan f);
 
 }
