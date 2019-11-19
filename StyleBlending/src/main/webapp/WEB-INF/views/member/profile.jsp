@@ -21,7 +21,6 @@
 	#addAlarmCon1{padding:10px 10px 10px 10px;}
 	
 	
-	.imgP:hover{cursor:pointer; display:block;}
 	#abc div, #abc i{float:left;}
 	#abc div{width:45px;}
 	#abc i{line-height:30px; margin-right:5px;}
@@ -155,7 +154,7 @@
 			<!-- 나를 팔로우한 친구 목록 -->
 			<div class="tab-pane fade text-center" id="fan">
 				<div align="center">
-					<div id="fanList" style="width:50%;">
+					<div id="fanList" style="width:555px;">
 						
 					</div>
 				</div>
@@ -169,7 +168,7 @@
 			<!-- 내가 팔로잉한 친구 목록 -->
 			<div class="tab-pane fade text-center" id="following">
 				<div align="center">
-					<div id="fwList" style="width:50%;">
+					<div id="fwList" style="width:555px;">
 						
 					</div>
 				</div>
@@ -250,12 +249,23 @@
 							if(i == list.length-1){
 								$("#pBtn").css("display", "none");
 							}
-							var $copy1 = $("<div>").attr("class", "col-12 col-md-4");
-							$copy1.append($("<div>").attr({"class":"square", "style":"background-image: url(" + "'resources/assets/img/" + list[i].renameImg + "');"}));
+							var $copy1 = $("<div>").attr({"class":"col-12 col-md-4", "style":"position:relative;"});
+							$copy1.append($("<div>").attr({"id":"imgP","class":"square imgP", "style":"background-image: url(" + "'resources/assets/img/" + list[i].renameImg + "');"}));
+							var $copy2 = 
+								"<div id='aaa1' style='position:absolute; display:none; bottom:16px; width:350px; height:300px; background:rgba(0,0,0,0.6);'>"
+								+ "<div style='margin-left:48px; margin-top:135px; color:white; position:relative;'>"
+								+ "<div style='float:left; left:40px; position:absolute;'><i class='fas fa-heart'></i></div>"
+								+ "<div style='float:left; left:70px; position:absolute;'>" + list[i].likeCount + "</div>"
+								+ "<div style='float:left; left:160px; position:absolute;'><i class='fas fa-comment'></i></div>"
+								+ "<div style='float:left; left:190px; position:absolute;'>" + list[i].replyCount + "</div>"
+								+ "</div>"
+								+ "</div>";
+							$copy1.append($copy2);
 							
 							$("#postingList").append($copy1);
 						}
 					}
+					
 				},
 				error:function(){
 					console.log("ajax 통신 실패");
@@ -291,9 +301,19 @@
 							if(i == list.length-1){
 								$("#lBtn").css("display", "none");
 							}
-							var $copy1 = $("<div>").attr("class", "col-12 col-md-4");
-							$copy1.append($("<div>").attr({"class":"square", "style":"background-image: url(" + "'resources/assets/img/" + list[i].renameImg + "');"}));
-							
+							var $copy1 = $("<div>").attr({"class":"col-12 col-md-4", "style":"position:relative;"});
+							$copy1.append($("<div>").attr({"class":"square imgP", "style":"background-image: url(" + "'resources/assets/img/" + list[i].renameImg + "');"}));
+							var $copy2 = 
+								"<div class='countView' style='position:absolute; display:none; bottom:16px; width:350px; height:300px; background:rgba(0,0,0,0.6);'>"
+								+ "<div style='margin-left:48px; margin-top:135px; color:white; position:relative;'>"
+								+ "<div style='float:left;'><i class='fas fa-heart'></i></div>"
+								+ "<div style='float:left; left:30px; position:absolute;'>" + list[i].likeCount + "</div>"
+								+ "<div style='float:left; left:200px; position:absolute;'><i class='fas fa-comment'></i></div>"
+								+ "<div style='float:left; left:230px; position:absolute;'>" + list[i].replyCount + "</div>"
+								+ "</div>"
+								+ "</div>";
+							$copy1.append($copy2);
+								
 							$("likeList").append($copy1);
 						}
 					}
@@ -552,22 +572,20 @@
 			
 		});
 		
-		
-		
-		$(function(){
-			$("#imgH").mouseenter(function(){
-				$("#aaa").show();
-			}).mouseout(function(){
-				$("#aaa").hide();
+	</script>
+	
+	<script type="text/javascript">
+		// 포스팅 hover 좋아요, 댓글 표시
+		$(document).ready(function(){
+			$(document).on("mouseenter", ".imgP", function(event){
+				$(this).siblings("div").css("display", "block");
 			});
-			
-			$("#imgL").mouseenter(function(){
-				$("#aaa1").show();
-			}).mouseout(function(){
-				$("#aaa1").hide();
+			$(document).on("mouseout", ".imgP", function(event){
+				$(this).siblings("div").css("display", "none");
 			});
 		});
 	</script>
+	
 	<script>
 		$(document).ready(function(){
 			var url = document.location.href;
