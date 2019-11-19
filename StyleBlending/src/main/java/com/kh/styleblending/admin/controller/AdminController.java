@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,9 +32,12 @@ public class AdminController {
 	private AdminService aService;
 	
 	@RequestMapping("aPage.do")
-	public String adminPage() {
+	public String adminPage(Model model) {
 		
 		int newBoard = aService.selectNewBcount();
+		ArrayList<Member> newMember = aService.selectNewMember();
+		
+		model.addAttribute("newBoard",newBoard).addAttribute("newMember", newMember);
 		
 		return "admin/adminPage";
 	}
@@ -122,15 +126,18 @@ public class AdminController {
 	}
 	
 	@RequestMapping("aInsertAd.do")
-	public ModelAndView insertAd(@RequestParam String mno, ModelAndView mv, Ad ad, HttpServletRequest request) {
+	public ModelAndView insertAd(HttpSession session, ModelAndView mv,  HttpServletRequest request) {
 		
+	
+		Ad ad = (Ad)session.getAttribute("ad");
 		int result = aService.insertAd(ad);
 		
-		System.out.println(ad);
-		System.out.println(mno);
-		
+		//System.out.println("진짜"+ad);
+	
 		if(result > 0) {
+			session.removeAttribute("ad"); // 광고 session 지워주기
 			mv.setViewName("redirect:aAdvertisment.do");
+			//System.out.println("지우고"+ad);
 		}else {
 			mv.addObject("msg", "광고신청실패").setViewName("common/errorPage");
 		}
@@ -168,8 +175,14 @@ public class AdminController {
 		
 	}
 	
+	@RequestMapping("aInsertAdView.do")
+	public String insertAdView() {
+		return "admin/adInsertForm";
+	}
+	
 	@RequestMapping("aInsertPayView.do")
-	public String insertPayView(@RequestParam(value="uploadFile", required=false) MultipartFile file, Ad ad, Model model, HttpServletRequest request) {
+	public String insertPayView(HttpSession session,@RequestParam(value="uploadFile", required=false) MultipartFile file, Ad ad, Model model, HttpServletRequest request) {
+		
 		
 		if(!file.getOriginalFilename().equals("")) {// 파일 존재시
 			
@@ -178,9 +191,10 @@ public class AdminController {
 			ad.setOriginalImg(file.getOriginalFilename());
 			ad.setRenameImg(renameFileName);
 		}
+
+		session.setAttribute("ad", ad);
 		//System.out.println(ad);
 		
-		model.addAttribute("ad",ad).addAttribute("file",file);
 		return "admin/pay";
 	}
 	

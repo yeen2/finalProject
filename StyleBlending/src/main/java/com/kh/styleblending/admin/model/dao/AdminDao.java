@@ -23,6 +23,10 @@ public class AdminDao {
 		return sqlSession.selectOne("adminMapper.selectNewBcount");
 	}
 	
+	public ArrayList<Member> selectNewMember() {
+		return (ArrayList)sqlSession.selectList("adminMapper.selectNewMember");
+	}
+	
 	public int getMemberListCount() {
 		return sqlSession.selectOne("adminMapper.getMemberListCount");
 	}

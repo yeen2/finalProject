@@ -87,7 +87,7 @@
                                         <tr>
                                         	<th><input type="checkbox" name="mCheckAll" id="checkAll" onclick="allCheck();"/></th>
                                             <th>No.</th>
-                                            <th>이미지</th>
+                                            <th>프로필</th>
                                             <th>이메일</th>
                                             <th>닉네임</th>
                                             <th>가입일</th>

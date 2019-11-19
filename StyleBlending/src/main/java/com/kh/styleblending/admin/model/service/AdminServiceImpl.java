@@ -23,6 +23,12 @@ public class AdminServiceImpl implements AdminService{
 		// 오늘자 새 게시물수
 		return aDao.selectNewBcount();
 	}
+	
+	@Override
+	public ArrayList<Member> selectNewMember() {
+		// 오늘자 가입자수
+		return aDao.selectNewMember();
+	}
 
 	@Override
 	public int getMemberListCount() {
@@ -86,13 +92,15 @@ public class AdminServiceImpl implements AdminService{
 		int result = aDao.insertPay(ad);
 		
 		if(result > 0) {
-			System.out.println("impl : 결제 성공 ");
+			//System.out.println("impl : 결제 성공 ");
 			return aDao.insertAd(ad);
 		}else {
 			return 0;
 		}
 		
 	}
+
+	
 
 	
 
