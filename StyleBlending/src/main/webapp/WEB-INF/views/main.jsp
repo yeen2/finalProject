@@ -183,13 +183,13 @@ li {
 
 <script>
 	
-	var $fourWrap = $("#fourWrap");
 
 	$(function(){
-		
 		topFour();
 	});
 	function topFour(){
+		
+		var $fourWrap = $("#fourWrap");
 		
 		$.ajax({
 			url:"mainFourWrap.do",
@@ -221,6 +221,7 @@ li {
 								$fourWrap.append($input);
 				
 				});
+			//	$fourWrap.append($inputWrap);
 			},
 			error:function(){
 				console.log("실패");
@@ -229,15 +230,15 @@ li {
 			
 		});
 	}
-	
+  	
 	$(function(){
-		
 		postList();
-	});
+	})
+	
 	function postList(){
 		
-	}
 		var $inputWrap = $("#inputWrap");
+		//$("#fourWrap").append($inputWrap);
 		
 		$.ajax({
 			url:"mainPostList.do",
@@ -246,75 +247,56 @@ li {
 				console.log("성공 PostList");
 				$.each(data,function(index, value){
 					
-					var $input = "<div class='col-md-4'>" +
-								 "<div class='component'" + 
-								 "<div class='card' style='overflow:hidden;'"+
-								 "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'"> +
+					console.log("아ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ");
+					var $input = "<div class='col-md-4'>"+
+								 "<div class='component'>"+ 
+								 "<div class='card' style='overflow:hidden;'>"+
+								 "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
 								 "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
 								 "<img src='${pageContext.request.contextPath}/resources/assets/img/배너일.png' style='width: 80px; height: 50px; margin-left: 20px;' />" +
 								 "</div>"+
 								 "<div class='col-6' style='width: 50%; height: 50px; margin-left: 30px;'>"+
-								 "<span style='margin-bottom: 0px; margin-top: 23px;'>kimsh940607<br>30주전</span>"+
-								 "</div>"
-								</div>
-								"
-					
-					
-				<div class="col-md-4">
-					<div class="component">
-						<div class="card" style="overflow: hidden;">
-							<div class="form-inline"
-								style="width: 100%; height: 80px; margin: 0px; color: black;">
-
-								<div class="col-2"
-									style="width: 30%; height: 50px; padding: 0px;">
-									<img
-										src="${pageContext.request.contextPath}/resources/assets/img/배너일.png"
-										alt="" style="width: 80px; height: 50px; margin-left: 20px;" />
-								</div>
-								
-								<div class="col-6"
-									style="width: 50%; height: 50px; margin-left: 30px;">
-									<span style="margin-bottom: 0px; margin-top: 23px;">kimsh940607<br>30주전
-									</span>
-
-								</div>
-								<div class="col-3"
-									style="width: 20%; height: 50px; margin-top: 5px; padding-right: 10px; padding-left: 10px; padding-bottom: 5px;">
-									<button class="btn btn-dark">
-										<span style="font-size: 1.2em">+Fan</span>
-									</button>
-
-								</div>
-							</div>
-
-							<div class="card-body" style="height: 400px; padding: 0px;">
-								<a href="pInfo.do?id=1"
-									style="border-bottom: 0px !important; text-decoration: none black;">
-									<img class="card-img"
-									src="${pageContext.request.contextPath}/resources/assets/img/dog-2.jpg"
-									alt="dog" style="height: 100%;">
-								</a>
-							</div>
-							<div class="card-footer row">
-								<div class="col-3 form-inline">
-									<a href=""><i class="far fa-heart"
-										style="color: black; font-size: 30px;"></i> </a>
-									<p style="margin: 0px;">30</p>
-								</div>
-								<div class="col-3 form-inline" style="padding: 0px;">
-									<a href=""><i class="far fa-comment" aria-hidden="true"
-										style="color: black; font-size: 30px;"></i></a>
-									<p style="margin: 0px;">30</p>
-								</div>
-
-
-							</div>
-						</div>
-					</div>
-				</div>
-					
-
+								 "<span style='margin-bottom: 0px; margin-top: 23px;'><br>"+value.enrollDate+"</span>"+
+								 "</div>"+
+								 "<div class='col-3'style='width: 20%; height: 50px; margin-top: 5px; padding-right: 10px; padding-left: 10px; padding-bottom: 5px;'>"+
+								 "<button class='btn btn-dark'>"+
+							 	 "<span style='font-size: 1.2em'>+Fan</span>"+
+								 "</button>"+
+								 "</div>"+
+								 "</div>"+
+								 "<div class='card-body' style='height: 400px; padding: 0px;'>"+
+								 "<a href='pInfo.do?id=1' style='border-bottom: 0px !important; text-decoration: none black;'>"+
+								 "<img class='card-img' src="+value.imgPath+"/"+value.renameImg+" alt='dog' style='height: 100%;'>"+
+								 "</a>"+
+								 "</div>"+
+								 "<div class='card-footer row'>"+
+								 "<div class='col-3 form-inline'>"+
+								 "<a href=''><i class='far fa-heart'style='color: black; font-size: 30px;'></i> </a>"+
+								 "<p style='margin: 0px;'>"+value.likeCount+"</p>"+
+								 "</div>"+
+								 "<div class='col-3 form-inline' style='padding: 0px;'>"+
+								 "<a href=''><i class='far fa-comment' aria-hidden='true' style='color: black; font-size: 30px;'></i></a>"+
+								 "<p style='margin: 0px;'>30</p>"+
+								 "</div>"+
+								 "</div>"+
+								 "</div>"+
+								 "</div>"+
+								 "</div>";
+								 $inputWrap.append($input);						
+								 //$("#fourWrap").append($inputWrap);
+								 //$("#fourWrap").append($input);
+				});
+				$("#fourWrap").append($inputWrap);
+			},
+			error:function(){
+				console.log("실패");
+			
+			}
+			
+		});
+	}
+	 
+			
 </script>
 
 		<div class="row" style="margin-top: 1rem !important" id="fourWrap">
@@ -428,7 +410,8 @@ li {
  
  
 	 	<div class="row mt-3" id="inputWrap">
-				<div class="col-md-4">
+	 	<%-- 
+ 				<div class="col-md-4">
 					<div class="component">
 						<div class="card" style="overflow: hidden;">
 							<div class="form-inline"
@@ -718,36 +701,78 @@ li {
 					</div>
 				</div>
 			</div>
-
+ --%>
 		</div> 
 	</div>
-
+</div>
 	<script>
 		var page = 2;
+		var flag = 0;
 
 		$(window).scroll(
 				function() {
 					console.log($(window).scrollTop());
 					console.log($(document).height());
 					console.log($(window).height());
-
+					
 					var height = $(window).height() - 920;
-
-					if ($(window).scrollTop() == height) {
+					if ($(window).scrollTop() == height && flag == 0) {
 						console.log(++page);
-						// $("i").removeClass('fa-spinner');
-						//$("#ddd").append("<div class='row mt-3' style='border:1px solid black;'>");
-						var dlendud = $('#ttt').clone();
-						//   dlendud.find('img').eq(0).attr('src','~~~"')
-
-						$('.eee').append(
-								'<div class="row mt-3">' + dlendud.html()
-										+ '</div>');
-
+						var $inputWrap = $("#inputWrap");
+						$.ajax({	
+							url:"mainInfinityScroll.do",
+							dataType:"json",
+							success:function(data){
+								console.log("성공 infinitylist");
+								$.each(data,function(index, value){
+									var $input = "<div class='col-md-4'>"+
+									 "<div class='component'>"+ 
+									 "<div class='card' style='overflow:hidden;'>"+
+									 "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
+									 "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
+									 "<img src='${pageContext.request.contextPath}/resources/assets/img/배너일.png' style='width: 80px; height: 50px; margin-left: 20px;' />" +
+									 "</div>"+
+									 "<div class='col-6' style='width: 50%; height: 50px; margin-left: 30px;'>"+
+									 "<span style='margin-bottom: 0px; margin-top: 23px;'><br>"+value.enrollDate+"</span>"+
+									 "</div>"+
+									 "<div class='col-3'style='width: 20%; height: 50px; margin-top: 5px; padding-right: 10px; padding-left: 10px; padding-bottom: 5px;'>"+
+									 "<button class='btn btn-dark'>"+
+								 	 "<span style='font-size: 1.2em'>+Fan</span>"+
+									 "</button>"+
+									 "</div>"+
+									 "</div>"+
+									 "<div class='card-body' style='height: 400px; padding: 0px;'>"+
+									 "<a href='pInfo.do?id=1' style='border-bottom: 0px !important; text-decoration: none black;'>"+
+									 "<img class='card-img' src="+value.imgPath+"/"+value.renameImg+" alt='dog' style='height: 100%;'>"+
+									 "</a>"+
+									 "</div>"+
+									 "<div class='card-footer row'>"+
+									 "<div class='col-3 form-inline'>"+
+									 "<a href=''><i class='far fa-heart'style='color: black; font-size: 30px;'></i> </a>"+
+									 "<p style='margin: 0px;'>"+value.likeCount+"</p>"+
+									 "</div>"+
+									 "<div class='col-3 form-inline' style='padding: 0px;'>"+
+									 "<a href=''><i class='far fa-comment' aria-hidden='true' style='color: black; font-size: 30px;'></i></a>"+
+									 "<p style='margin: 0px;'>30</p>"+
+									 "</div>"+
+									 "</div>"+
+									 "</div>"+
+									 "</div>"+
+									 "</div>";
+									 $inputWrap.append($input);	
+						});
+						$("#fourWrap").append($inputWrap);
+							flag = 1;
+							$("#loading").remove();
+							},
+							error:function(){
+								console.log("실패");
+							
+							}
+							
+						});
 					}
-
-				});
-
+				});			 
 		var sel;
 		$(document).on("click", ".b", function() {
 			console.log("ddd");

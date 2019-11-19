@@ -23,6 +23,7 @@ import com.google.gson.GsonBuilder;
 import com.kh.styleblending.admin.model.vo.Ad;
 import com.kh.styleblending.member.model.service.MyPageService;
 import com.kh.styleblending.member.model.vo.Alarm;
+import com.kh.styleblending.member.model.vo.Fan;
 import com.kh.styleblending.member.model.vo.Member;
 import com.kh.styleblending.member.model.vo.PageInfo;
 import com.kh.styleblending.member.model.vo.Pagination;
@@ -124,6 +125,8 @@ public class MyPageController {
 	@RequestMapping("mpUpdateImg.do")
 	public String updateProfileImg(Member m, HttpSession session, ModelAndView mv, HttpServletRequest request, MultipartHttpServletRequest req) {
 		int mno = ((Member)session.getAttribute("loginUser")).getMno();
+		String renameFileNameD = ((Member)session.getAttribute("loginUser")).getRenameImg();
+		
 		m.setMno(mno);
 		
 		MultipartFile file = req.getFile("uploadImg");
@@ -136,12 +139,14 @@ public class MyPageController {
 			m.setRenameImg(renameFileName);
 			
 		}
-		System.out.println(file);
-		System.out.println(m);
 		
-		int result = mpService.updateProfileImg(m);
-		System.out.println(result);
-		if(result > 0) {
+		Member mem = mpService.updateProfileImg(m);
+		
+		if(mem != null) {
+			session.setAttribute("loginUser", mem);
+			if(renameFileNameD != "profile.png") {
+				deleteProfileImg(renameFileNameD, request);
+			}
 			return m.getRenameImg();
 		}else {
 			return "fail";
@@ -149,27 +154,27 @@ public class MyPageController {
 		
 	}
 	// 내 프로필 이미지 기본 이미지로 변경
+	@ResponseBody
 	@RequestMapping("mpUpdateBasic")
-	public ModelAndView updateBasicImg(Member m, ModelAndView mv, HttpSession session, HttpServletRequest request, String renameImg) {
-		
-		deleteProfileImg(renameImg, request);
-		
-		m.setRenameImg("profile.jpg");
-		m.setOriginalImg("profile.jpg");
-			
-
+	public String updateBasicImg(Member m, ModelAndView mv, HttpSession session, HttpServletRequest request) {
+		String renameFileName = ((Member)session.getAttribute("loginUser")).getRenameImg();
 		int mno = ((Member)session.getAttribute("loginUser")).getMno();
+		
+		deleteProfileImg(renameFileName, request);
+		
+		m.setRenameImg("profile.png");
+		m.setOriginalImg("profile.png");
 		m.setMno(mno);
 		
-		int result = mpService.updateProfileImg(m);
+		Member mem = mpService.updateProfileImg(m);
 		
-		if(result > 0) {
-			mv.setViewName("redirect:mProfile.do");
+		if(mem != null) {
+			session.setAttribute("loginUser", mem);
+			return m.getRenameImg();
 		}else {
-			mv.addObject("msg", "프로필 이미지 변경에 실패하였습니다.").setViewName("common/errorPage");
+			return "fail";
 		}
-		
-		return mv;
+	
 	}
 	
 	// 프로필 이미지 수정명 저장 메소드
@@ -275,6 +280,7 @@ public class MyPageController {
 	}
 	
 	// 알람 카운트 메소드
+	/*
 	@ResponseBody
 	@RequestMapping("mpSAlarmCount.do")
 	public int selectAlarmCount(HttpSession session) {
@@ -300,18 +306,33 @@ public class MyPageController {
 		
 		return gson.toJson(list);
 	}
-	/*
-	@RequestMapping("mpInsertFan")
-	public ModelAndView insertFan(int mno, ModelAndView mv) {
-		int result = mpService.insertFan(mno);
+	*/
+	
+	@ResponseBody
+	@RequestMapping("mpSFanCheck.do")
+	public int selectFanCheck(Fan f) {
+		int result = mpService.selectFanCheck(f);
 		
 		if(result > 0) {
-			
+			return result;
 		}else {
-			mv.addObject()
+			return -1;
 		}
 	}
-	*/
+	
+	
+	@RequestMapping("mpInsertFan.do")
+	public int insertFan(Fan f, ModelAndView mv) {
+		int result = mpService.insertFan(f);
+		
+		if(result > 0) {
+			return 1;
+		}else {
+			return -1;
+		}
+	}
+	
+	
 	/*
 	@RequestMapping("검색어 ajax 호출")
 	

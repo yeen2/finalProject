@@ -21,8 +21,6 @@
 	#addAlarmCon1{padding:10px 10px 10px 10px;}
 	
 	
-	#imgH:hover{cursor:pointer;}
-	#imgL:hover{cursor:pointer;}
 	#abc div, #abc i{float:left;}
 	#abc div{width:45px;}
 	#abc i{line-height:30px; margin-right:5px;}
@@ -40,10 +38,13 @@
 				<!-- 프로필 이미지 -->
 				<div class="col-12 col-md-4 text-center">
 					<img id="imgClick" src="resources/upload/member/${ m.renameImg }"
-						class="img-fluid rounded-circle" style="width: 180px; height:180px;">
+						class="img-fluid rounded-circle shadow-lg" style="width: 180px; height:180px;">
 				</div>
 				<div id="fileArea">
 					<input type="file" id="uploadImg" name="uploadImg">
+				</div>
+				<div style="display:none;">
+					<a href="#updateProfileImg" data-toggle="modal" id="imgModal"></a>
 				</div>
 				
 				<!-- 프로필 -->
@@ -51,19 +52,24 @@
 					<div class="d-flex flex-row align-items-start mt-3 mt-lg-0">
 						<!-- 닉네임 -->
 						<div class="name">
-							<h2 class="mb-0">닉네임</h2>
+							<h2 class="mb-0">${ m.nickName }</h2>
 						</div>
 						
 						<!-- 팔로워버튼  -->
-						<c:if test="${ m == loginUser }">
-							<a href="test.do" class="btn btn-dark ml-3"><i class="fa fa-plus"></i> <b>Fan</b></a>						
-						</c:if>
-						<%--<c:if test="${ loginUser.mno == m.mno }"> --%>
-							<button class="btn btn-info btn-pill" style="margin-left:400px;"onclick="location.href='mpUpdatePage.do';">
+						<c:if test="${ loginUser.mno == m.mno }">
+							<button class="btn btn-info btn-pill" style="margin-left:500px;"onclick="location.href='mpUpdatePage.do';">
 							    <i class="fa fa-edit mr-1"></i>
 						    	프로필 관리
 							</button>
-						<%--</c:if> --%>
+						</c:if>
+						<c:if test="${ loginUser.mno != m.mno }">
+							<a href="#" data-toggle="modal" class="btn btn-dark ml-3" id="fanA" style="display:none;">
+								<%-- <c:param url="mpInsertFan.do" --%>
+							<i class="fa fa-plus"></i><b> Fan</b></a>
+							<a href="#" class="btn btn-dark ml-3" id="fanB" style="display:none;">
+								<i style="width:40px;"class="fas fa-check"></i></a>
+						</c:if>
+						
 					</div>
 						
 					<div class="stats d-flex flex-row align-items-center align-items-lg-start text-center text-lg-left">
@@ -148,7 +154,7 @@
 			<!-- 나를 팔로우한 친구 목록 -->
 			<div class="tab-pane fade text-center" id="fan">
 				<div align="center">
-					<div id="fanList" style="width:50%;">
+					<div id="fanList" style="width:555px;">
 						
 					</div>
 				</div>
@@ -162,7 +168,7 @@
 			<!-- 내가 팔로잉한 친구 목록 -->
 			<div class="tab-pane fade text-center" id="following">
 				<div align="center">
-					<div id="fwList" style="width:50%;">
+					<div id="fwList" style="width:555px;">
 						
 					</div>
 				</div>
@@ -176,6 +182,30 @@
 
 	</div>
 
+	<!-- 프로필 이미지 있을 때 클릭 시 모달창 -->
+	<div class="modal fade" id="updateProfileImg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">프로필 이미지 변경</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="modalClose">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body" align="center">
+	        <div style="width:70%; height:50px;">
+	        	<button style="width:100%; height:100%;" class="btn btn-success" id="updateImg1">프로필 이미지 변경</button>
+	        </div>
+	        <br>
+	        <div style="width:70%; height:50px;">
+	        	<button style="width:100%; height:100%;" class="btn btn-info" id="updateImg2">기본 이미지로 변경</button>
+	        </div>
+	      </div>
+	     
+	    </div>
+	  </div>
+	</div>
+	
 	<div id="scrollTop1" style="position:fixed; border:1px solid lightgray; display:none; background:white; bottom:10px; right:10px;">
 		<a href="#"><img style="width:60px; height:60px;"src="${pageContext.request.contextPath}/resources/assets/img/123a.png"></a>
 	</div>
@@ -187,6 +217,8 @@
 			selectLikeList();
 			selectFanList();
 			selectFwList();
+			selectFanCheck();
+			selectFanCheckTab();
 		});
 		
 		var countP = 0;
@@ -217,12 +249,23 @@
 							if(i == list.length-1){
 								$("#pBtn").css("display", "none");
 							}
-							var $copy1 = $("<div>").attr("class", "col-12 col-md-4");
-							$copy1.append($("<div>").attr({"class":"square", "style":"background-image: url(" + "'resources/assets/img/" + list[i].renameImg + "');"}));
+							var $copy1 = $("<div>").attr({"class":"col-12 col-md-4", "style":"position:relative;"});
+							$copy1.append($("<div>").attr({"id":"imgP","class":"square imgP", "style":"background-image: url(" + "'resources/assets/img/" + list[i].renameImg + "');"}));
+							var $copy2 = 
+								"<div id='aaa1' style='position:absolute; display:none; bottom:16px; width:350px; height:300px; background:rgba(0,0,0,0.6);'>"
+								+ "<div style='margin-left:48px; margin-top:135px; color:white; position:relative;'>"
+								+ "<div style='float:left; left:40px; position:absolute;'><i class='fas fa-heart'></i></div>"
+								+ "<div style='float:left; left:70px; position:absolute;'>" + list[i].likeCount + "</div>"
+								+ "<div style='float:left; left:160px; position:absolute;'><i class='fas fa-comment'></i></div>"
+								+ "<div style='float:left; left:190px; position:absolute;'>" + list[i].replyCount + "</div>"
+								+ "</div>"
+								+ "</div>";
+							$copy1.append($copy2);
 							
 							$("#postingList").append($copy1);
 						}
 					}
+					
 				},
 				error:function(){
 					console.log("ajax 통신 실패");
@@ -258,9 +301,19 @@
 							if(i == list.length-1){
 								$("#lBtn").css("display", "none");
 							}
-							var $copy1 = $("<div>").attr("class", "col-12 col-md-4");
-							$copy1.append($("<div>").attr({"class":"square", "style":"background-image: url(" + "'resources/assets/img/" + list[i].renameImg + "');"}));
-							
+							var $copy1 = $("<div>").attr({"class":"col-12 col-md-4", "style":"position:relative;"});
+							$copy1.append($("<div>").attr({"class":"square imgP", "style":"background-image: url(" + "'resources/assets/img/" + list[i].renameImg + "');"}));
+							var $copy2 = 
+								"<div class='countView' style='position:absolute; display:none; bottom:16px; width:350px; height:300px; background:rgba(0,0,0,0.6);'>"
+								+ "<div style='margin-left:48px; margin-top:135px; color:white; position:relative;'>"
+								+ "<div style='float:left;'><i class='fas fa-heart'></i></div>"
+								+ "<div style='float:left; left:30px; position:absolute;'>" + list[i].likeCount + "</div>"
+								+ "<div style='float:left; left:200px; position:absolute;'><i class='fas fa-comment'></i></div>"
+								+ "<div style='float:left; left:230px; position:absolute;'>" + list[i].replyCount + "</div>"
+								+ "</div>"
+								+ "</div>";
+							$copy1.append($copy2);
+								
 							$("likeList").append($copy1);
 						}
 					}
@@ -389,17 +442,114 @@
 		});
 		
 		
+		function selectFanCheck(){
+			$.ajax({
+				url:"mpSFanCheck.do",
+				data:{meNo:${m.mno}, youNo:${loginUser.mno}},
+				type:"post",
+				success:function(result){
+					if(result == 1){
+						$("#fanA").hide();
+						$("#fanB").show();
+					}else{
+						$("#fanA").show();
+						$("#fanB").hide();
+					}
+					
+				},
+				error:function(){
+					console.log("실패");
+				}
+			});
+				
+		}
+		
+		function selectFanCheckTab(result){
+			var mno = result;
+			$.ajax({
+				url:"mpSFanCheck.do",
+				data:{meNo:mno, youNo:${loginUser.mno}},
+				type:"post",
+				success:function(result){
+					if(result == 1){
+						$(".fanA").hide();
+						$(".fanB").show();
+					}else{
+						$(".fanA").show();
+						$(".fanB").hide();
+					}
+					
+				},
+				error:function(){
+					console.log("실패");
+				}
+			});
+				
+		}
+		
+		function insertFan(){
+			$.ajax({
+				url:"mpInsertFan.do",
+				data:{meNo:${loginUser.mno}, youNo:${m.mno}},
+				type:"post",
+				success:function(){
+					if(result == 1){
+						
+					}else{
+						console.log("실패");
+					}
+				},
+				error:function(){
+					console.log("ajax 통신 실패");
+				}
+			});
+		}
+		
 	</script>
 	<script>
 		// input 파일
 		$(function(){
 			$("#fileArea").hide();
 			
+			// 이미지 변경 시 이미지 존재 여부 확인
 			$("#imgClick").click(function(){
-				$("#uploadImg").click();
+				if($("#imgClick").attr("src") != "resources/upload/member/profile.png"){
+					$("#imgModal").click();
+				}else{
+					$("#uploadImg").click();
+				}
+				
 			});
+			
+			// 모달창 버튼 클릭 시 발생 이벤트
+			// 프로필 이미지 있을 때 이미지 변경
+			$("#updateImg1").click(function(){
+				$("#uploadImg").click();
+				$("#modalClose").click();
+			});
+			// 프로필 이미지 있을 때 기본 이미지로 변경
+			$("#updateImg2").click(function(){
+				updateBasic();
+				$("#modalClose").click();
+			});
+			
 		});
 		
+		// 기본 이미지로 변경하는 ajax구문 호출
+		function updateBasic(){
+			$.ajax({
+				url:"mpUpdateBasic.do",
+				success:function(result){
+					$("#imgClick").attr("src", "resources/upload/member/" + result);
+				},
+				error:function(){
+					console.log("ajax 통신 실패");
+				}
+				
+			});
+		}
+		
+		// 이미지 파일 input 시 수행될 ajax구문
 		$("#uploadImg").on("input", function(){
 			var data = new FormData();
 			data.append("uploadImg", $("#uploadImg")[0].files[0]);
@@ -411,7 +561,6 @@
 				processData:false,
 				contentType:false,
 				success:function(result){
-					console.log("ajax 성공");
 					$("#imgClick").attr("src", "resources/upload/member/" + result);
 				},
 				error:function(){
@@ -423,22 +572,20 @@
 			
 		});
 		
-		
-		
-		$(function(){
-			$("#imgH").mouseenter(function(){
-				$("#aaa").css("display", "block");
-			}).mouseout(function(){
-				$("#aaa").css("display", "none");
+	</script>
+	
+	<script type="text/javascript">
+		// 포스팅 hover 좋아요, 댓글 표시
+		$(document).ready(function(){
+			$(document).on("mouseenter", ".imgP", function(event){
+				$(this).siblings("div").css("display", "block");
 			});
-			
-			$("#imgL").mouseenter(function(){
-				$("#aaa1").css("display", "block");
-			}).mouseout(function(){
-				$("#aaa1").css("display", "none");
+			$(document).on("mouseout", ".imgP", function(event){
+				$(this).siblings("div").css("display", "none");
 			});
 		});
 	</script>
+	
 	<script>
 		$(document).ready(function(){
 			var url = document.location.href;
