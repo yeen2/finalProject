@@ -21,8 +21,7 @@
 	#addAlarmCon1{padding:10px 10px 10px 10px;}
 	
 	
-	#imgH:hover{cursor:pointer;}
-	#imgL:hover{cursor:pointer;}
+	.imgP:hover{cursor:pointer; display:block;}
 	#abc div, #abc i{float:left;}
 	#abc div{width:45px;}
 	#abc i{line-height:30px; margin-right:5px;}
@@ -58,18 +57,20 @@
 						</div>
 						
 						<!-- 팔로워버튼  -->
-						<a href="#" data-toggle="modal" class="btn btn-dark ml-3" id="fanA" style="display:none;">
-							<%-- <c:param url="mpInsertFan.do" --%>
-							<i class="fa fa-plus"></i><b> Fan</b></a>
-						<a href="#" class="btn btn-dark ml-3" id="fanB" style="display:none;">
-							<i style="width:40px;"class="fas fa-check"></i></a>						
-						
-						<%--<c:if test="${ loginUser.mno == m.mno }"> --%>
-							<button class="btn btn-info btn-pill" style="margin-left:400px;"onclick="location.href='mpUpdatePage.do';">
+						<c:if test="${ loginUser.mno == m.mno }">
+							<button class="btn btn-info btn-pill" style="margin-left:500px;"onclick="location.href='mpUpdatePage.do';">
 							    <i class="fa fa-edit mr-1"></i>
 						    	프로필 관리
 							</button>
-						<%--</c:if> --%>
+						</c:if>
+						<c:if test="${ loginUser.mno != m.mno }">
+							<a href="#" data-toggle="modal" class="btn btn-dark ml-3" id="fanA" style="display:none;">
+								<%-- <c:param url="mpInsertFan.do" --%>
+							<i class="fa fa-plus"></i><b> Fan</b></a>
+							<a href="#" class="btn btn-dark ml-3" id="fanB" style="display:none;">
+								<i style="width:40px;"class="fas fa-check"></i></a>
+						</c:if>
+						
 					</div>
 						
 					<div class="stats d-flex flex-row align-items-center align-items-lg-start text-center text-lg-left">
@@ -218,6 +219,7 @@
 			selectFanList();
 			selectFwList();
 			selectFanCheck();
+			selectFanCheckTab();
 		});
 		
 		var countP = 0;
@@ -440,6 +442,47 @@
 				}
 			});
 				
+		}
+		
+		function selectFanCheckTab(result){
+			var mno = result;
+			$.ajax({
+				url:"mpSFanCheck.do",
+				data:{meNo:mno, youNo:${loginUser.mno}},
+				type:"post",
+				success:function(result){
+					if(result == 1){
+						$(".fanA").hide();
+						$(".fanB").show();
+					}else{
+						$(".fanA").show();
+						$(".fanB").hide();
+					}
+					
+				},
+				error:function(){
+					console.log("실패");
+				}
+			});
+				
+		}
+		
+		function insertFan(){
+			$.ajax({
+				url:"mpInsertFan.do",
+				data:{meNo:${loginUser.mno}, youNo:${m.mno}},
+				type:"post",
+				success:function(){
+					if(result == 1){
+						
+					}else{
+						console.log("실패");
+					}
+				},
+				error:function(){
+					console.log("ajax 통신 실패");
+				}
+			});
 		}
 		
 	</script>

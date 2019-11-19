@@ -161,5 +161,9 @@
 		from fan
 		where me_no=#{meNo} and you_no=#{youNo}
 	</select>
+	
+	<insert id="insertFan">
+		insert into fan values(seq_fan.nextval, #{meNo}, #{youNo}, sysdate)
+	</insert>
 
 </mapper>
