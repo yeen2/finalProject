@@ -23,6 +23,9 @@
 		<result property="profile" column="profile"/>
 		<result property="mlocation" column="location_1"/>
 		<result property="profileImg" column="profile_img"/>
+		<result property="loginLike" column="loginLike"/>
+		<result property="loginDeclare" column="loginDeclare"/>
+		<result property="replyCount" column="replyCount"/>
 	</resultMap>
 	
 	<resultMap id="postingReplyResultSet" type="PostingReply">
@@ -59,7 +62,7 @@
 		values(seq_style.nextval, seq_posting.currval, #{cate}, #{brand}, #{color})
 	</insert>
 	
-	<select id="selectOnePosting" resultMap="postingOneResultSet">
+	<select id="selectOnePosting" resultMap="postingOneResultSet" parameterType="HashMap">
 		<!-- 
 		select * 
 		from posting
@@ -68,12 +71,12 @@
 		select p_no, p.m_no, p.original_img, p.rename_img, img_path, content, hashtag, gender, p.location,
         		like_count, declare_count, p.enroll_date, p.update_date, p.isdelete,
         		m.nickname, m.profile, m.location, m.rename_img, 
-                loginLike(select count(*) from p_like where m_no=#{map.mno} and p_no=#{map.pno}), 
-                loginDeclare(select count(*) from declare where m_no=#{map.mno} and b_no=#{map.pno} and type=1), 
-                replyCount(select count(*) from p_reply where p_no=#{map.pno} and r_level=1)
+                (select count(*) from p_like where m_no=#{mno} and p_no=#{pno}) loginLike, 
+                (select count(*) from declare where m_no=#{mno} and b_no=#{pno} and type=1) loginDeclare, 
+                (select count(*) from p_reply where p_no=#{pno} and r_level=1) replyCount
 		from posting p
 		join member m on(p.m_no=m.m_no)
-		where p_no=#{map.pno};
+		where p_no=#{pno};
 	</select>
 	
 	<select id="selectReplyList" resultMap="postingReplyResultSet">
