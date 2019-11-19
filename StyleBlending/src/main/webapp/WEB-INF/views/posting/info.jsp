@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -222,14 +223,23 @@
 				<div class="card my-4">
 					<h5 class="card-header">Clothes stylist</h5>
 					<div class="card-body">
-						<div class="row">
-							<div class="col-lg-12">
-								<ul class="list-unstyled mb-0">
-									<li>코디정보</li>
-								</ul>
-								
+					
+						<c:forEach var="s" items="${s }">
+						<div class="row" style="margin-bottom: 10px;">
+							<div class="col-lg-3">
+								<div  style="border-radius: 50%; width: 50px; height: 50px;">
+									<img style="width: 100%; height: 100%; border-radius: 50%;"
+										src="${ pageContext.servletContext.contextPath }/resources/image/cate/${s.img}">
+								</div>
+							</div>
+							<div class="col-lg-9">
+								<b>${s.name }</b>
+								<br>
+								<span>${s.brand }</span>
 							</div>
 						</div>
+						</c:forEach>
+						
 					</div>
 				</div>
 				
