@@ -19,6 +19,10 @@ public class AdminDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
+	public int selectNewBcount() {
+		return sqlSession.selectOne("adminMapper.selectNewBcount");
+	}
+	
 	public int getMemberListCount() {
 		return sqlSession.selectOne("adminMapper.getMemberListCount");
 	}

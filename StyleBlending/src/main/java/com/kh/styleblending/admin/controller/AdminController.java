@@ -32,6 +32,9 @@ public class AdminController {
 	
 	@RequestMapping("aPage.do")
 	public String adminPage() {
+		
+		int newBoard = aService.selectNewBcount();
+		
 		return "admin/adminPage";
 	}
 	

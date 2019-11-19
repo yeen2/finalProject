@@ -17,6 +17,12 @@ public class AdminServiceImpl implements AdminService{
 
 	@Autowired
 	private AdminDao aDao;
+	
+	@Override
+	public int selectNewBcount() {
+		// 오늘자 새 게시물수
+		return aDao.selectNewBcount();
+	}
 
 	@Override
 	public int getMemberListCount() {
@@ -87,6 +93,8 @@ public class AdminServiceImpl implements AdminService{
 		}
 		
 	}
+
+	
 
 	
 	
