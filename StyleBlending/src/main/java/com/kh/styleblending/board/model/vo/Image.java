@@ -17,7 +17,7 @@ public class Image {
 	private int bno;
 	private String originalImg;
 	private String renameImg;
-	private String imgPath;
+	private String imgPath;		// 이미지 저장될 경로
 	private String type;
 	
 	

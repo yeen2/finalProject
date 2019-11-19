@@ -65,7 +65,7 @@
 
 		<div id="readBtn">
 			<c:if test="${ !empty loginUser }">
-			<button class="btn btn-primary btn-sm" id="write" type="submit" onclick="binsertForm.do">글쓰기</button>
+			<button class="btn btn-primary btn-sm" id="write" type="submit" onclick="location.href='binsertForm.do';">글쓰기</button>
 			</c:if>
 		</div>
 		</div>
