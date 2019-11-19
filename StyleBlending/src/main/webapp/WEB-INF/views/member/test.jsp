@@ -19,7 +19,6 @@
 	#addAlarmNick1{display:inline-block; width:50%; margin-left:10px;}
 	#addAlarmDate1{display:inline-block; width:25%; text-align:right;}
 	#addAlarmCon1{padding:10px 10px 10px 10px;}
-	#allDelete:hover{cursor:pointer;}
 </style>
 </head>
 <body style="margin-top:300px;">

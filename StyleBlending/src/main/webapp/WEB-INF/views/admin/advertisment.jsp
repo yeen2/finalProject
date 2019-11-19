@@ -1,9 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- 아임포트 api -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.2.js"></script>
 </head>
 <body>
 	
@@ -47,10 +51,10 @@
             <div class="animated fadeIn">
                	<div class="card-header" style="background:white;">
                      <nav>
-                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                             <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true"><b>광고목록</b></a>
-                             <a class="nav-item nav-link " id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false"><b>승인대기</b></a>
-                             <a class="nav-item nav-link " id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false"><b>진행중</b></a>
+                         <div class="nav nav-tabs" id="nav-tab" >
+                             <a class="nav-item nav-link active" data-toggle="tab" href="#nav-home" id="adListTab"><b>광고목록</b></a>
+                             <a class="nav-item nav-link " data-toggle="tab" href="#nav-waiting" id="adUnapproved"><b>승인대기</b></a>
+                             <a class="nav-item nav-link " data-toggle="tab" href="#nav-ongoing" id="adOngoing"><b>진행중</b></a>
                          </div>
                      </nav>
                 	  <br>
@@ -58,7 +62,7 @@
                       <div class="default-tab">
                           <div class="tab-content pl-3 p-1" id="nav-tabContent">
                           	  <!-- 광고목록 -->
-                              <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                              <div class="tab-pane fade show active" id="nav-home" >
                               	 <div class="row">
 		                          	<div class="col-sm-12 col-md-6" style="padding:20px;">
 		                          		<div class="dataTables_length" id="bootstrap-data-table_length">
@@ -105,6 +109,7 @@
 	                                            <th>등록여부</th>
 	                                        </tr>
 	                                    </thead>
+	                                    <c:forEach items="${list }" var="a">
 	                                    <tbody>
 	                                        <tr>
 	                                        	<td>
@@ -114,89 +119,73 @@
 	                                       				<span class="switch-handle"></span>
 	                                        		</label>
 	                                        	</td>
-	                                            <td class="serial">1.</td>
-	                                            <td>나이키</td>
-	                                            <td> 2019-11-01 </td>
-	                                            <td> 2019-11-02 </td>
-	                                            <td>  </td>
+	                                            <td class="serial">${a.rownum}</td>
+	                                            <td>${a.name }</td>
+	                                            <td> ${a.enrollDate } </td>
+	                                            <td> ${a.startDate } </td>
+	                                            <td> ${a.endDate } </td>
 	                                            <td>
+	                                            	<c:if test="${a.status eq 1 }">
+	                                            	<span class="badge" style="background:#ffc107;">등록 대기</span>
+	                                                </c:if>
+	                                                <c:if test="${a.status eq 2 }">
 	                                                <span class="badge" style="background:rgb(0, 123, 255);">진행중</span>
-	                                            </td>
-	                                        </tr>
-	                                        <tr>
-	                                        	<td>
-	                                        		<label class="switch switch-3d switch-danger mr-3">
-	                                        			<input type="checkbox" class="switch-input" checked="true">
-	                                       				<span class="switch-label"></span> 
-	                                       				<span class="switch-handle"></span>
-	                                        		</label>
-	                                        	</td>
-	                                            <td class="serial">2.</td>
-	                                            <td>아디다스</td>
-	                                            <td> 2019-10-20 </td>
-	                                            <td> </td>
-	                                            <td> </td>
-	                                            <td>
-	                                                <span class="badge" style="background:#ffc107;">등록 대기</span>
-	                                            </td>
-	                                        </tr>
-	                                        <tr>
-	                                        	<td>
-	                                        		<label class="switch switch-3d switch-danger mr-3">
-	                                        			<input type="checkbox" class="switch-input" checked="true">
-	                                       				<span class="switch-label"></span> 
-	                                       				<span class="switch-handle"></span>
-	                                        		</label>
-	                                        	</td>
-	                                            <td class="serial">3.</td>
-	                                            <td>뉴발란스</td>
-	                                            <td> 2019-10-20 </td>
-	                                            <td> 2019-10-20 </td>
-	                                            <td>  2019-10-27 </td>
-	                                            <td>
+	                                                </c:if>
+	                                                <c:if test="${a.status eq 3 }">
 	                                                <span class="badge" style="background:gray;">종료</span>
-	                                            </td>
-	                                        </tr>
-	                                        <tr>
-	                                        	<td>
-	                                        		<label class="switch switch-3d switch-danger mr-3">
-	                                        			<input type="checkbox" class="switch-input" checked="true">
-	                                       				<span class="switch-label"></span> 
-	                                       				<span class="switch-handle"></span>
-	                                        		</label>
-	                                        	</td>
-	                                            <td class="serial">4.</td>
-	                                            <td>나이키</td>
-	                                            <td> 2019-10-20 </td>
-	                                            <td> 2019-10-20 </td>
-	                                            <td>  2019-10-27 </td>
-	                                            <td>
-	                                                <span class="badge" style="background:gray;">종료</span>
+	                                                </c:if>
 	                                            </td>
 	                                        </tr>
 	                                    </tbody>
+	                                    </c:forEach>
 	                                </table>
 	                                
 	                                <div class="row">
 		                                <div class="col-sm-4" style="margin-left:10px;">
-		                                	Showing 1 to 10 of 12 entries	
+		                                	Showing ${pi.currentPage } to ${pi.endPage } of ${pi.listCount } entries		
 		                                </div>
 		                                
 		                                <div class=".col-md-6 .offset-md-3">
 		                                	<div class="dataTables_paginate paging_simple_numbers" id="bootstrap-data-table_paginate">
 		                                		<ul class="pagination">
-		                                			<li class="paginate_button page-item previous disabled" id="bootstrap-data-table_previous">
-		                                				<a href="#" aria-controls="bootstrap-data-table" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
-		                                			</li>
+		                                	<!-- 이전 -->
+	                                			<li class="paginate_button page-item previous" id="bootstrap-data-table_previous">
+	                                			<c:if test="${pi.currentPage ne 1 }">
+	                                				<c:url value="aAdvertisment.do" var="previous">	
+														<c:param name="currentPage" value="${pi.currentPage-1 }"/>
+	                                				</c:url>
+	                                				<a href="${previous }" aria-controls="bootstrap-data-table" class="page-link">Previous</a>
+	                                			</c:if>
+	                                			<c:if test="${pi.currentPage eq 1 }">
+	                                				<button class="page-link disabled" style="color:black; cursor:text;" disabled>Previous</button>
+	                                			</c:if>
+	                                			</li>
+	                                		<!-- 페이지 -->
+	                                			<c:forEach begin="${pi.startPage}" end="${pi.endPage }" var="p">
+	                                			<c:if test="${p ne pi.currentPage }">
+	                                				<c:url value="aAdvertisment.do" var="page">	
+	                                					<c:param name="currentPage" value="${p}"/>
+	                                				</c:url>
 		                                			<li class="paginate_button page-item active">
-		                                				<a href="#" aria-controls="bootstrap-data-table" data-dt-idx="1" tabindex="0" class="page-link">1</a>
+		                                				<a href="${page}" aria-controls="bootstrap-data-table" class="page-link">${p }</a>
 		                                			</li>
-		                                			<li class="paginate_button page-item ">
-		                                				<a href="#" aria-controls="bootstrap-data-table" data-dt-idx="2" tabindex="0" class="page-link">2</a>
-		                                			</li>
-		                                			<li class="paginate_button page-item next" id="bootstrap-data-table_next">
-		                                				<a href="#" aria-controls="bootstrap-data-table" data-dt-idx="3" tabindex="0" class="page-link">Next</a>
-		                                			</li>
+	                                			</c:if>
+	                                			<c:if test="${p eq pi.currentPage }">
+	                                				<button class="page-link disabled" style="color:black; cursor:text;" disabled>${p}</button>
+	                                			</c:if>
+	                                			</c:forEach>
+	                                		<!-- 다음 -->	
+	                                			<li class="paginate_button page-item next" id="bootstrap-data-table_next">
+	                                			<c:if test="${pi.currentPage ne pi.endPage }">	
+	                                				<c:url value="aAdvertisment.do" var="next" >
+	                                					<c:param name="currentPage" value="${pi.currentPage+1 }"/>
+	                                				</c:url>
+	                                				<a href="${next }" aria-controls="bootstrap-data-table" class="page-link">Next</a>
+	                                			</c:if>
+	                                			<c:if test="${pi.currentPage eq pi.endPage }">
+	                                				<button class="page-link disabled" style="color:black; cursor:text;" disabled>Next</button>
+	                                			</c:if>
+	                                			</li>	
 		                                		</ul>
 		                                	</div>
 		                                </div>
@@ -206,7 +195,7 @@
                            
                               
                               <!-- 승인대기 목록 -->
-                              <div class="tab-pane fade" id="nav-profile" style="display:inline-flex;" role="tabpanel" aria-labelledby="nav-profile-tab" >
+                              <div class="tab-pane fade" id="nav-waiting" style="display:inline-flex;" >
 				                	<div class="col-md-4">
 				                        <div class="card">
 				                            <img class="card-img-top" src="https://i.imgur.com/ue0AB6J.png" alt="Card image cap">
@@ -238,7 +227,7 @@
                               
                               
                              <!-- 진행중 목록 -->
-                               <div class="tab-pane fade" id="nav-contact" style="display:inline-flex;" role="tabpanel" aria-labelledby="nav-contact-tab" >
+                               <div class="tab-pane fade" id="nav-ongoing" style="display:inline-flex;" >
 			                     <div class="col-md-4">
 				                        <div class="card">
 				                            <img class="card-img-top" src="https://i.imgur.com/hrS2McC.png" alt="Card image cap">
@@ -256,7 +245,9 @@
                   
                 
                 
-             	
+             	<button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#updatePass">
+	                        		광고등록
+	            </button>
                
 
                 </div>
@@ -269,22 +260,96 @@
     </div><!-- /#right-panel -->
     
     
-    
-       <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/admin_temp/js/main.js"></script>
-
+    <!-- 광고신청모달 -->
+    <div class="modal fade" id="updatePass" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			  <div class="modal-dialog modal-dialog-centered" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="exampleModalLabel">광고 신청</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <!-- 비밀번호 입력 폼 -->
+			      <form action="aInsertAd.do" method="post" enctype="multipart/form-data"  onsubmit="return insertPay();">
+					<input type="hidden" name="mno" value="${loginUser.mno }"/>
+					<div class="form-group" style="margin-bottom:25px;">
+						<label for="adName">업체명</label>
+						<input type="text" class="form-control" id="adName" name="name" placeholder="업체명을 입력해주세요." maxlength="16">
+					</div>
+					<div class="form-group" style="margin-bottom:25px; position:relative;">
+						<label for="url">연결 URL</label>
+						<input type="text" class="form-control" id="url" name="url" placeholder="http://" maxlength="16">
+						<div style="position:absolute;"><p><small class="form-text text-success">클릭시 표시할 대표 URL을 입력합니다.</small></p></div>
+					</div>
+					<div class="form-group" style="margin-bottom:25px; position:relative;">
+						<label for="file-input" class=" form-control-label">등록 이미지</label>
+						<input type="file" id="file-input" name="uploadFile" class="form-control-file">
+						<div class="c2 fCheck2" style="position:absolute;"><p><small class="form-text text-danger">
+						광고 신청시 관리자 승인 처리 후 30일 동안 진행됩니다. 신청 버튼클릭시 결제페이지로 이동합니다.
+						</small></p></div>
+						<div class="c2 sCheck2" style="position:absolute;">
+							<p>
+							<input type="checkbox" name="checkCondition" id="checkCondition" value="1"/>
+							<small class="form-text text-success">위 구매 조건 확인 및 결제 진행에 동의</small></p>
+						</div>
+					</div>
+				
+				      <div class="modal-footer">
+				        <button type="submit" class="btn btn-success">광고신청</button>
+				        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+				      </div>
+			       </form>
+			     
+			    </div>
+			  </div>
+			</div>
+			
+			
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+	<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.2.js"></script>   
 	<script>
 	
+	
+	function conditionCheck(){
+		var check = $("#checkCondition").val();
 		
-		$("#nav-home-tab").click(function(){ 
-			$("#nav-profile").hide();	
-			$("#nav-contact").hide();	
+		console.log(check);
+		
+		if($("#checkCondition").not(':checked')){
+			alert("동의 후 진행.");
+			return false;
+		}
+		return true;
+	}
+	
+	function insertPay(){
+		alert("dd");
+		
+		//location.href="redirect:aInsertPayView.do";
+	//	window.location.href="aInsertPayView.do";
+		location.replace("aInsertPayView.do");
+		
+		};
+	
+	
+		/* $("#adListTab").click(function(){ 
+			alert("gg");
+			$("#nav-waiting div").hide();	
+			$("#nav-ongoing div").hide();	
 			
 		});
+		
+		$("#adUnapproved").click(function(){
+			$("#nav-home div").hide();	
+			$("#nav-ongoing div").hide();	
+		});
+		
+		$("#adOngoing").click(function(){
+			$("#adListTab").hide();	
+			$("#adUnapproved").hide();	
+		});
+		 */
 	</script>
 
     

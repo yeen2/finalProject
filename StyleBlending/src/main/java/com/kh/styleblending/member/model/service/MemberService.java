@@ -18,4 +18,7 @@ public interface MemberService {
 	// 5. 닉네임ajax
 	int joinCheckNickName(String nickName);
 	
+	// 6. 자동로그인시, id로 정보 가져오기
+	Member getMember(String email);
+	
 }

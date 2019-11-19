@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,9 +20,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.kh.styleblending.member.model.vo.Member;
 import com.kh.styleblending.posting.model.service.PostingService;
 import com.kh.styleblending.posting.model.vo.Posting;
 import com.kh.styleblending.posting.model.vo.PostingReply;
+import com.kh.styleblending.posting.model.vo.SelectPosting;
 import com.kh.styleblending.posting.model.vo.Style;
 
 @Controller
@@ -33,13 +36,26 @@ public class PostingController {
 	// 좋아요,신고 정보 보여주려면 loginUser정보 가져와야 함
 	// 매개변수로 int id 추가해야함
 	@RequestMapping("pInfo.do")
-	public ModelAndView info(int id, ModelAndView mv) {
-		Posting p = pService.selectOnePosting(id);
+	public ModelAndView info(int id, ModelAndView mv, HttpSession session) {
+		
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		Posting p;
+		//SelectPosting sp = new SelectPosting();
+		//sp.setId(id);
+		
+		
+		if(loginUser != null) {
+			//sp.setMno(loginUser.getMno());
+			p = pService.selectOnePosting(id, loginUser.getMno());
+		}else {
+			//sp.setMno(-10000);
+			p = pService.selectOnePosting(id, -10000);
+		}
+		
 		ArrayList<Style> s = pService.selectStyle(id);
 		
-		System.out.println(p);
-		
 		if(p != null) {
+			System.out.println(p);
 			mv.addObject("p", p).addObject("s", s).setViewName("posting/info");
 		}else {
 			mv.addObject("msg", "게시글 상세조회 실패").setViewName("common/errorPage");

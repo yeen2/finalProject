@@ -26,6 +26,7 @@
 	#abc div, #abc i{float:left;}
 	#abc div{width:45px;}
 	#abc i{line-height:30px; margin-right:5px;}
+	#imgClick:hover{cursor:pointer;}
 </style>
 </head>
 <body class="profile" style="margin-bottom: 20px !important;">
@@ -38,8 +39,14 @@
 			<div class="row">
 				<!-- 프로필 이미지 -->
 				<div class="col-12 col-md-4 text-center">
-					<img src="resources/assets/img/lorde.png" alt="Raised circle image"
-						class="img-fluid rounded-circle shadow-lg" style="width: 180px;">
+					<img id="imgClick" src="resources/upload/member/${ m.renameImg }"
+						class="img-fluid rounded-circle shadow-lg" style="width: 180px; height:180px;">
+				</div>
+				<div id="fileArea">
+					<input type="file" id="uploadImg" name="uploadImg">
+				</div>
+				<div style="display:none;">
+					<a href="#updateProfileImg" data-toggle="modal" id="imgModal"></a>
 				</div>
 				
 				<!-- 프로필 -->
@@ -47,11 +54,15 @@
 					<div class="d-flex flex-row align-items-start mt-3 mt-lg-0">
 						<!-- 닉네임 -->
 						<div class="name">
-							<h2 class="mb-0">닉네임</h2>
+							<h2 class="mb-0">${ m.nickName }</h2>
 						</div>
 						
 						<!-- 팔로워버튼  -->
-						<a href="test.do" class="btn btn-dark ml-3"><i class="fa fa-plus"></i> <b>Fan</b></a>
+						<a href="#" data-toggle="modal" class="btn btn-dark ml-3" id="fanA" style="display:none;">
+							<i class="fa fa-plus"></i><b> Fan</b></a>
+						<a href="#" class="btn btn-dark ml-3" id="fanB" style="display:none;">
+							<i style="width:40px;"class="fas fa-check"></i></a>						
+						
 						<%--<c:if test="${ loginUser.mno == m.mno }"> --%>
 							<button class="btn btn-info btn-pill" style="margin-left:400px;"onclick="location.href='mpUpdatePage.do';">
 							    <i class="fa fa-edit mr-1"></i>
@@ -170,6 +181,30 @@
 
 	</div>
 
+	<!-- 프로필 이미지 있을 때 클릭 시 모달창 -->
+	<div class="modal fade" id="updateProfileImg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">프로필 이미지 변경</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="modalClose">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body" align="center">
+	        <div style="width:70%; height:50px;">
+	        	<button style="width:100%; height:100%;" class="btn btn-success" id="updateImg1">프로필 이미지 변경</button>
+	        </div>
+	        <br>
+	        <div style="width:70%; height:50px;">
+	        	<button style="width:100%; height:100%;" class="btn btn-info" id="updateImg2">기본 이미지로 변경</button>
+	        </div>
+	      </div>
+	     
+	    </div>
+	  </div>
+	</div>
+	
 	<div id="scrollTop1" style="position:fixed; border:1px solid lightgray; display:none; background:white; bottom:10px; right:10px;">
 		<a href="#"><img style="width:60px; height:60px;"src="${pageContext.request.contextPath}/resources/assets/img/123a.png"></a>
 	</div>
@@ -181,6 +216,7 @@
 			selectLikeList();
 			selectFanList();
 			selectFwList();
+			selectFanCheck();
 		});
 		
 		var countP = 0;
@@ -195,7 +231,6 @@
 				data:{mno:${m.mno}},
 				dataType:"json",
 				success:function(list){
-					console.log("ajax 통신 성공");
 					if(list.length == 0){
 						var $a1 = $("<p>").attr("class", "lead");
 						var $a2 = $("<span>").attr("class", "text-danger");
@@ -384,19 +419,107 @@
 		});
 		
 		
+		function selectFanCheck(){
+			$.ajax({
+				url:"mpSFanCheck.do",
+				data:{meNo:${m.mno}, youNo:${loginUser.mno}},
+				type:"post",
+				success:function(result){
+					if(result == 1){
+						$("#fanA").hide();
+						$("#fanB").show();
+					}else{
+						$("#fanA").show();
+						$("#fanB").hide();
+					}
+					
+				},
+				error:function(){
+					console.log("실패");
+				}
+			});
+				
+		}
+		
 	</script>
 	<script>
+		// input 파일
+		$(function(){
+			$("#fileArea").hide();
+			
+			// 이미지 변경 시 이미지 존재 여부 확인
+			$("#imgClick").click(function(){
+				if($("#imgClick").attr("src") != "resources/upload/member/profile.png"){
+					$("#imgModal").click();
+				}else{
+					$("#uploadImg").click();
+				}
+				
+			});
+			
+			// 모달창 버튼 클릭 시 발생 이벤트
+			$("#updateImg1").click(function(){
+				$("#uploadImg").click();
+				$("#modalClose").click();
+			});
+			
+			$("#updateImg2").click(function(){
+				updateBasic();
+				$("#modalClose").click();
+			});
+			
+		});
+		
+		// 기본 이미지로 변경하는 ajax구문 호출
+		function updateBasic(){
+			$.ajax({
+				url:"mpUpdateBasic.do",
+				success:function(result){
+					$("#imgClick").attr("src", "resources/upload/member/" + result);
+				},
+				error:function(){
+					console.log("ajax 통신 실패");
+				}
+				
+			});
+		}
+		
+		// 이미지 파일 input 시 수행될 ajax구문
+		$("#uploadImg").on("input", function(){
+			var data = new FormData();
+			data.append("uploadImg", $("#uploadImg")[0].files[0]);
+			
+			$.ajax({
+				url:"mpUpdateImg.do",
+				type:"post",
+				data:data,
+				processData:false,
+				contentType:false,
+				success:function(result){
+					$("#imgClick").attr("src", "resources/upload/member/" + result);
+				},
+				error:function(){
+					console.log("ajax 실패");
+				}
+				
+			});
+				
+			
+		});
+		
+		
+		
 		$(function(){
 			$("#imgH").mouseenter(function(){
-				$("#aaa").css("display", "block");
+				$("#aaa").show();
 			}).mouseout(function(){
-				$("#aaa").css("display", "none");
+				$("#aaa").hide();
 			});
 			
 			$("#imgL").mouseenter(function(){
-				$("#aaa1").css("display", "block");
+				$("#aaa1").show();
 			}).mouseout(function(){
-				$("#aaa1").css("display", "none");
+				$("#aaa1").hide();
 			});
 		});
 	</script>

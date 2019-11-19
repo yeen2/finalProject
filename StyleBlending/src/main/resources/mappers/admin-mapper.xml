@@ -13,7 +13,8 @@
 		<result property="nickName" column="nickName"/>
 		<result property="profile" column="profile"/>
 		<result property="location" column="location"/>
-		<result property="profileImg" column="profile_Img"/>
+		<result property="originalImg" column="original_Img"/>
+		<result property="renameImg" column="rename_Img"/>
 		<result property="profilePath" column="profile_Path"/>
 		<result property="enrollDate" column="enroll_Date"/>
 		<result property="updateDate" column="update_Date"/>
@@ -32,6 +33,23 @@
 		<result property="type" column="type"/>
 		<result property="email" column="email"/>
 		<result property="bname" column="bname"/>
+	</resultMap>
+	
+	<resultMap id="AdResultSet" type="Ad">
+		<id property="rownum" column="rownum"/>
+		<result property="adno" column="ad_no"/>
+		<result property="mno" column="m_no"/>
+		<result property="payno" column="pay_no"/>
+		<result property="name" column="name"/>
+		<result property="url" column="url"/>
+		<result property="originalImg" column="original_img"/>
+		<result property="renameImg" column="rename_img"/>
+		<result property="imgPath" column="img_path"/>
+		<result property="enrollDate" column="enroll_date"/>
+		<result property="startDate" column="start_date"/>
+		<result property="endDate" column="end_date"/>
+		<result property="status" column="status"/>
+		<result property="email" column="email"/>
 	</resultMap>
 	
 	<select id="getMemberListCount" resultType="_int">
@@ -104,6 +122,29 @@
 	    </foreach>
 		</if>
 	</update>
+	
+	<select id="getAdListCount" resultType="_int">
+		select count(*)
+		from ad
+	</select>
 
+	<select id="selectAdList" resultMap="AdResultSet">
+		select rownum, t1.* from
+		(select ad.*,m.email
+		from ad
+		join pay p on(p.pay_no=ad.pay_no)
+		join member m on(m.m_no=ad.m_no)
+		order by ad.status, ad.enroll_date )t1
+	</select>
+	
+	<insert id="insertPay">
+		insert into pay
+		values(seq_pay.nextval,#{mno},'1000',sysdate,default)
+	</insert>
+	
+	<insert id="insertAd">
+		insert into ad
+		values(seq_ad.nextval,#{mno},seq_pay.currval,#{name},#{url},#{originalImg},#{renameImg},'/resources/upload/advertisment/',sysdate,null,null,default)
+	</insert>
 	
 </mapper>

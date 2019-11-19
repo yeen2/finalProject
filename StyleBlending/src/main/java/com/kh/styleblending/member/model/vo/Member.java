@@ -40,4 +40,7 @@ public class Member {
 	private int likeCount;
 	private int replyCount;
 	
+	// 팬 버튼 체크용 변수
+	private int fanMno;
+	
 }

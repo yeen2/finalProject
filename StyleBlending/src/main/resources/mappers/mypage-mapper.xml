@@ -24,6 +24,8 @@
 		
 		<result property="likeCount" column="likeCount"/>
 		<result property="replyCount" column="replyCount"/>
+		
+		<result property="fanMno" column="fanMno"/>
 	</resultMap>
 	
 	<resultMap id="postingResultSet" type="Posting">
@@ -77,15 +79,13 @@
 	</select>
 	
 	<select id="selectPostingList" resultMap="postingResultSet">
-		select p.*, (select count(*) from p_like l where l.p_no=p.p_no)likeCount, 
-					(select count(*) from p_reply r where r.p_no=p.p_no)replyCount
+		select p.*, (select count(*) from p_reply r where r.p_no=p.p_no)replyCount
 		from posting p
 		where m_no=#{mno}
 	</select>
 	
 	<select id="selectLikeList" resultMap="postingResultSet">
-		select p.*, (select count(*) from p_like l where l.p_no=p.p_no)likeCount, 
-					(select count(*) from p_reply r where r.p_no=p.p_no)replyCount
+		select p.*, (select count(*) from p_reply r where r.p_no=p.p_no)replyCount
 		from posting p
 		left join p_like l on(l.p_no=p.p_no)
 		where l.m_no=#{mno}
@@ -93,7 +93,7 @@
 	
 	<select id="selectFanList" resultMap="memberResultSet">
 		select m.*, (select count(*) from posting p where m.m_no=p.m_no)posCount, (select count(*) from p_like l where m.m_no=l.m_no)likeCount,
-            (select count(*) from p_reply r left join posting p on(p.p_no=r.p_no) where p.p_no=r.p_no)replyCount
+            (select count(*) from p_reply r left join posting p on(p.p_no=r.p_no) where p.p_no=r.p_no and r.m_no=m.m_no)replyCount
 		from member m
 		left join fan f on(m.m_no=f.you_no)
 		where f.me_no=#{mno}
@@ -101,15 +101,21 @@
 	
 	<select id="selectFwList" resultMap="memberResultSet">
 		select m.*, (select count(*) from posting p where m.m_no=p.m_no)posCount, (select count(*) from p_like l where m.m_no=l.m_no)likeCount,
-            (select count(*) from p_reply r left join posting p on(p.p_no=r.p_no) where p.p_no=r.p_no)replyCount
+            (select count(*) from p_reply r left join posting p on(p.p_no=r.p_no) where p.p_no=r.p_no and r.m_no=m.m_no)replyCount
 		from member m
 		left join fan f on(m.m_no=f.me_no)
 		where f.you_no=#{mno}
 	</select>
 	
+	<update id="updateProfileImg">
+		update member
+		set original_img=#{originalImg}, rename_img=#{renameImg}
+		where m_no=#{mno}
+	</update>
+	
 	<update id="updateProfile">
 		update member
-		set nickname=#{nickName}, profile=#{profile}, location=#{location}, profile_img=#{profileImg}, profile_path=#{profilePath}
+		set nickname=#{nickName}, profile=#{profile}, location=#{location}
 		where m_no=#{mno}
 	</update>
 	
@@ -148,6 +154,12 @@
 		select *
 		from alarm
 		where status=1 and m_no=#{mno}
+	</select>
+	
+	<select id="selectFanCheck" resultType="_int">
+		select count(*)
+		from fan
+		where me_no=#{meNo} and you_no=#{youNo}
 	</select>
 
 </mapper>
