@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.styleblending.admin.model.vo.Ad;
+import com.kh.styleblending.member.model.vo.Alarm;
 import com.kh.styleblending.member.model.vo.Member;
 import com.kh.styleblending.member.model.vo.PageInfo;
 import com.kh.styleblending.posting.model.vo.Posting;
@@ -59,6 +60,18 @@ public class MyPageDao {
 
 	public int deleteMember(int mno) {
 		return sqlSession.update("mypageMapper.deleteMember", mno);
+	}
+	
+	public int selectAlarmCount(int mno) {
+		return sqlSession.selectOne("mypageMapper.selectAlarmCount", mno);
+	}
+	
+	public ArrayList<Alarm> selectAlarmList(int mno){
+		return (ArrayList)sqlSession.selectList("mypageMapper.selectAlarmList", mno);
+	}
+	
+	public int updateProfileImg(Member m) {
+		return sqlSession.update("mypageMapper.updateProfileImg", m);
 	}
 	
 	

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-	
+
 </head>
 <body>
 	
@@ -71,14 +71,12 @@
                           	</div>
                           	
                           	<div class="col-sm-12 col-md-6">
-                          		<div id="bootstrap-data-table_filter" class="dataTables_filter">
-                          			<label style="display:inline-flex; padding:15px;">Search: &nbsp;
-                          				<input type="search" class="form-control form-control-sm col-sm-12" placeholder="아이디 또는 닉네임을 입력해주세요." aria-controls="bootstrap-data-table">
-                          			</label>
-		                        	<button type="button" class="btn btn-secondary btn-sm" style="float:right; margin-right:10px; margin-top:15px;" data-toggle="modal" data-target="#staticModal">
-		                        		회원삭제
-		                        	</button>
-                          		</div>
+                       			<label style="display:inline-flex; padding:15px;">Search: &nbsp;
+                       				<input type="search" class="form-control form-control-sm col-sm-12" placeholder="아이디 또는 닉네임을 입력해주세요." aria-controls="bootstrap-data-table">
+                       			</label>
+	                        	<button type="button" class="btn btn-secondary btn-sm" style="float:right; margin-right:10px; margin-top:15px;" data-toggle="modal" data-target="#staticModal">
+	                        		회원삭제
+	                        	</button>
                           	</div>
                           </div>
                           
@@ -87,14 +85,8 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                        	<th>
-                                        		<label class="switch switch-3d switch-danger mr-3">
-                                        			<input type="checkbox" class="switch-input" checked="true">
-                                       				<span class="switch-label"></span> 
-                                       				<span class="switch-handle"></span>
-                                        		</label>
-                                        	</th>
-                                            <th class="serial">No.</th>
+                                        	<th><input type="checkbox" name="mCheckAll" id="checkAll" onclick="allCheck();"/></th>
+                                            <th>No.</th>
                                             <th>이미지</th>
                                             <th>이메일</th>
                                             <th>닉네임</th>
@@ -108,43 +100,12 @@
                                     <tbody>
                                         <tr>
                                         	<td>
-                                        	<form action="aDeleteMember.do" method="get">
-                                        		<!-- 회원삭제 모달창  -->
-                                        		<div class="modal fade" id="staticModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="true">
-										          <div class="modal-dialog modal-sm" role="document">
-										               <div class="modal-content">
-										                   <div class="modal-header">
-										                       <h5 class="modal-title" id="staticModalLabel"><b>회원 탈퇴</b></h5>
-										                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-										                           <span aria-hidden="true">&times;</span>
-										                       </button>
-										                   </div>
-										                   <div class="modal-body">
-										                       <p>
-										                           	해당 회원을 탈퇴하시겠습니까?
-										                      </p>
-										                      <p>
-										                           	이미 탈퇴된 회원인 경우 회원목록에서 삭제됩니다.
-										                      </p>
-										                    </div>
-										                    <div class="modal-footer">
-										                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-										                       <button type="submit" class="btn btn-primary">Confirm</button>
-										                    </div>
-										                </div>
-										            </div>
-										        </div>
-                                        		<label class="switch switch-3d switch-danger mr-3">
-                                        			<input type="checkbox" class="switch-input" checked="true" >
-                                       				<span class="switch-label"></span> 
-                                       				<span class="switch-handle"></span>
-                                        		</label>
-                                        	</form>
+                                        		<input name="checkRow" type="checkbox" value="${m.mno}"/>
                                         	</td>
-                                            <td class="serial">${m.mno}</td>
-                                            <td class="avatar">
+                                            <td >${m.mno}</td>
+                                            <td >
                                                 <div class="round-img">
-                                                    <a href="#"><img class="rounded-circle" src="${pageContext.request.contextPath}/resources/admin_temp/images/avatar/1.jpg" alt=""></a>
+                                                    <a href="#"><img class="rounded-circle" src="${pageContext.request.contextPath}${m.profilePath }${m.profileImg}" alt=""></a>
                                                 </div>
                                             </td>
                                             <td>${m.email}</td>
@@ -235,6 +196,40 @@
     </div><!-- /#right-panel -->
     
     
+     <script>
+	function allCheck(){ // 전체 선택,해제
+	      if( $("#checkAll").is(':checked') ){
+	        $("input[name=checkRow]").prop("checked", true);
+	      }else{
+	        $("input[name=checkRow]").prop("checked", false);
+	      }
+	};
+
+		/* 삭제(체크박스된 것 전부) */
+		function deleteAction(){
+			
+		  var checkRow = "";
+		  $( "input[name='checkRow']:checked" ).each (function (){
+		    checkRow = checkRow + $(this).val()+"," ;
+		  });
+		  checkRow = checkRow.substring(0,checkRow.lastIndexOf( ",")); //맨끝 콤마 지우기
+		 
+		  if(checkRow == ''){
+		    alert("삭제할 대상을 선택하세요.");
+		    return false;
+		  }
+		  
+		  console.log("### checkRow => {}"+checkRow);
+		 
+		     var mno = checkRow;
+		      
+			location.href="${pageContext.request.contextPath}/aDeleteMember.do?mno="+mno;  
+		  
+		}; 
+
+
+	</script> 
+    
     	<!-- 회원정보 모달창 -->
 	   <div class="modal fade" id="smallmodal" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-sm" role="document">
@@ -267,7 +262,7 @@
             
             
       <!-- 회원 삭제 모달창 -->     
-      <div class="modal fade" id="staticModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="true">
+      <div class="modal fade" id="staticModal" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-sm" role="document">
                <div class="modal-content">
                    <div class="modal-header">
@@ -286,22 +281,13 @@
                     </div>
                     <div class="modal-footer">
                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                       <button type="button" class="btn btn-primary" onclick="location.href='aDeleteMember.do';">Confirm</button>
+                       <button type="button" class="btn btn-primary" onclick="deleteAction();">Confirm</button>
                     </div>
                 </div>
             </div>
         </div>
-            
-   
-    
-       <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/admin_temp/js/main.js"></script>
-
-
+         
+ 		
     
 </body>
 </html>

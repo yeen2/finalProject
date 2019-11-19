@@ -1,6 +1,7 @@
 package com.kh.styleblending.admin.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -29,16 +30,28 @@ public class AdminDao {
 		return (ArrayList)sqlSession.selectList("adminMapper.selectMemberList", null, rowBounds);
 	}
 	
-	public int getDeclareListCount() {
-		return sqlSession.selectOne("adminMapper.getDeclareListCount");
+	public int deleteMember(ArrayList mno) {
+	
+		return sqlSession.update("adminMapper.deleteMember", mno);
 	}
 	
-	public ArrayList<Declare> selectDeclareList(PageInfo pi){
+	public int getDeclareListCount(HashMap cate) {
+		
+		return sqlSession.selectOne("adminMapper.getDeclareListCount",cate);			
+		
+	}
+	
+	public ArrayList<Declare> selectDeclareList(PageInfo pi, HashMap cate){
 		
 		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		
-		return (ArrayList)sqlSession.selectList("adminMapper.selectDeclareList", null, rowBounds);
+		return (ArrayList)sqlSession.selectList("adminMapper.selectDeclareList", cate, rowBounds);
+		
+	}
+	
+	public int deleteDeclareBoard(ArrayList dno) {
+		return sqlSession.update("adminMapper.deleteDeclareBoard",dno);
 	}
 	
 	

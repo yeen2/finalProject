@@ -40,19 +40,39 @@
 	</select>
 
 	<select id="selectMemberList" resultMap="MemberResultSet">
-		select *
+		select rownum, m.* from
+       ( select *
 		from member
-		order by delete_date desc ,m_no desc
+		order by delete_date desc ,enroll_date desc,m_no desc)m
 	</select>
 	
-	<select id="getDeclareListCount" resultType="_int">
+	<update id="deleteMember" parameterType="java.util.ArrayList">
+		update Member
+		set isdelete='Y', delete_date=sysdate
+		where m_no in 
+		<if test="list.size != 0">
+		<foreach item="item" collection="list" index="index" separator="," open="(" close=")">
+		#{item}
+	    </foreach>
+		</if>
+	</update>
+	
+	<select id="getDeclareListCount" resultType="_int" parameterType="hashMap">
 		select count(*)
 		from declare
+		<if test="posting != null">
+			where type='1'
+		</if>
+		<if test="free != null">
+			where type='2'
+		</if>
 	</select>
 	
-	<select id="selectDeclareList" resultMap="DeclareResultSet">
-		select * from
-		(select d.*,m.email,p.original_img bname
+	<select id="selectDeclareList" resultMap="DeclareResultSet" parameterType="hashMap">
+		select rownum, t4.* from
+		(select t3.* from
+		(select * from
+		(select d.*,m.email,p.rename_img bname
 		from declare d
 		join member m on(m.m_no=d.m_no)
 		join posting p on(p.p_no=d.b_no)
@@ -63,8 +83,27 @@
 		from declare d
 		join member m on(m.m_no=d.m_no)
 		join board b on(b.b_no=d.b_no)
-		where type=2) t2
+		where type=2) t2)
+        t3
+        <if test="posting != null">
+			where type='1'
+		</if>
+		<if test="free != null">
+			where type='2'
+		</if>
+        order by ischeck, enroll_date desc) t4
 	</select>
+	
+	<update id="deleteDeclareBoard" parameterType="java.util.ArrayList">
+		update declare
+		set ischeck='3'
+		where d_no in 
+		<if test="list.size != 0">
+		<foreach item="item" collection="list" index="index" separator="," open="(" close=")">
+		#{item}
+	    </foreach>
+		</if>
+	</update>
 
 	
 </mapper>

@@ -5,6 +5,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style type="text/css">
+	.replyForm_div_2{
+		margin-left: 50px;
+	}
 	.replyForm_imgDiv{
 		width: 10%; height: 10%; border-radius: 50%;
 	}
@@ -14,7 +17,39 @@
 	.replyForm_contentDiv{
 		width: 90%; height: 90%;
 	}
-	
+	.replyForm_nickname {
+		font-weight: bold;
+	}
+	.rrBtn{
+		color:gray;
+		font-style : oblique;
+		margin-left: 8px;
+	}
+	.rrBtn:hover{
+		text-decoration : none;
+		color : lightblue;
+		cursor: pointer;
+	}
+	.replyForm_date {
+		margin-left: 8px;
+	}
+	textarea{
+		resize: none;
+	}
+	.rrContent {
+		border: 1px solid #787878;
+		border-radius: .25rem;
+    	padding: .5rem 1rem;
+    	border-color : none;
+    	width: 550px;
+    	rows : 3;
+	}
+	.rrContent:focus {outline:none;}
+	.rrSubmit {
+		margin-bottom: 30px;
+		margin-left: 10px;
+	}
+
 </style>
 </head>
 <body>
@@ -38,8 +73,13 @@
 				</p>
 
 				<hr>
-				<br><br>
+				<!-- 좋아요/신고 -->
+				<div >
+					<button type="button" class="btn btn-secondary" id="likeBtn">LIKE</button> &nbsp;&nbsp;
+					<h3 style="display: inline; margin-bottom: 0px;">${p.likeCount}</h3>
+				</div>
 				
+				<br><br>
 				<!-- 이미지 -->
 				<div style="width: 500px; height: 600px;">
 					<img class="img-fluid rounded" style="width: 100%; height: 100%;"
@@ -75,14 +115,21 @@
 							<h5 class="mt-0 replyForm_nickname"></h5>
 							댓글내용
 							<span class="replyForm_content"></span>
-							대댓글달기 
 							<br>
 							<span class="replyForm_likecount"></span>
 							<i class="fas fa-caret-up"></i>
-							· <a href="#" class="rrBtn"><i style="color: gray;">reply</i></a>
+							· <a class="rrBtn">reply</a>
 							· <span class="replyForm_date"></span> day ago
+							
+							대댓글
+							<br><br>
+							<div class="replyForm_rrForm">
+								<textarea rows="3" id="rrContent" class="rrContent" 
+										style="resize: none; display: inline;"></textarea>
+								<button class="btn btn-dark rrSubmit" id="rrSubmit" >등록</button>
+							</div>
 						</div>
-					</div> -->
+					</div>  -->
 	
 					<!-- 댓글 -->
 					<!-- <div class="media mb-4">
@@ -111,7 +158,7 @@
 							</div>
 	
 						</div>
-					</div> --> 
+					</div>  -->
 		
  				</div>  <!-- #replyForm end -->
  
@@ -123,151 +170,15 @@
 								<textarea class="form-control" rows="3" id="rContent" placeholder="Post comment.."
 										style="resize: none;"></textarea>
 							</div>
-							<button class="btn btn-dark" id="rBtn" disabled>Post comment</button>
+							<button class="btn btn-dark" id="rBtn"disabled>Post comment</button>
 						</div>
 					</div>
 				</div> <!-- #replyTextarea end -->
 				
 			</div> <!-- col-lg-8 end -->
 			
-			
-			
-			
-<!------------------------------------------ 댓글 ajax -------------------------------------->
-			<script type="text/javascript">
-				$(function() {
-					/* 
-					getReplyList();
-					
-					setInterval(function(){
-						getReplyList();
-					}, 5000); 
-					 */
-					
-					// 댓글폼 클릭시 로그인되있는지 확인
-					$("#rContent").on("click", function () {
-						var loginUser = "${loginUser.email}";
 
-						if(loginUser == null || loginUser == ""){
-							alert("로그인 후 이용 가능하세요");
-							return;
-							
-						}else{ // 로그인 되어있을때
-							$("#rBtn").attr("disabled", false);
 
-						}
-					});
-					
-					// 댓글내용 있는지 확인
-					$("#rBtn").on("click", function(){
-						if($("#rContent").val().length == 0){
-							alert("댓글내용을 입력해 주세요");
-						}else{
-							
-							var content = $("#rContent").val();
-							var pno = ${p.pno};
-							var mno = "${loginUser.mno}"; // var writer = admin;
-							
-							// 댓글 insert
-							$.ajax({
-								url:"pReplyInsert.do",
-								data:{content:content, 
-									  pno:pno,
-									  mno:mno},
-								success:function(data){
-									
-									if(data == "success"){
-										getReplyList();
-										$("#rContent").val("");
-									}else{
-										alert("댓글 작성 실패");
-									}
-									
-								},error:function(){
-									console.log("ajax 통신 실패");
-								}
-							});
-						}
-					});
-					
-				});
-				
-				//reply 전체리스트 불러오기
-				function getReplyList(){
-					console.log("select리플 들어옴");
-					$.ajax({
-						url:"pReplyList.do",
-						data:{pno:${p.pno}},
-						dataType:"json",
-						success:function(data){
-							
-							console.log(data);
-
-							$replyForm = $("#replyForm");
-							$replyForm.html("");
-							
-							$("#rCount").text(data.length);
-							
-							if(data.length > 0){ // 댓글이 존재할 경우
-								
-								// 반복문을 통해서 한 행씩 추가될 수 있도록
-								$.each(data, function(index, value){ // value == data[index]
-									// 작성자 내용 작성일
-									/* $tr = $("<tr></tr>");
-									
-									$writerTd = $("<td width='100'></td>").text(value.writer);
-									$contentTd = $("<td></td>").text(value.content);
-									$dateTd = $("<td></td>").text(value.createDate);
-									
-									$tr.append($writerTd);
-									$tr.append($contentTd);
-									$tr.append($dateTd);
-									
-									$tbody.append($tr); */
-									console.log("댓글잇움 나와야댄");
-									console.log(value.nickName);
-									console.log(value.content);
-									
-									$replyForm_div = $("<div class='media mb-4 replyForm_div'></div>");
-									
-									$replyForm_imgDiv = $("<div class='replyForm_imgDiv'></div>");	
-									$replyForm_contentDiv = $("<div class='replyForm_contentDiv'></div>");
-									
-									$img = $("<img class='replyForm_img'>").attr("src",'http://placehold.it/50x50');
-									$nickname = $("<h5 class='mt-0 replyForm_nickname'></h5>").text(value.nickName);
-									$rcontent = $("<span class='replyForm_content'></span><br>").text(value.content);
-									$likecount = $("<span class='replyForm_likecount'></span>").text(value.likeCount);
-									$likeImg = $("<i class='fas fa-caret-up'></i>");
-									$rrBtn = $("<a href=''#' class='rrBtn'><i style='color: gray;'>reply</i></a>");
-									$date = $("<span class='replyForm_date'></span>").text(value.enrollDate);
-									
-									$replyForm_imgDiv.append($img);
-									$replyForm_contentDiv.append($nickname).append($rcontent).append($likecount)
-													.append($likeImg);
-									
-									$replyForm_div.append($replyForm_imgDiv).append($replyForm_contentDiv);
-									
-								});
-								
-							}else{ // 댓글이 존재하지 않을 경우
-								console.log("댓글없움");
-								$tr = $("<tr></tr>");
-								
-								$contentTd = $("<td colspan='3'></td>").text("등록된 댓글이 없습니다.");
-								$tr.append($contentTd);
-								
-								$tbody.append($tr);
-							}
-							
-						},
-						error:function(){
-							console.log("ajax 통신 실패");
-						}
-					});
-				} //getReplyList end 
-				
-			</script>
-			
 
 
 			<!-- 오른쪽 -->
@@ -387,8 +298,240 @@
 	</div>
 	<!-- /.container -->
 	
+<!------------------------------------------  좋아요 / 신고 -------------------------------->
+
+	<script type="text/javascript">
+
+	var likeCount;
 	
 	
+	$("#likeBtn").hover(function () {
+		likeCount = $(this).next().text();
+		$(this).next().text("+1");
+		
+	}, function () {
+		$(this).next().text(likeCount);
+	})
+	
+	
+	// 댓글폼 클릭시 로그인되있는지 확인
+	$("#likeBtn").on("click", function () {
+		var loginUser = "${loginUser.email}";
+
+		if(loginUser == null || loginUser == ""){
+			alert("로그인 후 이용 가능하세요");
+			return;
+			
+		}else{ // 로그인 되어있을때
+			
+		}
+	});
+	
+	</script>
+				
+			
+			
+<!------------------------------------------ 댓글 ajax -------------------------------------->
+
+	<script type="text/javascript">
+		$(function() {
+
+			getReplyList();
+			
+			setInterval(function(){
+				getReplyList();
+			}, 50000); 
+
+			
+			// 댓글폼 클릭시 로그인되있는지 확인
+			$("#rContent").on("click", function () {
+				var loginUser = "${loginUser.email}";
+
+				if(loginUser == null || loginUser == ""){
+					alert("로그인 후 이용 가능하세요");
+					return;
+					
+				}else{ // 로그인 되어있을때
+					$("#rBtn").attr("disabled", false);
+				}
+			});
+			
+			// 댓글내용 있는지 확인
+			$("#rBtn").on("click", function(){
+				if($("#rContent").val().length == 0){
+					alert("댓글내용을 입력해 주세요");
+				}else{
+					
+					var content = $("#rContent").val();
+					var pno = ${p.pno};
+					var mno = "${loginUser.mno}"; // var writer = admin;
+					
+					// 댓글 insert
+					$.ajax({
+						url:"pReplyInsert.do",
+						data:{content:content, 
+							  pno:pno,
+							  mno:mno},
+						success:function(data){
+							
+							if(data == "success"){
+								getReplyList();
+								$("#rContent").val("");
+							}else{
+								alert("댓글 작성 실패");
+							}
+							
+						},error:function(){
+							console.log("ajax 통신 실패");
+						}
+					});
+				}
+			});
+			
+		});
+		
+		//reply 전체리스트 불러오기
+		function getReplyList(){
+			console.log("select리플 들어옴");
+			$.ajax({
+				url:"pReplyList.do",
+				data:{pno:${p.pno}},
+				dataType:"json",
+				success:function(data){
+					
+					//console.log(data);
+
+					$replyForm = $("#replyForm");
+					$replyForm.html("");
+					
+					$("#rCount").text(data.length);
+					
+					if(data.length > 0){ // 댓글이 존재할 경우
+						
+						// 반복문을 통해서 한 행씩 추가될 수 있도록
+						$.each(data, function(index, value){ // value == data[index]
+
+							$replyForm = $("#replyForm");
+							//리플하나의 큰div
+							// 댓글일때
+							$replyForm_div = $("<div class='media mb-4 replyForm_div'></div>");
+							// 대댓글일때
+							$replyForm_div_2 = $("<div class='media mb-4 replyForm_div_2'></div>");
+							
+							$replyForm_imgDiv = $("<div class='replyForm_imgDiv'></div>");	
+							$img = $("<img class='replyForm_img'>").attr("src",'http://placehold.it/50x50');
+							
+							$replyForm_contentDiv = $("<div class='replyForm_contentDiv'></div>");
+							$nickname = $("<h5 class='mt-0 replyForm_nickname'></h5>").text(value.nickName);
+							$rcontent = $("<span class='replyForm_content'></span>").text(value.content);
+							$likecount = $("<span class='replyForm_likecount'></span>").text(value.likeCount);
+							$likeImg = $("<i class='fas fa-caret-up'></i>");
+							$rrBtn = $("<a class='rrBtn'>reply</a>");
+							$date = $("<span class='replyForm_date'></span>").text(value.enrollDate);
+							
+							// 대댓글폼
+							$replyForm_rrForm = $("<br><br><div class='replyForm_rrForm' style='display: none;'></div>");
+							$prno = $("<input type='hidden'>").text(value.prno);
+							$rrContent = $("<textarea id='rrContent' class='rrContent'></textarea>");
+							$rrSubmit = $("<button class='btn btn-dark rrSubmit' id='rrSubmit'>등록</button>");
+							
+							if(value.level == 1){ //댓글
+								$replyForm_imgDiv.append($img);
+								//대댓글
+								$replyForm_rrForm.append($prno).append($rrContent).append($rrSubmit);
+								//컨텐츠
+								$replyForm_contentDiv.append($nickname).append($rcontent).append('<br>').append($likecount)
+												.append($likeImg).append($rrBtn).append($date).append($replyForm_rrForm);
+
+								$replyForm_div.append($replyForm_imgDiv).append($replyForm_contentDiv);
+								
+								$replyForm.append($replyForm_div);
+								
+							}else{ //대댓글
+
+								$replyForm_imgDiv.append($img);
+								$replyForm_contentDiv.append($nickname).append($rcontent).append('<br>').append($likecount)
+												.append($likeImg).append($date);
+								
+								$replyForm_div_2.append($replyForm_imgDiv).append($replyForm_contentDiv);
+								
+								$replyForm.append($replyForm_div_2);
+							}
+							
+						});
+						
+					}else{ // 댓글이 존재하지 않을 경우
+						//console.log("댓글없움");
+						$replyForm = $("#replyForm");
+						$replyForm.append("<span>등록된 댓글이 없습니다.</span>");
+					}
+					
+				},
+				error:function(){
+					console.log("ajax 통신 실패");
+				}
+			});
+		} //getReplyList end 
+		
+	</script>
+			
+<!------------------------------------------ 대댓글 ajax  ------------------------------------>
+
+	<script>
+		// reply쓰는 버튼 누를때 textarea 보여주기
+		$(document).on("click",".rrBtn", function () {
+			
+			var loginUser = "${loginUser.email}";
+			var tt = $(this).parent().children(".replyForm_rrForm");
+			//console.log(tt);
+			
+			if(loginUser == null || loginUser == ""){
+				alert("로그인 후 이용 가능하세요");
+				return;
+				
+			}else{ // 로그인 되어있을때
+				tt.toggle();
+			}
+		});
+		
+		
+		// 대댓글내용 있는지 확인
+		$(document).on("click",".rrSubmit" , function(){
+			var content = $(this).prev().val(); //댓글내용
+			var prno = $(this).prev().prev().text();
+			
+			if(content == 0){
+				alert("내용을 입력해 주세요");
+			}else{
+				
+				var pno = ${p.pno};
+				var mno = "${loginUser.mno}"; // var writer = admin;
+				
+				// 대댓글 insert
+				$.ajax({
+					url:"pReReplyInsert.do",
+					data:{content:content, 
+						  prno:prno,	
+						  pno:pno,
+						  mno:mno},
+					success:function(data){
+						
+						if(data == "success"){
+							getReplyList();
+							$(".rrContent").val("");
+						}else{
+							alert("댓글 작성 실패");
+						}
+						
+					},error:function(){
+						console.log("ajax 통신 실패");
+					}
+				});
+			}
+		});
+		
+	
+	</script>
 	
 
 	<!-------------------------------------------------------- 지도api  -------------------------------------->

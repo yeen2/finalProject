@@ -78,6 +78,7 @@
 				like_count, r.isdelete, m.nickname, m.rename_img
 		from p_reply r
 		join member m on(r.m_no = m.m_no)
+		order by prr_no
 	</select>
 
 	<insert id="insertReply">
@@ -92,6 +93,12 @@
 		where p_no=#{id}
 	</select>
 	
+	<!-- 대댓글 -->
+	<insert id="insertReReply">
+		insert into p_reply
+		values(seq_p_reply.nextval, #{pno}, #{mno}, #{content}, sysdate, null, #{prno},
+				2, default, default)
+	</insert>
 	
 	
 	

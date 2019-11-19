@@ -16,114 +16,87 @@
 	#addAlarm1{width:100%; height:inherit; background:lightgray; border:2px solid white;}
 	#addAlarmImg1{padding:10px 0 0 10px; width:17%; height:auto; display:inline-block;}
 	#addAlarmImg1 img{width:50px; height:50px; border-radius:1.5em;}
-	#addAlarmNick1{display:inline-block; width:50%;}
+	#addAlarmNick1{display:inline-block; width:50%; margin-left:10px;}
 	#addAlarmDate1{display:inline-block; width:25%; text-align:right;}
 	#addAlarmCon1{padding:10px 10px 10px 10px;}
+	#allDelete:hover{cursor:pointer;}
 </style>
 </head>
-<body>
+<body style="margin-top:300px;">
+	<jsp:include page="../includes/header.jsp"/>
 	<!-------------------------------------- 알림창 테스트 --------------------------------------->
 	<!-------------------------------------- 알림창 테스트 --------------------------------------->
 	<!-------------------------------------- 알림창 테스트 --------------------------------------->
-	<div style="position:relative;">
-		<button class="btn btn-secondary dropdown-toggle" type="button" id="alarmBtn1">
-			알림창 테스트
-		</button>
-		
-		<div style="position:absolute; top:45px; right:-135px; width:400px; max-height:255px;
-					overflow-y:auto; overflow-x:hidden; display:none; background:skyblue; z-index:1000;" id="alarmDiv1">
-			<div align="right">
-				<button type="button" class="btn btn-danger">알림 전체 삭제</button>
-			</div>
+	
+	<!-- 알람창!!! -->
+	<div>
+	<li class="nav-item">
+		<div style="position:relative; margin-left:700px; margin-top:-100px;" id="display">
+			<a class="nav-link" id="down"> 
+				<i class="far fa-bell fa-lg" style="font-size: 25px;"></i>
+			</a>
+			<span id="count" class="badge badge-danger badge-pill" 
+					style="display:none; pointer-events:none; position:absolute; bottom:19px; left:26px;"></span>
 			
-		    <!-- 알림 추가될 때마다 div 추가 -->
-		    <div id="addAlarm1">
-		    	<div id="addAlarmImg1">
-		    		<img src="${pageContext.request.contextPath}/resources/assets/img/lorde.png">
-		    	</div>
-		    	<div id="addAlarmNick1">
-		    		<p>닉네임</p>
-		    	</div>
-		    	<div id="addAlarmDate1">
-		    		<p>30초전</p>
-		    	</div>
-		    	<div id="addAlarmCon1">
-		    		~~~님이 팬이 되었습니다.
-		    	</div>
-		    </div>
-		    <div id="addAlarm1">
-		    	<div id="addAlarmImg1">
-		    		<img src="${pageContext.request.contextPath}/resources/assets/img/lorde.png">
-		    	</div>
-		    	<div id="addAlarmNick1">
-		    		<p>닉네임</p>
-		    	</div>
-		    	<div id="addAlarmDate1">
-		    		<p>10분전</p>
-		    	</div>
-		    	<div id="addAlarmCon1">
-		    		나의 게시물이 신고되었습니다.
-		    	</div>
-		    </div>
-		    <div id="addAlarm1">
-		    	<div id="addAlarmImg1">
-		    		<img src="${pageContext.request.contextPath}/resources/assets/img/lorde.png">
-		    	</div>
-		    	<div id="addAlarmNick1">
-		    		<p>닉네임</p>
-		    	</div>
-		    	<div id="addAlarmDate1">
-		    		<p>2시간전</p>
-		    	</div>
-		    	<div id="addAlarmCon1">
-		    		나의 게시물이 좋아요되었습니다.
-		    	</div>
-		    </div>
-		    <div id="addAlarm1">
-		    	<div id="addAlarmImg1">
-		    		<img src="${pageContext.request.contextPath}/resources/assets/img/lorde.png">
-		    	</div>
-		    	<div id="addAlarmNick1">
-		    		<p>닉네임</p>
-		    	</div>
-		    	<div id="addAlarmDate1">
-		    		<p>2일전</p>
-		    	</div>
-		    	<div id="addAlarmCon1">
-		    		~~~님이 팬이 되었습니다.
-		    	</div>
-		    </div>
-		    <div id="addAlarm1">
-		    	<div id="addAlarmImg1">
-		    		<img src="${pageContext.request.contextPath}/resources/assets/img/lorde.png">
-		    	</div>
-		    	<div id="addAlarmNick1">
-		    		<p>닉네임</p>
-		    	</div>
-		    	<div id="addAlarmDate1">
-		    		<p>30일전</p>
-		    	</div>
-		    	<div id="addAlarmCon1">
-		    		~~~님이 팬이 되었습니다.
-		    	</div>
-		    </div>
-		    <div id="addAlarm1">
-		    	<div id="addAlarmImg1">
-		    		<img src="${pageContext.request.contextPath}/resources/assets/img/lorde.png">
-		    	</div>
-		    	<div id="addAlarmNick1">
-		    		<p>닉네임</p>
-		    	</div>
-		    	<div id="addAlarmDate1">
-		    		<p>320일전</p>
-		    	</div>
-		    	<div id="addAlarmCon1">
-		    		~~~님이 팬이 되었습니다.
-		    	</div>
-		    </div>
-		    
+			<div style="position:absolute; width:400px; max-height:255px; background:white; display:none; box-shadow:0 5px 10px rgba(0, 0, 0, 0.5);
+			overflow-y:auto; overflow-x:hidden; left:-180px; z-index:1000;" id="show" class="show">
+				<div style="padding:10px 10px 10px 10px;" align="right">
+					<a id="allDelete" data-toggle="tooltip" data-placement="bottom" title="모두 읽음으로 표시"><i style="font-size:30px;" class="far fa-envelope-open"></i></a>
+				</div>
+				<div id="contentPlus">
+					<a class="dropdown-item" href="#">
+				    	<div id="addAlarm1">
+					    	<div id="addAlarmImg1">
+					    		<img src="resources/assets/img/lorde.png">
+					    	</div>
+					    	<div id="addAlarmNick1">
+					    		<p>닉네임</p>
+					    	</div>
+					    	<div id="addAlarmDate1">
+					    		<p>320일전</p>
+					    	</div>
+					    	<div id="addAlarmCon1">
+					    		~~~님이 팬이 되었습니다.
+					    	</div>
+					    </div>	  
+				    </a>
+				    <a class="dropdown-item" href="#">
+				    	<div id="addAlarm1">
+					    	<div id="addAlarmImg1">
+					    		<img src="resources/assets/img/lorde.png">
+					    	</div>
+					    	<div id="addAlarmNick1">
+					    		<p>닉네임</p>
+					    	</div>
+					    	<div id="addAlarmDate1">
+					    		<p>320일전</p>
+					    	</div>
+					    	<div id="addAlarmCon1">
+					    		~~~님이 팬이 되었습니다.
+					    	</div>
+					    </div>	  
+				    </a>
+				    <a class="dropdown-item" href="#">
+				    	<div id="addAlarm1">
+					    	<div id="addAlarmImg1">
+					    		<img src="resources/assets/img/lorde.png">
+					    	</div>
+					    	<div id="addAlarmNick1">
+					    		<p>닉네임</p>
+					    	</div>
+					    	<div id="addAlarmDate1">
+					    		<p>320일전</p>
+					    	</div>
+					    	<div id="addAlarmCon1">
+					    		~~~님이 팬이 되었습니다.
+					    	</div>
+					    </div>	  
+				    </a>
+				</div>
+			    
+			</div>
 		</div>
-		
+	</li>
 	</div>
 	<!-------------------------------------- 알림창 테스트 --------------------------------------->
 	<!-------------------------------------- 알림창 테스트 --------------------------------------->
@@ -286,27 +259,107 @@
 			style="background-image: url('resources/assets/img/profile6.jpg');"></div>
 	</div>
 	<!-- 좋아요리스트 -->
+	<script>
+	/* $(function(){
+		$("#alarmBtn").click(function(){
+			if($("#alarmDiv").css("display") == "block"){
+				$("#alarmDiv").css("display", "none");
+			}else{
+				$("#alarmDiv").css("display", "block");
+			}
+			
+		});
+		
+	}); */
+	</script>
+	
 	
 	<script>
 		$(function(){
-			$("#alarmBtn").click(function(){
-				if($("#alarmDiv").css("display") == "block"){
-					$("#alarmDiv").css("display", "none");
-				}else{
-					$("#alarmDiv").css("display", "block");
+			if(${loginUser != null}){
+				alarmCheck();
+				
+				setInterval(function(){
+					alarmCheck();
+				}, 5000);
+				
+			}
+		});
+		
+		function alarmCheck(){
+			$.ajax({
+				url:"mpSAlarmCount.do",
+				dataType:"json",
+				success:function(result){
+					if(result > 0){
+						$("#count").css("display", "block");
+						$("#count").html("");
+						$("#count").append(result);
+					}else{
+						$("#count").css("display", "none");
+					}
+				},
+				error:function(){
+					console.log("ajax 통신 실패");
 				}
 				
 			});
 			
-			$("#alarmBtn1").click(function(){
-				if($("#alarmDiv1").css("display") == "block"){
-					$("#alarmDiv1").css("display", "none");
-				}else{
-					$("#alarmDiv1").css("display", "block");
+			$.ajax({
+				url:"mpSAlarmList.do",
+				dataType:"json",
+				success:function(list){
+					console.log("111");
+					$("#contentPlus").html("");
+					
+					$.each(list, function(index, value){
+						var $add = "<a class='dropdown-item' href='#'>"
+			    				+ "<div id='addAlarm1'>"
+			    				+ "<div id='addAlarmImg1'>"
+			    				+ "<img src='resources/assets/img/lorde.png'>"
+			    				+ "</div>"
+			    				+ "<div id='addAlarmNick1'>"
+			    				+ "<p>닉네임</p>"
+			    				+ "</div>"
+			    				+ "<div id='addAlarmDate1'>"
+			    				+ "<p>320일전</p>"
+			    				+ "</div>"
+			    				+ "<div id='addAlarmCon1'>"
+			    				+ "<p>~~~님이 팬이 되었습니다.</p>"
+			    				+ "</div>"
+			    				+ "</div>"
+			    				+ "</a>";
+			    		
+			    		$("#contentPlus").append($add);
+						
+					});
+						
+				},
+				error:function(){
+					console.log("실패");
 				}
 				
 			});
+		}
+		
+		$("#down").on("click", function(){
+			if($("#show").css("display") == "block"){
+				$("#show").hide();
+				
+			}else{
+				$("#show").show();
+			}
 		});
+		
+		$("html").click(function(e){
+			if($("#show").css("display") == "block"){
+				if(!$("#display").has(e.target).length){
+					$("#show").hide();
+				}
+			}
+		});
+		
+		
 	</script>
 </body>
 </html>

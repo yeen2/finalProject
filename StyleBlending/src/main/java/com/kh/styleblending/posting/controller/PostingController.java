@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,9 +20,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.kh.styleblending.member.model.vo.Member;
 import com.kh.styleblending.posting.model.service.PostingService;
 import com.kh.styleblending.posting.model.vo.Posting;
 import com.kh.styleblending.posting.model.vo.PostingReply;
+import com.kh.styleblending.posting.model.vo.SelectPosting;
 import com.kh.styleblending.posting.model.vo.Style;
 
 @Controller
@@ -33,11 +36,23 @@ public class PostingController {
 	// 좋아요,신고 정보 보여주려면 loginUser정보 가져와야 함
 	// 매개변수로 int id 추가해야함
 	@RequestMapping("pInfo.do")
-	public ModelAndView info(int id, ModelAndView mv) {
-		Posting p = pService.selectOnePosting(id);
-		ArrayList<Style> s = pService.selectStyle(id);
+	public ModelAndView info(int id, ModelAndView mv, HttpSession session) {
 		
-		System.out.println(p);
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		Posting p;
+		SelectPosting sp = new SelectPosting();
+		sp.setId(id);
+		
+		
+		if(loginUser != null) {
+			sp.setMno(loginUser.getMno());
+			p = pService.selectOnePosting(sp);
+		}else {
+			sp.setMno(-10000);
+			p = pService.selectOnePosting(sp);
+		}
+		
+		ArrayList<Style> s = pService.selectStyle(id);
 		
 		if(p != null) {
 			mv.addObject("p", p).addObject("s", s).setViewName("posting/info");
@@ -128,7 +143,7 @@ public class PostingController {
 	}
 		
 	
-	// 댓글
+	// 댓글 목록 가져오기
 	@ResponseBody
 	@RequestMapping(value="pReplyList.do", produces="application/json; charset=UTF-8")
 	public String replyList(int pno) {
@@ -140,7 +155,7 @@ public class PostingController {
 		
 	}
 	
-	
+	// 댓글 등록
 	@ResponseBody
 	@RequestMapping("pReplyInsert.do")
 	public String insertReply(PostingReply r) {
@@ -155,7 +170,20 @@ public class PostingController {
 		}
 	}
 	
-	
+	// 대댓글 등록
+	@ResponseBody
+	@RequestMapping("pReReplyInsert.do")
+	public String insertReReply(PostingReply r) {
+		//System.out.println(r);
+		
+		int result = pService.insertReReply(r);
+		
+		if(result > 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
 	
 	
 	

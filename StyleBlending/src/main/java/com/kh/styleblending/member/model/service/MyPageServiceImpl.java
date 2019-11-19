@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.styleblending.admin.model.vo.Ad;
 import com.kh.styleblending.member.model.dao.MyPageDao;
+import com.kh.styleblending.member.model.vo.Alarm;
 import com.kh.styleblending.member.model.vo.Member;
 import com.kh.styleblending.member.model.vo.PageInfo;
 import com.kh.styleblending.posting.model.vo.Posting;
@@ -65,6 +66,21 @@ public class MyPageServiceImpl implements MyPageService {
 	@Override
 	public int deleteMember(int mno) {
 		return mpDao.deleteMember(mno);
+	}
+
+	@Override
+	public int selectAlarmCount(int mno) {
+		return mpDao.selectAlarmCount(mno);
+	}
+
+	@Override
+	public ArrayList<Alarm> selectAlarmList(int mno) {
+		return mpDao.selectAlarmList(mno);
+	}
+
+	@Override
+	public int updateProfileImg(Member m) {
+		return mpDao.updateProfileImg(m);
 	}
 
 
