@@ -15,7 +15,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class Posting {
-
+	
 	private int pno;
 	private int mno;
 	private String originalImg;
@@ -36,6 +36,7 @@ public class Posting {
 	private String profile;
 	private String mlocation;
 	private String profileImg;
+	private int rownum;
 	
 	// 로그인한 회원이 좋아요 했는지, 안했는지 확인
 	private int loginLike;

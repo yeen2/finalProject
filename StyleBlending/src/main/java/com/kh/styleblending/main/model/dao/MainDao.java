@@ -18,6 +18,14 @@ public class MainDao {
 		// TODO Auto-generated method stub
 		return (ArrayList)sqlSession.selectList("mainMapper.selectFourWrap");
 	}
+	public ArrayList<Posting> selectPostList(){
+		return (ArrayList)sqlSession.selectList("mainMapper.selectPostList");
+	}
+	
+	public ArrayList<Posting> selectInfinityScroll() {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("mainMapper.selectInfinityScroll");
+	}
 	
 	
 	
