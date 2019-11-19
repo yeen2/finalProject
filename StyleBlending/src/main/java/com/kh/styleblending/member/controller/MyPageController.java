@@ -320,18 +320,18 @@ public class MyPageController {
 		}
 	}
 	
-	/*
+	
 	@RequestMapping("mpInsertFan.do")
-	public ModelAndView insertFan(int mno, ModelAndView mv) {
-		int result = mpService.insertFan(mno);
+	public int insertFan(Fan f, ModelAndView mv) {
+		int result = mpService.insertFan(f);
 		
 		if(result > 0) {
-			
+			return 1;
 		}else {
-			mv.addObject()
+			return -1;
 		}
 	}
-	*/
+	
 	
 	/*
 	@RequestMapping("검색어 ajax 호출")
