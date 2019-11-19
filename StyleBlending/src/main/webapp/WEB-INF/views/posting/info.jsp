@@ -50,6 +50,10 @@
 		margin-left: 10px;
 	}
 
+	.spotDiv{
+		width: 50%; height: 50%; border: 1px solid red; display: inline-block;
+		padding : 5px;
+	}
 </style>
 </head>
 <body>
@@ -238,9 +242,9 @@
 						<span>${p.location }</span>
 					</div>
 				</div>
+				<!-- 
 				
-				
-				<!-- Search Widget -->
+				Search Widget
 				<div class="card my-4">
 					<h5 class="card-header">Search</h5>
 					<div class="card-body">
@@ -254,7 +258,7 @@
 					</div>
 				</div>
 
-				<!-- Categories Widget -->
+				Categories Widget
 				<div class="card my-4">
 					<h5 class="card-header">Categories</h5>
 					<div class="card-body">
@@ -276,16 +280,20 @@
 						</div>
 					</div>
 				</div>
-
+ -->
 				<!-- Side Widget -->
 				<div class="card my-4">
 					<h5 class="card-header">Spotlight</h5>
 					<div class="card-body">
-						<div style="width: 50%; height: 50%; border: 1px solid red;">
-							<img style="width: 100%; height: 100%;">
+						<div class="spotDiv">
+							<a>
+								<img style="width: 100%; height: 100%;">
+							</a>
 						</div>
-						<div style="width: 50%; height: 50%; border: 1px solid red;">
-							<img style="width: 100%; height: 100%;">
+						<div class="spotDiv" style="float: right;">
+							<a>
+								<img style="width: 100%; height: 100%;">
+							</a>
 						</div>
 					</div>
 				</div>

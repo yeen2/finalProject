@@ -59,6 +59,7 @@
 						
 						<!-- 팔로워버튼  -->
 						<a href="#" data-toggle="modal" class="btn btn-dark ml-3" id="fanA" style="display:none;">
+							<%-- <c:param url="mpInsertFan.do" --%>
 							<i class="fa fa-plus"></i><b> Fan</b></a>
 						<a href="#" class="btn btn-dark ml-3" id="fanB" style="display:none;">
 							<i style="width:40px;"class="fas fa-check"></i></a>						
@@ -187,7 +188,7 @@
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <h5 class="modal-title" id="exampleModalLabel">프로필 이미지 변경</h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="modalClose">
 	          <span aria-hidden="true">&times;</span>
 	        </button>
 	      </div>
@@ -458,12 +459,15 @@
 			});
 			
 			// 모달창 버튼 클릭 시 발생 이벤트
+			// 프로필 이미지 있을 때 이미지 변경
 			$("#updateImg1").click(function(){
 				$("#uploadImg").click();
+				$("#modalClose").click();
 			});
-			
+			// 프로필 이미지 있을 때 기본 이미지로 변경
 			$("#updateImg2").click(function(){
 				updateBasic();
+				$("#modalClose").click();
 			});
 			
 		});

@@ -177,24 +177,9 @@
 					
 					<!-- 알림창 -->
 					<li class="nav-item">
-						<div style="position:relative;" id="display">
-							<a class="nav-link" id="down" href="#"> 
-								<i class="far fa-bell fa-lg" style="font-size: 25px;"></i>
-							</a>
-							<span id="count" class="badge badge-danger badge-pill" 
-									style="display:none; pointer-events:none; position:absolute; bottom:19px; left:19px;"></span>
-							
-							<div style="position:absolute; width:400px; max-height:255px; background:white; display:none; box-shadow:0 5px 10px rgba(0, 0, 0, 0.5);
-							overflow-y:auto; overflow-x:hidden; left:-180px; z-index:1000;" id="show" class="show">
-								<div style="padding:10px 10px 10px 10px;" align="right">
-									<a href="#" data-toggle="tooltip" data-placement="bottom" title="모두 읽음으로 표시"><i style="font-size:30px;" class="far fa-envelope-open"></i></a>
-								</div>
-								<div id="contentPlus">
-									
-								</div>
-							    
-							</div>
-						</div>
+						<a class="nav-link" id="down" href="#"> 
+							<i class="far fa-bell fa-lg" style="font-size: 25px;"></i>
+						</a>
 					</li>
 					
 					<!-- 포스팅 등록 -->
@@ -472,104 +457,6 @@ function select(){
 	});
 }
 </script> -->
-
-	<!-- 알림창 스크립트 -->
-	<script>
-		$(function(){
-			if(${ !empty loginUser }){
-				alarmCheck();
-				
-				setInterval(function(){
-					alarmCheck();
-				}, 5000);
-				
-			}
-		});
-		
-		function alarmCheck(){
-			$.ajax({
-				url:"mpSAlarmCount.do",
-				dataType:"json",
-				success:function(result){
-					if(result > 0){
-						$("#count").css("display", "block");
-						$("#count").html("");
-						$("#count").append(result);
-					}else{
-						$("#count").css("display", "none");
-					}
-				},
-				error:function(){
-					console.log("ajax 통신 실패");
-				}
-				
-			});
-			
-			$.ajax({
-				url:"mpSAlarmList.do",
-				dataType:"json",
-				success:function(list){
-					$("#contentPlus").html("");
-					
-					$.each(list, function(index, value){
-						var $add = "<a class='dropdown-item' href='#'>"
-			    				+ "<div id='addAlarm1'>"
-			    				+ "<div id='addAlarmImg1'>"
-			    				+ "<img src='resources/assets/img/lorde.png'>"
-			    				+ "</div>"
-			    				+ "<div id='addAlarmNick1'>"
-			    				+ "<p>닉네임</p>"
-			    				+ "</div>"
-			    				+ "<div id='addAlarmDate1'>"
-			    				+ "<p>320일전</p>"
-			    				+ "</div>"
-			    				+ "<div id='addAlarmCon1'>"
-			    				+ "<p>~~~님이 팬이 되었습니다.</p>"
-			    				+ "</div>"
-			    				+ "</div>"
-			    				+ "</a>";
-			    		
-			    		$("#contentPlus").append($add);
-						
-					});
-						
-				},
-				error:function(){
-					console.log("실패");
-				}
-				
-			});
-		}
-		
-		$("#down").on("click", function(){
-			if($("#show").css("display") == "block"){
-				$("#show").hide();
-				
-			}else{
-				$("#show").show();
-			}
-				
-			if(${ empty loginUser}){
-				$("#show").html("");
-				
-				var $add = "<div style='padding:20px 10px 10px 10px'>"
-    				+ "<p>로그인 후 이용해주세요</p>"
-    				+ "</div>";
-    		
-    			$("#show").append($add);
-			}
-		});
-		
-		$("html").click(function(e){
-			if($("#show").css("display") == "block"){
-				if(!$("#display").has(e.target).length){
-					$("#show").hide();
-				}
-			}
-		});
-		
-		
-	</script>
 	
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script
