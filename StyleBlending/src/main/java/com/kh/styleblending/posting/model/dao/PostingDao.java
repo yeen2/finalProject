@@ -1,13 +1,17 @@
 package com.kh.styleblending.posting.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.styleblending.member.model.vo.Member;
 import com.kh.styleblending.posting.model.vo.Posting;
 import com.kh.styleblending.posting.model.vo.PostingReply;
+import com.kh.styleblending.posting.model.vo.SelectPosting;
 import com.kh.styleblending.posting.model.vo.Style;
 
 @Repository("pDao")
@@ -24,8 +28,12 @@ public class PostingDao {
 		return sqlSession.insert("postingMapper.insertStyle", s);
 	}
 	
-	public Posting selectOnePosting(int id) {
-		return sqlSession.selectOne("postingMapper.selectOnePosting", id);
+	public Posting selectOnePosting(int id, int mno) {
+		
+		HashMap map = new HashMap<>();
+		map.put("pno", id);
+		map.put("mno", mno);
+		return sqlSession.selectOne("postingMapper.selectOnePosting", map);
 	}
 	
 	public ArrayList<PostingReply> selectReplyList(int pno) {
@@ -38,6 +46,10 @@ public class PostingDao {
 	
 	public ArrayList<Style> selectStyle(int id) {
 		return (ArrayList)sqlSession.selectList("postingMapper.selectStyle", id);
+	}
+	
+	public int insertReReply(PostingReply r) {
+		return sqlSession.insert("postingMapper.insertReReply", r);
 	}
 	
 }

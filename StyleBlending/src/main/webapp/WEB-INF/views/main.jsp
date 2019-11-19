@@ -5,15 +5,12 @@
 
 <head>
 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
-				<script async src="https://www.youtube.com/iframe_api"></script>
-				
+<script async src="https://www.youtube.com/iframe_api"></script>
+
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style>
-
-
-
 @media ( min-aspect-ratio : 16/9) {
 	.video-foreground {
 		height: 300%;
@@ -31,7 +28,6 @@
 h1 {
 	color: white;
 }
-
 
 @charset "EUC-KR";
 
@@ -95,7 +91,6 @@ li {
 	transition: transform .5s;
 }
 
-
 .card-body img {
 	transform: scale(1.0);
 	transition: transform .5s;
@@ -134,19 +129,19 @@ li {
 	font-weight: bold;
 	margin-right: 3px;
 }
-#muteYouTubeVideoPlayer:hover{
-	width: 300px;
-	height: 300px;
-}
 
+#player:hover {
+	width: 1000px;
+	height: 1000px;
+}
 </style>
 <link rel="stylesheet" type="text/css"
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
-
-<body class="index">
-
+<script type="text/javascript" src="resources/js/typeit.min.js"></script>
+	
+<body class="index" onload="window.open('${pageContext.request.contextPath}/resources/assets/ad.jsp','','width=360px, height=300px, left=700px, top=300px, toolbar=0, status=yes, menubars=0, scrollbars=0, resizable=0, location=0, directories=0')">
 	<jsp:include page="includes/header.jsp" />
 
 	<div id="filter-drop"
@@ -174,24 +169,157 @@ li {
 
 
 			</div>
-				<div id="muteYouTubeVideoPlayer" class="youtube" style="position: absolute; border: 1px solid black; margin-left: 840px; width: 270px; height: 190px; margin-top: 15px;">
-					<!-- style="position: absolute; border: 1px solid black; margin-left:100px; width: 1000px; height: 500px; margin-top: 300px; z-index: 1;">-->
-				</div>
+			
+ 			<div id="player"
+				style="z-index:1; position:absolute;margin-left: 840px; width:270px; height: 190px; margin-top: 15px;">
+			</div> 
+			
 			<div class="form-group col-1" style="margin-bottom: 191px">
 				<a href="" id="aDrop"><i class="fa fa-chevron-down"
 					style="color: black;"></i></a>
-
 			</div>
 
 		</div>
 
+<script>
+	
+	var $fourWrap = $("#fourWrap");
 
-		<!-- 		</figure>
- -->
+	$(function(){
+		
+		topFour();
+	});
+	function topFour(){
+		
+		$.ajax({
+			url:"mainFourWrap.do",
+			dataType:"json",
+			success:function(data){
+				console.log("성공 topFour");
+				$.each(data,function(index, value){
+					
+					var $input =
+								"<div class='col-3'>" +
+								"<div class='component'>" +
+								"<div class='card' style='overflow:hidden;'>" +
+								"<div class='card-body' style='height: 400px; padding: 0px;'>" +
+								"<img class='card-img' src="+value.imgPath+"/"+value.renameImg + " style='height:100%'>" +
+								"<div>"+
+								"<div class='card-footer' style='padding:0px;'>" +
+								"<figcaption class='card-caption form-inline' style='left:0px; right:0px;'>"+
+								"<b class='pop-rank pull-left'style='line-height: 41px; font-size: 30px; padding: 7px 12px 6px;'>"+(index+1)+"st"+"</b>" +
+								"<div class='photographer'style='padding-top: 7px; padding-bottom: 7px; line-height: 20px; font-size: 14px;'>"+
+								"Inspired by"+
+								"<b>StyleBlending</b>"+
+								"</div>"+
+								"</figcaption>"+
+								"</div>"+
+								"</div>"+
+								"</div>"+
+								"</div>";
+								
+								$fourWrap.append($input);
+				
+				});
+			},
+			error:function(){
+				console.log("실패");
+			
+			}
+			
+		});
+	}
+	
+	$(function(){
+		
+		postList();
+	});
+	function postList(){
+		
+	}
+		var $inputWrap = $("#inputWrap");
+		
+		$.ajax({
+			url:"mainPostList.do",
+			dataType:"json",
+			success:function(data){
+				console.log("성공 PostList");
+				$.each(data,function(index, value){
+					
+					var $input = "<div class='col-md-4'>" +
+								 "<div class='component'" + 
+								 "<div class='card' style='overflow:hidden;'"+
+								 "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'"> +
+								 "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
+								 "<img src='${pageContext.request.contextPath}/resources/assets/img/배너일.png' style='width: 80px; height: 50px; margin-left: 20px;' />" +
+								 "</div>"+
+								 "<div class='col-6' style='width: 50%; height: 50px; margin-left: 30px;'>"+
+								 "<span style='margin-bottom: 0px; margin-top: 23px;'>kimsh940607<br>30주전</span>"+
+								 "</div>"
+								</div>
+								"
+					
+					
+				<div class="col-md-4">
+					<div class="component">
+						<div class="card" style="overflow: hidden;">
+							<div class="form-inline"
+								style="width: 100%; height: 80px; margin: 0px; color: black;">
 
-		<div class="row" style="margin-top: 1rem !important">
-			<div class="col-3">
-				<div class="component">
+								<div class="col-2"
+									style="width: 30%; height: 50px; padding: 0px;">
+									<img
+										src="${pageContext.request.contextPath}/resources/assets/img/배너일.png"
+										alt="" style="width: 80px; height: 50px; margin-left: 20px;" />
+								</div>
+								
+								<div class="col-6"
+									style="width: 50%; height: 50px; margin-left: 30px;">
+									<span style="margin-bottom: 0px; margin-top: 23px;">kimsh940607<br>30주전
+									</span>
+
+								</div>
+								<div class="col-3"
+									style="width: 20%; height: 50px; margin-top: 5px; padding-right: 10px; padding-left: 10px; padding-bottom: 5px;">
+									<button class="btn btn-dark">
+										<span style="font-size: 1.2em">+Fan</span>
+									</button>
+
+								</div>
+							</div>
+
+							<div class="card-body" style="height: 400px; padding: 0px;">
+								<a href="pInfo.do?id=1"
+									style="border-bottom: 0px !important; text-decoration: none black;">
+									<img class="card-img"
+									src="${pageContext.request.contextPath}/resources/assets/img/dog-2.jpg"
+									alt="dog" style="height: 100%;">
+								</a>
+							</div>
+							<div class="card-footer row">
+								<div class="col-3 form-inline">
+									<a href=""><i class="far fa-heart"
+										style="color: black; font-size: 30px;"></i> </a>
+									<p style="margin: 0px;">30</p>
+								</div>
+								<div class="col-3 form-inline" style="padding: 0px;">
+									<a href=""><i class="far fa-comment" aria-hidden="true"
+										style="color: black; font-size: 30px;"></i></a>
+									<p style="margin: 0px;">30</p>
+								</div>
+
+
+							</div>
+						</div>
+					</div>
+				</div>
+					
+
+</script>
+
+		<div class="row" style="margin-top: 1rem !important" id="fourWrap">
+		<%--	<div class="col-3">
+				 <div class="component">
 					<div class="card" style="overflow: hidden;">
 
 						<div class="card-body" style="height: 400px; padding: 0px;">
@@ -214,10 +342,10 @@ li {
 							</figcaption>
 						</div>
 					</div>
-				</div>
+				</div> 
 			</div>
-
-			<div class="col-3">
+--%>
+	<%-- 		<div class="col-3">
 				<div class="component">
 					<div class="card" style="overflow: hidden;">
 
@@ -295,8 +423,11 @@ li {
 					</div>
 				</div>
 			</div>
-
-			<div class="row mt-3">
+ --%>
+ 
+ 
+ 
+	 	<div class="row mt-3" id="inputWrap">
 				<div class="col-md-4">
 					<div class="component">
 						<div class="card" style="overflow: hidden;">
@@ -351,47 +482,108 @@ li {
 				</div>
 				<div class="col-md-4">
 					<div class="component">
-						<div class="card">
-							<div class="card-header">
-								<img class="card-img"
+						<div class="card" style="overflow: hidden;">
+							<div class="form-inline"
+								style="width: 100%; height: 80px; margin: 0px; color: black;">
+
+								<div class="col-2"
+									style="width: 30%; height: 50px; padding: 0px;">
+									<img
+										src="${pageContext.request.contextPath}/resources/assets/img/배너일.png"
+										alt="" style="width: 80px; height: 50px; margin-left: 20px;" />
+								</div>
+								<div class="col-6"
+									style="width: 50%; height: 50px; margin-left: 30px;">
+									<span style="margin-bottom: 0px; margin-top: 23px;">kimsh940607<br>30주전
+									</span>
+
+								</div>
+								<div class="col-3"
+									style="width: 20%; height: 50px; margin-top: 5px; padding-right: 10px; padding-left: 10px; padding-bottom: 5px;">
+									<button class="btn btn-dark">
+										<span style="font-size: 1.2em">+Fan</span>
+									</button>
+
+								</div>
+							</div>
+
+							<div class="card-body" style="height: 400px; padding: 0px;">
+								<a href="pInfo.do?id=1"
+									style="border-bottom: 0px !important; text-decoration: none black;">
+									<img class="card-img"
 									src="${pageContext.request.contextPath}/resources/assets/img/dog-2.jpg"
-									alt="dog">
+									alt="dog" style="height: 100%;">
+								</a>
 							</div>
-							<div class="card-body">
-								<span class="badge badge-warning mb-2">Vacation</span>
-								<h4 class="card-title">Woof! How to find dog-friendly
-									beaches in Spain</h4>
-								<p class="card-text">Considering Spain's abundant coastline,
-									beaches that do allow you to take your pooch to feel sand...</p>
-							</div>
-							<div class="card-footer">
-								<a href="#a" class="btn btn-outline-primary">Read More</a>
+							<div class="card-footer row">
+								<div class="col-3 form-inline">
+									<a href=""><i class="far fa-heart"
+										style="color: black; font-size: 30px;"></i> </a>
+									<p style="margin: 0px;">30</p>
+								</div>
+								<div class="col-3 form-inline" style="padding: 0px;">
+									<a href=""><i class="far fa-comment" aria-hidden="true"
+										style="color: black; font-size: 30px;"></i></a>
+									<p style="margin: 0px;">30</p>
+								</div>
+
+
 							</div>
 						</div>
 					</div>
 				</div>
-
 				<div class="col-md-4">
 					<div class="component">
-						<div class="card">
-							<div class="card-header">
-								<img class="card-img"
-									src="${pageContext.request.contextPath}/resources/assets/img/dog-3.jpg"
-									alt="dog">
+						<div class="card" style="overflow: hidden;">
+							<div class="form-inline"
+								style="width: 100%; height: 80px; margin: 0px; color: black;">
+
+								<div class="col-2"
+									style="width: 30%; height: 50px; padding: 0px;">
+									<img
+										src="${pageContext.request.contextPath}/resources/assets/img/배너일.png"
+										alt="" style="width: 80px; height: 50px; margin-left: 20px;" />
+								</div>
+								<div class="col-6"
+									style="width: 50%; height: 50px; margin-left: 30px;">
+									<span style="margin-bottom: 0px; margin-top: 23px;">kimsh940607<br>30주전
+									</span>
+
+								</div>
+								<div class="col-3"
+									style="width: 20%; height: 50px; margin-top: 5px; padding-right: 10px; padding-left: 10px; padding-bottom: 5px;">
+									<button class="btn btn-dark">
+										<span style="font-size: 1.2em">+Fan</span>
+									</button>
+
+								</div>
 							</div>
-							<div class="card-body">
-								<span class="badge badge-secondary mb-2">Hobby</span>
-								<h4 class="card-title">Getting Started With Your Puppy</h4>
-								<p class="card-text">This new addition to your family will
-									require lots of love, attention and plenty of supplies.</p>
+
+							<div class="card-body" style="height: 400px; padding: 0px;">
+								<a href="pInfo.do?id=1"
+									style="border-bottom: 0px !important; text-decoration: none black;">
+									<img class="card-img"
+									src="${pageContext.request.contextPath}/resources/assets/img/dog-2.jpg"
+									alt="dog" style="height: 100%;">
+								</a>
 							</div>
-							<div class="card-footer">
-								<a href="#a" class="btn btn-outline-primary">Read More</a>
+							<div class="card-footer row">
+								<div class="col-3 form-inline">
+									<a href=""><i class="far fa-heart"
+										style="color: black; font-size: 30px;"></i> </a>
+									<p style="margin: 0px;">30</p>
+								</div>
+								<div class="col-3 form-inline" style="padding: 0px;">
+									<a href=""><i class="far fa-comment" aria-hidden="true"
+										style="color: black; font-size: 30px;"></i></a>
+									<p style="margin: 0px;">30</p>
+								</div>
+
+
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
 			<div class="row mt-3">
 				<div class="col-md-4">
 					<div class="component">
@@ -527,7 +719,7 @@ li {
 				</div>
 			</div>
 
-		</div>
+		</div> 
 	</div>
 
 	<script>
@@ -750,66 +942,63 @@ li {
 			$("#ticker").css("display", "none");
 			$("#ticker2").css("display", "block");
 			$(".block").css("overflow", "visible");
+			$("#player").css("display", "none");
 			$(".ddd").remove();
-
+			
 			topSearch2();
 		});
 		$('#aDrop').mouseleave(function() {
 			$("#ticker").css("display", "block");
 			$("#ticker2").css("display", "none");
 			$(".block").css("overflow", "hidden");
-
+			$("#player").css("display", "block");
+			
 			topSearch();
+			
 
 		});
-	</script>
-		<script type="text/javascript">				
-					var player;
+      // 2. This code loads the IFrame Player API code asynchronously.
+      var tag = document.createElement('script');
 
-					function onYouTubePlayerAPIReady() {
-						
-						player = new YT.Player('muteYouTubeVideoPlayer', {
-							videoId : 'LNIpr3efeeI',
-							playerVars : {
-								autoplay : 1, // Auto-play the video on load
-								controls : 0, // Show pause/play buttons in player
-								rel : 0,
-								start : 105,
-								end : 301,
-								showinfo : 0,
-								showinfo : 0, // Hide the video title
-								modestbranding : 1, // Hide the Youtube Logo
-								loop : 1, // Run the video in a loop
-								playlist : 'LNIpr3efeeI',
-								fs : 0, // Hide the full screen button
-								cc_load_policy : 0, // Hide closed captions
-								iv_load_policy : 3, // Hide the Video Annotations
-								autohide : 1
-							// Hide video controls when playing
-							},
-							events : {
-								onReady : function(e) {
-									e.target.mute();
-								}
-							}
-						});
-					}
-				</script>
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-				<script type="text/javascript" src="resources/js/typeit.min.js"></script>
+      // 3. This function creates an <iframe> (and YouTube player)
+      //    after the API code downloads.
+      var player;
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+          height: '1000',
+          width: '1000',
+          videoId: 'CGuc3lgXFKM',
+          events: {
+            'onReady': onPlayerReady
+            //,'onStateChange': onPlayerStateChange
+          }
+        });
+      }
 
-	<script>
-	
-		$("#muteYouTubeVideoPlayer").hover(
-		function(){
-			alert("들어옴");	
-		},
-		function(){
-			alert("나감");
-		}
-	);
-	
-	</script>
+      // 4. The API will call this function when the video player is ready.
+      function onPlayerReady(event) {
+        event.target.playVideo();
+      }
+
+      // 5. The API calls this function when the player's state changes.
+      //    The function indicates that when playing a video (state=1),
+      //    the player should play for six seconds and then stop.
+      var done = false;
+      function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PLAYING && !done) {
+          setTimeout(stopVideo, 6000);
+          done = true;
+        }
+      }
+      function stopVideo() {
+        player.stopVideo();
+      }
+    </script>
+
 	<div id="loading"
 		style="width: 100%; height: 50px; margin-left: 900px;"></div>
 

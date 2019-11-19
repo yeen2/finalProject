@@ -23,6 +23,9 @@
 		<result property="profile" column="profile"/>
 		<result property="mlocation" column="location_1"/>
 		<result property="profileImg" column="profile_img"/>
+		<result property="loginLike" column="loginLike"/>
+		<result property="loginDeclare" column="loginDeclare"/>
+		<result property="replyCount" column="replyCount"/>
 	</resultMap>
 	
 	<resultMap id="postingReplyResultSet" type="PostingReply">
@@ -59,7 +62,7 @@
 		values(seq_style.nextval, seq_posting.currval, #{cate}, #{brand}, #{color})
 	</insert>
 	
-	<select id="selectOnePosting" resultMap="postingOneResultSet">
+	<select id="selectOnePosting" resultMap="postingOneResultSet" parameterType="HashMap">
 		<!-- 
 		select * 
 		from posting
@@ -67,10 +70,13 @@
 		-->
 		select p_no, p.m_no, p.original_img, p.rename_img, img_path, content, hashtag, gender, p.location,
         		like_count, declare_count, p.enroll_date, p.update_date, p.isdelete,
-        		m.nickname, m.profile, m.location, m.rename_img
+        		m.nickname, m.profile, m.location, m.rename_img, 
+                (select count(*) from p_like where m_no=#{mno} and p_no=#{pno}) loginLike, 
+                (select count(*) from declare where m_no=#{mno} and b_no=#{pno} and type=1) loginDeclare, 
+                (select count(*) from p_reply where p_no=#{pno} and r_level=1) replyCount
 		from posting p
 		join member m on(p.m_no=m.m_no)
-		where p_no=#{id}
+		where p_no=#{pno};
 	</select>
 	
 	<select id="selectReplyList" resultMap="postingReplyResultSet">
@@ -78,6 +84,7 @@
 				like_count, r.isdelete, m.nickname, m.rename_img
 		from p_reply r
 		join member m on(r.m_no = m.m_no)
+		order by prr_no
 	</select>
 
 	<insert id="insertReply">
@@ -92,6 +99,12 @@
 		where p_no=#{id}
 	</select>
 	
+	<!-- 대댓글 -->
+	<insert id="insertReReply">
+		insert into p_reply
+		values(seq_p_reply.nextval, #{pno}, #{mno}, #{content}, sysdate, null, #{prno},
+				2, default, default)
+	</insert>
 	
 	
 	

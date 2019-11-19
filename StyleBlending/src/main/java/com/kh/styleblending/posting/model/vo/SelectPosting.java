@@ -1,4 +1,4 @@
-package com.kh.styleblending.member.model.vo;
+package com.kh.styleblending.posting.model.vo;
 
 import java.sql.Date;
 
@@ -13,14 +13,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Alarm {
+public class SelectPosting {
 
-	private int alno;
-	private int tno;
+	private int id;
 	private int mno;
-	private Date enrollDate;
-	private String status;
-	private String type;
-	
-	private int alarmCount;
 }

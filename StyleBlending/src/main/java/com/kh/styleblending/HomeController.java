@@ -2,6 +2,9 @@ package com.kh.styleblending;
 
 import java.io.IOException;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +34,16 @@ public class HomeController {
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
 	
 	@RequestMapping(value = "main.do", method = RequestMethod.GET)
-	public String main() {
+	public String main(HttpServletRequest req, HttpSession session) {
+		
+		Cookie[] cookies = req.getCookies();
+		if(cookies != null) {
+			for(Cookie c:cookies) {
+				if(c.getName().equals("remember")) {
+					session.setAttribute("loginUser", mService.getMember(c.getValue()));
+				}
+			}
+		}
 		return "main";
 	}
 	
@@ -65,7 +77,8 @@ public class HomeController {
 	
 	
 	@RequestMapping("login.do")
-	public ModelAndView loginMember(Member m, HttpSession session, ModelAndView mv) {
+	public ModelAndView loginMember(Member m, HttpSession session, ModelAndView mv, 
+								String remember, HttpServletResponse rs) {
 		
 		Member loginUser = mService.loginMember(m);
 		
@@ -84,6 +97,12 @@ public class HomeController {
 		
 		if(loginUser != null) { // 로그인 성공
 			session.setAttribute("loginUser", loginUser);
+			if(remember != null) {
+				Cookie cookie = new Cookie("remember", loginUser.getEmail());
+				cookie.setMaxAge(60*60*24*7); //7일
+				cookie.setPath("/");
+				rs.addCookie(cookie);
+			}
 			mv.setViewName("redirect:main.do");
 		}else {
 			mv.addObject("msg", "로그인 실패").setViewName("common/errorPage");
@@ -93,10 +112,20 @@ public class HomeController {
 	}
 	
 	@RequestMapping("logout.do")
-	public String logout(HttpSession session) {
+	public String logout(HttpSession session, HttpServletRequest req, HttpServletResponse res) {
 		
 		session.invalidate(); // 세션 무효화
-		
+		Cookie[] cookies=req.getCookies();
+		if(cookies!=null) {
+			for(Cookie c:cookies) {
+				if(c.getName().equals("remember")) {
+					c.setMaxAge(0);
+					c.setPath("/");
+					res.addCookie(c);
+					break;
+				}
+			}
+		}
 		return "redirect:main.do";
 	}
 	
