@@ -125,6 +125,8 @@ public class MyPageController {
 	@RequestMapping("mpUpdateImg.do")
 	public String updateProfileImg(Member m, HttpSession session, ModelAndView mv, HttpServletRequest request, MultipartHttpServletRequest req) {
 		int mno = ((Member)session.getAttribute("loginUser")).getMno();
+		String renameFileNameD = ((Member)session.getAttribute("loginUser")).getRenameImg();
+		
 		m.setMno(mno);
 		
 		MultipartFile file = req.getFile("uploadImg");
@@ -141,6 +143,9 @@ public class MyPageController {
 		int result = mpService.updateProfileImg(m);
 		
 		if(result > 0) {
+			if(renameFileNameD != "profile.png") {
+				deleteProfileImg(renameFileNameD, request);
+			}
 			return m.getRenameImg();
 		}else {
 			return "fail";
@@ -153,7 +158,7 @@ public class MyPageController {
 	public String updateBasicImg(Member m, ModelAndView mv, HttpSession session, HttpServletRequest request) {
 		String renameFileName = ((Member)session.getAttribute("loginUser")).getRenameImg();
 		int mno = ((Member)session.getAttribute("loginUser")).getMno();
-		System.out.println(123);
+		
 		deleteProfileImg(renameFileName, request);
 		
 		m.setRenameImg("profile.png");
@@ -273,6 +278,7 @@ public class MyPageController {
 	}
 	
 	// 알람 카운트 메소드
+	/*
 	@ResponseBody
 	@RequestMapping("mpSAlarmCount.do")
 	public int selectAlarmCount(HttpSession session) {
@@ -298,6 +304,7 @@ public class MyPageController {
 		
 		return gson.toJson(list);
 	}
+	*/
 	
 	@ResponseBody
 	@RequestMapping("mpSFanCheck.do")

@@ -187,7 +187,7 @@
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <h5 class="modal-title" id="exampleModalLabel">프로필 이미지 변경</h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="modalClose">
 	          <span aria-hidden="true">&times;</span>
 	        </button>
 	      </div>
@@ -460,10 +460,12 @@
 			// 모달창 버튼 클릭 시 발생 이벤트
 			$("#updateImg1").click(function(){
 				$("#uploadImg").click();
+				$("#modalClose").click();
 			});
 			
 			$("#updateImg2").click(function(){
 				updateBasic();
+				$("#modalClose").click();
 			});
 			
 		});
