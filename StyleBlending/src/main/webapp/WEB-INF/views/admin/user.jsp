@@ -60,11 +60,11 @@
                           	<div class="col-sm-12 col-md-6" style="padding:20px;">
                           		<div class="dataTables_length" id="bootstrap-data-table_length">
                           			<label style="display:inline-flex";>Show 
-                          				<select name="bootstrap-data-table_length" aria-controls="bootstrap-data-table" class="form-control form-control-sm">
-                          					<option value="5">5</option>
-                          					<option value="10">10</option>
-                          					<option value="30">30</option>
-                          					<option value="-1">All</option>
+                          				<select name="boardLimit"  class="form-control form-control-sm" onchange="pageSet(value);" >
+                          					<option value="5" <c:if test="${pi.boardLimit eq '5' }">selected</c:if>>5</option>
+                          					<option value="10" <c:if test="${pi.boardLimit eq '10' }">selected</c:if>>10</option>
+                          					<option value="20" <c:if test="${pi.boardLimit eq '20' }">selected</c:if>>20</option>
+                          					<option value="30" <c:if test="${pi.boardLimit eq '30' }">selected</c:if>>30</option>
                           				</select> entries
                           			</label>
                           		</div>
@@ -74,7 +74,7 @@
                        			<label for="keyword" style="display:inline-flex; padding:15px;">Search: &nbsp;
                        				<input type="search" id="keyword" class="form-control form-control-sm col-sm-12" placeholder="아이디 또는 닉네임을 입력해주세요." aria-controls="bootstrap-data-table">
                        			</label>
-	                        	<button type="button" data-toggle="modal" data-target="#userDeleteModal" class="btn btn-secondary btn-sm" style="float:right; margin-right:10px; margin-top:15px;" >
+	                        	<button type="button" id="userDeleteBtn" data-toggle="modal" data-target="#userDeleteModal" class="btn btn-secondary btn-sm" style="float:right; margin-right:10px; margin-top:15px;" >
 	                        		회원삭제
 	                        	</button>
                           	</div>
@@ -87,7 +87,7 @@
                                         <tr>
                                         	<th><input type="checkbox" name="mCheckAll" id="checkAll" onclick="allCheck();"/></th>
                                             <th>No.</th>
-                                            <th>이미지</th>
+                                            <th>프로필</th>
                                             <th>이메일</th>
                                             <th>닉네임</th>
                                             <th>가입일</th>
@@ -95,7 +95,7 @@
                                             <th>탈퇴유무</th>
                                         </tr>
                                     </thead>
-                                    
+                                    <c:if test="${!empty list}">
                                     <c:forEach items="${list}" var="m">
                                     <tbody>
                                         <tr>
@@ -127,6 +127,7 @@
                                         </tr>
                                     </tbody>
                                     </c:forEach>
+                                    </c:if>
                                 </table>
                                 
                                 <div class="row">
@@ -198,55 +199,69 @@
     
      <script>
      
-     
-    	 var keyword = $("#keyword").val().toUpperCase();
-    	 var choKeyword = keywordSearch($("#keyword").val());
-    	 
-    	 if(keyword!=""&& choKeyword==""){
-    		 typeCheck = 'Y'; // 초성검색
-    	 }else{
-    		 typeCheck= 'N'; // 일반검색
-    	 }
-    	 
-     function keywordSearch(str){
-    	 
-    	 cho = ["ㄱ","ㄲ","ㄴ","ㄷ","ㄸ","ㄹ","ㅁ","ㅂ","ㅃ","ㅅ","ㅆ","ㅇ","ㅈ","ㅉ","ㅊ","ㅋ","ㅌ","ㅍ","ㅎ"]; 
-    	 result = ""; 
-    	 
-    	  for(i=0;i<str.length;i++) { 
-    	    code = str.charCodeAt(i)-44032; 
-    	    if(code>-1 && code<11172){
-    	        result += cho[Math.floor(code/588)]; 
-    	    } 
-    	  }
-    	    return result; 
-     };
-     
-     
-	function allCheck(){ // 전체 선택,해제
-	      if( $("#checkAll").is(':checked') ){
-	        $("input[name=checkRow]").prop("checked", true);
-	      }else{
-	        $("input[name=checkRow]").prop("checked", false);
-	      }
-	};
+	     function pageSet(boardLimit){
+	    	 location.href="${pageContext.request.contextPath}/aUser.do?boardLimit="+boardLimit; 
+	     }
+	     
+	     
+	    	 var keyword = $("#keyword").val().toUpperCase();
+	    	 var choKeyword = keywordSearch($("#keyword").val());
+	    	 
+	    	 if(keyword!=""&& choKeyword==""){
+	    		 typeCheck = 'Y'; // 초성검색
+	    	 }else{
+	    		 typeCheck= 'N'; // 일반검색
+	    	 }
+	    	 
+	     function keywordSearch(str){
+	    	 
+	    	 cho = ["ㄱ","ㄲ","ㄴ","ㄷ","ㄸ","ㄹ","ㅁ","ㅂ","ㅃ","ㅅ","ㅆ","ㅇ","ㅈ","ㅉ","ㅊ","ㅋ","ㅌ","ㅍ","ㅎ"]; 
+	    	 result = ""; 
+	    	 
+	    	  for(i=0;i<str.length;i++) { 
+	    	    code = str.charCodeAt(i)-44032; 
+	    	    if(code>-1 && code<11172){
+	    	        result += cho[Math.floor(code/588)]; 
+	    	    } 
+	    	  }
+	    	    return result; 
+	     };
+	     
+	     
+		function allCheck(){ // 전체 선택,해제
+		      if( $("#checkAll").is(':checked') ){
+		        $("input[name=checkRow]").prop("checked", true);
+		      }else{
+		        $("input[name=checkRow]").prop("checked", false);
+		      }
+		};
+	
+		/* 삭제여부 모달창 뜨기전에 조건검사먼저 진행 */
+		$("#userDeleteBtn").click(function(){
+			
+			  var checkRow = "";
+			  $( "input[name='checkRow']:checked" ).each (function (){
+			    checkRow = checkRow + $(this).val()+"," ;
+			  });
+			 
+			  if(checkRow == ''){
+			    alert("삭제할 대상을 선택하세요.");
+			    return false;
+			  }
+			  
+			  $("#userDeleteModal").show();
+			  
+		});
 
 		/* 삭제(체크박스된 것 전부) */
 		function deleteAction(){
-			
-		  var checkRow = "";
+		 
+		 var checkRow = "";
 		  $( "input[name='checkRow']:checked" ).each (function (){
 		    checkRow = checkRow + $(this).val()+"," ;
 		  });
 		  checkRow = checkRow.substring(0,checkRow.lastIndexOf( ",")); //맨끝 콤마 지우기
-		 
-		  if(checkRow == ''){
-		    alert("삭제할 대상을 선택하세요.");
-		    return false;
-		  }
-		  
-		  console.log("### checkRow => {}"+checkRow);
-		 
+			
 		     var mno = checkRow;
 		      
 			location.href="${pageContext.request.contextPath}/aDeleteMember.do?mno="+mno;  

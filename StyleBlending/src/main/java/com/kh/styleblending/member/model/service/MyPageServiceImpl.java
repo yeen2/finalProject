@@ -1,9 +1,15 @@
 package com.kh.styleblending.member.model.service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import com.kh.styleblending.admin.model.vo.Ad;
 import com.kh.styleblending.member.model.dao.MyPageDao;
@@ -18,6 +24,12 @@ public class MyPageServiceImpl implements MyPageService {
 
 	@Autowired
 	private MyPageDao mpDao;
+	
+	@Autowired
+	private DataSourceTransactionManager transactionManager;
+	
+	@Autowired
+	private SqlSessionTemplate sqlSession;
 	
 	@Override
 	public Member selectProfile(int mno) {
@@ -80,14 +92,52 @@ public class MyPageServiceImpl implements MyPageService {
 	}
 
 	@Override
-	public int updateProfileImg(Member m) {
-		return mpDao.updateProfileImg(m);
+	public Member updateProfileImg(Member m) {
+		int mno = m.getMno();
+		
+		DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+		def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
+		
+		TransactionStatus status = transactionManager.getTransaction(def);
+		
+		try {
+			sqlSession.getConnection().setAutoCommit(false);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		int result = mpDao.updateProfileImg(m);
+		Member mem = mpDao.selectProfile(mno);
+		
+		if(result > 0 && mem != null) {
+			transactionManager.commit(status);
+			return mem;
+		}else {
+			transactionManager.rollback(status);
+			return null;
+		}
 	}
 
 	@Override
 	public int selectFanCheck(Fan f) {
 		return mpDao.selectFanCheck(f);
 	}
+
+	@Override
+	public int[] selectFanCheckTab(Fan f) {
+		return mpDao.selectFanCheckTab(f);
+	}
+	
+	@Override
+	public int insertFan(Fan f) {
+		return mpDao.insertFan(f);
+	}
+
+	@Override
+	public int deleteFan(Fan f) {
+		return mpDao.deleteFan(f);
+	}
+
 
 
 }

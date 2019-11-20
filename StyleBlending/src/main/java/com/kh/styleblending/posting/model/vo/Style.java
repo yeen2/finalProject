@@ -19,5 +19,7 @@ public class Style {
 	private String brand;
 	private String color;
 	
+	private String name;
+	private String img;
 	
 }

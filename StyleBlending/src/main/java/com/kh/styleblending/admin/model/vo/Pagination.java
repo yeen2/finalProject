@@ -2,10 +2,10 @@ package com.kh.styleblending.admin.model.vo;
 
 public class Pagination {
 
-	public static PageInfo getPageInfo(int currentPage, int listCount) {
+	public static PageInfo getPageInfo(int currentPage, int listCount, int boardLimit) {
 		
 		int pageLimit = 10; // 페이징바 최대갯수
-		int boardLimit = 5; // 한페이지에 보여질 게시글 수
+	//	int boardLimit = 5; // 한페이지에 보여질 게시글 수
 		
 		int maxPage = (int)(Math.ceil((double)listCount/boardLimit));
 		int startPage = (currentPage -1) / pageLimit * pageLimit + 1;

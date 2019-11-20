@@ -140,10 +140,11 @@ public class MyPageController {
 			
 		}
 		
-		int result = mpService.updateProfileImg(m);
+		Member mem = mpService.updateProfileImg(m);
 		
-		if(result > 0) {
-			if(renameFileNameD != "profile.png") {
+		if(mem != null) {
+			session.setAttribute("loginUser", mem);
+			if(!renameFileNameD.equals("profile.png")) {
 				deleteProfileImg(renameFileNameD, request);
 			}
 			return m.getRenameImg();
@@ -165,9 +166,10 @@ public class MyPageController {
 		m.setOriginalImg("profile.png");
 		m.setMno(mno);
 		
-		int result = mpService.updateProfileImg(m);
+		Member mem = mpService.updateProfileImg(m);
 		
-		if(result > 0) {
+		if(mem != null) {
+			session.setAttribute("loginUser", mem);
 			return m.getRenameImg();
 		}else {
 			return "fail";
@@ -318,18 +320,43 @@ public class MyPageController {
 		}
 	}
 	
-	/*
-	@RequestMapping("mpInsertFan")
-	public ModelAndView insertFan(int mno, ModelAndView mv) {
-		int result = mpService.insertFan(mno);
+	@ResponseBody
+	@RequestMapping("mpSFanCheckTab.do")
+	public int[] selectFanCheckTab(Fan f) {
+		int[] result = mpService.selectFanCheckTab(f);
 		
-		if(result > 0) {
-			
+		if(result != null) {
+			return result;
 		}else {
-			mv.addObject()
+			return null;
 		}
 	}
-	*/
+	
+	@ResponseBody
+	@RequestMapping("mpInsertFan.do")
+	public int insertFan(Fan f) {
+		int result = mpService.insertFan(f);
+		
+		if(result > 0) {
+			return 1;
+		}else {
+			return -1;
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping("mpDeleteFan.do")
+	public int deleteFan(Fan f) {
+		int result = mpService.deleteFan(f);
+		
+		if(result > 0) {
+			return 1;
+		}else {
+			return -1;
+		}
+	}
+	
+	
 	/*
 	@RequestMapping("검색어 ajax 호출")
 	

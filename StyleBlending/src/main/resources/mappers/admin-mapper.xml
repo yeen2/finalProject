@@ -33,11 +33,11 @@
 		<result property="type" column="type"/>
 		<result property="email" column="email"/>
 		<result property="bname" column="bname"/>
+		<result property="writer" column="writer"/>
 	</resultMap>
 	
 	<resultMap id="AdResultSet" type="Ad">
-		<id property="rownum" column="rownum"/>
-		<result property="adno" column="ad_no"/>
+		<id property="adno" column="ad_no"/>
 		<result property="mno" column="m_no"/>
 		<result property="payno" column="pay_no"/>
 		<result property="name" column="name"/>
@@ -52,16 +52,42 @@
 		<result property="email" column="email"/>
 	</resultMap>
 	
+	<select id="selectNewBcount" resultType="_int">
+		select sum(c) from
+		(select count(*) c 
+		from posting
+		where to_char(enroll_date) = to_char(sysdate,'yy/MM/dd')
+		union 
+		select count(*) c
+		from board
+		where to_char(enroll_date) = to_char(sysdate,'yy/MM/dd')
+		union
+		select count(*) c
+		from fashion_board
+		where to_char(enroll_date) = to_char(sysdate,'yy/MM/dd'))
+	</select>
+	
+	<select id="selectNewMember" resultMap="MemberResultSet">
+		select *
+		from member
+		where to_char(enroll_date) = to_char(sysdate,'yy/MM/dd')
+	</select>
+	
+	<select id="selectDeclareCount" resultType="_int">
+		select count(*)
+		from declare
+		where ischeck='1'
+	</select>
+	
 	<select id="getMemberListCount" resultType="_int">
 		select count(*)
 		from member
 	</select>
 
 	<select id="selectMemberList" resultMap="MemberResultSet">
-		select rownum, m.* from
-       ( select *
+        select *
 		from member
-		order by delete_date desc ,enroll_date desc,m_no desc)m
+		order by delete_date desc ,enroll_date desc,m_no desc
 	</select>
 	
 	<update id="deleteMember" parameterType="java.util.ArrayList">
@@ -87,22 +113,24 @@
 	</select>
 	
 	<select id="selectDeclareList" resultMap="DeclareResultSet" parameterType="hashMap">
-		select rownum, t4.* from
-		(select t3.* from
-		(select * from
-		(select d.*,m.email,p.rename_img bname
-		from declare d
-		join member m on(m.m_no=d.m_no)
-		join posting p on(p.p_no=d.b_no)
-		where type=1) t1
-		union
-		select * from
-		(select d.*,m.email,b.title
-		from declare d
-		join member m on(m.m_no=d.m_no)
-		join board b on(b.b_no=d.b_no)
-		where type=2) t2)
-        t3
+      select t4.* from
+      (select t3.* from
+      (select * from
+      (select d.*,m.email, p.writer, p.rename_img
+      from declare d
+      join member m on(m.m_no=d.m_no)
+      join (select posting.p_no, member.email writer,posting.rename_img from posting
+        join member using(m_no)) p on(p.p_no=d.b_no)
+      where type=1) t1
+      union
+      select * from
+      (select d.*,m.email,b.writer, b.title
+      from declare d
+      join member m on(m.m_no=d.m_no)
+      join (select board.b_no, member.email writer,board.title from board 
+        join member using(m_no)) b on(b.b_no=d.b_no)
+      where type=2) t2)
+       t3
         <if test="posting != null">
 			where type='1'
 		</if>
@@ -129,7 +157,7 @@
 	</select>
 
 	<select id="selectAdList" resultMap="AdResultSet">
-		select rownum, t1.* from
+		select t1.* from
 		(select ad.*,m.email
 		from ad
 		join pay p on(p.pay_no=ad.pay_no)

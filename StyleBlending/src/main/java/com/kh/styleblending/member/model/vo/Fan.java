@@ -1,6 +1,7 @@
 package com.kh.styleblending.member.model.vo;
 
 import java.sql.Date;
+import java.util.Collection;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,6 +21,7 @@ public class Fan {
 	private int youNo;
 	private Date enrollDate;
 	
-	
+	// 팬 체크용 배열
+	private int[] meNoArr;
 	
 }
