@@ -27,7 +27,6 @@ import com.google.gson.JsonObject;
 import com.kh.styleblending.board.model.service.BoardService;
 import com.kh.styleblending.board.model.vo.Board;
 import com.kh.styleblending.board.model.vo.FashionBoard;
-import com.kh.styleblending.board.model.vo.Image;
 import com.kh.styleblending.board.model.vo.PageInfo;
 import com.kh.styleblending.board.model.vo.Pagination;
 
@@ -77,23 +76,25 @@ public class BoardController {
 	@RequestMapping("binsertForm.do")
 	public String insertBoardForm() {
 		
-		
-		
 		return "board/listDetailWrite";
 	}
 	
 	
 	@RequestMapping("binsert.do")
-	public String insertBoard(Board b , HttpServletRequest request, Model model,
-							@RequestParam(value="content", required=false) MultipartFile upload) {
-								
+	public String insertBoard(Board b , HttpServletRequest request, Model model) {
+								//System.out.println(b);
+		
 		
 		int result = bService.insertBoard(b);
+		//System.out.println(result);
+		
 		
 		if(result > 0) {
+			
 			return "redirect:blist.do";
+			
 		}else {
-			model.addAttribute("msg","자유게시판 작성 실패");
+			model.addAttribute("msg","게시판 작성 실패");
 			return "common/errorPage";
 		}
 		
@@ -104,7 +105,7 @@ public class BoardController {
 	// ckeditor 이미지 업로드
 	@RequestMapping(value = "imageUpload.do", method = RequestMethod.POST)
 	public String imageUpload(HttpServletRequest request, HttpServletResponse response,
-							@RequestParam MultipartFile upload) {
+							MultipartFile upload) {
 		System.out.println("dd");
 		JsonObject json = new JsonObject();
 		OutputStream out = null;
@@ -118,7 +119,7 @@ public class BoardController {
 			// CKEDITOR에서 업로드된 파일의 이름을 참조
 
 			String fileName = upload.getOriginalFilename();
-			System.out.println("fileName:"+fileName);
+			//System.out.println("fileName:"+fileName);
 			// CKEDITOR에서 업로드된 파일을 byte 배열로 참조
 
 			byte[] bytes = upload.getBytes(); /* 이미지 포함 모든 데이터는 바이트 */
@@ -131,7 +132,7 @@ public class BoardController {
 
 			// 실서버 톰캣 스왑시 주석변경
 
-			String uploadPath = root_path + "/" + "bImgUploadFiles/" + fileName; // 윈도우
+			String uploadPath = root_path + "/" + "bImgUploadFiles/" + fileName; 
 
 			//System.out.println("uplaodPath:"+uploadPath);
 
@@ -151,7 +152,7 @@ public class BoardController {
 
 			// CKEDITOR에 업로드 된 서버측의 파일경로를 반환하는 목적
 
-			String fileUrl = "resources/bImgUploadFiles"+ "/" + fileName; /// resources/upload/ + fileName
+			String fileUrl = "resources/bImgUploadFiles"+ "/" + fileName; 
 
 			//System.out.println("왜 찍어야?"+fileUrl);
 
@@ -199,14 +200,38 @@ public class BoardController {
 		}
 
 		return null;
-
 	}
  
-//	
-//	@PostMapping("bdetail.do")
-//	public ModelAndView (Board b, ModelAndView mv) {
-//	
-//		return mv;
-//	}
+	
+	@RequestMapping("bdetail.do")
+	public ModelAndView boardDetail (int bno, ModelAndView mv) {
+	
+		Board b = bService.selectBoard(bno);
+		
+		if(b != null) {
+			mv.addObject("b", b).setViewName("board/listDetail");
+		}else {
+			mv.addObject("msg","게시판 조회 실패").setViewName("common/errorPage");
+		}
+		
+		return mv;
+	}
+	
+	
+	@RequestMapping("bdelete.do")
+	public String boardDelete(int bno,HttpServletRequest request) {
+		
+		Board b = bService.selectUpdateBoard(bno);
+		
+		int result = bService.deleteBoard(bno);
+		
+		if(result > 0) {
+			return "redirect:blist.do";
+		}else {
+			return "common/errorPage";
+		}
+		
+	}
+	
 	
 }

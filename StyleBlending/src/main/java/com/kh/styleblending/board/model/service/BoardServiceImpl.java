@@ -19,6 +19,18 @@ public class BoardServiceImpl implements BoardService{
 	private BoardDao bDao;
 
 	@Override
+	public int getListCount() {
+		
+		return bDao.getListCount();
+	}
+	
+	@Override
+	public ArrayList<Board> selectList(PageInfo pi) {
+		
+		return bDao.selectList(pi);
+	}
+	
+	@Override
 	public int insertBoard(Board b) {
 		
 		return bDao.insertBoard(b);
@@ -26,15 +38,24 @@ public class BoardServiceImpl implements BoardService{
 	
 	@Override
 	public Board selectBoard(int bno) {
-			
+		 
+		 int result = bDao.updateCount(bno);
 		
-			
-		Board b =  bDao.selectBoard(bno);
 		
-		System.out.println(b);
-		return b;
+		 if(result > 0) {
+			 
+			 return bDao.selectBoard(bno);
+		 }else {
+			 
+			return null; 
+		 }
 	}
 
+	@Override
+	public Board selectUpdateBoard(int bno) {
+
+		return bDao.selectBoard(bno);
+	}
 	@Override
 	public int updateBoard(Board b) {
 		
@@ -59,23 +80,14 @@ public class BoardServiceImpl implements BoardService{
 		return bDao.insertBoardReply(r);
 	}
 
-	@Override
-	public int getListCount() {
 
-		return bDao.getListCount();
-	}
-
-	@Override
-	public ArrayList<Board> selectList(PageInfo pi) {
-
-		return bDao.selectList(pi);
-	}
 
 	@Override
 	public ArrayList<FashionBoard> fashionSelectList(PageInfo pi) {
 
 		return bDao.fashionSelectList(pi);
 	}
+
 
 
 

@@ -12,8 +12,7 @@ public interface BoardService {
 	
 	// 게시판 작성하기
 	int insertBoard(Board b);
-	
-	
+
 	// 게시판 상세조회
 	Board selectBoard(int bno);
 	
@@ -37,5 +36,9 @@ public interface BoardService {
 
 	ArrayList<FashionBoard> fashionSelectList(PageInfo pi);
 	//*********************************************************
+
+	// 삭제하고자 하는 게시판 조회용
+	Board selectUpdateBoard(int bno);
+	
 	
 }

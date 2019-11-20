@@ -11,6 +11,7 @@
 	.detailOuter{width: 900px; height:auto; margin-left: auto; margin-right: auto; margin-top: 100px;}
 	#readBtn{float: right;}
 	.detailOuter{font-size: 13px !important;}
+	
 </style>
 </head>
 <body>
@@ -25,7 +26,7 @@
 		<table class="table table-hover">
 			<tr>
 				<th>No.</th>
-				<th>제목</th>
+				<th style="text-align: center;">제목</th>
 				<th>글쓴이</th>
 				<th>조회수</th>
 				<th>날짜</th>
@@ -35,8 +36,8 @@
 			<c:forEach items="${ list }" var="b">
 			<tr>
 				<td>${ b.bno }</td>
-				<td>
-				<a style="text-decoration: none;" href="">${ b.title }</a>
+				<td style="width: 430px; text-align: center;">
+				<a style="text-decoration: none; color: black;" href="bdetail.do?bno=${ b.bno }">${ b.title }</a>
 				</td>
 				<td>${ b.mno }</td>
 				<td>${ b.count }</td>
@@ -77,25 +78,48 @@
 		<div class="pagingArea" style="margin-top: 50px; margin-bottom: 50px;">
 			<ul class="pagination" style="justify-content: center;">
 				<li class="page-item disabled">
-					<a class="page-link" href="#a"><i class="fas fa-long-arrow-alt-left"></i></a>
+				<!-- 이전 --> <!-- 수정중 -->
+					<c:if test="${ pi.currentPage eq 1 }">
+						<i class="fas fa-long-arrow-alt-left"></i>
+					</c:if>
+					<c:if test="${ pi.currentPage ne 1 }">
+						<c:url value="blist.do" var="before">
+							<c:param name="currentPage" value="${ pi.currentPage-1 }"/>
+						</c:url>
+						<a class="page-link" href="${ before }"><i class="fas fa-long-arrow-alt-left"></i></a>
+					</c:if>
 				</li>
-				<li class="page-item active">
-					<a class="page-link" href="#a">1</a>
-				</li>
+				<!-- 페이지  -->
+				<c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
+					<li class="page-item active">
+						<c:if test="${ p eq pi.currentPage }">
+							<a class="page-link" href="#a">${ p }</a>
+						</c:if>
+						<c:if test="${ p ne pi.currentPage }">
+							<c:url value="blist.do" var="page">
+								<c:param name="currentPage" value="${ p }"/>
+							</c:url>
+							<a class="page-link" href="${ page }">${ p }</a>
+						</c:if>
+					</li>
+				</c:forEach>
+				
+				<!-- 다음 -->
 				<li class="page-item">
-					<a class="page-link" href="#a">2</a>
-				</li>
-				<li class="page-item">
-					<a class="page-link" href="#a">3</a>
-				</li>
-				<li class="page-item">
-					<a class="page-link" href="#a"><i class="fas fa-long-arrow-alt-right"></i></a>
+					<c:if test="${ pi.currentPage eq pi.maxPage }">
+						<i class="fas fa-long-arrow-alt-right"></i>
+					</c:if>
+					<c:if test="${ pi.currentPage ne pi.maxPage }">
+						<c:url value="blist.do" var="last">
+							<c:param name="currentPage" value="${ pi.currentPage+1 }"/>
+						</c:url>
+						<a class="page-link" href="${ last }"> <i class="fas fa-long-arrow-alt-right"></i></a>
+					</c:if>
 				</li>
 			</ul>
 		</div>
 	</div>
-
-
+	
 	<jsp:include page="../includes/footer.jsp"/>
 	
 	
