@@ -57,6 +57,7 @@
 	}
 </style>
 </head>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <body>
 
 	<jsp:include page="../includes/header.jsp" />
@@ -80,8 +81,23 @@
 				<hr>
 				<!-- 좋아요/신고 -->
 				<div >
-					<button type="button" class="btn btn-secondary" id="likeBtn">LIKE</button> &nbsp;&nbsp;
-					<h3 style="display: inline; margin-bottom: 0px;">${p.likeCount}</h3>
+					<div style="display: inline; margin-right: 20px;">
+						<button type="button" class="btn btn-secondary" id="likeBtn">LIKE</button> &nbsp;&nbsp;
+						<h3 style="display: inline; margin-bottom: 0px;">${p.likeCount}</h3>
+					</div>
+					<div style="display: inline; margin-right: 20px;">
+						 <!--  카카오톡 공유하기  -->
+							<a id="kakao-link-btn" href="javascript:sendLink()">
+								<img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"
+										width="40px" height="40px;">
+							</a>
+							<span>
+								<script type="text/javascript" src="https://ssl.pstatic.net/share/js/naver_sharebutton.js"></script>
+								<script type="text/javascript">
+									new ShareNaver.makeButton({"type": "e" , "title":"[공유][StyleBlending]"});
+								</script>
+							</span>
+					</div>
 				</div>
 				
 				<br><br>
@@ -440,7 +456,7 @@
 							
 							$replyForm_contentDiv = $("<div class='replyForm_contentDiv'></div>");
 							$nickname = $("<h5 class='mt-0 replyForm_nickname'></h5>").text(value.nickName);
-							$rcontent = $("<span class='replyForm_content'></span>").text(value.content);
+							$rcontent = $("<span class='replyForm_content'></span>").html(value.content);
 							$likecount = $("<span class='replyForm_likecount'></span>").text(value.likeCount);
 							$likeImg = $("<i class='fas fa-caret-up'></i>");
 							$rrBtn = $("<a class='rrBtn'>reply</a>");
@@ -550,7 +566,59 @@
 	
 	</script>
 	
-
+	<!------------------------------------------------- 카카오 공유하기 -------------------------------------------->
+	
+	
+					<script type='text/javascript'>
+					  //<![CDATA[
+					    // // 사용할 앱의 JavaScript 키를 설정해 주세요.
+					    Kakao.init('8ef4b8fd4aebaa69e9172f4cc49921ca');
+					    // // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다.
+					    function sendLink() {
+					    	
+					    	var like = ${p.likeCount}
+					    	var count = 35;
+					    	
+					      Kakao.Link.sendDefault({
+					        objectType: 'feed',
+					        content: {
+					          title: '${c.cafe_name}',
+					          description: '#StyleBlending,#ootd,#데일리룩,#${c.cafe_name},#${c.address},#${c.favorite}',
+					         /*  imageUrl: 'http://mud-kage.kakao.co.kr/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png', */
+					         imageUrl: 'http://mud-kage.kakao.co.kr/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
+					         link: {
+					            /* mobileWebUrl: 'http://192.168.30.186:8030/LugarFresco/cafeInfo.ca?c_no=${c.c_no}',
+					            webUrl: 'http://192.168.30.186:8030/LugarFresco/cafeInfo.ca?c_no=${c.c_no}' */
+					            mobileWebUrl: 'http://localhost:8070/styleblending/pInfo.do?id=${p.pno}',
+					            webUrl: 'http://localhost:8070/styleblending/pInfo.do?id=${p.pno}' 
+					          }
+					        },
+					        social: {
+					          likeCount: like,
+					          commentCount: count,
+					          sharedCount: 3
+					        }, 
+					        buttons: [
+					          {
+					            title: '웹으로 보기',
+					            link: {
+					              mobileWebUrl: 'http://localhost:8070/styleblending/pInfo.do?id=${p.pno}',
+					              webUrl: 'http://localhost:8070/styleblending/pInfo.do?id=${p.pno}'
+					            }
+					          },
+					          {
+					            title: '앱으로 보기',
+					            link: {
+					              mobileWebUrl: 'http://localhost:8070/styleblending/pInfo.do?id=${p.pno}',
+					              webUrl: 'http://localhost:8070/styleblending/pInfo.do?id=${p.pno}'
+					            }
+					          }
+					        ]
+					      });
+					    }
+					  //]]>
+					</script>
+					
 	<!-------------------------------------------------------- 지도api  -------------------------------------->
 
 
