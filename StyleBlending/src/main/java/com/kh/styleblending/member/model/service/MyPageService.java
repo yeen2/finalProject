@@ -8,6 +8,7 @@ import com.kh.styleblending.member.model.vo.Fan;
 import com.kh.styleblending.member.model.vo.Member;
 import com.kh.styleblending.member.model.vo.PageInfo;
 import com.kh.styleblending.posting.model.vo.Posting;
+import com.kh.styleblending.posting.model.vo.Style;
 
 public interface MyPageService {
 	
@@ -61,5 +62,14 @@ public interface MyPageService {
 	
 	// 프로필 페이지 - delete 팬
 	int deleteFan(Fan f);
+	
+	// 팬 검색
+	ArrayList<Member> selectSearchFan(String search);
+	// 브랜드 검색
+	ArrayList<Style> selectSearchBrand(String search);
+	// 해시태그 검색
+	ArrayList<Posting> selectSearchHashtag(String search);
+	// 위치 검색
+	ArrayList<Posting> selectSearchLoca(String search);
 
 }

@@ -53,6 +53,7 @@
 						<!-- 닉네임 -->
 						<div class="name">
 							<h2 class="mb-0">${ m.nickName }</h2>
+							<a href="test.do">test</a>
 						</div>
 						
 						<!-- 팬 버튼  -->
@@ -219,8 +220,8 @@
 			selectLikeList();
 			selectFanList();
 			selectFwList();
-			selectFanCheck();
-			selectFanCheckTab();
+			/* selectFanCheck();
+			selectFanCheckTab(); */
 		});
 		
 		var countP = 0;

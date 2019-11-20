@@ -18,6 +18,7 @@ import com.kh.styleblending.member.model.vo.Fan;
 import com.kh.styleblending.member.model.vo.Member;
 import com.kh.styleblending.member.model.vo.PageInfo;
 import com.kh.styleblending.posting.model.vo.Posting;
+import com.kh.styleblending.posting.model.vo.Style;
 
 @Service("mpService")
 public class MyPageServiceImpl implements MyPageService {
@@ -136,6 +137,26 @@ public class MyPageServiceImpl implements MyPageService {
 	@Override
 	public int deleteFan(Fan f) {
 		return mpDao.deleteFan(f);
+	}
+
+	@Override
+	public ArrayList<Member> selectSearchFan(String search) {
+		return mpDao.selectSearchFan(search);
+	}
+
+	@Override
+	public ArrayList<Style> selectSearchBrand(String search) {
+		return mpDao.selectSearchBrand(search);
+	}
+
+	@Override
+	public ArrayList<Posting> selectSearchHashtag(String search) {
+		return mpDao.selectSearchHashtag(search);
+	}
+
+	@Override
+	public ArrayList<Posting> selectSearchLoca(String search) {
+		return mpDao.selectSearchLoca(search);
 	}
 
 

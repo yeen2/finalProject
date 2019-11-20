@@ -43,6 +43,15 @@
 		<result property="enrollDate" column="enroll_date"/>
 		<result property="updateDate" column="update_date"/>
 		<result property="isDelete" column="isdelete"/>
+		<result property="brand" column="brand"/>
+	</resultMap>
+	
+	<resultMap id="styleResultSet" type="Style">
+		<id property="sno" column="s_no"/>
+		<result property="pno" column="p_no"/>
+		<result property="cate" column="cate"/>
+		<result property="brand" column="brand"/>
+		<result property="color" column="color"/>
 	</resultMap>
 	
 	<resultMap id="adResultSet" type="Ad">
@@ -188,10 +197,9 @@
 		where nickName like '%' || #{search} || '%'
 	</select>
 	
-	<select id="selectSearchBrand" resultMap="postingResultSet">
-		select * 
-		from style s 
-		join posting p on(p.p_no=s.p_no) 
+	<select id="selectSearchBrand" resultMap="styleResultSet">
+		select *
+		from style s
 		where brand like '%' || #{search} || '%'
 	</select>
 	
