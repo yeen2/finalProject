@@ -53,11 +53,11 @@
 			        <h5 class="modal-title" id="exampleModalLabel">광고 신청</h5>
 			      </div>
 			      <!-- 비밀번호 입력 폼 -->
-			      <form action="aInsertPayView.do" method="post" enctype="multipart/form-data"  onsubmit="return insertPay();">
-					<input type="hidden" name="mno" value="${loginUser.mno }"/>
+			      <form action="aInsertAd.do" method="post" enctype="multipart/form-data"  onsubmit="return insertPay();">
+					<input type="hidden" name="mno" id="mno" value="${loginUser.mno }"/>
 					<div class="form-group" style="margin-bottom:25px;">
 						<label for="adName">업체명</label>
-						<input type="text" class="form-control" id="adName" name="name" placeholder="업체명을 입력해주세요." maxlength="16">
+						<input type="text" id="adName" class="form-control" id="adName" name="name" placeholder="업체명을 입력해주세요." maxlength="16">
 					</div>
 					<div class="form-group" style="margin-bottom:25px; position:relative;">
 						<label for="url">연결 URL</label>
@@ -78,7 +78,7 @@
 					</div>
 					<br>
 				      <div class="modal-footer">
-				        <button type="submit" class="btn btn-success" id="adConfirm">광고신청</button>
+				        <button type="button" class="btn btn-success" id="adConfirm">광고신청</button>
 				        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
 				      </div>
 			       </form>
@@ -93,9 +93,15 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.2.js"></script>
 		<script>
-		$(function(){
+
+	 	$(function(){
 			
 			$("#adConfirm").on("click",function(){
+				var adName = $("#adName").val();
+				var url = $("#url").val();
+				var file = $("#file-input").val();
+				var mno = $("#mno").val();
+				
 				var IMP = window.IMP;
 				IMP.init('iamport');
 				IMP.request_pay({
@@ -119,9 +125,8 @@
 				    } else {
 				        var msg = '결제에 실패하였습니다.';
 				        msg += '에러내용 : ' + rsp.error_msg;
-				        location.href="aInsertAd.do";
-				        window.close();
-				        /* location.href="aAdvertisment.do"; */
+				        location.href="aInsertAd.do?mno="+mno;
+				        
 				    }
 				
 				    alert(msg);
