@@ -46,9 +46,9 @@
 	</resultMap>
 	
 	<resultMap id="adResultSet" type="Ad">
-		<id property="adNo" column="ad_no"/>
+		<id property="adno" column="ad_no"/>
 		<result property="mno" column="m_no"/>
-		<result property="payNo" column="pay_no"/>
+		<result property="payno" column="pay_no"/>
 		<result property="name" column="name"/>
 		<result property="url" column="url"/>
 		<result property="originalImg" column="original_img"/>
@@ -181,5 +181,30 @@
 	<delete id="deleteFan">
 		delete from fan where me_no=#{meNo} and you_no=#{youNo}
 	</delete>
+	
+	<select id="selectSearchFan" resultMap="memberResultSet">
+		select * 
+		from member 
+		where nickName like '%' || #{search} || '%'
+	</select>
+	
+	<select id="selectSearchBrand" resultMap="postingResultSet">
+		select * 
+		from style s 
+		join posting p on(p.p_no=s.p_no) 
+		where brand like '%' || #{search} || '%'
+	</select>
+	
+	<select id="selectSearchHashtag" resultMap="postingResultSet">
+		select * 
+		from posting 
+		where hashtag like '%' || #{search} || '%'
+	</select>
+	
+	<select id="selectSearchLoca" resultMap="postingResultSet">
+		select * 
+		from posting 
+		where location like '%' || #{search} || '%'
+	</select>
 
 </mapper>
