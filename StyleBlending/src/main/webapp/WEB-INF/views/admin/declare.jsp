@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset=UTF-8">
-
+<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/resources/admin_temp/js/admin.js"></script> --%>
 </head>
 <body>
 
@@ -68,7 +68,7 @@
                         	<button type="submit" class="btn btn-primary btn-sm">검색</button>
                         </div>
                         
-                  		   <button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#smallModal" >
+                  		   <button type="button" class="btn btn-outline-danger btn-sm"  onclick="show('aaa')" >
                   		   	게시물삭제
                   		   </button>
                         </form>
@@ -212,42 +212,7 @@
 
     </div><!-- /#right-panel -->
 
-		<script>
-		function checkAll(){ // 전체 선택,해제
-		      if( $("#th_checkAll").is(':checked') ){
-		        $("input[name=checkRow]").prop("checked", true);
-		      }else{
-		        $("input[name=checkRow]").prop("checked", false);
-		      }
-		};
-
-		/* 삭제(체크박스된 것 전부) */
-		function deleteAction(){
-		  var checkRow = "";
-		  $( "input[name='checkRow']:checked" ).each (function (){
-		    checkRow = checkRow + $(this).val()+"," ;
-		  });
-		  checkRow = checkRow.substring(0,checkRow.lastIndexOf( ",")); //맨끝 콤마 지우기
-		 
-		  if(checkRow == ''){
-		    alert("삭제할 대상을 선택하세요.");
-		    return false;
-		    $("#smallModal").hide(); //닫기
-		  }
-		  
-		  console.log("### checkRow => {}"+checkRow);
-		 
-		     var dno = checkRow;
-		      
-		      //location.href="${rc.contextPath}/test_proc.do?dnoArr="+checkRow;  
-		      location.href="${pageContext.request.contextPath}/aDeleteDeclareBoard.do?dno="+dno;  
-		  
-		};
-
-
-		</script>
-
-   
+	
    
    		<!-- 게시물삭제 모달창 -->
    		  <div class="modal fade" id="smallModal"role="dialog" aria-labelledby="smallModalLabel" aria-hidden="true">
@@ -260,7 +225,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <p>
+                            <p id="modalContent">
                             	해당 게시물을 정말 삭제하시겠습니까?
                             </p>
                        </div>
@@ -272,8 +237,6 @@
                 </div>
             </div>
         </div>
-   		
-   		
    		
    		
    		
@@ -306,7 +269,71 @@
                     </div>
                 </div>
             </div>
-    
+ 
+ <script>
+    /**
+ * 체크박스 전체선택, 해제
+ */
+function checkAll(){ 
+      if( $("#th_checkAll").is(':checked') ){
+        $("input[name=checkRow]").prop("checked", true);
+      }else{
+        $("input[name=checkRow]").prop("checked", false);
+      }
+};
+
+
+function show(str){
+
+	//show 호출시 넘겨준 값을 이용하여 ajax 등을 통해 modal 을 띄울때 동적으로 바뀌어야 하는 값을 얻어온다.  
+
+	var checkRow = "";
+  $( "input[name='checkRow']:checked" ).each (function (){
+    checkRow = checkRow + $(this).val()+"," ;
+  });
+  checkRow = checkRow.substring(0,checkRow.lastIndexOf( ",")); //맨끝 콤마 지우기
+ 	
+
+	//얻어온 값을 이용하여, modal 에서 동적으로 바뀌어야 하는 값을 바꾸어 준다..  
+  if(checkRow == ''){
+	    alert("삭제할 대상을 선택하세요.");
+	    $("#modalContent").html("삭제할 대상을 선택하세요.");
+
+	  }
+
+  $("#modalContent").html("해당 게시물을 정말 삭제하시겠습니까?");
+
+
+    //modal을 띄워준다.  
+
+    $("#smallModal").modal('show');
+
+}
+
+
+/**
+ * 삭제(체크박스 선택된 것 전부)
+ */
+function deleteAction(){
+  var checkRow = "";
+  $( "input[name='checkRow']:checked" ).each (function (){
+    checkRow = checkRow + $(this).val()+"," ;
+  });
+  checkRow = checkRow.substring(0,checkRow.lastIndexOf( ",")); //맨끝 콤마 지우기
+ 
+  if(checkRow == ''){
+    alert("삭제할 대상을 선택하세요.");
+    $('#smallModal').modal('hide');
+    return false;
+ 
+  }
+ 
+     var dno = checkRow;
+      
+    location.href="${pageContext.request.contextPath}/aDeleteDeclareBoard.do?dno="+dno;  
+  
+};
+</script>
       
 </body>
 </html>

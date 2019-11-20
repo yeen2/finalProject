@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -96,7 +97,7 @@
                                     </div>
                                     <div class="stat-content">
                                         <div class="text-left dib">
-                                            <div class="stat-text"><span class="count">23569</span></div>
+                                            <div class="stat-text"><span class="count">${ newBoard}</span></div>
                                             <div class="stat-heading">새 게시글</div>
                                         </div>
                                     </div>
@@ -131,7 +132,7 @@
                                     </div>
                                     <div class="stat-content">
                                         <div class="text-left dib">
-                                            <div class="stat-text"><span class="count">2986</span></div>
+                                            <div class="stat-text"><span class="count"> ${fn:length(newMember) } </span></div>
                                             <div class="stat-heading">가입자 수</div>
                                         </div>
                                     </div>
@@ -177,84 +178,35 @@
                                                 <tr>
                                                     <th class="serial">No.</th>
                                                     <th class="avatar">프로필</th>
-                                                    <th>ID</th>
-                                                    <th>Name</th>
+                                                    <th>이메일</th>
+                                                    <th>닉네임</th>
                                                     <th>가입일</th>
-                                                    <th>Status</th>
+                                                    <th>탈퇴유무</th>
                                                 </tr>
                                             </thead>
+                                            <c:forEach var="m" begin="0" end="${fn:length(newMember)-1}">
                                             <tbody>
                                                 <tr>
-                                                    <td class="serial">1.</td>
-                                                    <td class="avatar">
-                                                        <div class="round-img">
-                                                            <a href="#"><img class="rounded-circle" src="${pageContext.request.contextPath}/resources/admin_temp/images/avatar/1.jpg" alt=""></a>
-                                                        </div>
-                                                    </td>
-                                                    <td> #5469 </td>
-                                                    <td>  <span class="name">Louis Stanley</span> </td>
-                                                    <td> <span class="product">iMax</span> </td>
+                                                    <td class="serial">${m+1}</td>
                                                     <td>
-                                                        <span class="badge badge-complete">Y</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="serial">2.</td>
-                                                    <td class="avatar">
-                                                        <div class="round-img">
-                                                            <a href="#"><img class="rounded-circle" src="${pageContext.request.contextPath}/resources/admin_temp/images/avatar/2.jpg" alt=""></a>
-                                                        </div>
-                                                    </td>
-                                                    <td> #5468 </td>
-                                                    <td>  <span class="name">Gregory Dixon</span> </td>
-                                                    <td> <span class="product">iPad</span> </td>
-                                                    <td>
-                                                        <span class="badge badge-complete">Y</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="serial">3.</td>
-                                                    <td class="avatar">
-                                                        <div class="round-img">
-                                                            <a href="#"><img class="rounded-circle" src="${pageContext.request.contextPath}/resources/admin_temp/images/avatar/3.jpg" alt=""></a>
-                                                        </div>
-                                                    </td>
-                                                    <td> #5467 </td>
-                                                    <td>  <span class="name">Catherine Dixon</span> </td>
-                                                    <td> <span class="product">SSD</span> </td>
-                                                    <td>
-                                                        <span class="badge badge-complete">Y</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="serial">4.</td>
-                                                    <td class="avatar">
-                                                        <div class="round-img">
-                                                            <a href="#"><img class="rounded-circle" src="${pageContext.request.contextPath}/resources/admin_temp/images/avatar/4.jpg" alt=""></a>
-                                                        </div>
-                                                    </td>
-                                                    <td> #5466 </td>
-                                                    <td>  <span class="name">Mary Silva</span> </td>
-                                                    <td> <span class="product">Magic Mouse</span> </td>
-                                                    <td>
-                                                        <span class="badge badge-pending">N</span>
-                                                    </td>
-                                                </tr>
-                                                <tr class=" pb-0">
-                                                    <td class="serial">5.</td>
-                                                    <td class="avatar pb-0">
-                                                        <div class="round-img">
-                                                            <a href="#"><img class="rounded-circle" src="${pageContext.request.contextPath}/resources/admin_temp/images/avatar/6.jpg" alt=""></a>
-                                                        </div>
-                                                    </td>
-                                                    <td> #5465 </td>
-                                                    <td>  <span class="name">Johnny Stephens</span> </td>
-                                                    <td> <span class="product">Monitor</span> </td>
-                                                    <td>
-                                                        <span class="badge badge-complete">Y</span>
-                                                    </td>
+		                                                <div class="round-img">
+		                                                    <a href="#"><img class="rounded-circle" src="${pageContext.request.contextPath}${newMember[m].profilePath }${newMember[m].renameImg}" alt=""></a>
+		                                                </div>
+		                                            </td> 
+                                                    <td> ${newMember[m].email } </td>
+                                                    <td> <span class="name">${newMember[m].nickName}</span> </td>
+		                                            <td> <span>${newMember[m].enrollDate }</span> </td>
+		                                            <td>
+		                                            	<c:if test="${newMember[m].isDelete eq 'N' }">
+		                                                <span class="badge badge-complete">${newMember[m].isDelete}</span>
+		                                                </c:if>
+		                                                <c:if test="${newMember[m].isDelete eq 'Y' }">
+		                                               	<span class="badge badge-pending">${newMember[m].isDelete}</span>
+		                                            	</c:if>
+		                                            </td> 
                                                 </tr>
                                             </tbody>
+                                            </c:forEach>
                                         </table>
                                     </div> <!-- /.table-stats -->
                                 </div>

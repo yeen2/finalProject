@@ -36,8 +36,7 @@
 	</resultMap>
 	
 	<resultMap id="AdResultSet" type="Ad">
-		<id property="rownum" column="rownum"/>
-		<result property="adno" column="ad_no"/>
+		<id property="adno" column="ad_no"/>
 		<result property="mno" column="m_no"/>
 		<result property="payno" column="pay_no"/>
 		<result property="name" column="name"/>
@@ -52,16 +51,36 @@
 		<result property="email" column="email"/>
 	</resultMap>
 	
+	<select id="selectNewBcount" resultType="_int">
+		select sum(c) from
+		(select count(*) c 
+		from posting
+		where to_char(enroll_date) = to_char(sysdate,'yy/MM/dd')
+		union 
+		select count(*) c
+		from board
+		where to_char(enroll_date) = to_char(sysdate,'yy/MM/dd')
+		union
+		select count(*) c
+		from fashion_board
+		where to_char(enroll_date) = to_char(sysdate,'yy/MM/dd'))
+	</select>
+	
+	<select id="selectNewMember" resultMap="MemberResultSet">
+		select *
+		from member
+		where to_char(enroll_date) = to_char(sysdate,'yy/MM/dd')
+	</select>
+	
 	<select id="getMemberListCount" resultType="_int">
 		select count(*)
 		from member
 	</select>
 
 	<select id="selectMemberList" resultMap="MemberResultSet">
-		select rownum, m.* from
-       ( select *
+        select *
 		from member
-		order by delete_date desc ,enroll_date desc,m_no desc)m
+		order by delete_date desc ,enroll_date desc,m_no desc
 	</select>
 	
 	<update id="deleteMember" parameterType="java.util.ArrayList">
@@ -87,7 +106,7 @@
 	</select>
 	
 	<select id="selectDeclareList" resultMap="DeclareResultSet" parameterType="hashMap">
-		select rownum, t4.* from
+		select t4.* from
 		(select t3.* from
 		(select * from
 		(select d.*,m.email,p.rename_img bname
@@ -129,7 +148,7 @@
 	</select>
 
 	<select id="selectAdList" resultMap="AdResultSet">
-		select rownum, t1.* from
+		select t1.* from
 		(select ad.*,m.email
 		from ad
 		join pay p on(p.pay_no=ad.pay_no)

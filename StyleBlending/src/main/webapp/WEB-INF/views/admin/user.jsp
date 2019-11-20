@@ -60,11 +60,11 @@
                           	<div class="col-sm-12 col-md-6" style="padding:20px;">
                           		<div class="dataTables_length" id="bootstrap-data-table_length">
                           			<label style="display:inline-flex";>Show 
-                          				<select name="bootstrap-data-table_length" aria-controls="bootstrap-data-table" class="form-control form-control-sm">
-                          					<option value="5">5</option>
-                          					<option value="10">10</option>
-                          					<option value="30">30</option>
-                          					<option value="-1">All</option>
+                          				<select name="boardLimit"  class="form-control form-control-sm" onchange="pageSet(value);" >
+                          					<option value="5" <c:if test="${pi.boardLimit eq '5' }">selected</c:if>>5</option>
+                          					<option value="10" <c:if test="${pi.boardLimit eq '10' }">selected</c:if>>10</option>
+                          					<option value="20" <c:if test="${pi.boardLimit eq '20' }">selected</c:if>>20</option>
+                          					<option value="30" <c:if test="${pi.boardLimit eq '30' }">selected</c:if>>30</option>
                           				</select> entries
                           			</label>
                           		</div>
@@ -87,7 +87,7 @@
                                         <tr>
                                         	<th><input type="checkbox" name="mCheckAll" id="checkAll" onclick="allCheck();"/></th>
                                             <th>No.</th>
-                                            <th>이미지</th>
+                                            <th>프로필</th>
                                             <th>이메일</th>
                                             <th>닉네임</th>
                                             <th>가입일</th>
@@ -197,6 +197,10 @@
     
     
      <script>
+     
+     function pageSet(boardLimit){
+    	 location.href="${pageContext.request.contextPath}/aUser.do?boardLimit="+boardLimit; 
+     }
      
      
     	 var keyword = $("#keyword").val().toUpperCase();

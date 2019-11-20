@@ -15,7 +15,6 @@ import lombok.ToString;
 @ToString
 public class Ad {
 
-	private int rownum;
 	private int adno;
 	private String mno;
 	private int payno;

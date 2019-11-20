@@ -10,6 +10,11 @@ import com.kh.styleblending.member.model.vo.Member;
 
 public interface AdminService {
 	
+	// 오늘자 새게시물수
+	int selectNewBcount();
+	// 오늘자 가입자수
+	ArrayList<Member> selectNewMember();
+	
 	// 총 회원수 조회용
 	int getMemberListCount();
 	
@@ -36,4 +41,7 @@ public interface AdminService {
 	
 	// 광고 등록
 	int insertAd(Ad ad);
+	
+	
+	
 }

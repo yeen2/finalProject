@@ -144,7 +144,7 @@ public class MyPageController {
 		
 		if(mem != null) {
 			session.setAttribute("loginUser", mem);
-			if(renameFileNameD != "profile.png") {
+			if(!renameFileNameD.equals("profile.png")) {
 				deleteProfileImg(renameFileNameD, request);
 			}
 			return m.getRenameImg();
@@ -320,10 +320,34 @@ public class MyPageController {
 		}
 	}
 	
+	@ResponseBody
+	@RequestMapping("mpSFanCheckTab.do")
+	public int[] selectFanCheckTab(Fan f) {
+		int[] result = mpService.selectFanCheckTab(f);
+		
+		if(result != null) {
+			return result;
+		}else {
+			return null;
+		}
+	}
 	
+	@ResponseBody
 	@RequestMapping("mpInsertFan.do")
-	public int insertFan(Fan f, ModelAndView mv) {
+	public int insertFan(Fan f) {
 		int result = mpService.insertFan(f);
+		
+		if(result > 0) {
+			return 1;
+		}else {
+			return -1;
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping("mpDeleteFan.do")
+	public int deleteFan(Fan f) {
+		int result = mpService.deleteFan(f);
 		
 		if(result > 0) {
 			return 1;
