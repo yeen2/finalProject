@@ -2,6 +2,7 @@ package com.kh.styleblending.main.model.service;
 
 import java.util.ArrayList;
 
+import com.kh.styleblending.admin.model.vo.Ad;
 import com.kh.styleblending.posting.model.vo.Posting;
 
 public interface MainService {
@@ -12,5 +13,6 @@ public interface MainService {
 	ArrayList<Posting> selectPostList();
 	//메인 무한스크롤 리스트
 	ArrayList<Posting> selectInfinityScroll();
-
+	//광고 url/ 사진 가져옫기
+	Ad selectAd();
 }
