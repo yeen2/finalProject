@@ -194,25 +194,25 @@
 	<select id="selectSearchFan" resultMap="memberResultSet">
 		select * 
 		from member 
-		where nickName like '%' || #{search} || '%'
+		where nickName like #{search} || '%'
 	</select>
 	
 	<select id="selectSearchBrand" resultMap="styleResultSet">
 		select *
 		from style s
-		where brand like '%' || #{search} || '%'
+		where brand like #{search} || '%'
 	</select>
 	
 	<select id="selectSearchHashtag" resultMap="postingResultSet">
 		select * 
 		from posting 
-		where hashtag like '%' || #{search} || '%'
+		where hashtag like #{search} || '%'
 	</select>
 	
 	<select id="selectSearchLoca" resultMap="postingResultSet">
 		select * 
 		from posting 
-		where location like '%' || #{search} || '%'
+		where location like #{search} || '%'
 	</select>
 
 </mapper>
