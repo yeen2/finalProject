@@ -132,7 +132,7 @@
                                     </div>
                                     <div class="stat-content">
                                         <div class="text-left dib">
-                                            <div class="stat-text"><span class="count">${fn:length(newMember) }</span></div>
+                                            <div class="stat-text"><span class="count"> ${fn:length(newMember) } </span></div>
                                             <div class="stat-heading">가입자 수</div>
                                         </div>
                                     </div>
@@ -184,27 +184,29 @@
                                                     <th>탈퇴유무</th>
                                                 </tr>
                                             </thead>
+                                            <c:forEach var="m" begin="0" end="${fn:length(newMember)-1}">
                                             <tbody>
                                                 <tr>
-                                                    <td class="serial">1.</td>
+                                                    <td class="serial">${m+1}</td>
                                                     <td>
 		                                                <div class="round-img">
-		                                                    <a href="#"><img class="rounded-circle" src="${pageContext.request.contextPath}${m.profilePath }${newMember.renameImg}" alt=""></a>
+		                                                    <a href="#"><img class="rounded-circle" src="${pageContext.request.contextPath}${newMember[m].profilePath }${newMember[m].renameImg}" alt=""></a>
 		                                                </div>
-		                                            </td>
-                                                    <td> ${newMember.email } </td>
-                                                    <td> <span class="name">${newMember.nickName}</span> </td>
-		                                            <td> <span>${newMember.enrollDate }</span> </td>
+		                                            </td> 
+                                                    <td> ${newMember[m].email } </td>
+                                                    <td> <span class="name">${newMember[m].nickName}</span> </td>
+		                                            <td> <span>${newMember[m].enrollDate }</span> </td>
 		                                            <td>
-		                                            	<c:if test="${newMember.isDelete eq 'N' }">
-		                                                <span class="badge badge-complete">${m.isDelete}</span>
+		                                            	<c:if test="${newMember[m].isDelete eq 'N' }">
+		                                                <span class="badge badge-complete">${newMember[m].isDelete}</span>
 		                                                </c:if>
-		                                                <c:if test="${newMember.isDelete eq 'Y' }">
-		                                               	<span class="badge badge-pending">${m.isDelete}</span>
+		                                                <c:if test="${newMember[m].isDelete eq 'Y' }">
+		                                               	<span class="badge badge-pending">${newMember[m].isDelete}</span>
 		                                            	</c:if>
-		                                            </td>
+		                                            </td> 
                                                 </tr>
                                             </tbody>
+                                            </c:forEach>
                                         </table>
                                     </div> <!-- /.table-stats -->
                                 </div>

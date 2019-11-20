@@ -69,7 +69,7 @@
 	<select id="selectNewMember" resultMap="MemberResultSet">
 		select *
 		from member
-		where to_char(enroll_date) = to_char(sysdate,'yy/MM/dd')and isdelete='N'
+		where to_char(enroll_date) = to_char(sysdate,'yy/MM/dd')
 	</select>
 	
 	<select id="getMemberListCount" resultType="_int">

@@ -5,9 +5,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<!-- 아임포트 api -->
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
-<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.2.js"></script>
 </head>
 <body>
 	
@@ -119,7 +116,7 @@
 	                                       				<span class="switch-handle"></span>
 	                                        		</label>
 	                                        	</td>
-	                                            <td class="serial">${a.rownum}</td>
+	                                            <td class="serial">${a.adno}</td>
 	                                            <td>${a.name }</td>
 	                                            <td> ${a.enrollDate } </td>
 	                                            <td> ${a.startDate } </td>

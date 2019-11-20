@@ -38,16 +38,17 @@ public class AdminController {
 		ArrayList<Member> newMember = aService.selectNewMember();
 		
 		model.addAttribute("newBoard",newBoard).addAttribute("newMember", newMember);
-		
+		System.out.println(newMember);
 		return "admin/adminPage";
 	}
 	
 	@RequestMapping("aUser.do")
-	public ModelAndView selectUserList(ModelAndView mv, @RequestParam(value="currentPage", defaultValue="1")int currentPage) {
+	public ModelAndView selectUserList(ModelAndView mv, @RequestParam(value="currentPage", defaultValue="1")int currentPage,
+									@RequestParam(value="boardLimit", defaultValue="5")int boardLimit) {
 		
 		int listCount = aService.getMemberListCount();
 		
-		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, boardLimit);
 		
 		ArrayList<Member> list = aService.selectMemberList(pi);
 		
@@ -73,7 +74,8 @@ public class AdminController {
 	
 	@RequestMapping("aDeclare.do")
 	public ModelAndView selectDeclareList(ModelAndView mv, @RequestParam(value="currentPage", defaultValue="1")int currentPage,
-											@RequestParam(value="select", defaultValue="0") String select, HashMap<String,String> cate) {
+											@RequestParam(value="select", defaultValue="0") String select, HashMap<String,String> cate,
+											@RequestParam(value="boardLimit", defaultValue="5")int boardLimit) {
 		
 		if(select.equals("1")) {
 			cate.put("posting","1" );
@@ -83,7 +85,7 @@ public class AdminController {
 		
 		int listCount = aService.getDeclareListCount(cate);
 		
-		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, boardLimit);
 		
 		
 		ArrayList<Declare> list = aService.selectDeclareList(pi,cate);
@@ -112,11 +114,12 @@ public class AdminController {
 	
 	
 	@RequestMapping("aAdvertisment.do")
-	public ModelAndView selectAdList(ModelAndView mv, @RequestParam(value="currentPage",defaultValue="1")int currentPage) {
+	public ModelAndView selectAdList(ModelAndView mv, @RequestParam(value="currentPage",defaultValue="1")int currentPage,
+									@RequestParam(value="boardLimit", defaultValue="5")int boardLimit) {
 		
 		int listCount = aService.getAdListCount();
 		
-		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount,boardLimit);
 		
 		ArrayList<Ad> list = aService.selectAdList(pi);
 		
