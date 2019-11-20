@@ -3,26 +3,20 @@
 "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="mainMapper">
-	<resultMap id="mainResultSet" type="Posting">
-		
-		<id property="pno" column="p_no"/>
+	<resultMap id="mainAdResultSet" type="Ad">
+		<id property="adno" column="ad_no"/>
 		<result property="mno" column="m_no"/>
+		<result property="payno" column="pay_no"/>
+		<result property="name" column="name"/>
+		<result property="url" column="url"/>
 		<result property="originalImg" column="original_img"/>
 		<result property="renameImg" column="rename_img"/>
 		<result property="imgPath" column="img_path"/>
-		<result property="content" column="content"/>
-		<result property="hashtag" column="hashtag"/>
-		<result property="gender" column="gender"/>
-		<result property="location" column="location"/>
-		<result property="likeCount" column="like_count"/>
-		<result property="declareCount" column="declare_count"/>
 		<result property="enrollDate" column="enroll_date"/>
-		<result property="updateDate" column="update_date"/>
-		<result property="isDelete" column="isdelete"/>
-		<result property="nickName" column="nickname"/>
-		<result property="profile" column="profile"/>
-		<result property="mlocation" column="location"/>
-		<result property="profileImg" column="profile_path"/>
+		<result property="startDate" column="start_date"/>
+		<result property="endDate" column="end_date"/>
+		<result property="status" column="status"/>
+		
 	
 	</resultMap>
 	
@@ -45,32 +39,38 @@
 		<result property="nickName" column="nickname"/>
 		<result property="profile" column="profile"/>
 		<result property="profileImg" column="profile_path"/>
+		<result property="replyCount" column="replyCount"/>
 		<result property="rownum" column="rnum"/>
 	
 	</resultMap>
 	
 	
-	<select id="selectFourWrap" resultMap="mainResultSet">
-		<![CDATA[
-		select *
-		from (select * from posting join member using(m_no) order by like_count desc)
-		where rownum <=4
-		]]>
+	<select id="selectFourWrap" resultMap="mainResultSet2">
+		select * from
+		(select a.*,rownum rnum
+		from (select p_no,m_no, p.original_img,p.rename_img,p.img_path,content,p.hashtag,p.gender,p.location,like_count,p.declare_count,p.enroll_date,p.update_date,p.isdelete,m.nickname, m.profile, m.profile_path,(select count(*) from p_reply where r_level=1 and p_no=p.p_no)as replyCount from posting p join member m using(m_no) order by p.like_count desc) a)
+		where rnum between 1 and 4
 	</select>
-	<select id="selectPostList" resultMap="mainResultSet">
-		select * 
-		from (select * from posting p join member m using(m_no) order by p.enroll_date desc)
-		where rownum between 1 and 9
-
+	<select id="selectPostList" resultMap="mainResultSet2">
+		select * from
+		(select a.*,rownum rnum
+		from (select p_no,m_no, p.original_img,p.rename_img,p.img_path,content,p.hashtag,p.gender,p.location,like_count,p.declare_count,p.enroll_date,p.update_date,p.isdelete,m.nickname, m.profile, m.profile_path,(select count(*) from p_reply where r_level=1 and p_no=p.p_no)as replyCount from posting p join member m using(m_no) order by p.enroll_date desc) a)
+		where rnum between 1 and 9
 	</select>
 	<select id="selectInfinityScroll" resultMap="mainResultSet2">
 		
-		select *
-		from (select p_no,m_no, p.original_img,p.rename_img,p.img_path,content,p.hashtag,p.gender,p.location,like_count,p.declare_count,p.enroll_date,p.update_date,p.isdelete,m.nickname, m.profile, m.profile_path, rownum rnum from posting p join member m using(m_no) order by p.enroll_date desc)
+		select * from
+		(select a.*,rownum rnum
+		from (select p_no,m_no, p.original_img,p.rename_img,p.img_path,content,p.hashtag,p.gender,p.location,like_count,p.declare_count,p.enroll_date,p.update_date,p.isdelete,m.nickname, m.profile, m.profile_path,(select count(*) from p_reply where r_level=1 and p_no=p.p_no)as replyCount from posting p join member m using(m_no) order by p.enroll_date desc) a)
 		where rnum between 10 and 20
 
 
 	</select>
-
+	<select id="selectAd" resultMap="mainAdResultSet">
+		select *
+		from ad
+		where status=2
+	
+	</select>
 
 </mapper>
