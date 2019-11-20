@@ -36,8 +36,9 @@ public class AdminController {
 		
 		int newBoard = aService.selectNewBcount();
 		ArrayList<Member> newMember = aService.selectNewMember();
+		int declareCount = aService.selectNoCheckDeclare(); 
 		
-		model.addAttribute("newBoard",newBoard).addAttribute("newMember", newMember);
+		model.addAttribute("newBoard",newBoard).addAttribute("newMember", newMember).addAttribute("declareCount",declareCount);
 		System.out.println(newMember);
 		return "admin/adminPage";
 	}
@@ -138,9 +139,9 @@ public class AdminController {
 		//System.out.println("진짜"+ad);
 	
 		if(result > 0) {
-			session.removeAttribute("ad"); // 광고 session 지워주기
-			mv.setViewName("redirect:aAdvertisment.do");
-			//System.out.println("지우고"+ad);
+			//session.removeAttribute("ad"); // 광고 session 지워주기
+			mv.setViewName("redirect:mpSAdList.do");
+			System.out.println("지우고"+ad);
 		}else {
 			mv.addObject("msg", "광고신청실패").setViewName("common/errorPage");
 		}

@@ -150,7 +150,7 @@
                                     </div>
                                     <div class="stat-content">
                                         <div class="text-left dib">
-                                            <div class="stat-text"><span class="count">349</span></div>
+                                            <div class="stat-text"><span class="count">${declareCount}</span></div>
                                             <div class="stat-heading" style="font-size: 13px;">미처리신고</div>
                                         </div>
                                     </div>
@@ -184,6 +184,7 @@
                                                     <th>탈퇴유무</th>
                                                 </tr>
                                             </thead>
+                                            <c:if test="${!empty newMember}">
                                             <c:forEach var="m" begin="0" end="${fn:length(newMember)-1}">
                                             <tbody>
                                                 <tr>
@@ -207,6 +208,12 @@
                                                 </tr>
                                             </tbody>
                                             </c:forEach>
+                                            </c:if>
+                                            <c:if test="${ empty newMember}">
+                                            <tbody>
+                                            	<td colspan="6" style="text-align: center;">새로 가입한 회원이 없습니다.</td>
+                                            </tbody>
+                                            </c:if>
                                         </table>
                                     </div> <!-- /.table-stats -->
                                 </div>
