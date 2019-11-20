@@ -48,6 +48,8 @@ public class Posting {
 	// 로그인한 session-mno 불러오기
 	private int loginmno;
 	
+	// 브랜드명 조회
+	private String brand;
 	
 	
 	
