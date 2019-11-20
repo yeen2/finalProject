@@ -64,7 +64,9 @@
 				</div>
 				
 				<div style="margin-top:35px;">
-					<button type="button" class="form-control btn btn-warning" id="kakaoBtn"><b>카카오톡 로그인</b></button>
+					<button type="button"id="kakaoBtn" style="border: none; background-color: white;">
+						<img id="kakao-login-btn" src="https://kauth.kakao.com/public/widget/login/kr/kr_02_medium.png" style="cursor: pointer"></button>
+				
 				</div>
 				<div style="margin-top:10px;">
 					<button type="button" class="form-control btn btn-danger" id="googleBtn"><b>구글 로그인</b></button>
