@@ -9,6 +9,7 @@ import com.kh.styleblending.board.model.dao.BoardDao;
 import com.kh.styleblending.board.model.vo.Board;
 import com.kh.styleblending.board.model.vo.BoardReply;
 import com.kh.styleblending.board.model.vo.FashionBoard;
+import com.kh.styleblending.board.model.vo.Image;
 import com.kh.styleblending.board.model.vo.PageInfo;
 
 @Service("bService")
@@ -18,33 +19,59 @@ public class BoardServiceImpl implements BoardService{
 	private BoardDao bDao;
 
 	@Override
+	public int getListCount() {
+		
+		return bDao.getListCount();
+	}
+	
+	@Override
+	public ArrayList<Board> selectList(PageInfo pi) {
+		
+		return bDao.selectList(pi);
+	}
+	
+	@Override
 	public int insertBoard(Board b) {
 		
 		return bDao.insertBoard(b);
 	}
-
+	
 	@Override
-	public Board selectBoard(int bNo) {
-
-		return bDao.selectBoard(bNo);
+	public Board selectBoard(int bno) {
+		 
+		 int result = bDao.updateCount(bno);
+		
+		
+		 if(result > 0) {
+			 
+			 return bDao.selectBoard(bno);
+		 }else {
+			 
+			return null; 
+		 }
 	}
 
 	@Override
-	public int updateBoard(Board b) {
+	public Board selectUpdateBoard(int bno) {
 
+		return bDao.selectBoard(bno);
+	}
+	@Override
+	public int updateBoard(Board b) {
+		
 		return bDao.updateBoard(b);
 	}
 
 	@Override
-	public int deleteBoard(int bNo) {
+	public int deleteBoard(int bno) {
 
-		return bDao.deleteBoard(bNo);
+		return bDao.deleteBoard(bno);
 	}
 
 	@Override
-	public ArrayList<BoardReply> selectBoardReplyList(int brNo) {
+	public ArrayList<BoardReply> selectBoardReplyList(int brno) {
 
-		return bDao.selectBoardReplyList(brNo);
+		return bDao.selectBoardReplyList(brno);
 	}
 
 	@Override
@@ -53,23 +80,18 @@ public class BoardServiceImpl implements BoardService{
 		return bDao.insertBoardReply(r);
 	}
 
-	@Override
-	public int getListCount() {
 
-		return bDao.getListCount();
-	}
-
-	@Override
-	public ArrayList<Board> selectList(PageInfo pi) {
-
-		return bDao.selectList(pi);
-	}
 
 	@Override
 	public ArrayList<FashionBoard> fashionSelectList(PageInfo pi) {
 
 		return bDao.fashionSelectList(pi);
 	}
+
+
+
+
+
 	
 	
 

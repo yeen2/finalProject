@@ -13,6 +13,7 @@ import com.kh.styleblending.member.model.vo.Fan;
 import com.kh.styleblending.member.model.vo.Member;
 import com.kh.styleblending.member.model.vo.PageInfo;
 import com.kh.styleblending.posting.model.vo.Posting;
+import com.kh.styleblending.posting.model.vo.Style;
 
 @Repository("mpDao")
 public class MyPageDao {
@@ -89,6 +90,22 @@ public class MyPageDao {
 	
 	public int deleteFan(Fan f) {
 		return sqlSession.delete("mypageMapper.deleteFan", f);
+	}
+
+	public ArrayList<Member> selectSearchFan(String search) {
+		return (ArrayList)sqlSession.selectList("mypageMapper.selectSearchFan", search);
+	}
+
+	public ArrayList<Style> selectSearchBrand(String search) {
+		return (ArrayList)sqlSession.selectList("mypageMapper.selectSearchBrand", search);
+	}
+
+	public ArrayList<Posting> selectSearchHashtag(String search) {
+		return (ArrayList)sqlSession.selectList("mypageMapper.selectSearchHashtag", search);
+	}
+
+	public ArrayList<Posting> selectSearchLoca(String search) {
+		return (ArrayList)sqlSession.selectList("mypageMapper.selectSearchLoca", search);
 	}
 	
 

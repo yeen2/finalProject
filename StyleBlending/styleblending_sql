@@ -833,6 +833,20 @@ insert into declare values(seq_declare.nextval,4,1,'도배',null,'19/11/15',1,1)
 
 -- 자유게시판 insert
 insert into board values(seq_board.nextval, 2, '제목', '내용',default,sysdate, sysdate,default,default);
+insert into board values(seq_board.nextval, 1, '[관리자 게시글]', '하지말란거 하지마!!',default,sysdate, sysdate,default,default);
+insert into board values(seq_board.nextval, 2 , '힘들어', '힘.....들........어',default,sysdate, sysdate,default,default);
+insert into board values(seq_board.nextval, 2 , '머리 아파', 'ㅎㅎㅎㅎㅎㅎ',default,sysdate, sysdate,default,default);
+insert into board values(seq_board.nextval, 2 , '눈 아파', 'ㅅㅅㅅㅅㅅㅅㅅㅅ',default,sysdate, sysdate,default,default);
+insert into board values(seq_board.nextval, 2 , '다리 아파', 'ㅛㅛㅛㅛㅛㅛㅛㅛ',default,sysdate, sysdate,default,default);
+insert into board values(seq_board.nextval, 2 , '팔 아파', 'ㅕㅕㅕㅕㅕㅕㅕㅕㅕ',default,sysdate, sysdate,default,default);
+insert into board values(seq_board.nextval, 2 , '발 아파', 'ㅑㅑㅑㅑㅑㅑㅑㅑㅑ',default,sysdate, sysdate,default,default);
+insert into board values(seq_board.nextval, 3 , '손 아파', 'ㅁㅁㅁㅁㅁㅁㅁㅁㅁ',default,sysdate, sysdate,default,default);
+insert into board values(seq_board.nextval, 4 , '입 아파', 'ㄴㄴㄴㄴㄴㄴㄴㄴㄴ',default,sysdate, sysdate,default,default);
+insert into board values(seq_board.nextval, 5 , '허리 아파', 'ㅇㅇㅇㅇㅇㅇㅇㅇ',default,sysdate, sysdate,default,default);
+insert into board values(seq_board.nextval, 6 , '배 아파', 'ㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹ',default,sysdate, sysdate,default,default);
+insert into board values(seq_board.nextval, 12 , '어깨 아파', 'ㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎ',default,sysdate, sysdate,default,default);
+insert into board values(seq_board.nextval, 13 , '오늘 치킨먹을까?', 'ㅓㅓㅓㅓㅓㅓㅓㅓ',default,sysdate, sysdate,default,default);
+
 
 -- 자유게시판 신고  insert
 insert into declare values(seq_declare.nextval,1,1,'비방',null,sysdate,1,2);

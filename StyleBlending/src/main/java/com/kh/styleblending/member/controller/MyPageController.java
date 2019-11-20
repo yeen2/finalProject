@@ -28,6 +28,7 @@ import com.kh.styleblending.member.model.vo.Member;
 import com.kh.styleblending.member.model.vo.PageInfo;
 import com.kh.styleblending.member.model.vo.Pagination;
 import com.kh.styleblending.posting.model.vo.Posting;
+import com.kh.styleblending.posting.model.vo.Style;
 
 @Controller
 public class MyPageController {
@@ -308,6 +309,7 @@ public class MyPageController {
 	}
 	*/
 	
+	// 팬 체크
 	@ResponseBody
 	@RequestMapping("mpSFanCheck.do")
 	public int selectFanCheck(Fan f) {
@@ -320,6 +322,7 @@ public class MyPageController {
 		}
 	}
 	
+	// 팬 리스트 체크
 	@ResponseBody
 	@RequestMapping("mpSFanCheckTab.do")
 	public int[] selectFanCheckTab(Fan f) {
@@ -332,6 +335,7 @@ public class MyPageController {
 		}
 	}
 	
+	// insert 팬
 	@ResponseBody
 	@RequestMapping("mpInsertFan.do")
 	public int insertFan(Fan f) {
@@ -344,6 +348,7 @@ public class MyPageController {
 		}
 	}
 	
+	// delete 팬
 	@ResponseBody
 	@RequestMapping("mpDeleteFan.do")
 	public int deleteFan(Fan f) {
@@ -356,11 +361,47 @@ public class MyPageController {
 		}
 	}
 	
+	// --------------- 검색 리스트 ---------------
+	@ResponseBody
+	@RequestMapping(value="mpSSearchFan.do", produces="application/json; charset=UTF-8")
+	public String selectSearchFan(String search) {
+		ArrayList<Member> list = mpService.selectSearchFan(search);
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		
+		return gson.toJson(list);
+	}
 	
-	/*
-	@RequestMapping("검색어 ajax 호출")
+	@ResponseBody
+	@RequestMapping(value="mpSSearchBrand.do", produces="application/json; charset=UTF-8")
+	public String selectSearchBrand(String search) {
+		ArrayList<Style> list = mpService.selectSearchBrand(search);
+
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		
+		return gson.toJson(list);
+	}
 	
-	*/
+	@ResponseBody
+	@RequestMapping(value="mpSSearchHashtag.do", produces="application/json; charset=UTF-8")
+	public String selectSearchHashtag(String search) {
+		ArrayList<Posting> list = mpService.selectSearchHashtag(search);
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		
+		return gson.toJson(list);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="mpSSearchLoca.do", produces="application/json; charset=UTF-8")
+	public String selectSearchLoca(String search) {
+		ArrayList<Posting> list = mpService.selectSearchLoca(search);
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		
+		return gson.toJson(list);
+	}
+	
 
 	// 테스트 메소드 (나중에 지울거)
 	@RequestMapping("test.do")
