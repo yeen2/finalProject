@@ -98,7 +98,6 @@ public class MyPageServiceImpl implements MyPageService {
 		DefaultTransactionDefinition def = new DefaultTransactionDefinition();
 		def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
 		
-		// 트랜잭션 상태를 관리하는 객체
 		TransactionStatus status = transactionManager.getTransaction(def);
 		
 		try {
@@ -125,9 +124,20 @@ public class MyPageServiceImpl implements MyPageService {
 	}
 
 	@Override
+	public int[] selectFanCheckTab(Fan f) {
+		return mpDao.selectFanCheckTab(f);
+	}
+	
+	@Override
 	public int insertFan(Fan f) {
 		return mpDao.insertFan(f);
 	}
+
+	@Override
+	public int deleteFan(Fan f) {
+		return mpDao.deleteFan(f);
+	}
+
 
 
 }
