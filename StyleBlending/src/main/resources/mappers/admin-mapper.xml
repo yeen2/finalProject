@@ -79,6 +79,12 @@
 		where ischeck='1'
 	</select>
 	
+	<select id="selectStartAd" resultMap="AdResultSet">
+		select *
+		from ad
+		where status='2'
+	</select>
+	
 	<select id="getMemberListCount" resultType="_int">
 		select count(*)
 		from member
@@ -162,7 +168,7 @@
 		from ad
 		join pay p on(p.pay_no=ad.pay_no)
 		join member m on(m.m_no=ad.m_no)
-		order by ad.status, ad.enroll_date )t1
+		order by ad.status, ad.ad_no desc, ad.enroll_date )t1
 	</select>
 	
 	<insert id="insertPay">

@@ -97,7 +97,7 @@
                                     </div>
                                     <div class="stat-content">
                                         <div class="text-left dib">
-                                            <div class="stat-text"><span class="count">${ newBoard}</span></div>
+                                            <div class="stat-text"><span class="count">${newBoard}</span></div>
                                             <div class="stat-heading">새 게시글</div>
                                         </div>
                                     </div>
@@ -115,8 +115,8 @@
                                     </div>
                                     <div class="stat-content">
                                         <div class="text-left dib">
-                                            <div class="stat-text"><span>진행중</span></div>
-                                            <div class="stat-heading">업체명</div> 
+                                            <div class="stat-text"><span>${startAd.name}</span></div>
+                                            <div class="stat-heading">진행중</div> 
                                         </div>
                                     </div>
                                 </div>

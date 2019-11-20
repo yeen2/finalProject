@@ -35,6 +35,13 @@ public class AdminServiceImpl implements AdminService{
 		// 미확인 신고수
 		return aDao.selectNoCheckDeclare();
 	}
+	
+	@Override
+	public Ad selectStartAd() {
+		// 진행중인 광고
+		return aDao.selectStartAd();
+	}
+
 
 	@Override
 	public int getMemberListCount() {
@@ -106,6 +113,7 @@ public class AdminServiceImpl implements AdminService{
 		
 	}
 
+	
 
 
 	

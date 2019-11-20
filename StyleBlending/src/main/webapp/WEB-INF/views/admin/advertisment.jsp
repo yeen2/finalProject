@@ -7,6 +7,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
+
+
+
 	
 <!-- Left Panel -->
     <aside id="left-panel" class="left-panel" style="padding-top:20px;">
@@ -41,9 +44,10 @@
        <!-- Right Panel -->
 
     <div id="right-panel" class="right-panel">
+    
 	
 	<jsp:include page="header.jsp" />
-	
+
         <div class="content">
             <div class="animated fadeIn">
                	<div class="card-header" style="background:white;">
@@ -242,7 +246,7 @@
                   
                 
                 
-             	<button type="button" class="btn btn-secondary btn-sm" onclick="javascript:openWin();">
+             	<button type="button" class="btn btn-secondary btn-sm" onclick="location.href='aInsertAdView.do';">
 	                        		광고등록
 	            </button>
                
@@ -274,9 +278,7 @@
 	}
 	
 		
-	function openWin(){  
-	    window.open("aInsertAdView.do", "네이버새창", "width=800, height=700, toolbar=no, menubar=no, scrollbars=no, resizable=yes" );  
-	} 
+
 
 	
 		/* $("#adListTab").click(function(){ 
