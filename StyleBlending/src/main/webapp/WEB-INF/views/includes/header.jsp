@@ -175,7 +175,7 @@
 				&nbsp;
 				
 				<form action="nav_search.ca" method="get" style="display: inline;">
-					<input type="text" id="nav_search" name="nav_search" size="20px;"
+					<input type="text" id="nav_search" name="nav_search" size="20px;" autocomplete="off"
 						style="background: none; border: none; color: white;"
 						placeholder="친구  위치 브랜드별 검색">
 				</form>
