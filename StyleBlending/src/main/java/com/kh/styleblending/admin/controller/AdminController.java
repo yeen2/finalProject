@@ -37,9 +37,10 @@ public class AdminController {
 		int newBoard = aService.selectNewBcount();
 		ArrayList<Member> newMember = aService.selectNewMember();
 		int declareCount = aService.selectNoCheckDeclare(); 
+		Ad startAd = aService.selectStartAd();
 		
-		model.addAttribute("newBoard",newBoard).addAttribute("newMember", newMember).addAttribute("declareCount",declareCount);
-		System.out.println(newMember);
+		model.addAttribute("newBoard",newBoard).addAttribute("newMember", newMember).addAttribute("declareCount",declareCount).addAttribute("startAd",startAd);
+		//System.out.println(newMember);
 		return "admin/adminPage";
 	}
 	
@@ -130,7 +131,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping("aInsertAd.do")
-	public ModelAndView insertAd(HttpSession session, ModelAndView mv,  HttpServletRequest request) {
+	public String insertAd(HttpSession session, Model model, HttpServletRequest request) {
 		
 	
 		Ad ad = (Ad)session.getAttribute("ad");
@@ -139,16 +140,16 @@ public class AdminController {
 		//System.out.println("진짜"+ad);
 	
 		if(result > 0) {
-			//session.removeAttribute("ad"); // 광고 session 지워주기
-			mv.setViewName("redirect:mpSAdList.do");
-			System.out.println("지우고"+ad);
+			session.removeAttribute("ad"); // 광고 session 지워주기
+			//System.out.println("지우고"+ad);
+			return "member/myPage";
 		}else {
-			mv.addObject("msg", "광고신청실패").setViewName("common/errorPage");
+			model.addAttribute("msg", "광고신청실패");
+			return "common/errorPage";
 		}
-		
-		return mv;
-	}
 	
+	}
+
 	// 광고 사진 업로드한 파일명 반환 메소드
 	public String saveFile(MultipartFile file, HttpServletRequest request) {
 		

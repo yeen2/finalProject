@@ -140,6 +140,16 @@
 #addAlarmCon1 {
 	padding: 10px 10px 10px 10px;
 }
+
+#addSearch{width:100%; height:inherit; background:lightgray; border:2px solid white;}
+#addSearchImg{padding:10px 0 10px 10px; width:10%; height:auto; display:inline-block;}
+#addSearchImg img{width:50px; height:50px; border-radius:1.5em;}
+#addSearchNick{display:inline-block; width:50%; margin-top:10px;}
+#addSearchDate{display:inline-block; width:25%; text-align:right;}
+#addSearchCon{padding:10px 10px 10px 10px;}
+#fanAreaBtn:hover, #brandAreaBtn:hover, #hashtagAreaBtn:hover, #locationAreaBtn:hover{cursor:pointer}
+#fanAreaBtn, #brandAreaBtn, #hashtagAreaBtn, #locationAreaBtn{width:24%;}
+
 </style>
 
 
@@ -163,12 +173,51 @@
 
 				<i class="fa fa-search" style="font-size: x-large; color: gray;"></i>
 				&nbsp;
-
+				
 				<form action="nav_search.ca" method="get" style="display: inline;">
-					<input type="text" id="nav_search" name="nav_search" size="20px;"
+					<input type="text" id="nav_search" name="nav_search" size="20px;" autocomplete="off"
 						style="background: none; border: none; color: white;"
 						placeholder="친구  위치 브랜드별 검색">
 				</form>
+				
+				<div style="position:relative; margin-left:100px;" id="displaySearch">
+				<!-- 검색 결과 창 -->
+					<div style="position:absolute; top:2px; left:-100px; width:400px; max-height:255px; box-shadow:0 5px 10px rgba(0, 0, 0, 0.5);
+						overflow-y:auto; overflow-x:hidden; background:white; display:none; z-index:1000;" id="searchDiv">
+						<div style="width:100%; height:50px;">
+							<ul style="padding:7px 5px 5px 8px;">
+								<li class="btn btn-dark" id="fanAreaBtn">회원</li>
+								<li class="btn btn-light" id="brandAreaBtn">브랜드</li>
+								<li class="btn btn-light" id="hashtagAreaBtn">#태그</li>
+								<li class="btn btn-light" id="locationAreaBtn">위치</li>
+							</ul>
+						</div>
+						
+					    <!-- 알림 추가될 때마다 div 추가 -->
+					    <!-- 회원 추가 -->
+					    <div id="fanArea" style="display:block; padding:0 5px 5px 5px;">
+					    	
+					    </div>
+					    
+					    <!-- 브랜드 추가 -->
+					    <div id="brandArea" style="display:none; padding:0 5px 5px 5px;">
+					    	
+						</div>
+						
+						<!-- 해시태그 추가 -->
+					    <div id="hashtagArea" style="display:none; padding:0 5px 5px 5px;">
+				
+					    </div>
+					    
+					    <!-- 위치 추가 -->
+					    <div id="locationArea" style="display:none; padding:0 5px 5px 5px;">
+					    
+					    </div>
+					    
+					    
+					</div>
+				</div>
+				
 			</div>
 
 
@@ -488,6 +537,8 @@
 		</div>
 	</div>
 
+
+
 	<!-- <script>
 var sel;
 $(document).on("click", ".btn", function(){
@@ -515,6 +566,256 @@ function select(){
 	});
 }
 </script> -->
+
+	<!-- 검색창 스크립트 -->
+	<script>
+		$(function(){
+			$("#nav_search").on("input", function(){
+				var search = $("#nav_search").val();
+				
+				if(search != ""){
+					$("#searchDiv").show();
+					$.ajax({
+						url:"mpSSearchFan.do",
+						data:{search:search},
+						dataType:"json",
+						type:"post",
+						success:function(list){
+							$("#fanArea").html("");
+							
+							if(list == ""){
+								var $fanNull = "<div id='addSearch'>"
+										    	+"<div id='addSearchImg'>"
+									    		+"<i class='fas fa-user-alt'></i>"
+										    	+"</div>"
+										    	+"<div id='addSearchNick'>"
+									    		+"<p>검색 결과가 없습니다.</p>"
+										    	+"</div>"
+										    	+"</div>";
+							    	
+								$("#fanArea").append($fanNull);
+							}else{
+								$.each(list, function(index, value){
+									var $fan = "<div id='addSearch' class='fanFan' value='" + value.mno + "'>"
+										    	+"<div id='addSearchImg'>"
+									    		+"<i class='fas fa-user-alt'></i>"
+										    	+"</div>"
+										    	+"<div id='addSearchNick'>"
+									    		+"<p>" + value.nickName + "</p>"
+										    	+"</div>"
+										    	+"</div>";
+										    	
+									$("#fanArea").append($fan);
+									
+								});
+							}
+							
+						},
+						error:function(){
+							console.log("ajax 통신 실패");
+						}
+					});
+					
+					$.ajax({
+						url:"mpSSearchBrand.do",
+						data:{search:search},
+						dataType:"json",
+						type:"post",
+						success:function(list){
+							$("#brandArea").html("");
+							
+							if(list == ""){
+								var $brandNull = "<div id='addSearch'>"
+										    	+"<div id='addSearchImg'>"
+									    		+"<i class='fas fa-search'></i>"
+										    	+"</div>"
+										    	+"<div id='addSearchNick'>"
+									    		+"<p>검색 결과가 없습니다.</p>"
+										    	+"</div>"
+										    	+"</div>";
+						
+								$("#brandArea").append($brandNull);
+							}else{
+								$.each(list, function(index, value){
+									var $brand = "<div id='addSearch' class='brandBrand' value='" + value.pno + "'>"
+										    	+"<div id='addSearchImg'>"
+									    		+"<i class='fas fa-search'></i>"
+										    	+"</div>"
+										    	+"<div id='addSearchNick'>"
+									    		+"<p>" + value.brand + "</p>"
+										    	+"</div>"
+										    	+"</div>";
+									
+									$("#brandArea").append($brand);
+									
+								});
+							}
+							
+						},
+						error:function(){
+							console.log("ajax 통신 실패");
+						}
+					});
+					
+					$.ajax({
+						url:"mpSSearchHashtag.do",
+						data:{search:search},
+						dataType:"json",
+						type:"post",
+						success:function(list){
+							$("#hashtagArea").html("");
+							
+							if(list == ""){
+								var $hashtagNull = "<div id='addSearch'>"
+											    	+"<div id='addSearchImg'>"
+										    		+"<i class='fas fa-hashtag'></i>"
+											    	+"</div>"
+											    	+"<div id='addSearchNick'>"
+										    		+"<p>검색 결과가 없습니다.</p>"
+											    	+"</div>"
+											    	+"</div>";
+							    	
+									$("#hashtagArea").append($hashtagNull);
+							}else{
+								$.each(list, function(index, value){
+									var $hashtag = "<div id='addSearch' class='hashHash' value='" + value.pno + "'>"
+											    	+"<div id='addSearchImg'>"
+										    		+"<i class='fas fa-hashtag'></i>"
+											    	+"</div>"
+											    	+"<div id='addSearchNick'>"
+										    		+"<p>" + value.hashtag + "</p>"
+											    	+"</div>"
+											    	+"</div>";
+											    	
+									$("#hashtagArea").append($hashtag);
+									
+								});
+							}
+							
+						},
+						error:function(){
+							console.log("ajax 통신 실패");
+						}
+					});
+
+					$.ajax({
+						url:"mpSSearchLoca.do",
+						data:{search:search},
+						dataType:"json",
+						type:"post",
+						success:function(list){
+							$("#locationArea").html("");
+							
+							if(list == ""){
+								var $locationNull = "<div id='addSearch'>"
+											    	+"<div id='addSearchImg'>"
+										    		+"<i class='fas fa-map-marker-alt'></i>"
+											    	+"</div>"
+											    	+"<div id='addSearchNick'>"
+										    		+"<p>검색 결과가 없습니다.</p>"
+											    	+"</div>"
+												    +"</div>";
+								    
+								$("#locationArea").append($locationNull);
+							}else{
+								$.each(list, function(index, value){
+									var $location = "<div id='addSearch' class='locaLoca' value='" + value.pno + "'>"
+											    	+"<div id='addSearchImg'>"
+										    		+"<i class='fas fa-map-marker-alt'></i>"
+											    	+"</div>"
+											    	+"<div id='addSearchNick'>"
+										    		+"<p>" + value.location + "</p>"
+											    	+"</div>"
+												    +"</div>";
+												    
+									$("#locationArea").append($location);
+									
+								});
+							}
+							
+						},
+						error:function(){
+							console.log("ajax 통신 실패");
+						}
+					});
+				}else{
+					$("#searchDiv").hide();
+					
+				}
+				
+			});
+			
+			
+			// 검색 메뉴 클릭 시
+			$("#fanAreaBtn").click(function(){
+				$("#fanArea").show();
+				$("#fanAreaBtn").attr("class","btn btn-dark");
+				$("#brandArea").hide();
+				$("#brandAreaBtn").attr("class","btn btn-light");
+				$("#hashtagArea").hide();
+				$("#hashtagAreaBtn").attr("class","btn btn-light");
+				$("#locationArea").hide();
+				$("#locationAreaBtn").attr("class","btn btn-light");
+			});
+			$("#brandAreaBtn").click(function(){
+				$("#fanArea").hide();
+				$("#fanAreaBtn").attr("class","btn btn-light");
+				$("#brandArea").show();
+				$("#brandAreaBtn").attr("class","btn btn-dark");
+				$("#hashtagArea").hide();
+				$("#hashtagAreaBtn").attr("class","btn btn-light");
+				$("#locationArea").hide();
+				$("#locationAreaBtn").attr("class","btn btn-light");
+			});
+			$("#hashtagAreaBtn").click(function(){
+				$("#fanArea").hide();
+				$("#fanAreaBtn").attr("class","btn btn-light");
+				$("#brandArea").hide();
+				$("#brandAreaBtn").attr("class","btn btn-light");
+				$("#hashtagArea").show();
+				$("#hashtagAreaBtn").attr("class","btn btn-dark");
+				$("#locationArea").hide();
+				$("#locationAreaBtn").attr("class","btn btn-light");
+			});
+			$("#locationAreaBtn").click(function(){
+				$("#fanArea").hide();
+				$("#fanAreaBtn").attr("class","btn btn-light");
+				$("#brandArea").hide();
+				$("#brandAreaBtn").attr("class","btn btn-light");
+				$("#hashtagArea").hide();
+				$("#hashtagAreaBtn").attr("class","btn btn-light");
+				$("#locationArea").show();
+				$("#locationAreaBtn").attr("class","btn btn-dark");
+			});
+			
+			// 검색 결과 뷰 영역 외 클릭 시
+			$("html").click(function(e){
+				if($("#searchDiv").css("display") == "block"){
+					if(!$("#displaySearch").has(e.target).length){
+						$("#searchDiv").hide();
+					}
+				}
+			});
+			
+			// 검색 결과 클릭 시 페이지 이동
+			$(document).ready(function(){
+				$(document).on("click", ".fanFan", function(){
+					location.href="mpViewProfile.do?mno=" + $(this).attr("value");
+				});
+				$(document).on("click", ".brandBrand", function(){
+					
+				});
+				$(document).on("click", ".hashHash", function(){
+					
+				});
+				$(document).on("click", ".locaLoca", function(){
+					
+				});
+					
+			});
+			
+		});
+	</script>
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script
