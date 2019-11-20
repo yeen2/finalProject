@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.styleblending.admin.model.vo.Ad;
 import com.kh.styleblending.main.model.dao.MainDao;
 import com.kh.styleblending.posting.model.vo.Posting;
 
@@ -30,6 +31,12 @@ public class MainServiceImpl implements MainService{
 	public ArrayList<Posting> selectInfinityScroll() {
 		// TODO Auto-generated method stub
 		return mainDao.selectInfinityScroll();
+	}
+
+	@Override
+	public Ad selectAd() {
+		// TODO Auto-generated method stub
+		return mainDao.selectAd();
 	}
 	
 	

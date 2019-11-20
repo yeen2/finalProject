@@ -49,6 +49,8 @@
 		<result property="cate" column="cate"/>
 		<result property="brand" column="brand"/>
 		<result property="color" column="color"/>
+		<result property="name" column="name"/>
+		<result property="img" column="img"/>
 	</resultMap>
 
 	<insert id="insertPosting">
@@ -94,8 +96,13 @@
 	</insert>
 	
 	<select id="selectStyle" resultMap="styleResultSet">
-		select * 
+		<!-- select * 
 		from style
+		where p_no=#{id} -->
+		select s_no, s.p_no, s.cate, brand, color, 
+       			(select name from category c where s.cate=c.ca_no)name,
+        		(select img from category c where s.cate=c.ca_no)img
+		from style s
 		where p_no=#{id}
 	</select>
 	

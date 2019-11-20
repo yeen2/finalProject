@@ -17,6 +17,24 @@ public class AdminServiceImpl implements AdminService{
 
 	@Autowired
 	private AdminDao aDao;
+	
+	@Override
+	public int selectNewBcount() {
+		// 오늘자 새 게시물수
+		return aDao.selectNewBcount();
+	}
+	
+	@Override
+	public ArrayList<Member> selectNewMember() {
+		// 오늘자 가입자수
+		return aDao.selectNewMember();
+	}
+	
+	@Override
+	public int selectNoCheckDeclare() {
+		// 미확인 신고수
+		return aDao.selectNoCheckDeclare();
+	}
 
 	@Override
 	public int getMemberListCount() {
@@ -80,13 +98,19 @@ public class AdminServiceImpl implements AdminService{
 		int result = aDao.insertPay(ad);
 		
 		if(result > 0) {
-			System.out.println("impl : 결제 성공 ");
+			//System.out.println("impl : 결제 성공 ");
 			return aDao.insertAd(ad);
 		}else {
 			return 0;
 		}
 		
 	}
+
+
+
+	
+
+	
 
 	
 	

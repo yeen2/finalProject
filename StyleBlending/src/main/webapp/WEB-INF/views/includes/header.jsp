@@ -1,15 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
- <meta charset="utf-8">
-    <title>Style Blending</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="description" content="A new design system for developing with less effort.">
-    <meta name="author" content="BootstrapBay">
+<meta charset="utf-8">
+<title>Style Blending</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="description"
+	content="A new design system for developing with less effort.">
+<meta name="author" content="BootstrapBay">
 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/assets/vendor/bootstrap/bootstrap.min.css">
@@ -102,13 +103,43 @@
 	padding: 0px;
 }
 
-#addAlarm1{width:100%; height:inherit; background:lightgray; border:2px solid white;}
-#addAlarmImg1{padding:10px 0 0 10px; width:17%; height:auto; display:inline-block; margin-left:-10px;}
-#addAlarmImg1 img{width:50px; height:50px; border-radius:1.5em;}
-#addAlarmNick1{display:inline-block; width:50%; text-align:left; margin-left:10px;}
-#addAlarmDate1{display:inline-block; width:25%; text-align:right;}
-#addAlarmCon1{padding:10px 10px 10px 10px;}
+#addAlarm1 {
+	width: 100%;
+	height: inherit;
+	background: lightgray;
+	border: 2px solid white;
+}
 
+#addAlarmImg1 {
+	padding: 10px 0 0 10px;
+	width: 17%;
+	height: auto;
+	display: inline-block;
+	margin-left: -10px;
+}
+
+#addAlarmImg1 img {
+	width: 50px;
+	height: 50px;
+	border-radius: 1.5em;
+}
+
+#addAlarmNick1 {
+	display: inline-block;
+	width: 50%;
+	text-align: left;
+	margin-left: 10px;
+}
+
+#addAlarmDate1 {
+	display: inline-block;
+	width: 25%;
+	text-align: right;
+}
+
+#addAlarmCon1 {
+	padding: 10px 10px 10px 10px;
+}
 </style>
 
 
@@ -119,8 +150,10 @@
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
 		<div class="container">
 
-			<a class="navbar-brand d-flex align-items-center" href="${pageContext.request.contextPath}"> 
-				<img src="${pageContext.request.contextPath}/resources/assets/img/logo.svg" class="mr-2" height="30"> Stlye Blending
+			<a class="navbar-brand d-flex align-items-center"
+				href="${pageContext.request.contextPath}"> <img
+				src="${pageContext.request.contextPath}/resources/assets/img/logo.svg"
+				class="mr-2" height="30"> Stlye Blending
 			</a>
 
 
@@ -152,60 +185,48 @@
 			<div class="collapse navbar-collapse text-center"
 				id="navbarNavDropdown-1">
 				<ul class="navbar-nav ml-auto" style="margin-left: 10px;">
-					<li class="nav-item">
-						<a class="nav-link btn btn" data-toggle="modal" href="#exampleModal"> 
-						<i class="fas fa-sliders-h fa-lg"></i>
-						</a>
+					<li class="nav-item"><a class="nav-link btn btn"
+						data-toggle="modal" href="#exampleModal"> <i
+							class="fas fa-sliders-h fa-lg"></i>
+					</a></li>
+					<li class="nav-item"><a class="nav-link" href="mainNotice.do">Notice</a>
 					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="mainNotice.do">Notice</a>
+					<li class="nav-item"><a class="nav-link" href="blist.do">Free
+							board</a></li>
+					<li class="nav-item"><a class="nav-link" href="joinForm.do">Join</a>
 					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="blist.do">Free board</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="joinForm.do">Join</a>
-					</li>
-					<li class="nav-item">
-						<c:if test="${ empty loginUser }">
+					<li class="nav-item"><c:if test="${ empty loginUser }">
 							<a class="nav-link" href="loginForm.do">Sign In</a>
-						</c:if>
-						<c:if test="${ !empty loginUser }">
+						</c:if> <c:if test="${ !empty loginUser }">
 							<a class="nav-link" href="logout.do">LogOut</a>
-						</c:if>
-					</li>
-					
-					<!-- 알림창 -->
-					<li class="nav-item">
-						<a class="nav-link" id="down" href="#"> 
-							<i class="far fa-bell fa-lg" style="font-size: 25px;"></i>
-						</a>
-					</li>
-					
-					<!-- 포스팅 등록 -->
-					<li class="nav-item">
-						<a class="nav-link" href="pInsertForm.do"> 
-							<i class="fas fa-camera fa-lg" style="font-size: 25px;"></i>
-						</a>
-					</li>
+						</c:if></li>
 
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
-							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<!-- 알림창 -->
+					<li class="nav-item"><a class="nav-link" id="down" href="#">
+							<i class="far fa-bell fa-lg" style="font-size: 25px;"></i>
+					</a></li>
+
+					<!-- 포스팅 등록 -->
+					<li class="nav-item"><a class="nav-link" href="pInsertForm.do">
+							<i class="fas fa-camera fa-lg" style="font-size: 25px;"></i>
+					</a></li>
+
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<i class="fas fa-user-circle fa-lg" style="font-size: 30px;"></i>
-						</a>
-							<div class="dropdown-menu"
-								aria-labelledby="navbarDropdownMenuLink">
-								<a class="dropdown-item" href="mProfile.do">myPage</a> 
-								<a class="dropdown-item" href="aPage.do">adminPage</a> 
-								<c:if test="${ empty loginUser }">
-									<a class="dropdown-item" href="loginForm.do">Sign In</a>
-								</c:if>
-								<c:if test="${ !empty loginUser }">
-									<a class="dropdown-item" href="logout.do">LogOut</a>
-								</c:if>
-							</div>
-					</li>
+					</a>
+						<div class="dropdown-menu"
+							aria-labelledby="navbarDropdownMenuLink">
+							<a class="dropdown-item" href="mProfile.do">myPage</a> <a
+								class="dropdown-item" href="aPage.do">adminPage</a>
+							<c:if test="${ empty loginUser }">
+								<a class="dropdown-item" href="loginForm.do">Sign In</a>
+							</c:if>
+							<c:if test="${ !empty loginUser }">
+								<a class="dropdown-item" href="logout.do">LogOut</a>
+							</c:if>
+						</div></li>
 
 					<!-- <li class="nav-item active">
 						<a class="nav-link" href="#">Home
@@ -232,12 +253,12 @@
 
 				</ul>
 			</div>
-			
+
 		</div>
 	</nav>
-	
 
-<!-----------------------------------------------검색 필터 ---------------------------------  -->
+
+	<!-----------------------------------------------검색 필터 ---------------------------------  -->
 
 	<div class="container">
 		<div class="row">
@@ -266,147 +287,184 @@
 				 					data-toggle="tooltip" title="Exit"></i>
 								</a> -->
 									<a class="btn b" id="남자"> <i class="fa fa-male fa-5x"></i>
-									</a> <br />
-									<br />
-									<p style="color: white; margin:0px;">남자</p>
+									</a> <br /> <br />
+									<p style="color: white; margin: 0px;">남자</p>
 								</div>
 								<div class="col-3">
 									<!-- <a class="btn" href="">
 									<i class="fa fa-female fa-5x" aria-hidden="true"></i>
 								</a> -->
 									<a class="btn b" id="여자"> <i class="fa fa-female fa-5x"></i>
-									</a> <br />
-									<br />
-									<p style="color: white; margin:0px;">여자</p>
+									</a> <br /> <br />
+									<p style="color: white; margin: 0px;">여자</p>
 								</div>
 								<div class="col-3">
 									<a class="btn b" id="전체"> <i class="fa fa-users fa-5x"
 										aria-hidden="true"></i>
-									</a> <br />
-									<br />
-									<p style="color: white; margin:0px;">전체</p>
+									</a> <br /> <br />
+									<p style="color: white; margin: 0px;">전체</p>
 								</div>
 								<div class="col-3">
 									<a class="btn b" id="기타"> <i class="fa fa-ellipsis-h fa-5x"
 										aria-hidden="true"></i>
-									</a> <br />
-									<br />
-									<p style="color: white; margin:0px;">기타</p>
+									</a> <br /> <br />
+									<p style="color: white; margin: 0px;">기타</p>
 								</div>
 
 							</div>
-					
-							<div style="border: 1px solid gray; width: 500px; margin-bottom:10px; "></div>		
-							
+
+							<div
+								style="border: 1px solid gray; width: 500px; margin-bottom: 10px;"></div>
+
 							<div class="modal-body row" style="padding-top: 0px;">
-								<div class="btn col-2" style="padding:0px;">
+								<div class="btn col-2" style="padding: 0px;">
 									<a id="red" class="btn bb"> <i class="fa fa-circle fa-5x"
-										aria-hidden="true" style="color: red; " id="red"></i>
-									</a> <br />
-									<br />
+										aria-hidden="true" style="color: red;" id="red"></i>
+									</a> <br /> <br />
 									<p style="color: white;">Red</p>
 								</div>
-								<div class="col-2"  style="padding:0px;">
-									<a id="orange" class="btn bb"> <i class="fa fa-circle fa-5x"
-										aria-hidden="true" style="color: orange;" id="orange"></i>
-									</a> <br />
-									<br />
+								<div class="col-2" style="padding: 0px;">
+									<a id="orange" class="btn bb"> <i
+										class="fa fa-circle fa-5x" aria-hidden="true"
+										style="color: orange;" id="orange"></i>
+									</a> <br /> <br />
 									<p style="color: white;">Orange</p>
 								</div>
-								<div class="col-2"  style="padding:0px;">
-									<a id="yellow" class="btn bb"> <i class="fa fa-circle fa-5x"
-										aria-hidden="true" style="color: yellow;" id="yellow"></i>
-									</a> <br />
-									<br />
+								<div class="col-2" style="padding: 0px;">
+									<a id="yellow" class="btn bb"> <i
+										class="fa fa-circle fa-5x" aria-hidden="true"
+										style="color: yellow;" id="yellow"></i>
+									</a> <br /> <br />
 									<p style="color: white;">Yellow</p>
 								</div>
-								<div class="col-2"  style="padding:0px;">
+								<div class="col-2" style="padding: 0px;">
 									<a id="green" class="btn bb"> <i class="fa fa-circle fa-5x"
 										aria-hidden="true" style="color: green;" id="green"></i>
-									</a> <br />
-									<br />
+									</a> <br /> <br />
 									<p style="color: white;">Green</p>
 								</div>
-								<div class="col-2"  style="padding:0px;">
+								<div class="col-2" style="padding: 0px;">
 									<a id="blue" class="btn bb"> <i class="fa fa-circle fa-5x"
 										aria-hidden="true" style="color: blue;" id="blue"></i>
-									</a> <br />
-									<br />
+									</a> <br /> <br />
 									<p style="color: white;">Blue</p>
 								</div>
-								<div class="col-2"  style="padding:0px;">
+								<div class="col-2" style="padding: 0px;">
 									<a id="navy" class="btn bb"> <i class="fa fa-circle fa-5x"
 										aria-hidden="true" style="color: navy;" id="navy"></i>
-									</a> <br />
-									<br />
+									</a> <br /> <br />
 									<p style="color: white;">Navy</p>
 								</div>
 
 
 							</div>
 							<div class="modal-body row" style="padding-top: 0px;">
-								<div class="col-2" style="padding:0px;">
-									<a id="Pupple" class="btn bb"> <i class="fa fa-circle fa-5x"
-										aria-hidden="true" style="color: black;" id="black"></i>
-									</a> <br />
-									<br />
-									<p style="color: white;  margin-bottom: 0px;">Black</p>
+								<div class="col-2" style="padding: 0px;">
+									<a id="Pupple" class="btn bb"> <i
+										class="fa fa-circle fa-5x" aria-hidden="true"
+										style="color: black;" id="black"></i>
+									</a> <br /> <br />
+									<p style="color: white; margin-bottom: 0px;">Black</p>
 								</div>
-								<div class="col-2"  style="padding:0px;">
+								<div class="col-2" style="padding: 0px;">
 									<a id="white" class="btn bb"> <i class="fa fa-circle fa-5x"
 										aria-hidden="true" style="color: white;" id="white"></i>
-									</a> <br />
-									<br />
+									</a> <br /> <br />
 									<p style="color: white; margin-bottom: 0px;">White</p>
 								</div>
-								<div class="col-2"  style="padding:0px;">
+								<div class="col-2" style="padding: 0px;">
 									<a id="pink" class="btn bb"> <i class="fa fa-circle fa-5x"
 										aria-hidden="true" style="color: pink;" id="pink"></i>
-									</a> <br />
-									<br />
+									</a> <br /> <br />
 									<p style="color: white; margin-bottom: 0px;">Pink</p>
 								</div>
-								<div class="col-2"  style="padding:0px;">
+								<div class="col-2" style="padding: 0px;">
 									<a id="brown" class="btn bb"> <i class="fa fa-circle fa-5x"
 										aria-hidden="true" style="color: brown;" id="brown"></i>
-									</a> <br />
-									<br />
+									</a> <br /> <br />
 									<p style="color: white; margin-bottom: 0px;">Brown</p>
 								</div>
-								<div class="col-2"  style="padding:0px;">
+								<div class="col-2" style="padding: 0px;">
 									<a id="beige" class="btn bb"> <i class="fa fa-circle fa-5x"
 										aria-hidden="true" style="color: beige;" id="beige"></i>
-									</a> <br />
-									<br />
+									</a> <br /> <br />
 									<p style="color: white; margin-bottom: 0px;">Beige</p>
 								</div>
-								<div class="col-2"  style="padding:0px;">
+								<div class="col-2" style="padding: 0px;">
 									<a id="aqua" class="btn bb"> <i class="fa fa-circle fa-5x"
 										aria-hidden="true" style="color: aqua;" id="aqua"></i>
-									</a> <br />
-									<br />
+									</a> <br /> <br />
 									<p style="color: white; margin-bottom: 0px;">Aqua</p>
 								</div>
-								<div id="selectColor"></div>		
-							
-								<div class="modal-body form-row" style="padding:0px;">
+								<div id="selectColor"></div>
+
+								<div class="modal-body form-row" style="padding: 0px;">
 									<div class="form-group col-sm-12">
-										<label for="">Category</label> <select name="category" id="category"
-											class="form-control">
-											<option value="T-SHIRT" selected="selected">T-SHIRT</option>
-											<option value="SWEATSHIRT">SWEATSHIRT</option>
-											<option value="SHIRT">SHIRT</option>
-											<option value="BRAZER">BRAZER</option>
-											<option value="JACKET">JACKET</option>
-											<option value="JACKET">JACKET</option>
-											<option value="JACKET">JACKET</option>
+										<label for="">Category</label> <select name="category"
+											id="category" class="form-control">
+											<option value="" disabled="">상의</option>
+											<option value="T-SHIRT">&nbsp;&nbsp;&nbsp;T-SHIRT</option>
+											<option value="SWEATSHIRT">&nbsp;&nbsp;&nbsp;SWEATSHIRT</option>
+											<option value="SHIRT">&nbsp;&nbsp;&nbsp;SHIRT</option>
+											<option value="BLAZER">&nbsp;&nbsp;&nbsp;BLAZER</option>
+											<option value="JACKET">&nbsp;&nbsp;&nbsp;JACKET</option>
+											<option value="OUTER">&nbsp;&nbsp;&nbsp;OUTER</option>
+											<option value="SLEEVELESS">&nbsp;&nbsp;&nbsp;SLEEVELESS</option>
+											<option value="CROP TEE">&nbsp;&nbsp;&nbsp;CROP TEE</option>
+											<option value="HOODIE">&nbsp;&nbsp;&nbsp;HOODIE</option>
+											<option value="POLO">&nbsp;&nbsp;&nbsp;POLO</option>
+											<option value="KNIT">&nbsp;&nbsp;&nbsp;KNIT</option>
+											<option value="TANK TOP">&nbsp;&nbsp;&nbsp;TANK TOP</option>
+											<option value="VEST">&nbsp;&nbsp;&nbsp;VEST</option>
+											<option value="CARDIGAN">&nbsp;&nbsp;&nbsp;CARDIGAN</option>
+											<option value="COAT">&nbsp;&nbsp;&nbsp;COAT</option>
+											<option value="" disabled="">하의</option>
+											<option value="JEANS">&nbsp;&nbsp;&nbsp;JEANS</option>
+											<option value="PANTS">&nbsp;&nbsp;&nbsp;PANTS</option>
+											<option value="SHORTS">&nbsp;&nbsp;&nbsp;SHORTS</option>
+											<option value="SKIRT">&nbsp;&nbsp;&nbsp;SKIRT</option>
+											<option value="" disabled="">신발</option>
+											<option value="SNEAKERS">&nbsp;&nbsp;&nbsp;SNEAKERS</option>
+											<option value="BOOTS">&nbsp;&nbsp;&nbsp;BOOTS</option>
+											<option value="HEELS">&nbsp;&nbsp;&nbsp;HEELS</option>
+											<option value="SANDALS">&nbsp;&nbsp;&nbsp;SANDALS</option>
+											<option value="CASUAL SHOES">&nbsp;&nbsp;&nbsp;CASUAL
+												SHOES</option>
+											<option value="FORMAL SHOES">&nbsp;&nbsp;&nbsp;FORMAL
+												SHOES</option>
+											<option value="" disabled="">악세서리</option>
+											<option value="BAG">&nbsp;&nbsp;&nbsp;BAG</option>
+											<option value="JEWELRY">&nbsp;&nbsp;&nbsp;JEWELRY</option>
+											<option value="BRACELET">&nbsp;&nbsp;&nbsp;BRACELET</option>
+											<option value="WATCH">&nbsp;&nbsp;&nbsp;WATCH</option>
+											<option value="HAT">&nbsp;&nbsp;&nbsp;HAT</option>
+											<option value="EYEWEAR">&nbsp;&nbsp;&nbsp;EYEWEAR</option>
+											<option value="GLOVES">&nbsp;&nbsp;&nbsp;GLOVES</option>
+											<option value="SCARF">&nbsp;&nbsp;&nbsp;SCARF</option>
+											<option value="SOCKS">&nbsp;&nbsp;&nbsp;SOCKS</option>
+											<option value="WALLET">&nbsp;&nbsp;&nbsp;WALLET</option>
+											<option value="TIE">&nbsp;&nbsp;&nbsp;TIE</option>
+											<option value="" disabled="">기타</option>
+											<option value="SWIMWEAR">&nbsp;&nbsp;&nbsp;SWIMWEAR</option>
+											<option value="DRESS">&nbsp;&nbsp;&nbsp;DRESS</option>
+											<option value="JUMPSUIT">&nbsp;&nbsp;&nbsp;JUMPSUIT</option>
+											<option value="OVERALL">&nbsp;&nbsp;&nbsp;OVERALL</option>
+											<option value="SUIT">&nbsp;&nbsp;&nbsp;SUIT</option>
+											<option value="ONE-PIECE">&nbsp;&nbsp;&nbsp;ONE-PIECE</option>
+											<option value="CAMERA">&nbsp;&nbsp;&nbsp;CAMERA</option>
+											<option value="PHONE">&nbsp;&nbsp;&nbsp;PHONE</option>
+											<option value="SNACK">&nbsp;&nbsp;&nbsp;SNACK</option>
+											<option value="ETC.">&nbsp;&nbsp;&nbsp;ETC.</option>
+											<option value="BIKE">&nbsp;&nbsp;&nbsp;BIKE</option>
 										</select>
+
+
 									</div>
 
 								</div>
 
 							</div>
-							
+
 
 							<div class="modal-footer inline"
 								style="margin: auto; width: 230px;">
@@ -457,7 +515,7 @@ function select(){
 	});
 }
 </script> -->
-	
+
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script
 		src="${pageContext.request.contextPath}/resources/assets/vendor/jquery/jquery.min.js"></script>
@@ -471,4 +529,5 @@ function select(){
 		src="${pageContext.request.contextPath}//resources/assets/vendor/nouislider/js/nouislider.min.js"></script>
 
 	<!--   lazy javascript -->
-	<script src="${pageContext.request.contextPath}//resources/assets/js/lazy.js"></script>
+	<script
+		src="${pageContext.request.contextPath}//resources/assets/js/lazy.js"></script>

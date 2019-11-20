@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset=UTF-8">
-
+<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/resources/admin_temp/js/admin.js"></script> --%>
 </head>
 <body>
 
@@ -68,14 +68,14 @@
                         	<button type="submit" class="btn btn-primary btn-sm">검색</button>
                         </div>
                         
-                  		   <button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#smallModal" >
+                  		   <button type="button" class="btn btn-outline-danger btn-sm" id="declareBtn" 
+                  		   data-toggle="modal" data-target="#deleteBoardModal">
                   		   	게시물삭제
                   		   </button>
                         </form>
                     </div>
                   </div>
                           
-                	       
                             <div class=" table-stats order-table ov-h col-md-10 offset-md-1">                            	
                                 <table class="table">
                                     <thead>
@@ -85,6 +85,7 @@
                                             <th>신고자</th>
                                             <th>게시판명</th>
                                             <th>게시글</th>
+                                            <th>글쓴이</th>
                                             <th>신고일자</th>
                                             <th>신고사유</th>
                                             <th>확인유무</th>
@@ -114,6 +115,7 @@
                                             <td>자유</td>
                                             <td>${p.bname}</td>
                                             </c:if>
+                                            <td>${p.writer }</td>
                                             <td>${p.enrollDate }</td>
                                             <td>${p.category }</td>
                                             <td>
@@ -198,8 +200,6 @@
                                 </div>
                                 
                             </div> <!-- /.table-stats -->
-            
-
                 </div>
             </div><!-- .animated -->
         </div><!-- .content -->
@@ -212,45 +212,10 @@
 
     </div><!-- /#right-panel -->
 
-		<script>
-		function checkAll(){ // 전체 선택,해제
-		      if( $("#th_checkAll").is(':checked') ){
-		        $("input[name=checkRow]").prop("checked", true);
-		      }else{
-		        $("input[name=checkRow]").prop("checked", false);
-		      }
-		};
-
-		/* 삭제(체크박스된 것 전부) */
-		function deleteAction(){
-		  var checkRow = "";
-		  $( "input[name='checkRow']:checked" ).each (function (){
-		    checkRow = checkRow + $(this).val()+"," ;
-		  });
-		  checkRow = checkRow.substring(0,checkRow.lastIndexOf( ",")); //맨끝 콤마 지우기
-		 
-		  if(checkRow == ''){
-		    alert("삭제할 대상을 선택하세요.");
-		    return false;
-		    $("#smallModal").hide(); //닫기
-		  }
-		  
-		  console.log("### checkRow => {}"+checkRow);
-		 
-		     var dno = checkRow;
-		      
-		      //location.href="${rc.contextPath}/test_proc.do?dnoArr="+checkRow;  
-		      location.href="${pageContext.request.contextPath}/aDeleteDeclareBoard.do?dno="+dno;  
-		  
-		};
-
-
-		</script>
-
-   
+	
    
    		<!-- 게시물삭제 모달창 -->
-   		  <div class="modal fade" id="smallModal"role="dialog" aria-labelledby="smallModalLabel" aria-hidden="true">
+   		  <div class="modal fade" id="deleteBoardModal"role="dialog" aria-labelledby="deleteBoardModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-sm" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -260,20 +225,18 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <p>
+                            <p id="modalContent">
                             	해당 게시물을 정말 삭제하시겠습니까?
                             </p>
                        </div>
                         
                        <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-primary" onclick="deleteAction();">Confirm</button>
+                        <button type="button" class="btn btn-primary" id="deleteOk" onclick="deleteAction();">Confirm</button>
                     </div>
                 </div>
             </div>
         </div>
-   		
-   		
    		
    		
    		
@@ -306,7 +269,64 @@
                     </div>
                 </div>
             </div>
-    
+ 
+ 
+	 <script>
+	    /**
+	 * 체크박스 전체선택, 해제
+	 */
+	function checkAll(){ 
+	      if( $("#th_checkAll").is(':checked') ){
+	        $("input[name=checkRow]").prop("checked", true);
+	      }else{
+	        $("input[name=checkRow]").prop("checked", false);
+	      }
+	};
+
+	/* 삭제여부 모달창 뜨기전에 조건검사먼저 진행 */
+	$("#declareBtn").click(function () {
+		
+		 var checkRow = "";
+		  $( "input[name='checkRow']:checked" ).each (function (){
+		    checkRow = checkRow + $(this).val()+"," ;
+		  });
+		  checkRow = checkRow.substring(0,checkRow.lastIndexOf( ",")); //맨끝 콤마 지우기
+		  
+	  	  if(checkRow == ''){
+		    alert("삭제할 대상을 선택하세요.");
+		    return false;
+		 
+		  }
+		  //console.log("나옴");
+	  	$('#deleteBoardModal').show(); // 삭제여부 모달창 열어주기
+			  
+	});
+
+	/**
+	 * 삭제(체크박스 선택된 것 전부)
+	 */
+	function deleteAction(){
+		
+		 var checkRow = "";
+		  $( "input[name='checkRow']:checked" ).each (function (){
+		    checkRow = checkRow + $(this).val()+"," ;
+		  });
+		  checkRow = checkRow.substring(0,checkRow.lastIndexOf( ",")); //맨끝 콤마 지우기
+		 
+		  if(checkRow == ''){
+		    alert("삭제할 대상을 선택하세요.");
+		    //$('#smallModal').modal('hide');
+			//$("#deleteOk").setAttribute("data-dismiss","modal");
+		    return false;
+		 
+		  }
+	 
+	     var dno = checkRow;
+	      
+	    location.href="${pageContext.request.contextPath}/aDeleteDeclareBoard.do?dno="+dno;  
+	  
+	};
+	</script>
       
 </body>
 </html>

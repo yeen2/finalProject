@@ -21,7 +21,6 @@
 	#addAlarmCon1{padding:10px 10px 10px 10px;}
 	
 	
-	.imgP:hover{cursor:pointer; display:block;}
 	#abc div, #abc i{float:left;}
 	#abc div{width:45px;}
 	#abc i{line-height:30px; margin-right:5px;}
@@ -56,19 +55,21 @@
 							<h2 class="mb-0">${ m.nickName }</h2>
 						</div>
 						
-						<!-- 팔로워버튼  -->
-						<c:if test="${ loginUser.mno == m.mno }">
+						<!-- 팬 버튼  -->
+						<c:if test="${ !empty loginUser && loginUser.mno != m.mno }">
+							<button class="btn btn-dark ml-3" id="fanA" style="display:none;" value="${ m.mno }">
+							<i class="fa fa-plus"></i><b> Fan</b></button>
+								
+							<button class="btn btn-dark ml-3" id="fanB" style="display:none;" value="${ m.mno }">
+							<i style="width:40px;"class="fas fa-check"></i></button>
+						</c:if>
+						
+						<!-- 프로필 관리 버튼 -->
+						<c:if test="${ !empty loginUser && loginUser.mno == m.mno }">
 							<button class="btn btn-info btn-pill" style="margin-left:500px;"onclick="location.href='mpUpdatePage.do';">
 							    <i class="fa fa-edit mr-1"></i>
 						    	프로필 관리
 							</button>
-						</c:if>
-						<c:if test="${ loginUser.mno != m.mno }">
-							<a href="#" data-toggle="modal" class="btn btn-dark ml-3" id="fanA" style="display:none;">
-								<%-- <c:param url="mpInsertFan.do" --%>
-							<i class="fa fa-plus"></i><b> Fan</b></a>
-							<a href="#" class="btn btn-dark ml-3" id="fanB" style="display:none;">
-								<i style="width:40px;"class="fas fa-check"></i></a>
 						</c:if>
 						
 					</div>
@@ -155,7 +156,7 @@
 			<!-- 나를 팔로우한 친구 목록 -->
 			<div class="tab-pane fade text-center" id="fan">
 				<div align="center">
-					<div id="fanList" style="width:50%;">
+					<div id="fanList" style="width:555px;">
 						
 					</div>
 				</div>
@@ -169,7 +170,7 @@
 			<!-- 내가 팔로잉한 친구 목록 -->
 			<div class="tab-pane fade text-center" id="following">
 				<div align="center">
-					<div id="fwList" style="width:50%;">
+					<div id="fwList" style="width:555px;">
 						
 					</div>
 				</div>
@@ -212,7 +213,7 @@
 	</div>
 	
 	
-	<script>
+	<script type="text/javascript">
 		$(function(){
 			selectPostingList();
 			selectLikeList();
@@ -250,12 +251,23 @@
 							if(i == list.length-1){
 								$("#pBtn").css("display", "none");
 							}
-							var $copy1 = $("<div>").attr("class", "col-12 col-md-4");
-							$copy1.append($("<div>").attr({"class":"square", "style":"background-image: url(" + "'resources/assets/img/" + list[i].renameImg + "');"}));
+							var $copy1 = $("<div>").attr({"class":"col-12 col-md-4", "style":"position:relative;"});
+							$copy1.append($("<div>").attr({"value":"abcddd","class":"square imgP", "style":"background-image: url(" + "'resources/assets/img/" + list[i].renameImg + "');"}));
+							var $copy2 = 
+								"<div class='square' style='position:absolute; width:92%; bottom:0; display:none; background:rgba(0,0,0,0.6);'>"
+								+ "<div style='margin-left:48px; margin-top:135px; font-size:22px; color:white; position:relative;'>"
+								+ "<div style='float:left; left:40px; position:absolute;'><i class='fas fa-heart'></i></div>"
+								+ "<div style='float:left; left:70px; position:absolute;'>" + list[i].likeCount + "</div>"
+								+ "<div style='float:left; left:160px; position:absolute;'><i class='fas fa-comment'></i></div>"
+								+ "<div style='float:left; left:190px; position:absolute;'>" + list[i].replyCount + "</div>"
+								+ "</div>"
+								+ "</div>";
+							$copy1.append($copy2);
 							
 							$("#postingList").append($copy1);
 						}
 					}
+					
 				},
 				error:function(){
 					console.log("ajax 통신 실패");
@@ -291,9 +303,19 @@
 							if(i == list.length-1){
 								$("#lBtn").css("display", "none");
 							}
-							var $copy1 = $("<div>").attr("class", "col-12 col-md-4");
-							$copy1.append($("<div>").attr({"class":"square", "style":"background-image: url(" + "'resources/assets/img/" + list[i].renameImg + "');"}));
-							
+							var $copy1 = $("<div>").attr({"class":"col-12 col-md-4", "style":"position:relative;"});
+							$copy1.append($("<div>").attr({"class":"square imgP", "style":"background-image: url(" + "'resources/assets/img/" + list[i].renameImg + "');"}));
+							var $copy2 = 
+								"<div class='square' style='position:absolute; width:92%; bottom:0; display:none; bottom:16px; width:348px; height:300px; background:rgba(0,0,0,0.6);'>"
+								+ "<div style='margin-left:48px; margin-top:135px; font-size:22px; color:white; position:relative;'>"
+								+ "<div style='float:left; left:40px; position:absolute;'><i class='fas fa-heart'></i></div>"
+								+ "<div style='float:left; left:70px; position:absolute;'>" + list[i].likeCount + "</div>"
+								+ "<div style='float:left; left:160px; position:absolute;'><i class='fas fa-comment'></i></div>"
+								+ "<div style='float:left; left:190px; position:absolute;'>" + list[i].replyCount + "</div>"
+								+ "</div>"
+								+ "</div>";
+							$copy1.append($copy2);
+								
 							$("likeList").append($copy1);
 						}
 					}
@@ -346,7 +368,10 @@
 							+"</div>"
 							+"</div>"
 							+"<div style='float:left; margin-left:210px;'>"
-							+"<button class='btn btn-dark'><i class='fa fa-plus'></i> Fan</button>"
+							+"<button class='btn btn-dark fanClassA' name='fanNameA' style='display:none; margin-top:9px;' value='" + list[i].mno + "'>"
+							+"<i class='fa fa-plus'></i> Fan</button>"
+							+"<button class='btn btn-dark fanClassB' name='fanNameB' style='display:none; margin-top:9px;' value='" + list[i].mno + "'>"
+							+"<i style='width:40px;' class='fas fa-check'></i></button>"
 							+"</div>"
 							+"</div>"
 							+"<hr>";
@@ -402,7 +427,10 @@
 							+"</div>"
 							+"</div>"
 							+"<div style='float:left; margin-left:210px;'>"
-							+"<button class='btn btn-dark'><i class='fa fa-plus'></i> Fan</button>"
+							+"<button class='btn btn-dark fanClassA' name='fanNameA' style='display:none; margin-top:9px;' value='" + list[i].mno + "'>"
+							+"<i class='fa fa-plus'></i> Fan</button>"
+							+"<button class='btn btn-dark fanClassB' name='fanNameB' style='display:none; margin-top:9px;' value='" + list[i].mno + "'>"
+							+"<i style='width:40px;' class='fas fa-check'></i></button>"
 							+"</div>"
 							+"</div>"
 							+"<hr>";
@@ -444,11 +472,12 @@
 				
 		}
 		
-		function selectFanCheckTab(result){
-			var mno = result;
+		function selectFanCheckTab(){
+			var arr = document.getElementsByName("fanNameA");
+			
 			$.ajax({
 				url:"mpSFanCheck.do",
-				data:{meNo:mno, youNo:${loginUser.mno}},
+				data:{meNoArr:arr, youNo:${loginUser.mno}},
 				type:"post",
 				success:function(result){
 					if(result == 1){
@@ -467,14 +496,55 @@
 				
 		}
 		
-		function insertFan(){
+		// 팬 버튼 클릭
+		$("#fanA").on("click", function(){
+			var fanA = $("#fanA").val();
+			if(${ loginUser != null }){
+				insertFan(fanA);
+			}else{
+				alert("로그인 후 이용 가능합니다.");
+			}
+		});
+		$("#fanB").on("click", function(){
+			var fanB = $("#fanB").val();
+			if(${ loginUser != null }){
+				deleteFan(fanB);
+			}else{
+				alert("로그인 후 이용 가능합니다.");
+			}
+		});
+		
+		
+		
+		function insertFan(value){
+			var meNo = value;
 			$.ajax({
 				url:"mpInsertFan.do",
-				data:{meNo:${loginUser.mno}, youNo:${m.mno}},
+				data:{meNo:meNo, youNo:${loginUser.mno}},
 				type:"post",
 				success:function(){
 					if(result == 1){
-						
+						$(".fanA").hide();
+						$(".fanB").show();
+					}else{
+						console.log("실패");
+					}
+				},
+				error:function(){
+					console.log("ajax 통신 실패");
+				}
+			});
+		}
+		function deleteFan(value){
+			var meNo = value;
+			$.ajax({
+				url:"mpDeleteFan.do",
+				data:{meNo:meNo, youNo:${loginUser.mno}},
+				type:"post",
+				success:function(){
+					if(result == 1){
+						$(".fanA").show();
+						$(".fanB").hide();
 					}else{
 						console.log("실패");
 					}
@@ -485,7 +555,20 @@
 			});
 		}
 		
+		$(document).ready(function(){
+			// 포스팅 hover 좋아요, 댓글 표시
+			$(document).on("mouseover", ".imgP", function(){
+				$(this).siblings("div").css("display", "block");
+			});
+			$(document).on("mouseleave", ".imgP", function(){
+				$(this).siblings("div").css("display", "none");
+			});
+				
+		});
+		
+		
 	</script>
+	
 	<script>
 		// input 파일
 		$(function(){
@@ -552,22 +635,8 @@
 			
 		});
 		
-		
-		
-		$(function(){
-			$("#imgH").mouseenter(function(){
-				$("#aaa").show();
-			}).mouseout(function(){
-				$("#aaa").hide();
-			});
-			
-			$("#imgL").mouseenter(function(){
-				$("#aaa1").show();
-			}).mouseout(function(){
-				$("#aaa1").hide();
-			});
-		});
 	</script>
+	
 	<script>
 		$(document).ready(function(){
 			var url = document.location.href;

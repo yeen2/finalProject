@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.styleblending.admin.model.vo.Ad;
 import com.kh.styleblending.posting.model.vo.Posting;
 
 @Repository("mainDao")
@@ -25,6 +26,10 @@ public class MainDao {
 	public ArrayList<Posting> selectInfinityScroll() {
 		// TODO Auto-generated method stub
 		return (ArrayList)sqlSession.selectList("mainMapper.selectInfinityScroll");
+	}
+	public Ad selectAd() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("mainMapper.selectAd");
 	}
 	
 	

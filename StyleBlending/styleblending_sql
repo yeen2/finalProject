@@ -8,7 +8,7 @@ drop sequence seq_p_declare;
 drop sequence seq_b_declare;
 
 
-
+DROP TABLE category;
 DROP TABLE style;
 DROP TABLE p_like;
 DROP TABLE notice;
@@ -520,6 +520,26 @@ COMMENT ON COLUMN live.keyword IS '검색어';
 COMMENT ON COLUMN live.enroll_date IS '검색시간';
 
 
+
+CREATE TABLE category (
+	ca_no	number		NOT NULL,
+	name	varchar2(100)		NOT NULL,
+	img	varchar2(500)		NOT NULL
+);
+
+COMMENT ON COLUMN category.ca_no IS '카테고리번호';
+
+COMMENT ON COLUMN category.name IS '이름';
+
+COMMENT ON COLUMN category.img IS '사진이름';
+
+
+
+
+
+
+
+
 -- PK
 
 ALTER TABLE member ADD CONSTRAINT PK_MEMBER PRIMARY KEY (
@@ -599,7 +619,11 @@ ALTER TABLE live ADD CONSTRAINT PK_LIVE PRIMARY KEY (
 );
 
 
+ALTER TABLE category ADD CONSTRAINT PK_CATEGORY PRIMARY KEY (
+	ca_no
+);
 
+    
 --FK
 
 ALTER TABLE posting ADD CONSTRAINT FK_member_TO_posting_1 FOREIGN KEY (
@@ -776,7 +800,7 @@ insert into member values(seq_member.nextval,default,null,'user18','pass18','유
 insert into member values(seq_member.nextval,default,null,'user19','pass19','유저19',null,null,'profile.png','profile.png',null,sysdate,null,null,default);
 
 --포스팅 20개(admin 계정에만 포스팅 20개)
-insert into posting values(seq_posting.nextval,1,'a','profile1.jpg','resources/assets/img/','내용1',default,'M',default,1,1,sysdate,default, default);
+insert into posting values(seq_posting.nextval,1,'a','profile1.jpg','resources/assets/img/','#데일리룩 내용1','#데일리룩','M','서울시 강남구',1,1,sysdate,default, default);
 insert into posting values(seq_posting.nextval,1,'a','profile2.jpg','resources/assets/img/','내용2',default,'M',default,2,0,sysdate,default, default);
 insert into posting values(seq_posting.nextval,1,'a','profile3.jpg','resources/assets/img/','내용3',default,'M',default,3,1,sysdate,default, default);
 insert into posting values(seq_posting.nextval,1,'a','profile4.jpg','resources/assets/img/','내용4',default,'M',default,4,0,sysdate,default, default);
@@ -796,6 +820,10 @@ insert into posting values(seq_posting.nextval,1,'a','profile17.jpg','resources/
 insert into posting values(seq_posting.nextval,1,'a','profile18.jpg','resources/assets/img/','내용18',default,'F',default,18,0,sysdate,default, default);
 insert into posting values(seq_posting.nextval,1,'a','profile19.jpg','resources/assets/img/','내용19',default,'F',default,19,1,sysdate,default, default);
 insert into posting values(seq_posting.nextval,1,'a','profile20.jpg','resources/assets/img/','내용20',default,'F',default,20,0,sysdate,default, default);
+
+insert into style values(seq_style.nextval, 1, '1','커버낫','red');
+insert into style values(seq_style.nextval, 1, '17','리바이스','black');
+
 
 -- 포스팅 신고 insert
 insert into declare values(seq_declare.nextval,1,1,'비방',null,sysdate,1,1);
@@ -872,5 +900,63 @@ insert into p_reply
 values(seq_p_reply.nextval, 1, 1, '대댓글3',sysdate, null, 3, 2, default, default);
 
 commit;
+
+
+
+insert into category values(1,'T-SHIRT','티셔츠.png');
+insert into category values(2,'SWEATSHIRT','셔츠.png');
+insert into category values(3,'SHIRT','치마.png');
+insert into category values(4,'BLAZER','아우터.png');
+insert into category values(5,'JACKET','자켓.png');
+insert into category values(6,'OUTER','아우터.png');
+insert into category values(7,'SLEEVELESS','티셔츠.png');
+insert into category values(8,'CROP TEE','티셔츠.png');
+insert into category values(9,'HOODIE','티셔츠.png');
+insert into category values(10,'POLO','티셔츠.png');
+
+insert into category values(11,'KNIT','니트.png');
+insert into category values(12,'TANK TOP','티셔츠.png');
+insert into category values(13,'VEST','티셔츠.png');
+insert into category values(14,'CARDIGAN','가디건.png');
+insert into category values(15,'COAT','코트.png');
+insert into category values(16,'JEANS','바지.png');
+insert into category values(17,'PANTS','바지.png');
+insert into category values(18,'SHORTS','바지.png');
+insert into category values(19,'SKIRT','치마.png');
+
+insert into category values(20,'SNEAKERS','신발.png');
+insert into category values(21,'BOOTS','신발.png');
+insert into category values(22,'HEELS','신발.png');
+insert into category values(23,'SANDALS','신발.png');
+insert into category values(24,'CASUAL SHOES','신발.png');
+insert into category values(25,'FORMAL SHOES','신발.png');
+
+insert into category values(26,'BAG','가방.png');
+insert into category values(27,'JEWELRY','악세사리.png');
+insert into category values(28,'BRACELET','악세사리.png');
+insert into category values(29,'WATCH','시계.png');
+insert into category values(30,'HAT','모자.png');
+insert into category values(31,'EYEWEAR','기타.png');
+insert into category values(32,'GLOVES','기타.png');
+insert into category values(33,'SCARF','머플러.png');
+insert into category values(34,'SOCKS','기타.png');
+insert into category values(35,'WALLET','기타.png');
+insert into category values(36,'TIE','기타.png');
+
+insert into category values(37,'SWIMWEAR','기타.png');
+insert into category values(38,'DRESS','원피스.png');
+insert into category values(39,'JUMPSUIT','점프슈트.png');
+insert into category values(40,'OVERALL','기타.png');
+insert into category values(41,'SUIT','기타.png');
+insert into category values(42,'ONE-PIECE','원피스.png');
+insert into category values(43,'CAMERA','기타.png');
+insert into category values(44,'PHONE','기타.png');
+insert into category values(45,'SNACK','기타.png');
+insert into category values(46,'ETC','기타.png');
+insert into category values(47,'BIKE','기타.png');
+
+
+commit;
+
 
 
