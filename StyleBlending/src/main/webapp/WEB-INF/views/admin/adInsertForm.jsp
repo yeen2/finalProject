@@ -8,15 +8,49 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+	<jsp:include page="../includes/header.jsp" />
+	
+	<div class="container" style="margin-bottom:70px;">
+		
+		<div class="navigation d-flex justify-content-center" style="margin-top:100px; margin-bottom:30px;">
+			<!-- 메뉴바 -->
+			<ul class="nav nav-primary nav-tabs mt-3 d-flex flex-column flex-md-row">
+				<li class="nav-item">
+					<a class="nav-link" data-toggle="tab" href="#updateProfile"> 
+					<i class="fa fa-edit"></i>
+						프로필 수정
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link active" data-toggle="tab" href="#ad" id="adBtn"> 
+					<i class="fa fa-ad"></i>
+						광고 관리
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" data-toggle="modal" href="#updatePass"> 
+					<i class="fa fa-key"></i>
+						비밀번호 변경
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" data-toggle="modal" href="#deleteMember"> 
+					<i class="fa fa-ban"></i>
+						회원 탈퇴
+					</a>
+				</li>
+			</ul>
+		</div>
+		
+	
 	<!-- 광고신청모달 -->
-      <div class="modal" id="updatePass" tabindex="-1" role="dialog" >
+	
+       <div class="" id="updatePass" tabindex="-1" role="dialog" >
 			  <div class="modal-dialog modal-dialog-centered" role="document">
 			    <div class="modal-content">
 			      <div class="modal-header">
 			        <h5 class="modal-title" id="exampleModalLabel">광고 신청</h5>
-			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			          <span aria-hidden="true">&times;</span>
-			        </button>
 			      </div>
 			      <!-- 비밀번호 입력 폼 -->
 			      <form action="aInsertPayView.do" method="post" enctype="multipart/form-data"  onsubmit="return insertPay();">
@@ -44,7 +78,7 @@
 					</div>
 					<br>
 				      <div class="modal-footer">
-				        <button type="submit" class="btn btn-success">광고신청</button>
+				        <button type="submit" class="btn btn-success" id="adConfirm">광고신청</button>
 				        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
 				      </div>
 			       </form>
@@ -52,5 +86,48 @@
 			    </div>
 			  </div>
 			</div>
+		</div>
+		
+		<jsp:include page="../includes/footer.jsp" />
+		
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.2.js"></script>
+		<script>
+		$(function(){
+			
+			$("#adConfirm").on("click",function(){
+				var IMP = window.IMP;
+				IMP.init('iamport');
+				IMP.request_pay({
+					pg : 'kakaopay',
+				    pay_method : 'card',
+				    merchant_uid : 'merchant_' + new Date().getTime(),
+				    name : '광고 등록',
+				    amount : 100,
+				    buyer_email : '${loginUser.email}',
+				    buyer_name : "${loginUser.nickName}",
+				    buyer_tel : '010-1234-5678',
+				    buyer_addr : '서울특별시 강남구 삼성동',
+				    buyer_postcode : '123-456'
+				}, function(rsp) {
+				    if ( rsp.success ) {
+				        var msg = '결제가 완료되었습니다.';
+				        msg += '고유ID : ' + rsp.imp_uid;
+				        msg += '상점 거래ID : ' + rsp.merchant_uid;
+				        msg += '결제 금액 : ' + rsp.paid_amount;
+				        msg += '카드 승인번호 : ' + rsp.apply_num;
+				    } else {
+				        var msg = '결제에 실패하였습니다.';
+				        msg += '에러내용 : ' + rsp.error_msg;
+				        location.href="aInsertAd.do";
+				        window.close();
+				        /* location.href="aAdvertisment.do"; */
+				    }
+				
+				    alert(msg);
+				});	
+			})
+		})
+		</script>
 </body>
 </html>

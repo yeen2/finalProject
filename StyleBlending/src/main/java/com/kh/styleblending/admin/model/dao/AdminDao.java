@@ -31,6 +31,10 @@ public class AdminDao {
 		return sqlSession.selectOne("adminMapper.selectDeclareCount");
 	}
 	
+	public Ad selectStartAd() {
+		return sqlSession.selectOne("adminMapper.selectStartAd");
+	}
+	
 	public int getMemberListCount() {
 		return sqlSession.selectOne("adminMapper.getMemberListCount");
 	}

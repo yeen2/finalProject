@@ -19,6 +19,9 @@ public interface AdminService {
 	// 미확인 신고수
 	int selectNoCheckDeclare();
 	
+	// 진행중인 광고
+	Ad selectStartAd();
+	
 	// 총 회원수 조회용
 	int getMemberListCount();
 	
