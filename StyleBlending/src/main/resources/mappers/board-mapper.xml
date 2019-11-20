@@ -15,6 +15,8 @@
 		<result property="updateDate" column="update_date"/>
 		<result property="isDelete" column="isdelete"/>
 		<result property="likeCount" column="like_count"/>
+		<result property="imagelIST" column="image_List"/>	<!-- 컬럼별칭 설정함-->
+		
 	</resultMap>
 
 <resultMap type="FashionBoard" id="fashionBoardResultSet">
@@ -39,6 +41,8 @@
 	<result property="isDelete" column="isdelete"/>
 </resultMap>
 
+<resultMap type="lick" id=""></resultMap>
+
 <select id="selectList" resultMap="boardResultSet">
 	select *
 	from board
@@ -49,11 +53,40 @@
 	select * from fashion_board order by fb_no desc
 </select>
 
+<select id="selectBoard" resultMap="boardResultSet">
+	select * 
+	from board
+	where b_no=#{bno}
+</select>
+
 <select id="getListCount" resultType="_int">
 	select count(*)
 	from board
 	where isdelete='N'
 </select>
 
+<insert id="insertBoard">
+	insert into board 
+	values(seq_board.nextval, #{mno} , #{title} , #{content} , default , sysdate, sysdate, default , default)
+</insert>
+
+<update id="updateCount">
+	update board
+	set count = count+1
+	where b_no = #{bno} 
+</update>
+<!-- ************************************* 추천 수정중-->
+<update id="likeCheck">
+	update board
+	set like_count = like_count+1
+	where mno=#{mno} and b_no=#{bno} 
+</update>
+
+<update id="likeCheckCancel">
+	update board
+	set like_count = 0
+	where mno=#{mno} and b_no=#{bno}
+</update>
+<!-- ************************************* -->
 
 </mapper>

@@ -1,6 +1,7 @@
 package com.kh.styleblending.board.model.vo;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,6 +27,8 @@ public class Board {
 	private Date updateDate;
 	private String isDelete;
 	private int likeCount;
+	
+	private ArrayList<Image> imageList;
 	
 	
 }

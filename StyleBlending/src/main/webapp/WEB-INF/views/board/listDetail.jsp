@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -41,39 +43,41 @@
 				<table id="titleArea">
 					<tr>
 						<td>자유게시판</td>
-						<td colspan="6">2019.10.24</td>
+						<td colspan="6">${ b.enrollDate }</td>
 						<td><a href="#eexampleModal" data-toggle="modal">신고</a></td>
 					</tr>
 					<hr>
 					<tr>
-						<th><h4>오늘 입고온 데일리 룩인데 어떤가요?</h4></th>
+						<th><h4>${ b.title }</h4></th>
 					</tr>
 					<tr>
-						<td colspan="2">작성자</td>
-						<td>조회수</td>
-						<td>추천수</td>
-						<td>댓글</td>
+						<td colspan="2">작성자 ${ b.mno }</td>	<!-- 작성자 -->
+						<td>조회수 ${ b.count }</td>	<!-- 조회수 -->
+						<td>추천수 ${ b.likeCount }</td>	<!-- 추천수 -->
+						<td>댓글수 ${ r.brno }</td>	<!-- 댓글 -->
 					</tr>
 				</table>
 				<hr>
-				<div id="writeviewArea" style="height: auto; width: 80%; padding-bottom: 80px;">
 				
-						<p style="height:auto; margin-left: 20px; margin-top: 40px;">
-						무엇을 ~~ 오늘은 무엇을 해야하나~~ 고민고민~
-						aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-						</p>
-						
+				<div id="writeviewArea" style="height: auto; width: 80%; padding-bottom: 80px;">		
+					<p style="height:auto; margin-left: 20px; margin-top: 40px;">${ b.content }</p>
 				</div>
 				
 				<div id="best" align="center">
-					<button type="button" class="btn btn-warning"
-							style="text-align: center;">추천 2</button>
-					<button type="button" class="btn btn-light detail" id="btnUpdate"
-						style="float: right; padd">수정</button>
-					<button type="button" class="btn btn-light detail" id="btnDelete"
-						style="float: right; margin-right: 5px;">삭제</button>
+				
+				<c:choose>
+					<c:when test="${ mno ne null }">
+						<button type="button" class="btn btn-warning" id="lickUp" style="text-align: center;" onclick="location.href='like';">추천 ${ b.likeCount }</button>
+					</c:when>
+					<c:otherwise>
+						<button type="button" class="btn btn-warning" id="likeDown" style="text-align: center;" onclick="location.href='login_need';">추천 ${ b.likeCount-1 }</button>
+					</c:otherwise>
+				</c:choose>	
+				
+					<button type="button" class="btn btn-light detail" id="btnUpdate" style="float: right; padd">수정</button>
+					<button type="button" class="btn btn-light detail" id="btnDelete" style="float: right; margin-right: 5px;">삭제</button>
 					<button type="button" class="btn btn-light detail" id="btnList"
-						style="float: right; margin-right: 5px;">목록으로</button>
+						style="float: right; margin-right: 5px;" onclick="location.href='blist.do';">목록으로</button>
 				</div>
 			</form>
 		</div>
@@ -91,12 +95,12 @@
 					</div>
 					<table class="replylistArea">
 						<tr>
-							<td><img alt="" src="${pageContext.request.contextPath}/resources/assets/img/board/icons8-checkmark-40.png"></td>
+							<td><img alt="check" src="${pageContext.request.contextPath}/resources/assets/img/board/icons8-checkmark-40.png"></td>
 							<td><strong style="font-size: 15px;">댓글 쓰기</strong></td>
 						</tr>
 
 						<tr>
-							<td><img src="${pageContext.request.contextPath}/resources/assets/img/board/icons8-sun-64.png" alt=""></td>
+							<td><img src="${pageContext.request.contextPath}/resources/assets/img/board/icons8-sun-64.png" alt="member"></td>
 							<td><textarea rows="3" cols="80" id="comment" name="comment" style="resize: none;"></textarea></td>
 							<td>
 								<div class="replyBtn">
@@ -129,10 +133,10 @@
 
 					<!-- 댓글 달리는 div -->
 					<div class="reply-comment">
-						<img src="${pageContext.request.contextPath}/resources/assets/img/board/icons8-sun-64.png" alt="">
+						<img src="${pageContext.request.contextPath}/resources/assets/img/board/icons8-sun-64.png" alt="member">
 						<textarea rows="3" cols="80" id="comment" name="commnet" style="resize:none;"></textarea>
-						<a href="#" style="text-decoration: none; display: none;" id="a-update">수정</a>
-						<a href="#" style="text-decoration: none; display: none;" id="a-delete">삭제</a>						
+						<a href="bupdate.do?bno=${ b.bno }" style="text-decoration: none; display: none;" id="a-update">수정</a>
+						<a href="bdelete.do?bno=${ b.bno }" style="text-decoration: none; display: none;" id="a-delete">삭제</a>						
 					</div>
 				</div>
 			</form>

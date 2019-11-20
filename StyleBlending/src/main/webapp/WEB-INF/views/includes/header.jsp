@@ -22,9 +22,9 @@
 	href="https://use.fontawesome.com/releases/v5.6.0/css/all.css"
 	integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h"
 	crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+ <script src="https://code.jquery.com/jquery-3.4.1.min.js"
 	integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-	crossorigin="anonymous"></script>
+	crossorigin="anonymous"></script> 
 
 <style>
 .contact-title {
