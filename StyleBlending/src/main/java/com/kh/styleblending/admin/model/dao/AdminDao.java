@@ -27,6 +27,10 @@ public class AdminDao {
 		return (ArrayList)sqlSession.selectList("adminMapper.selectNewMember");
 	}
 	
+	public int selectNoCheckDeclare() {
+		return sqlSession.selectOne("adminMapper.selectDeclareCount");
+	}
+	
 	public int getMemberListCount() {
 		return sqlSession.selectOne("adminMapper.getMemberListCount");
 	}

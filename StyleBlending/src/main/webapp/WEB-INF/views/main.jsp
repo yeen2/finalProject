@@ -141,9 +141,11 @@ li {
 
 <script type="text/javascript" src="resources/js/typeit.min.js"></script>
 	
-<body class="index" onload="window.open('${pageContext.request.contextPath}/resources/assets/ad.jsp','','width=360px, height=300px, left=700px, top=300px, toolbar=0, status=yes, menubars=0, scrollbars=0, resizable=0, location=0, directories=0')">
+<body class="index">
 	<jsp:include page="includes/header.jsp" />
-
+	
+	
+	
 	<div id="filter-drop"
 		style="width: 100%; height: 50px; margin-top: 70px;"></div>
 	<div class="container eee" style="margin-top: 18px;">
@@ -256,7 +258,7 @@ li {
 								 "<img src='${pageContext.request.contextPath}/resources/assets/img/배너일.png' style='width: 80px; height: 50px; margin-left: 20px;' />" +
 								 "</div>"+
 								 "<div class='col-6' style='width: 50%; height: 50px; margin-left: 30px;'>"+
-								 "<span style='margin-bottom: 0px; margin-top: 23px;'><br>"+value.enrollDate+"</span>"+
+								 "<span style='margin-bottom: 0px; margin-top: 23px;'>"+value.nickName+"<br>"+value.enrollDate+"</span>"+
 								 "</div>"+
 								 "<div class='col-3'style='width: 20%; height: 50px; margin-top: 5px; padding-right: 10px; padding-left: 10px; padding-bottom: 5px;'>"+
 								 "<button class='btn btn-dark'>"+
@@ -276,7 +278,7 @@ li {
 								 "</div>"+
 								 "<div class='col-3 form-inline' style='padding: 0px;'>"+
 								 "<a href=''><i class='far fa-comment' aria-hidden='true' style='color: black; font-size: 30px;'></i></a>"+
-								 "<p style='margin: 0px;'>30</p>"+
+								 "<p style='margin: 0px;'>"+value.replyCount+"</p>"+
 								 "</div>"+
 								 "</div>"+
 								 "</div>"+
@@ -842,7 +844,7 @@ li {
 			var filter = $("#filter-drop");
 			/*filter.css("border: 1px solid black; width: 100%; height: 50px; margin-top: 50px") */
 			filter
-					.append("<i class='fa fa-sliders fa-md' style='color:white; margin-top:10px; margin-left:399px;'>"
+					.append("<i class='fa fa-sliders fa-md' style='color:white; margin-top:13px; margin-left:399px;'>"
 							+ "<span style='margin-left:20px;'>"
 							+ '필터 - '
 							+ sel
@@ -992,16 +994,31 @@ li {
       // 3. This function creates an <iframe> (and YouTube player)
       //    after the API code downloads.
       var player;
-      function onYouTubeIframeAPIReady() {
-        player = new YT.Player('player', {
+      function onYouTubeIframeAPIReady( ) {
+    	  console.log("onyoutube");
+       	  $.ajax({
+       		 url:"youtubeUrl.do",
+       		 success:function(data){
+       			var url = data.url;
+       			var idx = url.indexOf("="); 
+       			var url2 = url.substring(idx+1);
+       			console.log("dkdkdkdk"+data.imgPath);
+       			window.open("${pageContext.request.contextPath}/resources/assets/ad.jsp?img="+data.imgPath+"&originalImg="+data.originalImg,'','width=345px, height=321px, left=700px, top=300px, toolbar=0, status=yes, menubars=0, scrollbars=0, resizable=0, location=0, directories=0');
+       		
+    	  player = new YT.Player('player', {
           height: '1000',
           width: '1000',
-          videoId: 'CGuc3lgXFKM',
+          videoId: url2,
           events: {
             'onReady': onPlayerReady
             //,'onStateChange': onPlayerStateChange
           }
-        });
+        }); 
+       		 },
+       		 error:function(){
+       			 
+       		 }
+       	  });
       }
 
       // 4. The API will call this function when the video player is ready.

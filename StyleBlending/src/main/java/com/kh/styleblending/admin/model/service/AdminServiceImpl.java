@@ -29,6 +29,12 @@ public class AdminServiceImpl implements AdminService{
 		// 오늘자 가입자수
 		return aDao.selectNewMember();
 	}
+	
+	@Override
+	public int selectNoCheckDeclare() {
+		// 미확인 신고수
+		return aDao.selectNoCheckDeclare();
+	}
 
 	@Override
 	public int getMemberListCount() {
@@ -99,6 +105,8 @@ public class AdminServiceImpl implements AdminService{
 		}
 		
 	}
+
+
 
 	
 

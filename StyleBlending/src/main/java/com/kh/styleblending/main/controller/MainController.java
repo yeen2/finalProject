@@ -1,10 +1,12 @@
 package com.kh.styleblending.main.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
+import com.kh.styleblending.admin.model.vo.Ad;
 import com.kh.styleblending.main.model.service.MainService;
 import com.kh.styleblending.main.model.vo.Live;
 import com.kh.styleblending.main.model.vo.Notice;
@@ -98,4 +101,24 @@ public class MainController {
 		
 		gson.toJson(list, response.getWriter());
 	}
+	@RequestMapping("youtubeUrl.do")
+	public void youtubeUrl(HttpServletResponse response) throws JsonIOException, IOException {
+		
+		Ad ad = mainService.selectAd();
+		
+		JSONObject jsonUser = new JSONObject(); // {}
+		
+		jsonUser.put("url", ad.getUrl());
+		jsonUser.put("originalImg", ad.getOriginalImg());
+		jsonUser.put("imgPath", ad.getImgPath());
+		
+		response.setContentType("application/json; charset=UTF-8");
+		
+		PrintWriter out = response.getWriter();
+		
+		out.print(jsonUser);
+		
+		
+	}
+	
 }
