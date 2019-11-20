@@ -53,7 +53,13 @@ public interface MyPageService {
 	// 프로필 페이지 - 팬 버튼 체크
 	int selectFanCheck(Fan f);
 	
+	// 프로필 페이지 - 팬 탭 버튼 체크
+	int[] selectFanCheckTab(Fan f);
+	
 	// 프로필 페이지 - insert 팬
 	int insertFan(Fan f);
+	
+	// 프로필 페이지 - delete 팬
+	int deleteFan(Fan f);
 
 }

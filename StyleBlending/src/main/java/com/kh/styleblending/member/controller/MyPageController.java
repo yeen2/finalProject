@@ -126,7 +126,7 @@ public class MyPageController {
 	public String updateProfileImg(Member m, HttpSession session, ModelAndView mv, HttpServletRequest request, MultipartHttpServletRequest req) {
 		int mno = ((Member)session.getAttribute("loginUser")).getMno();
 		String renameFileNameD = ((Member)session.getAttribute("loginUser")).getRenameImg();
-		
+		System.out.println("프로필 이미지 수정할 때 rename컬럼 : " + renameFileNameD);
 		m.setMno(mno);
 		
 		MultipartFile file = req.getFile("uploadImg");
@@ -144,7 +144,7 @@ public class MyPageController {
 		
 		if(mem != null) {
 			session.setAttribute("loginUser", mem);
-			if(renameFileNameD != "profile.png") {
+			if(!renameFileNameD.equals("profile.png")) {
 				deleteProfileImg(renameFileNameD, request);
 			}
 			return m.getRenameImg();
@@ -159,7 +159,7 @@ public class MyPageController {
 	public String updateBasicImg(Member m, ModelAndView mv, HttpSession session, HttpServletRequest request) {
 		String renameFileName = ((Member)session.getAttribute("loginUser")).getRenameImg();
 		int mno = ((Member)session.getAttribute("loginUser")).getMno();
-		
+		System.out.println("기본 이미지로 변경할 때 rename컬럼 : " + renameFileName);
 		deleteProfileImg(renameFileName, request);
 		
 		m.setRenameImg("profile.png");
@@ -211,7 +211,7 @@ public class MyPageController {
 		String savePath = root + "/upload/member";
 		
 		File f = new File(savePath + "/" + renameFileName);
-		
+		System.out.println("프로필 이미지 삭제 콘솔 : " + f);
 		if(f.exists()) {
 			f.delete();
 		}
@@ -320,10 +320,34 @@ public class MyPageController {
 		}
 	}
 	
+	@ResponseBody
+	@RequestMapping("mpSFanCheckTab.do")
+	public int[] selectFanCheckTab(Fan f) {
+		int[] result = mpService.selectFanCheckTab(f);
+		
+		if(result != null) {
+			return result;
+		}else {
+			return null;
+		}
+	}
 	
+	@ResponseBody
 	@RequestMapping("mpInsertFan.do")
-	public int insertFan(Fan f, ModelAndView mv) {
+	public int insertFan(Fan f) {
 		int result = mpService.insertFan(f);
+		
+		if(result > 0) {
+			return 1;
+		}else {
+			return -1;
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping("mpDeleteFan.do")
+	public int deleteFan(Fan f) {
+		int result = mpService.deleteFan(f);
 		
 		if(result > 0) {
 			return 1;
