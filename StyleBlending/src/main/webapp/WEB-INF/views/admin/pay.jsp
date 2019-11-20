@@ -11,7 +11,7 @@
 
 </head>
 <body>
-
+<!-- 
 	<script>
 	
 	$(function(){
@@ -49,6 +49,6 @@
 
 	});
 </script>
- 
+  -->
 </body>
 </html>

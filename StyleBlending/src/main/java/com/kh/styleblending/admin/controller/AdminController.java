@@ -131,13 +131,23 @@ public class AdminController {
 	}
 	
 	@RequestMapping("aInsertAd.do")
-	public String insertAd(HttpSession session, Model model, HttpServletRequest request) {
+	public String insertAd(HttpSession session, Model model, HttpServletRequest request, 
+							@RequestParam(value="uploadFile", required=false) MultipartFile file, Ad ad) {
 		
+		if(!file.getOriginalFilename().equals("")) {// 파일 존재시
+			
+			String renameFileName = saveFile(file,request);
+			
+			ad.setOriginalImg(file.getOriginalFilename());
+			ad.setRenameImg(renameFileName);
+		}
+
+		session.setAttribute("ad", ad);
 	
-		Ad ad = (Ad)session.getAttribute("ad");
-		int result = aService.insertAd(ad);
+		Ad add = (Ad)session.getAttribute("ad");
+		int result = aService.insertAd(add);
 		
-		//System.out.println("진짜"+ad);
+		System.out.println("진짜"+ad);
 	
 		if(result > 0) {
 			session.removeAttribute("ad"); // 광고 session 지워주기
