@@ -95,7 +95,25 @@ public class PostingServiceImpl implements PostingService {
 		return pDao.insertReReply(r);
 	}
 	
+	@Override
+	public int insertPostingLike(int pno, int mno) {
+		return pDao.insertPostingLike(pno, mno);
+	}
 	
+	@Override
+	public int deletePostingLike(int pno, int mno) {
+		return pDao.deletePostingLike(pno, mno);
+	}
+	
+	@Override
+	public int selectPLikeCount(int pno) {
+		return pDao.selectPLikeCount(pno);
+	}
+	
+	@Override
+	public int selectPLikeCheck(int pno, int mno) {
+		return pDao.selectPLikeCheck(pno, mno);
+	}
 	
 	
 }

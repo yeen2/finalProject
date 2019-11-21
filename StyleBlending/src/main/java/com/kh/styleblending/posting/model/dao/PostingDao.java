@@ -52,4 +52,29 @@ public class PostingDao {
 		return sqlSession.insert("postingMapper.insertReReply", r);
 	}
 	
+	public int insertPostingLike(int pno, int mno) {
+		HashMap map = new HashMap<>();
+		map.put("pno", pno);
+		map.put("mno", mno);
+		return sqlSession.insert("postingMapper.insertPostingLike", map);
+	}
+	
+	public int deletePostingLike(int pno, int mno) {
+		HashMap map = new HashMap<>();
+		map.put("pno", pno);
+		map.put("mno", mno);
+		return sqlSession.insert("postingMapper.deletePostingLike", map);
+	}
+	
+	public int selectPLikeCount(int pno) {
+		return sqlSession.selectOne("postingMapper.selectPLikeCount", pno);
+	}
+	
+	public int selectPLikeCheck(int pno, int mno) {
+		HashMap map = new HashMap<>();
+		map.put("pno", pno);
+		map.put("mno", mno);
+		return sqlSession.selectOne("postingMapper.selectPLikeCheck", map);
+	}
+	
 }

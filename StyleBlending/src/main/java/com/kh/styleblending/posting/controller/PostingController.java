@@ -202,9 +202,54 @@ public class PostingController {
 		}
 	}
 	
+	// 좋아요 추가
+	@ResponseBody
+	@RequestMapping("pLikeInsert.do")
+	public String insertPostingLike(int pno, int mno) {
+
+		int result = pService.insertPostingLike(pno, mno);
+		
+		if(result > 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
 	
+	// 좋아요 제거
+	@ResponseBody
+	@RequestMapping("pLikeDelete.do")
+	public String deletePostingLike(int pno, int mno) {
+
+		int result = pService.deletePostingLike(pno, mno);
+		
+		if(result > 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
 	
+	// 실시간 포스팅좋아요숫자 가져오기
+	@ResponseBody
+	@RequestMapping("getPLikeCount.do")
+	public int selectPLikeCount(int pno) {
+
+		int result = pService.selectPLikeCount(pno);
+		
+		return result;
+	}
 	
+	// 로그인 회원의 포스팅좋아요 했는지 체크
+	@ResponseBody
+	@RequestMapping("getPLikeCheck.do")
+	public int selectPLikeCheck(int pno, int mno) {
+
+		int result = pService.selectPLikeCheck(pno, mno);
+		
+		return result;
+	}
+
 	
 	
 		
