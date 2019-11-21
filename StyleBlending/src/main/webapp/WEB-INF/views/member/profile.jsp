@@ -25,6 +25,7 @@
 	#abc div{width:45px;}
 	#abc i{line-height:30px; margin-right:5px;}
 	#imgClick:hover{cursor:pointer;}
+	#scrollTop1:hover{cursor:pointer;}
 </style>
 </head>
 <body class="profile" style="margin-bottom: 20px !important;">
@@ -209,8 +210,9 @@
 	  </div>
 	</div>
 	
-	<div id="scrollTop1" style="position:fixed; border:1px solid lightgray; display:none; background:white; bottom:10px; right:10px;">
-		<a href="#"><img style="width:60px; height:60px;"src="${pageContext.request.contextPath}/resources/assets/img/123a.png"></a>
+	<div id="scrollTop1" align="center" style="position:fixed; border:1px solid gray; display:none; background:white; 
+								width:60px; height:58px; bottom:30px; right:20px; z-index:1000;">
+		<span style="font-size:35px; color:gray;"><i class="fas fa-arrow-up"></i></span>
 	</div>
 	
 	
@@ -218,8 +220,6 @@
 		$(function(){
 			selectPostingList();
 			selectLikeList();
-			selectFanList();
-			selectFwList();
 			/* selectFanCheck();
 			selectFanCheckTab(); */
 		});
@@ -332,11 +332,30 @@
 			selectLikeList();
 		});
 		
+		
+		$("#fanBtn").click(function(){
+			if(${loginUser == null}){
+				alert("로그인 후 이용해주세요.");
+				return false;
+			}else{
+				selectFanList();
+			}
+		});
+		
+		$("#fwBtn").click(function(){
+			if(${loginUser == null}){
+				alert("로그인 후 이용해주세요.");
+				return false;
+			}else{
+				selectFwList();
+			}
+		});
+		
 		function selectFanList(){
 			
 			$.ajax({
 				url:"mpSFanList.do",
-				data:{mno:${m.mno}},
+				data:{mno:${m.mno}, loginMno:${loginUser.mno}},
 				dataType:"json",
 				success:function(list){
 					if(list.length == 0){
@@ -395,7 +414,7 @@
 			
 			$.ajax({
 				url:"mpSFwList.do",
-				data:{mno:${m.mno}},
+				data:{mno:${m.mno}, loginMno:${loginUser.mno}},
 				dataType:"json",
 				success:function(list){
 					if(list.length == 0){
@@ -497,26 +516,23 @@
 				
 		}
 		
-		// 팬 버튼 클릭
+		// 팬 버튼 클릭 시 insert into fan
 		$("#fanA").on("click", function(){
-			var fanA = $("#fanA").val();
-			if(${ loginUser != null }){
-				insertFan(fanA);
-			}else{
-				alert("로그인 후 이용 가능합니다.");
-			}
+			var fanA = $("#fanA").attr("value");
+			
+			insertFan(fanA);
+			
 		});
+		// 팬 버튼 클릭 시 delete from fan
 		$("#fanB").on("click", function(){
-			var fanB = $("#fanB").val();
-			if(${ loginUser != null }){
-				deleteFan(fanB);
-			}else{
-				alert("로그인 후 이용 가능합니다.");
-			}
+			var fanB = $("#fanB").attr("value");
+			
+			deleteFan(fanB);
+			
 		});
 		
 		
-		
+		// insert 팬
 		function insertFan(value){
 			var meNo = value;
 			$.ajax({
@@ -536,6 +552,8 @@
 				}
 			});
 		}
+		
+		// delete 팬
 		function deleteFan(value){
 			var meNo = value;
 			$.ajax({
@@ -564,7 +582,7 @@
 			$(document).on("mouseleave", ".imgP", function(){
 				$(this).siblings("div").css("display", "none");
 			});
-				
+			
 		});
 		
 		
@@ -638,12 +656,33 @@
 		
 	</script>
 	
-	<script>
+	<script type="text/javascript">
+	
+		// 스크롤 맨 위로 가는 버튼
+		$(function() {
+	        $(window).scroll(function() {
+	            if ($(this).scrollTop() > 300) {
+	                $('#scrollTop1').fadeIn();
+	            } else {
+	                $('#scrollTop1').fadeOut();
+	            }
+	        });
+	        
+	        $("#scrollTop1").click(function() {
+	            $('html, body').animate({
+	                scrollTop : 0
+	            }, 400);
+	            return false;
+	        });
+	    });
+
+		// 탭 클릭 시 새로고침 해도 탭 페이지 유지 (수정 필요)
 		$(document).ready(function(){
 			var url = document.location.href;
 			var tab = url.split('/').pop();
 			$(tab).trigger("click");
 		});
+		
 	</script>
 	
 	<jsp:include page="../includes/footer.jsp" />
