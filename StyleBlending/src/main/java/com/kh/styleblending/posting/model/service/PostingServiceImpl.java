@@ -106,6 +106,16 @@ public class PostingServiceImpl implements PostingService {
 	}
 	
 	@Override
+	public int increasePostingLike(int pno) {
+		return pDao.increasePostingLike(pno);
+	}
+	
+	@Override
+	public int decreasePostingLike(int pno) {
+		return pDao.decreasePostingLike(pno);
+	}
+	
+	@Override
 	public int selectPLikeCount(int pno) {
 		return pDao.selectPLikeCount(pno);
 	}
@@ -114,6 +124,8 @@ public class PostingServiceImpl implements PostingService {
 	public int selectPLikeCheck(int pno, int mno) {
 		return pDao.selectPLikeCheck(pno, mno);
 	}
+	
+	
 	
 	
 }

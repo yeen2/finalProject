@@ -135,6 +135,24 @@
 		where p_no=#{pno} and m_no=#{mno}
 	</select>
 	
+	<update id="increasePostingLike">
+		update posting
+		set likeCount = likeCount+1
+		where isdelete='N'
+	</update>
+	
+	<update id="decreasePostingLike">
+		update posting
+		set likeCount = likeCount-1
+		where isdelete='N'
+	</update>
+	
+	
+	
+	
+	
+	
+	
 	
 	
 </mapper>

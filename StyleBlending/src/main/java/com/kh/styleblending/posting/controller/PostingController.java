@@ -207,9 +207,10 @@ public class PostingController {
 	@RequestMapping("pLikeInsert.do")
 	public String insertPostingLike(int pno, int mno) {
 
-		int result = pService.insertPostingLike(pno, mno);
-		
-		if(result > 0) {
+		int result1 = pService.insertPostingLike(pno, mno);
+		int result2 = pService.increasePostingLike(pno);
+				
+		if(result1 > 0 && result2 > 0) {
 			return "success";
 		}else {
 			return "fail";
@@ -221,9 +222,10 @@ public class PostingController {
 	@RequestMapping("pLikeDelete.do")
 	public String deletePostingLike(int pno, int mno) {
 
-		int result = pService.deletePostingLike(pno, mno);
+		int result1 = pService.deletePostingLike(pno, mno);
+		int result2 = pService.decreasePostingLike(pno);
 		
-		if(result > 0) {
+		if(result1 > 0 && result2 > 0 ) {
 			return "success";
 		}else {
 			return "fail";
@@ -233,19 +235,20 @@ public class PostingController {
 	// 실시간 포스팅좋아요숫자 가져오기
 	@ResponseBody
 	@RequestMapping("getPLikeCount.do")
-	public int selectPLikeCount(int pno) {
+	public String selectPLikeCount(int pno) {
 
-		int result = pService.selectPLikeCount(pno);
-		
+		String result = Integer.toString(pService.selectPLikeCount(pno));
+		System.out.println(Integer.toString(pService.selectPLikeCount(pno)));
 		return result;
 	}
 	
 	// 로그인 회원의 포스팅좋아요 했는지 체크
 	@ResponseBody
 	@RequestMapping("getPLikeCheck.do")
-	public int selectPLikeCheck(int pno, int mno) {
+	public String selectPLikeCheck(int pno, int mno) {
 
-		int result = pService.selectPLikeCheck(pno, mno);
+		String result =  Integer.toString(pService.selectPLikeCheck(pno, mno));
+		System.out.println(Integer.toString(pService.selectPLikeCheck(pno, mno)));
 		
 		return result;
 	}
