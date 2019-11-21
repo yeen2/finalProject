@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
+<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/resources/admin_temp/js/admin.js"></script> --%>
 </head>
 <body>
 	
@@ -74,7 +74,7 @@
                        			<label for="keyword" style="display:inline-flex; padding:15px;">Search: &nbsp;
                        				<input type="search" id="keyword" class="form-control form-control-sm col-sm-12" placeholder="아이디 또는 닉네임을 입력해주세요." aria-controls="bootstrap-data-table">
                        			</label>
-	                        	<button type="button" id="userDeleteBtn" data-toggle="modal" data-target="#userDeleteModal" class="btn btn-secondary btn-sm" style="float:right; margin-right:10px; margin-top:15px;" >
+	                        	<button type="button" id="deleteBtn" data-toggle="modal" data-target="#deleteModal" class="btn btn-secondary btn-sm" style="float:right; margin-right:10px; margin-top:15px;" >
 	                        		회원삭제
 	                        	</button>
                           	</div>
@@ -85,7 +85,7 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                        	<th><input type="checkbox" name="mCheckAll" id="checkAll" onclick="allCheck();"/></th>
+                                        	<th><input type="checkbox" name="checkAll" id="checkAll" onclick="allCheck();"/></th>
                                             <th>No.</th>
                                             <th>프로필</th>
                                             <th>이메일</th>
@@ -105,7 +105,7 @@
                                             <td >${m.mno}</td>
                                             <td >
                                                 <div class="round-img">
-                                                    <a href="#"><img class="rounded-circle" src="${pageContext.request.contextPath}${m.profilePath }${m.renameImg}" alt=""></a>
+                                                    <a href="#"><img class="rounded-circle" src="${pageContext.request.contextPath}${m.profilePath}${m.renameImg}" alt=""></a>
                                                 </div>
                                             </td>
                                             <td>${m.email}</td>
@@ -155,6 +155,7 @@
 	                                			<c:if test="${p ne pi.currentPage }">
 	                                				<c:url value="aUser.do" var="page">	
 	                                					<c:param name="currentPage" value="${p}"/>
+	                                					<c:param name="boardLimit" value="${pi.boardLimit }"/>
 	                                				</c:url>
 		                                			<li class="paginate_button page-item active">
 		                                				<a href="${page}" aria-controls="bootstrap-data-table" class="page-link">${p }</a>
@@ -196,62 +197,12 @@
 
     </div><!-- /#right-panel -->
     
-    
+     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/admin_temp/js/admin.js"></script>
      <script>
      
-	     function pageSet(boardLimit){
+	     function pageSet(boardLimit){ // 게시글수 변경
 	    	 location.href="${pageContext.request.contextPath}/aUser.do?boardLimit="+boardLimit; 
-	     }
-	     
-	     
-	    	 var keyword = $("#keyword").val().toUpperCase();
-	    	 var choKeyword = keywordSearch($("#keyword").val());
-	    	 
-	    	 if(keyword!=""&& choKeyword==""){
-	    		 typeCheck = 'Y'; // 초성검색
-	    	 }else{
-	    		 typeCheck= 'N'; // 일반검색
-	    	 }
-	    	 
-	     function keywordSearch(str){
-	    	 
-	    	 cho = ["ㄱ","ㄲ","ㄴ","ㄷ","ㄸ","ㄹ","ㅁ","ㅂ","ㅃ","ㅅ","ㅆ","ㅇ","ㅈ","ㅉ","ㅊ","ㅋ","ㅌ","ㅍ","ㅎ"]; 
-	    	 result = ""; 
-	    	 
-	    	  for(i=0;i<str.length;i++) { 
-	    	    code = str.charCodeAt(i)-44032; 
-	    	    if(code>-1 && code<11172){
-	    	        result += cho[Math.floor(code/588)]; 
-	    	    } 
-	    	  }
-	    	    return result; 
-	     };
-	     
-	     
-		function allCheck(){ // 전체 선택,해제
-		      if( $("#checkAll").is(':checked') ){
-		        $("input[name=checkRow]").prop("checked", true);
-		      }else{
-		        $("input[name=checkRow]").prop("checked", false);
-		      }
-		};
-	
-		/* 삭제여부 모달창 뜨기전에 조건검사먼저 진행 */
-		$("#userDeleteBtn").click(function(){
-			
-			  var checkRow = "";
-			  $( "input[name='checkRow']:checked" ).each (function (){
-			    checkRow = checkRow + $(this).val()+"," ;
-			  });
-			 
-			  if(checkRow == ''){
-			    alert("삭제할 대상을 선택하세요.");
-			    return false;
-			  }
-			  
-			  $("#userDeleteModal").show();
-			  
-		});
+	     } 
 
 		/* 삭제(체크박스된 것 전부) */
 		function deleteAction(){
@@ -303,7 +254,7 @@
             
             
       <!-- 회원 삭제 모달창 -->     
-      <div class="modal fade" id="userDeleteModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="true">
+      <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-sm" role="document">
                <div class="modal-content">
                    <div class="modal-header">
@@ -315,9 +266,6 @@
                    <div class="modal-body">
                        <p>
                            	해당 회원을 탈퇴하시겠습니까?
-                      </p>
-                      <p>
-                           	이미 탈퇴된 회원인 경우 회원목록에서 삭제됩니다.
                       </p>
                     </div>
                     <div class="modal-footer">

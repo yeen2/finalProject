@@ -69,10 +69,10 @@
 		                          		<div class="dataTables_length" id="bootstrap-data-table_length">
 		                          			<label style="display:inline-flex";>Show 
 		                          				<select name="bootstrap-data-table_length" aria-controls="bootstrap-data-table" class="form-control form-control-sm">
-		                          					<option value="5">5</option>
-		                          					<option value="10">10</option>
-		                          					<option value="30">30</option>
-		                          					<option value="-1">All</option>
+		                          					<option value="5" <c:if test="${pi.boardLimit eq '5'}">selected</c:if>>5</option>
+		                          					<option value="10" <c:if test="${pi.boardLimit eq '10'}">selected</c:if>>10</option>
+		                          					<option value="20" <c:if test="${pi.boardLimit eq '20'}">selected</c:if>>20</option>
+		                          					<option value="30" <c:if test="${pi.boardLimit eq '30'}">selected</c:if>>30</option>
 		                          				</select> entries
 		                          			</label>
 		                          		</div>
@@ -81,9 +81,9 @@
 		                          	<div class="col-sm-12 col-md-6">
 		                          		<div id="bootstrap-data-table_filter" class="dataTables_filter">
 		                          			<label style="display:inline-flex; padding:15px;">Search: &nbsp;
-		                          				<input type="search" class="form-control form-control-sm col-sm-10" placeholder="업체명으로 검색" aria-controls="bootstrap-data-table">
+		                          				<input type="search" id="keyword" class="form-control form-control-sm col-sm-10" placeholder="업체명으로 검색" aria-controls="bootstrap-data-table">
 		                          			</label>
-				                        	<button type="button" class="btn btn-outline-danger btn-sm" style="float:right; margin-right:10px; margin-top:15px;">취소</button>
+				                        	<button type="button" id="deleteBtn" class="btn btn-outline-danger btn-sm" style="float:right; margin-right:10px; margin-top:15px;">취소</button>
 				                        	<button type="button" class="btn btn-outline-primary btn-sm" style="float:right; margin-right:10px; margin-top:15px;">
 				                        		<i class="fa fa-magic"></i>등록
 				                        	</button>
@@ -110,7 +110,7 @@
 	                                            <th>등록여부</th>
 	                                        </tr>
 	                                    </thead>
-	                                    <c:forEach items="${list }" var="a">
+	                                    <c:forEach items="${list}" var="a">
 	                                    <tbody>
 	                                        <tr>
 	                                        	<td>
@@ -166,6 +166,7 @@
 	                                			<c:if test="${p ne pi.currentPage }">
 	                                				<c:url value="aAdvertisment.do" var="page">	
 	                                					<c:param name="currentPage" value="${p}"/>
+	                                					<c:param name="boardLimit" value="${pi.boardLimit }"/>
 	                                				</c:url>
 		                                			<li class="paginate_button page-item active">
 		                                				<a href="${page}" aria-controls="bootstrap-data-table" class="page-link">${p }</a>
@@ -259,28 +260,38 @@
        <jsp:include page="footer.jsp" />
 
     </div><!-- /#right-panel -->
+        
+           
+      <!-- 광고 마감 모달창 -->     
+      <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-sm" role="document">
+               <div class="modal-content">
+                   <div class="modal-header">
+                       <h5 class="modal-title" id="staticModalLabel"><b>회원 탈퇴</b></h5>
+                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                           <span aria-hidden="true">&times;</span>
+                       </button>
+                   </div>
+                   <div class="modal-body">
+                       <p>
+                           	해당 광고를 마감하시겠습니까?
+                      </p>
+                      <p>
+                           	<!-- 이미 탈퇴된 회원인 경우 회원목록에서 삭제됩니다. -->
+                      </p>
+                    </div>
+                    <div class="modal-footer">
+                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                       <button type="button" class="btn btn-primary" onclick="deleteAction();">Confirm</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+         
     
-    
-    
-    
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/admin_temp/js/admin.js"></script>
 	<script>
-	
-	function conditionCheck(){
-		var check = $("#checkCondition").val();
-		
-		console.log(check);
-		
-		if($("#checkCondition").not(':checked')){
-			alert("동의 후 진행.");
-			return false;
-		}
-		return true;
-	}
-	
-		
-
-
-	
+	//history.replaceState({}, null, location.pathname);
 		/* $("#adListTab").click(function(){ 
 			alert("gg");
 			$("#nav-waiting div").hide();	
