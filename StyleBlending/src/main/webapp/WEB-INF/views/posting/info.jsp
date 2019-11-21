@@ -86,7 +86,7 @@
 				<div >
 					<div style="display: inline; margin-right: 20px;">
 						<button type="button" class="btn btn-secondary" id="likeBtn">LIKE</button> &nbsp;&nbsp;
-						<h3 style="display: inline; margin-bottom: 0px;">${p.likeCount}</h3>
+						<h3 style="display: inline; margin-bottom: 0px;" id="pLikeCountH3">${p.likeCount}</h3>
 					</div>
 					<div style="display: inline; margin-right: 20px;">
 						 <!--  카카오톡 공유하기  -->
@@ -339,29 +339,50 @@
 
 	<script type="text/javascript">
 
-	var likeCount;
-	var mno = "${loginUser.mno}";
 
+	// 이 포스팅의 좋아요 카운트 가져오기
+	function getPLikeCount() {
+		$.ajax({
+			url:"getPLikeCount.do",
+			data:{pno:${p.pno}},
+			type:"get",
+			success:function(data){
+				
+				$("#pLikeCountH3").text(data);
+				
+			},error:function(){
+				console.log("ajax 서버 실패");
+			}
+		});
+	};
 	
-	$("#likeBtn").hover(function () {
+	
+	
+	
+
+
+	$("#likeBtn").hover(function () { // 버튼 마우스
 		//likeCount = $(this).next().text();
-		likeCount =  getPLikeCount();
-		var loginLike = getPLikeCheck();
+		var loginLike;
+		var mno = "${loginUser.mno}";
 		
-		console.log(likeCount);
-		console.log(loginLike);
-		
-		// 이때 만든 ajax함수로 값 비교하기(수정하기)
-		//if(${p.loginLike} == 0){
-		if(loginLike == 0){
+		if(mno == null || mno == ""){
 			$(this).next().text("+1");
-		}else{
-			$(this).next().text("-1");
-		}
+			
+		}else{ // 로그인 되어있을때
 		
-	}, function () {
-		$(this).next().text(likeCount);
-	})
+			loginLike = getPLikeCheck(mno);
+		
+			if(loginLike == 0){
+				$(this).next().text("+1");
+			}else{
+				$(this).next().text("-1");
+			}	
+		}
+
+	}, function () { //마우스 뗄때
+		getPLikeCount();
+	});
 	
 	
 	// 댓글폼 클릭시 로그인되있는지 확인
@@ -373,8 +394,10 @@
 			return;
 			
 		}else{ // 로그인 되어있을때
-
-			if(${p.loginLike} == '0'){
+			var mno = "${loginUser.mno}";
+			var loginLike = getPLikeCheck(mno);
+			
+			if(loginLike == '0'){
 				// 좋아요 추가
 				$.ajax({
 					url:"pLikeInsert.do",
@@ -384,7 +407,7 @@
 					success:function(str){
 						if(str == 'success'){
 							console.log("좋아요 추가 성공");
-							$("#likeBtn").next().text(${p.likeCount} +1);
+							getPLikeCount();
 						}else{
 							console.log("좋아요 추가 실패");
 						}
@@ -403,7 +426,7 @@
 					success:function(str){
 						if(str == 'success'){
 							console.log("좋아요 제거 성공");
-							$("#likeBtn").next().text(${p.likeCount} -1);
+							getPLikeCount();
 						}else{
 							console.log("좋아요 제거 실패");
 						}
@@ -415,28 +438,14 @@
 		}
 	});
 	
-	// 이 포스팅의 좋아요 카운트 가져오기
-	function getPLikeCount() {
-		var result=0;
-		$.ajax({
-			url:"getPLikeCount.do",
-			data:{pno:${p.pno}},
-			type:"get",
-			success:function(data){
-				console.log(data);
-				result = data;
-			},error:function(){
-				console.log("ajax 서버 실패");
-			}
-		});
-		return result;
-	};
 	
+
 	// 로그인 회원의 해당 포스팅 좋아요 확인
-	function getPLikeCheck() {
+	function getPLikeCheck(mno) {
 		var result=0;
 		$.ajax({
 			url:"getPLikeCheck.do",
+			async: false,
 			data:{pno:${p.pno},
 				  mno:mno},
 			type:"get",
@@ -446,10 +455,10 @@
 			},error:function(){
 				console.log("ajax 서버 실패");
 			}
+			
 		});
-		return result;
+			return result;
 	};
-	
 	
 	</script>
 				

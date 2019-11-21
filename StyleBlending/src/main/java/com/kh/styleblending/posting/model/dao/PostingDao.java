@@ -67,11 +67,11 @@ public class PostingDao {
 	}
 	
 	public int increasePostingLike(int pno) {
-		return sqlSession.update("postingMapper.increasePostingLike");
+		return sqlSession.update("postingMapper.increasePostingLike", pno);
 	}
 	
 	public int decreasePostingLike(int pno) {
-		return sqlSession.update("postingMapper.decreasePostingLike");
+		return sqlSession.update("postingMapper.decreasePostingLike", pno);
 	}
 	
 	public int selectPLikeCount(int pno) {
