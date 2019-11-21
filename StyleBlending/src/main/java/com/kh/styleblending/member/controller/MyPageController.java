@@ -316,7 +316,7 @@ public class MyPageController {
 		int result = mpService.selectFanCheck(f);
 		
 		if(result > 0) {
-			return result;
+			return 1;
 		}else {
 			return -1;
 		}
