@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style type="text/css">
-	.replyForm_div_2{
+	.replyForm_div_2 { 
 		margin-left: 50px;
 	}
 	.replyForm_imgDiv{
