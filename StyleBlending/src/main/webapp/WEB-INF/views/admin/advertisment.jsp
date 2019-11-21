@@ -68,7 +68,7 @@
 		                          	<div class="col-sm-12 col-md-6" style="padding:20px;">
 		                          		<div class="dataTables_length" id="bootstrap-data-table_length">
 		                          			<label style="display:inline-flex";>Show 
-		                          				<select name="bootstrap-data-table_length" aria-controls="bootstrap-data-table" class="form-control form-control-sm">
+		                          				<select name="boardLimit" class="form-control form-control-sm" onchange="pageSet(value);">
 		                          					<option value="5" <c:if test="${pi.boardLimit eq '5'}">selected</c:if>>5</option>
 		                          					<option value="10" <c:if test="${pi.boardLimit eq '10'}">selected</c:if>>10</option>
 		                          					<option value="20" <c:if test="${pi.boardLimit eq '20'}">selected</c:if>>20</option>
@@ -81,7 +81,7 @@
 		                          	<div class="col-sm-12 col-md-6">
 		                          		<div id="bootstrap-data-table_filter" class="dataTables_filter">
 		                          			<label style="display:inline-flex; padding:15px;">Search: &nbsp;
-		                          				<input type="search" id="keyword" class="form-control form-control-sm col-sm-10" placeholder="업체명으로 검색" aria-controls="bootstrap-data-table">
+		                          				<input type="search" id="adName" class="form-control form-control-sm col-sm-10" placeholder="업체명으로 검색" aria-controls="bootstrap-data-table">
 		                          			</label>
 				                        	<button type="button" id="deleteBtn" class="btn btn-outline-danger btn-sm" style="float:right; margin-right:10px; margin-top:15px;">취소</button>
 				                        	<button type="button" class="btn btn-outline-primary btn-sm" style="float:right; margin-right:10px; margin-top:15px;">
@@ -154,6 +154,7 @@
 	                                			<c:if test="${pi.currentPage ne 1 }">
 	                                				<c:url value="aAdvertisment.do" var="previous">	
 														<c:param name="currentPage" value="${pi.currentPage-1 }"/>
+														<c:param name="boardLimit" value="${pi.boardLimit }"/>
 	                                				</c:url>
 	                                				<a href="${previous }" aria-controls="bootstrap-data-table" class="page-link">Previous</a>
 	                                			</c:if>
@@ -181,6 +182,7 @@
 	                                			<c:if test="${pi.currentPage ne pi.endPage }">	
 	                                				<c:url value="aAdvertisment.do" var="next" >
 	                                					<c:param name="currentPage" value="${pi.currentPage+1 }"/>
+	                                					<c:param name="boardLimit" value="${pi.boardLimit }"/>
 	                                				</c:url>
 	                                				<a href="${next }" aria-controls="bootstrap-data-table" class="page-link">Next</a>
 	                                			</c:if>
@@ -231,13 +233,15 @@
                              <!-- 진행중 목록 -->
                                <div class="tab-pane fade" id="nav-ongoing" style="display:inline-flex;" >
 			                     <div class="col-md-4">
+			                     		<c:if test="${!empty startAd}">
 				                        <div class="card">
-				                            <img class="card-img-top" src="https://i.imgur.com/hrS2McC.png" alt="Card image cap">
+				                            <img class="card-img-top" src="${pageContext.request.contextPath}${startAd.imgPath}${startAd.renameImg}" alt="Card image cap">
 				                            <div class="card-body">
-				                                <h4 class="card-title mb-3">아디다스</h4>
-				                                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+				                                <h4 class="card-title mb-3">${startAd.name}</h4>
+				                                 <p class="card-text">${startAd.enrollDate}~ </p>
 				                            </div>
 				                        </div>
+				                        </c:if>
 				                  </div>
                              </div>
                              
@@ -291,6 +295,11 @@
     
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/admin_temp/js/admin.js"></script>
 	<script>
+	
+	 function pageSet(boardLimit){ // 게시글수 변경
+    	 location.href="${pageContext.request.contextPath}/aAdvertisment.do?boardLimit="+boardLimit; 
+     } 
+	
 	//history.replaceState({}, null, location.pathname);
 		/* $("#adListTab").click(function(){ 
 			alert("gg");

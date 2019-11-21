@@ -42,7 +42,6 @@ public class AdminServiceImpl implements AdminService{
 		return aDao.selectStartAd();
 	}
 
-
 	@Override
 	public int getMemberListCount() {
 		// 총 회원수 조회용

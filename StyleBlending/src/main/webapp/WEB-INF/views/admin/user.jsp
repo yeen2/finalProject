@@ -143,6 +143,7 @@
 	                                			<c:if test="${pi.currentPage ne 1 }">
 	                                				<c:url value="aUser.do" var="previous">	
 														<c:param name="currentPage" value="${pi.currentPage-1 }"/>
+														<c:param name="boardLimit" value="${pi.boardLimit }"/>
 	                                				</c:url>
 	                                				<a href="${previous }" aria-controls="bootstrap-data-table" class="page-link">Previous</a>
 	                                			</c:if>
@@ -170,6 +171,7 @@
 	                                			<c:if test="${pi.currentPage ne pi.endPage }">	
 	                                				<c:url value="aUser.do" var="next" >
 	                                					<c:param name="currentPage" value="${pi.currentPage+1 }"/>
+	                                					<c:param name="boardLimit" value="${pi.boardLimit }"/>
 	                                				</c:url>
 	                                				<a href="${next }" aria-controls="bootstrap-data-table" class="page-link">Next</a>
 	                                			</c:if>

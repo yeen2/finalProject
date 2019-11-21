@@ -253,7 +253,7 @@
 	     
                 	<!-- /Calender  -->
 										
-					<div class="col-lg-8">
+					<div class="col-lg-7">
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title box-title">To Do List</h4>
