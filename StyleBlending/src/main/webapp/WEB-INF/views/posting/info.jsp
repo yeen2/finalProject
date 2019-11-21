@@ -55,6 +55,9 @@
 		width: 50%; height: 50%; border: 1px solid red; display: inline-block;
 		padding : 5px;
 	}
+	button:click{
+		border:none;
+	}
 </style>
 </head>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
@@ -94,7 +97,8 @@
 							<span>
 								<script type="text/javascript" src="https://ssl.pstatic.net/share/js/naver_sharebutton.js"></script>
 								<script type="text/javascript">
-									new ShareNaver.makeButton({"type": "e" , "title":"[공유][StyleBlending]"});
+									new ShareNaver.makeButton({"type": "e" , "title":"[공유][StyleBlending]" , "url":"https://search.naver.com/search.naver?sm=tab_hty.top&where=nexearch&query=Style+Blending&oquery=StyleBlending&tqi=UOhtCsp0J1sssTDAW8dssssssGK-038226"});
+/* 									new ShareNaver.makeButton({"type": "e" , "title":"[공유][StyleBlending]" , "url":"https://search.naver.com/search.naver?sm=tab_hty.top&where=nexearch&oquery=%EB%84%A4%EC%9D%B4%EB%B2%84+%EA%B0%9C%EB%B0%9C%EC%9E%90%EC%84%BC%ED%84%B0&ie=utf8&query=%EB%84%A4%EC%9D%B4%EB%B2%84+%EA%B0%9C%EB%B0%9C%EC%9E%90%EC%84%BC%ED%84%B0"}); */
 								</script>
 							</span>
 					</div>
@@ -336,11 +340,18 @@
 	<script type="text/javascript">
 
 	var likeCount;
-	
+	var mno = "${loginUser.mno}";
+
 	
 	$("#likeBtn").hover(function () {
 		likeCount = $(this).next().text();
-		$(this).next().text("+1");
+		
+		// 이때 만든 ajax함수로 값 비교하기(수정하기)
+		if(${p.loginLike} == 0){
+			$(this).next().text("+1");
+		}else{
+			$(this).next().text("-1");
+		}
 		
 	}, function () {
 		$(this).next().text(likeCount);
@@ -356,9 +367,80 @@
 			return;
 			
 		}else{ // 로그인 되어있을때
-			
+
+			if(${p.loginLike} == 0){
+				// 좋아요 추가
+				$.ajax({
+					url:"pLikeInsert.do",
+					data:{pno:${p.pno},
+						  mno:mno},
+					type:"get",
+					success:function(str){
+						if(str == 'success'){
+							console.log("좋아요 추가 성공");
+							$("#likeBtn").next().text(${p.likeCount} +1);
+						}else{
+							console.log("좋아요 추가 실패");
+						}
+					},error:function(){
+						console.log("ajax 서버 실패");
+					}
+				});
+				
+			}else{
+				// 좋아요 취소
+				$.ajax({
+					url:"pLikeDelete.do",
+					data:{pno:${p.pno},
+						  mno:mno},
+					type:"get",
+					success:function(str){
+						if(str == 'success'){
+							console.log("좋아요 제거 성공");
+							$("#likeBtn").next().text(${p.likeCount} -1);
+						}else{
+							console.log("좋아요 제거 실패");
+						}
+					},error:function(){
+						console.log("ajax 서버 실패");
+					}
+				});
+			}
 		}
 	});
+	
+	
+	function getPLikeCount() {
+		var result=0;
+		$.ajax({
+			url:"getPLikeCount.do",
+			data:{pno:${p.pno}},
+			type:"get",
+			success:function(data){
+				result = data;
+			},error:function(){
+				console.log("ajax 서버 실패");
+			}
+		});
+		return result;
+	};
+	
+	function getPLikeCheck() {
+		var result=0;
+		$.ajax({
+			url:"getPLikeCheck.do",
+			data:{pno:${p.pno},
+				  mno:mno},
+			type:"get",
+			success:function(data){
+				result = data;
+			},error:function(){
+				console.log("ajax 서버 실패");
+			}
+		});
+		return result;
+	};
+	
 	
 	</script>
 				

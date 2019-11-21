@@ -21,4 +21,12 @@ public interface PostingService {
 	
 	int insertReReply(PostingReply r);
 	
+	int insertPostingLike(int pno, int mno);
+	
+	int deletePostingLike(int pno, int mno);
+	
+	int selectPLikeCount(int pno);
+	
+	int selectPLikeCheck(int pno, int mno);
+	
 }
