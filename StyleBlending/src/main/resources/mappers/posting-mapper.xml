@@ -137,14 +137,14 @@
 	
 	<update id="increasePostingLike">
 		update posting
-		set likeCount = likeCount+1
-		where isdelete='N'
+		set like_count = like_count+1
+		where isdelete='N' and p_no=#{pno}
 	</update>
 	
 	<update id="decreasePostingLike">
 		update posting
-		set likeCount = likeCount-1
-		where isdelete='N'
+		set like_count = like_count-1
+		where isdelete='N' and p_no=#{pno}
 	</update>
 	
 	
