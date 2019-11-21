@@ -176,8 +176,7 @@ public class PostingController {
 	@ResponseBody
 	@RequestMapping("pReplyInsert.do")
 	public String insertReply(PostingReply r) {
-		//System.out.println(r);
-		
+
 		int result = pService.insertReply(r);
 		
 		if(result > 0) {
@@ -191,8 +190,7 @@ public class PostingController {
 	@ResponseBody
 	@RequestMapping("pReReplyInsert.do")
 	public String insertReReply(PostingReply r) {
-		//System.out.println(r);
-		
+
 		int result = pService.insertReReply(r);
 		
 		if(result > 0) {
@@ -207,15 +205,9 @@ public class PostingController {
 	@RequestMapping("pLikeInsert.do")
 	public String insertPostingLike(int pno, int mno) {
 
-		System.out.println("pno"+pno);
-		
 		int result1 = pService.insertPostingLike(pno, mno);
-		
-		System.out.println(result1);
 		int result2 = pService.increasePostingLike(pno);
-		System.out.println(result2);
-				
-				
+	
 		if(result1 > 0 && result2 > 0) {
 			return "success";
 		}else {
@@ -244,7 +236,6 @@ public class PostingController {
 	public String selectPLikeCount(int pno) {
 
 		String result = Integer.toString(pService.selectPLikeCount(pno));
-		System.out.println("실시간 좋아요 숫자 : "+Integer.toString(pService.selectPLikeCount(pno)));
 		return result;
 	}
 	
@@ -254,7 +245,6 @@ public class PostingController {
 	public String selectPLikeCheck(int pno, int mno) {
 
 		String result =  Integer.toString(pService.selectPLikeCheck(pno, mno));
-		//System.out.println(Integer.toString(pService.selectPLikeCheck(pno, mno)));
 		
 		return result;
 	}
