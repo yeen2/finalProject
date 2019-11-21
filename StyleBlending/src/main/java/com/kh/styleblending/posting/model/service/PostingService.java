@@ -21,9 +21,15 @@ public interface PostingService {
 	
 	int insertReReply(PostingReply r);
 	
+	// 포스팅 좋아요
 	int insertPostingLike(int pno, int mno);
 	
 	int deletePostingLike(int pno, int mno);
+	
+	//해당 포스팅에 likeCount 수정
+	int increasePostingLike(int pno);
+	
+	int decreasePostingLike(int pno);
 	
 	int selectPLikeCount(int pno);
 	

@@ -25,7 +25,7 @@
 		<result property="likeCount" column="likeCount"/>
 		<result property="replyCount" column="replyCount"/>
 		
-		<result property="fanMno" column="fanMno"/>
+		<result property="fanCheck" column="fanCheck"/>
 	</resultMap>
 	
 	<resultMap id="postingResultSet" type="Posting">
@@ -102,7 +102,8 @@
 	
 	<select id="selectFanList" resultMap="memberResultSet">
 		select m.*, (select count(*) from posting p where m.m_no=p.m_no)posCount, (select count(*) from p_like l where m.m_no=l.m_no)likeCount,
-            (select count(*) from p_reply r left join posting p on(p.p_no=r.p_no) where p.p_no=r.p_no and r.m_no=m.m_no)replyCount
+            (select count(*) from p_reply r left join posting p on(p.p_no=r.p_no) where p.p_no=r.p_no and r.m_no=m.m_no)replyCount,
+            (select count(*) from fan where me_no=#{meNo} and you_no=#{youNo})fanCheck
 		from member m
 		left join fan f on(m.m_no=f.you_no)
 		where f.me_no=#{mno}
@@ -110,7 +111,8 @@
 	
 	<select id="selectFwList" resultMap="memberResultSet">
 		select m.*, (select count(*) from posting p where m.m_no=p.m_no)posCount, (select count(*) from p_like l where m.m_no=l.m_no)likeCount,
-            (select count(*) from p_reply r left join posting p on(p.p_no=r.p_no) where p.p_no=r.p_no and r.m_no=m.m_no)replyCount
+            (select count(*) from p_reply r left join posting p on(p.p_no=r.p_no) where p.p_no=r.p_no and r.m_no=m.m_no)replyCount,
+            (select count(*) from fan where me_no=#{meNo} and you_no=#{youNo})fanCheck
 		from member m
 		left join fan f on(m.m_no=f.me_no)
 		where f.you_no=#{mno}

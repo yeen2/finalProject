@@ -66,6 +66,14 @@ public class PostingDao {
 		return sqlSession.insert("postingMapper.deletePostingLike", map);
 	}
 	
+	public int increasePostingLike(int pno) {
+		return sqlSession.update("postingMapper.increasePostingLike");
+	}
+	
+	public int decreasePostingLike(int pno) {
+		return sqlSession.update("postingMapper.decreasePostingLike");
+	}
+	
 	public int selectPLikeCount(int pno) {
 		return sqlSession.selectOne("postingMapper.selectPLikeCount", pno);
 	}
