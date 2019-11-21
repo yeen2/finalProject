@@ -33,6 +33,7 @@
 	<jsp:include page="../includes/header.jsp" />
 
 	<div class="container">
+		<input type="hidden" id="loginMno" value="${ loginUser.mno }">
 		<!-- 내 프로필 정보 -->
 		<div class="info">
 			<div class="row">
@@ -58,8 +59,8 @@
 						</div>
 						
 						<!-- 팬 버튼  -->
-						<c:if test="${ !empty loginUser && loginUser.mno != m.mno }">
-							<button class="btn btn-dark ml-3" id="fanA" style="display:none;" value="${ m.mno }">
+						<c:if test="${ loginUser.mno != m.mno }">
+							<button class="btn btn-light ml-3" id="fanA" style="display:block;" value="${ m.mno }">
 							<i class="fa fa-plus"></i><b> Fan</b></button>
 								
 							<button class="btn btn-dark ml-3" id="fanB" style="display:none;" value="${ m.mno }">
@@ -107,25 +108,25 @@
 			<!-- 메뉴바 -->
 			<ul id="tabMenu" class="nav nav-primary nav-tabs mt-3 d-flex flex-column flex-md-row">
 				<li class="nav-item">
-					<a class="nav-link active" data-toggle="tab" href="#board" id="boardBtn"> 
+					<a class="nav-link active" data-toggle="tab" href="#postingL" id="postingTabBtn"> 
 					<i class="fas fa-th"></i>
 						Board
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="tab" href="#like" id="likeBtn"> 
+					<a class="nav-link" data-toggle="tab" href="#likeL" id="likeTabBtn"> 
 					<i class="far fa-heart"></i>
 						Like
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="tab" href="#fan" id="fanBtn"> 
+					<a class="nav-link" data-toggle="tab" href="#fanL" id="fanTabBtn"> 
 					<i class="far fa-id-badge"></i> 
 						Fan
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="tab" href="#following" id="fwBtn"> 
+					<a class="nav-link" data-toggle="tab" href="#followingL" id="followingTabBtn"> 
 					<i class="far fa-id-badge"></i> 
 						Following
 					</a>
@@ -136,7 +137,7 @@
 
 		<div class="profile-tabs tab-content">
 			<!-- 내 업로드 사진목록 -->
-			<div class="tab-pane fade show active" id="board">
+			<div class="tab-pane fade show active" id="postingL">
 				<div class="row" id="postingList">
 					
 				</div>
@@ -146,7 +147,7 @@
 			</div>
 			
 			<!-- 내 좋아요 사진목록-->
-			<div class="tab-pane fade text-center" id="like">
+			<div class="tab-pane fade text-center" id="likeL">
 				<div class="row" id="likeList">
 					
 				</div>
@@ -156,7 +157,7 @@
 			</div>
 			
 			<!-- 나를 팔로우한 친구 목록 -->
-			<div class="tab-pane fade text-center" id="fan">
+			<div class="tab-pane fade text-center" id="fanL">
 				<div align="center">
 					<div id="fanList" style="width:555px;">
 						
@@ -170,9 +171,9 @@
 			</div>
 			
 			<!-- 내가 팔로잉한 친구 목록 -->
-			<div class="tab-pane fade text-center" id="following">
+			<div class="tab-pane fade text-center" id="followingL">
 				<div align="center">
-					<div id="fwList" style="width:555px;">
+					<div id="followingList" style="width:555px;">
 						
 					</div>
 				</div>
@@ -220,8 +221,11 @@
 		$(function(){
 			selectPostingList();
 			selectLikeList();
-			/* selectFanCheck();
-			selectFanCheckTab(); */
+			selectFanList();
+			selectFwList();
+			selectFanCheck();
+			
+			/* selectFanCheckTab(); */
 		});
 		
 		var countP = 0;
@@ -230,7 +234,6 @@
 		var countFw = 0;
 		
 		function selectPostingList(){
-			
 			$.ajax({
 				url:"mpSPostingList.do",
 				data:{mno:${m.mno}},
@@ -243,7 +246,7 @@
 						$a1.append($a2);
 						$a1.append(" 포스팅한 게시물이 없습니다.");
 						
-						$("#board").prepend($a1);
+						$("#postingL").prepend($a1);
 					}else{
 						if(list.length > 6){
 							$("#pBtn").css("display", "block");
@@ -295,7 +298,7 @@
 						$a1.append($a2);
 						$a1.append(" 좋아요한 게시물이 없습니다.");
 						
-						$("#like").prepend($a1);
+						$("#likeL").prepend($a1);
 					}else{
 						if(list.length > 6){
 							$("#lBtn").css("display", "block");
@@ -332,30 +335,10 @@
 			selectLikeList();
 		});
 		
-		
-		$("#fanBtn").click(function(){
-			if(${loginUser == null}){
-				alert("로그인 후 이용해주세요.");
-				return false;
-			}else{
-				selectFanList();
-			}
-		});
-		
-		$("#fwBtn").click(function(){
-			if(${loginUser == null}){
-				alert("로그인 후 이용해주세요.");
-				return false;
-			}else{
-				selectFwList();
-			}
-		});
-		
 		function selectFanList(){
-			
 			$.ajax({
 				url:"mpSFanList.do",
-				data:{mno:${m.mno}, loginMno:${loginUser.mno}},
+				data:{mno:${m.mno}, loginMno:$("#loginMno").val()},
 				dataType:"json",
 				success:function(list){
 					if(list.length == 0){
@@ -365,7 +348,7 @@
 						$a1.append($a2);
 						$a1.append(" ${m.nickName}님을 팔로우한 팬이 없습니다.");
 						
-						$("#fan").prepend($a1);
+						$("#fanL").prepend($a1);
 					}else{
 						if(list.length > 12){
 							$("#fBtn").css("display", "block");
@@ -374,27 +357,57 @@
 							if(i == list.length-1){
 								$("#fBtn").css("display", "none");
 							}
-							var $fan1 = "<div style='height:60px;'>"
-							+"<div style='float:left;'>"
-							+"<img src='resources/assets/img/lorde.png' alt='Raised circle image'"
-							+"class='img-fluid rounded-circle shadow-lg' style='width: 50px;'>"
-							+"</div>"
-							+"<div style='float:left; margin-left:15px;'>"
-							+"<div style='text-align:left;'>" + list[i].nickName + "</div>"
-							+"<div id='abc' style='text-align:left;'>"
-							+"<i class='fas fa-clipboard-list'></i><div>" + list[i].posCount + "</div>"
-							+"<i class='fas fa-heart'></i><div>" + list[i].likeCount + "</div>"
-							+"<i class='fas fa-comment'></i><div>" + list[i].replyCount + "</div>"
-							+"</div>"
-							+"</div>"
-							+"<div style='float:left; margin-left:210px;'>"
-							+"<button class='btn btn-dark fanClassA' name='fanNameA' style='display:none; margin-top:9px;' value='" + list[i].mno + "'>"
-							+"<i class='fa fa-plus'></i> Fan</button>"
-							+"<button class='btn btn-dark fanClassB' name='fanNameB' style='display:none; margin-top:9px;' value='" + list[i].mno + "'>"
-							+"<i style='width:40px;' class='fas fa-check'></i></button>"
-							+"</div>"
-							+"</div>"
-							+"<hr>";
+							if(list[i].fanCheck == 1){
+								var $fan1 = "<div style='height:60px;'>"
+									+"<input type='hidden' class='fanCheckClass' value='" + list[i].fanCheck + "'>"
+									+"<div style='float:left;'>"
+									+"<img src='resources/assets/img/lorde.png' alt='Raised circle image'"
+									+"class='img-fluid rounded-circle shadow-lg' style='width: 50px;'>"
+									+"</div>"
+									+"<div style='float:left; margin-left:15px;'>"
+									+"<div style='text-align:left;'>" + list[i].nickName + "</div>"
+									+"<div id='abc' style='text-align:left;'>"
+									+"<i class='fas fa-clipboard-list'></i><div>" + list[i].posCount + "</div>"
+									+"<i class='fas fa-heart'></i><div>" + list[i].likeCount + "</div>"
+									+"<i class='fas fa-comment'></i><div>" + list[i].replyCount + "</div>"
+									+"</div>"
+									+"</div>"
+									+"<div style='float:left; margin-left:210px;'>"
+									+"<button class='btn btn-light fanClassA' name='fanNameA' style='display:none; margin-top:9px;'"
+									+"value='" + list[i].mno + "'>"
+									+"<i class='fa fa-plus'></i> Fan</button>"
+									+"<button class='btn btn-dark fanClassB' name='fanNameB' style='display:block; margin-top:9px;'"
+									+"value='" + list[i].mno + "'>"
+									+"<i style='width:40px;' class='fas fa-check'></i></button>"
+									+"</div>"
+									+"</div>"
+									+"<hr>";
+							}else{
+								var $fan1 = "<div style='height:60px;'>"
+									+"<input type='hidden' class='fanCheckClass' value='" + list[i].fanCheck + "'>"
+									+"<div style='float:left;'>"
+									+"<img src='resources/assets/img/lorde.png' alt='Raised circle image'"
+									+"class='img-fluid rounded-circle shadow-lg' style='width: 50px;'>"
+									+"</div>"
+									+"<div style='float:left; margin-left:15px;'>"
+									+"<div style='text-align:left;'>" + list[i].nickName + "</div>"
+									+"<div id='abc' style='text-align:left;'>"
+									+"<i class='fas fa-clipboard-list'></i><div>" + list[i].posCount + "</div>"
+									+"<i class='fas fa-heart'></i><div>" + list[i].likeCount + "</div>"
+									+"<i class='fas fa-comment'></i><div>" + list[i].replyCount + "</div>"
+									+"</div>"
+									+"</div>"
+									+"<div style='float:left; margin-left:210px;'>"
+									+"<button class='btn btn-light fanClassA' name='fanNameA' style='display:block; margin-top:9px;'"
+									+"value='" + list[i].mno + "'>"
+									+"<i class='fa fa-plus'></i> Fan</button>"
+									+"<button class='btn btn-dark fanClassB' name='fanNameB' style='display:none; margin-top:9px;'"
+									+"value='" + list[i].mno + "'>"
+									+"<i style='width:40px;' class='fas fa-check'></i></button>"
+									+"</div>"
+									+"</div>"
+									+"<hr>";
+							}
 							
 							$("#fanList").append($fan1);
 						}
@@ -404,6 +417,7 @@
 					console.log("ajax 통신 실패");
 				}
 			});
+			
 		}
 		$("#fBtn").on("click", function(){
 			countFan += 12;
@@ -411,10 +425,9 @@
 		});
 		
 		function selectFwList(){
-			
 			$.ajax({
 				url:"mpSFwList.do",
-				data:{mno:${m.mno}, loginMno:${loginUser.mno}},
+				data:{mno:${m.mno}, loginMno:$("#loginMno").val()},
 				dataType:"json",
 				success:function(list){
 					if(list.length == 0){
@@ -424,7 +437,7 @@
 						$a1.append($a2);
 						$a1.append(" 마음에 드는 사람의 팬이 되어주세요.");
 						
-						$("#following").prepend($a1);
+						$("#followingL").prepend($a1);
 					}else{
 						if(list.length > 12){
 							$("#wBtn").css("display", "block");
@@ -433,29 +446,55 @@
 							if(i == list.length-1){
 								$("#wBtn").css("display", "none");
 							}
-							var $fan1 = "<div style='height:60px;'>"
-							+"<div style='float:left;'>"
-							+"<img src='resources/assets/img/lorde.png' alt='Raised circle image'"
-							+"class='img-fluid rounded-circle shadow-lg' style='width: 50px;'>"
-							+"</div>"
-							+"<div style='float:left; margin-left:15px;'>"
-							+"<div style='text-align:left;'>" + list[i].nickName + "</div>"
-							+"<div id='abc' style='text-align:left;'>"
-							+"<i class='fas fa-clipboard-list'></i><div>" + list[i].posCount + "</div>"
-							+"<i class='fas fa-heart'></i><div>" + list[i].likeCount + "</div>"
-							+"<i class='fas fa-comment'></i><div>" + list[i].replyCount + "</div>"
-							+"</div>"
-							+"</div>"
-							+"<div style='float:left; margin-left:210px;'>"
-							+"<button class='btn btn-dark fanClassA' name='fanNameA' style='display:none; margin-top:9px;' value='" + list[i].mno + "'>"
-							+"<i class='fa fa-plus'></i> Fan</button>"
-							+"<button class='btn btn-dark fanClassB' name='fanNameB' style='display:none; margin-top:9px;' value='" + list[i].mno + "'>"
-							+"<i style='width:40px;' class='fas fa-check'></i></button>"
-							+"</div>"
-							+"</div>"
-							+"<hr>";
+							if(list[i].fanCheck == 1){
+								var $fan1 = "<div style='height:60px;'>"
+									+"<input type='hidden' class='fanCheckCount' value='" + list[i].fanCheck + "'>"
+									+"<div style='float:left;'>"
+									+"<img src='resources/assets/img/lorde.png' alt='Raised circle image'"
+									+"class='img-fluid rounded-circle shadow-lg' style='width: 50px;'>"
+									+"</div>"
+									+"<div style='float:left; margin-left:15px;'>"
+									+"<div style='text-align:left;'>" + list[i].nickName + "</div>"
+									+"<div id='abc' style='text-align:left;'>"
+									+"<i class='fas fa-clipboard-list'></i><div>" + list[i].posCount + "</div>"
+									+"<i class='fas fa-heart'></i><div>" + list[i].likeCount + "</div>"
+									+"<i class='fas fa-comment'></i><div>" + list[i].replyCount + "</div>"
+									+"</div>"
+									+"</div>"
+									+"<div style='float:left; margin-left:210px;'>"
+									+"<button class='btn btn-light fanClassA' name='fanNameA' style='display:none; margin-top:9px;' value='" + list[i].mno + "'>"
+									+"<i class='fa fa-plus'></i> Fan</button>"
+									+"<button class='btn btn-dark fanClassB' name='fanNameB' style='display:block; margin-top:9px;' value='" + list[i].mno + "'>"
+									+"<i style='width:40px;' class='fas fa-check'></i></button>"
+									+"</div>"
+									+"</div>"
+									+"<hr>";
+							}else{
+								var $fan1 = "<div style='height:60px;'>"
+									+"<input type='hidden' class='fanCheckCount' value='" + list[i].fanCheck + "'>"
+									+"<div style='float:left;'>"
+									+"<img src='resources/assets/img/lorde.png' alt='Raised circle image'"
+									+"class='img-fluid rounded-circle shadow-lg' style='width: 50px;'>"
+									+"</div>"
+									+"<div style='float:left; margin-left:15px;'>"
+									+"<div style='text-align:left;'>" + list[i].nickName + "</div>"
+									+"<div id='abc' style='text-align:left;'>"
+									+"<i class='fas fa-clipboard-list'></i><div>" + list[i].posCount + "</div>"
+									+"<i class='fas fa-heart'></i><div>" + list[i].likeCount + "</div>"
+									+"<i class='fas fa-comment'></i><div>" + list[i].replyCount + "</div>"
+									+"</div>"
+									+"</div>"
+									+"<div style='float:left; margin-left:210px;'>"
+									+"<button class='btn btn-light fanClassA' name='fanNameA' style='display:block; margin-top:9px;' value='" + list[i].mno + "'>"
+									+"<i class='fa fa-plus'></i> Fan</button>"
+									+"<button class='btn btn-dark fanClassB' name='fanNameB' style='display:none; margin-top:9px;' value='" + list[i].mno + "'>"
+									+"<i style='width:40px;' class='fas fa-check'></i></button>"
+									+"</div>"
+									+"</div>"
+									+"<hr>";
+							}
 							
-							$("#fwList").append($fan1);
+							$("#followingList").append($fan1);
 						}
 					}
 				},
@@ -463,6 +502,7 @@
 					console.log("ajax 통신 실패");
 				}
 			});
+			
 		}
 		$("#wBtn").on("click", function(){
 			countFw += 12;
@@ -471,56 +511,56 @@
 		
 		
 		function selectFanCheck(){
-			$.ajax({
-				url:"mpSFanCheck.do",
-				data:{meNo:${m.mno}, youNo:${loginUser.mno}},
-				type:"post",
-				success:function(result){
-					if(result == 1){
-						$("#fanA").hide();
-						$("#fanB").show();
-					}else{
-						$("#fanA").show();
-						$("#fanB").hide();
+			if(${loginUser != null}){
+				$.ajax({
+					url:"mpSFanCheck.do",
+					data:{meNo:${m.mno}, youNo:$("#loginMno").val()},
+					type:"post",
+					success:function(result){
+						if(result == 1){
+							$("#fanA").hide();
+							$("#fanB").show();
+						}else{
+							$("#fanA").show();
+							$("#fanB").hide();
+						}
+						
+					},
+					error:function(){
+						console.log("실패");
 					}
-					
-				},
-				error:function(){
-					console.log("실패");
-				}
-			});
+				});
+				
+			}
 				
 		}
 		
-		function selectFanCheckTab(){
-			var arr = document.getElementsByName("fanNameA");
-			
-			$.ajax({
-				url:"mpSFanCheck.do",
-				data:{meNoArr:arr, youNo:${loginUser.mno}},
-				type:"post",
-				success:function(result){
-					if(result == 1){
-						$(".fanA").hide();
-						$(".fanB").show();
-					}else{
-						$(".fanA").show();
-						$(".fanB").hide();
-					}
-					
-				},
-				error:function(){
-					console.log("실패");
-				}
-			});
+		
+		// 팬, 팔로잉 탭버튼 클릭 시
+		$(function(){
+			if(${loginUser != null}){
+				$("#fanTabBtn").click(function(){
+					$("#fanList").html("");
+					selectFanList();
+				});
 				
-		}
+				$("#followingTabBtn").click(function(){
+					$("#followingList").html("");
+					selectFwList();
+				});
+			}
+			
+		});
+		
 		
 		// 팬 버튼 클릭 시 insert into fan
 		$("#fanA").on("click", function(){
 			var fanA = $("#fanA").attr("value");
-			
-			insertFan(fanA);
+			if(${loginUser == null}){
+				alert("로그인 후 이용해주세요.");
+			}else{
+				insertFan(fanA);
+			}
 			
 		});
 		// 팬 버튼 클릭 시 delete from fan
@@ -532,17 +572,28 @@
 		});
 		
 		
+		// 팬, 팔로잉 리스트에서 버튼 클릭 시
+		$(document).on("click", ".fanClassA", function(){
+			var fanClassA = $(this).attr("value");
+			insertFan(fanClassA);
+		});
+		$(document).on("click", ".fanClassB", function(){
+			var fanClassB = $(this).attr("value");
+			deleteFan(fanClassB);
+		});
+		
+		
 		// insert 팬
 		function insertFan(value){
 			var meNo = value;
 			$.ajax({
 				url:"mpInsertFan.do",
-				data:{meNo:meNo, youNo:${loginUser.mno}},
+				data:{meNo:meNo, youNo:$("#loginMno").val()},
 				type:"post",
-				success:function(){
+				success:function(result){
 					if(result == 1){
-						$(".fanA").hide();
-						$(".fanB").show();
+						$("#fanA").hide();
+						$("#fanB").show();
 					}else{
 						console.log("실패");
 					}
@@ -558,12 +609,12 @@
 			var meNo = value;
 			$.ajax({
 				url:"mpDeleteFan.do",
-				data:{meNo:meNo, youNo:${loginUser.mno}},
+				data:{meNo:meNo, youNo:$("#loginMno").val()},
 				type:"post",
-				success:function(){
+				success:function(result){
 					if(result == 1){
-						$(".fanA").show();
-						$(".fanB").hide();
+						$("#fanA").show();
+						$("#fanB").hide();
 					}else{
 						console.log("실패");
 					}
@@ -574,18 +625,15 @@
 			});
 		}
 		
-		$(document).ready(function(){
-			// 포스팅 hover 좋아요, 댓글 표시
-			$(document).on("mouseover", ".imgP", function(){
-				$(this).siblings("div").css("display", "block");
-			});
-			$(document).on("mouseleave", ".imgP", function(){
-				$(this).siblings("div").css("display", "none");
-			});
-			
+		// 포스팅 hover 좋아요, 댓글 표시
+		
+		$(document).on("mouseover", ".imgP", function(){
+			$(this).siblings("div").css("display", "block");
 		});
-		
-		
+		$(document).on("mouseleave", ".imgP", function(){
+			$(this).siblings("div").css("display", "none");
+		});
+			
 	</script>
 	
 	<script>
