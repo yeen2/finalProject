@@ -5,7 +5,6 @@
 <html>
 <head>
 <meta charset=UTF-8">
-<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/resources/admin_temp/js/admin.js"></script> --%>
 </head>
 <body>
 
@@ -45,6 +44,7 @@
     
 	<jsp:include page="header.jsp" />
     
+    
 		<div class="content ">
             <div class="animated fadeIn ">
                <div class="card-header" >
@@ -68,8 +68,8 @@
                         	<button type="submit" class="btn btn-primary btn-sm">검색</button>
                         </div>
                         
-                  		   <button type="button" class="btn btn-outline-danger btn-sm" id="declareBtn" 
-                  		   data-toggle="modal" data-target="#deleteBoardModal">
+                  		   <button type="button" class="btn btn-outline-danger btn-sm" id="deleteBtn" 
+                  		   data-toggle="modal" data-target="#deleteModal">
                   		   	게시물삭제
                   		   </button>
                         </form>
@@ -80,7 +80,7 @@
                                 <table class="table">
                                     <thead>
                                         <tr >
-                                        	<th><input type="checkbox" name="checkAll" id="th_checkAll" onclick="checkAll();"/></th>
+                                        	<th><input type="checkbox" name="checkAll" id="checkAll" onclick="allCheck();"/></th>
                                             <th>No.</th>
                                             <th>신고자</th>
                                             <th>게시판명</th>
@@ -206,16 +206,41 @@
 		
 	
 	
-		<jsp:include page="footer.jsp" />
-
-        
+	<jsp:include page="footer.jsp" />
 
     </div><!-- /#right-panel -->
-
+    <!-- 자바스크립트 파일 -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/admin_temp/js/admin.js"></script>
 	
+	<script>
+
+	/**
+	 * 삭제(체크박스 선택된 것 전부)
+	 */
+	function deleteAction(){
+		
+		 var checkRow = "";
+		  $( "input[name='checkRow']:checked" ).each (function (){
+		    checkRow = checkRow + $(this).val()+"," ;
+		  });
+		  checkRow = checkRow.substring(0,checkRow.lastIndexOf( ",")); //맨끝 콤마 지우기
+		 
+		  if(checkRow == ''){
+		    alert("삭제할 대상을 선택하세요.");
+		    return false;
+		 
+		  }
+	 
+	     var dno = checkRow;
+	      
+	    location.href="${pageContext.request.contextPath}/aDeleteDeclareBoard.do?dno="+dno;  
+	  
+	};
+	</script>
+      
    
    		<!-- 게시물삭제 모달창 -->
-   		  <div class="modal fade" id="deleteBoardModal"role="dialog" aria-labelledby="deleteBoardModalLabel" aria-hidden="true">
+   		  <div class="modal fade" id="deleteModal"role="dialog" aria-labelledby="deleteBoardModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-sm" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -271,62 +296,6 @@
             </div>
  
  
-	 <script>
-	    /**
-	 * 체크박스 전체선택, 해제
-	 */
-	function checkAll(){ 
-	      if( $("#th_checkAll").is(':checked') ){
-	        $("input[name=checkRow]").prop("checked", true);
-	      }else{
-	        $("input[name=checkRow]").prop("checked", false);
-	      }
-	};
 
-	/* 삭제여부 모달창 뜨기전에 조건검사먼저 진행 */
-	$("#declareBtn").click(function () {
-		
-		 var checkRow = "";
-		  $( "input[name='checkRow']:checked" ).each (function (){
-		    checkRow = checkRow + $(this).val()+"," ;
-		  });
-		  checkRow = checkRow.substring(0,checkRow.lastIndexOf( ",")); //맨끝 콤마 지우기
-		  
-	  	  if(checkRow == ''){
-		    alert("삭제할 대상을 선택하세요.");
-		    return false;
-		 
-		  }
-		  //console.log("나옴");
-	  	$('#deleteBoardModal').show(); // 삭제여부 모달창 열어주기
-			  
-	});
-
-	/**
-	 * 삭제(체크박스 선택된 것 전부)
-	 */
-	function deleteAction(){
-		
-		 var checkRow = "";
-		  $( "input[name='checkRow']:checked" ).each (function (){
-		    checkRow = checkRow + $(this).val()+"," ;
-		  });
-		  checkRow = checkRow.substring(0,checkRow.lastIndexOf( ",")); //맨끝 콤마 지우기
-		 
-		  if(checkRow == ''){
-		    alert("삭제할 대상을 선택하세요.");
-		    //$('#smallModal').modal('hide');
-			//$("#deleteOk").setAttribute("data-dismiss","modal");
-		    return false;
-		 
-		  }
-	 
-	     var dno = checkRow;
-	      
-	    location.href="${pageContext.request.contextPath}/aDeleteDeclareBoard.do?dno="+dno;  
-	  
-	};
-	</script>
-      
 </body>
 </html>

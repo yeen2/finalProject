@@ -114,10 +114,17 @@
                                         <i class="ti-video-clapper"></i>
                                     </div>
                                     <div class="stat-content">
+                                    <c:if test="${!empty startAd}">
+                                        <c:if test="${startAd.status eq '2' }">
                                         <div class="text-left dib">
                                             <div class="stat-text"><span>${startAd.name}</span></div>
                                             <div class="stat-heading">진행중</div> 
                                         </div>
+                                        </c:if>
+                                    </c:if>
+                                    <c:if test="${empty startAd}">
+                                    	<div>모집중</div>
+                                    </c:if>
                                     </div>
                                 </div>
                             </div>
@@ -221,8 +228,8 @@
                         </div>  <!-- /.col-lg-8 -->
 						
 						
-						 <!-- Calender   -->
 	       
+						 <!-- Calender   -->
 	                    <div class="col-md-12 col-lg-5">
 	                        <div class="card">
 	                            <div class="card-body">
@@ -232,11 +239,7 @@
 	                                </div>
 	                            </div>
 	                        </div><!-- /.card -->
-	                    </div>
-	     
-                	<!-- /Calender  -->
-	                	<div class="col-md-5 col-lg-5">
-							<div class="card  ">
+	                            <div class="card  ">
 								<div class="card-body">
 									<div class="h1 text-muted text-right mb-1">
 										<i class="fa fa-clock-o"></i>
@@ -246,7 +249,9 @@
 									<div class="progress progress-xs mt-3 mb-0 bg-flat-color-5" style="width: 40%; height: 5px;"></div>
 								</div>
 							</div>	
-						</div>	
+	                    </div>
+	     
+                	<!-- /Calender  -->
 										
 					<div class="col-lg-8">
                         <div class="card">
