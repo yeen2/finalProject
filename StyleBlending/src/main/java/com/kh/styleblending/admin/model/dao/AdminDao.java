@@ -64,7 +64,6 @@ public class AdminDao {
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		
 		return (ArrayList)sqlSession.selectList("adminMapper.selectDeclareList", cate, rowBounds);
-		
 	}
 	
 	public int deleteDeclareBoard(ArrayList dno) {

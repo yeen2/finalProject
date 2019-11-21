@@ -53,11 +53,14 @@
 			        <h5 class="modal-title" id="exampleModalLabel">광고 신청</h5>
 			      </div>
 			      <!-- 비밀번호 입력 폼 -->
-			      <form action="aInsertAd.do" method="post" enctype="multipart/form-data"  onsubmit="return insertPay();">
+			      
+			      
+			      <form id="adInsertForm" action="" method="post" enctype="multipart/form-data" onsubmit="return insertPay();">
+			      
 					<input type="hidden" name="mno" id="mno" value="${loginUser.mno }"/>
 					<div class="form-group" style="margin-bottom:25px;">
 						<label for="adName">업체명</label>
-						<input type="text" id="adName" class="form-control" id="adName" name="name" placeholder="업체명을 입력해주세요." maxlength="16">
+						<input type="text" id="adName" class="form-control" name="name" placeholder="업체명을 입력해주세요." maxlength="16">
 					</div>
 					<div class="form-group" style="margin-bottom:25px; position:relative;">
 						<label for="url">연결 URL</label>
@@ -82,6 +85,9 @@
 				        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
 				      </div>
 			       </form>
+			       
+			       
+			       
 			     
 			    </div>
 			  </div>
@@ -97,10 +103,10 @@
 	 	$(function(){
 			
 			$("#adConfirm").on("click",function(){
-				var adName = $("#adName").val();
-				var url = $("#url").val();
-				var file = $("#file-input").val();
-				var mno = $("#mno").val();
+				
+				var checkCondition = document.getElementById("checkCondition");
+				var checkResult = checkCondition.getAttribute("checked");
+				alert(checkResult);
 				
 				var IMP = window.IMP;
 				IMP.init('iamport');
@@ -122,10 +128,31 @@
 				        msg += '상점 거래ID : ' + rsp.merchant_uid;
 				        msg += '결제 금액 : ' + rsp.paid_amount;
 				        msg += '카드 승인번호 : ' + rsp.apply_num;
+				        
 				    } else {
 				        var msg = '결제에 실패하였습니다.';
 				        msg += '에러내용 : ' + rsp.error_msg;
-				        location.href="aInsertAd.do?mno="+mno;
+				        
+				    	var form = $("#adInsertForm")[0];
+				        var formData = new FormData(form);
+				
+				        //console.log(formData);
+				        
+				         $.ajax({
+				        	url:"aInsertAd.do",
+				        	processData: false,
+				        	contentType: false,
+				        	data: formData,
+				        	type:"post",
+				        	success:function(data){
+				        		alert("data");
+				        		
+				       		location.href="aAdvertisment.do";
+				       
+				        	},error:function(){
+				        		console.log("ajax 통신 실패");
+				        	}
+				        }); 
 				        
 				    }
 				

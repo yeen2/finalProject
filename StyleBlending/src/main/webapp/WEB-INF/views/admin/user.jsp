@@ -5,7 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/resources/admin_temp/js/admin.js"></script> --%>
+<style type="text/css">
+	.order-table:after, .order-table:before{
+		position : relative !important;
+	}
+</style>
 </head>
 <body>
 	
@@ -81,7 +85,7 @@
                           </div>
                           
                       
-                            <div class=" table-stats order-table ov-h ">                            	
+                            <div class=" table-stats order-table ov-h col-md-10 offset-md-1">                            	
                                 <table class="table">
                                     <thead>
                                         <tr>

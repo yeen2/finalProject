@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.kh.styleblending.admin.model.service.AdminService;
 import com.kh.styleblending.admin.model.vo.Ad;
 import com.kh.styleblending.admin.model.vo.Declare;
@@ -131,10 +135,12 @@ public class AdminController {
 		return mv;
 	}
 	
+	// 광고등록+결제
+	@ResponseBody
 	@RequestMapping("aInsertAd.do")
-	public String insertAd(HttpSession session, Model model, HttpServletRequest request, 
-							@RequestParam(value="uploadFile", required=false) MultipartFile file, Ad ad) {
-		
+	public String insertAd(HttpServletResponse response, Ad ad, HttpServletRequest request,
+							@RequestParam(value="uploadFile", required=false) MultipartFile file) {
+
 		if(!file.getOriginalFilename().equals("")) {// 파일 존재시
 			
 			String renameFileName = saveFile(file,request);
@@ -142,21 +148,13 @@ public class AdminController {
 			ad.setOriginalImg(file.getOriginalFilename());
 			ad.setRenameImg(renameFileName);
 		}
-
-		session.setAttribute("ad", ad);
-	
-		Ad add = (Ad)session.getAttribute("ad");
-		int result = aService.insertAd(add);
 		
-		System.out.println("진짜"+ad);
-	
+		int result = aService.insertAd(ad);
+		
 		if(result > 0) {
-			session.removeAttribute("ad"); // 광고 session 지워주기
-			//System.out.println("지우고"+ad);
-			return "member/myPage";
+			return "success";
 		}else {
-			model.addAttribute("msg", "광고신청실패");
-			return "common/errorPage";
+			return "fail";
 		}
 	
 	}

@@ -5,6 +5,11 @@
 <html>
 <head>
 <meta charset=UTF-8">
+<style type="text/css">
+	.order-table:after, .order-table:before{
+		position : relative !important;
+	}
+</style>
 </head>
 <body>
 
@@ -56,9 +61,10 @@
                   
                   <div class="row">
                   
+                  
                   	<div class="card-body card-block">
                         <form action="aDeclare.do" method="get" class="form-inline">
-                        <div class="col-12 col-md-9">
+                        <div class="col-5 col-md-7">
                			  	게시판명 &nbsp;
                              <select name="select" id="select" class="form-control">
                                  <option value="0" <c:if test="${cate.all eq '0' }">selected</c:if>>전체</option>
@@ -67,11 +73,12 @@
                              </select>&nbsp;
                         	<button type="submit" class="btn btn-primary btn-sm">검색</button>
                         </div>
-                        
+                        <div class="col-5 col-md-5">
                   		   <button type="button" class="btn btn-outline-danger btn-sm" id="deleteBtn" 
                   		   data-toggle="modal" data-target="#deleteModal">
                   		   	게시물삭제
                   		   </button>
+                  		 </div>
                         </form>
                     </div>
                   </div>
