@@ -137,7 +137,7 @@
 
 		<div class="profile-tabs tab-content">
 			<!-- 내 업로드 사진목록 -->
-			<div class="tab-pane fade show active" id="postingL">
+			<div class="tab-pane fade show active text-center" id="postingL">
 				<div class="row" id="postingList">
 					
 				</div>
@@ -308,9 +308,9 @@
 								$("#lBtn").css("display", "none");
 							}
 							var $copy1 = $("<div>").attr({"class":"col-12 col-md-4", "style":"position:relative;"});
-							$copy1.append($("<div>").attr({"class":"square imgP", "style":"background-image: url(" + "'resources/assets/img/" + list[i].renameImg + "');"}));
+							$copy1.append($("<div>").attr({"value":"abcddd","class":"square imgP", "style":"background-image: url(" + "'resources/assets/img/" + list[i].renameImg + "');"}));
 							var $copy2 = 
-								"<div class='square' style='position:absolute; width:92%; bottom:0; display:none; bottom:16px; width:348px; height:300px; background:rgba(0,0,0,0.6);'>"
+								"<div class='square' style='position:absolute; width:92%; bottom:0; display:none; background:rgba(0,0,0,0.6);'>"
 								+ "<div style='margin-left:48px; margin-top:135px; font-size:22px; color:white; position:relative;'>"
 								+ "<div style='float:left; left:40px; position:absolute;'><i class='fas fa-heart'></i></div>"
 								+ "<div style='float:left; left:70px; position:absolute;'>" + list[i].likeCount + "</div>"
@@ -319,8 +319,8 @@
 								+ "</div>"
 								+ "</div>";
 							$copy1.append($copy2);
-								
-							$("likeList").append($copy1);
+							
+							$("#likeList").append($copy1);
 						}
 					}
 				},
@@ -342,6 +342,8 @@
 				dataType:"json",
 				success:function(list){
 					if(list.length == 0){
+						$("#fanL").html("");
+						
 						var $a1 = $("<p>").attr("class", "lead");
 						var $a2 = $("<span>").attr("class", "text-danger");
 						$a2.append($("<i>").attr("class", "far fa-frown-open"));
@@ -431,6 +433,8 @@
 				dataType:"json",
 				success:function(list){
 					if(list.length == 0){
+						$("#followingL").html("");
+						
 						var $a1 = $("<p>").attr("class", "lead");
 						var $a2 = $("<span>").attr("class", "text-danger");
 						$a2.append($("<i>").attr("class", "far fa-frown-open"));

@@ -253,8 +253,15 @@ public class PostingController {
 	@RequestMapping("pDeclare.do")
 	public ModelAndView insertPDeclare(Declare d, ModelAndView mv) {
 		
-		System.out.println(d);
+		int id = d.getBno();
 		int result = pService.insertPDeclare(d);
+		
+		if(result > 0) {
+			mv.addObject("msg", "신고하기 성공!").setViewName("redirect:pInfo.do?id="+id);
+		}else {
+			mv.addObject("msg", "신고하기 실패!").setViewName("common/error");
+		}
+		
 		return mv;
 	}
 		
