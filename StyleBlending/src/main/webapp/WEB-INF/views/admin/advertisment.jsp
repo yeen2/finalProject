@@ -5,6 +5,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css">
+	.order-table:after, .order-table:before{
+		position : relative !important;
+	}
+</style>
 </head>
 <body>
 
@@ -63,7 +68,7 @@
                       <div class="default-tab">
                           <div class="tab-content pl-3 p-1" id="nav-tabContent">
                           	  <!-- 광고목록 -->
-                              <div class="tab-pane fade show active" id="nav-home" >
+                              <div class="tab-pane fade show active" id="nav-home" role="tabpanel" >
                               	 <div class="row">
 		                          	<div class="col-sm-12 col-md-6" style="padding:20px;">
 		                          		<div class="dataTables_length" id="bootstrap-data-table_length">
@@ -199,7 +204,7 @@
                            
                               
                               <!-- 승인대기 목록 -->
-                              <div class="tab-pane fade" id="nav-waiting" style="display:inline-flex;" >
+                              <div class="tab-pane fade" id="nav-waiting" style="display:inline-flex;" role="tabpanel" >
 				                	<div class="col-md-4">
 				                        <div class="card">
 				                            <img class="card-img-top" src="https://i.imgur.com/ue0AB6J.png" alt="Card image cap">
@@ -231,9 +236,9 @@
                               
                               
                              <!-- 진행중 목록 -->
-                               <div class="tab-pane fade" id="nav-ongoing" style="display:inline-flex;" >
-			                     <div class="col-md-4">
-			                     		<c:if test="${!empty startAd}">
+                               <div class="tab-pane fade" id="nav-ongoing" style="display:inline-flex;" role="tabpanel">
+			                     <div class="col-md-4" >
+			                     		<%-- <c:if test="${!empty startAd}"> --%>
 				                        <div class="card">
 				                            <img class="card-img-top" src="${pageContext.request.contextPath}${startAd.imgPath}${startAd.renameImg}" alt="Card image cap">
 				                            <div class="card-body">
@@ -241,9 +246,19 @@
 				                                 <p class="card-text">${startAd.enrollDate}~ </p>
 				                            </div>
 				                        </div>
-				                        </c:if>
+				                        <%-- </c:if> --%>
 				                  </div>
                              </div>
+                             
+                             
+                               <!-- Tab panes -->
+      <!--   <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="home">안녕<br>안녕</div>
+          <div role="tabpanel" class="tab-pane" id="profile">혜은이 바보</div>
+          <div role="tabpanel" class="tab-pane" id="messages">...</div>
+          <div role="tabpanel" class="tab-pane" id="settings">...</div>
+        </div>
+      </div> -->
                              
                           
 							</div>
@@ -301,23 +316,7 @@
      } 
 	
 	//history.replaceState({}, null, location.pathname);
-		/* $("#adListTab").click(function(){ 
-			alert("gg");
-			$("#nav-waiting div").hide();	
-			$("#nav-ongoing div").hide();	
-			
-		});
-		
-		$("#adUnapproved").click(function(){
-			$("#nav-home div").hide();	
-			$("#nav-ongoing div").hide();	
-		});
-		
-		$("#adOngoing").click(function(){
-			$("#adListTab").hide();	
-			$("#adUnapproved").hide();	
-		});
-		 */
+
 	</script>
 
     

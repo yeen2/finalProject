@@ -2,9 +2,9 @@ package com.kh.styleblending.posting.model.service;
 
 import java.util.ArrayList;
 
+import com.kh.styleblending.posting.model.vo.Declare;
 import com.kh.styleblending.posting.model.vo.Posting;
 import com.kh.styleblending.posting.model.vo.PostingReply;
-import com.kh.styleblending.posting.model.vo.SelectPosting;
 import com.kh.styleblending.posting.model.vo.Style;
 
 public interface PostingService {
@@ -26,7 +26,7 @@ public interface PostingService {
 	
 	int deletePostingLike(int pno, int mno);
 	
-	//해당 포스팅에 likeCount 수정
+	// 해당 포스팅에 likeCount 수정
 	int increasePostingLike(int pno);
 	
 	int decreasePostingLike(int pno);
@@ -34,5 +34,9 @@ public interface PostingService {
 	int selectPLikeCount(int pno);
 	
 	int selectPLikeCheck(int pno, int mno);
+	
+	// 신고
+	int insertPDeclare(Declare d);
+	
 	
 }

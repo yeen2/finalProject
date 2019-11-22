@@ -57,3 +57,28 @@ $("#deleteBtn").click(function () {
 });
 
 
+//탭 클릭시 이벤트
+$("#adListTab").click(function(){ 
+	//alert("gg");
+	$("#nav-waiting div").attr("style","display:none");	
+	$("#nav-ongoing div").attr("style","display:none");	
+	$("#nav-home div").attr("style","display:contents");	
+	
+});
+
+$("#adUnapproved").click(function(){
+	$("#nav-home div").attr("style","display:none");	
+	$("#nav-ongoing div").attr("style","display:none");	
+	$("#nav-waiting div").attr("style","display:block");
+	
+});
+
+$("#adOngoing").click(function(){
+	$("#nav-home div").attr("style","display:none");	
+	$("#nav-waiting div").attr("style","display:none");
+	$("#nav-ongoing div").attr("style","display:block");
+	
+});
+
+
+

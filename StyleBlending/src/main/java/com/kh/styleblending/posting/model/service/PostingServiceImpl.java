@@ -12,6 +12,7 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import com.kh.styleblending.posting.model.dao.PostingDao;
+import com.kh.styleblending.posting.model.vo.Declare;
 import com.kh.styleblending.posting.model.vo.Posting;
 import com.kh.styleblending.posting.model.vo.PostingReply;
 import com.kh.styleblending.posting.model.vo.SelectPosting;
@@ -124,6 +125,13 @@ public class PostingServiceImpl implements PostingService {
 	public int selectPLikeCheck(int pno, int mno) {
 		return pDao.selectPLikeCheck(pno, mno);
 	}
+	
+	@Override
+	public int insertPDeclare(Declare d) {
+		return pDao.insertPDeclare(d);
+	}
+	
+	
 	
 	
 	

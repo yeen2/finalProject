@@ -53,11 +53,14 @@
 			        <h5 class="modal-title" id="exampleModalLabel">광고 신청</h5>
 			      </div>
 			      <!-- 비밀번호 입력 폼 -->
-			      <form action="aInsertAd.do" method="post" enctype="multipart/form-data"  onsubmit="return insertPay();">
+			      
+			      
+			      <form id="adInsertForm" action="" method="post" enctype="multipart/form-data" onsubmit="return insertPay();">
+			      
 					<input type="hidden" name="mno" id="mno" value="${loginUser.mno }"/>
 					<div class="form-group" style="margin-bottom:25px;">
 						<label for="adName">업체명</label>
-						<input type="text" id="adName" class="form-control" id="adName" name="name" placeholder="업체명을 입력해주세요." maxlength="16">
+						<input type="text" id="adName" class="form-control" name="name" placeholder="업체명을 입력해주세요." maxlength="16">
 					</div>
 					<div class="form-group" style="margin-bottom:25px; position:relative;">
 						<label for="url">연결 URL</label>
@@ -72,16 +75,19 @@
 						</small></p></div>
 						<div class="c2 sCheck2" style="position:absolute;">
 							<p>
-							<input type="checkbox" name="checkCondition" id="checkCondition" value="1"/>
+							<input type="checkbox" name="checkCondition" id="checkCondition" onclick="agreeCheck();"/>
 							<small class="form-text text-success">위 구매 조건 확인 및 결제 진행에 동의</small></p>
 						</div>
 					</div>
 					<br>
 				      <div class="modal-footer">
-				        <button type="button" class="btn btn-success" id="adConfirm">광고신청</button>
+				        <button type="button" class="btn btn-success" id="adConfirm" disabled>광고신청</button>
 				        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
 				      </div>
 			       </form>
+			       
+			       
+			       
 			     
 			    </div>
 			  </div>
@@ -93,15 +99,39 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.2.js"></script>
 		<script>
+		
+		// 체크박스 여부확인 
+		function agreeCheck(){
+			var chk = $('input:checkbox[id="checkCondition"]').is(":checked");
+			if(chk==true){
+				$("#adConfirm").removeAttr('disabled');
+			}else{
+				$("#adConfirm").attr("disabled", true);
+			}
+			
+		}
+		
 
 	 	$(function(){
 			
 			$("#adConfirm").on("click",function(){
-				var adName = $("#adName").val();
-				var url = $("#url").val();
-				var file = $("#file-input").val();
-				var mno = $("#mno").val();
-				
+			
+			// 값이 하나라도 저장되지 않으면 버튼 눌리지않도록
+			if($("#adName").val() == ""){
+				alert("업체명을 입력해주세요.");
+				$("#adName").focus();
+				return ;
+			}
+			if($("#url").val() == ""){
+				alert("동영상 url을 입력해주세요.");
+				$("#url").focus();
+				return ;
+			}
+			if($("#file-input").val() == ""){
+				alert("이미지를 등록해주세요.");
+				return ;
+			}
+			
 				var IMP = window.IMP;
 				IMP.init('iamport');
 				IMP.request_pay({
@@ -122,10 +152,30 @@
 				        msg += '상점 거래ID : ' + rsp.merchant_uid;
 				        msg += '결제 금액 : ' + rsp.paid_amount;
 				        msg += '카드 승인번호 : ' + rsp.apply_num;
+				        
 				    } else {
 				        var msg = '결제에 실패하였습니다.';
 				        msg += '에러내용 : ' + rsp.error_msg;
-				        location.href="aInsertAd.do?mno="+mno;
+				        
+				    	var form = $("#adInsertForm")[0];
+				        var formData = new FormData(form);
+				
+				        //console.log(formData);
+				        
+				         $.ajax({
+				        	url:"aInsertAd.do",
+				        	processData: false,
+				        	contentType: false,
+				        	data: formData,
+				        	type:"post",
+				        	success:function(data){
+				        	// 마이페이지 광고리스트 페이지로이동	
+				       		location.href="aAdvertisment.do";
+				       
+				        	},error:function(){
+				        		console.log("ajax 통신 실패");
+				        	}
+				        }); 
 				        
 				    }
 				

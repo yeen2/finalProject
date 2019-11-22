@@ -23,6 +23,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.kh.styleblending.member.model.vo.Member;
 import com.kh.styleblending.posting.model.service.PostingService;
+import com.kh.styleblending.posting.model.vo.Declare;
 import com.kh.styleblending.posting.model.vo.Posting;
 import com.kh.styleblending.posting.model.vo.PostingReply;
 import com.kh.styleblending.posting.model.vo.SelectPosting;
@@ -176,8 +177,7 @@ public class PostingController {
 	@ResponseBody
 	@RequestMapping("pReplyInsert.do")
 	public String insertReply(PostingReply r) {
-		//System.out.println(r);
-		
+
 		int result = pService.insertReply(r);
 		
 		if(result > 0) {
@@ -191,8 +191,7 @@ public class PostingController {
 	@ResponseBody
 	@RequestMapping("pReReplyInsert.do")
 	public String insertReReply(PostingReply r) {
-		//System.out.println(r);
-		
+
 		int result = pService.insertReReply(r);
 		
 		if(result > 0) {
@@ -209,7 +208,7 @@ public class PostingController {
 
 		int result1 = pService.insertPostingLike(pno, mno);
 		int result2 = pService.increasePostingLike(pno);
-				
+	
 		if(result1 > 0 && result2 > 0) {
 			return "success";
 		}else {
@@ -238,7 +237,6 @@ public class PostingController {
 	public String selectPLikeCount(int pno) {
 
 		String result = Integer.toString(pService.selectPLikeCount(pno));
-		System.out.println(Integer.toString(pService.selectPLikeCount(pno)));
 		return result;
 	}
 	
@@ -248,13 +246,17 @@ public class PostingController {
 	public String selectPLikeCheck(int pno, int mno) {
 
 		String result =  Integer.toString(pService.selectPLikeCheck(pno, mno));
-		System.out.println(Integer.toString(pService.selectPLikeCheck(pno, mno)));
 		
 		return result;
 	}
 
-	
-	
+	@RequestMapping("pDeclare.do")
+	public ModelAndView insertPDeclare(Declare d, ModelAndView mv) {
+		
+		System.out.println(d);
+		int result = pService.insertPDeclare(d);
+		return mv;
+	}
 		
 		
 		

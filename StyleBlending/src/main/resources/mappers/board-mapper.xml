@@ -41,7 +41,7 @@
 	<result property="isDelete" column="isdelete"/>
 </resultMap>
 
-<resultMap type="lick" id=""></resultMap>
+<!-- <resultMap type="lick" id=""></resultMap> -->
 
 <select id="selectList" resultMap="boardResultSet">
 	select *
@@ -76,7 +76,7 @@
 	where b_no = #{bno} 
 </update>
 <!-- ************************************* 추천 수정중-->
-<update id="likeCheck">
+<!-- <update id="likeCheck">
 	update board
 	set like_count = like_count+1
 	where mno=#{mno} and b_no=#{bno} 
@@ -86,7 +86,7 @@
 	update board
 	set like_count = 0
 	where mno=#{mno} and b_no=#{bno}
-</update>
+</update> -->
 <!-- ************************************* -->
 
 </mapper>

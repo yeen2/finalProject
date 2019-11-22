@@ -113,6 +113,7 @@
 				2, default, default)
 	</insert>
 	
+	<!-- 좋아요 -->
 	<insert id="insertPostingLike" parameterType="HashMap">
 		insert into p_like
 		values(#{mno},#{pno})
@@ -137,19 +138,22 @@
 	
 	<update id="increasePostingLike">
 		update posting
-		set likeCount = likeCount+1
-		where isdelete='N'
+		set like_count = like_count+1
+		where isdelete='N' and p_no=#{pno}
 	</update>
 	
 	<update id="decreasePostingLike">
 		update posting
-		set likeCount = likeCount-1
-		where isdelete='N'
+		set like_count = like_count-1
+		where isdelete='N' and p_no=#{pno}
 	</update>
 	
-	
-	
-	
+	<!-- 신고 -->
+	<insert id="insertPDeclare">
+		insert into declare
+		values(seq_declare.nextval, #{mno}, #{bno}, #{category}, #{content},
+				sysdate, default, 1)
+	</insert>
 	
 	
 	

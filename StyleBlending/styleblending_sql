@@ -242,12 +242,12 @@ COMMENT ON COLUMN style.color IS '컬러';
 CREATE TABLE  declare (
 	d_no	number		NOT NULL,
 	m_no	number		NOT NULL,
-	b_no	number		NULL,
+	b_no	number		NOT NULL,
 	category	varchar2(100)		NOT NULL,
 	content	varchar2(200)		NULL,
 	enroll_date	date	DEFAULT sysdate	NOT NULL,
 	isCheck	varchar2(10)	DEFAULT 1	NOT NULL,
-	type 	number		NULL
+	type 	number		NOT NULL
 );
 
 COMMENT ON COLUMN declare.d_no IS '신고번호';
@@ -800,7 +800,7 @@ insert into member values(seq_member.nextval,default,null,'user18','pass18','유
 insert into member values(seq_member.nextval,default,null,'user19','pass19','유저19',null,null,'profile.png','profile.png',null,sysdate,null,null,default);
 
 --포스팅 20개(admin 계정에만 포스팅 20개)
-insert into posting values(seq_posting.nextval,1,'a','profile1.jpg','resources/assets/img/','#데일리룩 내용1','#데일리룩','M','서울시 강남구',4,1,sysdate,default, default);
+insert into posting values(seq_posting.nextval,1,'a','profile1.jpg','resources/assets/img/','#데일리룩 내용1','#데일리룩','M','서울시 강남구',3,1,sysdate,default, default);
 insert into posting values(seq_posting.nextval,1,'a','profile2.jpg','resources/assets/img/','내용2',default,'M',default,2,0,sysdate,default, default);
 insert into posting values(seq_posting.nextval,1,'a','profile3.jpg','resources/assets/img/','내용3',default,'M',default,3,1,sysdate,default, default);
 insert into posting values(seq_posting.nextval,1,'a','profile4.jpg','resources/assets/img/','내용4',default,'M',default,4,0,sysdate,default, default);

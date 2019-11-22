@@ -51,12 +51,15 @@
 		margin-left: 10px;
 	}
 
-	.spotDiv{
+	.spotDiv {
 		width: 50%; height: 50%; border: 1px solid red; display: inline-block;
 		padding : 5px;
 	}
-	button:click{
+	button:click {
 		border:none;
+	}
+	#declareBtn:hover {
+		cursor: pointer;
 	}
 </style>
 </head>
@@ -84,11 +87,11 @@
 				<hr>
 				<!-- 좋아요/신고 -->
 				<div >
-					<div style="display: inline; margin-right: 20px;">
+					<div style="display: inline; margin-right: 40px;">
 						<button type="button" class="btn btn-secondary" id="likeBtn">LIKE</button> &nbsp;&nbsp;
-						<h3 style="display: inline; margin-bottom: 0px;">${p.likeCount}</h3>
+						<h3 style="display: inline; margin-bottom: 0px;" id="pLikeCountH3">${p.likeCount}</h3>
 					</div>
-					<div style="display: inline; margin-right: 20px;">
+					<div style="display: inline; margin-right: 60px;">
 						 <!--  카카오톡 공유하기  -->
 							<a id="kakao-link-btn" href="javascript:sendLink()">
 								<img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"
@@ -102,9 +105,15 @@
 								</script>
 							</span>
 					</div>
+					<div style="display: inline; float: right; margin-right: 200px;">
+						<a>
+						<i class="fas fa-exclamation-triangle" id="declareBtn"
+							style="color:red; font-size: xx-large; padding-top: 5px;"></i>
+						</a>
+					</div>
 				</div>
 				
-				<br><br>
+				<br>
 				<!-- 이미지 -->
 				<div style="width: 500px; height: 600px;">
 					<img class="img-fluid rounded" style="width: 100%; height: 100%;"
@@ -334,47 +343,175 @@
 
 	</div>
 	<!-- /.container -->
+<!------------------------------------------ 신고  -------------------------------->
+
+	<script type="text/javascript">
 	
-<!------------------------------------------  좋아요 / 신고 -------------------------------->
+		$("#declareBtn").click(function () {
+			var loginUser = "${loginUser.email}";
+			if(loginUser == null || loginUser == ""){
+				alert("로그인 후 이용 가능하세요");
+				return;
+				
+			}else{ // 로그인 되어있을때
+				$("#declareModal").modal('show');
+			}
+		});
+	</script>
+	
+<!--  -------------------------------------신고하기 모달------------------------------------- -->
+	<div class="modal fade" id="declareModal" tabindex="-1" role="dialog" 
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+			
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">신고하기</h5>
+					<!-- 닫기 버튼 -->
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				
+				<form action="pDeclare.do" method="post" id="declare_form">
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="cate">신고항목</label> 
+						<select name="cate" class="form-control" id="d_category">
+							<option value="0">----</option>
+							<option value="1">불법광고</option>
+							<option value="2">도배</option>
+							<option value="3">음란물</option>
+							<option value="4">욕설</option>
+							<option value="5">개인정보침해</option>
+							<option value="6">욕설</option>
+							<option value="7">기타</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="content">신고내용</label>
+						<textarea name="content" style="height: 180px" class="form-control" id="declare_content"></textarea>
+					</div>
+					
+					<input type="hidden" name="mno" value="${loginUser.mno }">
+					<input type="hidden" name="bno" value="${p.pno}">
+					<input type="hidden" name="category">
+					
+					<div>
+						<input type="checkbox" name="declare_check" id="declare_check">
+						<label for="declare_check">한번 신고하시면 취소할 수 없습니다. 동의시 체크해주세요.</label>
+					</div>
+				</div>
+					
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">취소</button>
+					<button type="submit" class="btn btn-success" id="declare_submit">신고하기</button>
+				</div>
+				</form>
+				<script type="text/javascript">
+					$("#declare_submit").attr("disabled", true);
+					
+					// 신고동의 체크
+					$("#declare_check").on('click', function() {
+						if($("input:checkbox[name='declare_check']").is(":checked")){
+							$("#declare_submit").removeAttr("disabled");
+						}else{
+							$("#declare_submit").attr("disabled",true);
+						}
+					});
+					
+					// 신고버튼	
+					$("#declare_submit").click(function() {
+						var category = $("#category").val();
+						var content = $("#declare_content").val();
+						var cate = $("#d_category option:selected").text();
+						
+						// cate hidden에 값넣어주기
+						$("#category").val(cate);
+						console.log(cate);
+						
+						if(cate == 0){
+
+							alert("신고유형을 선택해 주세요");
+							$('#declareModal').modal();
+							return false;
+						}
+						
+						if(cate == 7){
+							console.log('기타야');
+							
+							if(content.length == 0){
+								alert("신고내용을 입력해주세요");
+								$('#declareModal').modal();
+								return false;
+							}
+						}
+					});
+				
+				</script>
+			</div>
+		</div>
+	</div>
+	
+<!------------------------------------------  좋아요 -------------------------------->
 
 	<script type="text/javascript">
 
-	var likeCount;
-	var mno = "${loginUser.mno}";
 
-	
-	$("#likeBtn").hover(function () {
+	// 이 포스팅의 좋아요 카운트 가져오기
+	function getPLikeCount() {
+		$.ajax({
+			url:"getPLikeCount.do",
+			data:{pno:${p.pno}},
+			type:"get",
+			success:function(data){
+				
+				$("#pLikeCountH3").text(data);
+				
+			},error:function(){
+				console.log("ajax 서버 실패");
+			}
+		});
+	};
+
+	$("#likeBtn").hover(function () { // 버튼 마우스
 		//likeCount = $(this).next().text();
-		likeCount =  getPLikeCount();
-		var loginLike = getPLikeCheck();
+		var loginLike;
+		var mno = "${loginUser.mno}";
 		
-		console.log(likeCount);
-		console.log(loginLike);
-		
-		// 이때 만든 ajax함수로 값 비교하기(수정하기)
-		//if(${p.loginLike} == 0){
-		if(loginLike == 0){
+		if(mno == null || mno == ""){
 			$(this).next().text("+1");
-		}else{
-			$(this).next().text("-1");
-		}
+			
+		}else{ // 로그인 되어있을때
 		
-	}, function () {
-		$(this).next().text(likeCount);
-	})
+			loginLike = getPLikeCheck(mno);
+		
+			if(loginLike == 0){
+				$(this).next().text("+1");
+			}else{
+				$(this).next().text("-1");
+			}	
+		}
+
+	}, function () { //마우스 뗄때
+		getPLikeCount();
+	});
 	
 	
 	// 댓글폼 클릭시 로그인되있는지 확인
 	$("#likeBtn").on("click", function () {
-		var loginUser = "${loginUser.email}";
+		var loginUser = "  ${loginUser.email}";
 
 		if(loginUser == null || loginUser == ""){
 			alert("로그인 후 이용 가능하세요");
 			return;
 			
 		}else{ // 로그인 되어있을때
-
-			if(${p.loginLike} == '0'){
+			var mno = "${loginUser.mno}";
+			var loginLike = getPLikeCheck(mno);
+			
+			if(loginLike == '0'){
 				// 좋아요 추가
 				$.ajax({
 					url:"pLikeInsert.do",
@@ -384,7 +521,7 @@
 					success:function(str){
 						if(str == 'success'){
 							console.log("좋아요 추가 성공");
-							$("#likeBtn").next().text(${p.likeCount} +1);
+							getPLikeCount();
 						}else{
 							console.log("좋아요 추가 실패");
 						}
@@ -403,7 +540,7 @@
 					success:function(str){
 						if(str == 'success'){
 							console.log("좋아요 제거 성공");
-							$("#likeBtn").next().text(${p.likeCount} -1);
+							getPLikeCount();
 						}else{
 							console.log("좋아요 제거 실패");
 						}
@@ -415,28 +552,14 @@
 		}
 	});
 	
-	// 이 포스팅의 좋아요 카운트 가져오기
-	function getPLikeCount() {
-		var result=0;
-		$.ajax({
-			url:"getPLikeCount.do",
-			data:{pno:${p.pno}},
-			type:"get",
-			success:function(data){
-				console.log(data);
-				result = data;
-			},error:function(){
-				console.log("ajax 서버 실패");
-			}
-		});
-		return result;
-	};
 	
+
 	// 로그인 회원의 해당 포스팅 좋아요 확인
-	function getPLikeCheck() {
+	function getPLikeCheck(mno) {
 		var result=0;
 		$.ajax({
 			url:"getPLikeCheck.do",
+			async: false,
 			data:{pno:${p.pno},
 				  mno:mno},
 			type:"get",
@@ -446,10 +569,10 @@
 			},error:function(){
 				console.log("ajax 서버 실패");
 			}
+			
 		});
-		return result;
+			return result;
 	};
-	
 	
 	</script>
 				

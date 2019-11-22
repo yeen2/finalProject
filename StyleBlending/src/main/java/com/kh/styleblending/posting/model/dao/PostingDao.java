@@ -6,12 +6,10 @@ import java.util.HashMap;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.kh.styleblending.member.model.vo.Member;
+import com.kh.styleblending.posting.model.vo.Declare;
 import com.kh.styleblending.posting.model.vo.Posting;
 import com.kh.styleblending.posting.model.vo.PostingReply;
-import com.kh.styleblending.posting.model.vo.SelectPosting;
 import com.kh.styleblending.posting.model.vo.Style;
 
 @Repository("pDao")
@@ -67,11 +65,11 @@ public class PostingDao {
 	}
 	
 	public int increasePostingLike(int pno) {
-		return sqlSession.update("postingMapper.increasePostingLike");
+		return sqlSession.update("postingMapper.increasePostingLike", pno);
 	}
 	
 	public int decreasePostingLike(int pno) {
-		return sqlSession.update("postingMapper.decreasePostingLike");
+		return sqlSession.update("postingMapper.decreasePostingLike", pno);
 	}
 	
 	public int selectPLikeCount(int pno) {
@@ -84,5 +82,12 @@ public class PostingDao {
 		map.put("mno", mno);
 		return sqlSession.selectOne("postingMapper.selectPLikeCheck", map);
 	}
+
+	public int insertPDeclare(Declare d) {
+		return sqlSession.insert("postingMapper.insertPDeclare", d);
+	}
+	
+	
+	
 	
 }
