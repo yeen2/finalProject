@@ -61,6 +61,9 @@
 	#declareBtn:hover {
 		cursor: pointer;
 	}
+	.fBtn {
+		float: right; margin-right: 20px;
+	}
 </style>
 </head>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
@@ -116,6 +119,8 @@
 				<br>
 				<!-- 이미지 -->
 				<div style="width: 500px; height: 600px;">
+				
+				
 					<img class="img-fluid rounded" style="width: 100%; height: 100%;"
 						src="${ pageContext.servletContext.contextPath }/resources/upload/posting/${p.renameImg}" alt="">
 				</div>
@@ -233,9 +238,27 @@
 							<div >
 								<!-- 닉네임 -->
 								<h6 style="display: inline-block;">${ p.nickName }</h6>
+								
 								<!-- 팬추가 버튼 -->
-								<button type="button" class="btn btn-dark btn-sm" 
-										style="float: right; margin-right: 20px;">+ fan</button>
+								<!-- 팬추가 -->
+								<c:if test="${p.fanCheck == 0}">
+									<button type="button" class="btn btn-dark btn-sm fBtn" id="addFan">
+										<i class="fa fa-plus"></i><b>Fan</b>
+									</button>
+									<button class="btn btn-dark btn-sm fBtn" id="removeFan" style="display: none;">
+										<i style="width: 40px;" class="fas fa-check"></i>
+									</button>
+								</c:if>
+								
+								<!-- 팬제거 -->	
+								<c:if test="${p.fanCheck == 1}">
+									<button class="btn btn-dark btn-sm fBtn" id="removeFan">
+										<i style="width: 40px;" class="fas fa-check"></i>
+									</button>
+									<button type="button" class="btn btn-dark btn-sm fBtn" id="addFan" style="display: none;">
+										<i class="fa fa-plus"></i><b>Fan</b>
+									</button>
+								</c:if>
 							</div>
 							<div>
 								<!-- 자기소개 -->
@@ -343,10 +366,85 @@
 
 	</div>
 	<!-- /.container -->
-<!------------------------------------------ 신고  -------------------------------->
+	
+<!------------------------------------------ 팬  ---------------------------------->
 
 	<script type="text/javascript">
+		var loginUser = "${loginUser.mno}";
+		
+		// 팬추가
+		$(".fBtn").click(function () {
+			
+			var nowFanCheck = $(this).attr('id');
+			console.log(nowFanCheck);
+			
+			if(loginUser == null || loginUser == ""){
+				alert("로그인 후 이용 가능하세요");
+				return;
+			}else{ //로그인 했을때
+				
+				if(nowFanCheck == 'addFan'){
+					insertFan(${p.mno});
+				}else {
+					deleteFan(${p.mno});
+				}
+				
+				
+			}
+		});
 	
+		// insert 팬
+		function insertFan(value){
+			var meNo = value;
+			$.ajax({
+				url:"mpInsertFan.do",
+				data:{meNo:meNo, youNo:loginUser},
+				type:"post",
+				success:function(result){
+					if(result == 1){
+						$("#addFan").hide();
+						$("#removeFan").show();
+					}else{
+						console.log("실패");
+					}
+				},
+				error:function(){
+					console.log("ajax 통신 실패");
+				}
+			});
+		}
+		
+		// delete 팬
+		function deleteFan(value){
+			var meNo = value;
+			$.ajax({
+				url:"mpDeleteFan.do",
+				data:{meNo:meNo, youNo:loginUser},
+				type:"post",
+				success:function(result){
+					if(result == 1){
+						$("#removeFan").hide();
+						$("#addFan").show();
+					}else{
+						console.log("실패");
+					}
+				},
+				error:function(){
+					console.log("ajax 통신 실패");
+				}
+			});
+		}
+		
+		
+		
+		
+		
+	</script>
+<!------------------------------------------ 신고하기  ---------------------------------->	
+
+	<script type="text/javascript">
+
+		// 신고하기
 		$("#declareBtn").click(function () {
 			var loginUser = "${loginUser.email}";
 			if(loginUser == null || loginUser == ""){

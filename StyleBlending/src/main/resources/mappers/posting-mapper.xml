@@ -26,6 +26,7 @@
 		<result property="loginLike" column="loginLike"/>
 		<result property="loginDeclare" column="loginDeclare"/>
 		<result property="replyCount" column="replyCount"/>
+		<result property="fanCheck" column="fanCheck"/>
 	</resultMap>
 	
 	<resultMap id="postingReplyResultSet" type="PostingReply">
@@ -75,7 +76,8 @@
         		m.nickname, m.profile, m.location, m.rename_img, 
                 (select count(*) from p_like where m_no=#{mno} and p_no=#{pno}) loginLike, 
                 (select count(*) from declare where m_no=#{mno} and b_no=#{pno} and type=1) loginDeclare, 
-                (select count(*) from p_reply where p_no=#{pno} and r_level=1) replyCount
+                (select count(*) from p_reply where p_no=#{pno} and r_level=1) replyCount,
+                (select count(*) from fan where me_no=p.m_no and you_no=#{mno}) fanCheck 
 		from posting p
 		join member m on(p.m_no=m.m_no)
 		where p_no=#{pno}
