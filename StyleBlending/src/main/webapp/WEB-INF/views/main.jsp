@@ -12,7 +12,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style>
 @media ( min-aspect-ratio : 16/9) {
-	.video-foreground {
+	.video-foreground  {
 		height: 300%;
 		top: -100%;
 	}
