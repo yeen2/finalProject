@@ -48,7 +48,10 @@ public class HomeController {
 	}
 	
 	@RequestMapping("loginForm.do")
-	public String loginForm() {
+	public String loginForm(HttpSession session, HttpServletRequest request) {
+		String referer = request.getHeader("Referer");
+		session.setAttribute("prevPage", referer);
+		
 		return "common/login";
 	}
 	
@@ -138,7 +141,7 @@ public class HomeController {
 				
 				
 			}
-			mv.setViewName("redirect:main.do");
+			mv.setViewName("redirect:" + session.getAttribute("prevPage"));
 		}else {
 			mv.addObject("msg", "로그인 실패").setViewName("common/errorPage");
 		}
