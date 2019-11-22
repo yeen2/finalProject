@@ -40,5 +40,16 @@ public interface BoardService {
 	// 삭제하고자 하는 게시판 조회용
 	Board selectUpdateBoard(int bno);
 	
+	// 게시판 추천
+		int insertBoardLike(int bno , int mno);
+		
+		int deleteBoardLike(int bno , int mno);
+		
+		int blikeCheckUp(int bno);
+		int blikeCheckDown(int bno);
+		
+		
+		int selectBoardLikeCnt(int bno);
+		int selectBoardLikeCheck(int bno , int mno);
 	
 }

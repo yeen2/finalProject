@@ -5,6 +5,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,17 +18,21 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.kh.styleblending.board.model.service.BoardService;
 import com.kh.styleblending.board.model.vo.Board;
+import com.kh.styleblending.board.model.vo.BoardReply;
 import com.kh.styleblending.board.model.vo.FashionBoard;
+import com.kh.styleblending.board.model.vo.Image;
 import com.kh.styleblending.board.model.vo.PageInfo;
 import com.kh.styleblending.board.model.vo.Pagination;
 
@@ -81,8 +87,16 @@ public class BoardController {
 	
 	
 	@RequestMapping("binsert.do")
-	public String insertBoard(Board b , HttpServletRequest request, Model model) {
-								//System.out.println(b);
+	public String insertBoard(Board b , HttpServletRequest request, Model model, MultipartFile upload) {
+							
+//		if(!upload.getOriginalFilename().equals("")) {
+//		
+//		String renameFileName = saveFile(upload, request);
+//		
+//		i.setOriginalImg(upload.getOriginalFilename());
+//		i.setRenameImg(renameFileName);
+//		
+//	}
 		
 		
 		int result = bService.insertBoard(b);
@@ -100,6 +114,39 @@ public class BoardController {
 		
 	}
 	
+	
+	public String saveFile(MultipartFile upload, HttpServletRequest request) {
+
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = root + "/bImgUploadFiles";
+		
+		File folder = new File(savePath);
+		
+		if(folder.exists()) {
+			folder.mkdirs(); 
+		}
+		
+		String originFileName = upload.getOriginalFilename();
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		
+		
+		String renameFileName = sdf.format(new Date(System.currentTimeMillis())) + "." 
+								+ originFileName.substring(originFileName.lastIndexOf(".")+1);
+		
+		
+		String renamePath = savePath + "/" + renameFileName;
+		
+		try {
+			upload.transferTo(new File(renamePath));
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return renameFileName;
+	}
 	
 	
 	// ckeditor 이미지 업로드
@@ -221,7 +268,12 @@ public class BoardController {
 	@RequestMapping("bdelete.do")
 	public String boardDelete(int bno,HttpServletRequest request) {
 		
-		Board b = bService.selectUpdateBoard(bno);
+		//Board b = bService.selectUpdateBoard(bno);
+		
+//		if(b.getRenameImg() != null) {		// 어떻게 보내야하지
+//		
+//		deleteFile(b.getRenameImg(), request);
+//}
 		
 		int result = bService.deleteBoard(bno);
 		
@@ -229,6 +281,85 @@ public class BoardController {
 			return "redirect:blist.do";
 		}else {
 			return "common/errorPage";
+		}
+		
+	}
+	
+	// 업로드 파일삭제
+	public void deleteFile(String renameFileName, HttpServletRequest request) {
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		
+		String uploadPath = root + "/" + "/bImgUploadFiles";
+		
+		File f = new File(uploadPath + "/" + renameFileName);
+		
+		if(f.exists()) {
+			f.delete();	
+		}
+	}
+		
+	@RequestMapping("bupateView.do")
+	public ModelAndView boardUpdateView(int bno, ModelAndView mv) {
+		
+		Board b = bService.selectUpdateBoard(bno);
+		mv.addObject("b",b).setViewName("board/listWriteUpdateForm");
+		
+		return mv;
+		
+	}
+	
+	@RequestMapping("bupdate.do")
+	public String boardUpdate(Board b , HttpServletRequest request, ModelAndView mv,
+							   MultipartFile upload) {
+		
+//			if(!upload.getOriginalFilename().equals("")) {
+//				
+//				if(i.getOriginalImg() != null) {
+//					deleteFile(i.getRenameImg(), request);
+//				}
+//			}
+//			
+//			String renameFileName = saveFile(upload, request);
+//			
+//			i.setRenameImg(renameFileName);
+//			i.setOriginalImg(upload.getOriginalFilename());
+		
+		int result = bService.updateBoard(b);
+		
+		if(result > 0 ) {
+			mv.addObject("bno", b.getBno()).setViewName("redirect:bdetail.do");
+			
+		}else {
+			mv.addObject("msg","게시판 수정 실패").setViewName("common/errorPage");
+		}
+		
+	return null;	
+	}
+	
+	
+	
+	@ResponseBody
+	@RequestMapping("replyList.do")
+	public String replyList(int brno) {
+		
+		ArrayList<BoardReply> list = bService.selectBoardReplyList(brno);
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM--dd").create();
+		
+		return gson.toJson(list);
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping("rinsert.do")
+	public String insertReply(BoardReply r) {
+			
+		int result = bService.insertBoardReply(r);
+		
+		if(result > 0 ) {
+			return "success";
+		}else {
+			return "fail";
 		}
 		
 	}
