@@ -501,7 +501,7 @@
 	
 	// 댓글폼 클릭시 로그인되있는지 확인
 	$("#likeBtn").on("click", function () {
-		var loginUser = "${loginUser.email}";
+		var loginUser = "  ${loginUser.email}";
 
 		if(loginUser == null || loginUser == ""){
 			alert("로그인 후 이용 가능하세요");
