@@ -1,6 +1,7 @@
 package com.kh.styleblending.member.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -33,12 +34,20 @@ public class MyPageDao {
 		return (ArrayList)sqlSession.selectList("mypageMapper.selectLikeList", mno);
 	}
 
-	public ArrayList<Member> selectFanList(int mno) {
-		return (ArrayList)sqlSession.selectList("mypageMapper.selectFanList", mno);
+	public ArrayList<Member> selectFanList(int mno, int loginMno) {
+		HashMap map = new HashMap<>();
+		map.put("mno", mno);
+		map.put("loginMno", loginMno);
+		
+		return (ArrayList)sqlSession.selectList("mypageMapper.selectFanList", map);
 	}
 
-	public ArrayList<Member> selectFwList(int mno) {
-		return (ArrayList)sqlSession.selectList("mypageMapper.selectFwList", mno);
+	public ArrayList<Member> selectFwList(int mno, int loginMno) {
+		HashMap map = new HashMap<>();
+		map.put("mno", mno);
+		map.put("loginMno", loginMno);
+		
+		return (ArrayList)sqlSession.selectList("mypageMapper.selectFwList", map);
 	}
 
 	public int updateProfile(Member m) {

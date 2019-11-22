@@ -48,13 +48,13 @@ public class MyPageServiceImpl implements MyPageService {
 	}
 
 	@Override
-	public ArrayList<Member> selectFanList(int mno) {
-		return mpDao.selectFanList(mno);
+	public ArrayList<Member> selectFanList(int mno, int loginMno) {
+		return mpDao.selectFanList(mno, loginMno);
 	}
 
 	@Override
-	public ArrayList<Member> selectFwList(int mno) {
-		return mpDao.selectFwList(mno);
+	public ArrayList<Member> selectFwList(int mno, int loginMno) {
+		return mpDao.selectFwList(mno, loginMno);
 	}
 
 	@Override

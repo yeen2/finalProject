@@ -22,10 +22,10 @@ public interface MyPageService {
 	ArrayList<Posting> selectLikeList(int mno);
 	
 	// 프로필 페이지 - 팬 리스트
-	ArrayList<Member> selectFanList(int mno);
+	ArrayList<Member> selectFanList(int mno, int loginMno);
 	
 	// 프로필 페이지 - 팔로잉 리스트
-	ArrayList<Member> selectFwList(int mno);
+	ArrayList<Member> selectFwList(int mno, int loginMno);
 	
 	// 프로필 페이지 - 프로필 이미지 수정, 기본이미지로 변경
 	Member updateProfileImg(Member m);
