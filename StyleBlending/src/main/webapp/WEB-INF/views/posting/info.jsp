@@ -51,12 +51,15 @@
 		margin-left: 10px;
 	}
 
-	.spotDiv{
+	.spotDiv {
 		width: 50%; height: 50%; border: 1px solid red; display: inline-block;
 		padding : 5px;
 	}
-	button:click{
+	button:click {
 		border:none;
+	}
+	#declareBtn:hover {
+		cursor: pointer;
 	}
 </style>
 </head>
@@ -84,11 +87,11 @@
 				<hr>
 				<!-- 좋아요/신고 -->
 				<div >
-					<div style="display: inline; margin-right: 20px;">
+					<div style="display: inline; margin-right: 40px;">
 						<button type="button" class="btn btn-secondary" id="likeBtn">LIKE</button> &nbsp;&nbsp;
 						<h3 style="display: inline; margin-bottom: 0px;" id="pLikeCountH3">${p.likeCount}</h3>
 					</div>
-					<div style="display: inline; margin-right: 20px;">
+					<div style="display: inline; margin-right: 60px;">
 						 <!--  카카오톡 공유하기  -->
 							<a id="kakao-link-btn" href="javascript:sendLink()">
 								<img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"
@@ -102,9 +105,15 @@
 								</script>
 							</span>
 					</div>
+					<div style="display: inline; float: right; margin-right: 200px;">
+						<a>
+						<i class="fas fa-exclamation-triangle" id="declareBtn"
+							style="color:red; font-size: xx-large; padding-top: 5px;"></i>
+						</a>
+					</div>
 				</div>
 				
-				<br><br>
+				<br>
 				<!-- 이미지 -->
 				<div style="width: 500px; height: 600px;">
 					<img class="img-fluid rounded" style="width: 100%; height: 100%;"
@@ -334,8 +343,113 @@
 
 	</div>
 	<!-- /.container -->
+<!------------------------------------------ 신고  -------------------------------->
+
+	<script type="text/javascript">
 	
-<!------------------------------------------  좋아요 / 신고 -------------------------------->
+		$("#declareBtn").click(function () {
+			var loginUser = "${loginUser.email}";
+			if(loginUser == null || loginUser == ""){
+				alert("로그인 후 이용 가능하세요");
+				return;
+				
+			}else{ // 로그인 되어있을때
+				$("#declareModal").modal('show');
+			}
+		});
+	</script>
+	
+<!--  -------------------------------------신고하기 모달------------------------------------- -->
+	<div class="modal fade" id="declareModal" tabindex="-1" role="dialog" 
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+			
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">신고하기</h5>
+					<!-- 닫기 버튼 -->
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				
+				<form action="pDeclare.do" method="post" id="declare_form">
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="category">신고항목</label> 
+						<select name="category" class="form-control" id="d_category">
+							<option value="" disabled>----</option>
+							<option value="광고">불법광고</option>
+							<option value="도배">도배</option>
+							<option value="음란물">음란물</option>
+							<option value="욕설">욕설 게시물</option>
+							<option value="개인정보침해">개인정보침해</option>
+							<option value="욕설">욕설 게시물 신고</option>
+							<option value="기타">기타</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label for="content">신고내용</label>
+						<textarea name="content" style="height: 180px" class="form-control" id="declare_content"></textarea>
+					</div>
+					
+					<input type="hidden" name="mno" value="${loginUser.mno }">
+					<input type="hidden" name="bno" value="${p.pno}">
+					
+					<div>
+						<input type="checkbox" name="declare_check" id="declare_check">
+						<label for="declare_check">한번 신고하시면 취소할 수 없습니다. 동의시 체크해주세요.</label>
+					</div>
+				</div>
+					
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">취소</button>
+					<button type="submit" class="btn btn-success" id="declare_submit">신고하기</button>
+				</div>
+				</form>
+				<script type="text/javascript">
+					$("#declare_submit").attr("disabled", true);
+					
+					// 신고동의 체크
+					$("#declare_check").on('click', function() {
+						if($("input:checkbox[name='declare_check']").is(":checked")){
+							$("#declare_submit").removeAttr("disabled");
+						}else{
+							$("#declare_submit").attr("disabled",true);
+						}
+					});
+					
+					// 신고버튼	
+					$("#declare_submit").click(function() {
+						var category = $("#category").val();
+						var content = $("#declare_content").val();
+						var cate = $("#d_category option:selected").text();
+						
+						console.log('????');
+						console.log(cate);
+						
+						if(category == 0){
+							alert("신고유형을 선택해 주세요");
+							$('#declareModal').modal();
+							return false;
+						}
+						
+						if(cate == '기타'){
+							if(content.length == 0){
+								alert("신고내용을 입력해주세요");
+								$('#declareModal').modal();
+								return false;
+							}
+						}
+					});
+				
+				</script>
+			</div>
+		</div>
+	</div>
+	
+<!------------------------------------------  좋아요 -------------------------------->
 
 	<script type="text/javascript">
 
@@ -355,11 +469,6 @@
 			}
 		});
 	};
-	
-	
-	
-	
-
 
 	$("#likeBtn").hover(function () { // 버튼 마우스
 		//likeCount = $(this).next().text();

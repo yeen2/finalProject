@@ -23,6 +23,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.kh.styleblending.member.model.vo.Member;
 import com.kh.styleblending.posting.model.service.PostingService;
+import com.kh.styleblending.posting.model.vo.Declare;
 import com.kh.styleblending.posting.model.vo.Posting;
 import com.kh.styleblending.posting.model.vo.PostingReply;
 import com.kh.styleblending.posting.model.vo.SelectPosting;
@@ -249,8 +250,13 @@ public class PostingController {
 		return result;
 	}
 
-	
-	
+	@RequestMapping("pDeclare.do")
+	public ModelAndView insertPDeclare(Declare d, ModelAndView mv) {
+		
+		System.out.println(d);
+		int result = pService.insertPDeclare(d);
+		return mv;
+	}
 		
 		
 		
