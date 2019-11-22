@@ -6,9 +6,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 	<!-- jQuery -->
-    <script src="https://code.jquery.com/jquery.min.js"></script>
+ <!--    <script src="https://code.jquery.com/jquery.min.js"></script> -->
     <!-- google charts -->
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+   <!--  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> -->
 
 </head>
 <body>
@@ -56,6 +56,15 @@
                 <div class="row">
                 
 			      
+			      <div class="col-lg-6">
+<div class="card">
+<div class="card-body"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+<h4 class="mb-3">Yearly Sales </h4>
+<canvas id="sales-chart" height="528" width="1057" class="chartjs-render-monitor" style="display: block; height: 352px; width: 705px;"></canvas>
+</div>
+</div>
+</div>
+			      
 			      
 			      <div class="col-lg-6">
 			      	<div class="card" style="padding:0px 20px 0px 0px; width:900px;">
@@ -88,7 +97,7 @@
       </div>
       
       
-        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+     <!--    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     	<script type="text/javascript">
       google.charts.load("current", {packages:["corechart"]});
       google.charts.setOnLoadCallback(drawChart);
@@ -109,23 +118,116 @@
         chart.draw(data, options);
       }
     </script>
-
+ -->
 	
         <jsp:include page="footer.jsp" />
 
     </div><!-- /#right-panel -->
     
-    
+    <script>
+  //Sales chart
+  
+  $(function(){
+	  
+
+    var ctx = document.getElementById( "sales-chart" );
+    ctx.height = 150;
+    var myChart = new Chart( ctx, {
+        type: 'line',
+        data: {
+            labels: [ "2012", "2013", "2014", "2015", "2016", "2017", "2018" ],
+            type: 'line',
+            defaultFontFamily: 'Montserrat',
+            datasets: [ {
+                label: "Foods",
+                data: [ 0, 30, 15, 110, 50, 63, 120 ],
+                backgroundColor: 'transparent',
+                borderColor: 'rgba(220,53,69,0.75)',
+                borderWidth: 3,
+                pointStyle: 'circle',
+                pointRadius: 5,
+                pointBorderColor: 'transparent',
+                pointBackgroundColor: 'rgba(220,53,69,0.75)',
+                    }, {
+                label: "Electronics",
+                data: [ 0, 50, 40, 80, 35, 99, 80 ],
+                backgroundColor: 'transparent',
+                borderColor: 'rgba(40,167,69,0.75)',
+                borderWidth: 3,
+                pointStyle: 'circle',
+                pointRadius: 5,
+                pointBorderColor: 'transparent',
+                pointBackgroundColor: 'rgba(40,167,69,0.75)',
+                    } ]
+        },
+        options: {
+            responsive: true,
+
+            tooltips: {
+                mode: 'index',
+                titleFontSize: 12,
+                titleFontColor: '#000',
+                bodyFontColor: '#000',
+                backgroundColor: '#fff',
+                titleFontFamily: 'Montserrat',
+                bodyFontFamily: 'Montserrat',
+                cornerRadius: 3,
+                intersect: false,
+            },
+            legend: {
+                display: false,
+                labels: {
+                    usePointStyle: true,
+                    fontFamily: 'Montserrat',
+                },
+            },
+            scales: {
+                xAxes: [ {
+                    display: true,
+                    gridLines: {
+                        display: false,
+                        drawBorder: false
+                    },
+                    scaleLabel: {
+                        display: false,
+                        labelString: 'Month'
+                    }
+                        } ],
+                yAxes: [ {
+                    display: true,
+                    gridLines: {
+                        display: false,
+                        drawBorder: false
+                    },
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Value'
+                    }
+                        } ]
+            },
+            title: {
+                display: false,
+                text: 'Normal Legend'
+            }
+        }
+    } );
+  });
+  
+  
+  
+    </script>
     
        <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+    <%-- <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/admin_temp/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>--%>
+    <script src="${pageContext.request.contextPath}/resources/admin_temp/js/main.js"></script> 
 
 	
-	  <script>
+	 <!--  <script>
+	 
+	 
  
    var chartDrowFun = {
  
@@ -237,7 +339,7 @@
 		  chartDrowFun.chartDrow(); //chartDrow() 실행
 		}); 
   </script>
-	
+	 -->
 	
     
 </body>

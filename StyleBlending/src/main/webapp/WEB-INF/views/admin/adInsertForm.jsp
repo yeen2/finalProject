@@ -75,13 +75,13 @@
 						</small></p></div>
 						<div class="c2 sCheck2" style="position:absolute;">
 							<p>
-							<input type="checkbox" name="checkCondition" id="checkCondition" value="1"/>
+							<input type="checkbox" name="checkCondition" id="checkCondition" onclick="agreeCheck();"/>
 							<small class="form-text text-success">위 구매 조건 확인 및 결제 진행에 동의</small></p>
 						</div>
 					</div>
 					<br>
 				      <div class="modal-footer">
-				        <button type="button" class="btn btn-success" id="adConfirm">광고신청</button>
+				        <button type="button" class="btn btn-success" id="adConfirm" disabled>광고신청</button>
 				        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
 				      </div>
 			       </form>
@@ -99,15 +99,39 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.2.js"></script>
 		<script>
+		
+		// 체크박스 여부확인 
+		function agreeCheck(){
+			var chk = $('input:checkbox[id="checkCondition"]').is(":checked");
+			if(chk==true){
+				$("#adConfirm").removeAttr('disabled');
+			}else{
+				$("#adConfirm").attr("disabled", true);
+			}
+			
+		}
+		
 
 	 	$(function(){
 			
 			$("#adConfirm").on("click",function(){
-				
-				var checkCondition = document.getElementById("checkCondition");
-				var checkResult = checkCondition.getAttribute("checked");
-				alert(checkResult);
-				
+			
+			// 값이 하나라도 저장되지 않으면 버튼 눌리지않도록
+			if($("#adName").val() == ""){
+				alert("업체명을 입력해주세요.");
+				$("#adName").focus();
+				return ;
+			}
+			if($("#url").val() == ""){
+				alert("동영상 url을 입력해주세요.");
+				$("#url").focus();
+				return ;
+			}
+			if($("#file-input").val() == ""){
+				alert("이미지를 등록해주세요.");
+				return ;
+			}
+			
 				var IMP = window.IMP;
 				IMP.init('iamport');
 				IMP.request_pay({
@@ -145,8 +169,7 @@
 				        	data: formData,
 				        	type:"post",
 				        	success:function(data){
-				        		alert("data");
-				        		
+				        	// 마이페이지 광고리스트 페이지로이동	
 				       		location.href="aAdvertisment.do";
 				       
 				        	},error:function(){
