@@ -195,6 +195,7 @@ public class AdminController {
 		return "admin/adInsertForm";
 	}
 	
+	/*
 	@RequestMapping("aInsertPayView.do")
 	public String insertPayView(HttpSession session,@RequestParam(value="uploadFile", required=false) MultipartFile file, Ad ad, Model model, HttpServletRequest request) {
 		
@@ -211,6 +212,21 @@ public class AdminController {
 		//System.out.println(ad);
 		
 		return "admin/pay";
+	}
+	*/
+	
+	@RequestMapping("aUpdateStartAd.do")
+	public String updateStartAd(String adno, Model model) {
+		
+		int result = aService.updateStartAd(adno);
+		System.out.println(adno);
+		if(result > 0) {
+			model.addAttribute("msg", "정상적으로 광고 등록이 되었습니다.");
+			return "redirect:aAdvertisment.do";
+		}else {
+			model.addAttribute("msg", "광고 등록 실패");
+			return "common/errorPage";
+		}
 	}
 	
 	@RequestMapping("aStatistics.do")

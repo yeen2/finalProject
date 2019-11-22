@@ -89,7 +89,7 @@
 		                          				<input type="search" id="adName" class="form-control form-control-sm col-sm-10" placeholder="업체명으로 검색" aria-controls="bootstrap-data-table">
 		                          			</label>
 				                        	<button type="button" id="deleteBtn" class="btn btn-outline-danger btn-sm" style="float:right; margin-right:10px; margin-top:15px;">취소</button>
-				                        	<button type="button" id="adStartBtn" class="btn btn-outline-primary btn-sm" style="float:right; margin-right:10px; margin-top:15px;">
+				                        	<button type="button" id="adStartBtn" data-toggle="modal" data-target="#adStartModal"  class="btn btn-outline-primary btn-sm" style="float:right; margin-right:10px; margin-top:15px;">
 				                        		<i class="fa fa-magic"></i>등록
 				                        	</button>
 		                          		</div>
@@ -100,7 +100,7 @@
 	                                <table class="table">
 	                                    <thead >
 	                                        <tr>
-	                                        	<th><input type="checkbox" name="checkAll" id="checkAll" onclick="allCheck();"/></th>
+	                                        	<th></th>
 	                                            <th class="serial">No.</th>
 	                                            <th>업체명</th>
 	                                            <th>신청일자</th>
@@ -113,7 +113,7 @@
 	                                    <tbody>
 	                                        <tr>
 	                                        	<td>
-                                        			<input name="checkRow" type="checkbox" id="checkRow" value="${a.adno}" />
+                                        			<input name="checkRow" type="checkbox" id="checkRow" value="${a.adno}${a.status}"/>
                                         		</td>
 	                                            <td class="serial">${a.adno}</td>
 	                                            <td>${a.name }</td>
@@ -196,7 +196,6 @@
                               <!-- 승인대기 목록 -->
                               <div class="tab-pane fade row" id="nav-waiting" style="display:inline-flex;" role="tabpanel" >
                               <c:forEach items="${newList }" var="a">
-                              <c:if test="${a.status eq 1 }">
 			                    <div class="col-md-4" >
 			                        <div class="card col-md-8">
 			                            <img class="card-img-top" src="${pageContext.request.contextPath}${a.imgPath}${a.renameImg}" alt="Card image cap">
@@ -206,7 +205,6 @@
 			                            </div>
 			                        </div>
 				                </div>
-                              </c:if>		
                               </c:forEach>
                               </div>
                               
@@ -274,6 +272,32 @@
                 </div>
             </div>
         </div>
+        
+        <!-- 광고 승인 모달창 -->     
+      <div class="modal fade" id="adStartModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-sm" role="document">
+               <div class="modal-content">
+                   <div class="modal-header">
+                       <h5 class="modal-title" id="staticModalLabel"><b>광고 승인</b></h5>
+                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                           <span aria-hidden="true">&times;</span>
+                       </button>
+                   </div>
+                   <div class="modal-body">
+                       <p>
+                           	<b>해당 광고를 등록하시겠습니까?</b>
+                      </p>
+                      <p>
+                           	등록시 진행중인 광고는 자동 마감됩니다. 
+                      </p>
+                    </div>
+                    <div class="modal-footer">
+                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                       <button type="button" class="btn btn-primary" id="adStartConfirm" onclick="">Confirm</button>
+                    </div>
+                </div>
+            </div>
+        </div>
          
     
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/admin_temp/js/admin.js"></script>
@@ -283,15 +307,9 @@
     	 location.href="${pageContext.request.contextPath}/aAdvertisment.do?boardLimit="+boardLimit; 
      } 
 	
-	//history.replaceState({}, null, location.pathname);
+	
 	
 	$(function(){
-		/* $(".adWaiting").mouseenter(function(){
-			alert("ㅎㅎ");
-			$(this).removeAttr('disabled');
-		}).mouseleave(function(){
-			$(this).attr("disabled", true);
-		}); */
 		
 			$('input[type="checkbox"][name="checkRow"]').click(function(){
 				// click 이벤트 발생시
@@ -299,21 +317,42 @@
 						$('input[type="checkbox"][name="checkRow"]:checked').size()>1){
 					$(this).prop('checked',false);
 					alert('두개이상 선택할수없습니다');
-					
 				}
-			})
-		$("#adStartBtn").on("click",function(){
-			var checkRow = "";
-			checkRow = $("#checkRow").val();
-			var adno = checkRow;
-			alert(adno);
-		});
-		
-		
-		
+			});
+			
+			$("#adStartBtn").click(function(){ // 등록버튼 클릭시 모달창 뜨도록
+				  var checkRow = ""; // if문 안에서 사용하기위해
+				  var adno = "";
+				  $( "input[name='checkRow']:checked" ).each (function(){
+				    checkRow = $(this).val(); 
+				  });
+				  
+			  	  if(checkRow == ''){
+				    alert("등록할 광고를 선택하세요.");
+				    return false;
+				  }else{
+					  
+					  if(checkRow.charAt(checkRow.length-1) == 1){
+					    	alert("1임");
+					    	adno = checkRow.slice(0,-1);		    	
+					  	    $("#adStartModal").show();
+					  	    $("#adStartConfirm").click(function(){
+					  	    	location.href="${pageContext.request.contextPath}/aUpdateStartAd.do?adno="+adno;
+					  	    });
+					    }else{
+					    	alert("승인 대기인 광고가 아닙니다.");
+					    	return false;
+					   }
+			  	  
+				  }
+				  
+			});
+	
 	});
-
+	
 	</script>
+	
+
 
     
 </body>

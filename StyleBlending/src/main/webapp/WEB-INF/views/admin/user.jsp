@@ -207,7 +207,7 @@
 		 
 		 var checkRow = "";
 		  $( "input[name='checkRow']:checked" ).each (function (){
-		    checkRow = checkRow + $(this).val()+"," ;
+		    checkRow = checkRow + $(this).val()+",";
 		  });
 		  checkRow = checkRow.substring(0,checkRow.lastIndexOf( ",")); //맨끝 콤마 지우기
 			

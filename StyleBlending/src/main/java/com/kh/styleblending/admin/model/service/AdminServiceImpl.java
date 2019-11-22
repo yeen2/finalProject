@@ -118,6 +118,22 @@ public class AdminServiceImpl implements AdminService{
 		
 	}
 
+	@Override
+	public int updateStartAd(String adno) {
+		// 광고 승인등록
+		
+		int result = aDao.updateStartAd(adno);
+		return result;
+		/*
+		if(result > 0) {
+			return aDao.updateEndAd();
+		}else {
+			return 0;
+		}
+		*/
+		
+	}
+
 	
 
 	

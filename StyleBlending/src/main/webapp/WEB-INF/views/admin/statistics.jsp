@@ -4,12 +4,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-	<!-- jQuery -->
- <!--    <script src="https://code.jquery.com/jquery.min.js"></script> -->
+<!-- 차트 보이게 cdn -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery.min.js"></script>
     <!-- google charts -->
    <!--  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> -->
-
+<script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+<!-- <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13" type="text/javascript"></script> -->
 </head>
 <body>
 	
@@ -96,12 +98,13 @@
       		</div>
       </div>
       
-      <script type="text/javascript">
+      <script>
       
       $(function(){
     	  
     	    //Sales chart
     	    var ctx = document.getElementById( "sales-chart" );
+    	    
     	    ctx.height = 150;
     	    var myChart = new Chart( ctx, {
     	        type: 'line',
@@ -307,15 +310,21 @@
   });
   
   
+ /*    $(document).ready(function(){
+	  google.charts.load('current', {'packages':['line','controls']});
+	  chartDrowFun.chartDrow(); //chartDrow() 실행
+	});  */
+  
   
     </script>
     
        <!-- Scripts -->
-    <%-- <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+     
+   <%-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>--%>
     <script src="${pageContext.request.contextPath}/resources/admin_temp/js/main.js"></script> 
+    <%-- <script src="${pageContext.request.contextPath}/resources/admin_temp/js/init/chartjs-init.js"></script>  --%>
 
 	
 	 <!--  <script>

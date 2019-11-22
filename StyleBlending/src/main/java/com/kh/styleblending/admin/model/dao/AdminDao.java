@@ -95,4 +95,8 @@ public class AdminDao {
 		return sqlSession.insert("adminMapper.insertPay",ad);
 	}
 	
+	public int updateStartAd(String adno) {
+		return sqlSession.update("adminMapper.updateStartAd",adno);
+	}
+	
 }

@@ -52,6 +52,9 @@ public interface AdminService {
 	// 광고 등록
 	int insertAd(Ad ad);
 	
+	// 광고 승인 등록 
+	int updateStartAd(String adno);
+	
 	
 	
 }
