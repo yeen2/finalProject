@@ -354,7 +354,14 @@
 				return;
 				
 			}else{ // 로그인 되어있을때
-				$("#declareModal").modal('show');
+				var dc = ${p.loginDeclare};
+				
+				if(dc == 1){
+					alert("이미 신고하신 게시물 입니다");
+				}else{
+					$("#declareModal").modal('show');
+				}
+
 			}
 		});
 	</script>
@@ -376,16 +383,16 @@
 				<form action="pDeclare.do" method="post" id="declare_form">
 				<div class="modal-body">
 					<div class="form-group">
-						<label for="category">신고항목</label> 
-						<select name="category" class="form-control" id="d_category">
-							<option value="" disabled>----</option>
-							<option value="광고">불법광고</option>
-							<option value="도배">도배</option>
-							<option value="음란물">음란물</option>
-							<option value="욕설">욕설 게시물</option>
-							<option value="개인정보침해">개인정보침해</option>
-							<option value="욕설">욕설 게시물 신고</option>
-							<option value="기타">기타</option>
+						<label for="d_category">신고항목</label> 
+						<select name="d_category" class="form-control" id="d_category">
+							<option value="0">----</option>
+							<option value="1">불법광고</option>
+							<option value="2">도배</option>
+							<option value="3">음란물</option>
+							<option value="4">욕설</option>
+							<option value="5">개인정보침해</option>
+							<option value="6">욕설</option>
+							<option value="7">기타</option>
 						</select>
 					</div>
 					<div class="form-group">
@@ -395,6 +402,7 @@
 					
 					<input type="hidden" name="mno" value="${loginUser.mno }">
 					<input type="hidden" name="bno" value="${p.pno}">
+					<input type="hidden" name="dcategory" id="dcategory" value="">
 					
 					<div>
 						<input type="checkbox" name="declare_check" id="declare_check">
@@ -403,8 +411,7 @@
 				</div>
 					
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">취소</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
 					<button type="submit" class="btn btn-success" id="declare_submit">신고하기</button>
 				</div>
 				</form>
@@ -422,26 +429,33 @@
 					
 					// 신고버튼	
 					$("#declare_submit").click(function() {
-						var category = $("#category").val();
+						var d_category = $("#d_category").val();
 						var content = $("#declare_content").val();
 						var cate = $("#d_category option:selected").text();
 						
-						console.log('????');
-						console.log(cate);
+						// cate hidden에 값넣어주기
+						console.log("cate는 : " + cate);
 						
-						if(category == 0){
+						$("#dcategory").val(cate);
+						
+						return;
+						//alert($("#category").val());
+						console.log("category에는 : "+$("#dcategory").val());
+						
+						if(d_category == 0){
 							alert("신고유형을 선택해 주세요");
 							$('#declareModal').modal();
 							return false;
 						}
 						
-						if(cate == '기타'){
+						if(d_category == 7){							
 							if(content.length == 0){
 								alert("신고내용을 입력해주세요");
 								$('#declareModal').modal();
 								return false;
 							}
 						}
+						
 					});
 				
 				</script>
@@ -496,7 +510,7 @@
 	
 	// 댓글폼 클릭시 로그인되있는지 확인
 	$("#likeBtn").on("click", function () {
-		var loginUser = "${loginUser.email}";
+		var loginUser = "  ${loginUser.email}";
 
 		if(loginUser == null || loginUser == ""){
 			alert("로그인 후 이용 가능하세요");

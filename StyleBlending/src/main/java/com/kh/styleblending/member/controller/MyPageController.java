@@ -100,9 +100,9 @@ public class MyPageController {
 	// 내 팬 리스트 호출 메소드
 	@ResponseBody
 	@RequestMapping(value="mpSFanList.do", produces="application/json; charset=UTF-8")
-	public String selectFanList(int mno){
+	public String selectFanList(int mno, int loginMno){
 		
-		ArrayList<Member> list = mpService.selectFanList(mno);
+		ArrayList<Member> list = mpService.selectFanList(mno, loginMno);
 		
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		
@@ -112,9 +112,9 @@ public class MyPageController {
 	// 내 팔로잉 리스트 호출 메소드
 	@ResponseBody
 	@RequestMapping(value="mpSFwList.do", produces="application/json; charset=UTF-8")
-	public String selectFwList(int mno){
+	public String selectFwList(int mno, int loginMno){
 		
-		ArrayList<Member> list = mpService.selectFwList(mno);
+		ArrayList<Member> list = mpService.selectFwList(mno, loginMno);
 		
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		

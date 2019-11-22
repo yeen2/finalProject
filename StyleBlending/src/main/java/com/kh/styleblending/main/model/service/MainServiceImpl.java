@@ -22,15 +22,15 @@ public class MainServiceImpl implements MainService{
 	}
 
 	@Override
-	public ArrayList<Posting> selectPostList() {
+	public ArrayList<Posting> selectPostList(int mno) {
 		// TODO Auto-generated method stub
-		return mainDao.selectPostList();
+		return mainDao.selectPostList(mno);
 	}
 
 	@Override
-	public ArrayList<Posting> selectInfinityScroll() {
+	public ArrayList<Posting> selectInfinityScroll(int mno) {
 		// TODO Auto-generated method stub
-		return mainDao.selectInfinityScroll();
+		return mainDao.selectInfinityScroll(mno);
 	}
 
 	@Override
@@ -38,6 +38,19 @@ public class MainServiceImpl implements MainService{
 		// TODO Auto-generated method stub
 		return mainDao.selectAd();
 	}
+
+	@Override
+	public ArrayList<Posting> selectFilter(Posting p, int mno) {
+		// TODO Auto-generated method stub
+		return mainDao.selectFilter(p, mno);
+	}
+
+	@Override
+	public int increaseLikeCount(int pno) {
+		// TODO Auto-generated method stub
+		return mainDao.increaseLikeCount(pno);
+	}
+
 	
 	
 	

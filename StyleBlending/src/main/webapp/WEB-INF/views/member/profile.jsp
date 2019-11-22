@@ -60,10 +60,10 @@
 						
 						<!-- 팬 버튼  -->
 						<c:if test="${ loginUser.mno != m.mno }">
-							<button class="btn btn-light ml-3" id="fanA" style="display:block;" value="${ m.mno }">
+							<button class="btn btn-light ml-3" id="fanA" class="fanClassA" style="display:block;" value="${ m.mno }">
 							<i class="fa fa-plus"></i><b> Fan</b></button>
 								
-							<button class="btn btn-dark ml-3" id="fanB" style="display:none;" value="${ m.mno }">
+							<button class="btn btn-dark ml-3" id="fanB" class="fanClassB" style="display:none;" value="${ m.mno }">
 							<i style="width:40px;"class="fas fa-check"></i></button>
 						</c:if>
 						
@@ -574,12 +574,19 @@
 		
 		// 팬, 팔로잉 리스트에서 버튼 클릭 시
 		$(document).on("click", ".fanClassA", function(){
-			var fanClassA = $(this).attr("value");
-			insertFan(fanClassA);
+			var fanClassA = $(this);
+			
+			if(${loginUser == null}){
+				alert("로그인 후 이용해주세요.");
+			}else{
+				insertFanList(fanClassA);
+				
+			}
+			
 		});
 		$(document).on("click", ".fanClassB", function(){
-			var fanClassB = $(this).attr("value");
-			deleteFan(fanClassB);
+			var fanClassB = $(this);
+			deleteFanList(fanClassB);
 		});
 		
 		
@@ -603,6 +610,26 @@
 				}
 			});
 		}
+		// insert 팬 리스트
+		function insertFanList(value){
+			var meNo = value.attr("value");
+			$.ajax({
+				url:"mpInsertFan.do",
+				data:{meNo:meNo, youNo:$("#loginMno").val()},
+				type:"post",
+				success:function(result){
+					if(result == 1){
+						value.hide();
+						value.siblings("button").show();
+					}else{
+						console.log("실패");
+					}
+				},
+				error:function(){
+					console.log("ajax 통신 실패");
+				}
+			});
+		}
 		
 		// delete 팬
 		function deleteFan(value){
@@ -615,6 +642,26 @@
 					if(result == 1){
 						$("#fanA").show();
 						$("#fanB").hide();
+					}else{
+						console.log("실패");
+					}
+				},
+				error:function(){
+					console.log("ajax 통신 실패");
+				}
+			});
+		}
+		// delete 팬 리스트
+		function deleteFanList(value){
+			var meNo = value.attr("value");
+			$.ajax({
+				url:"mpDeleteFan.do",
+				data:{meNo:meNo, youNo:$("#loginMno").val()},
+				type:"post",
+				success:function(result){
+					if(result == 1){
+						value.hide();
+						value.siblings("button").show();
 					}else{
 						console.log("실패");
 					}

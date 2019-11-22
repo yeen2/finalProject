@@ -1,6 +1,7 @@
 package com.kh.styleblending.main.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,17 +20,29 @@ public class MainDao {
 		// TODO Auto-generated method stub
 		return (ArrayList)sqlSession.selectList("mainMapper.selectFourWrap");
 	}
-	public ArrayList<Posting> selectPostList(){
-		return (ArrayList)sqlSession.selectList("mainMapper.selectPostList");
+	public ArrayList<Posting> selectPostList(int mno){
+		return (ArrayList)sqlSession.selectList("mainMapper.selectPostList",mno);
 	}
 	
-	public ArrayList<Posting> selectInfinityScroll() {
+	public ArrayList<Posting> selectInfinityScroll(int mno) {
 		// TODO Auto-generated method stub
-		return (ArrayList)sqlSession.selectList("mainMapper.selectInfinityScroll");
+		return (ArrayList)sqlSession.selectList("mainMapper.selectInfinityScroll",mno);
 	}
 	public Ad selectAd() {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("mainMapper.selectAd");
+	}
+
+	public ArrayList<Posting> selectFilter(Posting p, int mno) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("p",p);
+		map.put("mno", mno);
+		return (ArrayList)sqlSession.selectList("mainMapper.selectFilter",map);
+	}
+	public int increaseLikeCount(int pno) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("mainMapper.increaseLikeCount",pno);
 	}
 	
 	
