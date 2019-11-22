@@ -376,16 +376,16 @@
 				<form action="pDeclare.do" method="post" id="declare_form">
 				<div class="modal-body">
 					<div class="form-group">
-						<label for="category">신고항목</label> 
-						<select name="category" class="form-control" id="d_category">
-							<option value="" disabled>----</option>
-							<option value="광고">불법광고</option>
-							<option value="도배">도배</option>
-							<option value="음란물">음란물</option>
-							<option value="욕설">욕설 게시물</option>
-							<option value="개인정보침해">개인정보침해</option>
-							<option value="욕설">욕설 게시물 신고</option>
-							<option value="기타">기타</option>
+						<label for="cate">신고항목</label> 
+						<select name="cate" class="form-control" id="d_category">
+							<option value="0">----</option>
+							<option value="1">불법광고</option>
+							<option value="2">도배</option>
+							<option value="3">음란물</option>
+							<option value="4">욕설</option>
+							<option value="5">개인정보침해</option>
+							<option value="6">욕설</option>
+							<option value="7">기타</option>
 						</select>
 					</div>
 					<div class="form-group">
@@ -395,6 +395,7 @@
 					
 					<input type="hidden" name="mno" value="${loginUser.mno }">
 					<input type="hidden" name="bno" value="${p.pno}">
+					<input type="hidden" name="category">
 					
 					<div>
 						<input type="checkbox" name="declare_check" id="declare_check">
@@ -426,16 +427,20 @@
 						var content = $("#declare_content").val();
 						var cate = $("#d_category option:selected").text();
 						
-						console.log('????');
+						// cate hidden에 값넣어주기
+						$("#category").val(cate);
 						console.log(cate);
 						
-						if(category == 0){
+						if(cate == 0){
+
 							alert("신고유형을 선택해 주세요");
 							$('#declareModal').modal();
 							return false;
 						}
 						
-						if(cate == '기타'){
+						if(cate == 7){
+							console.log('기타야');
+							
 							if(content.length == 0){
 								alert("신고내용을 입력해주세요");
 								$('#declareModal').modal();

@@ -242,12 +242,12 @@ COMMENT ON COLUMN style.color IS '컬러';
 CREATE TABLE  declare (
 	d_no	number		NOT NULL,
 	m_no	number		NOT NULL,
-	b_no	number		NULL,
+	b_no	number		NOT NULL,
 	category	varchar2(100)		NOT NULL,
 	content	varchar2(200)		NULL,
 	enroll_date	date	DEFAULT sysdate	NOT NULL,
 	isCheck	varchar2(10)	DEFAULT 1	NOT NULL,
-	type 	number		NULL
+	type 	number		NOT NULL
 );
 
 COMMENT ON COLUMN declare.d_no IS '신고번호';

@@ -152,7 +152,7 @@
 	<insert id="insertPDeclare">
 		insert into declare
 		values(seq_declare.nextval, #{mno}, #{bno}, #{category}, #{content},
-				sysdate, default, 1);
+				sysdate, default, 1)
 	</insert>
 	
 	
