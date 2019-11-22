@@ -12,7 +12,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style>
 @media ( min-aspect-ratio : 16/9) {
-	.video-foreground  {
+	.video-foreground {
 		height: 300%;
 		top: -100%;
 	}
@@ -232,7 +232,34 @@ li {
 			
 		});
 	}
-  	
+	//좋아요 카운트 증가 script
+ 	function like(a){
+		var likePno = $(a).children().eq(1).val();
+		var likeMno = $(a).children().eq(2).val();
+		//console.log(likePno);
+		var mno = "${loginUser.mno}";
+		console.log(mno);
+		
+		$.ajax({
+			url:"pLikeInsert.do",
+			data:{pno:likePno, mno:mno},
+			type:"get",
+			success:function(data){
+				
+				if(data == 'success'){
+				console.log("좋아요성공");
+				postList();
+					
+				}else{
+					console.log("실패");
+				}
+				
+			},
+			error:function(){
+				console.log("좋아요실패");	
+			}
+		});
+	}
 	$(function(){
 		postList();
 	})
@@ -247,10 +274,49 @@ li {
 			dataType:"json",
 			success:function(data){
 				console.log("성공 PostList");
+				$inputWrap.children().remove();
 				$.each(data,function(index, value){
+					var $input;
+					if(value.loginLike == 0){
+						$input = "<div class='col-md-4 mt-3'>"+
+						 "<div class='component'>"+ 
+						 "<div class='card' style='overflow:hidden;'>"+
+						 "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
+						 "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
+						 "<img src='${pageContext.request.contextPath}/resources/assets/img/배너일.png' style='width: 80px; height: 50px; margin-left: 20px;' />" +
+						 "</div>"+
+						 "<div class='col-6' style='width: 50%; height: 50px; margin-left: 30px;'>"+
+						 "<span style='margin-bottom: 0px; margin-top: 23px;'>"+value.nickName+"<br>"+value.enrollDate+"</span>"+
+						 "</div>"+
+						 "<div class='col-3'style='width: 20%; height: 50px; margin-top: 5px; padding-right: 10px; padding-left: 10px; padding-bottom: 5px;'>"+
+						 "<button class='btn btn-light'>"+
+					 	 "<span style='font-size: 1.2em'>+Fan</span>"+
+						 "</button>"+
+						 "</div>"+
+						 "</div>"+
+						 "<div class='card-body' style='height: 400px; padding: 0px;'>"+
+						 "<a href='pInfo.do?id="+value.pno+" 'style='border-bottom: 0px !important; text-decoration: none black;'>"+
+						 "<img class='card-img' src="+value.imgPath+"/"+value.renameImg+" alt='dog' style='height: 100%;'>"+
+						 "</a>"+
+						 "</div>"+
+						 "<div class='card-footer row'>"+
+						 "<div class='col-3 form-inline'>"+
+						 "<a id onclick='like(this);'><i class='far fa-heart'style='color: gray; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
+						 "<p style='margin: 0px;margin-left:5px;'>"+value.likeCount+"</p>"+
+						 "</div>"+
+						 "<div class='col-3 form-inline' style='padding: 0px;'>"+
+						 "<a href=''><i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i></a>"+
+						 "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
+						 "</div>"+
+						 "</div>"+
+						 "</div>"+
+						 "</div>"+
+						 "</div>"; 
+						
+					}else{
 					
-					console.log("아ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ");
-					var $input = "<div class='col-md-4'>"+
+					
+					$input = "<div class='col-md-4 mt-3'>"+
 								 "<div class='component'>"+ 
 								 "<div class='card' style='overflow:hidden;'>"+
 								 "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
@@ -261,7 +327,7 @@ li {
 								 "<span style='margin-bottom: 0px; margin-top: 23px;'>"+value.nickName+"<br>"+value.enrollDate+"</span>"+
 								 "</div>"+
 								 "<div class='col-3'style='width: 20%; height: 50px; margin-top: 5px; padding-right: 10px; padding-left: 10px; padding-bottom: 5px;'>"+
-								 "<button class='btn btn-dark'>"+
+								 "<button class='btn btn-light'>"+
 							 	 "<span style='font-size: 1.2em'>+Fan</span>"+
 								 "</button>"+
 								 "</div>"+
@@ -273,20 +339,22 @@ li {
 								 "</div>"+
 								 "<div class='card-footer row'>"+
 								 "<div class='col-3 form-inline'>"+
-								 "<a href=''><i class='far fa-heart'style='color: black; font-size: 30px;'></i> </a>"+
-								 "<p style='margin: 0px;'>"+value.likeCount+"</p>"+
+								 "<a href=''><i class='fa fa-heart'style='color: red; font-size: 30px;'></i> </a>"+
+								 "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
 								 "</div>"+
 								 "<div class='col-3 form-inline' style='padding: 0px;'>"+
-								 "<a href=''><i class='far fa-comment' aria-hidden='true' style='color: black; font-size: 30px;'></i></a>"+
-								 "<p style='margin: 0px;'>"+value.replyCount+"</p>"+
+								 "<a href=''><i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i></a>"+
+								 "<p style='margin-left:5px;margin: 0px;'>"+value.replyCount+"</p>"+
 								 "</div>"+
 								 "</div>"+
 								 "</div>"+
 								 "</div>"+
 								 "</div>";
-								 $inputWrap.append($input);						
-								 //$("#fourWrap").append($inputWrap);
-								 //$("#fourWrap").append($input);
+					}
+					
+						 $inputWrap.append($input);
+						 //$("#fourWrap").append($inputWrap);
+						 //$("#fourWrap").append($input);
 				});
 				$("#fourWrap").append($inputWrap);
 			},
@@ -713,56 +781,100 @@ li {
 
 		$(window).scroll(
 				function() {
+					console.log(sel);
 					console.log($(window).scrollTop());
 					console.log($(document).height());
 					console.log($(window).height());
 					
 					var height = $(window).height() - 920;
-					if ($(window).scrollTop() == height && flag == 0) {
+					if ($(window).scrollTop() == height && flag == 0 && sel == null) {
 						console.log(++page);
 						var $inputWrap = $("#inputWrap");
+						
+						var $input;
 						$.ajax({	
 							url:"mainInfinityScroll.do",
 							dataType:"json",
 							success:function(data){
 								console.log("성공 infinitylist");
 								$.each(data,function(index, value){
-									var $input = "<div class='col-md-4'>"+
-									 "<div class='component'>"+ 
-									 "<div class='card' style='overflow:hidden;'>"+
-									 "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
-									 "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
-									 "<img src='${pageContext.request.contextPath}/resources/assets/img/배너일.png' style='width: 80px; height: 50px; margin-left: 20px;' />" +
-									 "</div>"+
-									 "<div class='col-6' style='width: 50%; height: 50px; margin-left: 30px;'>"+
-									 "<span style='margin-bottom: 0px; margin-top: 23px;'><br>"+value.enrollDate+"</span>"+
-									 "</div>"+
-									 "<div class='col-3'style='width: 20%; height: 50px; margin-top: 5px; padding-right: 10px; padding-left: 10px; padding-bottom: 5px;'>"+
-									 "<button class='btn btn-dark'>"+
-								 	 "<span style='font-size: 1.2em'>+Fan</span>"+
-									 "</button>"+
-									 "</div>"+
-									 "</div>"+
-									 "<div class='card-body' style='height: 400px; padding: 0px;'>"+
-									 "<a href='pInfo.do?id=1' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-									 "<img class='card-img' src="+value.imgPath+"/"+value.renameImg+" alt='dog' style='height: 100%;'>"+
-									 "</a>"+
-									 "</div>"+
-									 "<div class='card-footer row'>"+
-									 "<div class='col-3 form-inline'>"+
-									 "<a href=''><i class='far fa-heart'style='color: black; font-size: 30px;'></i> </a>"+
-									 "<p style='margin: 0px;'>"+value.likeCount+"</p>"+
-									 "</div>"+
-									 "<div class='col-3 form-inline' style='padding: 0px;'>"+
-									 "<a href=''><i class='far fa-comment' aria-hidden='true' style='color: black; font-size: 30px;'></i></a>"+
-									 "<p style='margin: 0px;'>30</p>"+
-									 "</div>"+
-									 "</div>"+
-									 "</div>"+
-									 "</div>"+
-									 "</div>";
-									 $inputWrap.append($input);	
-						});
+									if(value.loginLike == 0){
+										$input = "<div class='col-md-4 mt-3'>"+
+										 "<div class='component'>"+ 
+										 "<div class='card' style='overflow:hidden;'>"+
+										 "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
+										 "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
+										 "<img src='${pageContext.request.contextPath}/resources/assets/img/배너일.png' style='width: 80px; height: 50px; margin-left: 20px;' />" +
+										 "</div>"+
+										 "<div class='col-6' style='width: 50%; height: 50px; margin-left: 30px;'>"+
+										 "<span style='margin-bottom: 0px; margin-top: 23px;'>"+value.nickName+"<br>"+value.enrollDate+"</span>"+
+										 "</div>"+
+										 "<div class='col-3'style='width: 20%; height: 50px; margin-top: 5px; padding-right: 10px; padding-left: 10px; padding-bottom: 5px;'>"+
+										 "<button class='btn btn-light'>"+
+									 	 "<span style='font-size: 1.2em'>+Fan</span>"+
+										 "</button>"+
+										 "</div>"+
+										 "</div>"+
+										 "<div class='card-body' style='height: 400px; padding: 0px;'>"+
+										 "<a href='pInfo.do?id=1' style='border-bottom: 0px !important; text-decoration: none black;'>"+
+										 "<img class='card-img' src="+value.imgPath+"/"+value.renameImg+" alt='dog' style='height: 100%;'>"+
+										 "</a>"+
+										 "</div>"+
+										 "<div class='card-footer row'>"+
+										 "<div class='col-3 form-inline'>"+
+										 "<a href=''><i class='far fa-heart'style='color: gray; font-size: 30px;'></i> </a>"+
+										 "<p style='margin: 0px;margin-left:5px;'>"+value.likeCount+"</p>"+
+										 "</div>"+
+										 "<div class='col-3 form-inline' style='padding: 0px;'>"+
+										 "<a href=''><i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i></a>"+
+										 "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
+										 "</div>"+
+										 "</div>"+
+										 "</div>"+
+										 "</div>"+
+										 "</div>"; 
+										
+									}else{
+									
+									
+									$input = "<div class='col-md-4 mt-3'>"+
+												 "<div class='component'>"+ 
+												 "<div class='card' style='overflow:hidden;'>"+
+												 "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
+												 "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
+												 "<img src='${pageContext.request.contextPath}/resources/assets/img/배너일.png' style='width: 80px; height: 50px; margin-left: 20px;' />" +
+												 "</div>"+
+												 "<div class='col-6' style='width: 50%; height: 50px; margin-left: 30px;'>"+
+												 "<span style='margin-bottom: 0px; margin-top: 23px;'>"+value.nickName+"<br>"+value.enrollDate+"</span>"+
+												 "</div>"+
+												 "<div class='col-3'style='width: 20%; height: 50px; margin-top: 5px; padding-right: 10px; padding-left: 10px; padding-bottom: 5px;'>"+
+												 "<button class='btn btn-dark'>"+
+											 	 "<span style='font-size: 1.2em'>+</span>"+
+												 "</button>"+
+												 "</div>"+
+												 "</div>"+
+												 "<div class='card-body' style='height: 400px; padding: 0px;'>"+
+												 "<a href='pInfo.do?id=1' style='border-bottom: 0px !important; text-decoration: none black;'>"+
+												 "<img class='card-img' src="+value.imgPath+"/"+value.renameImg+" alt='dog' style='height: 100%;'>"+
+												 "</a>"+
+												 "</div>"+
+												 "<div class='card-footer row'>"+
+												 "<div class='col-3 form-inline'>"+
+												 "<a href=''><i class='fa fa-heart'style='color: red; font-size: 30px;'></i> </a>"+
+												 "<p style='margin: 0px; margin-left:5px;'>"+value.likeCount+"</p>"+
+												 "</div>"+
+												 "<div class='col-3 form-inline' style='padding: 0px;'>"+
+												 "<a href=''><i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i></a>"+
+												 "<p style='margin-left:5px;margin: 0px;'>"+value.replyCount+"</p>"+
+												 "</div>"+
+												 "</div>"+
+												 "</div>"+
+												 "</div>"+
+												 "</div>";
+									}
+									
+										 $inputWrap.append($input);
+							});
 						$("#fourWrap").append($inputWrap);
 							flag = 1;
 							$("#loading").remove();
@@ -775,6 +887,7 @@ li {
 						});
 					}
 				});			 
+		
 		var sel;
 		$(document).on("click", ".b", function() {
 			console.log("ddd");
@@ -822,26 +935,201 @@ li {
 			$("#selectColor").removeAttr('style');
 			var category = $("#category").val();
 			console.log(sel);
-			console.log(category);
 			console.log(selectC);
-
+			console.log(category);
+			
+			var $inputWrap = $("#inputWrap");
+			
 			$.ajax({
-				url : "index.jsp",
-				data : sel,
-				success : function() {
+				url:"selectFilter.do",
+				data:{gender:sel, color:selectC, category:category},
+				dataType:"json",
+				success : function(data) {
+					//console.log(data[0])
+					//console.log(data[0].nickName)
+					$("#loading").remove();
+					$("#inputWrap").children().remove();
+					var $input 
+					if(data.length == 1){
+						console.log("데이터 한개임 !!!");
+						console.log(data[3]);
+						
+						if(value.loginLike == 0){
+							$input = "<div class='col-md-4 mt-3'>"+
+							 "<div class='component'>"+ 
+							 "<div class='card' style='overflow:hidden;'>"+
+							 "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
+							 "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
+							 "<img src='${pageContext.request.contextPath}/resources/assets/img/배너일.png' style='width: 80px; height: 50px; margin-left: 20px;' />" +
+							 "</div>"+
+							 "<div class='col-6' style='width: 50%; height: 50px; margin-left: 30px;'>"+
+							 "<span style='margin-bottom: 0px; margin-top: 23px;'>"+data[0].nickName+"<br>"+data[0].enrollDate+"</span>"+
+							 "</div>"+
+							 "<div class='col-3'style='width: 20%; height: 50px; margin-top: 5px; padding-right: 10px; padding-left: 10px; padding-bottom: 5px;'>"+
+							 "<button class='btn btn-light'>"+
+						 	 "<span style='font-size: 1.2em'>+Fan</span>"+
+							 "</button>"+
+							 "</div>"+
+							 "</div>"+
+							 "<div class='card-body' style='height: 400px; padding: 0px;'>"+
+							 "<a href='pInfo.do?id=1' style='border-bottom: 0px !important; text-decoration: none black;'>"+
+							 "<img class='card-img' src="+data[0].imgPath+"/"+data[0].renameImg+" alt='dog' style='height: 100%;'>"+
+							 "</a>"+
+							 "</div>"+
+							 "<div class='card-footer row'>"+
+							 "<div class='col-3 form-inline'>"+
+							 "<a href=''><i class='far fa-heart'style='color: gray; font-size: 30px;'></i> </a>"+
+							 "<p style='margin: 0px;margin-left:5px;'>"+data[0].likeCount+"</p>"+
+							 "</div>"+
+							 "<div class='col-3 form-inline' style='padding: 0px;'>"+
+							 "<a href=''><i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i></a>"+
+							 "<p style='margin: 0px;margin-left:5px;'>"+data[0].replyCount+"</p>"+
+							 "</div>"+
+							 "</div>"+
+							 "</div>"+
+							 "</div>"+
+							 "</div>"; 
+							
+						}else{
+						
+						
+						$input = "<div class='col-md-4 mt-3'>"+
+									 "<div class='component'>"+ 
+									 "<div class='card' style='overflow:hidden;'>"+
+									 "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
+									 "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
+									 "<img src='${pageContext.request.contextPath}/resources/assets/img/배너일.png' style='width: 80px; height: 50px; margin-left: 20px;' />" +
+									 "</div>"+
+									 "<div class='col-6' style='width: 50%; height: 50px; margin-left: 30px;'>"+
+									 "<span style='margin-bottom: 0px; margin-top: 23px;'>"+data[0].nickName+"<br>"+data[0].enrollDate+"</span>"+
+									 "</div>"+
+									 "<div class='col-3'style='width: 20%; height: 50px; margin-top: 5px; padding-right: 10px; padding-left: 10px; padding-bottom: 5px;'>"+
+									 "<button class='btn btn-light'>"+
+								 	 "<span style='font-size: 1.2em'>+Fan</span>"+
+									 "</button>"+
+									 "</div>"+
+									 "</div>"+
+									 "<div class='card-body' style='height: 400px; padding: 0px;'>"+
+									 "<a href='pInfo.do?id=1' style='border-bottom: 0px !important; text-decoration: none black;'>"+
+									 "<img class='card-img' src="+data[0].imgPath+"/"+data[0].renameImg+" alt='dog' style='height: 100%;'>"+
+									 "</a>"+
+									 "</div>"+
+									 "<div class='card-footer row'>"+
+									 "<div class='col-3 form-inline'>"+
+									 "<a href=''><i class='fa fa-heart'style='color: red; font-size: 30px;'></i> </a>"+
+									 "<p style='margin: 0px; margin-left:5px;'>"+data[0].likeCount+"</p>"+
+									 "</div>"+
+									 "<div class='col-3 form-inline' style='padding: 0px;'>"+
+									 "<a href=''><i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i></a>"+
+									 "<p style='margin-left:5px;margin: 0px;'>"+data[0].replyCount+"</p>"+
+									 "</div>"+
+									 "</div>"+
+									 "</div>"+
+									 "</div>"+
+									 "</div>";
+						}
+						$inputWrap.append($input);
+						$("#fourWrap").append($inputWrap);
+							
+					}else{
+					
+					$.each(data,function(index, value){
+						if(value.loginLike == 0){
+							$input = "<div class='col-md-4 mt-3'>"+
+							 "<div class='component'>"+ 
+							 "<div class='card' style='overflow:hidden;'>"+
+							 "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
+							 "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
+							 "<img src='${pageContext.request.contextPath}/resources/assets/img/배너일.png' style='width: 80px; height: 50px; margin-left: 20px;' />" +
+							 "</div>"+
+							 "<div class='col-6' style='width: 50%; height: 50px; margin-left: 30px;'>"+
+							 "<span style='margin-bottom: 0px; margin-top: 23px;'>"+value.nickName+"<br>"+value.enrollDate+"</span>"+
+							 "</div>"+
+							 "<div class='col-3'style='width: 20%; height: 50px; margin-top: 5px; padding-right: 10px; padding-left: 10px; padding-bottom: 5px;'>"+
+							 "<button class='btn btn-light'>"+
+						 	 "<span style='font-size: 1.2em'>+Fan</span>"+
+							 "</button>"+
+							 "</div>"+
+							 "</div>"+
+							 "<div class='card-body' style='height: 400px; padding: 0px;'>"+
+							 "<a href='pInfo.do?id=1' style='border-bottom: 0px !important; text-decoration: none black;'>"+
+							 "<img class='card-img' src="+value.imgPath+"/"+value.renameImg+" alt='dog' style='height: 100%;'>"+
+							 "</a>"+
+							 "</div>"+
+							 "<div class='card-footer row'>"+
+							 "<div class='col-3 form-inline'>"+
+							 "<a href=''><i class='far fa-heart'style='color: gray; font-size: 30px;'></i> </a>"+
+							 "<p style='margin: 0px;margin-left:5px;'>"+value.likeCount+"</p>"+
+							 "</div>"+
+							 "<div class='col-3 form-inline' style='padding: 0px;'>"+
+							 "<a href=''><i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i></a>"+
+							 "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
+							 "</div>"+
+							 "</div>"+
+							 "</div>"+
+							 "</div>"+
+							 "</div>"; 
+							
+						}else{
+						
+						
+						$input = "<div class='col-md-4 mt-3'>"+
+									 "<div class='component'>"+ 
+									 "<div class='card' style='overflow:hidden;'>"+
+									 "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
+									 "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
+									 "<img src='${pageContext.request.contextPath}/resources/assets/img/배너일.png' style='width: 80px; height: 50px; margin-left: 20px;' />" +
+									 "</div>"+
+									 "<div class='col-6' style='width: 50%; height: 50px; margin-left: 30px;'>"+
+									 "<span style='margin-bottom: 0px; margin-top: 23px;'>"+value.nickName+"<br>"+value.enrollDate+"</span>"+
+									 "</div>"+
+									 "<div class='col-3'style='width: 20%; height: 50px; margin-top: 5px; padding-right: 10px; padding-left: 10px; padding-bottom: 5px;'>"+
+									 "<button class='btn btn-light'>"+
+								 	 "<span style='font-size: 1.2em'>+Fan</span>"+
+									 "</button>"+
+									 "</div>"+
+									 "</div>"+
+									 "<div class='card-body' style='height: 400px; padding: 0px;'>"+
+									 "<a href='pInfo.do?id=1' style='border-bottom: 0px !important; text-decoration: none black;'>"+
+									 "<img class='card-img' src="+value.imgPath+"/"+value.renameImg+" alt='dog' style='height: 100%;'>"+
+									 "</a>"+
+									 "</div>"+
+									 "<div class='card-footer row'>"+
+									 "<div class='col-3 form-inline'>"+
+									 "<a href=''><i class='fa fa-heart'style='color: red; font-size: 30px;'></i> </a>"+
+									 "<p style='margin: 0px; margin-left:5px;'>"+value.likeCount+"</p>"+
+									 "</div>"+
+									 "<div class='col-3 form-inline' style='padding: 0px;'>"+
+									 "<a href=''><i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i></a>"+
+									 "<p style='margin-left:5px;margin: 0px;'>"+value.replyCount+"</p>"+
+									 "</div>"+
+									 "</div>"+
+									 "</div>"+
+									 "</div>"+
+									 "</div>";
+							}
+						
+							 $inputWrap.append($input);
+					});
+					$("#fourWrap").append($inputWrap);
+					}
 					man(category);
-					console.log("성공");
+					console.log("성공"); 
+					
+					
 				},
 				error : function() {
 					console.log("실패");
 				}
 			});
 		}
+		
 		function man(category) {
-
+			
 			console.log("안녕하e");
 
 			var filter = $("#filter-drop");
+			filter.children().remove();
 			/*filter.css("border: 1px solid black; width: 100%; height: 50px; margin-top: 50px") */
 			filter
 					.append("<i class='fa fa-sliders fa-md' style='color:white; margin-top:13px; margin-left:399px;'>"
@@ -917,7 +1205,7 @@ li {
 
 			var $ul = $("#ticker2");
 
-			$
+				$
 					.ajax({
 						url : "topSearch.do",
 						dataType : "json",
