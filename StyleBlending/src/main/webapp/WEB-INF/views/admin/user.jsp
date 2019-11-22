@@ -49,41 +49,33 @@
 	
 	<jsp:include page="header.jsp" />
      
-        <div class="content">
+    	<div class="content">
             <div class="animated fadeIn">
                 <div class="row">
-                
-                <div class="col-lg-12">
+                	<div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">
                                 <strong class="card-title">회원 목록</strong>
                             </div>
-                          
-                          
-                          <div class="row">
-                          	<div class="col-sm-12 col-md-6" style="padding:20px;">
-                          		<div class="dataTables_length" id="bootstrap-data-table_length">
-                          			<label style="display:inline-flex";>Show 
-                          				<select name="boardLimit"  class="form-control form-control-sm" onchange="pageSet(value);" >
-                          					<option value="5" <c:if test="${pi.boardLimit eq '5' }">selected</c:if>>5</option>
-                          					<option value="10" <c:if test="${pi.boardLimit eq '10' }">selected</c:if>>10</option>
-                          					<option value="20" <c:if test="${pi.boardLimit eq '20' }">selected</c:if>>20</option>
-                          					<option value="30" <c:if test="${pi.boardLimit eq '30' }">selected</c:if>>30</option>
-                          				</select> entries
-                          			</label>
-                          		</div>
+                            
+                            <div class="row">
+	                            <div class="col-md-10 offset-md-1" style="padding:20px;">
+	                          		<label style="display:inline-flex; padding-right:20px;">Show 
+	                       				<select name="boardLimit"  class="form-control form-control-sm" onchange="pageSet(value);" >
+	                       					<option value="5" <c:if test="${pi.boardLimit eq '5' }">selected</c:if>>5</option>
+	                       					<option value="10" <c:if test="${pi.boardLimit eq '10' }">selected</c:if>>10</option>
+	                       					<option value="20" <c:if test="${pi.boardLimit eq '20' }">selected</c:if>>20</option>
+	                       					<option value="30" <c:if test="${pi.boardLimit eq '30' }">selected</c:if>>30</option>
+	                       				</select> entries
+	                       			</label>
+	                       			<label for="keyword" style="display:inline-flex;" >Search: &nbsp;
+	                       				<input type="search" id="keyword" class="form-control form-control-sm col-sm-12" placeholder="아이디 또는 닉네임을 입력해주세요." aria-controls="bootstrap-data-table">
+	                       			</label>
+		                        	<button type="button" id="deleteBtn" data-toggle="modal" data-target="#deleteModal" class="btn btn-secondary btn-sm" style="float:right; margin-right:10px; margin-top:15px;" >
+		                        		회원삭제
+		                        	</button>
+	                          	</div>
                           	</div>
-                          	
-                          	<div class="col-sm-12 col-md-6">
-                       			<label for="keyword" style="display:inline-flex; padding:15px;">Search: &nbsp;
-                       				<input type="search" id="keyword" class="form-control form-control-sm col-sm-12" placeholder="아이디 또는 닉네임을 입력해주세요." aria-controls="bootstrap-data-table">
-                       			</label>
-	                        	<button type="button" id="deleteBtn" data-toggle="modal" data-target="#deleteModal" class="btn btn-secondary btn-sm" style="float:right; margin-right:10px; margin-top:15px;" >
-	                        		회원삭제
-	                        	</button>
-                          	</div>
-                          </div>
-                          
                       
                             <div class=" table-stats order-table ov-h col-md-10 offset-md-1">                            	
                                 <table class="table">
@@ -136,7 +128,7 @@
                                 
                                 <div class="row">
 	                                <div class="col-sm-4" style="margin-left:10px;">
-	                                	Showing ${pi.currentPage } to ${pi.endPage } of ${pi.listCount } entries	
+	                                	Showing <strong> ${pi.currentPage } to ${pi.endPage }</strong> of <strong> ${pi.listCount }</strong> entries	
 	                                </div>
 	                                
 	                                <div class=".col-md-6 .offset-md-3">

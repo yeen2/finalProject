@@ -52,17 +52,15 @@
     
 		<div class="content ">
             <div class="animated fadeIn ">
+            <div class="card">
                <div class="card-header" >
                    <strong class="card-title">신고목록</strong>
                </div>
               
-              <div class="card-header" style="background:white;">
                           
                   
                   <div class="row">
-                  
-                  
-                  	<div class="card-body card-block">
+                  	<div class="col-md-10 offset-md-1" style="padding:20px;">
                         <form action="aDeclare.do" method="get" class="form-inline">
                         <div class="col-5 col-md-7">
                			  	게시판명 &nbsp;
@@ -73,12 +71,12 @@
                              </select>&nbsp;
                         	<button type="submit" class="btn btn-primary btn-sm">검색</button>
                         </div>
-                        <div class="col-5 col-md-5">
+                        <div class="offset-md-4">
                   		   <button type="button" class="btn btn-outline-danger btn-sm" id="deleteBtn" 
                   		   data-toggle="modal" data-target="#deleteModal">
                   		   	게시물삭제
                   		   </button>
-                  		 </div>
+                        </div>
                         </form>
                     </div>
                   </div>
@@ -143,7 +141,7 @@
                                 
                                 <div class="row">
 	                                <div class="col-sm-4" style="margin-left:10px;">
-	                                	Showing ${pi.currentPage } to ${pi.endPage } of ${pi.listCount } entries	
+	                                	Showing <b> ${pi.currentPage } to ${pi.endPage }</b> of <b> ${pi.listCount }</b> entries
 	                                </div>
 	                                
 	                                <div class=".col-md-6 .offset-md-3">
