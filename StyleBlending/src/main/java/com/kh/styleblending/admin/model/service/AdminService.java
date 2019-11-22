@@ -43,8 +43,11 @@ public interface AdminService {
 	// 총 광고수 조회
 	int getAdListCount();
 	
-	// 광고 목록 조회용
+	// 광고 목록 조회용(페이징포함)
 	ArrayList<Ad> selectAdList(PageInfo pi);
+	
+	// 광고 승인대기 리스트 조회용
+	ArrayList<Ad> selectAdNewList();
 	
 	// 광고 등록
 	int insertAd(Ad ad);

@@ -89,7 +89,7 @@
 		                          				<input type="search" id="adName" class="form-control form-control-sm col-sm-10" placeholder="업체명으로 검색" aria-controls="bootstrap-data-table">
 		                          			</label>
 				                        	<button type="button" id="deleteBtn" class="btn btn-outline-danger btn-sm" style="float:right; margin-right:10px; margin-top:15px;">취소</button>
-				                        	<button type="button" class="btn btn-outline-primary btn-sm" style="float:right; margin-right:10px; margin-top:15px;">
+				                        	<button type="button" id="adStartBtn" class="btn btn-outline-primary btn-sm" style="float:right; margin-right:10px; margin-top:15px;">
 				                        		<i class="fa fa-magic"></i>등록
 				                        	</button>
 		                          		</div>
@@ -100,13 +100,7 @@
 	                                <table class="table">
 	                                    <thead >
 	                                        <tr>
-	                                        	<th>
-	                                        		<label class="switch switch-3d switch-danger mr-3">
-	                                        			<input type="checkbox" class="switch-input" checked="true">
-	                                       				<span class="switch-label"></span> 
-	                                       				<span class="switch-handle"></span>
-	                                        		</label>
-	                                        	</th>
+	                                        	<th><input type="checkbox" name="checkAll" id="checkAll" onclick="allCheck();"/></th>
 	                                            <th class="serial">No.</th>
 	                                            <th>업체명</th>
 	                                            <th>신청일자</th>
@@ -119,12 +113,8 @@
 	                                    <tbody>
 	                                        <tr>
 	                                        	<td>
-	                                        		<label class="switch switch-3d switch-danger mr-3">
-	                                        			<input type="checkbox" class="switch-input" checked="true">
-	                                       				<span class="switch-label"></span> 
-	                                       				<span class="switch-handle"></span>
-	                                        		</label>
-	                                        	</td>
+                                        			<input name="checkRow" type="checkbox" id="checkRow" value="${a.adno}" />
+                                        		</td>
 	                                            <td class="serial">${a.adno}</td>
 	                                            <td>${a.name }</td>
 	                                            <td> ${a.enrollDate } </td>
@@ -132,13 +122,13 @@
 	                                            <td> ${a.endDate } </td>
 	                                            <td>
 	                                            	<c:if test="${a.status eq 1 }">
-	                                            	<span class="badge" style="background:#ffc107;">등록 대기</span>
+	                                            	<span class="badge adWaiting" style="background:#ffc107;">등록 대기</span>
 	                                                </c:if>
 	                                                <c:if test="${a.status eq 2 }">
-	                                                <span class="badge" style="background:rgb(0, 123, 255);">진행중</span>
+	                                                <span class="badge adOngoing" style="background:rgb(0, 123, 255);">진행중</span>
 	                                                </c:if>
 	                                                <c:if test="${a.status eq 3 }">
-	                                                <span class="badge" style="background:gray;">종료</span>
+	                                                <span class="badge adEnd" style="background:gray;">종료</span>
 	                                                </c:if>
 	                                            </td>
 	                                        </tr>
@@ -204,63 +194,41 @@
                            
                               
                               <!-- 승인대기 목록 -->
-                              <div class="tab-pane fade" id="nav-waiting" style="display:inline-flex;" role="tabpanel" >
-				                	<div class="col-md-4">
-				                        <div class="card">
-				                            <img class="card-img-top" src="https://i.imgur.com/ue0AB6J.png" alt="Card image cap">
-				                            <div class="card-body">
-				                                <h4 class="card-title mb-3">나이키</h4>
-				                                <p>2019.11.08</p>
-				                            </div>
-				                        </div>
-				                    </div>
-				                    
-				                    <div class="col-md-4">
-				                        <div class="card">
-				                            <img class="card-img-top" src="https://i.imgur.com/hrS2McC.png" alt="Card image cap">
-				                            <div class="card-body">
-				                                <h4 class="card-title mb-3">아디다스</h4>
-				                            </div>
-				                        </div>
-				                    </div>
-				                    
-				                    <div class="col-md-4">
-				                        <div class="card">
-				                            <img class="card-img-top" src="https://i.imgur.com/MUBS4Gh.png" alt="Card image cap">
-				                            <div class="card-body">
-				                                <h4 class="card-title mb-3">칼하트</h4>
-				                            </div>
-				                        </div>
-				                    </div>
+                              <div class="tab-pane fade row" id="nav-waiting" style="display:inline-flex;" role="tabpanel" >
+                              <c:forEach items="${newList }" var="a">
+                              <c:if test="${a.status eq 1 }">
+			                    <div class="col-md-4" >
+			                        <div class="card col-md-8">
+			                            <img class="card-img-top" src="${pageContext.request.contextPath}${a.imgPath}${a.renameImg}" alt="Card image cap">
+			                            <div class="card-body">
+			                                <h4 class="card-title mb-3">${a.name}</h4>
+			                                 <p class="card-text">${a.enrollDate}</p>
+			                            </div>
+			                        </div>
+				                </div>
+                              </c:if>		
+                              </c:forEach>
                               </div>
                               
                               
                              <!-- 진행중 목록 -->
                                <div class="tab-pane fade" id="nav-ongoing" style="display:inline-flex;" role="tabpanel">
-			                     <div class="col-md-4" >
-			                     		<%-- <c:if test="${!empty startAd}"> --%>
+		                     		<c:if test="${!empty startAd}"> 
+				                    <div class="col-md-4" >
 				                        <div class="card">
 				                            <img class="card-img-top" src="${pageContext.request.contextPath}${startAd.imgPath}${startAd.renameImg}" alt="Card image cap">
 				                            <div class="card-body">
 				                                <h4 class="card-title mb-3">${startAd.name}</h4>
-				                                 <p class="card-text">${startAd.enrollDate}~ </p>
+				                                 <p class="card-text">${startAd.startDate}~ </p>
 				                            </div>
 				                        </div>
-				                        <%-- </c:if> --%>
-				                  </div>
+					                </div>
+			                        </c:if>
+			                        <c:if test="${empty startAd }">
+			                        	<b>진행중인 광고가 없습니다.</b><br>
+			                        </c:if>
                              </div>
                              
-                             
-                               <!-- Tab panes -->
-      <!--   <div class="tab-content">
-          <div role="tabpanel" class="tab-pane active" id="home">안녕<br>안녕</div>
-          <div role="tabpanel" class="tab-pane" id="profile">혜은이 바보</div>
-          <div role="tabpanel" class="tab-pane" id="messages">...</div>
-          <div role="tabpanel" class="tab-pane" id="settings">...</div>
-        </div>
-      </div> -->
-                             
-                          
 							</div>
                       </div>
                   
@@ -316,6 +284,34 @@
      } 
 	
 	//history.replaceState({}, null, location.pathname);
+	
+	$(function(){
+		/* $(".adWaiting").mouseenter(function(){
+			alert("ㅎㅎ");
+			$(this).removeAttr('disabled');
+		}).mouseleave(function(){
+			$(this).attr("disabled", true);
+		}); */
+		
+			$('input[type="checkbox"][name="checkRow"]').click(function(){
+				// click 이벤트 발생시
+				if($(this).prop('checked')&& 
+						$('input[type="checkbox"][name="checkRow"]:checked').size()>1){
+					$(this).prop('checked',false);
+					alert('두개이상 선택할수없습니다');
+					
+				}
+			})
+		$("#adStartBtn").on("click",function(){
+			var checkRow = "";
+			checkRow = $("#checkRow").val();
+			var adno = checkRow;
+			alert(adno);
+		});
+		
+		
+		
+	});
 
 	</script>
 

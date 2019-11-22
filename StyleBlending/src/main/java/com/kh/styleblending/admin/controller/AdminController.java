@@ -128,9 +128,10 @@ public class AdminController {
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, boardLimit);
 		
 		ArrayList<Ad> list = aService.selectAdList(pi);
+		ArrayList<Ad> newList = aService.selectAdNewList();
 		Ad startAd = aService.selectStartAd();
 		
-		mv.addObject("pi",pi).addObject("list",list).addObject("startAd",startAd).setViewName("admin/advertisment");
+		mv.addObject("pi",pi).addObject("list",list).addObject("startAd",startAd).addObject("newList", newList).setViewName("admin/advertisment");
 		
 		return mv;
 	}
