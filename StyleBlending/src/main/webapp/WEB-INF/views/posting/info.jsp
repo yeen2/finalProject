@@ -383,8 +383,8 @@
 				<form action="pDeclare.do" method="post" id="declare_form">
 				<div class="modal-body">
 					<div class="form-group">
-						<label for="cate">신고항목</label> 
-						<select name="cate" class="form-control" id="d_category">
+						<label for="d_category">신고항목</label> 
+						<select name="d_category" class="form-control" id="d_category">
 							<option value="0">----</option>
 							<option value="1">불법광고</option>
 							<option value="2">도배</option>
@@ -402,7 +402,7 @@
 					
 					<input type="hidden" name="mno" value="${loginUser.mno }">
 					<input type="hidden" name="bno" value="${p.pno}">
-					<input type="hidden" name="category">
+					<input type="hidden" name="dcategory" id="dcategory" value="">
 					
 					<div>
 						<input type="checkbox" name="declare_check" id="declare_check">
@@ -411,8 +411,7 @@
 				</div>
 					
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">취소</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
 					<button type="submit" class="btn btn-success" id="declare_submit">신고하기</button>
 				</div>
 				</form>
@@ -430,30 +429,33 @@
 					
 					// 신고버튼	
 					$("#declare_submit").click(function() {
-						var category = $("#d_category").val();
+						var d_category = $("#d_category").val();
 						var content = $("#declare_content").val();
 						var cate = $("#d_category option:selected").text();
 						
 						// cate hidden에 값넣어주기
-						$("#category").val(cate);
-						console.log(cate);
+						console.log("cate는 : " + cate);
 						
-						if(category == 0){
-
+						$("#dcategory").val(cate);
+						
+						return;
+						//alert($("#category").val());
+						console.log("category에는 : "+$("#dcategory").val());
+						
+						if(d_category == 0){
 							alert("신고유형을 선택해 주세요");
 							$('#declareModal').modal();
 							return false;
 						}
 						
-						if(category == 7){
-							console.log('기타야');
-							
+						if(d_category == 7){							
 							if(content.length == 0){
 								alert("신고내용을 입력해주세요");
 								$('#declareModal').modal();
 								return false;
 							}
 						}
+						
 					});
 				
 				</script>

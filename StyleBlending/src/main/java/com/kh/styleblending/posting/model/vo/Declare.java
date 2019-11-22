@@ -18,7 +18,7 @@ public class Declare {
 	private int dno;
 	private int mno;
 	private int bno;  // 해당 신고 게시물 번호
-	private String category;
+	private String dcategory;
 	private String content;
 	private Date enrollDate;
 	private String isCheck;
