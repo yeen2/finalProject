@@ -354,7 +354,14 @@
 				return;
 				
 			}else{ // 로그인 되어있을때
-				$("#declareModal").modal('show');
+				var dc = ${p.loginDeclare};
+				
+				if(dc == 1){
+					alert("이미 신고하신 게시물 입니다");
+				}else{
+					$("#declareModal").modal('show');
+				}
+
 			}
 		});
 	</script>
@@ -423,7 +430,7 @@
 					
 					// 신고버튼	
 					$("#declare_submit").click(function() {
-						var category = $("#category").val();
+						var category = $("#d_category").val();
 						var content = $("#declare_content").val();
 						var cate = $("#d_category option:selected").text();
 						
@@ -431,14 +438,14 @@
 						$("#category").val(cate);
 						console.log(cate);
 						
-						if(cate == 0){
+						if(category == 0){
 
 							alert("신고유형을 선택해 주세요");
 							$('#declareModal').modal();
 							return false;
 						}
 						
-						if(cate == 7){
+						if(category == 7){
 							console.log('기타야');
 							
 							if(content.length == 0){
