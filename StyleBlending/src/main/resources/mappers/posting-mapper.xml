@@ -151,7 +151,7 @@
 	<!-- 신고 -->
 	<insert id="insertPDeclare">
 		insert into declare
-		values(seq_declare.nextval, #{mno}, #{bno}, #{category}, #{content},
+		values(seq_declare.nextval, #{mno}, #{bno}, #{dcategory}, #{content},
 				sysdate, default, 1)
 	</insert>
 	

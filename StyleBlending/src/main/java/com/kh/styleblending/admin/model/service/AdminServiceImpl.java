@@ -96,6 +96,12 @@ public class AdminServiceImpl implements AdminService{
 		// 광고 목록조회
 		return aDao.selectAdList(pi);
 	}
+	
+	@Override
+	public ArrayList<Ad> selectAdNewList() {
+		// 승인대기 광고 목록 리스트
+		return aDao.selectAdNewList();
+	}
 
 	@Override
 	public int insertAd(Ad ad) {
@@ -111,6 +117,8 @@ public class AdminServiceImpl implements AdminService{
 		}
 		
 	}
+
+	
 
 	
 

@@ -171,6 +171,12 @@
 		order by ad.status, ad.ad_no desc, ad.enroll_date )t1
 	</select>
 	
+	<select id="selectAdNewList" resultMap="AdResultSet">
+		select *
+		from ad
+		where status='1'
+	</select>
+	
 	<insert id="insertPay">
 		insert into pay
 		values(seq_pay.nextval,#{mno},'1000',sysdate,default)
@@ -181,4 +187,11 @@
 		values(seq_ad.nextval,#{mno},seq_pay.currval,#{name},#{url},#{originalImg},#{renameImg},'/resources/upload/advertisment/',sysdate,null,null,default)
 	</insert>
 	
+	<!-- 
+	<update id="" parameterType="">
+		update ad
+		set status='1'
+		where ad_no='7'
+	</update>
+	 -->
 </mapper>
