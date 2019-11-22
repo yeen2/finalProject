@@ -104,9 +104,9 @@
 			</div>
 		</div>
 		
-		<div class="navigation d-flex justify-content-center">
+		<div class="navigation d-flex justify-content-center" id="tabMenu">
 			<!-- 메뉴바 -->
-			<ul id="tabMenu" class="nav nav-primary nav-tabs mt-3 d-flex flex-column flex-md-row">
+			<ul class="nav nav-primary nav-tabs mt-3 d-flex flex-column flex-md-row">
 				<li class="nav-item">
 					<a class="nav-link active" data-toggle="tab" href="#postingL" id="postingTabBtn"> 
 					<i class="fas fa-th"></i>
@@ -138,6 +138,9 @@
 		<div class="profile-tabs tab-content">
 			<!-- 내 업로드 사진목록 -->
 			<div class="tab-pane fade show active text-center" id="postingL">
+				<div id="postingEmpty">
+				
+				</div>
 				<div class="row" id="postingList">
 					
 				</div>
@@ -148,6 +151,9 @@
 			
 			<!-- 내 좋아요 사진목록-->
 			<div class="tab-pane fade text-center" id="likeL">
+				<div id="likeEmpty">
+				
+				</div>
 				<div class="row" id="likeList">
 					
 				</div>
@@ -158,6 +164,9 @@
 			
 			<!-- 나를 팔로우한 친구 목록 -->
 			<div class="tab-pane fade text-center" id="fanL">
+				<div id="fanEmpty">
+				
+				</div>
 				<div align="center">
 					<div id="fanList" style="width:555px;">
 						
@@ -172,6 +181,9 @@
 			
 			<!-- 내가 팔로잉한 친구 목록 -->
 			<div class="tab-pane fade text-center" id="followingL">
+				<div id="followingEmpty">
+					
+				</div>
 				<div align="center">
 					<div id="followingList" style="width:555px;">
 						
@@ -238,14 +250,17 @@
 				dataType:"json",
 				success:function(list){
 					if(list.length == 0){
+						$("#postingEmpty").html("");
+						
 						var $a1 = $("<p>").attr("class", "lead");
 						var $a2 = $("<span>").attr("class", "text-danger");
 						$a2.append($("<i>").attr("class", "far fa-frown-open"));
 						$a1.append($a2);
 						$a1.append(" 포스팅한 게시물이 없습니다.");
 						
-						$("#postingL").prepend($a1);
+						$("#postingEmpty").append($a1);
 					}else{
+						$("#postingEmpty").html("");
 						if(list.length > 6){
 							$("#pBtn").css("display", "block");
 						}
@@ -290,14 +305,17 @@
 				dataType:"json",
 				success:function(list){
 					if(list.length == 0){
+						$("#likeEmpty").html("");
+						
 						var $a1 = $("<p>").attr("class", "lead");
 						var $a2 = $("<span>").attr("class", "text-danger");
 						$a2.append($("<i>").attr("class", "far fa-frown-open"));
 						$a1.append($a2);
 						$a1.append(" 좋아요한 게시물이 없습니다.");
 						
-						$("#likeL").prepend($a1);
+						$("#likeEmpty").append($a1);
 					}else{
+						$("#likeEmpty").html("");
 						if(list.length > 6){
 							$("#lBtn").css("display", "block");
 						}
@@ -340,7 +358,7 @@
 				dataType:"json",
 				success:function(list){
 					if(list.length == 0){
-						$("#fanL").html("");
+						$("#fanEmpty").html("");
 						
 						var $a1 = $("<p>").attr("class", "lead");
 						var $a2 = $("<span>").attr("class", "text-danger");
@@ -348,8 +366,9 @@
 						$a1.append($a2);
 						$a1.append(" ${m.nickName}님을 팔로우한 팬이 없습니다.");
 						
-						$("#fanL").prepend($a1);
+						$("#fanEmpty").append($a1);
 					}else{
+						$("#fanEmpty").html("");
 						if(list.length > 12){
 							$("#fBtn").css("display", "block");
 						}
@@ -431,7 +450,7 @@
 				dataType:"json",
 				success:function(list){
 					if(list.length == 0){
-						$("#followingL").html("");
+						$("#followingEmpty").html("");
 						
 						var $a1 = $("<p>").attr("class", "lead");
 						var $a2 = $("<span>").attr("class", "text-danger");
@@ -439,8 +458,9 @@
 						$a1.append($a2);
 						$a1.append(" 마음에 드는 사람의 팬이 되어주세요.");
 						
-						$("#followingL").prepend($a1);
+						$("#followingEmpty").append($a1);
 					}else{
+						$("#followingEmpty").html("");
 						if(list.length > 12){
 							$("#wBtn").css("display", "block");
 						}
@@ -784,10 +804,17 @@
 	    });
 
 		// 탭 클릭 시 새로고침 해도 탭 페이지 유지 (수정 필요)
-		$(document).ready(function(){
+		/* $(document).ready(function(){
 			var url = document.location.href;
 			var tab = url.split('/').pop();
 			$(tab).trigger("click");
+		}); */
+		$(function(){
+			var tab = location.hash;
+			$("#postingTabBtn" + tab).trigger("click");
+			var tab2 = location.hash;
+			$("#likeTabBtn" + tab2).trigger("click");
+			
 		});
 		
 	</script>

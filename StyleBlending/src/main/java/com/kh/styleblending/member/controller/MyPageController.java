@@ -323,18 +323,6 @@ public class MyPageController {
 		}
 	}
 	
-	// 팬 리스트 체크
-	@ResponseBody
-	@RequestMapping("mpSFanCheckTab.do")
-	public int[] selectFanCheckTab(Fan f) {
-		int[] result = mpService.selectFanCheckTab(f);
-		
-		if(result != null) {
-			return result;
-		}else {
-			return null;
-		}
-	}
 	
 	// insert 팬
 	@ResponseBody

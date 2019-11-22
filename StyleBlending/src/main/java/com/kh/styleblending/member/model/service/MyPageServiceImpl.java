@@ -146,11 +146,6 @@ public class MyPageServiceImpl implements MyPageService {
 	public int selectFanCheck(Fan f) {
 		return mpDao.selectFanCheck(f);
 	}
-
-	@Override
-	public int[] selectFanCheckTab(Fan f) {
-		return mpDao.selectFanCheckTab(f);
-	}
 	
 	@Override
 	public int insertFan(Fan f) {

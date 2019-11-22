@@ -143,7 +143,7 @@ public class HomeController {
 			}
 			mv.setViewName("redirect:" + session.getAttribute("prevPage"));
 		}else {
-			mv.addObject("msg", "로그인 실패").setViewName("common/errorPage");
+			mv.addObject("msg", "로그인 실패").setViewName("common/login");
 		}
 		
 		return mv;
