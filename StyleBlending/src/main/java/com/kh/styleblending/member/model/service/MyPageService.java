@@ -40,7 +40,7 @@ public interface MyPageService {
 	ArrayList<Ad> selectAdList(int mno, PageInfo pi);
 	
 	// 프로필 관리 - 비밀번호 변경
-	int updatePass(Member m);
+	Member updatePass(Member m);
 	
 	// 프로필 관리 - 회원 탈퇴
 	int deleteMember(int mno);
@@ -53,9 +53,6 @@ public interface MyPageService {
 	
 	// 프로필 페이지 - 팬 버튼 체크
 	int selectFanCheck(Fan f);
-	
-	// 프로필 페이지 - 팬 탭 버튼 체크
-	int[] selectFanCheckTab(Fan f);
 	
 	// 프로필 페이지 - insert 팬
 	int insertFan(Fan f);

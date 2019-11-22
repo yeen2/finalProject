@@ -252,9 +252,10 @@ public class MyPageController {
 	@RequestMapping("mpUpdatePass.do")
 	public ModelAndView updatePass(Member m, ModelAndView mv, HttpSession session) {
 		m.setMno(((Member)session.getAttribute("loginUser")).getMno());
-		int result = mpService.updatePass(m);
+		Member mem = mpService.updatePass(m);
 		
-		if(result > 0) {
+		if(mem != null) {
+			session.setAttribute("loginUser", mem);
 			mv.addObject("msg", "비밀번호 변경에 성공하였습니다.").setViewName("member/myPage");
 		}else {
 			mv.addObject("msg", "비밀번호 변경에 실패하였습니다.").setViewName("common/errorPage");
@@ -322,18 +323,6 @@ public class MyPageController {
 		}
 	}
 	
-	// 팬 리스트 체크
-	@ResponseBody
-	@RequestMapping("mpSFanCheckTab.do")
-	public int[] selectFanCheckTab(Fan f) {
-		int[] result = mpService.selectFanCheckTab(f);
-		
-		if(result != null) {
-			return result;
-		}else {
-			return null;
-		}
-	}
 	
 	// insert 팬
 	@ResponseBody

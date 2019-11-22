@@ -73,8 +73,31 @@ public class MyPageServiceImpl implements MyPageService {
 	}
 
 	@Override
-	public int updatePass(Member m) {
-		return mpDao.updatePass(m);
+	public Member updatePass(Member m) {
+		int mno = m.getMno();
+		
+		DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+		def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
+		
+		TransactionStatus status = transactionManager.getTransaction(def);
+		
+		try {
+			sqlSession.getConnection().setAutoCommit(false);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		int result = mpDao.updatePass(m);
+		Member mem = mpDao.selectProfile(mno);
+		
+		if(result > 0 && mem != null) {
+			transactionManager.commit(status);
+			return mem;
+		}else {
+			transactionManager.rollback(status);
+			return null;
+		}
+		
 	}
 
 	@Override
@@ -122,11 +145,6 @@ public class MyPageServiceImpl implements MyPageService {
 	@Override
 	public int selectFanCheck(Fan f) {
 		return mpDao.selectFanCheck(f);
-	}
-
-	@Override
-	public int[] selectFanCheckTab(Fan f) {
-		return mpDao.selectFanCheckTab(f);
 	}
 	
 	@Override

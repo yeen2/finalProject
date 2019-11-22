@@ -173,18 +173,6 @@
 		where me_no=#{meNo} and you_no=#{youNo}
 	</select>
 	
-	<select id="selectFanCheckTab" resultType="int">
-		select me_no
-		from fan
-		where me_no in
-		
-		<foreach collection="array" index="index" item="meNoArr" open="(" separator="," close=")">
-			#{meNoArr}
-		</foreach>
-		
-		and you_no=#{youNo}
-	</select>
-	
 	<insert id="insertFan">
 		insert into fan values(seq_fan.nextval, #{meNo}, #{youNo}, sysdate)
 	</insert>

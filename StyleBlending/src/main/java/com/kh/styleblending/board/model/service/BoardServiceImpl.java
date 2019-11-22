@@ -88,6 +88,42 @@ public class BoardServiceImpl implements BoardService{
 		return bDao.fashionSelectList(pi);
 	}
 
+	
+	// 자유게시판 추천
+		@Override
+		public int insertBoardLike(int bno, int mno) {
+			return bDao.insertBoardLike(bno, mno);
+		}
+
+		@Override
+		public int deleteBoardLike(int bno, int mno) {
+
+			return bDao.deleteBoardLike(bno, mno);
+		}
+
+		@Override
+		public int blikeCheckUp(int bno) {
+
+			return bDao.blikeCheckUp(bno);
+		}
+
+		@Override
+		public int blikeCheckDown(int bno) {
+
+			return bDao.blikeCheckDown(bno);
+		}
+
+		@Override
+		public int selectBoardLikeCnt(int bno) {
+
+			return bDao.selectBoardLikeCnt(bno);
+		}
+
+		@Override
+		public int selectBoardLikeCheck(int bno, int mno) {
+
+			return bDao.selectBoardLikeCheck(bno, mno);
+		}
 
 
 

@@ -89,10 +89,6 @@ public class MyPageDao {
 		return sqlSession.selectOne("mypageMapper.selectFanCheck", f);
 	}
 	
-	public int[] selectFanCheckTab(Fan f) {
-		return sqlSession.selectOne("mypageMapper.selectFanCheckTab", f);
-	}
-	
 	public int insertFan(Fan f) {
 		return sqlSession.insert("mypageMapper.insertFan", f);
 	}
