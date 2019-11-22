@@ -151,8 +151,16 @@
 #fanAreaBtn, #brandAreaBtn, #hashtagAreaBtn, #locationAreaBtn{width:24%;}
 
 </style>
-
-
+<script type="text/javascript">
+	$(function(){
+		
+		var msg = "${msg}";
+		if(msg != null && msg != ""){
+			alert(msg);
+		}
+	});
+</script>	
+	
 </head>
 </head>
 <body>

@@ -402,8 +402,7 @@
 					
 					<input type="hidden" name="mno" value="${loginUser.mno }">
 					<input type="hidden" name="bno" value="${p.pno}">
-					<input type="hidden" name="dcategory" id="dcategory" value="">
-					
+					<input type="hidden" name="dcategory" id="dcategory">
 					<div>
 						<input type="checkbox" name="declare_check" id="declare_check">
 						<label for="declare_check">한번 신고하시면 취소할 수 없습니다. 동의시 체크해주세요.</label>
