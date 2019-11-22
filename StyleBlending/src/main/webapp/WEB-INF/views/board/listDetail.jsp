@@ -30,6 +30,7 @@
 	display: none;
 }
 .detailOuter{font-size: 13px;}
+#UDbtnArea{margin-top: 20px;}
 </style>
 </head>
 <body>
@@ -65,17 +66,23 @@
 				
 				<div id="best" align="center">
 				
-				<c:choose>
-					<c:when test="${ mno ne null }">
-						<button type="button" class="btn btn-warning" id="lickUp" style="text-align: center;" onclick="location.href='like';">추천 ${ b.likeCount }</button>
-					</c:when>
-					<c:otherwise>
-						<button type="button" class="btn btn-warning" id="likeDown" style="text-align: center;" onclick="location.href='login_need';">추천 ${ b.likeCount-1 }</button>
-					</c:otherwise>
-				</c:choose>	
+					<c:choose>
+						<c:when test="${ mno ne null }">
+							<button type="button" class="btn btn-warning" id="lickUp" style="text-align: center;" onclick="location.href='like';">추천 ${ b.likeCount }</button>
+						</c:when>
+						<c:otherwise>
+							<button type="button" class="btn btn-warning" id="likeDown" style="text-align: center;" onclick="location.href='login_need';">추천 ${ b.likeCount-1 }</button>
+						</c:otherwise>
+					</c:choose>	
+				</div>
 				
-					<button type="button" class="btn btn-light detail" id="btnUpdate" style="float: right; padd">수정</button>
-					<button type="button" class="btn btn-light detail" id="btnDelete" style="float: right; margin-right: 5px;">삭제</button>
+				<div id="UDbtnArea">
+				<c:if test="${ loginUser.mno eq b.mno }">
+					<button type="button" class="btn btn-light detail" id="btnUpdate" style="float: right; padd"
+													onclick="location.href='bupdate.do?bno=${ b.bno }';">수정</button>
+					<button type="button" class="btn btn-light detail" id="btnDelete" style="float: right; margin-right: 5px;"
+													onclick="location.href='bdelete.do?bno=${ b.bno }';">삭제</button>
+				</c:if>
 					<button type="button" class="btn btn-light detail" id="btnList"
 						style="float: right; margin-right: 5px;" onclick="location.href='blist.do';">목록으로</button>
 				</div>
@@ -91,7 +98,8 @@
 				<div class="replylist">
 					<br>
 					<div>
-						<span><strong style="font-size: 20px;">댓글</strong></span>&nbsp;<span id="rCnt" style="color: yellow; font-size: 30px;">1</span>
+						<span><strong style="font-size: 20px;">댓글</strong></span>&nbsp;
+							<span id="rCnt" style="color: yellow; font-size: 30px;">1</span>
 					</div>
 					<table class="replylistArea">
 						<tr>
@@ -104,7 +112,7 @@
 							<td><textarea rows="3" cols="80" id="comment" name="comment" style="resize: none;"></textarea></td>
 							<td>
 								<div class="replyBtn">
-									<button type="button" class="btn btn-light" style="width: 80px; height: 67px; margin-left: 10px;">등록</button>
+									<button class="btn btn-light" style="width: 80px; height: 67px; margin-left: 10px;">등록</button>
 								</div>
 							</td>
 						</tr>
@@ -135,8 +143,8 @@
 					<div class="reply-comment">
 						<img src="${pageContext.request.contextPath}/resources/assets/img/board/icons8-sun-64.png" alt="member">
 						<textarea rows="3" cols="80" id="comment" name="commnet" style="resize:none;"></textarea>
-						<a href="bupdate.do?bno=${ b.bno }" style="text-decoration: none; display: none;" id="a-update">수정</a>
-						<a href="bdelete.do?bno=${ b.bno }" style="text-decoration: none; display: none;" id="a-delete">삭제</a>						
+						<a href="" style="text-decoration: none; display: none;" id="a-update">수정</a>
+						<a href="" style="text-decoration: none; display: none;" id="a-delete">삭제</a>						
 					</div>
 				</div>
 			</form>
@@ -148,11 +156,96 @@
 	<jsp:include page="../includes/footer.jsp"/>
 	
 	<script>
+		// 삭제시 이벤트
+		
+		
+		//댓글 수정,삭제 이벤트
 		$(".reply-comment").mouseover(function(){
 			$(this).children('a').show();
 		}).mouseleave(function(){
 			$(this).children('a').hide();
 		});
+		
+		//댓글 ajax
+		$(function(){
+			getReplyList();
+			
+			$("#rBtn").on("click", function(){
+				
+				var content = $("#comment").val();
+				var bno = ${ b.bno };
+				var mno = "${ loginUser.mno }";
+				
+				$jax({
+					url:"rinsert.do",
+					data:{content:content,
+						  brno:brno,
+						  mno:mno},
+					success:function(data){
+						
+						if(data== 'success'){
+							getReplyList();
+							$("#comment").val("");
+						}else{
+							alert("댓글 작성 실패");
+						}
+					},
+					error:function(data){
+						console.log("댓글 ajax 실패");
+					}
+					
+				});
+				
+			});
+			
+		});
+		
+		
+		function getReplyList(){
+			
+			$ajax({
+				url:"replyList.do",
+				data:{mno:${b.mno}},
+				dataType:"json",
+				success:function(data){
+					
+					$div1 = $(".reply-comment")
+					$div1.html("");
+					
+					$("#rCnt").text(data.length);
+					
+					if(data.length > 0){
+						
+						$each(data, function(index, value){
+							$div2 = $("<div></div>")
+							
+							$img = $("<img src='${pageContext.request.contextPath}/resources/upload/member/${ b.renameImg }';");
+							$textarea = $("<textarea></textarea>").text(value.content);
+							$date = $("<p></p>").text(value.enrollDate);
+							
+							$div2.append($img);
+							$div2.append($textarea);
+							$div2.append($date);
+							
+							$div1.append($div2);
+							
+						});
+					}else {
+						
+						$div = $("<div></div>");
+						
+						$h5 = $("<h5></h5>").text("등록된 댓글이 없습니다.");
+						
+						$div.append($h5);
+					}
+					
+				},
+				error:function(data){
+					console.log("댓글 ajax 통신 실패")
+				}
+				
+			});
+		}
 	</script>
 	
 </body>

@@ -16,7 +16,7 @@
 		<result property="isDelete" column="isdelete"/>
 		<result property="likeCount" column="like_count"/>
 		<result property="imagelIST" column="image_List"/>	<!-- 컬럼별칭 설정함-->
-		
+		<result column="rename_img" property="renameImg"/>
 	</resultMap>
 
 <resultMap type="FashionBoard" id="fashionBoardResultSet">
@@ -46,16 +46,21 @@
 <select id="selectList" resultMap="boardResultSet">
 	select *
 	from board
+	where isdelete='N'
 	order by b_no desc
 </select>
 
 <select id="fashionSelectList" resultMap="fashionBoardResultSet">
-	select * from fashion_board order by fb_no desc
+	select * 
+	from fashion_board 
+	where isdelete='N'
+	order by fb_no desc
 </select>
 
 <select id="selectBoard" resultMap="boardResultSet">
-	select * 
-	from board
+	select b.*, m.rename_img 
+	from board b
+	join member m on(m.m_no = b.m_no)
 	where b_no=#{bno}
 </select>
 
@@ -75,18 +80,40 @@
 	set count = count+1
 	where b_no = #{bno} 
 </update>
-<!-- ************************************* 추천 수정중-->
-<!-- <update id="likeCheck">
-	update board
-	set like_count = like_count+1
-	where mno=#{mno} and b_no=#{bno} 
+
+<update id="deleteBoard"> 
+update board 
+set isdelete='Y' where b_no=#{bno} 
 </update>
 
-<update id="likeCheckCancel">
-	update board
-	set like_count = 0
-	where mno=#{mno} and b_no=#{bno}
-</update> -->
-<!-- ************************************* -->
+<update id="updateBoard"> 
+update board 
+set title=#{title}, content=#{content} where b_no=#{bno}
+</update>
+
+<insert id="insertBoardLike" parameterType="HashMap"> 
+insert into b_like values(#{bno}, #{mno})
+</insert>
+
+<update id="blikeCheckUp"> 
+update board set likeCount = likeCount+1 where isdelete='N' 
+</update>
+
+<select id="selectBoardLikeCnt" resultType="_int"> 
+select count(*) from b_like where b_no=#{bno} 
+</select>
+
+<select id="selectBoardLikeCheck" resultType="_int"> 
+select count(*) from b_like where b_no=#{bno} and m_no=#{mno} 
+</select>
+
+<update id="blikeCheckDown"> 
+update board set likeCount = likeCount-1 where isdelete='N' 
+</update>
+
+<delete id="deleteBoardLike" parameterType="HashMap"> 
+delete from b_like where m_no=#{mno} and b_no=#{bno} 
+</delete>
+
 
 </mapper>

@@ -19,7 +19,7 @@
 	<jsp:include page="../includes/header.jsp"/>
 	
 	<div class="detailOuter">
-		<h4>자유게시판</h4>
+		<h4>자유게시판 </h4>
 
 		<br><br>
 		
