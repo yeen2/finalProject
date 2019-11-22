@@ -36,7 +36,6 @@
 	
 	<result property="bno" column="b_no"/>
 	<result property="content" column="content"/>
-	<result property="count" column="count"/>
 	<result property="enrollDate" column="enroll_date"/>
 	<result property="isDelete" column="isdelete"/>
 </resultMap>
@@ -91,6 +90,18 @@ update board
 set title=#{title}, content=#{content} where b_no=#{bno}
 </update>
 
+<select id="selectBoardReplyList" resultMap="BoardReplyResultSet">
+	select *
+	from b_reply
+	where b_no=#{brno} and isdelete='N'
+	order by brno desc
+</select>
+
+<insert id="insertBoardReply">
+	insert into b_reply
+	values(seq_b_reply, #{bno}, #{content}, sysdate, default)
+</insert>
+
 <insert id="insertBoardLike" parameterType="HashMap"> 
 insert into b_like values(#{bno}, #{mno})
 </insert>
@@ -108,7 +119,9 @@ select count(*) from b_like where b_no=#{bno} and m_no=#{mno}
 </select>
 
 <update id="blikeCheckDown"> 
-update board set likeCount = likeCount-1 where isdelete='N' 
+update board 
+set likeCount = likeCount-1 
+where isdelete='N' 
 </update>
 
 <delete id="deleteBoardLike" parameterType="HashMap"> 

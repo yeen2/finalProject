@@ -87,7 +87,8 @@ public class BoardController {
 	
 	
 	@RequestMapping("binsert.do")
-	public String insertBoard(Board b , HttpServletRequest request, Model model, MultipartFile upload) {
+	public String insertBoard(Board b , HttpServletRequest request, Model model, 
+								MultipartFile upload) {
 							
 //		if(!upload.getOriginalFilename().equals("")) {
 //		
@@ -153,7 +154,7 @@ public class BoardController {
 	@RequestMapping(value = "imageUpload.do", method = RequestMethod.POST)
 	public String imageUpload(HttpServletRequest request, HttpServletResponse response,
 							MultipartFile upload) {
-		System.out.println("dd");
+		//System.out.println("dd");
 		JsonObject json = new JsonObject();
 		OutputStream out = null;
 		PrintWriter printWriter = null;
@@ -202,18 +203,6 @@ public class BoardController {
 			String fileUrl = "resources/bImgUploadFiles"+ "/" + fileName; 
 
 			//System.out.println("왜 찍어야?"+fileUrl);
-
-//			printWriter.println("<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction("
-//
-//					+ callback
-//
-//					+ ",'"
-//
-//					+ fileUrl
-//
-//					+ "','이미지를 업로드 하였습니다.'"
-//
-//					+ ")</script>");
 
 			 json.addProperty("uploaded", 1);
              json.addProperty("fileName", fileName);

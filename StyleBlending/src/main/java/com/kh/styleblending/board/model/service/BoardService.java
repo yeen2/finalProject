@@ -23,7 +23,7 @@ public interface BoardService {
 	int deleteBoard(int bno);
 	
 	// 게시글 댓글 리스트 조회
-	ArrayList<BoardReply> selectBoardReplyList(int bno);
+	ArrayList<BoardReply> selectBoardReplyList(int brno);
 	
 	// 댓글 작성
 	int insertBoardReply(BoardReply r);

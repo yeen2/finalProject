@@ -27,6 +27,7 @@ public class Board {
 	private Date updateDate;
 	private String isDelete;
 	private int likeCount;
+	private String renameImg;
 	
 	private ArrayList<Image> imageList;
 	

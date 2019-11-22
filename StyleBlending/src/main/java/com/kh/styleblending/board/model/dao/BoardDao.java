@@ -45,12 +45,12 @@ public class BoardDao {
 
 	public ArrayList<BoardReply> selectBoardReplyList(int brno) {
 
-		return null;
+		return (ArrayList)sqlSession.selectList("boardMapper.selectBoardReplyList", brno);
 	}
 
 	public int insertBoardReply(BoardReply r) {
 
-		return 0;
+		return sqlSession.insert("boardMapper.insertBoardReply", r);
 	}
 
 	public int getListCount() {
