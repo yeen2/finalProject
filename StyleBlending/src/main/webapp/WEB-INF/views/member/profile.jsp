@@ -221,8 +221,6 @@
 		$(function(){
 			selectPostingList();
 			selectLikeList();
-			selectFanList();
-			selectFwList();
 			selectFanCheck();
 			
 			/* selectFanCheckTab(); */
@@ -542,17 +540,27 @@
 		
 		// 팬, 팔로잉 탭버튼 클릭 시
 		$(function(){
-			if(${loginUser != null}){
-				$("#fanTabBtn").click(function(){
+			$("#fanTabBtn").click(function(){
+				if(${loginUser == null}){
+					alert("로그인 후 이용해주세요.");
+					return false;
+				}else{
 					$("#fanList").html("");
 					selectFanList();
-				});
-				
-				$("#followingTabBtn").click(function(){
+					
+				}
+			});
+			
+			$("#followingTabBtn").click(function(){
+				if(${loginUser == null}){
+					alert("로그인 후 이용해주세요.");
+					return false;
+				}else{
 					$("#followingList").html("");
 					selectFwList();
-				});
-			}
+					
+				}
+			});
 			
 		});
 		

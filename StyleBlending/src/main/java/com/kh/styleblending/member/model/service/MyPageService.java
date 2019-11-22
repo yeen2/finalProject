@@ -40,7 +40,7 @@ public interface MyPageService {
 	ArrayList<Ad> selectAdList(int mno, PageInfo pi);
 	
 	// 프로필 관리 - 비밀번호 변경
-	int updatePass(Member m);
+	Member updatePass(Member m);
 	
 	// 프로필 관리 - 회원 탈퇴
 	int deleteMember(int mno);
