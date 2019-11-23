@@ -812,8 +812,7 @@
 		$(function(){
 			var tab = location.hash;
 			$("#postingTabBtn" + tab).trigger("click");
-			var tab2 = location.hash;
-			$("#likeTabBtn" + tab2).trigger("click");
+			tab = location.hash;
 			
 		});
 		
