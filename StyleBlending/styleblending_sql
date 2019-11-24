@@ -848,6 +848,18 @@ insert into board values(seq_board.nextval, 12 , '어깨 아파', 'ㅎㅎㅎㅎ�
 insert into board values(seq_board.nextval, 13 , '오늘 치킨먹을까?', 'ㅓㅓㅓㅓㅓㅓㅓㅓ',default,sysdate, sysdate,default,default);
 
 
+-- 자유게시판 댓글 insert
+INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,5, '댓글1', sysdate, default);
+INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,4, '댓글2', sysdate, default);
+INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,3, '댓글3', sysdate, default);
+INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,2, '댓글4', sysdate, default);
+INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,1, '댓글5', sysdate, default);
+INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,6, '댓글6', sysdate, default);
+INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,7, '댓글7', sysdate, default);
+INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,8, '댓글8', sysdate, default);
+INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,9, '댓글9', sysdate, default);
+ 
+
 -- 자유게시판 신고  insert
 insert into declare values(seq_declare.nextval,1,1,'비방',null,sysdate,1,2);
 insert into declare values(seq_declare.nextval,17,1,'비방',null,sysdate,1,2);

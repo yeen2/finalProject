@@ -274,6 +274,7 @@ public class BoardController {
 		
 	}
 	
+	
 	// 업로드 파일삭제
 	public void deleteFile(String renameFileName, HttpServletRequest request) {
 		String root = request.getSession().getServletContext().getRealPath("resources");
@@ -287,6 +288,7 @@ public class BoardController {
 		}
 	}
 		
+	
 	@RequestMapping("bupateView.do")
 	public ModelAndView boardUpdateView(int bno, ModelAndView mv) {
 		
@@ -296,6 +298,7 @@ public class BoardController {
 		return mv;
 		
 	}
+	
 	
 	@RequestMapping("bupdate.do")
 	public String boardUpdate(Board b , HttpServletRequest request, ModelAndView mv,
@@ -328,22 +331,25 @@ public class BoardController {
 	
 	
 	@ResponseBody
-	@RequestMapping("replyList.do")
-	public String replyList(int brno) {
+	@RequestMapping(value="replyList.do", produces="application/json; charset=UTF-8")
+	public String replyList(int bno) {
 		
-		ArrayList<BoardReply> list = bService.selectBoardReplyList(brno);
+		ArrayList<BoardReply> list = bService.selectBoardReplyList(bno);
 		
-		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM--dd").create();
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		
 		return gson.toJson(list);
 		
 	}
+	
 	
 	@ResponseBody
 	@RequestMapping("rinsert.do")
 	public String insertReply(BoardReply r) {
 			
 		int result = bService.insertBoardReply(r);
+		
+		//System.out.println("result : " + result);
 		
 		if(result > 0 ) {
 			return "success";
@@ -353,5 +359,53 @@ public class BoardController {
 		
 	}
 	
+	// 추천 추가
+	@ResponseBody
+	@RequestMapping("binsertLike.do")
+	public String insertBoardLike(int bno, int mno) {
+		
+		int result1 = bService.insertBoardLike(bno, mno);
+		int result2 = bService.blikeCheckUp(bno);
+		
+		if(result1 > 0 && result2 > 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
 	
+	
+	// 추천 제거
+	@ResponseBody
+	@RequestMapping("bdeleteLike.do")
+	public String deleteBoardLike(int bno, int mno) {
+		
+		int result1 = bService.deleteBoardLike(bno, mno);
+		int result2 = bService.blikeCheckDown(bno);
+		
+		if(result1 > 0 && result2 > 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+		
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping("blikeCount.do")
+	public String selectBoardLikeCnt(int bno) {
+		String result = Integer.toString(bService.selectBoardLikeCnt(bno));
+		
+		return result;
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping("blikeCheck.do")
+	public String selectBoardLikeCheck(int bno, int mno) {
+		String result = Integer.toString(bService.selectBoardLikeCheck(bno, mno));
+		
+		return result;
+	}
 }

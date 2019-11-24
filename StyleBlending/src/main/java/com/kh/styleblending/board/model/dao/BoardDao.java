@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.styleblending.board.model.vo.Board;
 import com.kh.styleblending.board.model.vo.BoardReply;
+import com.kh.styleblending.board.model.vo.Declare;
 import com.kh.styleblending.board.model.vo.FashionBoard;
 import com.kh.styleblending.board.model.vo.PageInfo;
 
@@ -42,10 +43,11 @@ public class BoardDao {
 
 		return sqlSession.update("boardMapper.deleteBoard", bno);
 	}
+	
+	// 댓글
+	public ArrayList<BoardReply> selectBoardReplyList(int bno) {
 
-	public ArrayList<BoardReply> selectBoardReplyList(int brno) {
-
-		return (ArrayList)sqlSession.selectList("boardMapper.selectBoardReplyList", brno);
+		return (ArrayList)sqlSession.selectList("boardMapper.selectBoardReplyList", bno);
 	}
 
 	public int insertBoardReply(BoardReply r) {
@@ -57,7 +59,8 @@ public class BoardDao {
 
 		return sqlSession.selectOne("boardMapper.getListCount");
 	}
-
+	
+	// 자유게시판 리스트
 	public ArrayList<Board> selectList(PageInfo pi) {
 
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
@@ -69,7 +72,7 @@ public class BoardDao {
 		return list;
 	}
 
-	
+	// 패션 게시판 리스트
 	public ArrayList<FashionBoard> fashionSelectList(PageInfo pi) {
 		
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
@@ -81,6 +84,7 @@ public class BoardDao {
 		return list;
 	}
 	
+	// --------------------------------- 추천 --------------------------------------
 	public int insertBoardLike(int bno, int mno) {
 		HashMap hsm = new HashMap<>();
 		hsm.put("bno", bno);
@@ -116,6 +120,11 @@ public class BoardDao {
 		hsm.put("mno", mno);
 		
 		return sqlSession.selectOne("boardMapper.selectBoardLikeCheck", hsm);
+	}
+
+	public int insertbDeclare(Declare d) {
+
+		return sqlSession.insert("boardMapper.insertbDeclare", d);
 	}
 
 

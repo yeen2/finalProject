@@ -31,5 +31,12 @@ public class Board {
 	
 	private ArrayList<Image> imageList;
 	
+	//닉네임
+	private String nickName;
+	
+	
+	// 로그인한 회원이 좋아요
+	private int loginLike;
+	
 	
 }

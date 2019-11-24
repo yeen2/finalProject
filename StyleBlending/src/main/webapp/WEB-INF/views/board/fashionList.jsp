@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -45,10 +46,10 @@ body {padding-top: 20px;}
 			<h4>패션 정보 게시판</h4>
 			<br>
 			<div class="form-group" style="float: left; width: 200px;">
-				<select class="custom-select" style="height: 32px;">
-					<option selected>----</option>
-					<option value="fredBoard">자유게시판</option>
-					<option value="fashionInfo">패션정보게시판</option>
+				<select class="custom-select" onchange="location.href=this.value">
+					<option selected>분류</option>
+					<option value="blist.do">자유게시판</option>
+					<option value="fblist.do">패션정보게시판</option>
 				</select>
 			</div>
 			<br><br>
@@ -60,11 +61,11 @@ body {padding-top: 20px;}
 						<img src="${pageContext.request.contextPath}/resources/assets/img/board/정보1.jpg" alt="..." 
 							onclick="location.href='${pageContext.request.contextPath}/views/board/listDetail.jsp';" class="img-responsive img-thumbnail">
 						<div class="caption">
-							<h5>f/w 신상품1</h5>
-							<p id="writer">작성자</p>
+							<h5>${ f.title }</h5>
+							<p id="writer">${ f.mno }</p>
 							<div class="date-count">
-							<p id="createDate">19.11.01</p>
-							<p id="count">조회수</p>
+							<p id="createDate">${ f.enrollDate }</p>
+							<p id="count">${ f.count }</p>
 							</div>							
 						</div>
 					</div>
@@ -74,32 +75,6 @@ body {padding-top: 20px;}
 						<img src="${pageContext.request.contextPath}/resources/assets/img/board/e00f099626279f50d2fdfaa56f456132155509.jpg" alt="..." class="img-responsive img-thumbnail">
 						<div class="caption">
 							<h5>f/w 신상품2</h5>
-							<p id="writer">작성자</p>
-							<div class="date-count">
-							<p id="createDate">19.11.01</p>
-							<p id="count">조회수</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-6 col-md-3 line">
-					<div class="thumbnail">
-						<img src="${pageContext.request.contextPath}/resources/assets/img/board/f3ccdd27d2000e3f9255a7e3e2c48800120034.jpg" alt="..." class="img-responsive img-thumbnail">
-						<div class="caption">
-							<h5>제목</h5>
-							<p id="writer">작성자</p>
-							<div class="date-count">
-							<p id="createDate">19.11.01</p>
-							<p id="count">조회수</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-6 col-md-3 line">
-					<div class="thumbnail">
-						<img src="${pageContext.request.contextPath}/resources/assets/img/board/정보4.jpg" alt="" class="img-responsive img-thumbnail">
-						<div class="caption">
-							<h5>제목</h5>
 							<p id="writer">작성자</p>
 							<div class="date-count">
 							<p id="createDate">19.11.01</p>
@@ -128,22 +103,54 @@ body {padding-top: 20px;}
 		</div>
 
 		<div id="readBtn">
+			<c:if test="${ !empty loginUser }">
 			<button class="btn btn-primary btn-sm" id="write" type="submit" style="float: right;"
-			onclick="location.href='${pageContext.request.contextPath}/views/board/listDetailWrite.jsp';">글쓰기</button>
+			onclick="location.href=location.href='binsertForm.do';">글쓰기</button>
+			</c:if>
 		</div>
 		
 		<!-- 페이징  -->
 		<br><br>
 		<div class="pagingArea" style="margin-top: 50px; margin-bottom: 30px;">
 			<ul class="pagination" style="justify-content: center;">
-				<li class="page-item disabled"><a class="page-link" href="#a"><i
-						class="fas fa-long-arrow-alt-left"></i></a></li>
-				<li class="page-item active"><a class="page-link" href="#a">1</a>
+				<li class="page-item disabled">
+					<!-- 이전 --> <!-- 수정중 --> 
+					<c:if test="${ pi.currentPage eq 1 }">
+						<i class="fas fa-long-arrow-alt-left"></i>
+					</c:if> 
+					<c:if test="${ pi.currentPage ne 1 }">
+						<c:url value="fblist.do" var="before">
+							<c:param name="currentPage" value="${ pi.currentPage-1 }" />
+						</c:url>
+						<a class="page-link" href="${ before }"><i
+							class="fas fa-long-arrow-alt-left"></i></a>
+					</c:if>
 				</li>
-				<li class="page-item"><a class="page-link" href="#a">2</a></li>
-				<li class="page-item"><a class="page-link" href="#a">3</a></li>
-				<li class="page-item"><a class="page-link" href="#a"><i
-						class="fas fa-long-arrow-alt-right"></i></a></li>
+				<!-- 페이지  -->
+				<c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
+					<li class="page-item active">
+						<c:if test="${ p eq pi.currentPage }">
+							<a class="page-link" href="#a">${ p }</a>
+						</c:if> 
+						<c:if test="${ p ne pi.currentPage }">
+							<c:url value="fblist.do" var="page">
+								<c:param name="currentPage" value="${ p }" />
+							</c:url>
+							<a class="page-link" href="${ page }">${ p }</a>
+						</c:if>
+					</li>
+				</c:forEach>
+
+				<!-- 다음 -->
+				<li class="page-item"><c:if test="${ pi.currentPage eq pi.maxPage }">
+						<i class="fas fa-long-arrow-alt-right"></i>
+					</c:if> <c:if test="${ pi.currentPage ne pi.maxPage }">
+						<c:url value="fblist.do" var="last">
+							<c:param name="currentPage" value="${ pi.currentPage+1 }" />
+						</c:url>
+						<a class="page-link" href="${ last }"> <i
+							class="fas fa-long-arrow-alt-right"></i></a>
+					</c:if></li>
 			</ul>
 		</div>
 	</div>

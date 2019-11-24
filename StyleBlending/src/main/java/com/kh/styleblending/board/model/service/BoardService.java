@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import com.kh.styleblending.board.model.vo.Board;
 import com.kh.styleblending.board.model.vo.BoardReply;
+import com.kh.styleblending.board.model.vo.Declare;
 import com.kh.styleblending.board.model.vo.FashionBoard;
-import com.kh.styleblending.board.model.vo.Image;
 import com.kh.styleblending.board.model.vo.PageInfo;
 
 public interface BoardService {
@@ -23,7 +23,7 @@ public interface BoardService {
 	int deleteBoard(int bno);
 	
 	// 게시글 댓글 리스트 조회
-	ArrayList<BoardReply> selectBoardReplyList(int brno);
+	ArrayList<BoardReply> selectBoardReplyList(int bno);
 	
 	// 댓글 작성
 	int insertBoardReply(BoardReply r);
@@ -52,4 +52,6 @@ public interface BoardService {
 		int selectBoardLikeCnt(int bno);
 		int selectBoardLikeCheck(int bno , int mno);
 	
+	// 게시판 신고
+	int insertbDeclare(Declare d);
 }
