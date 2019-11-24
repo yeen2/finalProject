@@ -62,7 +62,7 @@ $("#adListTab").click(function(){
 	//alert("gg");
 	$("#nav-waiting div").attr("style","display:none");	
 	$("#nav-ongoing div").attr("style","display:none");	
-	$("#nav-home div").attr("style","display:contents");	
+	$("#nav-home div").attr("style","display:block");	
 	
 });
 

@@ -70,6 +70,10 @@ public class AdminDao {
 		return sqlSession.update("adminMapper.deleteDeclareBoard",dno);
 	}
 	
+	public int updateIsCheck(String dno) {
+		return sqlSession.update("adminMapper.updateIsCheck", dno);
+	}
+	
 	public int getAdListCount() {
 		// 총 광고수 조회
 		return sqlSession.selectOne("adminMapper.getAdListCount");
@@ -97,6 +101,10 @@ public class AdminDao {
 	
 	public int updateStartAd(String adno) {
 		return sqlSession.update("adminMapper.updateStartAd",adno);
+	}
+	
+	public int updateEndAd() {
+		return sqlSession.update("adminMapper.updateEndAd");
 	}
 	
 }

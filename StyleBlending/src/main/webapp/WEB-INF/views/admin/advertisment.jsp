@@ -88,7 +88,7 @@
 		                          			<label style="display:inline-flex; padding:15px;">Search: &nbsp;
 		                          				<input type="search" id="adName" class="form-control form-control-sm col-sm-10" placeholder="업체명으로 검색" aria-controls="bootstrap-data-table">
 		                          			</label>
-				                        	<button type="button" id="deleteBtn" class="btn btn-outline-danger btn-sm" style="float:right; margin-right:10px; margin-top:15px;">취소</button>
+				                        	<button type="button" id="adEndBtn" data-toggle="modal" data-target="#adEndModal" class="btn btn-outline-danger btn-sm" style="float:right; margin-right:10px; margin-top:15px;">마감</button>
 				                        	<button type="button" id="adStartBtn" data-toggle="modal" data-target="#adStartModal"  class="btn btn-outline-primary btn-sm" style="float:right; margin-right:10px; margin-top:15px;">
 				                        		<i class="fa fa-magic"></i>등록
 				                        	</button>
@@ -221,6 +221,15 @@
 				                            </div>
 				                        </div>
 					                </div>
+					                <div class="col-md-4" >
+				                        <div class="card">
+				                            <img class="card-img-top" src="${pageContext.request.contextPath}${startAd.imgPath}${startAd.renameImg}" alt="Card image cap">
+				                            <div class="card-body">
+				                                <h4 class="card-title mb-3">${startAd.name}</h4>
+				                                 <p class="card-text">${startAd.startDate} ~ </p>
+				                            </div>
+				                        </div>
+					                </div>
 			                        </c:if>
 			                        <c:if test="${empty startAd }">
 			                        	<b>진행중인 광고가 없습니다.</b><br>
@@ -248,11 +257,11 @@
         
            
       <!-- 광고 마감 모달창 -->     
-      <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="true">
+      <div class="modal fade" id="adEndModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-sm" role="document">
                <div class="modal-content">
                    <div class="modal-header">
-                       <h5 class="modal-title" id="staticModalLabel"><b>회원 탈퇴</b></h5>
+                       <h5 class="modal-title" id="staticModalLabel"><b>광고 마감</b></h5>
                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                            <span aria-hidden="true">&times;</span>
                        </button>
@@ -262,12 +271,12 @@
                            	해당 광고를 마감하시겠습니까?
                       </p>
                       <p>
-                           	<!-- 이미 탈퇴된 회원인 경우 회원목록에서 삭제됩니다. -->
+                           	마감시 등록여부 종료로 변경됩니다.
                       </p>
                     </div>
                     <div class="modal-footer">
                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                       <button type="button" class="btn btn-primary" onclick="deleteAction();">Confirm</button>
+                       <button type="button" class="btn btn-primary" id="adEndConfirm" onclick="">Confirm</button>
                     </div>
                 </div>
             </div>
@@ -288,7 +297,7 @@
                            	<b>해당 광고를 등록하시겠습니까?</b>
                       </p>
                       <p>
-                           	등록시 진행중인 광고는 자동 마감됩니다. 
+                           	등록시 현재 진행중인 광고는 자동 마감됩니다. 
                       </p>
                     </div>
                     <div class="modal-footer">
@@ -341,6 +350,33 @@
 					  	    });
 					    }else{
 					    	alert("승인 대기인 광고가 아닙니다.");
+					    	return false;
+					   }
+			  	  
+				  }
+				  
+			});
+			
+			$("#adEndBtn").click(function(){ // 마감버튼 클릭시 모달창 뜨도록
+				  var checkRow = ""; // if문 안에서 사용하기위해
+				  var adno = "";
+				  $( "input[name='checkRow']:checked" ).each (function(){
+				    checkRow = $(this).val(); 
+				  });
+				  
+			  	  if(checkRow == ''){
+				    alert("마감할 광고를 선택하세요.");
+				    return false;
+				  }else{
+					  
+					  if(checkRow.charAt(checkRow.length-1) == 2){
+					    	adno = checkRow.slice(0,-1);		    	
+					  	    $("#adEndModal").show();
+					  	    $("#adEndConfirm").click(function(){
+					  	    	location.href="${pageContext.request.contextPath}/aUpdateEndAd.do?adno="+adno;
+					  	    });
+					    }else{
+					    	alert("진행중인 광고가 아닙니다. 진행중인 광고만 마감 가능합니다.");
 					    	return false;
 					   }
 			  	  

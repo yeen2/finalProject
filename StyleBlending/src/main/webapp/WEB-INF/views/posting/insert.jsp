@@ -221,7 +221,8 @@
 	}
 	
 </style>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery.placeholder.js"></script>
+<%-- <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery.placeholder.js"></script> --%>
+<script src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
 </head>
 <body class="profile" style="margin-bottom: 20px !important;">
 	
@@ -254,7 +255,8 @@
 				<hr>
 				
 				<!-- Post Content -->
-				<textarea rows="10" cols="70" id="content" name="content" placeholder="사진에 대한 내용과 #해시태그는 이 안에 입력해주세요."></textarea>
+				<textarea rows="10" cols="70" id="content" name="content" 
+					placeholder="사진에 대한 내용과 #해시태그는 이 안에 입력해주세요."></textarea>
 
 			</div>
 			<!-- 해쉬태그 담기 -->
@@ -923,11 +925,21 @@
 				el.removeChild(el.lastChild);
 			}
 		}
-
-		
-
-		
 	</script>
+	<script type="text/javascript">
+
+	//id가 content인 태그에 ckeditor를 적용
+	/* CKEDITOR.replace("content", {
+		height:200
+	});  */
+	/* CKEDITOR.replace( 'content', { extraPlugins : 'confighelper'});
+ */
+
+/* 	CKEDITOR.create( document.querySelector( '#content' ), {
+        placeholder: 'Type the content here!'
+    } ); */
+	
+	</script>	
 	
 	<%@include file="../includes/footer.jsp" %>
 	

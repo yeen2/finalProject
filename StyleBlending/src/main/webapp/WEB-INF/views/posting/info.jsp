@@ -64,6 +64,13 @@
 	.fBtn {
 		float: right; margin-right: 20px;
 	}
+	/* 댓글 수정삭제 아이콘 */
+	.r_md{
+		margin-left: 10px;
+	}
+	.r_md:hover{
+		cursor: pointer;
+	}
 </style>
 </head>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
@@ -605,7 +612,7 @@
 	});
 	
 	
-	// 댓글폼 클릭시 로그인되있는지 확인
+	// 좋아요 클릭시 로그인되있는지 확인
 	$("#likeBtn").on("click", function () {
 		var loginUser = "  ${loginUser.email}";
 
@@ -628,6 +635,7 @@
 						if(str == 'success'){
 							console.log("좋아요 추가 성공");
 							getPLikeCount();
+
 						}else{
 							console.log("좋아요 추가 실패");
 						}
@@ -746,6 +754,8 @@
 		//reply 전체리스트 불러오기
 		function getReplyList(){
 			console.log("select리플 들어옴");
+			var session_mno = "${loginUser.mno}";
+			
 			$.ajax({
 				url:"pReplyList.do",
 				data:{pno:${p.pno}},
@@ -781,6 +791,10 @@
 							$likeImg = $("<i class='fas fa-caret-up'></i>");
 							$rrBtn = $("<a class='rrBtn'>reply</a>");
 							$date = $("<span class='replyForm_date'></span>").text(value.enrollDate);
+							//수정 삭제 아이콘
+							$r_modi = $("<i class='fas fa-pencil-alt r_md'></i>");
+							$r_delete = $("<i class='fas fa-trash-alt r_md'></i>");
+							
 							
 							// 대댓글폼
 							$replyForm_rrForm = $("<br><br><div class='replyForm_rrForm' style='display: none;'></div>");
@@ -788,14 +802,22 @@
 							$rrContent = $("<textarea id='rrContent' class='rrContent'></textarea>");
 							$rrSubmit = $("<button class='btn btn-dark rrSubmit' id='rrSubmit'>등록</button>");
 							
+							
 							if(value.level == 1){ //댓글
 								$replyForm_imgDiv.append($img);
 								//대댓글
 								$replyForm_rrForm.append($prno).append($rrContent).append($rrSubmit);
+								
+								if(session_mno == value.mno){
 								//컨텐츠
 								$replyForm_contentDiv.append($nickname).append($rcontent).append('<br>').append($likecount)
-												.append($likeImg).append($rrBtn).append($date).append($replyForm_rrForm);
-
+												.append($likeImg).append($rrBtn).append($date).append($r_modi).append($r_delete)
+												.append($replyForm_rrForm);
+								}else{
+									$replyForm_contentDiv.append($nickname).append($rcontent).append('<br>').append($likecount)
+									.append($likeImg).append($rrBtn).append($date)
+									.append($replyForm_rrForm);
+								}
 								$replyForm_div.append($replyForm_imgDiv).append($replyForm_contentDiv);
 								
 								$replyForm.append($replyForm_div);

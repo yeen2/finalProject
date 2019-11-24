@@ -39,6 +39,9 @@ public interface AdminService {
 	
 	// 신고게시물 삭제
 	int deleteDeclareBoard(ArrayList dno);
+	
+	// 신고게시물 상세조회(확인으로 상태값변경)
+	int updateIsCheck(String dno);
 
 	// 총 광고수 조회
 	int getAdListCount();
@@ -55,6 +58,8 @@ public interface AdminService {
 	// 광고 승인 등록 
 	int updateStartAd(String adno);
 	
+	// 광고 마감(종료)
+	int updateEndAd(String adno);
 	
 	
 }

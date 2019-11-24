@@ -245,7 +245,7 @@ public class PostingController {
 	@RequestMapping("getPLikeCheck.do")
 	public String selectPLikeCheck(int pno, int mno) {
 
-		String result =  Integer.toString(pService.selectPLikeCheck(pno, mno));
+		String result = Integer.toString(pService.selectPLikeCheck(pno, mno));
 		
 		return result;
 	}

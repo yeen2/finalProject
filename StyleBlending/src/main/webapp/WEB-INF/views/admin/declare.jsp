@@ -99,6 +99,9 @@
                                     <c:forEach items="${list}" var="p">
                                     <tbody>
                                          <tr>
+                                         	<input type="hidden" value="${p.dno }"/>
+                                         	<input type="hidden" value="${p.bno }"/>
+                                         	<input type="hidden" value="${p.isCheck }"/>
                                         	<td>
                                         		<input name="checkRow" type="checkbox" value="${p.dno}" />
                                         	</td>
@@ -111,19 +114,21 @@
                                             <c:if test="${p.type eq 1 }">
                                             <td>포스팅</td>
                                             <td>
-                                            	<div class="round-img">
-                                                    <a href="#포스팅게시글로"><img src="${pageContext.request.contextPath}/resources/assets/img/${p.bname}"></a>
-                                                </div>
+                                                <a class="detailBoard"><img src="${pageContext.request.contextPath}/resources/upload/posting/${p.bname}"></a>
+                                               	<input type="hidden" value="${p.type }"/>
                                             </td>
                                             </c:if>
                                             <c:if test="${p.type eq 2 }">
                                             <td>자유</td>
-                                            <td>${p.bname}</td>
+                                            <td>
+                                            	<a class="detailBoard">${p.bname}</a>
+                                            	<input type="hidden" value="${p.type }"/>
+                                            </td>
                                             </c:if>
                                             <td>${p.writer }</td>
                                             <td>${p.enrollDate }</td>
                                             <td>${p.category }</td>
-                                            <td>
+                                            <td id="check">
 	                                            <c:if test="${p.isCheck eq 1 }">
 	                                            <span class="badge badge-pending">확인요청</span>
 	                                        	</c:if>
@@ -218,6 +223,36 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/admin_temp/js/admin.js"></script>
 	
 	<script>
+	
+	$(".detailBoard").click(function(){
+		
+		var dno = $(this).parent().parent().children().eq(0).val();
+		var bno = $(this).parent().parent().children().eq(1).val();
+		var check = $(this).parent().parent().children().eq(2).val();
+		var type = $(this).next().val();
+		
+		console.log(check);
+
+		// check가 2인경우만 확인으로 바꾸도록 아니면 바로 상세페이지로
+		if(type==1){ // 포스팅
+			if(check == 1){
+				//alert("확인임");
+				location.href="aupdateIsCheck.do?dno="+ dno +"&bno=" +bno +"&type="+type;
+			}else{
+				location.href="pInfo.do?id="+ bno;
+			} 
+		}else{ // 자유게시판
+			if(check == 1){
+				//alert("컨트롤가나");
+				location.href="aupdateIsCheck.do?dno="+ dno +"&bno=" +bno +"&type="+type;
+			}else{
+				location.href="bdetail.do?bno="+ bno;
+			}  
+		}
+		
+		
+	
+	});
 
 	/**
 	 * 삭제(체크박스 선택된 것 전부)

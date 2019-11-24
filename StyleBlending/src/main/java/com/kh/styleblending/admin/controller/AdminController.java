@@ -118,6 +118,24 @@ public class AdminController {
 		
 	}
 	
+	@RequestMapping("aupdateIsCheck.do")
+	public ModelAndView updateIsCheck(String dno, ModelAndView mv, String bno, int type) {
+		
+		int result = aService.updateIsCheck(dno);
+		//System.out.println(dno);
+		if(result > 0) {
+			
+			if(type== 1) { // 포스팅
+				mv.addObject("id",bno).setViewName("redirect:pInfo.do");
+			}else { // 자유게시판
+				mv.addObject("bno",bno).setViewName("redirect:bdetail.do");
+			}
+		}else {
+			mv.addObject("msg","신고게시물 조회 실패").setViewName("common/errorPage");
+		}
+		return mv;
+	}
+	
 	
 	@RequestMapping("aAdvertisment.do")
 	public ModelAndView selectAdList(ModelAndView mv, @RequestParam(value="currentPage",defaultValue="1")int currentPage,
@@ -195,33 +213,14 @@ public class AdminController {
 		return "admin/adInsertForm";
 	}
 	
-	/*
-	@RequestMapping("aInsertPayView.do")
-	public String insertPayView(HttpSession session,@RequestParam(value="uploadFile", required=false) MultipartFile file, Ad ad, Model model, HttpServletRequest request) {
-		
-		
-		if(!file.getOriginalFilename().equals("")) {// 파일 존재시
-			
-			String renameFileName = saveFile(file,request);
-			
-			ad.setOriginalImg(file.getOriginalFilename());
-			ad.setRenameImg(renameFileName);
-		}
-
-		session.setAttribute("ad", ad);
-		//System.out.println(ad);
-		
-		return "admin/pay";
-	}
-	*/
 	
 	@RequestMapping("aUpdateStartAd.do")
 	public String updateStartAd(String adno, Model model) {
 		
 		int result = aService.updateStartAd(adno);
-		System.out.println(adno);
+		//System.out.println(adno);
 		if(result > 0) {
-			model.addAttribute("msg", "정상적으로 광고 등록이 되었습니다.");
+			model.addAttribute("msg", "광고 신청이 정상적으로 이루어졌습니다. 관리자 검토 후 승인시 진행됩니다.");
 			return "redirect:aAdvertisment.do";
 		}else {
 			model.addAttribute("msg", "광고 등록 실패");
@@ -229,8 +228,27 @@ public class AdminController {
 		}
 	}
 	
+	@RequestMapping("aUpdateEndAd.do")
+	public ModelAndView updateEndAd(String adno, ModelAndView mv) {
+		
+		System.out.println(adno);
+		
+		int result = aService.updateEndAd(adno);
+		
+		if(result > 0) {
+			mv.addObject("msg", "정상적으로 광고 종료처리 되었습니다.").setViewName("redirect:aAdvertisment.do");
+		}else {
+			mv.addObject("msg","광고 마감 실패").setViewName("common/errorPage");
+		}
+		
+		return mv;
+	}
+	
 	@RequestMapping("aStatistics.do")
-	public String statistics() {
+	public String statistics(Model model) {
+		
+		ArrayList<Member> newMember = aService.selectNewMember();
+		model.addAttribute("newMember",newMember);
 		return "admin/statistics";
 	}
 	

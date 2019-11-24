@@ -84,6 +84,12 @@ public class AdminServiceImpl implements AdminService{
 		 */
 		
 	}
+	
+	@Override
+	public int updateIsCheck(String dno) {
+		// 신고게시물 상세조회
+		return aDao.updateIsCheck(dno);
+	}
 
 	@Override
 	public int getAdListCount() {
@@ -122,17 +128,31 @@ public class AdminServiceImpl implements AdminService{
 	public int updateStartAd(String adno) {
 		// 광고 승인등록
 		
-		int result = aDao.updateStartAd(adno);
-		return result;
-		/*
-		if(result > 0) {
-			return aDao.updateEndAd();
-		}else {
-			return 0;
+		Ad ad = aDao.selectStartAd(); // 진행중인 광고 있는지
+		
+		if(ad != null) { // 있을때
+			int result = aDao.updateEndAd(); // 진행중 광고 마감으로 변경
+			
+			if(result > 0) {
+				return aDao.updateStartAd(adno);
+				
+			}else {
+				return 0;
+			}
+		}else { // 없을때
+			return aDao.updateStartAd(adno);
+			
 		}
-		*/
 		
 	}
+
+	@Override
+	public int updateEndAd(String adno) {
+		// 광고 마감(종료)
+		return aDao.updateEndAd();
+	}
+
+	
 
 	
 
