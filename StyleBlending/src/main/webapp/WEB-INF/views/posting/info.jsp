@@ -605,7 +605,7 @@
 	});
 	
 	
-	// 댓글폼 클릭시 로그인되있는지 확인
+	// 좋아요 클릭시 로그인되있는지 확인
 	$("#likeBtn").on("click", function () {
 		var loginUser = "  ${loginUser.email}";
 
@@ -628,6 +628,7 @@
 						if(str == 'success'){
 							console.log("좋아요 추가 성공");
 							getPLikeCount();
+
 						}else{
 							console.log("좋아요 추가 실패");
 						}
