@@ -64,7 +64,7 @@
 					</div>
 					<div class="form-group" style="margin-bottom:25px; position:relative;">
 						<label for="url">연결 URL</label>
-						<input type="text" class="form-control" id="url" name="url" placeholder="http://" maxlength="16">
+						<input type="text" class="form-control" id="url" name="url" placeholder="http://" maxlength="50">
 						<div style="position:absolute;"><p><small class="form-text text-success">클릭시 표시할 대표 URL을 입력합니다.</small></p></div>
 					</div>
 					<div class="form-group" style="margin-bottom:25px; position:relative;">

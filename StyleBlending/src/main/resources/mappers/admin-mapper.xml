@@ -157,6 +157,12 @@
 		</if>
 	</update>
 	
+	<update id="updateIsCheck" parameterType="String">
+		update declare
+		set ischeck='2'
+		where d_no=#{dno}
+	</update>
+	
 	<select id="getAdListCount" resultType="_int">
 		select count(*)
 		from ad
@@ -175,6 +181,7 @@
 		select *
 		from ad
 		where status='1'
+		order by ad_no desc
 	</select>
 	
 	<insert id="insertPay">
@@ -189,16 +196,14 @@
 	
 	<update id="updateStartAd">
 		update ad
-		set status='2'
+		set status='2', start_date=sysdate
 		where ad_no=#{adno}
 	</update>
 	
-	<!-- 
-	<update>
+	<update id="updateEndAd">
 		update ad
-set status='3'
-where status='2'
+		set status='3', end_date=sysdate
+		where status='2'
 	</update>
-	adno넘어오는거 빼고 if문으로
-	 -->
+	 
 </mapper>

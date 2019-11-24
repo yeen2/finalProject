@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -99,95 +100,6 @@
       </div>
       
       <script>
-      
-      $(function(){
-    	  
-    	    //Sales chart
-    	    var ctx = document.getElementById( "sales-chart" );
-    	    
-    	    ctx.height = 150;
-    	    var myChart = new Chart( ctx, {
-    	        type: 'line',
-    	        data: {
-    	            labels: [ "2012", "2013", "2014", "2015", "2016", "2017", "2018" ],
-    	            type: 'line',
-    	            defaultFontFamily: 'Montserrat',
-    	            datasets: [ {
-    	                label: "Foods",
-    	                data: [ 0, 30, 15, 110, 50, 63, 120 ],
-    	                backgroundColor: 'transparent',
-    	                borderColor: 'rgba(220,53,69,0.75)',
-    	                borderWidth: 3,
-    	                pointStyle: 'circle',
-    	                pointRadius: 5,
-    	                pointBorderColor: 'transparent',
-    	                pointBackgroundColor: 'rgba(220,53,69,0.75)',
-    	                    }, {
-    	                label: "Electronics",
-    	                data: [ 0, 50, 40, 80, 35, 99, 80 ],
-    	                backgroundColor: 'transparent',
-    	                borderColor: 'rgba(40,167,69,0.75)',
-    	                borderWidth: 3,
-    	                pointStyle: 'circle',
-    	                pointRadius: 5,
-    	                pointBorderColor: 'transparent',
-    	                pointBackgroundColor: 'rgba(40,167,69,0.75)',
-    	                    } ]
-    	        },
-    	        options: {
-    	            responsive: true,
-
-    	            tooltips: {
-    	                mode: 'index',
-    	                titleFontSize: 12,
-    	                titleFontColor: '#000',
-    	                bodyFontColor: '#000',
-    	                backgroundColor: '#fff',
-    	                titleFontFamily: 'Montserrat',
-    	                bodyFontFamily: 'Montserrat',
-    	                cornerRadius: 3,
-    	                intersect: false,
-    	            },
-    	            legend: {
-    	                display: false,
-    	                labels: {
-    	                    usePointStyle: true,
-    	                    fontFamily: 'Montserrat',
-    	                },
-    	            },
-    	            scales: {
-    	                xAxes: [ {
-    	                    display: true,
-    	                    gridLines: {
-    	                        display: false,
-    	                        drawBorder: false
-    	                    },
-    	                    scaleLabel: {
-    	                        display: false,
-    	                        labelString: 'Month'
-    	                    }
-    	                        } ],
-    	                yAxes: [ {
-    	                    display: true,
-    	                    gridLines: {
-    	                        display: false,
-    	                        drawBorder: false
-    	                    },
-    	                    scaleLabel: {
-    	                        display: true,
-    	                        labelString: 'Value'
-    	                    }
-    	                        } ]
-    	            },
-    	            title: {
-    	                display: false,
-    	                text: 'Normal Legend'
-    	            }
-    	        }
-    	    } );
-      });
-      
-
 
 
 
@@ -222,21 +134,24 @@
     
     <script>
   //Sales chart
-  
+  // 총누적 회원,게시글,광고,신고
   $(function(){
 	  
 
     var ctx = document.getElementById( "sales-chart" );
-    ctx.height = 150;
+    ctx.height = 500;
     var myChart = new Chart( ctx, {
         type: 'line',
         data: {
-            labels: [ "2012", "2013", "2014", "2015", "2016", "2017", "2018" ],
+            labels: [ "06", "07", "08", "09", "10", "11", "19/12" ],
             type: 'line',
             defaultFontFamily: 'Montserrat',
             datasets: [ {
-                label: "Foods",
-                data: [ 0, 30, 15, 110, 50, 63, 120 ],
+                label: "가입자수",
+                data: [ 
+                
+                	
+                ],
                 backgroundColor: 'transparent',
                 borderColor: 'rgba(220,53,69,0.75)',
                 borderWidth: 3,
@@ -245,7 +160,7 @@
                 pointBorderColor: 'transparent',
                 pointBackgroundColor: 'rgba(220,53,69,0.75)',
                     }, {
-                label: "Electronics",
+                label: "게시글수",
                 data: [ 0, 50, 40, 80, 35, 99, 80 ],
                 backgroundColor: 'transparent',
                 borderColor: 'rgba(40,167,69,0.75)',
@@ -310,12 +225,6 @@
   });
   
   
- /*    $(document).ready(function(){
-	  google.charts.load('current', {'packages':['line','controls']});
-	  chartDrowFun.chartDrow(); //chartDrow() 실행
-	});  */
-  
-  
     </script>
     
        <!-- Scripts -->
@@ -323,7 +232,7 @@
    <%-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>--%>
-    <script src="${pageContext.request.contextPath}/resources/admin_temp/js/main.js"></script> 
+   <%--  <script src="${pageContext.request.contextPath}/resources/admin_temp/js/main.js"></script>  --%>
     <%-- <script src="${pageContext.request.contextPath}/resources/admin_temp/js/init/chartjs-init.js"></script>  --%>
 
 	
