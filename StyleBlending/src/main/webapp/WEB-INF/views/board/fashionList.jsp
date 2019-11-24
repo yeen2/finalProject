@@ -101,6 +101,7 @@ body {padding-top: 20px;}
 				<button class="btn btn-primary btn-sm" type="submit" style="float: left; margin-left: 5px;" onclick="search();">검색하기</button>
 			</form>
 		</div>
+		
 
 		<div id="readBtn">
 			<c:if test="${ !empty loginUser }">
