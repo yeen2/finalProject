@@ -55,7 +55,6 @@
 						<!-- 닉네임 -->
 						<div class="name">
 							<h2 class="mb-0">${ m.nickName }</h2>
-							<a href="test.do">test</a>
 						</div>
 						
 						<!-- 팬 버튼  -->
@@ -852,16 +851,14 @@
 	    });
 
 		// 탭 클릭 시 새로고침 해도 탭 페이지 유지 (수정 필요)
-		/* $(document).ready(function(){
+		$(document).ready(function(){
 			var url = document.location.href;
 			var tab = url.split('/').pop();
-			$(tab).trigger("click");
-		}); */
-		$(function(){
-			var tab = location.hash;
-			$("#postingTabBtn" + tab).trigger("click");
-			tab = location.hash;
-			
+			/* $('a[href=' + tab + ']').trigger("click"); */
+			$("#postingTabBtn").click(function(){
+				console.log(url);
+				console.log(tab);
+			});
 		});
 		
 	</script>

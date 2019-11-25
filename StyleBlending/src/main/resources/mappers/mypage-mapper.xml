@@ -162,8 +162,10 @@
 	</select>
 	
 	<select id="selectAlarmList" resultMap="alarmResultSet">
-		select *
-		from alarm
+		select a.*, (select count(*) from alarm where status=1 and m_no=#{mno})alarmCount, 
+					(select nickName from member where m_no=a.b_m_no)nickName,
+					(select rename_Img from member where m_no=a.b_m_no)renameImg
+		from alarm a
 		where status=1 and m_no=#{mno}
 	</select>
 	

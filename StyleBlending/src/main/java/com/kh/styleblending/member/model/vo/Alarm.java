@@ -23,4 +23,7 @@ public class Alarm {
 	private String type;
 	
 	private int alarmCount;
+	
+	private String nickName;
+	private String renameImg;
 }
