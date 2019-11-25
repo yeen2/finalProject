@@ -77,12 +77,17 @@ public class AdminServiceImpl implements AdminService{
 		// 신고 게시물삭제
 		int result = aDao.deleteDeclareBoard(dno);
 		return result;
-		/*
-		 * if(result > 0) { // 게시물 삭제 return aDao.deleteBoard(dnoArr);
-		 * 
-		 * }else { return null; }
-		 */
 		
+	}
+	
+	@Override
+	public int deleteBoard(int type, int bno) {
+		if(type==1) {// 포스팅 삭제
+			
+			return aDao.pDeleteBoard(bno);
+		}else {
+			return aDao.bDeleteBoard(bno);
+		}
 	}
 	
 	@Override

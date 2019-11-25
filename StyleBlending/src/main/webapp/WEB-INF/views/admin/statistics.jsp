@@ -59,14 +59,22 @@
                 <div class="row">
                 
 			      
-			      <div class="col-lg-6">
-<div class="card">
-<div class="card-body"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-<h4 class="mb-3">Yearly Sales </h4>
-<canvas id="sales-chart" height="528" width="1057" class="chartjs-render-monitor" style="display: block; height: 352px; width: 705px;"></canvas>
-</div>
-</div>
-</div>
+			     <div class="col-lg-6">
+					<div class="card">
+						<div class="card-body">
+							<div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+								<div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+									<div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+								</div>
+								<div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+									<div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+								</div>
+							</div>
+							<h4 class="mb-3"><b>가입자수</b></h4>
+							<canvas id="sales-chart" height="528" width="1057" class="chartjs-render-monitor" style="display: block; height: 352px; width: 705px;"></canvas>
+						</div>
+					</div>
+				</div>
 			      
 			      
 			      <div class="col-lg-6">
@@ -136,8 +144,24 @@
   //Sales chart
   // 총누적 회원,게시글,광고,신고
   $(function(){
+	  $.ajax({
+			 type:"post",
+			 url:"aStatistics.do",
+			 dataType:"json",
+			 success:function(data){
+				// alert(data);
+				// queryObject = eval('(' + JSON.stringify(data,null,2) + ')');
+				// queryObjectLen = questyObject.barlist.length;
+				// alert(queryObjectLen);
+			 },error:function(){
+				 console.log("ajax통신 실패");
+			 }
+		  });  
+  });
+  
+  
+  $(function(){
 	  
-
     var ctx = document.getElementById( "sales-chart" );
     ctx.height = 500;
     var myChart = new Chart( ctx, {
@@ -150,7 +174,6 @@
                 label: "가입자수",
                 data: [ 
                 
-                	
                 ],
                 backgroundColor: 'transparent',
                 borderColor: 'rgba(220,53,69,0.75)',
@@ -226,15 +249,6 @@
   
   
     </script>
-    
-       <!-- Scripts -->
-     
-   <%-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>--%>
-   <%--  <script src="${pageContext.request.contextPath}/resources/admin_temp/js/main.js"></script>  --%>
-    <%-- <script src="${pageContext.request.contextPath}/resources/admin_temp/js/init/chartjs-init.js"></script>  --%>
-
 	
 	 <!--  <script>
 	 

@@ -9,7 +9,6 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +21,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonIOException;
 import com.kh.styleblending.admin.model.service.AdminService;
 import com.kh.styleblending.admin.model.vo.Ad;
 import com.kh.styleblending.admin.model.vo.Declare;
@@ -104,13 +102,20 @@ public class AdminController {
 	}
 	
 	@RequestMapping("aDeleteDeclareBoard.do")
-	public String deleteDeclareBoard(@RequestParam ArrayList dno, Model model) {
-		//System.out.println(dnoArr.length);
-		//System.out.println(Arrays.toString(dnoArr));
+	public String deleteDeclareBoard(@RequestParam ArrayList dno, @RequestParam int[] type,@RequestParam int[] bno, Model model) {
+
+		int result1 = 0;
 		
-		int result = aService.deleteDeclareBoard(dno);
+		for(int i=0; i<type.length; i++) {
+			result1 += aService.deleteBoard(type[i], bno[i]);
+		}
 		
-		if(result > 0) {			
+		int result2 = aService.deleteDeclareBoard(dno);
+		
+		//System.out.println("result1 : " + result1);
+		
+		if(result1 >=type.length && result2 > 0) {
+			
 			return "redirect:aDeclare.do";
 		}else {
 			model.addAttribute("msg","신고 게시물 삭제 실패");
@@ -267,12 +272,15 @@ public class AdminController {
 		return mv;
 	}
 	
-	@RequestMapping("aStatistics.do")
-	public String statistics(Model model) {
+	@ResponseBody
+	@RequestMapping(value="aStatistics.do", produces="application/json; charset=UTF-8")
+	public String statistics() {
 		
 		ArrayList<Member> newMember = aService.selectNewMember();
-		model.addAttribute("newMember",newMember);
-		return "admin/statistics";
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		
+		return gson.toJson(newMember);
 	}
 	
 	@RequestMapping("aNotice.do")

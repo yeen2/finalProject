@@ -70,6 +70,14 @@ public class AdminDao {
 		return sqlSession.update("adminMapper.deleteDeclareBoard",dno);
 	}
 	
+	public int pDeleteBoard(int bno) {
+		return sqlSession.update("adminMapper.pDeleteBoard",bno);
+	}
+	
+	public int bDeleteBoard(int bno) {
+		return sqlSession.update("adminMapper.bDeleteBoard",bno);
+	}
+	
 	public int updateIsCheck(String dno) {
 		return sqlSession.update("adminMapper.updateIsCheck", dno);
 	}
