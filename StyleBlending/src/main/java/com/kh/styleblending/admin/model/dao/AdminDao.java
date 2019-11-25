@@ -123,7 +123,7 @@ public class AdminDao {
 		return sqlSession.update("adminMapper.updateEndAd");
 	}
 	
-	public Member selectMemberCount() {
+	public Statistics selectMemberCount() {
 		return sqlSession.selectOne("adminMapper.selectMemberCount");
 	}
 }

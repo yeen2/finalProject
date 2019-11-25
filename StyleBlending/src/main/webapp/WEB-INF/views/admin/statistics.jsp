@@ -59,7 +59,7 @@
                 <div class="row">
                 
 			      
-			     <div class="col-lg-6">
+			     <div class="col-lg-10 offset-md-1">
 					<div class="card">
 						<div class="card-body">
 							<div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
@@ -70,13 +70,13 @@
 									<div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
 								</div>
 							</div>
-							<h4 class="mb-3"><b>가입자수</b></h4>
+							<h4 class="mb-3"><b>현황 통계</b></h4>
 							<canvas id="sales-chart" height="528" width="1057" class="chartjs-render-monitor" style="display: block; height: 352px; width: 705px;"></canvas>
 						</div>
 					</div>
 				</div>
 			      
-			      
+			    <!--   
 			      <div class="col-lg-6">
 			      	<div class="card" style="padding:0px 20px 0px 0px; width:900px;">
 			      		<div class="card-body" >
@@ -92,8 +92,8 @@
 			      		</div>
 			      	</div>
 			      </div>
-			      
-			      
+			       -->
+			      <!-- 
 			      <div class="col-lg-6">
 			      	<div class="card" >
 			      		<div class="card-body" >
@@ -101,7 +101,7 @@
 							<div id="piechart_3d" ></div>
 			      		</div>
 			      	</div>
-			      </div>
+			      </div> -->
       
       			</div>
       		</div>
@@ -154,7 +154,12 @@
 					// console.log(data[index]);
 					var num =[];
 					for(var i in data){
-						num.push(data[i].mno);
+						num.push(data.month1);
+						num.push(data.month2);
+						num.push(data.month3);
+						num.push(data.month4);
+						num.push(data.month5);
+						num.push(data.month6);
 					}
 					 
 				    var ctx = document.getElementById( "sales-chart" );
@@ -162,14 +167,12 @@
 				    var myChart = new Chart( ctx, {
 				        type: 'line',
 				        data: {
-				            labels: [ "06", "07", "08", "09", "10", "11", "19/12" ],
+				            labels: [ "06", "07", "08", "09", "10", "11"],
 				            type: 'line',
 				            defaultFontFamily: 'Montserrat',
 				            datasets: [ {
 				                label: "가입자수",
-				                data: 
-				                	num,
-				               
+				                data: num,
 				                backgroundColor: 'transparent',
 				                borderColor: 'rgba(220,53,69,0.75)',
 				                borderWidth: 3,

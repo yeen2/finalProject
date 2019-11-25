@@ -69,7 +69,7 @@ public interface AdminService {
 	int updateEndAd(String adno);
 	
 	// 통계(가입자수)
-	Member selectMemberCount();
+	Statistics selectMemberCount();
 	
 	
 }
