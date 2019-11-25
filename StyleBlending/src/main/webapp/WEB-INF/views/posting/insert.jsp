@@ -661,7 +661,8 @@
 				alert("이미지를 등록해주세요.");
 				fileImg.focus();
 				return false;
-			}else if(content.val().trim() == ""){
+		/* 	}else if(content.val().trim() == ""){ */
+			}else if(CKEDITOR.instances.content.getData() == ""){
 				alert("내용을 입력해주세요");
 				content.focus();
 				return false;
@@ -928,7 +929,7 @@
 		}
 	</script>
 	
-	<script type="text/javascript">
+<!-- 	<script type="text/javascript">
 
 		//id가 content인 태그에 ckeditor를 적용
 		CKEDITOR.replace("content", {
@@ -937,7 +938,15 @@
 		}); 
 	
 	
-	</script>		
+	</script>	 -->	
+	
+	<script type="text/javascript">
+		function enter_check() {
+			if(event.KeyCode == 13){
+				
+			}
+		}
+	</script>
 	
 	<%@include file="../includes/footer.jsp" %>
 	

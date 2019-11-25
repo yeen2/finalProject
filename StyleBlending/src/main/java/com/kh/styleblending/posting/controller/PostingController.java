@@ -88,6 +88,36 @@ public class PostingController {
 		
 		System.out.println(p);
 		
+		/*
+		 * // 2. 해시태그 추출 String str = p.getContent(); 
+		 * String [] strArr = str.split(" ");
+		 * String hashtag = "";
+		 * 
+		 * HashMap<String, String> map = new HashMap<>();
+		 * 
+		 * for(int i=0; i<strArr.length; i++) { 
+		 * 	if(strArr[i].charAt(0) == '#') { 
+		 * 		hashtag += strArr[i]; 
+		 * 		map.put(strArr[i], "<a>"+strArr[i]+"</a>"); 
+		 * 	} 
+		 * }
+		 * p.setHashtag(hashtag);
+		 * 
+		 * //3. #태그는 <a></a>로 감싸기 
+		 * String content = p.getContent();
+		 * System.out.println("처음 content : " + content ); 
+		 * String con = ""; 
+		 * // 첫 #를 <a>
+		 * for (String key : map.keySet() ) {
+		 * System.out.println("key:"+key+",value:"+map.get(key));
+		 * 
+		 * content = content.replace(key, map.get(key)); 
+		 * } 
+		 * p.setContent(content);
+		 * System.out.println("해시태그에 <a>붙임 : " + content);
+		 */
+		
+
 		// 2. 해시태그 추출
 		String str = p.getContent();
 		String [] strArr = str.split(" ");
@@ -98,7 +128,7 @@ public class PostingController {
 		for(int i=0; i<strArr.length; i++) {
 			if(strArr[i].charAt(0) == '#') {
 				hashtag += strArr[i];
-				map.put(strArr[i], "<a href='#'>"+strArr[i]+"</a>");
+				map.put(strArr[i], "<a>"+strArr[i]+"</a>");
 			}
 		}
 		p.setHashtag(hashtag);
@@ -115,6 +145,9 @@ public class PostingController {
 		}
 		p.setContent(content);
 		System.out.println("해시태그에 <a>붙임 : " + content);
+		
+		
+		
 		
 		
 		int result = pService.insertPosting(p, cate, brand, color);
