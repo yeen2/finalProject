@@ -103,43 +103,6 @@
 	padding: 0px;
 }
 
-#addAlarm1 {
-	width: 100%;
-	height: inherit;
-	background: lightgray;
-	border: 2px solid white;
-}
-
-#addAlarmImg1 {
-	padding: 10px 0 0 10px;
-	width: 17%;
-	height: auto;
-	display: inline-block;
-	margin-left: -10px;
-}
-
-#addAlarmImg1 img {
-	width: 50px;
-	height: 50px;
-	border-radius: 1.5em;
-}
-
-#addAlarmNick1 {
-	display: inline-block;
-	width: 50%;
-	text-align: left;
-	margin-left: 10px;
-}
-
-#addAlarmDate1 {
-	display: inline-block;
-	width: 25%;
-	text-align: right;
-}
-
-#addAlarmCon1 {
-	padding: 10px 10px 10px 10px;
-}
 
 #addSearch{width:100%; height:inherit; background:lightgray; border:2px solid white;}
 #addSearchImg{padding:10px 0 10px 10px; width:10%; height:auto; display:inline-block;}
