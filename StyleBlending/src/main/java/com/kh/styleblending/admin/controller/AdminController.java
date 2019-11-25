@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
 import com.kh.styleblending.admin.model.service.AdminService;
 import com.kh.styleblending.admin.model.vo.Ad;
 import com.kh.styleblending.admin.model.vo.Declare;
@@ -139,20 +140,42 @@ public class AdminController {
 	
 	@RequestMapping("aAdvertisment.do")
 	public ModelAndView selectAdList(ModelAndView mv, @RequestParam(value="currentPage",defaultValue="1")int currentPage,
-									@RequestParam(value="boardLimit", defaultValue="5")int boardLimit) {
+								String keyword,	@RequestParam(value="boardLimit", defaultValue="5")int boardLimit) {
 		
 		int listCount = aService.getAdListCount();
 		
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, boardLimit);
 		
-		ArrayList<Ad> list = aService.selectAdList(pi);
+		ArrayList<Ad> list;
+		if(keyword != null) {
+			list = aService.selectAdSearchList(pi, keyword);
+			//System.out.println("검색노노");
+		}else {
+			//System.out.println("검색함");
+			list = aService.selectAdList(pi);						
+		}
+		
 		ArrayList<Ad> newList = aService.selectAdNewList();
 		Ad startAd = aService.selectStartAd();
 		
-		mv.addObject("pi",pi).addObject("list",list).addObject("startAd",startAd).addObject("newList", newList).setViewName("admin/advertisment");
+		mv.addObject("pi",pi).addObject("list",list).addObject("startAd",startAd).addObject("newList", newList).addObject("keyword",keyword).setViewName("admin/advertisment");
 		
 		return mv;
 	}
+
+	/*
+	@RequestMapping("aSearchAdname.do")
+	public void searchAdname(String keyword, HttpServletResponse response) throws JsonIOException, IOException {
+		
+		ArrayList<Ad> ad = aService.selectAdSearchList(keyword);
+		
+		response.setContentType("application/json; charset=UTF-8");
+	      
+	      Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+	      
+	      gson.toJson(ad, response.getWriter());
+	}
+	*/
 	
 	// 광고등록+결제
 	@ResponseBody

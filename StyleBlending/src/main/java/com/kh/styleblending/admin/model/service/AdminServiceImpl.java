@@ -104,6 +104,12 @@ public class AdminServiceImpl implements AdminService{
 	}
 	
 	@Override
+	public ArrayList<Ad> selectAdSearchList(PageInfo pi, String keyword) {
+		// 광고 업체명 검색
+		return aDao.selectAdSearchList(pi, keyword);
+	}
+	
+	@Override
 	public ArrayList<Ad> selectAdNewList() {
 		// 승인대기 광고 목록 리스트
 		return aDao.selectAdNewList();
@@ -151,6 +157,8 @@ public class AdminServiceImpl implements AdminService{
 		// 광고 마감(종료)
 		return aDao.updateEndAd();
 	}
+
+	
 
 	
 

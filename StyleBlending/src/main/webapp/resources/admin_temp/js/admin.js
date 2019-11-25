@@ -23,7 +23,19 @@ $(function(){ // 검색창
 		$(".table>tbody>tr").hide();
 		var adName = $(".table>tbody>tr> td:nth-child(5n+3):contains('" + k + "')"); // 업체명 검색
 		
-		$(adName).parent().show();
+		$.ajax({
+			url:"aSearchAdname.do",
+			data:{"keyword":k},
+			type:"post",
+			success:function(data){
+				alert("성공");
+				$(adName).parent().show();
+				
+			},error:function(){
+				console.log("ajax 통신 실패");
+			}
+		});
+		
 	});
 	
 	
