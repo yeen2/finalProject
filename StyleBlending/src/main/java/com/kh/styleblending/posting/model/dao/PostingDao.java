@@ -2,6 +2,7 @@ package com.kh.styleblending.posting.model.dao;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,7 +88,15 @@ public class PostingDao {
 		return sqlSession.insert("postingMapper.insertPDeclare", d);
 	}
 	
+	public int deleteReply(int prno) {
+		return sqlSession.update("postingMapper.deleteReply", prno);
+	}
 	
-	
+	public int updateReply(int prno, String content) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("prno", prno);
+		map.put("content", content);
+		return sqlSession.update("postingMapper.updateReply", map);
+	}
 	
 }

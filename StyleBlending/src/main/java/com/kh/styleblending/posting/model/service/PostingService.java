@@ -38,5 +38,6 @@ public interface PostingService {
 	// 신고
 	int insertPDeclare(Declare d);
 	
-	
+	int deleteReply(int prno);
+	int updateReply(int prno, String content);
 }

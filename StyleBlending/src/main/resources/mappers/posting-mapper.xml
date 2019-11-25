@@ -88,7 +88,8 @@
 				like_count, r.isdelete, m.nickname, m.rename_img
 		from p_reply r
 		join member m on(r.m_no = m.m_no)
-		order by prr_no
+        where r.isdelete='N'
+		order by prr_no, r_level
 	</select>
 
 	<insert id="insertReply">
@@ -157,8 +158,17 @@
 				sysdate, default, 1)
 	</insert>
 	
+	<update id="deleteReply">
+		update p_reply
+		set isdelete='Y'
+		where prr_no=#{prno}
+	</update>
 	
-	
+	<update id="updateReply" parameterType="HashMap">
+		update p_reply
+		set content=#{content}
+		where pr_no=#{prno}
+	</update>
 	
 	
 </mapper>

@@ -131,6 +131,15 @@ public class PostingServiceImpl implements PostingService {
 		return pDao.insertPDeclare(d);
 	}
 	
+	@Override
+	public int deleteReply(int prno) {
+		return pDao.deleteReply(prno);
+	}
+	
+	@Override
+	public int updateReply(int prno, String content) {
+		return pDao.updateReply(prno, content);
+	}
 	
 	
 	
