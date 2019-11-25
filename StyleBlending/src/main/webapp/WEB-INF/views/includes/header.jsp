@@ -963,7 +963,7 @@ function select(){
 				$("#show").show();
 			}
 				
-			if(${ empty loginUser}){
+			if(${ loginUser == null }){
 				$("#show").html("");
 				
 				var $add = "<div style='padding:20px 10px 10px 10px' align='center'>"
