@@ -434,7 +434,7 @@ CREATE TABLE alarm (
 
 COMMENT ON COLUMN alarm.al_no IS '알림좋아요번호';
 
-COMMENT ON COLUMN alarm.t_no IS '알람게시물번호(좋아요,신고,팬)';
+COMMENT ON COLUMN alarm.t_no IS '알람게시물번호(좋아요,댓글,팬)';
 
 COMMENT ON COLUMN alarm.m_no IS '해당회원번호';
 
@@ -442,7 +442,7 @@ COMMENT ON COLUMN alarm.enroll_date IS '알림등록날짜';
 
 COMMENT ON COLUMN alarm.status IS '1-읽지않음, 2-읽음';
 
-COMMENT ON COLUMN alarm.type IS '1-좋아요, 2-신고, 3-팬';
+COMMENT ON COLUMN alarm.type IS '1-좋아요, 2-댓글, 3-팬';
 
 COMMENT ON COLUMN alarm.b_m_no IS '게시물 작성 회원번호';
 
