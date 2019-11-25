@@ -70,9 +70,6 @@
 	<!-------------------------------------- 검색창 테스트 --------------------------------------->
 	<!-------------------------------------- 검색창 테스트 --------------------------------------->
 	
-	<div id="count">
-	
-	</div>
 	<form>
 		<!-- 송신 메시지 작성하는 창 -->
 		<input id="textMessage" type="text">
@@ -80,6 +77,9 @@
 		<button id="sendMessage" type="button">전송</button>
 	</form>
 	<br><br><br>
+	<div id="count">
+	
+	</div>
 	
 	<!-- 결과 메시지 보여주는 창 -->
 	<textarea id="messageTextArea" rows="10" cols="50"></textarea>
@@ -593,14 +593,33 @@
 	        // 메세지 보내고 받을 때
 	        sock.onmessage = function(evt) {
 	            var jsontext = evt.data;
-	            console.log(jsontext);
+	            alert(jsontext);
+	            return false;
+	            
+	           /*  var $add = "<a class='dropdown-item' href='#'>"
+    				+ "<div id='addAlarm1'>"
+    				+ "<div id='addAlarmImg1'>"
+    				+ "<img src='resources/assets/img/lorde.png'>"
+    				+ "</div>"
+    				+ "<div id='addAlarmNick1'>"
+    				+ "<p>닉네임</p>"
+    				+ "</div>"
+    				+ "<div id='addAlarmDate1'>"
+    				+ "<p>320일전</p>"
+    				+ "</div>"
+    				+ "<div id='addAlarmCon1'>"
+    				+ "<p>~~~님이 팬이 되었습니다.</p>"
+    				+ "</div>"
+    				+ "</div>"
+    				+ "</a>";
+    		
+    			$("#contentPlus").append($add); */
 	        }
 	        
 		    $("#sendMessage").click(
 		    function() {
 		    	sock.send(mno);
-		    	$("#count").append("나->" + mno + "<br/>");
-		    	$("#textMessage").val("");
+		    	$("#count").append(mno);
 		    });
 		});
 	

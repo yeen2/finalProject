@@ -282,10 +282,90 @@ li {
       }
 
    }
+    function filterLike(a){
+      var likePno = $(a).children().eq(1).val();
+      var likeMno = $(a).children().eq(2).val();
+      var likeColor = $(a).children().eq(0);
+      //console.log(likePno);
+      var mno = "${loginUser.mno}";
+      console.log(mno);
+      console.log(likeColor);
+      console.log(likeColor.css('color'));
+      if(likeColor.css('color') == 'rgb(128, 128, 128)'){
+         $.ajax({
+            url:"pLikeInsert.do",
+            data:{pno:likePno, mno:mno},
+            type:"get",
+            success:function(data){
+               
+               if(data == 'success'){
+               console.log("좋아요성공");
+                select(); 
+                  
+               }else{
+                  console.log("실패");
+               }
+               
+            },
+            error:function(){
+               console.log("좋아요실패");   
+            }
+         });         
+      }else{
+         $.ajax({
+            url:"pLikeDelete.do",
+            data:{pno:likePno, mno:mno},
+            type:"get",
+            success:function(data){
+               if(data == 'success'){
+                  console.log("좋아요삭제 성공");
+                   select(); 
+
+                  
+               }
+            },
+            error:function(){
+               console.log("실패")
+            }
+         });
+         
+      }
+
+   }
+    function insertFan(a){
+       
+       console.log(a);
+       var youNo = $(a).children().eq(0).val();
+       var meNo = $(a).children().eq(1).val();
+      if($(a).attr('class','btn btn-light')){
+         $.ajax({
+            url:"mpInsertFan.do",
+            data:{meNo:meNo, youNo:youNo},
+            type:"get",
+            success:function(data){
+               
+               if(data == 1){
+               console.log("친구추가 성공");
+                postList(); 
+                  
+               }else{
+                  console.log("실패");
+               }
+               
+            },
+            error:function(){
+               console.log("좋아요실패");   
+            }
+         });   
+    }
+    };
+    
+    //비로그인 좋아요 클릭할경우
    function unLike(){
       alert('로그인 후 좋아요 클릭 가능합니다.');
       return;
    }
+    //메인 고정 9개 포스팅 불러오는 ajax
    $(function(){
       postList();
    })
@@ -316,9 +396,9 @@ li {
                    "<span style='margin-bottom: 0px; margin-top: 23px;'>"+value.nickName+"<br>"+value.enrollDate+"</span>"+
                    "</div>"+
                    "<div class='col-3'style='width: 20%; height: 50px; margin-top: 5px; padding-right: 10px; padding-left: 10px; padding-bottom: 5px;'>"+
-                   "<button class='btn btn-light'>"+
+                   "<a class='btn btn-light'>"+
                     "<span style='font-size: 1.2em'>+Fan</span>"+
-                   "</button>"+
+                   "</a>"+
                    "</div>"+
                    "</div>"+
                    "<div class='card-body' style='height: 400px; padding: 0px;'>"+
@@ -328,7 +408,7 @@ li {
                    "</div>"+
                    "<div class='card-footer row'>"+
                    "<div class='col-3 form-inline'>"+
-                   "<a onclick=unLike();><i class='far fa-heart'style='color: gray; font-size: 30px;'></i></a>"+
+                   "<a onclick=unLike(); style='cursor:pointer;'><i class='far fa-heart'style='color: gray; font-size: 30px;'></i></a>"+
                    "<p style='margin: 0px;margin-left:5px;'>"+value.likeCount+"</p>"+
                    "</div>"+
                    "<div class='col-3 form-inline' style='padding: 0px;'>"+
@@ -355,13 +435,13 @@ li {
                       "<span style='margin-bottom: 0px; margin-top: 23px;'>"+value.nickName+"<br>"+value.enrollDate+"</span>"+
                       "</div>"+
                       "<div class='col-3'style='width: 20%; height: 50px; margin-top: 5px; padding-right: 10px; padding-left: 10px; padding-bottom: 5px;'>"+
-                      "<button class='btn btn-light'>"+
+                      "<a class='btn btn-light' onclick='insertFan(this);'><input type='hidden' value="+value.mno+" id='hiddenmno'/><input type='hidden' value="+"${loginUser.mno}"+" id='hiddenmno'/>"+
                        "<span style='font-size: 1.2em'>+Fan</span>"+
-                      "</button>"+
+                      "</a>"+
                       "</div>"+
                       "</div>"+
                       "<div class='card-body' style='height: 400px; padding: 0px;'>"+
-                      "<a href='pInfo.do?id=1' style='border-bottom: 0px !important; text-decoration: none black;'>"+
+                      "<a href='pInfo.do?id="+value.pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
                       "<img class='card-img' src="+value.imgPath+"/"+value.renameImg+" alt='dog' style='height: 100%;'>"+
                       "</a>"+
                       "</div>"+
@@ -396,7 +476,7 @@ li {
                       "</div>"+
                       "</div>"+
                       "<div class='card-body' style='height: 400px; padding: 0px;'>"+
-                      "<a href='pInfo.do?id=1' style='border-bottom: 0px !important; text-decoration: none black;'>"+
+                      "<a href='pInfo.do?id="+value.pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
                       "<img class='card-img' src="+value.imgPath+"/"+value.renameImg+" alt='dog' style='height: 100%;'>"+
                       "</a>"+
                       "</div>"+
@@ -925,7 +1005,7 @@ li {
                                   "</div>"+
                                   "</div>"+
                                   "<div class='card-body' style='height: 400px; padding: 0px;'>"+
-                                  "<a href='pInfo.do?id=1' style='border-bottom: 0px !important; text-decoration: none black;'>"+
+                                  "<a href='pInfo.do?id="+value.pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
                                   "<img class='card-img' src="+value.imgPath+"/"+value.renameImg+" alt='dog' style='height: 100%;'>"+
                                   "</a>"+
                                   "</div>"+
@@ -960,7 +1040,7 @@ li {
                                   "</div>"+
                                   "</div>"+
                                   "<div class='card-body' style='height: 400px; padding: 0px;'>"+
-                                  "<a href='pInfo.do?id=1' style='border-bottom: 0px !important; text-decoration: none black;'>"+
+                                  "<a href='pInfo.do?id="+value.pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
                                   "<img class='card-img' src="+value.imgPath+"/"+value.renameImg+" alt='dog' style='height: 100%;'>"+
                                   "</a>"+
                                   "</div>"+
@@ -1065,14 +1145,14 @@ li {
                   var loginUser = "${loginUser.mno}";
                   if(loginUser == null || loginUser == ""){
                      $input = "<div class='col-md-4 mt-3'>"+
-                      "<div class='component' >"+ 
+                      "<div class='component' style='width:360px;'>"+ 
                       "<div class='card' style='overflow:hidden;'>"+
                       "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                       "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
                       "<img src='${pageContext.request.contextPath}/resources/assets/img/배너일.png' style='width: 80px; height: 50px; margin-left: 20px;' />" +
                       "</div>"+
                       "<div class='col-6' style='width: 50%; height: 50px; margin-left: 30px;'>"+
-                      "<span style='margin-bottom: 0px; margin-top: 23px;'>"+value.nickName+"<br>"+value.enrollDate+"</span>"+
+                      "<span style='margin-bottom: 0px; margin-top: 23px;'>"+data[0].nickName+"<br>"+data[0].enrollDate+"</span>"+
                       "</div>"+
                       "<div class='col-3'style='width: 20%; height: 50px; margin-top: 5px; padding-right: 10px; padding-left: 10px; padding-bottom: 5px;'>"+
                       "<button class='btn btn-light'>"+
@@ -1081,34 +1161,34 @@ li {
                       "</div>"+
                       "</div>"+
                       "<div class='card-body' style='height: 400px; padding: 0px;'>"+
-                      "<a href='pInfo.do?id="+value.pno+" 'style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                      "<img class='card-img' src="+value.imgPath+"/"+value.renameImg+" alt='dog' style='height: 100%;'>"+
+                      "<a href='pInfo.do?id="+data[0].pno+" 'style='border-bottom: 0px !important; text-decoration: none black;'>"+
+                      "<img class='card-img' src="+data[0].imgPath+"/"+data[0].renameImg+" alt='dog' style='height: 100%;'>"+
                       "</a>"+
                       "</div>"+
                       "<div class='card-footer row'>"+
                       "<div class='col-3 form-inline'>"+
                       "<a onclick=unLike();><i class='far fa-heart'style='color: gray; font-size: 30px;'></i></a>"+
-                      "<p style='margin: 0px;margin-left:5px;'>"+value.likeCount+"</p>"+
+                      "<p style='margin: 0px;margin-left:5px;'>"+data[0].likeCount+"</p>"+
                       "</div>"+
                       "<div class='col-3 form-inline' style='padding: 0px;'>"+
                       "<a href=''><i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i></a>"+
-                      "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
+                      "<p style='margin: 0px;margin-left:5px;'>"+data[0].replyCount+"</p>"+
                       "</div>"+
                       "</div>"+
                       "</div>"+
                       "</div>"+
                       "</div>";    
                   }else{
-                      if(value.loginLike == 0){ //조아요 안함
+                      if(data[0].loginLike == 0){ //조아요 안함
                          $input = "<div class='col-md-4 mt-3'>"+
-                         "<div class='component'>"+ 
+                         "<div class='component' style='width:360px;'>"+ 
                          "<div class='card' style='overflow:hidden;'>"+
                          "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                          "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
                          "<img src='${pageContext.request.contextPath}/resources/assets/img/배너일.png' style='width: 80px; height: 50px; margin-left: 20px;' />" +
                          "</div>"+
                          "<div class='col-6' style='width: 50%; height: 50px; margin-left: 30px;'>"+
-                         "<span style='margin-bottom: 0px; margin-top: 23px;'>"+value.nickName+"<br>"+value.enrollDate+"</span>"+
+                         "<span style='margin-bottom: 0px; margin-top: 23px;'>"+data[0].nickName+"<br>"+data[0].enrollDate+"</span>"+
                          "</div>"+
                          "<div class='col-3'style='width: 20%; height: 50px; margin-top: 5px; padding-right: 10px; padding-left: 10px; padding-bottom: 5px;'>"+
                          "<button class='btn btn-light'>"+
@@ -1117,18 +1197,18 @@ li {
                          "</div>"+
                          "</div>"+
                          "<div class='card-body' style='height: 400px; padding: 0px;'>"+
-                         "<a href='pInfo.do?id=1' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                         "<img class='card-img' src="+value.imgPath+"/"+value.renameImg+" alt='dog' style='height: 100%;'>"+
+                         "<a href='pInfo.do?="+data[0].pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
+                         "<img class='card-img' src="+data[0].imgPath+"/"+data[0].renameImg+" alt='dog' style='height: 100%;'>"+
                          "</a>"+
                          "</div>"+
                          "<div class='card-footer row'>"+
                          "<div class='col-3 form-inline'>"+
-                         "<a onclick='like(this);'><i class='far fa-heart'style='color: gray; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
-                         "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
+                         "<a onclick='filterLike(this);'><i class='far fa-heart'style='color: gray; font-size: 30px;'></i><input type='hidden' value="+data[0].pno+" id='hiddenpno'/><input type='hidden' value="+data[0].mno+" id='hiddenmno'/></a>"+
+                         "<p style='margin: 0px; margin-left:5px;'value="+data[0].pno+">"+data[0].likeCount+"</p>"+
                          "</div>"+
                          "<div class='col-3 form-inline' style='padding: 0px;'>"+
                          "<a href=''><i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i></a>"+
-                         "<p style='margin-left:5px;margin: 0px;'>"+value.replyCount+"</p>"+
+                         "<p style='margin-left:5px;margin: 0px;'>"+data[0].replyCount+"</p>"+
                          "</div>"+
                          "</div>"+
                          "</div>"+
@@ -1136,14 +1216,14 @@ li {
                          "</div>";
                       }else{
                          $input = "<div class='col-md-4 mt-3'>"+
-                         "<div class='component'>"+ 
+                         "<div class='component' style='width:360px;'>"+ 
                          "<div class='card' style='overflow:hidden;'>"+
                          "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                          "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
                          "<img src='${pageContext.request.contextPath}/resources/assets/img/배너일.png' style='width: 80px; height: 50px; margin-left: 20px;' />" +
                          "</div>"+
                          "<div class='col-6' style='width: 50%; height: 50px; margin-left: 30px;'>"+
-                         "<span style='margin-bottom: 0px; margin-top: 23px;'>"+value.nickName+"<br>"+value.enrollDate+"</span>"+
+                         "<span style='margin-bottom: 0px; margin-top: 23px;'>"+data[0].nickName+"<br>"+data[0].enrollDate+"</span>"+
                          "</div>"+
                          "<div class='col-3'style='width: 20%; height: 50px; margin-top: 5px; padding-right: 10px; padding-left: 10px; padding-bottom: 5px;'>"+
                          "<button class='btn btn-light'>"+
@@ -1152,18 +1232,18 @@ li {
                          "</div>"+
                          "</div>"+
                          "<div class='card-body' style='height: 400px; padding: 0px;'>"+
-                         "<a href='pInfo.do?id=1' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                         "<img class='card-img' src="+value.imgPath+"/"+value.renameImg+" alt='dog' style='height: 100%;'>"+
+                         "<a href='pInfo.do?id="+data[0].pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
+                         "<img class='card-img' src="+data[0].imgPath+"/"+data[0].renameImg+" alt='dog' style='height: 100%;'>"+
                          "</a>"+
                          "</div>"+
                          "<div class='card-footer row'>"+
                          "<div class='col-3 form-inline'>"+
-                         "<a onclick='like(this);'><i class='fa fa-heart'style='color: red; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
-                         "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
+                         "<a onclick='filterLike(this);'><i class='fa fa-heart'style='color: red; font-size: 30px;'></i><input type='hidden' value="+data[0].pno+" id='hiddenpno'/><input type='hidden' value="+data[0].mno+" id='hiddenmno'/></a>"+
+                         "<p style='margin: 0px; margin-left:5px;'value="+data[0].pno+">"+data[0].likeCount+"</p>"+
                          "</div>"+
                          "<div class='col-3 form-inline' style='padding: 0px;'>"+
                          "<a href=''><i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i></a>"+
-                         "<p style='margin-left:5px;margin: 0px;'>"+value.replyCount+"</p>"+
+                         "<p style='margin-left:5px;margin: 0px;'>"+data[0].replyCount+"</p>"+
                          "</div>"+
                          "</div>"+
                          "</div>"+
@@ -1174,6 +1254,7 @@ li {
                   }
                   $inputWrap.append($input);
                   $("#fourWrap").append($inputWrap);
+                  man(category);
                }else{ //데이터가 여러개
                   $.each(data,function(index, value){
                      var $input;
@@ -1235,13 +1316,13 @@ li {
                             "</div>"+
                             "</div>"+
                             "<div class='card-body' style='height: 400px; padding: 0px;'>"+
-                            "<a href='pInfo.do?id=1' style='border-bottom: 0px !important; text-decoration: none black;'>"+
+                            "<a href='pInfo.do?id="+value.pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
                             "<img class='card-img' src="+value.imgPath+"/"+value.renameImg+" alt='dog' style='height: 100%;'>"+
                             "</a>"+
                             "</div>"+
                             "<div class='card-footer row'>"+
                             "<div class='col-3 form-inline'>"+
-                            "<a onclick='like(this);'><i class='far fa-heart'style='color: gray; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
+                            "<a onclick='filterLike(this);'><i class='far fa-heart'style='color: gray; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
                             "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
                             "</div>"+
                             "<div class='col-3 form-inline' style='padding: 0px;'>"+
@@ -1270,13 +1351,13 @@ li {
                             "</div>"+
                             "</div>"+
                             "<div class='card-body' style='height: 400px; padding: 0px;'>"+
-                            "<a href='pInfo.do?id=1' style='border-bottom: 0px !important; text-decoration: none black;'>"+
+                            "<a href='pInfo.do?id="+value.pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
                             "<img class='card-img' src="+value.imgPath+"/"+value.renameImg+" alt='dog' style='height: 100%;'>"+
                             "</a>"+
                             "</div>"+
                             "<div class='card-footer row'>"+
                             "<div class='col-3 form-inline'>"+
-                            "<a onclick='like(this);'><i class='fa fa-heart'style='color: red; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
+                            "<a onclick='filterLike(this);'><i class='fa fa-heart'style='color: red; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
                             "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
                             "</div>"+
                             "<div class='col-3 form-inline' style='padding: 0px;'>"+
