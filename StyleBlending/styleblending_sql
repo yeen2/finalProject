@@ -428,7 +428,8 @@ CREATE TABLE alarm (
 	m_no	number		NOT NULL,
 	enroll_date	date	DEFAULT sysdate	NOT NULL,
 	status	varchar2(1)	DEFAULT 1	NOT NULL,
-	type	varchar2(1)		NOT NULL
+	type	varchar2(1)		NOT NULL,
+	b_m_no	number		NOT NULL
 );
 
 COMMENT ON COLUMN alarm.al_no IS '알림좋아요번호';
@@ -442,6 +443,8 @@ COMMENT ON COLUMN alarm.enroll_date IS '알림등록날짜';
 COMMENT ON COLUMN alarm.status IS '1-읽지않음, 2-읽음';
 
 COMMENT ON COLUMN alarm.type IS '1-좋아요, 2-신고, 3-팬';
+
+COMMENT ON COLUMN alarm.b_m_no IS '게시물 작성 회원번호';
 
 
 
