@@ -70,6 +70,7 @@
       <result property="category" column="name"/>
       <result property="rownum" column="rnum"/>
       <result property="loginLike" column="loginLike"/>
+      <result property="fanCheck" column="fanCheck"/>
    
    </resultMap>
    
@@ -82,14 +83,25 @@
    </select>
    
    <select id="selectPostList" resultMap="mainResultSet1">
-      select * from
+      <!-- select * from
       (select a.*,rownum rnum
       from (select p_no,m_no, p.original_img,p.rename_img,p.img_path,content,p.hashtag,p.gender,p.location,like_count,p.declare_count,p.enroll_date,p.update_date,p.isdelete,m.nickname, m.profile, m.profile_path,
             (select count(*) from p_reply where r_level=1 and p_no=p.p_no)as replyCount,
                 (select count(*) from p_like where p_no=p.p_no and m_no=#{mno}) loginLike
             from posting p join member m using(m_no) 
             order by p.enroll_date desc) a)
-      where rnum between 1 and 9
+      where rnum between 1 and 9 -->
+      
+        select * from
+      (select a.*,rownum rnum
+      from (select p.p_no,p.m_no, p.original_img,p.rename_img,p.img_path,content,p.hashtag,p.gender,p.location,like_count,p.declare_count,p.enroll_date,p.update_date,p.isdelete,m.nickname, m.profile, m.profile_path,
+            (select count(*) from p_reply r where r.r_level=1 and r.p_no=p.p_no)as replyCount,
+                (select count(*) from p_like l where l.p_no=p.p_no and l.m_no=#{mno}) loginLike,
+                (select count(*) from fan f where me_no = p.m_no and f.you_no=#{mno}) fanCheck
+            from posting p join member m on(p.m_no = m.m_no) 
+            order by p.enroll_date desc) a)
+      where rnum between 1 and 9;
+   
    </select>
    <select id="selectInfinityScroll" resultMap="mainResultSet1">
       select * from
