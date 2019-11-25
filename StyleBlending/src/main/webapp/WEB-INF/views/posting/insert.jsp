@@ -309,13 +309,13 @@
 						<div class="form-group" style="display: inline-block;">
 							<div class="custom-control custom-radio my-2"
 								style="padding-top: 0 !important; display: inline-block;">
-								<input type="radio" id="men" name="gender" value="men"
+								<input type="radio" id="men" name="gender" value="M"
 									class="custom-control-input" checked> <label
 									class="custom-control-label" for="men">남자</label>
 							</div>
 							<div class="custom-control custom-radio my-2"
 								style="padding-top: 0 !important; display: inline-block;">
-								<input type="radio" id="woman" name="gender" value="woman"
+								<input type="radio" id="woman" name="gender" value="W"
 									class="custom-control-input"> <label
 									class="custom-control-label" for="woman">여자</label>
 							</div>

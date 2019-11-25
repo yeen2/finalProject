@@ -1,6 +1,7 @@
 package com.kh.styleblending.posting.model.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.kh.styleblending.posting.model.vo.Declare;
 import com.kh.styleblending.posting.model.vo.Posting;
@@ -40,4 +41,18 @@ public interface PostingService {
 	
 	int deleteReply(int prno);
 	int updateReply(int prno, String content);
+	
+	// 키워드 검색
+	List<Posting> selectSearchPosting_brand(String keyword, int mno);
+	List<Posting> selectSearchPosting_hash(String keyword, int mno);
+	List<Posting> selectSearchPosting_loca(String keyword, int mno);
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
