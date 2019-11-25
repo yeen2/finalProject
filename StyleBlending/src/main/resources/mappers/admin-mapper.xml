@@ -227,12 +227,11 @@
 	</update>
 	
 	<!-- 최근6개월 가입자수 -->
-	<!--  
-	<select>
-		select COUNT(*)
+	<select id="selectMemberCount" resultMap="MemberResultSet">
+		select COUNT(*) m_no
 		from member
 		where to_char(enroll_date) between (select TO_CHAR(add_months((TRUNC(SYSDATE,'MM')),-6)) FROM DUAL) and (TO_CHAR(TRUNC(SYSDATE,'MM')))
 		GROUP BY to_char(enroll_date,'yy/MM')
 	</select>
-	 -->
+	 
 </mapper>

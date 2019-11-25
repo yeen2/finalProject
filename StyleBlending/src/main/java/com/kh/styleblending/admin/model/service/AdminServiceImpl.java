@@ -10,6 +10,7 @@ import com.kh.styleblending.admin.model.dao.AdminDao;
 import com.kh.styleblending.admin.model.vo.Ad;
 import com.kh.styleblending.admin.model.vo.Declare;
 import com.kh.styleblending.admin.model.vo.PageInfo;
+import com.kh.styleblending.admin.model.vo.Statistics;
 import com.kh.styleblending.member.model.vo.Member;
 
 @Service("aService")
@@ -161,6 +162,12 @@ public class AdminServiceImpl implements AdminService{
 	public int updateEndAd(String adno) {
 		// 광고 마감(종료)
 		return aDao.updateEndAd();
+	}
+
+	@Override
+	public Member selectMemberCount() {
+		// 통계(가입자수)
+		return aDao.selectMemberCount();
 	}
 
 	

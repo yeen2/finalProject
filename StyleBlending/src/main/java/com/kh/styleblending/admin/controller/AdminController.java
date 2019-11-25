@@ -26,6 +26,7 @@ import com.kh.styleblending.admin.model.vo.Ad;
 import com.kh.styleblending.admin.model.vo.Declare;
 import com.kh.styleblending.admin.model.vo.PageInfo;
 import com.kh.styleblending.admin.model.vo.Pagination;
+import com.kh.styleblending.admin.model.vo.Statistics;
 import com.kh.styleblending.member.model.vo.Member;
 
 @Controller
@@ -103,7 +104,6 @@ public class AdminController {
 	
 	@RequestMapping("aDeleteDeclareBoard.do")
 	public String deleteDeclareBoard(@RequestParam ArrayList dno, @RequestParam int[] type,@RequestParam int[] bno, Model model) {
-
 		int result1 = 0;
 		
 		for(int i=0; i<type.length; i++) {
@@ -272,15 +272,21 @@ public class AdminController {
 		return mv;
 	}
 	
+	@RequestMapping("aStatistics.do")
+	public String statistics(Model model) {
+		
+		return "admin/statistics";
+	}
+	
 	@ResponseBody
-	@RequestMapping(value="aStatistics.do", produces="application/json; charset=UTF-8")
+	@RequestMapping(value="aChart.do", produces="application/json; charset=UTF-8")
 	public String statistics() {
 		
-		ArrayList<Member> newMember = aService.selectNewMember();
-		
+		Member  statistics = aService.selectMemberCount();
+		System.out.println(statistics);
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		
-		return gson.toJson(newMember);
+		return gson.toJson(statistics);
 	}
 	
 	@RequestMapping("aNotice.do")

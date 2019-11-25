@@ -146,19 +146,112 @@
   $(function(){
 	  $.ajax({
 			 type:"post",
-			 url:"aStatistics.do",
+			 url:"aChart.do",
 			 dataType:"json",
 			 success:function(data){
 				// alert(data);
-				// queryObject = eval('(' + JSON.stringify(data,null,2) + ')');
-				// queryObjectLen = questyObject.barlist.length;
-				// alert(queryObjectLen);
+			
+					// console.log(data[index]);
+					var num =[];
+					for(var i in data){
+						num.push(data[i].mno);
+					}
+					 
+				    var ctx = document.getElementById( "sales-chart" );
+				    ctx.height = 500;
+				    var myChart = new Chart( ctx, {
+				        type: 'line',
+				        data: {
+				            labels: [ "06", "07", "08", "09", "10", "11", "19/12" ],
+				            type: 'line',
+				            defaultFontFamily: 'Montserrat',
+				            datasets: [ {
+				                label: "가입자수",
+				                data: 
+				                	num,
+				               
+				                backgroundColor: 'transparent',
+				                borderColor: 'rgba(220,53,69,0.75)',
+				                borderWidth: 3,
+				                pointStyle: 'circle',
+				                pointRadius: 5,
+				                pointBorderColor: 'transparent',
+				                pointBackgroundColor: 'rgba(220,53,69,0.75)',
+				                    }, {
+				                label: "게시글수",
+				                data: [ 0, 50, 40, 80, 35, 99, 80 ],
+				                backgroundColor: 'transparent',
+				                borderColor: 'rgba(40,167,69,0.75)',
+				                borderWidth: 3,
+				                pointStyle: 'circle',
+				                pointRadius: 5,
+				                pointBorderColor: 'transparent',
+				                pointBackgroundColor: 'rgba(40,167,69,0.75)',
+				                    } ]
+				        },
+				        options: {
+				            responsive: true,
+
+				            tooltips: {
+				                mode: 'index',
+				                titleFontSize: 12,
+				                titleFontColor: '#000',
+				                bodyFontColor: '#000',
+				                backgroundColor: '#fff',
+				                titleFontFamily: 'Montserrat',
+				                bodyFontFamily: 'Montserrat',
+				                cornerRadius: 3,
+				                intersect: false,
+				            },
+				            legend: {
+				                display: false,
+				                labels: {
+				                    usePointStyle: true,
+				                    fontFamily: 'Montserrat',
+				                },
+				            },
+				            scales: {
+				                xAxes: [ {
+				                    display: true,
+				                    gridLines: {
+				                        display: false,
+				                        drawBorder: false
+				                    },
+				                    scaleLabel: {
+				                        display: false,
+				                        labelString: 'Month'
+				                    }
+				                        } ],
+				                yAxes: [ {
+				                    display: true,
+				                    gridLines: {
+				                        display: false,
+				                        drawBorder: false
+				                    },
+				                    scaleLabel: {
+				                        display: true,
+				                        labelString: 'Value'
+				                    }
+				                        } ]
+				            },
+				            title: {
+				                display: false,
+				                text: 'Normal Legend'
+				            }
+				        }
+				    } );
+					
+					
+		
+				
 			 },error:function(){
 				 console.log("ajax통신 실패");
 			 }
 		  });  
   });
   
+  
+  /*
   
   $(function(){
 	  
@@ -247,7 +340,7 @@
     } );
   });
   
-  
+  */
     </script>
 	
 	 <!--  <script>

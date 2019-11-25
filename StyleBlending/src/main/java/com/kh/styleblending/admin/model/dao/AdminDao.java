@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.styleblending.admin.model.vo.Ad;
 import com.kh.styleblending.admin.model.vo.Declare;
 import com.kh.styleblending.admin.model.vo.PageInfo;
+import com.kh.styleblending.admin.model.vo.Statistics;
 import com.kh.styleblending.member.model.vo.Member;
 
 @Repository("aDao")
@@ -122,4 +123,7 @@ public class AdminDao {
 		return sqlSession.update("adminMapper.updateEndAd");
 	}
 	
+	public Member selectMemberCount() {
+		return sqlSession.selectOne("adminMapper.selectMemberCount");
+	}
 }
