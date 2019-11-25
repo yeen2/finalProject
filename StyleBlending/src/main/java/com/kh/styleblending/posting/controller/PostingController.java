@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -26,7 +27,6 @@ import com.kh.styleblending.posting.model.service.PostingService;
 import com.kh.styleblending.posting.model.vo.Declare;
 import com.kh.styleblending.posting.model.vo.Posting;
 import com.kh.styleblending.posting.model.vo.PostingReply;
-import com.kh.styleblending.posting.model.vo.SelectPosting;
 import com.kh.styleblending.posting.model.vo.Style;
 
 @Controller
@@ -34,6 +34,41 @@ public class PostingController {
 
 	@Autowired
 	private PostingService pService;
+	
+	// 포스팅 키워드 검색
+	// 1-브랜드 2-해시태그 3-위치
+	@RequestMapping("pNavSearch.do")
+	public ModelAndView info(String keyword, int type, ModelAndView mv, HttpSession session) {
+		
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		List<Posting> p = new ArrayList<Posting>();
+		
+		if(loginUser != null) {
+			if(type == 1) {
+				p = pService.selectSearchPosting_brand(keyword, loginUser.getMno());
+			}else if(type == 2) {
+				p = pService.selectSearchPosting_hash(keyword, loginUser.getMno());
+			}else if(type == 3) {
+				p = pService.selectSearchPosting_loca(keyword, loginUser.getMno());
+			}
+		}else {
+			if(type == 1) {
+				p = pService.selectSearchPosting_brand(keyword, -10000);
+			}else if(type == 2) {
+				p = pService.selectSearchPosting_hash(keyword, -10000);
+			}else if(type == 3) {
+				p = pService.selectSearchPosting_loca(keyword, -10000);
+			}
+		}
+		
+
+		System.out.println(p);
+		mv.addObject("p", p).setViewName("posting/search");
+	
+		return mv;
+	}
+	
+	
 	
 	// 좋아요,신고 정보 보여주려면 loginUser정보 가져와야 함
 	// 매개변수로 int id 추가해야함
@@ -88,6 +123,36 @@ public class PostingController {
 		
 		System.out.println(p);
 		
+		/*
+		 * // 2. 해시태그 추출 String str = p.getContent(); 
+		 * String [] strArr = str.split(" ");
+		 * String hashtag = "";
+		 * 
+		 * HashMap<String, String> map = new HashMap<>();
+		 * 
+		 * for(int i=0; i<strArr.length; i++) { 
+		 * 	if(strArr[i].charAt(0) == '#') { 
+		 * 		hashtag += strArr[i]; 
+		 * 		map.put(strArr[i], "<a>"+strArr[i]+"</a>"); 
+		 * 	} 
+		 * }
+		 * p.setHashtag(hashtag);
+		 * 
+		 * //3. #태그는 <a></a>로 감싸기 
+		 * String content = p.getContent();
+		 * System.out.println("처음 content : " + content ); 
+		 * String con = ""; 
+		 * // 첫 #를 <a>
+		 * for (String key : map.keySet() ) {
+		 * System.out.println("key:"+key+",value:"+map.get(key));
+		 * 
+		 * content = content.replace(key, map.get(key)); 
+		 * } 
+		 * p.setContent(content);
+		 * System.out.println("해시태그에 <a>붙임 : " + content);
+		 */
+		
+
 		// 2. 해시태그 추출
 		String str = p.getContent();
 		String [] strArr = str.split(" ");
@@ -98,7 +163,7 @@ public class PostingController {
 		for(int i=0; i<strArr.length; i++) {
 			if(strArr[i].charAt(0) == '#') {
 				hashtag += strArr[i];
-				map.put(strArr[i], "<a>"+strArr[i]+"</a>");
+				map.put(strArr[i], "<a href='#'>"+strArr[i]+"</a>");
 			}
 		}
 		p.setHashtag(hashtag);
@@ -113,7 +178,11 @@ public class PostingController {
 
 			content = content.replace(key, map.get(key));
 		}
+		p.setContent(content);
 		System.out.println("해시태그에 <a>붙임 : " + content);
+		
+		
+		
 		
 		
 		int result = pService.insertPosting(p, cate, brand, color);
@@ -264,9 +333,34 @@ public class PostingController {
 		
 		return mv;
 	}
+	
+	@ResponseBody
+	@RequestMapping("pReplyDelete.do")
+	public String deleteReply(int prno) {
+
+		int result = pService.deleteReply(prno);
+		if(result > 0 ) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping("pReplyUpdate.do")
+	public String updateReply(int prno, String content) {
 		
-		
-		
+		int result = pService.updateReply(prno, content);
+		if(result > 0 ) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
+	
+	
+	
+	
 	
 	
 }

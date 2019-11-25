@@ -21,6 +21,9 @@
 	.replyForm_nickname {
 		font-weight: bold;
 	}
+	.replyForm_content{
+		height: 100px;
+	}
 	.rrBtn{
 		color:gray;
 		font-style : oblique;
@@ -50,10 +53,28 @@
 		margin-bottom: 30px;
 		margin-left: 10px;
 	}
-
+	.r_modi_div {
+		height: 66px;
+		display: none;
+	}
+	.rModiContent{
+		border: 1px solid #787878;
+		border-radius: .25rem;
+    	padding: .5rem 1rem;
+    	border-color : none;
+    	width: 400px;
+    	rows : 3;
+	}
+	.rModiSubmit {
+	 	margin-bottom: 30px;
+		margin-left: 10px;
+		display: inline-block;
+	 }
+	 
+	 
 	.spotDiv {
-		width: 50%; height: 50%; border: 1px solid red; display: inline-block;
-		padding : 5px;
+		width: 50%; height: 50%; display: inline-block;
+		padding : 3px;
 	}
 	button:click {
 		border:none;
@@ -70,6 +91,9 @@
 	}
 	.r_md:hover{
 		cursor: pointer;
+	}
+	a:hover {
+		text-decoration: none;
 	}
 </style>
 </head>
@@ -91,7 +115,7 @@
 				<h1 class="mt-4">Style Posting</h1>
 				<!-- Author -->
 				<p class="lead">
-					by <a href="#">Style Blending</a>
+					by <a style="font-style: italic;">Style Blending</a>
 				</p>
 
 				<hr>
@@ -283,7 +307,7 @@
 					<h5 class="card-header">Clothes stylist</h5>
 					<div class="card-body">
 					
-						<c:forEach var="s" items="${s }">
+						<c:forEach var="s" items="${s}">
 						<div class="row" style="margin-bottom: 10px;">
 							<div class="col-lg-3">
 								<div  style="border-radius: 50%; width: 50px; height: 50px;">
@@ -291,10 +315,14 @@
 										src="${ pageContext.servletContext.contextPath }/resources/image/cate/${s.img}">
 								</div>
 							</div>
-							<div class="col-lg-9">
+							<div class="col-lg-9" style="display: inline-block;">
 								<b>${s.name }</b>
 								<br>
 								<span>${s.brand }</span>
+								<br>
+								<div style="display: inline-block; border-radius: 50%; width: 15px; height: 15px;">
+									<div style="border-radius: 50%; width:100%; height:100%; background-color: ${s.color}"></div>
+								</div>
 							</div>
 						</div>
 						</c:forEach>
@@ -354,14 +382,21 @@
 					<h5 class="card-header">Spotlight</h5>
 					<div class="card-body">
 						<div class="spotDiv">
-							<a>
-								<img style="width: 100%; height: 100%;">
-							</a>
+							<img style="width: 100%; height: 100%;" 
+								src="${ pageContext.servletContext.contextPath }/resources/image/hashtag/dailylook.jpg">
+							<div style="left: 60px; width: 100px; bottom: 80px; font-size: 1em; 
+										font-weight: bold; position: absolute; color: white;">
+								#데일리룩
+							</div>
 						</div>
+						
 						<div class="spotDiv" style="float: right;">
-							<a>
-								<img style="width: 100%; height: 100%;">
-							</a>
+							<img style="width: 100%; height: 100%;" 
+								src="${ pageContext.servletContext.contextPath }/resources/image/hashtag/springlook.jpg">
+							<div style="right: 25px; width: 100px; bottom: 80px; font-size: 1em; 
+										font-weight: bold; position: absolute; color: white;">
+								#봄코디
+							</div>
 						</div>
 					</div>
 				</div>
@@ -496,8 +531,7 @@
 							<option value="3">음란물</option>
 							<option value="4">욕설</option>
 							<option value="5">개인정보침해</option>
-							<option value="6">욕설</option>
-							<option value="7">기타</option>
+							<option value="6">기타</option>
 						</select>
 					</div>
 					<div class="form-group">
@@ -552,7 +586,7 @@
 							return false;
 						}
 						
-						if(d_category == 7){							
+						if(d_category == 6){							
 							if(content.length == 0){
 								alert("신고내용을 입력해주세요");
 								$('#declareModal').modal();
@@ -787,17 +821,23 @@
 							$replyForm_contentDiv = $("<div class='replyForm_contentDiv'></div>");
 							$nickname = $("<h5 class='mt-0 replyForm_nickname'></h5>").text(value.nickName);
 							$rcontent = $("<span class='replyForm_content'></span>").html(value.content);
+							//수정div(hidden)
+							$r_modi_div = $("<div class='r_modi_div'></div>")
+							$r_modi_textarea = $("<textarea class='rModiContent'></textarea>").html(value.content);
+							$r_modi_submit = $("<button class='btn btn-dark rModiSubmit' id='rModiSubmit'>등록</button>");
+							
 							$likecount = $("<span class='replyForm_likecount'></span>").text(value.likeCount);
 							$likeImg = $("<i class='fas fa-caret-up'></i>");
 							$rrBtn = $("<a class='rrBtn'>reply</a>");
 							$date = $("<span class='replyForm_date'></span>").text(value.enrollDate);
 							//수정 삭제 아이콘
-							$r_modi = $("<i class='fas fa-pencil-alt r_md'></i>");
-							$r_delete = $("<i class='fas fa-trash-alt r_md'></i>");
+							$r_modi = $("<i class='fas fa-pencil-alt r_md r_modiBtn'></i>");
+							$r_delete = $("<i class='fas fa-trash-alt r_md r_deleteBtn'></i>");
+							
 							
 							
 							// 대댓글폼
-							$replyForm_rrForm = $("<br><br><div class='replyForm_rrForm' style='display: none;'></div>");
+							$replyForm_rrForm = $("<br><br><div class='replyForm_rrForm' style='display:none;'></div>");
 							$prno = $("<input type='hidden'>").text(value.prno);
 							$rrContent = $("<textarea id='rrContent' class='rrContent'></textarea>");
 							$rrSubmit = $("<button class='btn btn-dark rrSubmit' id='rrSubmit'>등록</button>");
@@ -808,9 +848,13 @@
 								//대댓글
 								$replyForm_rrForm.append($prno).append($rrContent).append($rrSubmit);
 								
-								if(session_mno == value.mno){
+								if(session_mno == value.mno){ //댓글쓴사람 = 로그인회원
 								//컨텐츠
-								$replyForm_contentDiv.append($nickname).append($rcontent).append('<br>').append($likecount)
+								// => 수정div
+								$r_modi_div.append($r_modi_textarea).append($r_modi_submit);
+								$replyForm_contentDiv.append($nickname).append($rcontent)
+												.append($r_modi_div)
+												.append('<br>').append($likecount)
 												.append($likeImg).append($rrBtn).append($date).append($r_modi).append($r_delete)
 												.append($replyForm_rrForm);
 								}else{
@@ -847,6 +891,65 @@
 				}
 			});
 		} //getReplyList end 
+		
+		
+		//댓글 삭제
+		$(document).on("click",".r_deleteBtn", function () {
+			var prno = $(this).parent().children(".replyForm_rrForm").children().eq(0).text();
+			
+			if(confirm('정말로 삭제하시겠습니까?')){
+				// 댓글 삭제
+				$.ajax({
+					url:"pReplyDelete.do",
+					data:{prno:prno},
+					success:function(data){
+						
+						if(data == "success"){
+							getReplyList();
+						}else{
+							alert("댓글 삭제 실패");
+						}
+						
+					},error:function(){
+						console.log("ajax 통신 실패");
+					}
+				});
+			}
+		});
+		
+		//댓글 수정
+		$(document).on("click",".r_modiBtn", function () {
+			var prno = $(this).parent().children(".replyForm_rrForm").children().eq(0).text();
+
+			$(this).parent().children(".r_modi_div").toggle();
+			$(this).parent().children(".replyForm_content").toggle();
+		});
+		
+		$(document).on("click",".rModiSubmit", function () {
+			var prno = $(this).parent().parent().children(".replyForm_rrForm").children().eq(0).text();
+			var content = $(this).prev().val();
+			console.log(prno);
+			console.log(content);
+			
+			$.ajax({
+				url:"pReplyUpdate.do",
+				data:{prno:prno,
+					  content:content},
+				success:function(data){
+					
+					if(data == "success"){
+						getReplyList();
+					}else{
+						alert("댓글 삭제 실패");
+					}
+					
+				},error:function(){
+					console.log("ajax 통신 실패");
+				}
+			});
+			
+			
+		});
 		
 	</script>
 			
@@ -1006,7 +1109,6 @@
 							}
 						});
 	</script>
-	
 
 	<jsp:include page="../includes/footer.jsp" />
 

@@ -271,7 +271,7 @@
 							var $copy1 = $("<div>").attr({"class":"col-12 col-md-4", "style":"position:relative;"});
 							$copy1.append($("<div>").attr({"value":"abcddd","class":"square imgP", "style":"background-image: url(" + "'resources/assets/img/" + list[i].renameImg + "');"}));
 							var $copy2 = 
-								"<div class='square' style='position:absolute; width:92%; bottom:0; display:none; background:rgba(0,0,0,0.6);'>"
+								"<div class='square imgJ' style='position:absolute; width:92%; bottom:0; opacity:0; background:rgba(0,0,0,0.6);'>"
 								+ "<div style='margin-left:48px; margin-top:135px; font-size:22px; color:white; position:relative;'>"
 								+ "<div style='float:left; left:40px; position:absolute;'><i class='fas fa-heart'></i></div>"
 								+ "<div style='float:left; left:70px; position:absolute;'>" + list[i].likeCount + "</div>"
@@ -326,7 +326,7 @@
 							var $copy1 = $("<div>").attr({"class":"col-12 col-md-4", "style":"position:relative;"});
 							$copy1.append($("<div>").attr({"value":"abcddd","class":"square imgP", "style":"background-image: url(" + "'resources/assets/img/" + list[i].renameImg + "');"}));
 							var $copy2 = 
-								"<div class='square' style='position:absolute; width:92%; bottom:0; display:none; background:rgba(0,0,0,0.6);'>"
+								"<div class='square imgJ' style='position:absolute; width:92%; bottom:0; opacity:0; background:rgba(0,0,0,0.6);'>"
 								+ "<div style='margin-left:48px; margin-top:135px; font-size:22px; color:white; position:relative;'>"
 								+ "<div style='float:left; left:40px; position:absolute;'><i class='fas fa-heart'></i></div>"
 								+ "<div style='float:left; left:70px; position:absolute;'>" + list[i].likeCount + "</div>"
@@ -376,7 +376,32 @@
 							if(i == list.length-1){
 								$("#fBtn").css("display", "none");
 							}
-							if(list[i].fanCheck == 1){
+							if(list[i].mno == $("#loginMno").val()){
+								var $fan1 = "<div style='height:60px;'>"
+									+"<input type='hidden' class='fanCheckClass' value='" + list[i].fanCheck + "'>"
+									+"<div style='float:left;'>"
+									+"<img src='resources/assets/img/lorde.png' alt='Raised circle image'"
+									+"class='img-fluid rounded-circle shadow-lg' style='width: 50px;'>"
+									+"</div>"
+									+"<div style='float:left; margin-left:15px;'>"
+									+"<div style='text-align:left;'>" + list[i].nickName + "</div>"
+									+"<div id='abc' style='text-align:left;'>"
+									+"<i class='fas fa-clipboard-list'></i><div>" + list[i].posCount + "</div>"
+									+"<i class='fas fa-heart'></i><div>" + list[i].likeCount + "</div>"
+									+"<i class='fas fa-comment'></i><div>" + list[i].replyCount + "</div>"
+									+"</div>"
+									+"</div>"
+									+"<div style='float:left; margin-left:210px;'>"
+									+"<button class='btn btn-light fanClassA' name='fanNameA' style='display:none; margin-top:9px;'"
+									+"value='" + list[i].mno + "'>"
+									+"<i class='fa fa-plus'></i> Fan</button>"
+									+"<button class='btn btn-dark fanClassB' name='fanNameB' style='display:none; margin-top:9px;'"
+									+"value='" + list[i].mno + "'>"
+									+"<i style='width:40px;' class='fas fa-check'></i></button>"
+									+"</div>"
+									+"</div>"
+									+"<hr>";
+							}else if(list[i].fanCheck == 1){
 								var $fan1 = "<div style='height:60px;'>"
 									+"<input type='hidden' class='fanCheckClass' value='" + list[i].fanCheck + "'>"
 									+"<div style='float:left;'>"
@@ -468,7 +493,30 @@
 							if(i == list.length-1){
 								$("#wBtn").css("display", "none");
 							}
-							if(list[i].fanCheck == 1){
+							if(list[i].mno == $("#loginMno").val()){
+								var $fan1 = "<div style='height:60px;'>"
+									+"<input type='hidden' class='fanCheckCount' value='" + list[i].fanCheck + "'>"
+									+"<div style='float:left;'>"
+									+"<img src='resources/assets/img/lorde.png' alt='Raised circle image'"
+									+"class='img-fluid rounded-circle shadow-lg' style='width: 50px;'>"
+									+"</div>"
+									+"<div style='float:left; margin-left:15px;'>"
+									+"<div style='text-align:left;'>" + list[i].nickName + "</div>"
+									+"<div id='abc' style='text-align:left;'>"
+									+"<i class='fas fa-clipboard-list'></i><div>" + list[i].posCount + "</div>"
+									+"<i class='fas fa-heart'></i><div>" + list[i].likeCount + "</div>"
+									+"<i class='fas fa-comment'></i><div>" + list[i].replyCount + "</div>"
+									+"</div>"
+									+"</div>"
+									+"<div style='float:left; margin-left:210px;'>"
+									+"<button class='btn btn-light fanClassA' name='fanNameA' style='display:none; margin-top:9px;' value='" + list[i].mno + "'>"
+									+"<i class='fa fa-plus'></i> Fan</button>"
+									+"<button class='btn btn-dark fanClassB' name='fanNameB' style='display:none; margin-top:9px;' value='" + list[i].mno + "'>"
+									+"<i style='width:40px;' class='fas fa-check'></i></button>"
+									+"</div>"
+									+"</div>"
+									+"<hr>";
+							}else if(list[i].fanCheck == 1){
 								var $fan1 = "<div style='height:60px;'>"
 									+"<input type='hidden' class='fanCheckCount' value='" + list[i].fanCheck + "'>"
 									+"<div style='float:left;'>"
@@ -706,11 +754,11 @@
 		
 		// 포스팅 hover 좋아요, 댓글 표시
 		
-		$(document).on("mouseover", ".imgP", function(){
-			$(this).siblings("div").css("display", "block");
+		$(document).on("mouseenter", ".imgJ", function(){
+			$(this).css({"opacity":"1", "cursor":"pointer"});
 		});
-		$(document).on("mouseleave", ".imgP", function(){
-			$(this).siblings("div").css("display", "none");
+		$(document).on("mouseleave", ".imgJ", function(){
+			$(this).css("opacity", "0");
 		});
 			
 	</script>

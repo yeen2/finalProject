@@ -110,7 +110,7 @@
 	                                        </tr>
 	                                    </thead>
 	                                    <c:forEach items="${list}" var="a">
-	                                    <tbody>
+	                                    <tbody class="tbody">
 	                                        <tr>
 	                                        	<td>
                                         			<input name="checkRow" type="checkbox" id="checkRow" value="${a.adno}${a.status}"/>
@@ -134,6 +134,7 @@
 	                                        </tr>
 	                                    </tbody>
 	                                    </c:forEach>
+	                                    <tbody class="hiddenTable"></tbody>
 	                                </table>
 	                                
 	                                <div class="row">
@@ -150,6 +151,7 @@
 	                                				<c:url value="aAdvertisment.do" var="previous">	
 														<c:param name="currentPage" value="${pi.currentPage-1 }"/>
 														<c:param name="boardLimit" value="${pi.boardLimit }"/>
+														<c:param name="keyword" value="${keyword }"/>
 	                                				</c:url>
 	                                				<a href="${previous }" aria-controls="bootstrap-data-table" class="page-link">Previous</a>
 	                                			</c:if>
@@ -163,6 +165,7 @@
 	                                				<c:url value="aAdvertisment.do" var="page">	
 	                                					<c:param name="currentPage" value="${p}"/>
 	                                					<c:param name="boardLimit" value="${pi.boardLimit }"/>
+	                                					<c:param name="keyword" value="${keyword }"/>
 	                                				</c:url>
 		                                			<li class="paginate_button page-item active">
 		                                				<a href="${page}" aria-controls="bootstrap-data-table" class="page-link">${p }</a>
@@ -178,6 +181,7 @@
 	                                				<c:url value="aAdvertisment.do" var="next" >
 	                                					<c:param name="currentPage" value="${pi.currentPage+1 }"/>
 	                                					<c:param name="boardLimit" value="${pi.boardLimit }"/>
+	                                					<c:param name="keyword" value="${keyword }"/>
 	                                				</c:url>
 	                                				<a href="${next }" aria-controls="bootstrap-data-table" class="page-link">Next</a>
 	                                			</c:if>
@@ -195,7 +199,7 @@
                               
                               <!-- 승인대기 목록 -->
                               <div class="tab-pane fade row" id="nav-waiting" style="display:inline-flex;" role="tabpanel" >
-                              <c:forEach items="${newList }" var="a">
+                              <c:forEach items="${newList}" var="a">
 			                    <div class="col-md-4" >
 			                        <div class="card col-md-8">
 			                            <img class="card-img-top" src="${pageContext.request.contextPath}${a.imgPath}${a.renameImg}" alt="Card image cap">
@@ -309,7 +313,7 @@
         </div>
          
     
-    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/admin_temp/js/admin.js"></script>
+<%--     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/admin_temp/js/admin.js"></script> --%>
 	<script>
 	
 	 function pageSet(boardLimit){ // 게시글수 변경
@@ -385,6 +389,64 @@
 			});
 	
 	});
+	
+	
+	$(function(){ // 검색창
+		
+		// 업체명검색
+		$("#adName").keyup(function(){ // 키보드 눌렀다가 뗐을때 이벤트 발생
+			var k = $(this).val();
+			//$(".table>tbody>tr").hide();
+			//var adName = $(".table>tbody>tr> td:nth-child(5n+3):contains('" + k + "')"); // 업체명 검색
+			location.href="aAdvertisment.do?keyword="+k;
+	/* 		var $table = $(".table");
+			$table.html("");
+			
+			$.ajax({
+				url:"aSearchAdname.do",
+				data:{"keyword":k},
+				dataType:"json",
+				type:"post",
+				success:function(a){
+					alert("성공");
+				//	$(adName).parent().show();
+					$.each(a,function(index, value){
+						$content = 
+							"<td>" +
+                			"<input name='checkRow' type='checkbox' id='checkRow' value='${a.adno}${a.status}'/></td>"
+                         +"<td class='serial'>${a.adno}</td>"+
+                        "<td>${a.name }</td>"+
+                        "<td> ${a.enrollDate } </td>"+
+                        "<td> ${a.startDate } </td>"+
+                        "<td> ${a.endDate } </td>"+
+                        "<td>"+
+                        	"<c:if test='${a.status eq 1 }'>"+
+                        	"<span class='badge adWaiting' style='background:#ffc107;'>등록 대기</span>"+
+                            "</c:if>"
+                            <c:if test="${a.status eq 2 }">
+                            <span class="badge adOngoing" style="background:rgb(0, 123, 255);">진행중</span>
+                            </c:if>
+                            <c:if test="${a.status eq 3 }">
+                            <span class="badge adEnd" style="background:gray;">종료</span>
+                            </c:if>
+                        </td>
+                    </tr> 
+                    $table.append($content);
+						
+					});
+					
+				},error:function(){
+					console.log("ajax 통신 실패");
+				}
+			}); */
+			
+		});
+		
+		
+	});	
+	
+	
+	
 	
 	</script>
 	

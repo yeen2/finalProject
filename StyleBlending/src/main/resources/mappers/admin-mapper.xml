@@ -157,6 +157,18 @@
 		</if>
 	</update>
 	
+	<update id="pDeleteBoard">
+		update posting
+		set isdelete='Y'
+		where p_no=#{bno}
+	</update>
+	
+	<update id="bDeleteBoard">
+		update board
+		set isdelete='Y'
+		where b_no=#{bno}
+	</update>
+	
 	<update id="updateIsCheck" parameterType="String">
 		update declare
 		set ischeck='2'
@@ -175,6 +187,14 @@
 		join pay p on(p.pay_no=ad.pay_no)
 		join member m on(m.m_no=ad.m_no)
 		order by ad.status, ad.ad_no desc, ad.enroll_date )t1
+	</select>
+	
+	<select id="selectAdSearchList" resultMap="AdResultSet">
+		select ad.*,m.email
+		from ad
+		join pay p on(p.pay_no=ad.pay_no)
+		join member m on(m.m_no=ad.m_no)
+        where name like '%'||#{keyword}||'%'
 	</select>
 	
 	<select id="selectAdNewList" resultMap="AdResultSet">
@@ -205,5 +225,13 @@
 		set status='3', end_date=sysdate
 		where status='2'
 	</update>
+	
+	<!-- 최근6개월 가입자수 -->
+	<select id="selectMemberCount" resultMap="MemberResultSet">
+		select COUNT(*) m_no
+		from member
+		where to_char(enroll_date) between (select TO_CHAR(add_months((TRUNC(SYSDATE,'MM')),-6)) FROM DUAL) and (TO_CHAR(TRUNC(SYSDATE,'MM')))
+		GROUP BY to_char(enroll_date,'yy/MM')
+	</select>
 	 
 </mapper>

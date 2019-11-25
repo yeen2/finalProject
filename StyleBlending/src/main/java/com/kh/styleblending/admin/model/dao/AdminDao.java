@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.styleblending.admin.model.vo.Ad;
 import com.kh.styleblending.admin.model.vo.Declare;
 import com.kh.styleblending.admin.model.vo.PageInfo;
+import com.kh.styleblending.admin.model.vo.Statistics;
 import com.kh.styleblending.member.model.vo.Member;
 
 @Repository("aDao")
@@ -70,6 +71,14 @@ public class AdminDao {
 		return sqlSession.update("adminMapper.deleteDeclareBoard",dno);
 	}
 	
+	public int pDeleteBoard(int bno) {
+		return sqlSession.update("adminMapper.pDeleteBoard",bno);
+	}
+	
+	public int bDeleteBoard(int bno) {
+		return sqlSession.update("adminMapper.bDeleteBoard",bno);
+	}
+	
 	public int updateIsCheck(String dno) {
 		return sqlSession.update("adminMapper.updateIsCheck", dno);
 	}
@@ -85,6 +94,13 @@ public class AdminDao {
 		RowBounds rowBounds = new RowBounds(offset,pi.getBoardLimit());
 		
 		return (ArrayList)sqlSession.selectList("adminMapper.selectAdList", null ,rowBounds);
+	}
+	
+	public ArrayList<Ad> selectAdSearchList(PageInfo pi, String keyword){
+		int offset = (pi.getCurrentPage()-1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset,pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("adminMapper.selectAdSearchList", keyword, rowBounds);
 	}
 	
 	public ArrayList<Ad> selectAdNewList(){
@@ -107,4 +123,7 @@ public class AdminDao {
 		return sqlSession.update("adminMapper.updateEndAd");
 	}
 	
+	public Member selectMemberCount() {
+		return sqlSession.selectOne("adminMapper.selectMemberCount");
+	}
 }

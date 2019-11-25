@@ -223,6 +223,7 @@
 </style>
 <%-- <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery.placeholder.js"></script> --%>
 <script src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
+<script src="${pageContext.request.contextPath}/resources/ckeditor/plugin.js"></script>
 </head>
 <body class="profile" style="margin-bottom: 20px !important;">
 	
@@ -238,7 +239,7 @@
 			<div class="col-lg-7">
 
 				<!-- Title -->
-				<h1 class="mt-4">**의 Today's Posting</h1>
+				<h3 class="mt-4">" ${ loginUser.nickName } " 님의 Today's Posting</h3>
 				<input type="hidden" name="mno" value="${ loginUser.mno }">
 				<hr>
 				<!-- 이미지 -->
@@ -308,13 +309,13 @@
 						<div class="form-group" style="display: inline-block;">
 							<div class="custom-control custom-radio my-2"
 								style="padding-top: 0 !important; display: inline-block;">
-								<input type="radio" id="men" name="gender" value="men"
+								<input type="radio" id="men" name="gender" value="M"
 									class="custom-control-input" checked> <label
 									class="custom-control-label" for="men">남자</label>
 							</div>
 							<div class="custom-control custom-radio my-2"
 								style="padding-top: 0 !important; display: inline-block;">
-								<input type="radio" id="woman" name="gender" value="woman"
+								<input type="radio" id="woman" name="gender" value="W"
 									class="custom-control-input"> <label
 									class="custom-control-label" for="woman">여자</label>
 							</div>
@@ -660,7 +661,8 @@
 				alert("이미지를 등록해주세요.");
 				fileImg.focus();
 				return false;
-			}else if(content.val().trim() == ""){
+		/* 	}else if(content.val().trim() == ""){ */
+			}else if(CKEDITOR.instances.content.getData() == ""){
 				alert("내용을 입력해주세요");
 				content.focus();
 				return false;
@@ -926,20 +928,25 @@
 			}
 		}
 	</script>
-	<script type="text/javascript">
-
-	//id가 content인 태그에 ckeditor를 적용
-	/* CKEDITOR.replace("content", {
-		height:200
-	});  */
-	/* CKEDITOR.replace( 'content', { extraPlugins : 'confighelper'});
- */
-
-/* 	CKEDITOR.create( document.querySelector( '#content' ), {
-        placeholder: 'Type the content here!'
-    } ); */
 	
-	</script>	
+<!-- 	<script type="text/javascript">
+
+		//id가 content인 태그에 ckeditor를 적용
+		CKEDITOR.replace("content", {
+			height:200,
+			extraPlugins : 'confighelper',
+		}); 
+	
+	
+	</script>	 -->	
+	
+	<script type="text/javascript">
+		function enter_check() {
+			if(event.KeyCode == 13){
+				
+			}
+		}
+	</script>
 	
 	<%@include file="../includes/footer.jsp" %>
 	

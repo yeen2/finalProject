@@ -6,6 +6,7 @@ import java.util.HashMap;
 import com.kh.styleblending.admin.model.vo.Ad;
 import com.kh.styleblending.admin.model.vo.Declare;
 import com.kh.styleblending.admin.model.vo.PageInfo;
+import com.kh.styleblending.admin.model.vo.Statistics;
 import com.kh.styleblending.member.model.vo.Member;
 
 public interface AdminService {
@@ -39,6 +40,9 @@ public interface AdminService {
 	
 	// 신고게시물 삭제
 	int deleteDeclareBoard(ArrayList dno);
+
+	// 신고된 해당 게시물 삭제
+	int deleteBoard(int type, int bno);
 	
 	// 신고게시물 상세조회(확인으로 상태값변경)
 	int updateIsCheck(String dno);
@@ -48,6 +52,9 @@ public interface AdminService {
 	
 	// 광고 목록 조회용(페이징포함)
 	ArrayList<Ad> selectAdList(PageInfo pi);
+	
+	// 업체명 검색 
+	ArrayList<Ad> selectAdSearchList(PageInfo pi, String keyword);
 	
 	// 광고 승인대기 리스트 조회용
 	ArrayList<Ad> selectAdNewList();
@@ -60,6 +67,9 @@ public interface AdminService {
 	
 	// 광고 마감(종료)
 	int updateEndAd(String adno);
+	
+	// 통계(가입자수)
+	Member selectMemberCount();
 	
 	
 }

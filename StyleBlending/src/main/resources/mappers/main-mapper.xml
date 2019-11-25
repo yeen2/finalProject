@@ -3,126 +3,139 @@
 "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="mainMapper">
-	<resultMap id="mainAdResultSet" type="Ad">
-		<id property="adno" column="ad_no"/>
-		<result property="mno" column="m_no"/>
-		<result property="payno" column="pay_no"/>
-		<result property="name" column="name"/>
-		<result property="url" column="url"/>
-		<result property="originalImg" column="original_img"/>
-		<result property="renameImg" column="rename_img"/>
-		<result property="imgPath" column="img_path"/>
-		<result property="enrollDate" column="enroll_date"/>
-		<result property="startDate" column="start_date"/>
-		<result property="endDate" column="end_date"/>
-		<result property="status" column="status"/>
-		
-	
-	</resultMap>
-	
-	<resultMap id="mainResultSet2" type="Posting">
-		
-		<id property="pno" column="p_no"/>
-		<result property="mno" column="m_no"/>
-		<result property="originalImg" column="original_img"/>
-		<result property="renameImg" column="rename_img"/>
-		<result property="imgPath" column="img_path"/>
-		<result property="content" column="content"/>
-		<result property="hashtag" column="hashtag"/>
-		<result property="gender" column="gender"/>
-		<result property="location" column="location"/>
-		<result property="likeCount" column="like_count"/>
-		<result property="declareCount" column="declare_count"/>
-		<result property="enrollDate" column="enroll_date"/>
-		<result property="updateDate" column="update_date"/>
-		<result property="isDelete" column="isdelete"/>
-		<result property="nickName" column="nickname"/>
-		<result property="profile" column="profile"/>
-		<result property="profileImg" column="profile_path"/>
-		<result property="replyCount" column="replyCount"/>
-		<result property="color" column="color"/>
-		<result property="category" column="name"/>
-		<result property="rownum" column="rnum"/>
-		<result property="loginLike" column="loginLike"/>
-	
-	</resultMap>
-	<resultMap id="mainResultSet1" type="Posting">
-		
-		<id property="pno" column="p_no"/>
-		<result property="mno" column="m_no"/>
-		<result property="originalImg" column="original_img"/>
-		<result property="renameImg" column="rename_img"/>
-		<result property="imgPath" column="img_path"/>
-		<result property="content" column="content"/>
-		<result property="hashtag" column="hashtag"/>
-		<result property="gender" column="gender"/>
-		<result property="location" column="location"/>
-		<result property="likeCount" column="like_count"/>
-		<result property="declareCount" column="declare_count"/>
-		<result property="enrollDate" column="enroll_date"/>
-		<result property="updateDate" column="update_date"/>
-		<result property="isDelete" column="isdelete"/>
-		<result property="nickName" column="nickname"/>
-		<result property="profile" column="profile"/>
-		<result property="profileImg" column="profile_path"/>
-		<result property="replyCount" column="replyCount"/>
-		<result property="color" column="color"/>
-		<result property="category" column="name"/>
-		<result property="rownum" column="rnum"/>
-		<result property="loginLike" column="loginLike"/>
-	
-	</resultMap>
-	
-	
-	<select id="selectFourWrap" resultMap="mainResultSet2">
-		select * from
-		(select a.*,rownum rnum
-		from (select p_no,m_no, p.original_img,p.rename_img,p.img_path,content,p.hashtag,p.gender,p.location,like_count,p.declare_count,p.enroll_date,p.update_date,p.isdelete,m.nickname, m.profile, m.profile_path,(select count(*) from p_reply where r_level=1 and p_no=p.p_no)as replyCount from posting p join member m using(m_no) order by p.like_count desc) a)
-		where rnum between 1 and 4
-	</select>
-	
-	<select id="selectPostList" resultMap="mainResultSet1">
-		select * from
-		(select a.*,rownum rnum
-		from (select p_no,m_no, p.original_img,p.rename_img,p.img_path,content,p.hashtag,p.gender,p.location,like_count,p.declare_count,p.enroll_date,p.update_date,p.isdelete,m.nickname, m.profile, m.profile_path,
-				(select count(*) from p_reply where r_level=1 and p_no=p.p_no)as replyCount,
+   <resultMap id="mainAdResultSet" type="Ad">
+      <id property="adno" column="ad_no"/>
+      <result property="mno" column="m_no"/>
+      <result property="payno" column="pay_no"/>
+      <result property="name" column="name"/>
+      <result property="url" column="url"/>
+      <result property="originalImg" column="original_img"/>
+      <result property="renameImg" column="rename_img"/>
+      <result property="imgPath" column="img_path"/>
+      <result property="enrollDate" column="enroll_date"/>
+      <result property="startDate" column="start_date"/>
+      <result property="endDate" column="end_date"/>
+      <result property="status" column="status"/>
+      
+   
+   </resultMap>
+   
+   <resultMap id="mainResultSet2" type="Posting">
+      
+      <id property="pno" column="p_no"/>
+      <result property="mno" column="m_no"/>
+      <result property="originalImg" column="original_img"/>
+      <result property="renameImg" column="rename_img"/>
+      <result property="imgPath" column="img_path"/>
+      <result property="content" column="content"/>
+      <result property="hashtag" column="hashtag"/>
+      <result property="gender" column="gender"/>
+      <result property="location" column="location"/>
+      <result property="likeCount" column="like_count"/>
+      <result property="declareCount" column="declare_count"/>
+      <result property="enrollDate" column="enroll_date"/>
+      <result property="updateDate" column="update_date"/>
+      <result property="isDelete" column="isdelete"/>
+      <result property="nickName" column="nickname"/>
+      <result property="profile" column="profile"/>
+      <result property="profileImg" column="profile_path"/>
+      <result property="replyCount" column="replyCount"/>
+      <result property="color" column="color"/>
+      <result property="category" column="name"/>
+      <result property="rownum" column="rnum"/>
+      <result property="loginLike" column="loginLike"/>
+   
+   </resultMap>
+   <resultMap id="mainResultSet1" type="Posting">
+      
+      <id property="pno" column="p_no"/>
+      <result property="mno" column="m_no"/>
+      <result property="originalImg" column="original_img"/>
+      <result property="renameImg" column="rename_img"/>
+      <result property="imgPath" column="img_path"/>
+      <result property="content" column="content"/>
+      <result property="hashtag" column="hashtag"/>
+      <result property="gender" column="gender"/>
+      <result property="location" column="location"/>
+      <result property="likeCount" column="like_count"/>
+      <result property="declareCount" column="declare_count"/>
+      <result property="enrollDate" column="enroll_date"/>
+      <result property="updateDate" column="update_date"/>
+      <result property="isDelete" column="isdelete"/>
+      <result property="nickName" column="nickname"/>
+      <result property="profile" column="profile"/>
+      <result property="profileImg" column="profile_path"/>
+      <result property="replyCount" column="replyCount"/>
+      <result property="color" column="color"/>
+      <result property="category" column="name"/>
+      <result property="rownum" column="rnum"/>
+      <result property="loginLike" column="loginLike"/>
+      <result property="fanCheck" column="fanCheck"/>
+   
+   </resultMap>
+   
+   
+   <select id="selectFourWrap" resultMap="mainResultSet2">
+      select * from
+      (select a.*,rownum rnum
+      from (select p_no,m_no, p.original_img,p.rename_img,p.img_path,content,p.hashtag,p.gender,p.location,like_count,p.declare_count,p.enroll_date,p.update_date,p.isdelete,m.nickname, m.profile, m.profile_path,(select count(*) from p_reply where r_level=1 and p_no=p.p_no)as replyCount from posting p join member m using(m_no) order by p.like_count desc) a)
+      where rnum between 1 and 4
+   </select>
+   
+   <select id="selectPostList" resultMap="mainResultSet1">
+      <!-- select * from
+      (select a.*,rownum rnum
+      from (select p_no,m_no, p.original_img,p.rename_img,p.img_path,content,p.hashtag,p.gender,p.location,like_count,p.declare_count,p.enroll_date,p.update_date,p.isdelete,m.nickname, m.profile, m.profile_path,
+            (select count(*) from p_reply where r_level=1 and p_no=p.p_no)as replyCount,
                 (select count(*) from p_like where p_no=p.p_no and m_no=#{mno}) loginLike
-				from posting p join member m using(m_no) 
-				order by p.enroll_date desc) a)
-		where rnum between 1 and 9
-	</select>
-	<select id="selectInfinityScroll" resultMap="mainResultSet1">
-		select * from
-		(select a.*,rownum rnum
-		from (select p_no,m_no, p.original_img,p.rename_img,p.img_path,content,p.hashtag,p.gender,p.location,like_count,p.declare_count,p.enroll_date,p.update_date,p.isdelete,m.nickname, m.profile, m.profile_path,
-				(select count(*) from p_reply where r_level=1 and p_no=p.p_no)as replyCount,
+            from posting p join member m using(m_no) 
+            order by p.enroll_date desc) a)
+      where rnum between 1 and 9 -->
+      
+        select * from
+      (select a.*,rownum rnum
+      from (select p.p_no,p.m_no, p.original_img,p.rename_img,p.img_path,content,p.hashtag,p.gender,p.location,like_count,p.declare_count,p.enroll_date,p.update_date,p.isdelete,m.nickname, m.profile, m.profile_path,
+            (select count(*) from p_reply r where r.r_level=1 and r.p_no=p.p_no)as replyCount,
+                (select count(*) from p_like l where l.p_no=p.p_no and l.m_no=#{mno}) loginLike,
+                (select count(*) from fan f where me_no = p.m_no and f.you_no=#{mno}) fanCheck
+            from posting p join member m on(p.m_no = m.m_no) 
+            order by p.enroll_date desc) a)
+      where rnum between 1 and 9;
+   
+   </select>
+   <select id="selectInfinityScroll" resultMap="mainResultSet1">
+      select * from
+      (select a.*,rownum rnum
+      from (select p_no,m_no, p.original_img,p.rename_img,p.img_path,content,p.hashtag,p.gender,p.location,like_count,p.declare_count,p.enroll_date,p.update_date,p.isdelete,m.nickname, m.profile, m.profile_path,
+            (select count(*) from p_reply where r_level=1 and p_no=p.p_no)as replyCount,
                 (select count(*) from p_like where p_no=p.p_no and m_no=#{mno}) loginLike
-				from posting p join member m using(m_no) 
-				order by p.enroll_date desc) a)
-		where rnum between 10 and 1000
+            from posting p join member m using(m_no) 
+            order by p.enroll_date desc) a)
+      where rnum between 10 and 20
 
 
-	</select>
-	<select id="selectAd" resultMap="mainAdResultSet">
-		select *
-		from ad
-		where status=2
-	
-	</select>
-	<select id="selectFilter" resultMap="mainResultSet2">
-		select * 
-		from (select p.p_no,p.m_no, p.original_img,p.rename_img,p.img_path,content,p.hashtag,p.gender,
-            		p.location,like_count,p.declare_count,p.enroll_date,p.update_date,p.isdelete,m.nickname,
-            		m.profile, m.profile_path,(select count(*) from p_reply where r_level=1 and p_no=p.p_no) as replyCount,(select count(*) from p_like where p_no=p.p_no and m_no=#{mno}) loginLike
-        	from posting p, style s, category c, member m
-        	where p.p_no = s.p_no and s.s_no = c.ca_no and p.m_no = m.m_no and (color = #{p.color} or gender = #{p.gender} or name = #{p.category})) 
-		group by p_no, m_no, original_img, rename_img, img_path, content, hashtag, gender, location, like_count, declare_count, enroll_date,update_date,isdelete,nickname,profile,profile_path,replyCount,loginLike
-		
-	</select>
-	<update id="increaseLikeCount">
-		update posting 
-		set like_count = like_count+1
-		where p_no = #{pno}
-	</update>
+   </select>
+   <select id="selectAd" resultMap="mainAdResultSet">
+      select *
+      from ad
+      where status=2
+   
+   </select>
+   <select id="selectFilter" resultMap="mainResultSet2">
+         select *
+         from (select p.p_no,p.m_no, p.original_img,p.rename_img,p.img_path,content,p.hashtag,p.gender,
+                     p.location,like_count,p.declare_count,p.enroll_date,p.update_date,p.isdelete,m.nickname,
+                     m.profile, m.profile_path,(select count(*) from p_reply where r_level=1 and p_no=p.p_no) as replyCount,
+                     (select count(*) from p_like where p_no=p.p_no and m_no= #{mno}) loginLike
+                 from posting p, style s, category c, member m
+                 where p.p_no = s.p_no and s.s_no = c.ca_no and p.m_no = m.m_no and (color = #{p.color} or gender =#{p.gender} or name = #{p.category}))
+         group by p_no, m_no, original_img, rename_img, img_path, content, hashtag, gender, location, like_count, declare_count, enroll_date,update_date,isdelete,nickname,profile,profile_path,replycount,loginLike 
+
+   </select>
+   <update id="increaseLikeCount">
+      update posting 
+      set like_count = like_count+1
+      where p_no = #{pno}
+   </update>
 
 </mapper>
