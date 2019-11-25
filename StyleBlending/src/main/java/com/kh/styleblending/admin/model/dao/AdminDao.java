@@ -87,6 +87,13 @@ public class AdminDao {
 		return (ArrayList)sqlSession.selectList("adminMapper.selectAdList", null ,rowBounds);
 	}
 	
+	public ArrayList<Ad> selectAdSearchList(PageInfo pi, String keyword){
+		int offset = (pi.getCurrentPage()-1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset,pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("adminMapper.selectAdSearchList", keyword, rowBounds);
+	}
+	
 	public ArrayList<Ad> selectAdNewList(){
 		return (ArrayList)sqlSession.selectList("adminMapper.selectAdNewList");
 	}

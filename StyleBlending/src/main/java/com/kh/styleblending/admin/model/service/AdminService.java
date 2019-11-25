@@ -49,6 +49,9 @@ public interface AdminService {
 	// 광고 목록 조회용(페이징포함)
 	ArrayList<Ad> selectAdList(PageInfo pi);
 	
+	// 업체명 검색 
+	ArrayList<Ad> selectAdSearchList(PageInfo pi, String keyword);
+	
 	// 광고 승인대기 리스트 조회용
 	ArrayList<Ad> selectAdNewList();
 	

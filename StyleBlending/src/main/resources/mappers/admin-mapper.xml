@@ -177,6 +177,14 @@
 		order by ad.status, ad.ad_no desc, ad.enroll_date )t1
 	</select>
 	
+	<select id="selectAdSearchList" resultMap="AdResultSet">
+		select ad.*,m.email
+		from ad
+		join pay p on(p.pay_no=ad.pay_no)
+		join member m on(m.m_no=ad.m_no)
+        where name like '%'||#{keyword}||'%'
+	</select>
+	
 	<select id="selectAdNewList" resultMap="AdResultSet">
 		select *
 		from ad
