@@ -70,17 +70,9 @@
 				</div>
 
 				<div id="best" align="center">
-
-					<c:choose>
-						<c:when test="${ mno ne null }">
-							<button type="button" class="btn btn-warning" id="likeBtn"
-								style="text-align: center;" onclick="">Like <b id="likeCnt">${ b.likeCount }</b></button>
-						</c:when>
-						<c:otherwise>
-							<button type="button" class="btn btn-warning" id="likeBtn"
-								style="text-align: center;" onclick="">Like <b id="likeCnt">${ b.likeCount }</b></button>
-						</c:otherwise>
-					</c:choose>
+					<button type="button" class="btn btn-warning" id="likeBtn"
+						style="text-align: center;">Like <b id="likeCnt">${ b.likeCount }</b>
+					</button>
 				</div>
 
 				<div id="UDbtnArea">
@@ -109,7 +101,7 @@
 					<br>
 					<div>
 						<span><strong style="font-size: 20px;">댓글</strong></span>&nbsp;<span
-							id="rCnt" style="color: yellow; font-size: 30px;"></span>
+							id="rCnt" style="color: orange; font-size: 30px;"></span>
 					</div>
 					<table class="replylistArea">
 						
@@ -243,7 +235,7 @@
 			var content = $("#declare_content").val();
 			var cate = $("#d_category option:selected").text();
 
-			// cate hidden에 값넣어주기
+
 			console.log("cate는 : " + cate);
 
 			$("#dcategory").val(cate);
@@ -275,6 +267,7 @@
 	/* ******************************************* 추천 ******************************************** */
 		// 추천이벤트
 		function getbLikeCount(){
+		
 			$.ajax({
 				url:"blikeCount.do",
 				data:{bno:${b.bno}},
@@ -283,17 +276,18 @@
 					$("#likeCnt").text(data);
 				},
 				error:function(){
-					console.log("추천 ajax 통신 실패")
+					console.log("추천 ajax 통신 실패");
 				}
 			});
 		};
 		
-		$("#likeBtn").hover(function(){
+		 $("#likeBtn").hover(function(){
 			
 			var loginLike;
 			var mno = "${loginUser.mno}";
 			
 			if(mno == null || mno == ""){
+				
 				$(this).next().text("+1");
 			
 			}else{
@@ -309,9 +303,10 @@
 			
 		}, function(){
 			getbLikeCount();
-		});
+		}); 
 		
 		
+		// 버튼 클릭시 up,down
 		$("#likeBtn").on("click", function(){
 			
 			var loginUser = "${loginUser.email}";
@@ -320,75 +315,106 @@
 				alert("로그인 후 이용 가능합니다.");
 				
 				return;
-			}else{
-				var loginLike = blikeCheck(mno);
-				var mno = "${loginUser.mno}";
 				
-				if(loginLike == '0'){	// 추천 up
-					$.ajax({
-						url:"binsertLike.do",
-						data:{bno:${b.bno},
-							  mno:mno},
-						type:"get",
-						success:function(like){
-							if(like == 'success'){
-								getbLikeCount();
-								console.log("추천 up 성공");
-							}else{
-								console.log("추천 up 실패");
-							}
-						},
-						erorr:function(){
-							console.log("추천 ajax 서버 통신 실패");
-						}
-					});
+			}else{
+				var mno = "${loginUser.mno}";
+				//var loginLike = blikeCheck(mno);
+				
+				
+				// 회원이 추천을 했는지 않했는지 체크
+				$.ajax({
+					url:"blikeCheck.do",
+					data:{bno:${b.bno},
+						 mno:mno},
+					type:"get",
+					success:function(data){
+						
+						console.log(data);
+						check = data;
+						
+						loginLike = data;
+						//return data;
+					},
+					error:function(){
+						console.log("ajax 통신 실패");
+					}
+				}).done(function(){	
 					
-				}else{	// 추천 down
+					console.log("loginLike" + loginLike);
 					
-					$.ajax({
-						url:"bdeleteLike.do",
-						data:{bno:${b.bno},
-							  mno:mno},
-						type:"get",
-						success:function(like){
-							
-							if(like == 'success'){
-								
-								console.log("추천 down 성공");
-								getbLikeCount();
-								
-							}else{
-								console.log("추천 down 실패");
+					if(loginLike == '0'){	// *********************추천 up
+						$.ajax({
+							url:"binsertLike.do",
+							data:{bno:${b.bno},
+								  mno:mno},
+							type:"get",
+							success:function(like){
+								if(like == 'success'){
+									getbLikeCount();
+									console.log("추천 up 성공");
+								}else{
+									console.log("추천 up 실패");
+								}
+							},
+							erorr:function(){
+								console.log("추천 ajax 서버 통신 실패");
 							}
-						},
-						error:function(){
-							console.log("추천 ajax 서버 통신 실패")
-						}
-					});
-				}
+						});
+						
+					}else{	// *****************추천 down
+						
+						$.ajax({
+							url:"bdeleteLike.do",
+							data:{bno:${b.bno},
+								  mno:mno},
+							type:"get",
+							success:function(like){
+								
+								if(like == 'success'){
+									
+									console.log("추천 down 성공");
+									getbLikeCount();
+									
+								}else{
+									console.log("추천 down 실패");
+								}
+							},
+							error:function(){
+								console.log("추천 ajax 서버 통신 실패");
+							}
+						});
+					}
+					
+					
+				});
+				
+				
 			}
 			
 		});
 		
+		//var mno = ${ loginUser.mno };
+		
 		//로그인 추천 check
 		function blikeCheck(mno){
-			var check=0;
+			check = 0;
 			
 			$.ajax({
 				url:"blikeCheck.do",
-				async: false,
 				data:{bno:${b.bno},
 					 mno:mno},
 				type:"get",
 				success:function(data){
+					
 					console.log(data);
 					check = data;
+					
+					return data;
 				},
 				error:function(){
 					console.log("ajax 통신 실패");
 				}
 			});
-				return check;
 		};
 		
 /* *********************************************** 댓글 ********************************************* */
@@ -403,12 +429,12 @@
 		$(function(){
 			getReplyList();
 			
-			setInterval(function(){
+			 setInterval(function(){
 				getReplyList();
-			}, 50000); 
+			}, 50000 ); 
 			
 			//console.log("들어오나?");
-			$("#rBtn").on("click", function(){
+			/* $("#rBtn").on("click", function(){
 				var loginUser = "${loginUser.mno}";
 				
 				if(loginUser == null || loginUser == ""){
@@ -418,9 +444,20 @@
 				}else{
 					$("#rBtn").attr("disabled", false);
 				}
-			});
+			}); */
 			
 			$("#rBtn").on("click", function(){
+				
+				var loginUser = "${loginUser.mno}";
+				
+				if(loginUser == null || loginUser == ""){
+					alert("로그인 후 이용 가능합니다.");
+					
+					return;
+					
+				}/* else{
+					$("#rBtn").attr("disabled", false);
+				} */
 				
 				if($("#comment").val().length == 0){
 					alert("댓글내용을 입력해 주세요");

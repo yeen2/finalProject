@@ -374,6 +374,7 @@ public class BoardController {
 		}
 	}
 	
+
 	
 	// 추천 제거
 	@ResponseBody
@@ -404,7 +405,10 @@ public class BoardController {
 	@ResponseBody
 	@RequestMapping("blikeCheck.do")
 	public String selectBoardLikeCheck(int bno, int mno) {
+		
 		String result = Integer.toString(bService.selectBoardLikeCheck(bno, mno));
+			
+		System.out.println("resultCon : " + result);
 		
 		return result;
 	}

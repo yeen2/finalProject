@@ -89,6 +89,9 @@ public class BoardDao {
 		HashMap hsm = new HashMap<>();
 		hsm.put("bno", bno);
 		hsm.put("mno", mno);
+		
+		System.out.println("insertBno : " + bno);
+		System.out.println("insertMno : " + mno);
 		return sqlSession.insert("boardMapper.insertBoardLike", hsm);
 	}
 
@@ -96,6 +99,8 @@ public class BoardDao {
 		HashMap hsm = new HashMap<>();
 		hsm.put("bno", bno);
 		hsm.put("mno", mno);
+		System.out.println("bnoDao : " + bno);
+		System.out.println("mnoDao : " + mno);
 		return sqlSession.delete("boardMapper.deleteBoardLike", hsm);
 	}
 
@@ -119,6 +124,8 @@ public class BoardDao {
 		hsm.put("bno", bno);
 		hsm.put("mno", mno);
 		
+		System.out.println("checkBno : " + bno);
+		System.out.println("checkMno : " + mno);
 		return sqlSession.selectOne("boardMapper.selectBoardLikeCheck", hsm);
 	}
 

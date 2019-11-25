@@ -58,17 +58,18 @@
 		<div class="">
 		<!-- 검색 -->
 		<div id="searchArea" align="center" style="margin-top: 50px;">
-			<form action="" method="get">
- 				<input type="text" class="form-control input-sm" id="searchInput" placeholder="내용을 입력해주세요" style="width: 300px; float: left; height: 32px;">
+			<form action="blist.do" method="get" id="searchForm">
+ 				<input type="text" class="form-control input-sm" id="searchInput" placeholder="검색어를 입력해주세요" style="width: 300px; float: left; height: 32px;">
  				
-					<select class="custom-select" style="width: 100px; float: left; margin-left: 5px; height: 32px;" >
-						<option selected>----</option>
+					<select class="custom-select" name="type" id="selected-type" style="width: 100px; float: left; margin-left: 5px; height: 32px;" >
+						<option value="">선택</option>
 						<option value="title">제목</option>
 						<option value="writer">작성자</option>
 						<option value="content">내용</option>
 						<option value="reply">댓글</option>
 					</select>
-				<button class="btn btn-primary btn-sm" type="submit" style="float: left; margin-left: 5px;" onclick="search();">검색하기</button>
+				<button class="btn btn-primary btn-sm" id="searchBtn" type="submit" 
+						style="float: left; margin-left: 5px;">검색하기</button>
 			</form>
 		</div>
 
@@ -78,6 +79,14 @@
 			</c:if>
 		</div>
 		</div>
+		
+		<!-- 검색  -->
+		<!-- <script type="text/javascript">
+			$("searchBtn")on("click", function(){
+				
+				var searchType = ${"#selected-type"}
+			});
+		</script> -->
 		
 		
 		<!-- 페이징  -->
