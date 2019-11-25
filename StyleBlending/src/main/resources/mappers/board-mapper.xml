@@ -36,12 +36,13 @@
 	
 	<result property="bno" column="b_no"/>
 	<result property="content" column="content"/>
-	<result property="count" column="count"/>
 	<result property="enrollDate" column="enroll_date"/>
 	<result property="isDelete" column="isdelete"/>
+	
+	<result property="profileImg" column="profile_img"/>
+	
 </resultMap>
 
-<!-- <resultMap type="lick" id=""></resultMap> -->
 
 <select id="selectList" resultMap="boardResultSet">
 	select *
@@ -82,38 +83,75 @@
 </update>
 
 <update id="deleteBoard"> 
-update board 
-set isdelete='Y' where b_no=#{bno} 
+	update board 
+	set isdelete='Y' 
+	where b_no=#{bno} 
 </update>
 
 <update id="updateBoard"> 
-update board 
-set title=#{title}, content=#{content} where b_no=#{bno}
+	update board 
+	set title=#{title}, content=#{content}
+	where b_no=#{bno}
 </update>
 
+<select id="selectBoardReplyList" resultMap="BoardReplyResultSet">
+
+	select * 
+	from b_reply
+	where b_no=#{bno}
+	order by br_no desc
+	
+	<!-- select br_no ,b_no, b.m_no, content, br.enroll_date, br.isdelete, b.rename_img
+	from b_reply br
+	join board b on(br.m_no = m.m_no)
+	order by brno desc -->
+</select>
+
+<insert id="insertBoardReply">
+	insert into b_reply
+	values(seq_b_reply.nextval, #{bno}, #{content}, sysdate, default)
+</insert>
+
+
+<!-- 추천 -->
 <insert id="insertBoardLike" parameterType="HashMap"> 
-insert into b_like values(#{bno}, #{mno})
+	insert into b_like 
+	values(#{mno},#{bno})
 </insert>
 
 <update id="blikeCheckUp"> 
-update board set likeCount = likeCount+1 where isdelete='N' 
+	update board 
+	set like_count = like_count+1 
+	where isdelete='N' and b_no=#{bno}
 </update>
 
 <select id="selectBoardLikeCnt" resultType="_int"> 
-select count(*) from b_like where b_no=#{bno} 
+	select count(*) 
+	from b_like 
+	where b_no=#{bno} 
 </select>
 
 <select id="selectBoardLikeCheck" resultType="_int"> 
-select count(*) from b_like where b_no=#{bno} and m_no=#{mno} 
+	select count(*) 
+	from b_like 
+	where b_no=#{bno} and m_no=#{mno} 
 </select>
 
 <update id="blikeCheckDown"> 
-update board set likeCount = likeCount-1 where isdelete='N' 
+	update board 
+	set like_count = like_count-1 
+	where isdelete='N' and b_no=#{bno}
 </update>
 
 <delete id="deleteBoardLike" parameterType="HashMap"> 
-delete from b_like where m_no=#{mno} and b_no=#{bno} 
+	delete from b_like 
+	where m_no=#{mno} and b_no=#{bno} 
 </delete>
+
+<insert id="insertbDeclare">
+	insert into declare
+	values(seq_declare.nextval, #{mno}, #{bno}, #{bcategory}, #{content}, sysdate, default, 1)
+</insert>
 
 
 </mapper>

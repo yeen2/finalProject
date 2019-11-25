@@ -43,7 +43,7 @@
 			<div>
 				<h4>제목</h4>
 				<br> <input type="text" class="form-control" id="write-title"
-					name="title" value="${ b.title }" placeholder="제목을 입력하세요"> <br> <br>
+					name="title" placeholder="제목을 입력하세요"> <br> <br>
 
 			</div>
 			<br> <br>

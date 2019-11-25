@@ -21,6 +21,14 @@
 	<div class="detailOuter">
 		<h4>자유게시판 </h4>
 
+		<br>
+		<div class="form-group" style="float: left; width: 200px;">
+				<select class="custom-select" onchange="location.href=this.value">
+					<option selected>분류</option>
+					<option value="blist.do">자유게시판</option>
+					<option value="fblist.do">패션정보게시판</option>
+				</select>
+		</div>
 		<br><br>
 		
 		<table class="table table-hover">

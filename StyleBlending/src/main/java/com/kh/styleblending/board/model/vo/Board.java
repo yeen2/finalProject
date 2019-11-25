@@ -27,8 +27,16 @@ public class Board {
 	private Date updateDate;
 	private String isDelete;
 	private int likeCount;
+	private String renameImg;
 	
 	private ArrayList<Image> imageList;
+	
+	//닉네임
+	private String nickName;
+	
+	
+	// 로그인한 회원이 좋아요
+	private int loginLike;
 	
 	
 }

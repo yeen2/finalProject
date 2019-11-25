@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.kh.styleblending.board.model.dao.BoardDao;
 import com.kh.styleblending.board.model.vo.Board;
 import com.kh.styleblending.board.model.vo.BoardReply;
+import com.kh.styleblending.board.model.vo.Declare;
 import com.kh.styleblending.board.model.vo.FashionBoard;
 import com.kh.styleblending.board.model.vo.Image;
 import com.kh.styleblending.board.model.vo.PageInfo;
@@ -51,11 +52,14 @@ public class BoardServiceImpl implements BoardService{
 		 }
 	}
 
-	@Override
+	
+	@Override 
 	public Board selectUpdateBoard(int bno) {
-
-		return bDao.selectBoard(bno);
+	  
+		return bDao.selectBoard(bno); 
 	}
+	 
+	
 	@Override
 	public int updateBoard(Board b) {
 		
@@ -69,9 +73,9 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public ArrayList<BoardReply> selectBoardReplyList(int brno) {
+	public ArrayList<BoardReply> selectBoardReplyList(int bno) {
 
-		return bDao.selectBoardReplyList(brno);
+		return bDao.selectBoardReplyList(bno);
 	}
 
 	@Override
@@ -125,10 +129,12 @@ public class BoardServiceImpl implements BoardService{
 			return bDao.selectBoardLikeCheck(bno, mno);
 		}
 
+		@Override
+		public int insertbDeclare(Declare d) {
+
+			return bDao.insertbDeclare(d);
+		}
 
 
-
-	
-	
 
 }

@@ -87,7 +87,8 @@ public class BoardController {
 	
 	
 	@RequestMapping("binsert.do")
-	public String insertBoard(Board b , HttpServletRequest request, Model model, MultipartFile upload) {
+	public String insertBoard(Board b , HttpServletRequest request, Model model, 
+								MultipartFile upload) {
 							
 //		if(!upload.getOriginalFilename().equals("")) {
 //		
@@ -153,7 +154,7 @@ public class BoardController {
 	@RequestMapping(value = "imageUpload.do", method = RequestMethod.POST)
 	public String imageUpload(HttpServletRequest request, HttpServletResponse response,
 							MultipartFile upload) {
-		System.out.println("dd");
+		//System.out.println("dd");
 		JsonObject json = new JsonObject();
 		OutputStream out = null;
 		PrintWriter printWriter = null;
@@ -202,18 +203,6 @@ public class BoardController {
 			String fileUrl = "resources/bImgUploadFiles"+ "/" + fileName; 
 
 			//System.out.println("왜 찍어야?"+fileUrl);
-
-//			printWriter.println("<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction("
-//
-//					+ callback
-//
-//					+ ",'"
-//
-//					+ fileUrl
-//
-//					+ "','이미지를 업로드 하였습니다.'"
-//
-//					+ ")</script>");
 
 			 json.addProperty("uploaded", 1);
              json.addProperty("fileName", fileName);
@@ -285,6 +274,7 @@ public class BoardController {
 		
 	}
 	
+	
 	// 업로드 파일삭제
 	public void deleteFile(String renameFileName, HttpServletRequest request) {
 		String root = request.getSession().getServletContext().getRealPath("resources");
@@ -298,6 +288,7 @@ public class BoardController {
 		}
 	}
 		
+	
 	@RequestMapping("bupateView.do")
 	public ModelAndView boardUpdateView(int bno, ModelAndView mv) {
 		
@@ -307,6 +298,7 @@ public class BoardController {
 		return mv;
 		
 	}
+	
 	
 	@RequestMapping("bupdate.do")
 	public String boardUpdate(Board b , HttpServletRequest request, ModelAndView mv,
@@ -339,22 +331,25 @@ public class BoardController {
 	
 	
 	@ResponseBody
-	@RequestMapping("replyList.do")
-	public String replyList(int brno) {
+	@RequestMapping(value="replyList.do", produces="application/json; charset=UTF-8")
+	public String replyList(int bno) {
 		
-		ArrayList<BoardReply> list = bService.selectBoardReplyList(brno);
+		ArrayList<BoardReply> list = bService.selectBoardReplyList(bno);
 		
-		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM--dd").create();
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		
 		return gson.toJson(list);
 		
 	}
+	
 	
 	@ResponseBody
 	@RequestMapping("rinsert.do")
 	public String insertReply(BoardReply r) {
 			
 		int result = bService.insertBoardReply(r);
+		
+		//System.out.println("result : " + result);
 		
 		if(result > 0 ) {
 			return "success";
@@ -364,5 +359,53 @@ public class BoardController {
 		
 	}
 	
+	// 추천 추가
+	@ResponseBody
+	@RequestMapping("binsertLike.do")
+	public String insertBoardLike(int bno, int mno) {
+		
+		int result1 = bService.insertBoardLike(bno, mno);
+		int result2 = bService.blikeCheckUp(bno);
+		
+		if(result1 > 0 && result2 > 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
 	
+	
+	// 추천 제거
+	@ResponseBody
+	@RequestMapping("bdeleteLike.do")
+	public String deleteBoardLike(int bno, int mno) {
+		
+		int result1 = bService.deleteBoardLike(bno, mno);
+		int result2 = bService.blikeCheckDown(bno);
+		
+		if(result1 > 0 && result2 > 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+		
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping("blikeCount.do")
+	public String selectBoardLikeCnt(int bno) {
+		String result = Integer.toString(bService.selectBoardLikeCnt(bno));
+		
+		return result;
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping("blikeCheck.do")
+	public String selectBoardLikeCheck(int bno, int mno) {
+		String result = Integer.toString(bService.selectBoardLikeCheck(bno, mno));
+		
+		return result;
+	}
 }

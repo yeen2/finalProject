@@ -13,16 +13,15 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class BoardReply {
+public class Declare {
 
-	private int brno;
+	private int dno;
+	private int mno;
 	private int bno;
+	private String bcategory;
 	private String content;
 	private Date enrollDate;
-	private String isDelete;
-	
-	// 댓글 프로필 이미지
-	private String profileImg;
-	
+	private String ischeck;
+	private int type;
 	
 }

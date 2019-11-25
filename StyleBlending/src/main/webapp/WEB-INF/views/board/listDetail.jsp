@@ -26,9 +26,9 @@
 .btn btn-warning {
 	margin: 0 auto;
 }
-.reply-comment{
+/* .reply-comment{
 	display: none;
-}
+} */
 .detailOuter{font-size: 13px;}
 #UDbtnArea{margin-top: 20px;}
 </style>
@@ -52,100 +52,164 @@
 						<th><h4>${ b.title }</h4></th>
 					</tr>
 					<tr>
-						<td colspan="2">작성자 ${ b.mno }</td>	<!-- 작성자 -->
-						<td>조회수 ${ b.count }</td>	<!-- 조회수 -->
-						<td>추천수 ${ b.likeCount }</td>	<!-- 추천수 -->
-						<td>댓글수 ${ r.brno }</td>	<!-- 댓글 -->
+						<td colspan="2">작성자 ${ b.mno }</td>
+						<!-- 작성자 -->
+						<td>조회수 ${ b.count }</td>
+						<!-- 조회수 -->
+						<td>추천수 ${ b.likeCount }</td>
+						<!-- 추천수 -->
+						<td>댓글수 ${ r.brno }</td>
+						<!-- 댓글 -->
 					</tr>
 				</table>
 				<hr>
-				
-				<div id="writeviewArea" style="height: auto; width: 80%; padding-bottom: 80px;">		
-					<p style="height:auto; margin-left: 20px; margin-top: 40px;">${ b.content }</p>
+
+				<div id="writeviewArea"
+					style="height: auto; width: 80%; padding-bottom: 80px;">
+					<p style="height: auto; margin-left: 20px; margin-top: 40px;">${ b.content }</p>
 				</div>
-				
+
 				<div id="best" align="center">
-				
+
 					<c:choose>
 						<c:when test="${ mno ne null }">
-							<button type="button" class="btn btn-warning" id="lickUp" style="text-align: center;" onclick="location.href='like';">추천 ${ b.likeCount }</button>
+							<button type="button" class="btn btn-warning" id="likeBtn"
+								style="text-align: center;" onclick="">Like <b id="likeCnt">${ b.likeCount }</b></button>
 						</c:when>
 						<c:otherwise>
-							<button type="button" class="btn btn-warning" id="likeDown" style="text-align: center;" onclick="location.href='login_need';">추천 ${ b.likeCount-1 }</button>
+							<button type="button" class="btn btn-warning" id="likeBtn"
+								style="text-align: center;" onclick="">Like <b id="likeCnt">${ b.likeCount }</b></button>
 						</c:otherwise>
-					</c:choose>	
+					</c:choose>
 				</div>
-				
+
 				<div id="UDbtnArea">
-				<c:if test="${ loginUser.mno eq b.mno }">
-					<button type="button" class="btn btn-light detail" id="btnUpdate" style="float: right; padd"
-													onclick="location.href='bupdate.do?bno=${ b.bno }';">수정</button>
-					<button type="button" class="btn btn-light detail" id="btnDelete" style="float: right; margin-right: 5px;"
-													onclick="location.href='bdelete.do?bno=${ b.bno }';">삭제</button>
-				</c:if>
+					<c:if test="${ loginUser.mno eq b.mno }">
+						<button type="button" class="btn btn-light detail" id="btnUpdate"
+							style="float: right;"
+							onclick="location.href='bupdate.do?bno=${ b.bno }';">수정</button>
+						<button type="button" class="btn btn-light detail" id="btnDelete"
+							style="float: right; margin-right: 5px;"
+							onclick="location.href='bdelete.do?bno=${ b.bno }';">삭제</button>
+					</c:if>
 					<button type="button" class="btn btn-light detail" id="btnList"
-						style="float: right; margin-right: 5px;" onclick="location.href='blist.do';">목록으로</button>
+						style="float: right; margin-right: 5px;"
+						onclick="location.href='blist.do';">목록으로</button>
 				</div>
 			</form>
 		</div>
-		<br>
+		<br><br>
 		<hr>
 		<br>
-		
+
 		<!-- 로그인시 댓글 사용가능 -->
 		<div class="replyArea">
 			<form id="replylistForm" name="replylistForm" method="post">
 				<div class="replylist">
 					<br>
 					<div>
-						<span><strong style="font-size: 20px;">댓글</strong></span>&nbsp;
-							<span id="rCnt" style="color: yellow; font-size: 30px;">1</span>
+						<span><strong style="font-size: 20px;">댓글</strong></span>&nbsp;<span
+							id="rCnt" style="color: yellow; font-size: 30px;"></span>
 					</div>
 					<table class="replylistArea">
+						
 						<tr>
-							<td><img alt="check" src="${pageContext.request.contextPath}/resources/assets/img/board/icons8-checkmark-40.png"></td>
-							<td><strong style="font-size: 15px;">댓글 쓰기</strong></td>
+							<td>
+								<img alt="check"
+								src="${pageContext.request.contextPath}/resources/assets/img/board/icons8-checkmark-40.png">
+							</td>
+							<td>
+								<strong style="font-size: 15px;">댓글 쓰기</strong>
+							</td>
 						</tr>
 
 						<tr>
-							<td><img src="${pageContext.request.contextPath}/resources/assets/img/board/icons8-sun-64.png" alt="member"></td>
-							<td><textarea rows="3" cols="80" id="comment" name="comment" style="resize: none;"></textarea></td>
+							<td><img style="height: 62px; width: 60px; margin-right: 10px;"
+								src="${pageContext.request.contextPath}/resources/upload/member/profile.png"
+								alt="member">
+							</td>
+							
+							<td>
+								<div id=replytextArea>
+									<textarea rows="3" cols="80" id="comment" name="comment" 
+								 		style="resize: none;" placeholder="댓글을 작성해주세요">
+									</textarea>
+								</div>
+							</td>
 							<td>
 								<div class="replyBtn">
-									<button class="btn btn-light" style="width: 80px; height: 67px; margin-left: 10px;">등록</button>
+									<button class="btn btn-light" id="rBtn"
+										style="width: 80px; height: 67px; margin-left: 10px;">등록</button>
 								</div>
 							</td>
 						</tr>
 					</table>
 					<br>
 					
-					<!-- the modal -->
+					<!-- 댓글 달리는 div -->
+					<div class="reply-comment" id="reply-comment">
+						<%-- <img src="${pageContext.request.contextPath}/resources/assets/img/board/icons8-sun-64.png"
+							alt="member">
+						<textarea rows="3" cols="80" id="comment" name="commnet" style="resize: none;"></textarea> --%>
+						<!-- <a href="" style="text-decoration: none; display: none;"
+							id="a-update">수정</a> 
+						<a href="" style="text-decoration: none; display: none;" 
+						    id="a-delete">삭제</a> -->
+					</div>
+					
+					<!-- the 신고 modal -->
 					<div aria-labelledby="eexampleModal" class="modal fade"
 						id="eexampleModal" role="dialog" tabindex="-1">
 						<div class="modal-dialog modal-dialog-centered" role="document">
 							<div class="modal-content">
 								<div class="modal-header">
 									<h5 class="modal-title" id="exampleModal">신고창</h5>
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
 										<span aria-hidden="true">&times;</span>
 									</button>
 								</div>
-								<div class="modal-body">신고합니다~</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-									<button type="button" class="btn btn-success declare">신고</button>
-								</div>
+
+								<form action="">
+									<div class="modal-body">
+										<div class="form-group">
+											<label for="d_category">신고항목</label> <select
+												name="d_category" class="form-control" id="d_category">
+												<option value="0">----</option>
+												<option value="1">불법광고</option>
+												<option value="2">도배</option>
+												<option value="3">음란물</option>
+												<option value="4">욕설</option>
+												<option value="5">개인정보침해</option>
+												<option value="6">욕설</option>
+												<option value="7">기타</option>
+											</select>
+										</div>
+										<div class="form-group">
+											<label for="content">신고내용</label>
+											<textarea name="content" style="height: 180px"
+												class="form-control" id="declare_content">
+											</textarea>
+										</div>
+
+										<input type="hidden" name="mno" value="${loginUser.mno }">
+										<input type="hidden" name="bno" value="${b.bno}"> 
+										<input type="hidden" name="dcategory" id="dcategory">
+										<div>
+											<input type="checkbox" name="declare_check" id="declare_check"> 
+											<label for="declare_check">신고 동의시 체크해주세요.</label>
+										</div>
+									</div>
+
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+										<button type="submit" class="btn btn-success" id="declareBtn">신고</button>
+									</div>
+								</form>
 							</div>
 						</div>
 					</div>
 
-					<!-- 댓글 달리는 div -->
-					<div class="reply-comment">
-						<img src="${pageContext.request.contextPath}/resources/assets/img/board/icons8-sun-64.png" alt="member">
-						<textarea rows="3" cols="80" id="comment" name="commnet" style="resize:none;"></textarea>
-						<a href="" style="text-decoration: none; display: none;" id="a-update">수정</a>
-						<a href="" style="text-decoration: none; display: none;" id="a-delete">삭제</a>						
-					</div>
 				</div>
 			</form>
 		</div>
@@ -154,94 +218,299 @@
 	<br>
 	
 	<jsp:include page="../includes/footer.jsp"/>
-	
+
 	<script>
 		// 삭제시 이벤트
 		
 		
+		
+		
+		// 신고 이벤트
+		$("#declareBtn").attr("disabled", true);
+
+		// 신고동의 체크
+		$("#declare_check").on('click', function() {
+			if ($("input:checkbox[name='declare_check']").is(":checked")) {
+				$("#declareBtn").removeAttr("disabled");
+			} else {
+				$("#declareBtn").attr("disabled", true);
+			}
+		});
+
+		// 신고버튼	
+		$("#declareBtn").click(function() {
+			var d_category = $("#d_category").val();
+			var content = $("#declare_content").val();
+			var cate = $("#d_category option:selected").text();
+
+			// cate hidden에 값넣어주기
+			console.log("cate는 : " + cate);
+
+			$("#dcategory").val(cate);
+
+			return;
+			
+			console.log("category에는 : " + $("#dcategory").val());
+
+			if (d_category == 0) {
+				
+				alert("신고유형을 선택해 주세요");
+				$('#declareModal').modal();
+				return false;
+			}
+
+			if (d_category == 7) {
+				
+				if (content.length == 0) {
+					alert("신고내용을 입력해주세요");
+					$('#declareModal').modal();
+					return false;
+				}
+			}
+
+		});
+
+		
+
+	/* ******************************************* 추천 ******************************************** */
+		// 추천이벤트
+		function getbLikeCount(){
+			$.ajax({
+				url:"blikeCount.do",
+				data:{bno:${b.bno}},
+				type:"get",
+				success:function(data){
+					$("#likeCnt").text(data);
+				},
+				error:function(){
+					console.log("추천 ajax 통신 실패")
+				}
+			});
+		};
+		
+		$("#likeBtn").hover(function(){
+			
+			var loginLike;
+			var mno = "${loginUser.mno}";
+			
+			if(mno == null || mno == ""){
+				$(this).next().text("+1");
+			
+			}else{
+				
+				loginLike = blikeCheck(mno);
+				
+				if(loginLike == 0) {
+					$(this).next().text("+1");
+				}else{
+					$(this).next().text("-1");
+				}
+			}
+			
+		}, function(){
+			getbLikeCount();
+		});
+		
+		
+		$("#likeBtn").on("click", function(){
+			
+			var loginUser = "${loginUser.email}";
+			
+			if(loginUser == null || loginUser == ""){
+				alert("로그인 후 이용 가능합니다.");
+				
+				return;
+			}else{
+				var loginLike = blikeCheck(mno);
+				var mno = "${loginUser.mno}";
+				
+				if(loginLike == '0'){	// 추천 up
+					$.ajax({
+						url:"binsertLike.do",
+						data:{bno:${b.bno},
+							  mno:mno},
+						type:"get",
+						success:function(like){
+							if(like == 'success'){
+								getbLikeCount();
+								console.log("추천 up 성공");
+							}else{
+								console.log("추천 up 실패");
+							}
+						},
+						erorr:function(){
+							console.log("추천 ajax 서버 통신 실패");
+						}
+					});
+					
+				}else{	// 추천 down
+					
+					$.ajax({
+						url:"bdeleteLike.do",
+						data:{bno:${b.bno},
+							  mno:mno},
+						type:"get",
+						success:function(like){
+							
+							if(like == 'success'){
+								
+								console.log("추천 down 성공");
+								getbLikeCount();
+								
+							}else{
+								console.log("추천 down 실패");
+							}
+						},
+						error:function(){
+							console.log("추천 ajax 서버 통신 실패")
+						}
+					});
+				}
+			}
+			
+		});
+		
+		//로그인 추천 check
+		function blikeCheck(mno){
+			var check=0;
+			
+			$.ajax({
+				url:"blikeCheck.do",
+				async: false,
+				data:{bno:${b.bno},
+					 mno:mno},
+				type:"get",
+				success:function(data){
+					console.log(data);
+					check = data;
+				},
+				error:function(){
+					console.log("ajax 통신 실패");
+				}
+			});
+				return check;
+		};
+		
+/* *********************************************** 댓글 ********************************************* */
 		//댓글 수정,삭제 이벤트
-		$(".reply-comment").mouseover(function(){
+		$("#reply-comment").mouseover(function(){
 			$(this).children('a').show();
 		}).mouseleave(function(){
 			$(this).children('a').hide();
 		});
 		
-		//댓글 ajax
+		//댓글 작성
 		$(function(){
 			getReplyList();
 			
+			setInterval(function(){
+				getReplyList();
+			}, 50000); 
+			
+			//console.log("들어오나?");
+			$("#rBtn").on("click", function(){
+				var loginUser = "${loginUser.mno}";
+				
+				if(loginUser == null || loginUser == ""){
+					alert("로그인 후 이용 가능합니다.");
+					return;
+					
+				}else{
+					$("#rBtn").attr("disabled", false);
+				}
+			});
+			
 			$("#rBtn").on("click", function(){
 				
-				var content = $("#comment").val();
-				var bno = ${ b.bno };
-				var mno = "${ loginUser.mno }";
+				if($("#comment").val().length == 0){
+					alert("댓글내용을 입력해 주세요");
+				}else{
 				
-				$jax({
+				var content = $("#comment").val();
+				var bno = ${b.bno};
+				var mno = "${loginUser.mno}";
+				
+				
+				$.ajax({
 					url:"rinsert.do",
 					data:{content:content,
-						  brno:brno,
+						  bno:bno,
 						  mno:mno},
 					success:function(data){
 						
-						if(data== 'success'){
+						if(data == "success"){
 							getReplyList();
 							$("#comment").val("");
 						}else{
 							alert("댓글 작성 실패");
 						}
 					},
-					error:function(data){
+					error:function(){
 						console.log("댓글 ajax 실패");
 					}
 					
 				});
 				
+			   }
 			});
 			
 		});
 		
-		
+		// 댓글 리스트
 		function getReplyList(){
-			
-			$ajax({
+			//console.log("들어오나?");
+			$.ajax({
 				url:"replyList.do",
-				data:{mno:${b.mno}},
+				data:{bno:${b.bno}},
 				dataType:"json",
 				success:function(data){
 					
-					$div1 = $(".reply-comment")
-					$div1.html("");
+					$replyOuter = $("#reply-comment");
+					$replyOuter.html("");
+					//$replyDiv.html("");
 					
 					$("#rCnt").text(data.length);
 					
-					if(data.length > 0){
+					if(data.length > 0){	// 댓글이 있을때
 						
-						$each(data, function(index, value){
-							$div2 = $("<div></div>")
+						$.each(data, function(index, value){
 							
-							$img = $("<img src='${pageContext.request.contextPath}/resources/upload/member/${ b.renameImg }';");
-							$textarea = $("<textarea></textarea>").text(value.content);
-							$date = $("<p></p>").text(value.enrollDate);
+							$replyOuter = $("#reply-comment");
 							
-							$div2.append($img);
-							$div2.append($textarea);
-							$div2.append($date);
+							$replyDiv = $("<div class='form-inline replyDiv' style='margin-bottom: 30px;'></div>");
 							
-							$div1.append($div2);
+							$imgDiv = $("<div class='form-group imgDiv'></div>");
+							$img = $("<img class='reply_img' style='height: 62px; width: 60px; margin-right: 10px;'>").attr("src","${pageContext.request.contextPath}/resources/upload/member/profile.png");
+							
+							
+							$contentDiv = $("<div class='form-group contentDiv'></div>");
+							
+							/* $nickname = $("<h5 class='nickname'></h5>").text(value.nickName); */
+							$rcontent = $("<span id='rcontent' class='rcontent' style='margin-left: 5px;'></span>").html(value.content);
+							
+							$update_a = $("<a id='a-update'style='text-decoration: none; display: none;'>수정</a>");
+							$delete_a = $("<a id='a-delete' style='text-decoration: none; display: none;'>삭제</a>");
+							$date = $("<span class='date'></span>").text(value.enrollDate);
+							
+							$imgDiv.append($img);
+							$contentDiv.append($rcontent).append('<br>').append($update_a).append($delete_a).append('<br>').append($date);
+							$replyDiv.append($imgDiv).append($contentDiv);
+							
+							$replyOuter.append($replyDiv);
+						
 							
 						});
-					}else {
 						
-						$div = $("<div></div>");
+					}else { // 댓글 없을때
 						
-						$h5 = $("<h5></h5>").text("등록된 댓글이 없습니다.");
+						$replyOuter = $("#reply-comment");
+						$replyOuter.append("<span>등록된 댓글이 없습니다.</span>");
 						
-						$div.append($h5);
 					}
 					
 				},
 				error:function(data){
-					console.log("댓글 ajax 통신 실패")
+					console.log("댓글 ajax 통신 실패");
 				}
 				
 			});
