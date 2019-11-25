@@ -199,7 +199,7 @@
                               
                               <!-- 승인대기 목록 -->
                               <div class="tab-pane fade row" id="nav-waiting" style="display:inline-flex;" role="tabpanel" >
-                              <c:forEach items="${newList }" var="a">
+                              <c:forEach items="${newList}" var="a">
 			                    <div class="col-md-4" >
 			                        <div class="card col-md-8">
 			                            <img class="card-img-top" src="${pageContext.request.contextPath}${a.imgPath}${a.renameImg}" alt="Card image cap">

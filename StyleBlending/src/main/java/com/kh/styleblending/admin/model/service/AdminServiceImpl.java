@@ -10,6 +10,7 @@ import com.kh.styleblending.admin.model.dao.AdminDao;
 import com.kh.styleblending.admin.model.vo.Ad;
 import com.kh.styleblending.admin.model.vo.Declare;
 import com.kh.styleblending.admin.model.vo.PageInfo;
+import com.kh.styleblending.admin.model.vo.Statistics;
 import com.kh.styleblending.member.model.vo.Member;
 
 @Service("aService")
@@ -77,12 +78,17 @@ public class AdminServiceImpl implements AdminService{
 		// 신고 게시물삭제
 		int result = aDao.deleteDeclareBoard(dno);
 		return result;
-		/*
-		 * if(result > 0) { // 게시물 삭제 return aDao.deleteBoard(dnoArr);
-		 * 
-		 * }else { return null; }
-		 */
 		
+	}
+	
+	@Override
+	public int deleteBoard(int type, int bno) {
+		if(type==1) {// 포스팅 삭제
+			
+			return aDao.pDeleteBoard(bno);
+		}else {
+			return aDao.bDeleteBoard(bno);
+		}
 	}
 	
 	@Override
@@ -156,6 +162,12 @@ public class AdminServiceImpl implements AdminService{
 	public int updateEndAd(String adno) {
 		// 광고 마감(종료)
 		return aDao.updateEndAd();
+	}
+
+	@Override
+	public Member selectMemberCount() {
+		// 통계(가입자수)
+		return aDao.selectMemberCount();
 	}
 
 	

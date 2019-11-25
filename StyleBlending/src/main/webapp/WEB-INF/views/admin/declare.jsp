@@ -99,9 +99,10 @@
                                     <c:forEach items="${list}" var="p">
                                     <tbody>
                                          <tr>
-                                         	<input type="hidden" value="${p.dno }"/>
-                                         	<input type="hidden" value="${p.bno }"/>
-                                         	<input type="hidden" value="${p.isCheck }"/>
+                                         	<input type="hidden" value="${p.dno }" name="dno" />
+                                         	<input type="hidden" value="${p.bno }" name="bno"/>
+                                         	<input type="hidden" value="${p.isCheck }" name="isCheck"/>
+                                         	<input type="hidden" value="${p.type }" name="type"/>
                                         	<td>
                                         		<input name="checkRow" type="checkbox" value="${p.dno}" />
                                         	</td>
@@ -115,14 +116,12 @@
                                             <td>포스팅</td>
                                             <td>
                                                 <a class="detailBoard"><img src="${pageContext.request.contextPath}/resources/upload/posting/${p.bname}"></a>
-                                               	<input type="hidden" value="${p.type }"/>
                                             </td>
                                             </c:if>
                                             <c:if test="${p.type eq 2 }">
                                             <td>자유</td>
                                             <td>
                                             	<a class="detailBoard">${p.bname}</a>
-                                            	<input type="hidden" value="${p.type }"/>
                                             </td>
                                             </c:if>
                                             <td>${p.writer }</td>
@@ -229,7 +228,7 @@
 		var dno = $(this).parent().parent().children().eq(0).val();
 		var bno = $(this).parent().parent().children().eq(1).val();
 		var check = $(this).parent().parent().children().eq(2).val();
-		var type = $(this).next().val();
+		var type = $(this).parent().parent().children().eq(3).val();
 		
 		console.log(check);
 
@@ -260,20 +259,28 @@
 	function deleteAction(){
 		
 		 var checkRow = "";
+		 var type ="";
+		 var bno ="";
 		  $( "input[name='checkRow']:checked" ).each (function (){
 		    checkRow = checkRow + $(this).val()+"," ;
+		    type = type + $(this).parent().parent().children().eq(3).val()+","; 
+		    bno = bno + $(this).parent().parent().children().eq(1).val()+",";
 		  });
+		  
+		  console.log(type);
+		  console.log(checkRow);
+		  
 		  checkRow = checkRow.substring(0,checkRow.lastIndexOf( ",")); //맨끝 콤마 지우기
-		 
+		  type = type.substring(0,type.lastIndexOf( ","));
+		  bno = bno.substring(0,bno.lastIndexOf( ",")); 
+		  
 		  if(checkRow == ''){
 		    alert("삭제할 대상을 선택하세요.");
 		    return false;
-		 
 		  }
-	 
-	     var dno = checkRow;
+		  
 	      
-	    location.href="${pageContext.request.contextPath}/aDeleteDeclareBoard.do?dno="+dno;  
+	    location.href="${pageContext.request.contextPath}/aDeleteDeclareBoard.do?dno="+checkRow+"&type="+type+"&bno="+bno;  
 	  
 	};
 	</script>

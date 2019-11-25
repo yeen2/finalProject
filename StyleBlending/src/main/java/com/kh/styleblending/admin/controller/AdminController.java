@@ -9,7 +9,6 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,12 +21,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonIOException;
 import com.kh.styleblending.admin.model.service.AdminService;
 import com.kh.styleblending.admin.model.vo.Ad;
 import com.kh.styleblending.admin.model.vo.Declare;
 import com.kh.styleblending.admin.model.vo.PageInfo;
 import com.kh.styleblending.admin.model.vo.Pagination;
+import com.kh.styleblending.admin.model.vo.Statistics;
 import com.kh.styleblending.member.model.vo.Member;
 
 @Controller
@@ -104,13 +103,19 @@ public class AdminController {
 	}
 	
 	@RequestMapping("aDeleteDeclareBoard.do")
-	public String deleteDeclareBoard(@RequestParam ArrayList dno, Model model) {
-		//System.out.println(dnoArr.length);
-		//System.out.println(Arrays.toString(dnoArr));
+	public String deleteDeclareBoard(@RequestParam ArrayList dno, @RequestParam int[] type,@RequestParam int[] bno, Model model) {
+		int result1 = 0;
 		
-		int result = aService.deleteDeclareBoard(dno);
+		for(int i=0; i<type.length; i++) {
+			result1 += aService.deleteBoard(type[i], bno[i]);
+		}
 		
-		if(result > 0) {			
+		int result2 = aService.deleteDeclareBoard(dno);
+		
+		//System.out.println("result1 : " + result1);
+		
+		if(result1 >=type.length && result2 > 0) {
+			
 			return "redirect:aDeclare.do";
 		}else {
 			model.addAttribute("msg","신고 게시물 삭제 실패");
@@ -270,9 +275,18 @@ public class AdminController {
 	@RequestMapping("aStatistics.do")
 	public String statistics(Model model) {
 		
-		ArrayList<Member> newMember = aService.selectNewMember();
-		model.addAttribute("newMember",newMember);
 		return "admin/statistics";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="aChart.do", produces="application/json; charset=UTF-8")
+	public String statistics() {
+		
+		Member  statistics = aService.selectMemberCount();
+		System.out.println(statistics);
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		
+		return gson.toJson(statistics);
 	}
 	
 	@RequestMapping("aNotice.do")
