@@ -150,6 +150,14 @@
 #fanAreaBtn:hover, #brandAreaBtn:hover, #hashtagAreaBtn:hover, #locationAreaBtn:hover{cursor:pointer}
 #fanAreaBtn, #brandAreaBtn, #hashtagAreaBtn, #locationAreaBtn{width:24%;}
 
+.addAlarm1{width:100%; height:inherit; background:rgba(0,0,0,0.05); border-top:1px solid lightgray; border-bottom:1px solid lightgray;}
+.addAlarmImg1{padding:10px 0 0 10px; width:17%; height:auto; display:inline-block;}
+.addAlarmImg1 img{width:50px; height:50px; border-radius:1.5em;}
+.addAlarmNick1{display:inline-block; width:50%; margin-left:10px;}
+.addAlarmDate1{display:inline-block; width:25%; text-align:right;}
+.addAlarmCon1{padding:10px 10px 10px 10px;}
+.addAlarm1 p{font-size:15px;}
+
 </style>
 <script type="text/javascript">
 	$(function(){
@@ -259,9 +267,29 @@
 						</c:if></li>
 
 					<!-- 알림창 -->
-					<li class="nav-item"><a class="nav-link" id="down" href="#">
+					<li class="nav-item">
+						<div style="position:relative;" id="display">
+							<a class="nav-link" id="down" href="#"> 
+								<i class="far fa-bell fa-lg" style="font-size: 25px;"></i>
+							</a>
+							<span id="count" class="badge badge-danger badge-pill" 
+									style="display:none; pointer-events:none; position:absolute; bottom:19px; left:19px;"></span>
+							
+							<div style="position:absolute; width:400px; max-height:255px; background:white; display:none; box-shadow:0 5px 10px rgba(0, 0, 0, 0.5);
+							overflow-y:auto; overflow-x:hidden; left:-175px; z-index:1000;" id="show" class="show">
+								<div style="padding:10px 10px 10px 10px;" align="right">
+									<a href="#" data-toggle="tooltip" data-placement="bottom" title="모두 읽음으로 표시"><i style="font-size:30px;" class="far fa-envelope-open"></i></a>
+								</div>
+								<div id="contentPlus">
+									
+								</div>
+							    
+							</div>
+						</div>
+					</li>
+					<!-- <li class="nav-item"><a class="nav-link" id="down" href="#">
 							<i class="far fa-bell fa-lg" style="font-size: 25px;"></i>
-					</a></li>
+					</a></li> -->
 
 					<!-- 포스팅 등록 -->
 					<li class="nav-item"><a class="nav-link" href="pInsertForm.do">
@@ -587,7 +615,7 @@ function select(){
 						url:"mpSSearchFan.do",
 						data:{search:search},
 						dataType:"json",
-						type:"post",
+						type:"get",
 						success:function(list){
 							$("#fanArea").html("");
 							
@@ -604,14 +632,16 @@ function select(){
 								$("#fanArea").append($fanNull);
 							}else{
 								$.each(list, function(index, value){
-									var $fan = "<div id='addSearch' class='fanFan' value='" + value.mno + "'>"
+									var $fan = "<a style='color:black;' href='mpViewProfile.do?mno=" + value.mno + "'>"
+												+"<div id='addSearch' class='fanFan'>"
 										    	+"<div id='addSearchImg'>"
 									    		+"<i class='fas fa-user-alt'></i>"
 										    	+"</div>"
 										    	+"<div id='addSearchNick'>"
 									    		+"<p>" + value.nickName + "</p>"
 										    	+"</div>"
-										    	+"</div>";
+										    	+"</div>"
+										    	+"</a>";
 										    	
 									$("#fanArea").append($fan);
 									
@@ -628,7 +658,7 @@ function select(){
 						url:"mpSSearchBrand.do",
 						data:{search:search},
 						dataType:"json",
-						type:"post",
+						type:"get",
 						success:function(list){
 							$("#brandArea").html("");
 							
@@ -645,14 +675,16 @@ function select(){
 								$("#brandArea").append($brandNull);
 							}else{
 								$.each(list, function(index, value){
-									var $brand = "<div id='addSearch' class='brandBrand' value='" + value.pno + "'>"
+									var $brand = "<a style='color:black;' href='pNavSearch.do?type=1&keyword=" + value.brand + "'>"
+												+"<div id='addSearch' class='brandBrand' value='" + value.pno + "'>"
 										    	+"<div id='addSearchImg'>"
 									    		+"<i class='fas fa-search'></i>"
 										    	+"</div>"
 										    	+"<div id='addSearchNick'>"
 									    		+"<p>" + value.brand + "</p>"
 										    	+"</div>"
-										    	+"</div>";
+										    	+"</div>"
+										    	+"</a>";
 									
 									$("#brandArea").append($brand);
 									
@@ -669,7 +701,7 @@ function select(){
 						url:"mpSSearchHashtag.do",
 						data:{search:search},
 						dataType:"json",
-						type:"post",
+						type:"get",
 						success:function(list){
 							$("#hashtagArea").html("");
 							
@@ -686,14 +718,16 @@ function select(){
 									$("#hashtagArea").append($hashtagNull);
 							}else{
 								$.each(list, function(index, value){
-									var $hashtag = "<div id='addSearch' class='hashHash' value='" + value.pno + "'>"
+									var $hashtag = "<a style='color:black;' href='pNavSearch.do?type=2&keyword=" + value.hashtag + "'>"
+													+"<div id='addSearch' class='hashHash' value='" + value.pno + "'>"
 											    	+"<div id='addSearchImg'>"
 										    		+"<i class='fas fa-hashtag'></i>"
 											    	+"</div>"
 											    	+"<div id='addSearchNick'>"
 										    		+"<p>" + value.hashtag + "</p>"
 											    	+"</div>"
-											    	+"</div>";
+											    	+"</div>"
+											   		+"</a>";
 											    	
 									$("#hashtagArea").append($hashtag);
 									
@@ -710,7 +744,7 @@ function select(){
 						url:"mpSSearchLoca.do",
 						data:{search:search},
 						dataType:"json",
-						type:"post",
+						type:"get",
 						success:function(list){
 							$("#locationArea").html("");
 							
@@ -727,14 +761,16 @@ function select(){
 								$("#locationArea").append($locationNull);
 							}else{
 								$.each(list, function(index, value){
-									var $location = "<div id='addSearch' class='locaLoca' value='" + value.pno + "'>"
+									var $location = "<a style='color:black;' href='pNavSearch.do?type=3&keyword=" + value.location + "'>"
+													+"<div id='addSearch' class='locaLoca' value='" + value.pno + "'>"
 											    	+"<div id='addSearchImg'>"
 										    		+"<i class='fas fa-map-marker-alt'></i>"
 											    	+"</div>"
 											    	+"<div id='addSearchNick'>"
 										    		+"<p>" + value.location + "</p>"
 											    	+"</div>"
-												    +"</div>";
+												    +"</div>"
+												    +"</a>";
 												    
 									$("#locationArea").append($location);
 									
@@ -805,24 +841,153 @@ function select(){
 				}
 			});
 			
-			// 검색 결과 클릭 시 페이지 이동
-			$(document).ready(function(){
-				$(document).on("click", ".fanFan", function(){
-					location.href="mpViewProfile.do?mno=" + $(this).attr("value");
-				});
-				$(document).on("click", ".brandBrand", function(){
-					
-				});
-				$(document).on("click", ".hashHash", function(){
-					
-				});
-				$(document).on("click", ".locaLoca", function(){
-					
-				});
-					
-			});
-			
 		});
+	</script>
+	
+	<!-- 웹소켓 알람 스크립트 -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.js"></script>
+	<script type="text/javascript">
+		var sock = null;
+		var mno = ${loginUser.mno}
+		
+	    $(document).ready(function() {
+	        sock = new SockJS("/styleblending/count");
+	        
+	        // 연결 성공
+	        sock.onopen = function() {
+	        	console.log("연결 성공");
+	        	sock.send(mno);
+	        }
+	        // 연결 해제
+	        sock.onclose = function() {
+	        	console.log("연결 해제");
+	        }
+	        // 메세지 보내고 받을 때
+	        sock.onmessage = function(evt) {
+	        	var alarmCountNo = 0;
+	            var json = evt.data;
+	            
+	            var obj = JSON.parse(json);
+	            console.log(obj);
+	            
+	            if(obj != ""){
+	            	for(var i=0; i<obj.length; i++){
+		            	alarmCountNo = obj[i].alarmCount;
+		            	
+		            	if(obj[i].type == 1){
+		            		var $add = "<a class='dropdown-item' href='#'>"
+			    				+ "<div class='addAlarm1'>"
+			    				+ "<div class='addAlarmImg1'>"
+			    				+ "<img src='resources/upload/member/" + obj[i].renameImg + "'>"
+			    				+ "</div>"
+			    				+ "<div class='addAlarmNick1' align='left'>"
+			    				+ "<p>" + obj[i].nickName + "</p>"
+			    				+ "</div>"
+			    				+ "<div class='addAlarmDate1' align='right'>"
+			    				+ "<p>" + obj[i].enrollDate + "</p>"
+			    				+ "</div>"
+			    				+ "<div class='addAlarmCon1'>"
+			    				+ "<p>" + obj[i].nickName + "님이 게시글에 좋아요를 눌렀습니다.</p>"
+			    				+ "</div>"
+			    				+ "</div>"
+			    				+ "</a>";
+		    		
+		    				$("#contentPlus").append($add);
+		            	}else if(obj[i].type == 2){
+		            		var $add = "<a class='dropdown-item' href='#'>"
+			    				+ "<div class='addAlarm1'>"
+			    				+ "<div class='addAlarmImg1'>"
+			    				+ "<img src='resources/upload/member/" + obj[i].renameImg + "'>"
+			    				+ "</div>"
+			    				+ "<div class='addAlarmNick1' align='left'>"
+			    				+ "<p>" + obj[i].nickName + "</p>"
+			    				+ "</div>"
+			    				+ "<div class='addAlarmDate1' align='right'>"
+			    				+ "<p>" + obj[i].enrollDate + "</p>"
+			    				+ "</div>"
+			    				+ "<div class='addAlarmCon1'>"
+			    				+ "<p>" + obj[i].nickName + "님이 게시글에 댓글을 작성하였습니다.</p>"
+			    				+ "</div>"
+			    				+ "</div>"
+			    				+ "</a>";
+		    		
+		    				$("#contentPlus").append($add);
+		            	}else{
+		            		var $add = "<a class='dropdown-item' href='#'>"
+			    				+ "<div class='addAlarm1'>"
+			    				+ "<div class='addAlarmImg1'>"
+			    				+ "<img src='resources/upload/member/" + obj[i].renameImg + "'>"
+			    				+ "</div>"
+			    				+ "<div class='addAlarmNick1' align='left'>"
+			    				+ "<p>" + obj[i].nickName + "</p>"
+			    				+ "</div>"
+			    				+ "<div class='addAlarmDate1' align='right'>"
+			    				+ "<p>" + obj[i].enrollDate + "</p>"
+			    				+ "</div>"
+			    				+ "<div class='addAlarmCon1'>"
+			    				+ "<p>" + obj[i].nickName + "님이 팬이 되었습니다.</p>"
+			    				+ "</div>"
+			    				+ "</div>"
+			    				+ "</a>";
+		    		
+		    				$("#contentPlus").append($add);
+		            	}
+		    			
+		            }
+	            }else{
+	            	$("#show").html("");
+					
+					var $add = "<div style='padding:20px 10px 10px 10px' align='center'>"
+	    				+ "<p><span class='text-danger'><i class='far fa-frown-open'></i></span> 알림이 없습니다.</p>"
+	    				+ "</div>";
+	    		
+	    			$("#show").append($add);
+	            }
+	            
+	            
+	            if(alarmCountNo != 0){
+	            	$("#count").css("display", "block");
+					$("#count").html("");
+					$("#count").append(alarmCountNo);
+	            }
+	            
+	        }
+		    
+		});
+	    
+	    $("#down").on("click", function(){
+			if($("#show").css("display") == "block"){
+				$("#show").hide();
+				
+			}else{
+				$("#show").show();
+			}
+				
+			if(${ loginUser == null }){
+				$("#show").html("");
+				
+				var $add = "<div style='padding:20px 10px 10px 10px' align='center'>"
+					+ "<p><span class='text-danger'></span>로그인 후 이용해주세요.</p>"
+    				+ "<button class='btn btn-dark' id='alarmLogin'>로그인</button>"
+    				+ "</div>";
+    		
+    			$("#show").append($add);
+			}
+		});
+		
+		$("html").click(function(e){
+			if($("#show").css("display") == "block"){
+				if(!$("#display").has(e.target).length){
+					$("#show").hide();
+				}
+			}
+		});
+		
+		$(document).on("click", "#alarmLogin", function(){
+			location.href="loginForm.do";
+		});
+	
+		
 	</script>
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->

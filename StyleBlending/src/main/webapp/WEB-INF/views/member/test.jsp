@@ -16,12 +16,12 @@
 	#fanAreaBtn:hover, #brandAreaBtn:hover, #hashtagAreaBtn:hover, #locationAreaBtn:hover{cursor:pointer}
 	#fanAreaBtn, #brandAreaBtn, #hashtagAreaBtn, #locationAreaBtn{width:23%;}
 	
-	#addAlarm1{width:100%; height:inherit; background:lightgray; border:2px solid white;}
-	#addAlarmImg1{padding:10px 0 0 10px; width:17%; height:auto; display:inline-block;}
-	#addAlarmImg1 img{width:50px; height:50px; border-radius:1.5em;}
-	#addAlarmNick1{display:inline-block; width:50%; margin-left:10px;}
-	#addAlarmDate1{display:inline-block; width:25%; text-align:right;}
-	#addAlarmCon1{padding:10px 10px 10px 10px;}
+	.addAlarm1{width:100%; height:inherit; background:rgba(0,0,0,0.05); border-top:1px solid lightgray; border-bottom:1px solid lightgray;}
+	.addAlarmImg1{padding:10px 0 0 10px; width:17%; height:auto; display:inline-block;}
+	.addAlarmImg1 img{width:50px; height:50px; border-radius:1.5em;}
+	.addAlarmNick1{display:inline-block; width:50%; margin-left:10px;}
+	.addAlarmDate1{display:inline-block; width:25%; text-align:right;}
+	.addAlarmCon1{padding:10px 10px 10px 10px;}
 	
 	#imgH:hover{cursor:pointer; display:block;}
 	#imgL:hover{cursor:pointer; display:block;}
@@ -48,8 +48,8 @@
 			<span id="count" class="badge badge-danger badge-pill" 
 					style="display:none; pointer-events:none; position:absolute; bottom:19px; left:19px;"></span>
 			
-			<div style="position:absolute; width:400px; max-height:255px; background:white; display:none; box-shadow:0 5px 10px rgba(0, 0, 0, 0.5);
-			overflow-y:auto; overflow-x:hidden; left:-180px; z-index:1000;" id="show" class="show">
+			<div style="position:absolute; width:400px; max-height:255px; background:white; display:block; box-shadow:0 5px 10px rgba(0, 0, 0, 0.5);
+			overflow-y:auto; overflow-x:hidden; left:-175px; z-index:1000;" id="show" class="show">
 				<div style="padding:10px 10px 10px 10px;" align="right">
 					<a href="#" data-toggle="tooltip" data-placement="bottom" title="모두 읽음으로 표시"><i style="font-size:30px;" class="far fa-envelope-open"></i></a>
 				</div>
@@ -557,7 +557,7 @@
 				$("#show").html("");
 				
 				var $add = "<div style='padding:20px 10px 10px 10px'>"
-    				+ "<p>로그인 후 이용해주세요</p>"
+    				+ "로그인 후 이용해주세요"
     				+ "</div>";
     		
     			$("#show").append($add);
@@ -585,6 +585,7 @@
 	        // 연결 성공
 	        sock.onopen = function() {
 	        	console.log("연결 성공");
+	        	sock.send(mno);
 	        }
 	        // 연결 해제
 	        sock.onclose = function() {
@@ -592,35 +593,88 @@
 	        }
 	        // 메세지 보내고 받을 때
 	        sock.onmessage = function(evt) {
-	            var jsontext = evt.data;
-	            alert(jsontext);
-	            return false;
+	        	var alarmCountNo = 0;
+	            var json = evt.data;
 	            
-	           /*  var $add = "<a class='dropdown-item' href='#'>"
-    				+ "<div id='addAlarm1'>"
-    				+ "<div id='addAlarmImg1'>"
-    				+ "<img src='resources/assets/img/lorde.png'>"
-    				+ "</div>"
-    				+ "<div id='addAlarmNick1'>"
-    				+ "<p>닉네임</p>"
-    				+ "</div>"
-    				+ "<div id='addAlarmDate1'>"
-    				+ "<p>320일전</p>"
-    				+ "</div>"
-    				+ "<div id='addAlarmCon1'>"
-    				+ "<p>~~~님이 팬이 되었습니다.</p>"
-    				+ "</div>"
-    				+ "</div>"
-    				+ "</a>";
-    		
-    			$("#contentPlus").append($add); */
+	            var obj = JSON.parse(json);
+	            console.log(obj);
+	            
+	            if(obj != ""){
+	            	for(var i=0; i<obj.length; i++){
+		            	alarmCountNo = obj[i].alarmCount;
+		            	console.log(alarmCountNo);
+		            	
+		            	var $add = "<a class='dropdown-item' href='#'>"
+			    				+ "<div class='addAlarm1'>"
+			    				+ "<div class='addAlarmImg1'>"
+			    				+ "<img src='resources/upload/member/" + obj[i].renameImg + "'>"
+			    				+ "</div>"
+			    				+ "<div class='addAlarmNick1'>"
+			    				+ "<p>" + obj[i].nickName + "</p>"
+			    				+ "</div>"
+			    				+ "<div class='addAlarmDate1'>"
+			    				+ "<p>" + obj[i].enrollDate + "</p>"
+			    				+ "</div>"
+			    				+ "<div class='addAlarmCon1'>"
+			    				+ "<p>" + obj[i].nickName + "님이 팬이 되었습니다.</p>"
+			    				+ "</div>"
+			    				+ "</div>"
+			    				+ "</a>";
+		    		
+		    			$("#contentPlus").append($add);
+		    			
+		            }
+	            }else{
+	            	$("#show").html("");
+					
+					var $add = "<div style='padding:20px 10px 10px 10px' align='center'>"
+	    				+ "<p><span class='text-danger'><i class='far fa-frown-open'></i></span> 알림이 없습니다.</p>"
+	    				+ "</div>";
+	    		
+	    			$("#show").append($add);
+	            }
+	            
+	            
+	            if(alarmCountNo != 0){
+	            	$("#count").css("display", "block");
+					$("#count").html("");
+					$("#count").append(alarmCountNo);
+	            }
+	            
 	        }
-	        
-		    $("#sendMessage").click(
-		    function() {
-		    	sock.send(mno);
-		    	$("#count").append(mno);
-		    });
+		    
+		});
+	    
+	    $("#down").on("click", function(){
+			if($("#show").css("display") == "block"){
+				$("#show").hide();
+				
+			}else{
+				$("#show").show();
+			}
+				
+			if(${ empty loginUser}){
+				$("#show").html("");
+				
+				var $add = "<div style='padding:20px 10px 10px 10px' align='center'>"
+					+ "<p><span class='text-danger'></span>로그인 후 이용해주세요.</p>"
+    				+ "<button class='btn btn-dark' id='alarmLogin'>로그인</button>"
+    				+ "</div>";
+    		
+    			$("#show").append($add);
+			}
+		});
+		
+		$("html").click(function(e){
+			if($("#show").css("display") == "block"){
+				if(!$("#display").has(e.target).length){
+					$("#show").hide();
+				}
+			}
+		});
+		
+		$(document).on("click", "#alarmLogin", function(){
+			location.href="loginForm.do";
 		});
 	
 		
