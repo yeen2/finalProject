@@ -73,8 +73,8 @@
 	 
 	 
 	.spotDiv {
-		width: 50%; height: 50%; border: 1px solid red; display: inline-block;
-		padding : 5px;
+		width: 50%; height: 50%; display: inline-block;
+		padding : 3px;
 	}
 	button:click {
 		border:none;
@@ -112,7 +112,7 @@
 				<h1 class="mt-4">Style Posting</h1>
 				<!-- Author -->
 				<p class="lead">
-					by <a href="#">Style Blending</a>
+					by <a style="font-style: italic;">Style Blending</a>
 				</p>
 
 				<hr>
@@ -304,7 +304,7 @@
 					<h5 class="card-header">Clothes stylist</h5>
 					<div class="card-body">
 					
-						<c:forEach var="s" items="${s }">
+						<c:forEach var="s" items="${s}">
 						<div class="row" style="margin-bottom: 10px;">
 							<div class="col-lg-3">
 								<div  style="border-radius: 50%; width: 50px; height: 50px;">
@@ -312,10 +312,14 @@
 										src="${ pageContext.servletContext.contextPath }/resources/image/cate/${s.img}">
 								</div>
 							</div>
-							<div class="col-lg-9">
+							<div class="col-lg-9" style="display: inline-block;">
 								<b>${s.name }</b>
 								<br>
 								<span>${s.brand }</span>
+								<br>
+								<div style="display: inline-block; border-radius: 50%; width: 15px; height: 15px;">
+									<div style="border-radius: 50%; width:100%; height:100%; background-color: ${s.color}"></div>
+								</div>
 							</div>
 						</div>
 						</c:forEach>
@@ -375,14 +379,21 @@
 					<h5 class="card-header">Spotlight</h5>
 					<div class="card-body">
 						<div class="spotDiv">
-							<a>
-								<img style="width: 100%; height: 100%;">
-							</a>
+							<img style="width: 100%; height: 100%;" 
+								src="${ pageContext.servletContext.contextPath }/resources/image/hashtag/dailylook.jpg">
+							<div style="left: 60px; width: 100px; bottom: 80px; font-size: 1em; 
+										font-weight: bold; position: absolute; color: white;">
+								#데일리룩
+							</div>
 						</div>
+						
 						<div class="spotDiv" style="float: right;">
-							<a>
-								<img style="width: 100%; height: 100%;">
-							</a>
+							<img style="width: 100%; height: 100%;" 
+								src="${ pageContext.servletContext.contextPath }/resources/image/hashtag/springlook.jpg">
+							<div style="right: 25px; width: 100px; bottom: 80px; font-size: 1em; 
+										font-weight: bold; position: absolute; color: white;">
+								#봄코디
+							</div>
 						</div>
 					</div>
 				</div>
@@ -517,8 +528,7 @@
 							<option value="3">음란물</option>
 							<option value="4">욕설</option>
 							<option value="5">개인정보침해</option>
-							<option value="6">욕설</option>
-							<option value="7">기타</option>
+							<option value="6">기타</option>
 						</select>
 					</div>
 					<div class="form-group">
@@ -573,7 +583,7 @@
 							return false;
 						}
 						
-						if(d_category == 7){							
+						if(d_category == 6){							
 							if(content.length == 0){
 								alert("신고내용을 입력해주세요");
 								$('#declareModal').modal();
