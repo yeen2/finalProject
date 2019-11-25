@@ -92,6 +92,9 @@
 	.r_md:hover{
 		cursor: pointer;
 	}
+	a:hover {
+		text-decoration: none;
+	}
 </style>
 </head>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
@@ -1106,7 +1109,6 @@
 							}
 						});
 	</script>
-	
 
 	<jsp:include page="../includes/footer.jsp" />
 

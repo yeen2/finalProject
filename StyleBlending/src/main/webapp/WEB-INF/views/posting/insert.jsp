@@ -223,6 +223,7 @@
 </style>
 <%-- <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery.placeholder.js"></script> --%>
 <script src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
+<script src="${pageContext.request.contextPath}/resources/ckeditor/plugin.js"></script>
 </head>
 <body class="profile" style="margin-bottom: 20px !important;">
 	
@@ -238,7 +239,7 @@
 			<div class="col-lg-7">
 
 				<!-- Title -->
-				<h1 class="mt-4">**의 Today's Posting</h1>
+				<h3 class="mt-4">" ${ loginUser.nickName } " 님의 Today's Posting</h3>
 				<input type="hidden" name="mno" value="${ loginUser.mno }">
 				<hr>
 				<!-- 이미지 -->
@@ -926,20 +927,17 @@
 			}
 		}
 	</script>
+	
 	<script type="text/javascript">
 
-	//id가 content인 태그에 ckeditor를 적용
-	/* CKEDITOR.replace("content", {
-		height:200
-	});  */
-	/* CKEDITOR.replace( 'content', { extraPlugins : 'confighelper'});
- */
-
-/* 	CKEDITOR.create( document.querySelector( '#content' ), {
-        placeholder: 'Type the content here!'
-    } ); */
+		//id가 content인 태그에 ckeditor를 적용
+		CKEDITOR.replace("content", {
+			height:200,
+			extraPlugins : 'confighelper',
+		}); 
 	
-	</script>	
+	
+	</script>		
 	
 	<%@include file="../includes/footer.jsp" %>
 	

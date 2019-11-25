@@ -98,7 +98,7 @@ public class PostingController {
 		for(int i=0; i<strArr.length; i++) {
 			if(strArr[i].charAt(0) == '#') {
 				hashtag += strArr[i];
-				map.put(strArr[i], "<a>"+strArr[i]+"</a>");
+				map.put(strArr[i], "<a href='#'>"+strArr[i]+"</a>");
 			}
 		}
 		p.setHashtag(hashtag);
@@ -113,6 +113,7 @@ public class PostingController {
 
 			content = content.replace(key, map.get(key));
 		}
+		p.setContent(content);
 		System.out.println("해시태그에 <a>붙임 : " + content);
 		
 		
