@@ -2,6 +2,7 @@ package com.kh.styleblending.posting.model.dao;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -98,5 +99,40 @@ public class PostingDao {
 		map.put("content", content);
 		return sqlSession.update("postingMapper.updateReply", map);
 	}
+	
+	//검색
+	public List<Posting> selectSearchPosting_brand(String keyword, int mno){
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("keyword", keyword);
+		map.put("mno", mno);
+		return sqlSession.selectList("postingMapper.selectSearchPosting_brand", map);
+	}
+	
+	public List<Posting> selectSearchPosting_hash(String keyword, int mno){
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("keyword", keyword);
+		map.put("mno", mno);
+		return sqlSession.selectList("postingMapper.selectSearchPosting_hash", map);
+	}
+	
+	public List<Posting> selectSearchPosting_loca(String keyword, int mno){
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("keyword", keyword);
+		map.put("mno", mno);
+		return sqlSession.selectList("postingMapper.selectSearchPosting_loca", map);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

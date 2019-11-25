@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -26,7 +27,6 @@ import com.kh.styleblending.posting.model.service.PostingService;
 import com.kh.styleblending.posting.model.vo.Declare;
 import com.kh.styleblending.posting.model.vo.Posting;
 import com.kh.styleblending.posting.model.vo.PostingReply;
-import com.kh.styleblending.posting.model.vo.SelectPosting;
 import com.kh.styleblending.posting.model.vo.Style;
 
 @Controller
@@ -34,6 +34,41 @@ public class PostingController {
 
 	@Autowired
 	private PostingService pService;
+	
+	// 포스팅 키워드 검색
+	// 1-브랜드 2-해시태그 3-위치
+	@RequestMapping("pNavSearch.do")
+	public ModelAndView info(String keyword, int type, ModelAndView mv, HttpSession session) {
+		
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		List<Posting> p = new ArrayList<Posting>();
+		
+		if(loginUser != null) {
+			if(type == 1) {
+				p = pService.selectSearchPosting_brand(keyword, loginUser.getMno());
+			}else if(type == 2) {
+				p = pService.selectSearchPosting_hash(keyword, loginUser.getMno());
+			}else if(type == 3) {
+				p = pService.selectSearchPosting_loca(keyword, loginUser.getMno());
+			}
+		}else {
+			if(type == 1) {
+				p = pService.selectSearchPosting_brand(keyword, -10000);
+			}else if(type == 2) {
+				p = pService.selectSearchPosting_hash(keyword, -10000);
+			}else if(type == 3) {
+				p = pService.selectSearchPosting_loca(keyword, -10000);
+			}
+		}
+		
+
+		System.out.println(p);
+		mv.addObject("p", p).setViewName("posting/search");
+	
+		return mv;
+	}
+	
+	
 	
 	// 좋아요,신고 정보 보여주려면 loginUser정보 가져와야 함
 	// 매개변수로 int id 추가해야함
@@ -128,7 +163,7 @@ public class PostingController {
 		for(int i=0; i<strArr.length; i++) {
 			if(strArr[i].charAt(0) == '#') {
 				hashtag += strArr[i];
-				map.put(strArr[i], "<a>"+strArr[i]+"</a>");
+				map.put(strArr[i], "<a href='#'>"+strArr[i]+"</a>");
 			}
 		}
 		p.setHashtag(hashtag);
@@ -322,6 +357,10 @@ public class PostingController {
 			return "fail";
 		}
 	}
+	
+	
+	
+	
 	
 	
 }

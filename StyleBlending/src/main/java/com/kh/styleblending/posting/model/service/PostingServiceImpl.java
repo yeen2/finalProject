@@ -2,6 +2,7 @@ package com.kh.styleblending.posting.model.service;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +16,7 @@ import com.kh.styleblending.posting.model.dao.PostingDao;
 import com.kh.styleblending.posting.model.vo.Declare;
 import com.kh.styleblending.posting.model.vo.Posting;
 import com.kh.styleblending.posting.model.vo.PostingReply;
-import com.kh.styleblending.posting.model.vo.SelectPosting;
 import com.kh.styleblending.posting.model.vo.Style;
-
-import oracle.net.aso.b;
 
 @Service("pService")
 public class PostingServiceImpl implements PostingService {
@@ -139,6 +137,21 @@ public class PostingServiceImpl implements PostingService {
 	@Override
 	public int updateReply(int prno, String content) {
 		return pDao.updateReply(prno, content);
+	}
+	
+	@Override
+	public List<Posting> selectSearchPosting_brand(String keyword, int mno) {
+		return pDao.selectSearchPosting_brand(keyword, mno);
+	}
+	
+	@Override
+	public List<Posting> selectSearchPosting_hash(String keyword, int mno) {
+		return pDao.selectSearchPosting_hash(keyword, mno);
+	}
+	
+	@Override
+	public List<Posting> selectSearchPosting_loca(String keyword, int mno) {
+		return pDao.selectSearchPosting_loca(keyword, mno);
 	}
 	
 	
