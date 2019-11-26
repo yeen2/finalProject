@@ -112,7 +112,7 @@
 						</tr>
 
 						<tr>
-							<td><img style="height: 62px; width: 60px; margin-right: 10px;"
+							<td><img style="height: 62px; width: 60px; margin-right: 10px; border-radius: 2.5em;"
 								src="${pageContext.request.contextPath}/resources/upload/member/profile.png"
 								alt="member">
 							</td>
@@ -419,6 +419,7 @@
 		//댓글 수정,삭제 이벤트
 		$("#reply-comment").mouseover(function(){
 			$(this).children('a').show();
+			console.log("들어오나?");
 		}).mouseleave(function(){
 			$(this).children('a').hide();
 		});
@@ -515,7 +516,7 @@
 							$replyDiv = $("<div class='form-inline replyDiv' style='margin-bottom: 30px;'></div>");
 							
 							$imgDiv = $("<div class='form-group imgDiv'></div>");
-							$img = $("<img class='reply_img' style='height: 62px; width: 60px; margin-right: 10px;'>").attr("src","${pageContext.request.contextPath}/resources/upload/member/profile.png");
+							$img = $("<img class='reply_img' style='border-radius: 2.5em; height: 62px; width: 60px; margin-right: 10px;'>").attr("src","${pageContext.request.contextPath}/resources/upload/member/profile.png");
 							
 							
 							$contentDiv = $("<div class='form-group contentDiv'></div>");
