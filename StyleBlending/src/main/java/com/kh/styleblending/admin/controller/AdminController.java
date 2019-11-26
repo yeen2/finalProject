@@ -27,6 +27,7 @@ import com.kh.styleblending.admin.model.vo.Declare;
 import com.kh.styleblending.admin.model.vo.PageInfo;
 import com.kh.styleblending.admin.model.vo.Pagination;
 import com.kh.styleblending.admin.model.vo.Statistics;
+import com.kh.styleblending.main.model.vo.Notice;
 import com.kh.styleblending.member.model.vo.Member;
 
 @Controller
@@ -291,6 +292,9 @@ public class AdminController {
 	
 	@RequestMapping("aNotice.do")
 	public String notice() {
+		
+		ArrayList<Notice> list = aService.selectNoticeList();
+		
 		return "admin/notice";
 	}
 	

@@ -13,7 +13,6 @@ import lombok.ToString;
 @ToString
 public class Statistics {
 
-	private int newMemberCount; // 가입자수
 	private int month1;
 	private int month2;
 	private int month3;

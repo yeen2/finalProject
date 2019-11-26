@@ -53,7 +53,6 @@
 	</resultMap>
 	
 	<resultMap id="StResultSet" type="com.kh.styleblending.admin.model.vo.Statistics">
-		<id property="newMemberCount" column="newMemberCount"/>
 		<result property="month1" column="month1"/>
 		<result property="month2" column="month2"/>
 		<result property="month3" column="month3"/>
@@ -235,17 +234,8 @@
 		set status='3', end_date=sysdate
 		where status='2'
 	</update>
-	
-	<!-- 최근6개월 가입자수 -->
-	<!-- 
-	<select id="selectMemberCount" resultMap="MemberResultSet">
-		select COUNT(*) m_no
-		from member
-		where to_char(enroll_date) between (select TO_CHAR(add_months((TRUNC(SYSDATE,'MM')),-6)) FROM DUAL) and (TO_CHAR(TRUNC(SYSDATE,'MM')))
-		GROUP BY to_char(enroll_date,'yy/MM')
-	</select>
-	 -->
 	 
+	<!-- 최근6개월 가입자수 -->
 	<select id="selectMemberCount" resultMap="StResultSet">
 		select sum(m1) "month1",sum(m2) "month2",sum(m3) "month3",sum(m4) "month4",sum(m5) "month5",sum(m6) "month6"
 		from(select decode(TO_CHAR(enroll_date,'yy/mm'),(select TO_CHAR(add_months((TRUNC(SYSDATE,'MM')),-5),'yy/mm') FROM DUAL),count(*),0) m1,
@@ -256,6 +246,10 @@
  					decode(TO_CHAR(enroll_date,'yy/mm'),(TO_CHAR(TRUNC(SYSDATE,'MM'),'yy/mm')),count(*),0) m6
     				from member
     				group by TO_CHAR(enroll_date,'yy/mm'))
+	</select>
+	
+	<select id="selectNoticeList">
+		select * from notice
 	</select>
 	 
 </mapper>

@@ -11,6 +11,7 @@ import com.kh.styleblending.admin.model.vo.Ad;
 import com.kh.styleblending.admin.model.vo.Declare;
 import com.kh.styleblending.admin.model.vo.PageInfo;
 import com.kh.styleblending.admin.model.vo.Statistics;
+import com.kh.styleblending.main.model.vo.Notice;
 import com.kh.styleblending.member.model.vo.Member;
 
 @Service("aService")
@@ -168,6 +169,12 @@ public class AdminServiceImpl implements AdminService{
 	public Statistics selectMemberCount() {
 		// 통계(가입자수)
 		return aDao.selectMemberCount();
+	}
+
+	@Override
+	public ArrayList<Notice> selectNoticeList() {
+		// 공지사항 목록 조회용
+		return aDao.selectNoticeList();
 	}
 
 	

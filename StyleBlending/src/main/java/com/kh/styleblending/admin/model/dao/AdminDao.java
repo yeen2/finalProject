@@ -12,6 +12,7 @@ import com.kh.styleblending.admin.model.vo.Ad;
 import com.kh.styleblending.admin.model.vo.Declare;
 import com.kh.styleblending.admin.model.vo.PageInfo;
 import com.kh.styleblending.admin.model.vo.Statistics;
+import com.kh.styleblending.main.model.vo.Notice;
 import com.kh.styleblending.member.model.vo.Member;
 
 @Repository("aDao")
@@ -125,5 +126,9 @@ public class AdminDao {
 	
 	public Statistics selectMemberCount() {
 		return sqlSession.selectOne("adminMapper.selectMemberCount");
+	}
+	
+	public ArrayList<Notice> selectNoticeList(){
+		return (ArrayList)sqlSession.selectList("adminMapper.selectNoticeList");
 	}
 }
