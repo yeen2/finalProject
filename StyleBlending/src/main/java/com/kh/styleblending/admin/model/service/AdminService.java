@@ -70,7 +70,7 @@ public interface AdminService {
 	int updateEndAd(String adno);
 	
 	// 통계(가입자수)
-	Statistics selectMemberCount();
+	ArrayList<Statistics> selectMemberCount();
 	
 	// 공지사항 리스트 조회
 	ArrayList<Notice> selectNoticeList();

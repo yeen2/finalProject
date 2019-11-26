@@ -283,8 +283,9 @@ public class AdminController {
 	@RequestMapping(value="aChart.do", produces="application/json; charset=UTF-8")
 	public String statistics() {
 		
-		Statistics  statistics = aService.selectMemberCount();
+		ArrayList<Statistics>  statistics = aService.selectMemberCount();
 		System.out.println(statistics);
+		
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		
 		return gson.toJson(statistics);
