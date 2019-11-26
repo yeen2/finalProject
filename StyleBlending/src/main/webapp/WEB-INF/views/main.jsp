@@ -332,11 +332,40 @@ li {
       }
 
    }
+    //친구 삭제
+    function deleteFan(a){
+        console.log(a);
+         var youNo = $(a).children().eq(1).val(); // 하는 사람이 youNo
+         var meNo = $(a).children().eq(0).val(); //당하는 사람이 meNo
+        
+           $.ajax({
+              url:"mpDeleteFan.do",
+              data:{meNo:meNo, youNo:youNo},
+              type:"get",
+              success:function(data){
+                 
+                 if(data == 1){
+                 console.log("친구삭제 성공");
+                 postList(); 
+                    
+                 }else{
+                    console.log("실패");
+                 }
+                 
+              },
+              error:function(){
+                 console.log("좋아요실패");   
+              }
+           });
+        
+        
+      }
+    //친구 추가
     function insertFan(a){
        
        console.log(a);
-       var youNo = $(a).children().eq(0).val(); // 하는 사람이 youNo
-       var meNo = $(a).children().eq(1).val(); //당하는 사람이 meNo
+       var youNo = $(a).children().eq(1).val(); // 하는 사람이 youNo
+       var meNo = $(a).children().eq(0).val(); //당하는 사람이 meNo
       if($(a).attr('class','btn btn-light')){
          $.ajax({
             url:"mpInsertFan.do",
@@ -346,7 +375,7 @@ li {
                
                if(data == 1){
                console.log("친구추가 성공");
-                postList(); 
+               postList(); 
                   
                }else{
                   console.log("실패");
@@ -366,6 +395,11 @@ li {
       alert('로그인 후 좋아요 클릭 가능합니다.');
       return;
    }
+    
+   function unFan(){
+         alert('로그인 후 친구추가 클릭 가능합니다.');
+         return;
+      }
     //메인 고정 9개 포스팅 불러오는 ajax
    $(function(){
       postList();
@@ -397,7 +431,7 @@ li {
                    "<span style='margin-bottom: 0px; margin-top: 23px;'>"+value.nickName+"<br>"+value.enrollDate+"</span>"+
                    "</div>"+
                    "<div class='col-3'style='width: 20%; height: 50px; margin-top: 5px; padding-right: 10px; padding-left: 10px; padding-bottom: 5px;'>"+
-                   "<a class='btn btn-light'>"+
+                   "<a class='btn btn-light' onclick=unFan(); style='cursor:pointer;'>"+
                     "<span style='font-size: 1.2em'>+Fan</span>"+
                    "</a>"+
                    "</div>"+
@@ -510,7 +544,7 @@ li {
                        "<span style='margin-bottom: 0px; margin-top: 23px;'>"+value.nickName+"<br>"+value.enrollDate+"</span>"+
                        "</div>"+
                        "<div class='col-3'style='width: 20%; height: 50px; margin-top: 5px; padding-right: 10px; padding-left: 10px; padding-bottom: 5px;'>"+
-                       "<a class='btn btn-black' onclick='insertFan(this);'><input type='hidden' value="+value.mno+" id='hiddenmno'/><input type='hidden' value="+"${loginUser.mno}"+" id='hiddenmno'/>"+
+                       "<a class='btn' onclick='deleteFan(this);' style='cursor:pointer;'><input type='hidden' value="+value.mno+" id='hiddenmno'/><input type='hidden' value="+"${loginUser.mno}"+" id='hiddenmno'/>"+
                        "<i class='fa fa-check'></i>"+
                        "</a>"+
                        "</div>"+
@@ -546,8 +580,8 @@ li {
                        "<span style='margin-bottom: 0px; margin-top: 23px;'>"+value.nickName+"<br>"+value.enrollDate+"</span>"+
                        "</div>"+
                        "<div class='col-3'style='width: 20%; height: 50px; margin-top: 5px; padding-right: 10px; padding-left: 10px; padding-bottom: 5px;'>"+
-                       "<a class='btn btn-black' onclick='insertFan(this);'><input type='hidden' value="+value.mno+" id='hiddenmno'/><input type='hidden' value="+"${loginUser.mno}"+" id='hiddenmno'/>"+
-                       "<i class='fa fa-check'></i>"+
+                       "<a class='btn btn-black' onclick='deleteFan(this);'><input type='hidden' value="+value.mno+" id='hiddenmno'/><input type='hidden' value="+"${loginUser.mno}"+" id='hiddenmno'/>"+
+                       "<i class='fa fa-check fa'></i>"+
                        "</a>"+
                        "</div>"+
                        "</div>"+
@@ -558,7 +592,7 @@ li {
                        "</div>"+
                        "<div class='card-footer row'>"+
                        "<div class='col-3 form-inline'>"+
-                       "<a onclick='like(this);'><i class='far fa-heart'style='color: red; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
+                       "<a onclick='like(this);'><i class='fa fa-heart'style='color: red; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
                        "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
                        "</div>"+
                        "<div class='col-3 form-inline' style='padding: 0px;'>"+
@@ -1336,15 +1370,4 @@ li {
                   $.each(data,function(index, value){
                      var $input;
                      var loginUser = "${loginUser.mno}";
-                     if(loginUser == null || loginUser == ""){
-                        $input = "<div class='col-md-4 mt-3'>"+
-                         "<div class='component'>"+ 
-                         "<div class='card' style='overflow:hidden;'>"+
-                         "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
-                         "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
-                         "<img src='${pageContext.request.contextPath}/resources/assets/img/배너일.png' style='width: 80px; height: 50px; margin-left: 20px;' />" +
-                         "</div>"+
-                         "<div class='col-6' style='width: 50%; height: 50px; margin-left: 30px;'>"+
-                         "<span style='margin-bottom: 0px; margin-top: 23px;'>"+value.nickName+"<br>"+value.enrollDate+"</span>"+
-                         "</div>"+
-                
+                     if(loginU
