@@ -69,4 +69,7 @@ public interface MyPageService {
 	// 위치 검색
 	ArrayList<Posting> selectSearchLoca(String search);
 
+	// 알람 업데이트
+	int updateAlarm(int mno);
+
 }

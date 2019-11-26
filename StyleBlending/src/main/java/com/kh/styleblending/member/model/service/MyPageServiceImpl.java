@@ -177,6 +177,11 @@ public class MyPageServiceImpl implements MyPageService {
 		return mpDao.selectSearchLoca(search);
 	}
 
+	@Override
+	public int updateAlarm(int mno) {
+		return mpDao.updateAlarm(mno);
+	}
+
 
 
 }

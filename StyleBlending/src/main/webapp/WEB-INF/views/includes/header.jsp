@@ -120,6 +120,7 @@
 .addAlarmDate1{display:inline-block; width:25%; text-align:right;}
 .addAlarmCon1{padding:10px 10px 10px 10px;}
 .addAlarm1 p{font-size:15px;}
+#alarmDelete:hover{cursor:pointer; color:gray;};
 
 </style>
 <script type="text/javascript">
@@ -241,7 +242,7 @@
 							<div style="position:absolute; width:400px; max-height:255px; background:white; display:none; box-shadow:0 5px 10px rgba(0, 0, 0, 0.5);
 							overflow-y:auto; overflow-x:hidden; left:-175px; z-index:1000;" id="show" class="show">
 								<div style="padding:10px 10px 10px 10px;" align="right">
-									<a href="#" data-toggle="tooltip" data-placement="bottom" title="모두 읽음으로 표시"><i style="font-size:30px;" class="far fa-envelope-open"></i></a>
+									<i style="font-size:30px;" class="far fa-envelope-open" id="alarmDelete"></i>
 								</div>
 								<div id="contentPlus">
 									
@@ -948,6 +949,35 @@ function select(){
 		
 		$(document).on("click", "#alarmLogin", function(){
 			location.href="loginForm.do";
+		});
+		
+		$("#alarmDelete").click(function(){
+			$.ajax({
+				url:"mpUpdateAlarm.do",
+				data:{mno:mno},
+				type:"post",
+				success:function(result){
+					if(result == 1){
+						$("#show").html("");
+						
+						var $add = "<div style='padding:20px 10px 10px 10px' align='center'>"
+		    				+ "<p><span class='text-danger'><i class='far fa-frown-open'></i></span> 알림이 없습니다.</p>"
+		    				+ "</div>";
+		    		
+		    			$("#show").append($add);
+		    			
+		    			$("#count").html("");
+		    			$("#count").css("display", "none");
+						
+					}else{
+						console.log("알람 모두읽음 실패");
+					}
+					
+				},
+				error:function(){
+					console.log("ajax 통신 실패");
+				}
+			});
 		});
 	
 		

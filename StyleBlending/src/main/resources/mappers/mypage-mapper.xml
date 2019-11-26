@@ -206,5 +206,11 @@
 		from posting 
 		where location like #{search} || '%'
 	</select>
+	
+	<update id="updateAlarm">
+		update alarm
+		set status=2
+		where m_no=#{mno}
+	</update>
 
 </mapper>

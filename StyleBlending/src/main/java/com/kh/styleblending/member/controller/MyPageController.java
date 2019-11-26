@@ -350,7 +350,7 @@ public class MyPageController {
 		}
 	}
 	
-	// --------------- 검색 리스트 ---------------
+	// --------------- 검색 리스트 ----------------------------------------------------------------
 	@ResponseBody
 	@RequestMapping(value="mpSSearchFan.do", produces="application/json; charset=UTF-8")
 	public String selectSearchFan(String search) {
@@ -390,11 +390,17 @@ public class MyPageController {
 		
 		return gson.toJson(list);
 	}
+	//-------------------------------------------------------------------------------------------
 	
-
-	// 테스트 메소드 (나중에 지울거)
-	@RequestMapping("test.do")
-	public String test() {
-		return "member/test";
+	@ResponseBody
+	@RequestMapping("mpUpdateAlarm.do")
+	public int updateAlarm(int mno) {
+		int result = mpService.updateAlarm(mno);
+		
+		if(result > 0) {
+			return 1;
+		}else {
+			return -1;
+		}
 	}
 }
