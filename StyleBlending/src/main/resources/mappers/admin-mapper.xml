@@ -253,9 +253,42 @@
  					decode(TO_CHAR(enroll_date,'yy/mm'),(TO_CHAR(TRUNC(SYSDATE,'MM'),'yy/mm')),count(*),0) m6
     				from member
     				group by TO_CHAR(enroll_date,'yy/mm'))
+                    union
+select SUM(MONTH1) "month1", SUM(MONTH2) "month2",SUM(MONTH3) "month3",SUM(MONTH4) "month4",SUM(MONTH5) "month5",SUM(MONTH6) "month6" from
+    (select sum(m1) "MONTH1",sum(m2) "MONTH2",sum(m3) "MONTH3",sum(m4) "MONTH4",sum(m5) "MONTH5",sum(m6) "MONTH6"
+		from(select decode(TO_CHAR(enroll_date,'yy/mm'),(select TO_CHAR(add_months((TRUNC(SYSDATE,'MM')),-5),'yy/mm') FROM DUAL),count(*),0) m1,
+ 					decode(TO_CHAR(enroll_date,'yy/mm'),(select TO_CHAR(add_months((TRUNC(SYSDATE,'MM')),-4),'yy/mm') FROM DUAL),count(*),0) m2,
+ 					decode(TO_CHAR(enroll_date,'yy/mm'),(select TO_CHAR(add_months((TRUNC(SYSDATE,'MM')),-3),'yy/mm') FROM DUAL),count(*),0) m3,
+ 					decode(TO_CHAR(enroll_date,'yy/mm')
+                    ,(select TO_CHAR(add_months((TRUNC(SYSDATE,'MM')),-2),'yy/mm') FROM DUAL),count(*),0) m4,
+  					decode(TO_CHAR(enroll_date,'yy/mm'),(select TO_CHAR(add_months((TRUNC(SYSDATE,'MM')),-1),'yy/mm') FROM DUAL),count(*),0) m5,
+ 					decode(TO_CHAR(enroll_date,'yy/mm'),(TO_CHAR(TRUNC(SYSDATE,'MM'),'yy/mm')),count(*),0) m6
+    				from posting
+    				group by TO_CHAR(enroll_date,'yy/mm'))
+                    union
+select sum(m1) "month1",sum(m2) "month2",sum(m3) "month3",sum(m4) "month4",sum(m5) "month5",sum(m6) "month6"
+		from(select decode(TO_CHAR(enroll_date,'yy/mm'),(select TO_CHAR(add_months((TRUNC(SYSDATE,'MM')),-5),'yy/mm') FROM DUAL),count(*),0) m1,
+ 					decode(TO_CHAR(enroll_date,'yy/mm'),(select TO_CHAR(add_months((TRUNC(SYSDATE,'MM')),-4),'yy/mm') FROM DUAL),count(*),0) m2,
+ 					decode(TO_CHAR(enroll_date,'yy/mm'),(select TO_CHAR(add_months((TRUNC(SYSDATE,'MM')),-3),'yy/mm') FROM DUAL),count(*),0) m3,
+ 					decode(TO_CHAR(enroll_date,'yy/mm'),(select TO_CHAR(add_months((TRUNC(SYSDATE,'MM')),-2),'yy/mm') FROM DUAL),count(*),0) m4,
+  					decode(TO_CHAR(enroll_date,'yy/mm'),(select TO_CHAR(add_months((TRUNC(SYSDATE,'MM')),-1),'yy/mm') FROM DUAL),count(*),0) m5,
+ 					decode(TO_CHAR(enroll_date,'yy/mm'),(TO_CHAR(TRUNC(SYSDATE,'MM'),'yy/mm')),count(*),0) m6
+    				from board
+    				group by TO_CHAR(enroll_date,'yy/mm'))
+                    union
+select sum(m1) "month1",sum(m2) "month2",sum(m3) "month3",sum(m4) "month4",sum(m5) "month5",sum(m6) "month6"
+		from(select decode(TO_CHAR(enroll_date,'yy/mm'),(select TO_CHAR(add_months((TRUNC(SYSDATE,'MM')),-5),'yy/mm') FROM DUAL),count(*),0) m1,
+ 					decode(TO_CHAR(enroll_date,'yy/mm'),(select TO_CHAR(add_months((TRUNC(SYSDATE,'MM')),-4),'yy/mm') FROM DUAL),count(*),0) m2,
+ 					decode(TO_CHAR(enroll_date,'yy/mm'),(select TO_CHAR(add_months((TRUNC(SYSDATE,'MM')),-3),'yy/mm') FROM DUAL),count(*),0) m3,
+ 					decode(TO_CHAR(enroll_date,'yy/mm'),(select TO_CHAR(add_months((TRUNC(SYSDATE,'MM')),-2),'yy/mm') FROM DUAL),count(*),0) m4,
+  					decode(TO_CHAR(enroll_date,'yy/mm'),(select TO_CHAR(add_months((TRUNC(SYSDATE,'MM')),-1),'yy/mm') FROM DUAL),count(*),0) m5,
+ 					decode(TO_CHAR(enroll_date,'yy/mm'),(TO_CHAR(TRUNC(SYSDATE,'MM'),'yy/mm')),count(*),0) m6
+    				from fashion_board
+    				group by TO_CHAR(enroll_date,'yy/mm')))
 	</select>
 	
 	<!-- 최근 6개월 총 게시글수 -->
+	<!-- 
 	<select id="selectboardCount" resultMap="StResultSet">
 		select SUM(MONTH1) "month1", SUM(MONTH2) "month2",SUM(MONTH3) "month3",SUM(MONTH4) "month4",SUM(MONTH5) "month5",SUM(MONTH6) "month6"
 		from (select sum(m1) "MONTH1",sum(m2) "MONTH2",sum(m3) "MONTH3",sum(m4) "MONTH4",sum(m5) "MONTH5",sum(m6) "MONTH6"
@@ -289,6 +322,7 @@
 		    				from fashion_board
 		    				group by TO_CHAR(enroll_date,'yy/mm')))
 	</select>
+	 -->
 	
 	<select id="selectNoticeList" resultMap="NoticeResultSet">
 		select * from notice
