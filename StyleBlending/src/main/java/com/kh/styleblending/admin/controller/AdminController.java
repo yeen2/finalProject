@@ -283,14 +283,10 @@ public class AdminController {
 	@RequestMapping(value="aChart.do", produces="application/json; charset=UTF-8")
 	public String statistics() {
 		
-<<<<<<< HEAD
 		ArrayList<Statistics>  statistics = aService.selectMemberCount();
 		//System.out.println(statistics);
 		
-=======
-		Statistics  statistics = aService.selectMemberCount();
 		System.out.println(statistics);
->>>>>>> branch 'dev' of https://github.com/yeen2/finalProject.git
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		
 		return gson.toJson(statistics);
