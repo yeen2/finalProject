@@ -10,7 +10,11 @@
     <script src="https://code.jquery.com/jquery.min.js"></script>
     <!-- google charts -->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
+<style>
+	.order-table:after, .order-table:before{
+		position : relative !important;
+	}
+</style>
 </head>
 <body>
 	
@@ -61,89 +65,44 @@
               <div class="card-header" style="background:white;">
                   <div class="row">
                   	<div class="card-body card-block">
-                 		   <button type="button" class="btn btn-outline-danger btn-sm" style="float:right; " data-toggle="modal" data-target="#staticModal">
-                 		   	삭제
-                 		   </button>
+                 		   
                  		   <button type="button" class="btn btn-outline-danger btn-sm" style="float:right; margin-right:10px;" data-toggle="modal" data-target="#staticModal">
                  		   	수정
                  		   </button>
                     </div>
                   </div>
                 	       
-                    <div class=" table-stats order-table ov-h ">                            	
+                    <div class=" table-stats order-table ov-h col-md-10 offset-md-1 ">                            	
                         <table class="table">
                             <thead>
                                 <tr>
-                                	<th>
-                                		<label class="switch switch-3d switch-danger mr-3">
-                                			<input type="checkbox" class="switch-input" checked="true">
-                               				<span class="switch-label"></span> 
-                               				<span class="switch-handle"></span>
-                                		</label>
-                                	</th>
                                     <th>No.</th>
                                     <th>제목</th>
+                                    <th>내용</th>
                                     <th>작성자</th>
-                                    <th>조회수</th>
                                     <th>작성일</th>
                                 </tr>
                             </thead>
+                            <c:if test="${!empty list}">
+                            <c:forEach items="${list }" var="n">
                             <tbody>
                                  <tr>
-                                	<td><label class="switch switch-3d switch-danger mr-3"><input type="checkbox" class="switch-input" checked="true"> <span class="switch-label"></span> <span class="switch-handle"></span></label>
-                                	</td>
-                                    <td>4</td>
+                                    <td>${n.nno }</td>
                                     <td>
                                     	<div data-toggle="modal" data-target="#smallmodal">
-                                            <a href="#">HYEN</a>
+                                            <a href="#">${n.title }</a>
                                         </div>
                                     </td>
-                                    <td>패션</td>
-                                    <td>2019-11-04</td>
-                                    <td><span class="badge badge-pending">N</span></td>
-                                </tr>
-                                 <tr>
-                                 	<td><label class="switch switch-3d switch-danger mr-3"><input type="checkbox" class="switch-input" checked="true"> <span class="switch-label"></span> <span class="switch-handle"></span></label>
-                                	</td>
-                                    <td>6</td>
-                                    <td>
-                                    	<div data-toggle="modal" data-target="#smallmodal">
-                                            <a href="#">Edinburgh</a>
-                                        </div>
-                                    </td>
-                                    <td>패션</td>
-                                    <td>2019-11-04</td>
-                                    <td><span class="badge badge-pending">N</span></td>
-                                </tr>
-                                <tr>
-                                	<td><label class="switch switch-3d switch-danger mr-3"><input type="checkbox" class="switch-input" checked="true"> <span class="switch-label"></span> <span class="switch-handle"></span></label>
-                                	</td>
-                                    <td>7</td>
-                                    <td>
-                                    	<div data-toggle="modal" data-target="#smallmodal">
-                                            <a href="#">Edinburgh</a>
-                                        </div>
-                                    </td>
-                                    <td>패션</td>
-                                    <td>2019-11-04</td>
-                                    <td><span class="badge" style="background:gray">Y</span></td>
-                                </tr>
-                                <tr>
-                                	<td><label class="switch switch-3d switch-danger mr-3"><input type="checkbox" class="switch-input" checked="true"> <span class="switch-label"></span> <span class="switch-handle"></span></label>
-                                	</td>
-                                    <td>8</td>
-                                    <td>
-                                    	<div data-toggle="modal" data-target="#smallmodal">
-                                            <a href="#">Edinburgh</a>
-                                        </div>
-                                    </td>
-                                    <td>패션</td>
-                                    <td>2019-11-04</td>
-                                    <td><span class="badge" style="background:gray">Y</span></td>
+                                    <td>${n.content }</td>
+                                    <td>${loginUser.email }</td>
+                                    <td>${n.enrollDate }</td>
                                 </tr>
                             </tbody>
+                            </c:forEach>
+                            </c:if>
                         </table>
                         
+                        <br>
                         <div class="row">
                          <div class="col-sm-4" style="margin-left:10px;">
                          	Showing 1 to 10 of 12 entries	
@@ -167,7 +126,7 @@
                          		</ul>
                          	</div>
                          </div>
-                        </div>
+                       </div>
                         
                     </div> <!-- /.table-stats -->
                 </div>

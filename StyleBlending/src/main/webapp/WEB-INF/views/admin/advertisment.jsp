@@ -242,14 +242,6 @@
                              
 							</div>
                       </div>
-                  
-                
-                
-             	<button type="button" class="btn btn-secondary btn-sm" onclick="location.href='aInsertAdView.do';">
-	                        		광고등록
-	            </button>
-               
-
                 </div>
             </div><!-- .animated -->
         </div><!-- .content -->
