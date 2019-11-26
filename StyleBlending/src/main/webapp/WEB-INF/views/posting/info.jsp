@@ -264,7 +264,7 @@
 						<!-- 이미지 -->
 						<div style="width: 25%; height: 25%; border-radius: 50%;">
 							<img style="width: 80%; height: 80%; border-radius: 50%;"
-								src="${ pageContext.servletContext.contextPath }/resources/upload/member/${p.profileImg}"
+								src="http://placehold.it/60x60" 
 								<%-- src="${ pageContext.servletContext.contextPath }/resources/upload/member/${p.renameImg}" --%>>
 						</div>
 						<!-- 정보 -->
@@ -820,8 +820,7 @@
 						
 						// 반복문을 통해서 한 행씩 추가될 수 있도록
 						$.each(data, function(index, value){ // value == data[index]
-							
-						
+
 							$replyForm = $("#replyForm");
 							//리플하나의 큰div
 							// 댓글일때
@@ -830,7 +829,7 @@
 							$replyForm_div_2 = $("<div class='media mb-4 replyForm_div_2'></div>");
 							
 							$replyForm_imgDiv = $("<div class='replyForm_imgDiv'></div>");	
-							$img = $("<img class='replyForm_img'>").attr("src",'/styleblending/resources/upload/member/'+value.profileImg);
+							$img = $("<img class='replyForm_img'>").attr("src",'http://placehold.it/50x50');
 							
 							$replyForm_contentDiv = $("<div class='replyForm_contentDiv'></div>");
 							$nickname = $("<h5 class='mt-0 replyForm_nickname'></h5>").text(value.nickName);

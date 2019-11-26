@@ -154,17 +154,13 @@
 					// console.log(data[index]);
 					var num =[];
 					for(var i in data){
-						/* num.push(data[0].month1);
-						num.push(data[1].month2);
-						num.push(data[2].month3);
-						num.push(data[3].month4);
-						num.push(data[4].month5);
-						num.push(data[5].month6); */
+						num.push(data.month1);
+						num.push(data.month2);
+						num.push(data.month3);
+						num.push(data.month4);
+						num.push(data.month5);
+						num.push(data.month6);
 					}
-					console.log(data);
-					$.each(data,function(index, value){
-						
-					
 					 
 				    var ctx = document.getElementById( "sales-chart" );
 				    ctx.height = 500;
@@ -176,7 +172,7 @@
 				            defaultFontFamily: 'Montserrat',
 				            datasets: [ {
 				                label: "가입자수",
-				                data: data[1].month1,
+				                data: num,
 				                backgroundColor: 'transparent',
 				                borderColor: 'rgba(220,53,69,0.75)',
 				                borderWidth: 3,
@@ -248,8 +244,7 @@
 				        }
 				    } );
 					
-				    
-					});
+					
 		
 				
 			 },error:function(){
