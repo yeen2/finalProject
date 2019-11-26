@@ -291,11 +291,13 @@ public class AdminController {
 	}
 	
 	@RequestMapping("aNotice.do")
-	public String notice() {
+	public ModelAndView notice(ModelAndView mv) {
 		
 		ArrayList<Notice> list = aService.selectNoticeList();
 		
-		return "admin/notice";
+		mv.addObject("list", list).setViewName("admin/notice");
+		
+		return mv;
 	}
 	
 	
