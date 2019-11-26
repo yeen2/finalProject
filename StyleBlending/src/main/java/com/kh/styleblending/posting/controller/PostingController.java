@@ -358,6 +358,30 @@ public class PostingController {
 		}
 	}
 	
+	@ResponseBody
+	@RequestMapping("pReReplyDelete.do")
+	public String deleteReReply(int prno) {
+
+		int result = pService.deleteReReply(prno);
+		if(result > 0 ) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping("pReReplyUpdate.do")
+	public String updateReReply(int prno, String content) {
+		
+		int result = pService.updateReReply(prno, content);
+		if(result > 0 ) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
+	
 	
 	
 	

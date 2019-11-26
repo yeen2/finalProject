@@ -100,6 +100,17 @@ public class PostingDao {
 		return sqlSession.update("postingMapper.updateReply", map);
 	}
 	
+	public int deleteReReply(int prno) {
+		return sqlSession.update("postingMapper.deleteReReply", prno);
+	}
+	
+	public int updateReReply(int prno, String content) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("prno", prno);
+		map.put("content", content);
+		return sqlSession.update("postingMapper.updateReReply", map);
+	}
+	
 	//검색
 	public List<Posting> selectSearchPosting_brand(String keyword, int mno){
 		HashMap<String, Object> map = new HashMap<>();

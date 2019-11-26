@@ -170,6 +170,18 @@
 		where pr_no=#{prno}
 	</update>
 	
+	<update id="deleteReReply">
+		update p_reply
+		set isdelete='Y'
+		where pr_no=#{prno}
+	</update>
+	
+	<update id="updateReReply" parameterType="HashMap">
+		update p_reply
+		set content=#{content}
+		where pr_no=#{prno}
+	</update>
+	
 	<!-- 검색  -->
 	<select id="selectSearchPosting_brand" parameterType="HashMap" resultMap="postingOneResultSet">
 		select p_no, p.m_no, p.original_img, p.rename_img, img_path, content, hashtag, gender, p.location,
