@@ -26,6 +26,8 @@
 	#abc i{line-height:30px; margin-right:5px;}
 	#imgClick:hover{cursor:pointer;}
 	#scrollTop1:hover{cursor:pointer;}
+	.fanImg:hover{cursor:pointer;}
+	.fanNickName:hover{cursor:pointer;}
 </style>
 </head>
 <body class="profile" style="margin-bottom: 20px !important;">
@@ -237,6 +239,7 @@
 			/* selectFanCheckTab(); */
 		});
 		
+		
 		var countP = 0;
 		var countL = 0;
 		var countFan = 0;
@@ -268,9 +271,9 @@
 								$("#pBtn").css("display", "none");
 							}
 							var $copy1 = $("<div>").attr({"class":"col-12 col-md-4", "style":"position:relative;"});
-							$copy1.append($("<div>").attr({"value":"abcddd","class":"square imgP", "style":"background-image: url(" + "'resources/assets/img/" + list[i].renameImg + "');"}));
+							$copy1.append($("<div>").attr({"class":"square imgP", "style":"background-image: url(" + "'resources/assets/img/" + list[i].renameImg + "');"}));
 							var $copy2 = 
-								"<div class='square imgJ' style='position:absolute; width:92%; bottom:0; opacity:0; background:rgba(0,0,0,0.6);'>"
+								"<div class='square imgJ' value='" + list[i].pno + "' style='position:absolute; width:92%; bottom:0; opacity:0; background:rgba(0,0,0,0.6);'>"
 								+ "<div style='margin-left:48px; margin-top:135px; font-size:22px; color:white; position:relative;'>"
 								+ "<div style='float:left; left:40px; position:absolute;'><i class='fas fa-heart'></i></div>"
 								+ "<div style='float:left; left:70px; position:absolute;'>" + list[i].likeCount + "</div>"
@@ -323,9 +326,9 @@
 								$("#lBtn").css("display", "none");
 							}
 							var $copy1 = $("<div>").attr({"class":"col-12 col-md-4", "style":"position:relative;"});
-							$copy1.append($("<div>").attr({"value":"abcddd","class":"square imgP", "style":"background-image: url(" + "'resources/assets/img/" + list[i].renameImg + "');"}));
+							$copy1.append($("<div>").attr({"class":"square imgP", "style":"background-image: url(" + "'resources/assets/img/" + list[i].renameImg + "');"}));
 							var $copy2 = 
-								"<div class='square imgJ' style='position:absolute; width:92%; bottom:0; opacity:0; background:rgba(0,0,0,0.6);'>"
+								"<div class='square imgJ' value='" + list[i].pno + "' style='position:absolute; width:92%; bottom:0; opacity:0; background:rgba(0,0,0,0.6);'>"
 								+ "<div style='margin-left:48px; margin-top:135px; font-size:22px; color:white; position:relative;'>"
 								+ "<div style='float:left; left:40px; position:absolute;'><i class='fas fa-heart'></i></div>"
 								+ "<div style='float:left; left:70px; position:absolute;'>" + list[i].likeCount + "</div>"
@@ -356,6 +359,7 @@
 				data:{mno:${m.mno}, loginMno:$("#loginMno").val()},
 				dataType:"json",
 				success:function(list){
+					console.log(list[0].mno);
 					if(list.length == 0){
 						$("#fanEmpty").html("");
 						
@@ -375,15 +379,16 @@
 							if(i == list.length-1){
 								$("#fBtn").css("display", "none");
 							}
+							
 							if(list[i].mno == $("#loginMno").val()){
 								var $fan1 = "<div style='height:60px;'>"
 									+"<input type='hidden' class='fanCheckClass' value='" + list[i].fanCheck + "'>"
 									+"<div style='float:left;'>"
-									+"<img src='resources/assets/img/lorde.png' alt='Raised circle image'"
-									+"class='img-fluid rounded-circle shadow-lg' style='width: 50px;'>"
+									+"<img src='resources/assets/img/lorde.png' value='" + list[i].mno + "' alt='Raised circle image'"
+									+"class='img-fluid rounded-circle shadow-lg fanImg' style='width: 50px;'>"
 									+"</div>"
 									+"<div style='float:left; margin-left:15px;'>"
-									+"<div style='text-align:left;'>" + list[i].nickName + "</div>"
+									+"<div class='fanNickName' value='" + list[i].mno + "' style='text-align:left;'>" + list[i].nickName + "</div>"
 									+"<div id='abc' style='text-align:left;'>"
 									+"<i class='fas fa-clipboard-list'></i><div>" + list[i].posCount + "</div>"
 									+"<i class='fas fa-heart'></i><div>" + list[i].likeCount + "</div>"
@@ -404,11 +409,11 @@
 								var $fan1 = "<div style='height:60px;'>"
 									+"<input type='hidden' class='fanCheckClass' value='" + list[i].fanCheck + "'>"
 									+"<div style='float:left;'>"
-									+"<img src='resources/assets/img/lorde.png' alt='Raised circle image'"
-									+"class='img-fluid rounded-circle shadow-lg' style='width: 50px;'>"
+									+"<img src='resources/assets/img/lorde.png' value='" + list[i].mno + "' alt='Raised circle image'"
+									+"class='img-fluid rounded-circle shadow-lg fanImg' style='width: 50px;'>"
 									+"</div>"
 									+"<div style='float:left; margin-left:15px;'>"
-									+"<div style='text-align:left;'>" + list[i].nickName + "</div>"
+									+"<div class='fanNickName' value='" + list[i].mno + "' style='text-align:left;'>" + list[i].nickName + "</div>"
 									+"<div id='abc' style='text-align:left;'>"
 									+"<i class='fas fa-clipboard-list'></i><div>" + list[i].posCount + "</div>"
 									+"<i class='fas fa-heart'></i><div>" + list[i].likeCount + "</div>"
@@ -429,11 +434,11 @@
 								var $fan1 = "<div style='height:60px;'>"
 									+"<input type='hidden' class='fanCheckClass' value='" + list[i].fanCheck + "'>"
 									+"<div style='float:left;'>"
-									+"<img src='resources/assets/img/lorde.png' alt='Raised circle image'"
-									+"class='img-fluid rounded-circle shadow-lg' style='width: 50px;'>"
+									+"<img src='resources/assets/img/lorde.png' value='" + list[i].mno + "' alt='Raised circle image'"
+									+"class='img-fluid rounded-circle shadow-lg fanImg' style='width: 50px;'>"
 									+"</div>"
 									+"<div style='float:left; margin-left:15px;'>"
-									+"<div style='text-align:left;'>" + list[i].nickName + "</div>"
+									+"<div class='fanNickName' value='" + list[i].mno + "' style='text-align:left;'>" + list[i].nickName + "</div>"
 									+"<div id='abc' style='text-align:left;'>"
 									+"<i class='fas fa-clipboard-list'></i><div>" + list[i].posCount + "</div>"
 									+"<i class='fas fa-heart'></i><div>" + list[i].likeCount + "</div>"
@@ -496,11 +501,11 @@
 								var $fan1 = "<div style='height:60px;'>"
 									+"<input type='hidden' class='fanCheckCount' value='" + list[i].fanCheck + "'>"
 									+"<div style='float:left;'>"
-									+"<img src='resources/assets/img/lorde.png' alt='Raised circle image'"
-									+"class='img-fluid rounded-circle shadow-lg' style='width: 50px;'>"
+									+"<img src='resources/assets/img/lorde.png' value='" + list[i].mno + "' alt='Raised circle image'"
+									+"class='img-fluid rounded-circle shadow-lg fanImg' style='width: 50px;'>"
 									+"</div>"
 									+"<div style='float:left; margin-left:15px;'>"
-									+"<div style='text-align:left;'>" + list[i].nickName + "</div>"
+									+"<div class='fanNickName' value='" + list[i].mno + "' style='text-align:left;'>" + list[i].nickName + "</div>"
 									+"<div id='abc' style='text-align:left;'>"
 									+"<i class='fas fa-clipboard-list'></i><div>" + list[i].posCount + "</div>"
 									+"<i class='fas fa-heart'></i><div>" + list[i].likeCount + "</div>"
@@ -519,11 +524,11 @@
 								var $fan1 = "<div style='height:60px;'>"
 									+"<input type='hidden' class='fanCheckCount' value='" + list[i].fanCheck + "'>"
 									+"<div style='float:left;'>"
-									+"<img src='resources/assets/img/lorde.png' alt='Raised circle image'"
-									+"class='img-fluid rounded-circle shadow-lg' style='width: 50px;'>"
+									+"<img src='resources/assets/img/lorde.png' value='" + list[i].mno + "' alt='Raised circle image'"
+									+"class='img-fluid rounded-circle shadow-lg fanImg' style='width: 50px;'>"
 									+"</div>"
 									+"<div style='float:left; margin-left:15px;'>"
-									+"<div style='text-align:left;'>" + list[i].nickName + "</div>"
+									+"<div class='fanNickName' value='" + list[i].mno + "' style='text-align:left;'>" + list[i].nickName + "</div>"
 									+"<div id='abc' style='text-align:left;'>"
 									+"<i class='fas fa-clipboard-list'></i><div>" + list[i].posCount + "</div>"
 									+"<i class='fas fa-heart'></i><div>" + list[i].likeCount + "</div>"
@@ -542,11 +547,11 @@
 								var $fan1 = "<div style='height:60px;'>"
 									+"<input type='hidden' class='fanCheckCount' value='" + list[i].fanCheck + "'>"
 									+"<div style='float:left;'>"
-									+"<img src='resources/assets/img/lorde.png' alt='Raised circle image'"
-									+"class='img-fluid rounded-circle shadow-lg' style='width: 50px;'>"
+									+"<img src='resources/assets/img/lorde.png' value='" + list[i].mno + "' alt='Raised circle image'"
+									+"class='img-fluid rounded-circle shadow-lg fanImg' style='width: 50px;'>"
 									+"</div>"
 									+"<div style='float:left; margin-left:15px;'>"
-									+"<div style='text-align:left;'>" + list[i].nickName + "</div>"
+									+"<div class='fanNickName' value='" + list[i].mno + "' style='text-align:left;'>" + list[i].nickName + "</div>"
 									+"<div id='abc' style='text-align:left;'>"
 									+"<i class='fas fa-clipboard-list'></i><div>" + list[i].posCount + "</div>"
 									+"<i class='fas fa-heart'></i><div>" + list[i].likeCount + "</div>"
@@ -680,6 +685,14 @@
 					if(result == 1){
 						$("#fanA").hide();
 						$("#fanB").show();
+						/* var data={
+								id:'${loginUser.nickName}',
+								msg:'yy',
+								fdh:'yuftudtu',
+						}
+						console.log(data.stringify())
+						sock.send(JSON.stringify(data)) */
+						
 					}else{
 						console.log("실패");
 					}
@@ -758,6 +771,22 @@
 		});
 		$(document).on("mouseleave", ".imgJ", function(){
 			$(this).css("opacity", "0");
+		});
+		
+		// 포스팅 클릭 시 포스팅 상세페이지로 이동
+		$(document).on("click", ".imgJ", function(){
+			var postingNo = $(this).attr("value");
+			location.href="pInfo.do?id=" + postingNo;
+		});
+		
+		// 팬 이미지 or 팬 닉네임 클릭 시 해당 멤버의 프로필 페이지로 이동
+		$(document).on("click", ".fanImg", function(){
+			var postingMno1 = $(this).attr("value");
+			location.href="mpViewProfile.do?mno=" + postingMno1;
+		});
+		$(document).on("click", ".fanNickName", function(){
+			var postingMno2 = $(this).attr("value");
+			location.href="mpViewProfile.do?mno=" + postingMno2;
 		});
 			
 	</script>
