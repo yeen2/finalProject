@@ -124,8 +124,8 @@ public class AdminDao {
 		return sqlSession.update("adminMapper.updateEndAd");
 	}
 	
-	public ArrayList<Statistics> selectMemberCount() {
-		return (ArrayList)sqlSession.selectList("adminMapper.selectMemberCount");
+	public Statistics selectMemberCount() {
+		return sqlSession.selectOne("adminMapper.selectMemberCount");
 	}
 	
 	public ArrayList<Notice> selectNoticeList(){

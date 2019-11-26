@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 
 
-	<footer class="footer-1 bg-light text-dark">
+	<footer class="footer-1 bg-light text-dark" style="margin-top: 100px;">
 		<div class="container">
 			<div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
 				<div class="links">

@@ -95,10 +95,26 @@
 			 url:"aChart.do",
 			 dataType:"json",
 			 success:function(data){
+<<<<<<< HEAD
 				
 					console.log(data[0]);
 					console.log(data[1]);
 					
+=======
+				// alert(data);
+			
+					// console.log(data[index]);
+					var num =[];
+					for(var i in data){
+						num.push(data.month1);
+						num.push(data.month2);
+						num.push(data.month3);
+						num.push(data.month4);
+						num.push(data.month5);
+						num.push(data.month6);
+					}
+					 
+>>>>>>> branch 'dev' of https://github.com/yeen2/finalProject.git
 				    var ctx = document.getElementById( "sales-chart" );
 				    ctx.height = 500;
 				    var myChart = new Chart( ctx, {
@@ -181,6 +197,11 @@
 				        }
 				    } );
 					
+<<<<<<< HEAD
+=======
+					
+		
+>>>>>>> branch 'dev' of https://github.com/yeen2/finalProject.git
 				
 			 },error:function(){
 				 console.log("ajax통신 실패");
