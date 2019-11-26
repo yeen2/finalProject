@@ -68,7 +68,7 @@
 						
 						<!-- 프로필 관리 버튼 -->
 						<c:if test="${ !empty loginUser && loginUser.mno == m.mno }">
-							<button class="btn btn-info btn-pill" style="margin-left:500px;"onclick="location.href='mpUpdatePage.do';">
+							<button class="btn btn-info btn-pill" style="margin-left:500px;"onclick="location.href='mpProfileUpdate.do';">
 							    <i class="fa fa-edit mr-1"></i>
 						    	프로필 관리
 							</button>

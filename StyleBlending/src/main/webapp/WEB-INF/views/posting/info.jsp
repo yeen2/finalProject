@@ -6,6 +6,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style type="text/css">
+	.card {
+		box-shadow: none !important;
+	}
 	.replyForm_div_2 { 
 		margin-left: 50px;
 	}
@@ -262,7 +265,7 @@
 						<div style="width: 25%; height: 25%; border-radius: 50%;">
 							<img style="width: 80%; height: 80%; border-radius: 50%;"
 								src="http://placehold.it/60x60" 
-								<%-- src="${ pageContext.servletContext.contextPath }/resources/upload/member/${p.rename_img}" --%>>
+								<%-- src="${ pageContext.servletContext.contextPath }/resources/upload/member/${p.renameImg}" --%>>
 						</div>
 						<!-- 정보 -->
 						<div style="width: 75%; height: 75%;">
@@ -302,6 +305,8 @@
 					</div>
 				</div>
 				
+				<hr>
+				
 				<!-- 2. 코디 정보 -->
 				<div class="card my-4">
 					<h5 class="card-header">Clothes stylist</h5>
@@ -329,6 +334,8 @@
 						
 					</div>
 				</div>
+				
+				<hr>
 				
 				<!-- 3. 촬영위치(지도api) -->
 				<div class="card my-4">
@@ -377,6 +384,8 @@
 					</div>
 				</div>
  -->
+ 				<hr>
+ 				
 				<!-- Side Widget -->
 				<div class="card my-4">
 					<h5 class="card-header">Spotlight</h5>

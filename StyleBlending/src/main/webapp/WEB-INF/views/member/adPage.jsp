@@ -28,13 +28,13 @@
 			<!-- 메뉴바 -->
 			<ul class="nav nav-primary nav-tabs mt-3 d-flex flex-column flex-md-row">
 				<li class="nav-item">
-					<a class="nav-link active" data-toggle="tab" href="#updateProfile"> 
+					<a class="nav-link" data-toggle="tab" href="#updateProfile" id="updateProfileBtn"> 
 					<i class="fa fa-edit"></i>
 						프로필 수정
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="tab" href="#ad" id="adBtn"> 
+					<a class="nav-link active" data-toggle="tab" href="#ad" id="adBtn"> 
 					<i class="fa fa-ad"></i>
 						광고 관리
 					</a>
@@ -56,40 +56,120 @@
 		
 
 		<div class="profile-tabs tab-content">
-			<!-- 프로필 수정 탭 -->
-			<div class="tab-pane fade show active" id="updateProfile">
-				<div class="col-12 col-md-5" style="margin-left:auto; margin-right:auto;">
-					<div class="register-form" id="updateForm">
-					
-						<form action="mpUpdatePf.do" method="post">
-							<input type="hidden" name="mno" value="${ loginUser.mno }">
-							<div class="form-group">
-								<label for="email">Email address</label>
-								<input type="email" class="form-control" id="email" name="email"
-									aria-describedby="emailHelp" placeholder="${ loginUser.email }" disabled>
-							</div>
-							<div class="form-group">
-								<label for="nickname">Nickname</label>
-								<input type="text" class="form-control" id="nickName" name="nickName"
-									aria-describedby="nicknameHelp" value="${ loginUser.nickName }">
-								<small id="nicknameHelp" class="form-text text-danger">이미 사용중인 닉네임입니다</small>
-							</div>
-							<div class="form-group">
-								<label for="introduce">Introduce</label>
-								<textarea cols="52" rows="5" name="profile" style="resize:none;">${ loginUser.profile }</textarea>
-							</div>
-							<div class="form-group" style="margin-bottom:50px;">
-								<label for="userPwd2">Location</label>
-								<input type="text" class="form-control"
-									id="location" name="location" placeholder="${ loginUser.location }">
-							</div>
-							
-							<button type="submit" class="btn btn-block btn-dark" style="height:50px;">수정</button>
-						</form>
-		
-					</div>
-				</div>
-
+			
+			<!-- 내 광고 리스트 탭 -->
+			<div class="tab-pane fade show active" id="ad">
+				<div class="form-group">
+	              <div class="input-group">
+		              <div style="margin-left:auto;">
+		              	<button class="btn btn-info" type="button">광고 등록 신청</button>
+		              </div>
+	              </div>
+	            </div>
+	            <br>
+				<table class="table table-hover" id="listArea" style="text-align:center; table-layout:fixed;">
+				  <thead>
+				    <tr>
+				      <th scope="col">NO.</th>
+				      <th scope="col">업체명</th>
+				      <th scope="col">신청일자</th>
+				      <th scope="col">등록일자</th>
+				      <th scope="col">등록종료일자</th>
+				      <th scope="col">등록여부</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				  	<c:forEach items="${ list }" var="ad">
+				  		
+				  		<c:if test="${ empty list }">
+				  			<tr>
+				  				<td scope="col" colspan="6">내 광고가 없습니다.</td>
+				  			</tr>
+				  		</c:if>
+				  		<tr>
+					  		<td scope="col">${ ad.adno }</td>
+					  		<td scope="col">${ ad.name }</td>
+					  		<td scope="col">${ ad.enrollDate }</td>
+					  		<td scope="col">${ ad.startDate }</td>
+					  		<td scope="col">${ ad.endDate }</td>
+					  		<td scope="col">
+						  		<c:if test="${ ad.status == 1 }">
+						  		승인 대기
+						  		</c:if>
+						  		<c:if test="${ ad.status == 2 }">
+						  		등록중
+						  		</c:if>
+						  		<c:if test="${ ad.status == 3 }">
+						  		등록 종료
+						  		</c:if>
+					  		</td>
+				  		</tr>
+				  	</c:forEach>
+				  	
+				   </tbody>
+				</table>
+				
+				<!-- 페이징 처리 -->
+			    <ul class="pagination justify-content-center">
+			    	
+			    	<!-- 맨 처음으로 -->
+			    	<c:if test="${ pi.currentPage == 1 }">
+			    		<li class="page-item disabled"><a class="page-link" href="#">&lt;&lt;</a></li>
+			    	</c:if>
+			    	<c:if test="${ pi.currentPage != 1 }">
+			    		<c:url value="mpSAdList.do" var="start">
+			    			<c:param name="currentPage" value="${ pi.startPage }"/>
+			    		</c:url>
+			    		<li class="page-item"><a class="page-link" href="${ start }">&lt;&lt;</a></li>
+			    	</c:if>
+			    	
+			    	<!-- 이전으로 -->
+			    	<c:if test="${ pi.currentPage == 1 }">
+			    		<li class="page-item disabled"><a class="page-link" href="#">&lt;</a></li>
+			    	</c:if>
+			    	<c:if test="${ pi.currentPage != 1 }">
+			    		<c:url value="mpSAdList.do" var="before">
+			    			<c:param name="currentPage" value="${ pi.currentPage - 1 }"/>
+			    		</c:url>
+			    		<li class="page-item"><a class="page-link" href="${ before }">&lt;</a></li>
+			    	</c:if>
+			    	
+			    	<!-- 페이지 -->
+	           		<c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
+	           			<c:if test="${ p == pi.currentPage }">
+	           				<li class="page-item active"><a class="page-link">${ p }</a></li>
+	           			</c:if>
+	           			<c:if test="${ p != pi.currentPage }">
+	           				<c:url value="mpSAdList.do" var="page">
+	           					<c:param name="currentPage" value="${ p }"/>
+	           				</c:url>
+	           				<li class="page-item"><a class="page-link" href="${ page }">${ p }</a></li>
+	           			</c:if>
+	           		</c:forEach>
+	           		
+	           		<!-- 다음으로 -->
+	           		<c:if test="${ pi.currentPage == pi.maxPage }">
+	           			<li class="page-item disabled"><a class="page-link" href="#">&gt;</a></li>
+	           		</c:if>
+	           		<c:if test="${ pi.currentPage != pi.maxPage }">
+	           			<c:url value="mpSAdList.do" var="next">
+	           				<c:param name="currentPage" value="${ pi.currentPage + 1 }"/>
+	           			</c:url>
+	           			<li class="page-item"><a class="page-link" href="${ next }">&gt;</a></li>
+	           		</c:if>
+	           		
+	           		<!-- 맨 마지막으로 -->
+	           		<c:if test="${ pi.currentPage == pi.maxPage }">
+	           			<li class="page-item disabled"><a class="page-link" href="#">&gt;&gt;</a></li>
+	           		</c:if>
+	           		<c:if test="${ pi.currentPage != pi.maxPage }">
+	           			<c:url value="mpSAdList.do" var="end">
+	           				<c:param name="currentPage" value="${ pi.maxPage }"/>
+	           			</c:url>
+	           			<li class="page-item"><a class="page-link" href="${ end }">&gt;&gt;</a></li>
+	           		</c:if>
+	           		
+                </ul>
 			</div>
 			
 			
@@ -247,10 +327,11 @@
 		});
 		
 		
-		<%-- 내 광고 리스트 호출 --%>
-		$("#adBtn").click(function(){
-			location.href="mpSAdList.do";
+		<%-- 내 프로필 상세정보 호출 --%>
+		$("#updateProfileBtn").click(function(){
+			location.href="mpProfileUpdate.do";
 		});
+		
 	</script>
 
 

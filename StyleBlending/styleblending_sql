@@ -970,6 +970,34 @@ insert into category values(45,'SNACK','기타.png');
 insert into category values(46,'ETC','기타.png');
 insert into category values(47,'BIKE','기타.png');
 
+-- 결제 더미
+insert into pay values(seq_pay.nextval, 1, 1000, sysdate, default);
+insert into pay values(seq_pay.nextval, 1, 1000, sysdate, default);
+insert into pay values(seq_pay.nextval, 1, 1000, sysdate, default);
+insert into pay values(seq_pay.nextval, 1, 1000, sysdate, default);
+insert into pay values(seq_pay.nextval, 1, 1000, sysdate, default);
+insert into pay values(seq_pay.nextval, 1, 1000, sysdate, default);
+insert into pay values(seq_pay.nextval, 1, 1000, sysdate, default);
+insert into pay values(seq_pay.nextval, 1, 1000, sysdate, default);
+insert into pay values(seq_pay.nextval, 1, 1000, sysdate, default);
+insert into pay values(seq_pay.nextval, 1, 1000, sysdate, default);
+insert into pay values(seq_pay.nextval, 1, 1000, sysdate, default);
+insert into pay values(seq_pay.nextval, 1, 1000, sysdate, default);
+
+-- 광고 더미
+insert into ad values(seq_ad.nextval, 1, 1, '광고업체1', 'url', 'profile1.jpg', 'profile1.jpg', 'path', sysdate, default, default, default);
+insert into ad values(seq_ad.nextval, 1, 2, '광고업체2', 'url', 'profile1.jpg', 'profile1.jpg', 'path', sysdate, default, default, default);
+insert into ad values(seq_ad.nextval, 1, 3, '광고업체3', 'url', 'profile1.jpg', 'profile1.jpg', 'path', sysdate, default, default, default);
+insert into ad values(seq_ad.nextval, 1, 4, '광고업체4', 'url', 'profile1.jpg', 'profile1.jpg', 'path', sysdate, default, default, default);
+insert into ad values(seq_ad.nextval, 1, 5, '광고업체5', 'url', 'profile1.jpg', 'profile1.jpg', 'path', sysdate, default, default, default);
+insert into ad values(seq_ad.nextval, 1, 6, '광고업체6', 'url', 'profile1.jpg', 'profile1.jpg', 'path', sysdate, default, default, default);
+insert into ad values(seq_ad.nextval, 1, 7, '광고업체7', 'url', 'profile1.jpg', 'profile1.jpg', 'path', sysdate, default, default, default);
+insert into ad values(seq_ad.nextval, 1, 8, '광고업체8', 'url', 'profile1.jpg', 'profile1.jpg', 'path', sysdate, default, default, default);
+insert into ad values(seq_ad.nextval, 1, 9, '광고업체9', 'url', 'profile1.jpg', 'profile1.jpg', 'path', sysdate, default, default, default);
+insert into ad values(seq_ad.nextval, 1, 10, '광고업체10', 'url', 'profile1.jpg', 'profile1.jpg', 'path', sysdate, default, default, default);
+insert into ad values(seq_ad.nextval, 1, 11, '광고업체11', 'url', 'profile1.jpg', 'profile1.jpg', 'path', sysdate, default, default, default);
+insert into ad values(seq_ad.nextval, 1, 12, '광고업체12', 'url', 'profile1.jpg', 'profile1.jpg', 'path', sysdate, default, default, default);
+insert into ad values(seq_ad.nextval, 1, 13, '광고업체13', 'url', 'profile1.jpg', 'profile1.jpg', 'path', sysdate, default, default, default);
 
 commit;
 

@@ -192,7 +192,7 @@
                 (select count(*) from p_like where m_no=#{mno} and p_no=p.p_no) loginLike, 
                 (select count(*) from declare where m_no=#{mno} and b_no=p.p_no and type=1) loginDeclare, 
                 (select count(*) from p_reply where p_no=p.p_no and r_level=1) replyCount,
-                (select count(*) from fan where me_no=p.m_no and you_no=#{mno}) fanCheck 
+                (select count(*) from fan where me_no=p.m_no and you_no=#{mno}) fanCheck
 		from posting p
 		join member m on(p.m_no=m.m_no)
 		where hashtag like '%'||#{keyword}||'%'

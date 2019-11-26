@@ -67,11 +67,6 @@ public class MyPageController {
 		return mv;
 	}
 	
-	// 내 프로필관리 페이지 이동 메소드
-	@RequestMapping("mpUpdatePage.do")
-	public String memberUpdatePage() {
-		return "member/myPage";
-	}
 	
 	// 내 포스팅 리스트 호출 메소드
 	@ResponseBody
@@ -232,6 +227,11 @@ public class MyPageController {
 		return mv;
 	}
 	
+	@RequestMapping("mpProfileUpdate.do")
+	public String selectProfileUpdate() {
+		return "member/myPage";
+	}
+	
 	// 내 광고 리스트 호출 메소드
 	@RequestMapping(value="mpSAdList.do", produces="application/json; charset=UTF-8")
 	public ModelAndView selectAdList(HttpSession session, ModelAndView mv, @RequestParam(value="currentPage", defaultValue="1") int currentPage){
@@ -243,7 +243,7 @@ public class MyPageController {
 		
 		ArrayList<Ad> list = mpService.selectAdList(mno, pi);
 		
-		mv.addObject("pi", pi).addObject("list", list);
+		mv.addObject("pi", pi).addObject("list", list).setViewName("member/adPage");
 		
 		return mv;
 	}
@@ -392,6 +392,7 @@ public class MyPageController {
 	}
 	//-------------------------------------------------------------------------------------------
 	
+	// 알람 모두 읽음으로 표시 메소드
 	@ResponseBody
 	@RequestMapping("mpUpdateAlarm.do")
 	public int updateAlarm(int mno) {
@@ -403,4 +404,18 @@ public class MyPageController {
 			return -1;
 		}
 	}
+	
+	/*
+	@ResponseBody
+	@RequestMapping("mpUpdateAlarmOne")
+	public int updateAlarmOne(int alno) {
+		int result = mpService.updateAlarmOne(alno);
+		
+		if(result > 0) {
+			return 1;
+		}else {
+			return -1;
+		}
+	}
+	*/
 }
