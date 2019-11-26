@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<!-- 차트 보이게 cdn -->
+<!-- 차트 보이게 cdn x-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery.min.js"></script>
@@ -95,12 +95,10 @@
 			 url:"aChart.do",
 			 dataType:"json",
 			 success:function(data){
-<<<<<<< HEAD
 				
 					console.log(data[0]);
 					console.log(data[1]);
 					
-=======
 				// alert(data);
 			
 					// console.log(data[index]);
@@ -114,7 +112,6 @@
 						num.push(data.month6);
 					}
 					 
->>>>>>> branch 'dev' of https://github.com/yeen2/finalProject.git
 				    var ctx = document.getElementById( "sales-chart" );
 				    ctx.height = 500;
 				    var myChart = new Chart( ctx, {
@@ -197,11 +194,8 @@
 				        }
 				    } );
 					
-<<<<<<< HEAD
-=======
 					
 		
->>>>>>> branch 'dev' of https://github.com/yeen2/finalProject.git
 				
 			 },error:function(){
 				 console.log("ajax통신 실패");
