@@ -405,6 +405,18 @@ public class MyPageController {
 		}
 	}
 	
+	@ResponseBody
+	@RequestMapping("mpNickNameCheck.do")
+	public int nickNameCheck(Member m) {
+		int result = mpService.nickNameCheck(m);
+		
+		if(result > 0) {
+			return 1;
+		}else {
+			return -1;
+		}
+	}
+	
 	/*
 	@ResponseBody
 	@RequestMapping("mpUpdateAlarmOne")

@@ -71,5 +71,8 @@ public interface MyPageService {
 
 	// 알람 업데이트
 	int updateAlarm(int mno);
+	
+	// 닉네임 중복체크
+	int nickNameCheck(Member m);
 
 }

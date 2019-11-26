@@ -72,7 +72,8 @@
 								<label for="nickname">Nickname</label>
 								<input type="text" class="form-control" id="nickName" name="nickName"
 									aria-describedby="nicknameHelp" value="${ loginUser.nickName }">
-								<small id="nicknameHelp" class="form-text text-danger">이미 사용중인 닉네임입니다</small>
+								<small id="nickNameFail" class="form-text text-danger">이미 사용중인 닉네임입니다</small>
+								<small id="nickNameSuccess" class="form-text text-danger">사용 가능한 닉네임입니다</small>
 							</div>
 							<div class="form-group">
 								<label for="introduce">Introduce</label>
@@ -182,6 +183,28 @@
 	</div>
 	
 	<script>
+		<%-- 닉네임 중복체크 ajax --%>
+		/* var nickNameValue = $("#nickName").val();
+		$("#nickName").on("input", function(){
+			$.ajax({
+				url:"mpNickNameCheck.do",
+				type:"post",
+				data:{nickName:nickNameValue},
+				success:function(result){
+					if(result == 1){
+						$("#nickNameFail").hide();
+						$("#nickNameSuccess").show();
+					}else{
+						$("#nickNameFail").show();
+						$("#nickNameSuccess").hide();
+					}
+				},
+				error:function(){
+					console.log("ajax 통신 실패");
+				}
+			});
+		}); */
+		
 		<%-- 비밀번호 변경 유효성 검사 --%>
 		$("#pass").on("input", function(){
 			if($("#pass").val().length < 8){
