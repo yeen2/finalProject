@@ -120,7 +120,7 @@
 .addAlarmDate1{display:inline-block; width:25%; text-align:right;}
 .addAlarmCon1{padding:10px 10px 10px 10px;}
 .addAlarm1 p{font-size:15px;}
-#alarmDelete:hover{cursor:pointer; color:gray;};
+#alarmDelete:hover{cursor:pointer; color:gray;}
 
 </style>
 <script type="text/javascript">
@@ -839,7 +839,7 @@ function select(){
 		            	alarmCountNo = obj[i].alarmCount;
 		            	
 		            	if(obj[i].type == 1){
-		            		var $add = "<a class='dropdown-item' href='#'>"
+		            		var $add = "<a class='dropdown-item' href='mpViewProfile.do?mno=" + obj[i].bmno + "'>"
 			    				+ "<div class='addAlarm1'>"
 			    				+ "<div class='addAlarmImg1'>"
 			    				+ "<img src='resources/upload/member/" + obj[i].renameImg + "'>"
@@ -858,7 +858,7 @@ function select(){
 		    		
 		    				$("#contentPlus").append($add);
 		            	}else if(obj[i].type == 2){
-		            		var $add = "<a class='dropdown-item' href='#'>"
+		            		var $add = "<a class='dropdown-item' href='mpViewProfile.do?mno=" + obj[i].bmno + "'>"
 			    				+ "<div class='addAlarm1'>"
 			    				+ "<div class='addAlarmImg1'>"
 			    				+ "<img src='resources/upload/member/" + obj[i].renameImg + "'>"
@@ -877,7 +877,7 @@ function select(){
 		    		
 		    				$("#contentPlus").append($add);
 		            	}else{
-		            		var $add = "<a class='dropdown-item' href='#'>"
+		            		var $add = "<a class='dropdown-item' href='mpViewProfile.do?mno=" + obj[i].bmno + "'>"
 			    				+ "<div class='addAlarm1'>"
 			    				+ "<div class='addAlarmImg1'>"
 			    				+ "<img src='resources/upload/member/" + obj[i].renameImg + "'>"

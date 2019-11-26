@@ -76,6 +76,7 @@
 		<result property="enrollDate" column="enroll_date"/>
 		<result property="status" column="status"/>
 		<result property="type" column="type"/>
+		<result property="bmno" column="b_m_no"/>
 		
 		<result property="alarmCount" column="alarmCount"/>
 	</resultMap>
