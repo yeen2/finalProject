@@ -322,7 +322,7 @@ li {
                if(data == 'success'){
                   console.log("좋아요삭제 성공");
                    select(); 
-
+				   console.log('push');
                   
                }
             },
