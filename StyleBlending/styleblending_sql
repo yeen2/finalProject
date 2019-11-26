@@ -992,6 +992,7 @@ insert into pay values(seq_pay.nextval, 1, 1000, sysdate, default);
 insert into pay values(seq_pay.nextval, 1, 1000, sysdate, default);
 insert into pay values(seq_pay.nextval, 1, 1000, sysdate, default);
 insert into pay values(seq_pay.nextval, 1, 1000, sysdate, default);
+insert into pay values(seq_pay.nextval, 1, 1000, sysdate, default);
 
 -- 광고 더미
 insert into ad values(seq_ad.nextval, 1, 1, '광고업체1', 'url', 'profile1.jpg', 'profile1.jpg', 'path', sysdate, default, default, default);
