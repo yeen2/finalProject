@@ -284,7 +284,7 @@ public class AdminController {
 	public String statistics() {
 		
 		ArrayList<Statistics>  statistics = aService.selectMemberCount();
-		System.out.println(statistics);
+		//System.out.println(statistics);
 		
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		
