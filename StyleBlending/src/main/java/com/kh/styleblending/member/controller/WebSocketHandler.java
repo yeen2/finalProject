@@ -32,10 +32,8 @@ public class WebSocketHandler extends TextWebSocketHandler{
 		// 클라이언트가 서버로 메시지를 전송했을 때 실행되는 메서드
 		@Override
 		protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-			
 			int mno = Integer.parseInt(message.getPayload());
-			int alarmCount = sqlSession.selectOne("mypageMapper.selectAlarmCount", mno);
-		
+			
 			ArrayList<Alarm> list = (ArrayList)sqlSession.selectList("mypageMapper.selectAlarmList", mno);
 			
 			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
@@ -45,7 +43,6 @@ public class WebSocketHandler extends TextWebSocketHandler{
 				s.sendMessage(new TextMessage(alarmList));
 			}*/
 			session.sendMessage(new TextMessage(alarmList));
-			
 			
 		}
 

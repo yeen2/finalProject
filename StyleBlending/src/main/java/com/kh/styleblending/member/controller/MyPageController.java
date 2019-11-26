@@ -392,6 +392,7 @@ public class MyPageController {
 	}
 	//-------------------------------------------------------------------------------------------
 	
+	// 알람 모두 읽음으로 표시 메소드
 	@ResponseBody
 	@RequestMapping("mpUpdateAlarm.do")
 	public int updateAlarm(int mno) {
@@ -403,4 +404,18 @@ public class MyPageController {
 			return -1;
 		}
 	}
+	
+	/*
+	@ResponseBody
+	@RequestMapping("mpUpdateAlarmOne")
+	public int updateAlarmOne(int alno) {
+		int result = mpService.updateAlarmOne(alno);
+		
+		if(result > 0) {
+			return 1;
+		}else {
+			return -1;
+		}
+	}
+	*/
 }
