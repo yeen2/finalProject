@@ -141,7 +141,7 @@
 						<!-- 프로필 사진 -->
 						<div style="display: inline-block; width: 60px; height: 60px; border-radius: 50%; margin-right: 20px;">
 							<img style="width: 100%; height: 100%; border-radius: 50%; margin-bottom:35px;"
-									src="${ pageContext.servletContext.contextPath }/resources/upload/member/${p.renameImg}">
+									src="${ pageContext.servletContext.contextPath }/resources/upload/member/${p.profileImg}">
 						</div>
 						<!-- 상세정보 -->
 						<div style="display: inline-block; margin: auto; height: 50px; padding-top: 5px;">
