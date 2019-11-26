@@ -70,73 +70,19 @@
 									<div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
 								</div>
 							</div>
-							<h4 class="mb-3"><b>현황 통계</b></h4>
+							<h4 class="mb-3"><b>현황 통계 (게시글 / 가입자)</b></h4>
 							<canvas id="sales-chart" height="528" width="1057" class="chartjs-render-monitor" style="display: block; height: 352px; width: 705px;"></canvas>
 						</div>
 					</div>
 				</div>
-			      
-			    <!--   
-			      <div class="col-lg-6">
-			      	<div class="card" style="padding:0px 20px 0px 0px; width:900px;">
-			      		<div class="card-body" >
-			      			<h4 class="mb-3">사이트 방문자 성별 현황 그래프</h4>
-			      			 <div id="Line_Controls_Chart">
-			      			 	<h4 class="mb-3">라인 차트 생성할 영역</h4>
-     							
-          						<div id="lineChartArea" style="padding:0px 20px 0px 0px;"></div>
-          						<h4 class="mb-3">컨트롤바를 생성할 영역</h4>
-    							
-          						<div id="controlsArea" style="padding:0px 20px 0px 0px;"></div>
-        					</div> 
-			      		</div>
-			      	</div>
-			      </div>
-			       -->
-			      <!-- 
-			      <div class="col-lg-6">
-			      	<div class="card" >
-			      		<div class="card-body" >
-			      			<h4 class="mb-3">광고유입률</h4>
-							<div id="piechart_3d" ></div>
-			      		</div>
-			      	</div>
-			      </div> -->
       
       			</div>
       		</div>
       </div>
       
-      <script>
-
-
-
-      </script>
-      
-     <!--    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    	<script type="text/javascript">
-      google.charts.load("current", {packages:["corechart"]});
-      google.charts.setOnLoadCallback(drawChart);
-      
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['항목', '수치'],
-          ["1",'1']
-         
-        ]);
-
-        var options = {
-          title: '광고 유입률',
-          is3D: true,
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
-        chart.draw(data, options);
-      }
-    </script>
- -->
-	
-        <jsp:include page="footer.jsp" />
+   
+   
+    <jsp:include page="footer.jsp" />
 
     </div><!-- /#right-panel -->
     
@@ -149,6 +95,12 @@
 			 url:"aChart.do",
 			 dataType:"json",
 			 success:function(data){
+<<<<<<< HEAD
+				
+					console.log(data[0]);
+					console.log(data[1]);
+					
+=======
 				// alert(data);
 			
 					// console.log(data[index]);
@@ -162,6 +114,7 @@
 						num.push(data.month6);
 					}
 					 
+>>>>>>> branch 'dev' of https://github.com/yeen2/finalProject.git
 				    var ctx = document.getElementById( "sales-chart" );
 				    ctx.height = 500;
 				    var myChart = new Chart( ctx, {
@@ -171,8 +124,8 @@
 				            type: 'line',
 				            defaultFontFamily: 'Montserrat',
 				            datasets: [ {
-				                label: "가입자수",
-				                data: num,
+				                label: "게시글수",
+				                data: [data[0].month1,data[0].month2,data[0].month3,data[0].month4,data[0].month5,data[0].month6],
 				                backgroundColor: 'transparent',
 				                borderColor: 'rgba(220,53,69,0.75)',
 				                borderWidth: 3,
@@ -181,8 +134,8 @@
 				                pointBorderColor: 'transparent',
 				                pointBackgroundColor: 'rgba(220,53,69,0.75)',
 				                    }, {
-				                label: "게시글수",
-				                data: [ 0, 50, 40, 80, 35, 99, 80 ],
+				                label: "가입자수",
+				                data: [data[1].month1,data[1].month2,data[1].month3,data[1].month4,data[1].month5,data[1].month6],
 				                backgroundColor: 'transparent',
 				                borderColor: 'rgba(40,167,69,0.75)',
 				                borderWidth: 3,
@@ -244,224 +197,21 @@
 				        }
 				    } );
 					
+<<<<<<< HEAD
+=======
 					
 		
+>>>>>>> branch 'dev' of https://github.com/yeen2/finalProject.git
 				
 			 },error:function(){
 				 console.log("ajax통신 실패");
 			 }
 		  });  
   });
+ 
   
-  
-  /*
-  
-  $(function(){
-	  
-    var ctx = document.getElementById( "sales-chart" );
-    ctx.height = 500;
-    var myChart = new Chart( ctx, {
-        type: 'line',
-        data: {
-            labels: [ "06", "07", "08", "09", "10", "11", "19/12" ],
-            type: 'line',
-            defaultFontFamily: 'Montserrat',
-            datasets: [ {
-                label: "가입자수",
-                data: [ 
-                
-                ],
-                backgroundColor: 'transparent',
-                borderColor: 'rgba(220,53,69,0.75)',
-                borderWidth: 3,
-                pointStyle: 'circle',
-                pointRadius: 5,
-                pointBorderColor: 'transparent',
-                pointBackgroundColor: 'rgba(220,53,69,0.75)',
-                    }, {
-                label: "게시글수",
-                data: [ 0, 50, 40, 80, 35, 99, 80 ],
-                backgroundColor: 'transparent',
-                borderColor: 'rgba(40,167,69,0.75)',
-                borderWidth: 3,
-                pointStyle: 'circle',
-                pointRadius: 5,
-                pointBorderColor: 'transparent',
-                pointBackgroundColor: 'rgba(40,167,69,0.75)',
-                    } ]
-        },
-        options: {
-            responsive: true,
-
-            tooltips: {
-                mode: 'index',
-                titleFontSize: 12,
-                titleFontColor: '#000',
-                bodyFontColor: '#000',
-                backgroundColor: '#fff',
-                titleFontFamily: 'Montserrat',
-                bodyFontFamily: 'Montserrat',
-                cornerRadius: 3,
-                intersect: false,
-            },
-            legend: {
-                display: false,
-                labels: {
-                    usePointStyle: true,
-                    fontFamily: 'Montserrat',
-                },
-            },
-            scales: {
-                xAxes: [ {
-                    display: true,
-                    gridLines: {
-                        display: false,
-                        drawBorder: false
-                    },
-                    scaleLabel: {
-                        display: false,
-                        labelString: 'Month'
-                    }
-                        } ],
-                yAxes: [ {
-                    display: true,
-                    gridLines: {
-                        display: false,
-                        drawBorder: false
-                    },
-                    scaleLabel: {
-                        display: true,
-                        labelString: 'Value'
-                    }
-                        } ]
-            },
-            title: {
-                display: false,
-                text: 'Normal Legend'
-            }
-        }
-    } );
-  });
-  
-  */
     </script>
 	
-	 <!--  <script>
-	 
-	 
- 
-   var chartDrowFun = {
- 
-    chartDrow : function(){
-        var chartData = '';
- 
-        //날짜형식 변경하고 싶으시면 이 부분 수정하세요.
-        var chartDateformat     = 'yyyy년MM월dd일';
-        //라인차트의 라인 수
-        var chartLineCount    = 10;
-        //컨트롤러 바 차트의 라인 수
-        var controlLineCount    = 10;
- 
- 
-        function drawDashboard() {
- 
-          var data = new google.visualization.DataTable();
-          //그래프에 표시할 컬럼 추가
-          data.addColumn('datetime' , '날짜');
-          data.addColumn('number'   , '남성');
-          data.addColumn('number'   , '여성');
-          data.addColumn('number'   , '전체');
- 
-          //그래프에 표시할 데이터
-          var dataRow = [];
- 
-          for(var i = 0; i <= 29; i++){ //랜덤 데이터 생성
-            var total   = Math.floor(Math.random() * 300) + 1;
-            var man     = Math.floor(Math.random() * total) + 1;
-            var woman   = total - man;
-            
- 
-            dataRow = [new Date('2019', '10', i , '10'), man, woman , total];
-            data.addRow(dataRow);
-          } 
-          
-          
- 
-            var chart = new google.visualization.ChartWrapper({
-              chartType   : 'LineChart',
-              containerId : 'lineChartArea', //라인 차트 생성할 영역
-              options     : {
-                              isStacked   : 'percent',
-                              focusTarget : 'category',
-                              height          : 500,
-                              width              : '100%',
-                              legend          : { position: "top", textStyle: {fontSize: 13}},
-                              pointSize        : 5,
-                              tooltip          : {textStyle : {fontSize:12}, showColorCode : true,trigger: 'both'},
-                              hAxis              : {format: chartDateformat, gridlines:{count:chartLineCount,units: {
-                                                                  years : {format: ['yyyy년']},
-                                                                  months: {format: ['MM월']},
-                                                                  days  : {format: ['dd일']},
-                                                                  hours : {format: ['HH시']}}
-                                                                },textStyle: {fontSize:12}},
-                vAxis              : {minValue: 100,viewWindow:{min:0},gridlines:{count:-1},textStyle:{fontSize:12}},
-                animation        : {startup: true,duration: 1000,easing: 'in' },
-                annotations    : {pattern: chartDateformat,
-                                textStyle: {
-                                fontSize: 15,
-                                bold: true,
-                                italic: true,
-                                color: '#871b47',
-                                auraColor: '#d799ae',
-                                opacity: 0.8,
-                                pattern: chartDateformat
-                              }
-                            }
-              }
-            });
- 
-            var control = new google.visualization.ControlWrapper({
-              controlType: 'ChartRangeFilter',
-              containerId: 'controlsArea',  //control bar를 생성할 영역
-              options: {
-                  ui:{
-                        chartType: 'LineChart',
-                        chartOptions: {
-                        chartArea: {'width': '60%','height' : 80},
-                          hAxis: {'baselineColor': 'none', format: chartDateformat, textStyle: {fontSize:12},
-                            gridlines:{count:controlLineCount,units: {
-                                  years : {format: ['yyyy년']},
-                                  months: {format: ['MM월']},
-                                  days  : {format: ['dd일']},
-                                  hours : {format: ['HH시']}}
-                            }}
-                        }
-                  },
-                    filterColumnIndex: 0
-                }
-            });
- 
-            var date_formatter = new google.visualization.DateFormat({ pattern: chartDateformat});
-            date_formatter.format(data, 0);
- 
-            var dashboard = new google.visualization.Dashboard(document.getElementById('Line_Controls_Chart'));
-            window.addEventListener('resize', function() { dashboard.draw(data); }, false); //화면 크기에 따라 그래프 크기 변경
-            dashboard.bind([control], [chart]);
-            dashboard.draw(data);
- 
-        }
-          google.charts.setOnLoadCallback(drawDashboard);
- 
-      }
-    }
- 
-		$(document).ready(function(){
-		  google.charts.load('current', {'packages':['line','controls']});
-		  chartDrowFun.chartDrow(); //chartDrow() 실행
-		}); 
-  </script>
-	 -->
-	
-    
+
 </body>
 </html>
