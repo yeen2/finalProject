@@ -62,7 +62,7 @@
 				<div class="form-group">
 	              <div class="input-group">
 		              <div style="margin-left:auto;">
-		              	<button class="btn btn-info" type="button">광고 등록 신청</button>
+		              	<button class="btn btn-info" type="button" onclick="location.href='aInsertAdView.do';">광고 등록 신청</button>
 		              </div>
 	              </div>
 	            </div>

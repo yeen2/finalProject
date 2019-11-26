@@ -197,7 +197,7 @@
 				        	success:function(data){
 				        	// 마이페이지 광고리스트 페이지로이동
 				        	alert("광고가 정상적으로 신청되었습니다.");
-				       		location.href="aAdvertisment.do";
+				       		location.href="mpSAdList.do";
 				       
 				        	},error:function(){
 				        		console.log("ajax 통신 실패");
