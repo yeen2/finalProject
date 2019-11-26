@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +25,7 @@
 
 
 	<div class="writeOuter">
-		<h2>게시물 작성</h2>
+		<h2>게시물 수정</h2>
 		<br>
 
 		<form id="form1" name="form1" method="post" action="bupdate.do">
@@ -43,15 +44,15 @@
 			<div>
 				<h4>제목</h4>
 				<br> <input type="text" class="form-control" id="write-title"
-					name="title" placeholder="제목을 입력하세요"> <br> <br>
-
+					name="title" placeholder="제목을 입력하세요" value="${ b.title }"> <br> <br>
+				<input type="hidden" name="bno" value="${ b.bno }">
 			</div>
 			<br> <br>
 			<div class="write-inputArea" style="width: auto;">
 				<input type="hidden" name="mno" value="${ loginUser.mno }">
 				<h5>내용</h5>
 				
-				<textarea id="content" name="content" rows="3" cols="80" placeholder="내용을 입력하세요"></textarea>
+				<textarea id="content" name="content" rows="3" cols="80" placeholder="내용을 입력하세요">${ b.content }</textarea>
 				<br> <br>
 
 			</div>

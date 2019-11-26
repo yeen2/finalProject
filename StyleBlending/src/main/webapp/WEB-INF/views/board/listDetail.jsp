@@ -40,7 +40,6 @@
 	<div class="detailOuter">
 
 		<div class="detail content">
-			<form action="" method="GET">
 				<table id="titleArea">
 					<tr>
 						<td>자유게시판</td>
@@ -52,14 +51,12 @@
 						<th><h4>${ b.title }</h4></th>
 					</tr>
 					<tr>
-						<td colspan="2">작성자 ${ b.mno }</td>
+						<td colspan="1">작성자 &nbsp;${ b.nickName }</td>
 						<!-- 작성자 -->
-						<td>조회수 ${ b.count }</td>
+						<td>조회수 &nbsp;${ b.count }</td>
 						<!-- 조회수 -->
-						<td>추천수 ${ b.likeCount }</td>
+						<td>추천수 &nbsp;${ b.likeCount }</td>
 						<!-- 추천수 -->
-						<td>댓글수 ${ r.brno }</td>
-						<!-- 댓글 -->
 					</tr>
 				</table>
 				<hr>
@@ -79,7 +76,7 @@
 					<c:if test="${ loginUser.mno eq b.mno }">
 						<button type="button" class="btn btn-light detail" id="btnUpdate"
 							style="float: right;"
-							onclick="location.href='bupdate.do?bno=${ b.bno }';">수정</button>
+							onclick="location.href='bupateView.do?bno=${ b.bno }';">수정</button>
 						<button type="button" class="btn btn-light detail" id="btnDelete"
 							style="float: right; margin-right: 5px;"
 							onclick="location.href='bdelete.do?bno=${ b.bno }';">삭제</button>
@@ -88,7 +85,6 @@
 						style="float: right; margin-right: 5px;"
 						onclick="location.href='blist.do';">목록으로</button>
 				</div>
-			</form>
 		</div>
 		<br><br>
 		<hr>
@@ -148,8 +144,14 @@
 						<a href="" style="text-decoration: none; display: none;" 
 						    id="a-delete">삭제</a> -->
 					</div>
-					
-					<!-- the 신고 modal -->
+				</div>
+			</form>
+		</div>
+	</div>
+	<br>
+	<br>
+	
+	<!-- the 신고 modal -->
 					<div aria-labelledby="eexampleModal" class="modal fade"
 						id="eexampleModal" role="dialog" tabindex="-1">
 						<div class="modal-dialog modal-dialog-centered" role="document">
@@ -162,7 +164,7 @@
 									</button>
 								</div>
 
-								<form action="">
+								<form action="insertbDeclare.do" method="post" id="declare_form">
 									<div class="modal-body">
 										<div class="form-group">
 											<label for="d_category">신고항목</label> <select
@@ -184,13 +186,14 @@
 											</textarea>
 										</div>
 
-										<input type="hidden" name="mno" value="${loginUser.mno }">
-										<input type="hidden" name="bno" value="${b.bno}"> 
-										<input type="hidden" name="dcategory" id="dcategory">
 										<div>
 											<input type="checkbox" name="declare_check" id="declare_check"> 
 											<label for="declare_check">신고 동의시 체크해주세요.</label>
 										</div>
+										
+										<input type="hidden" name="mno" value="${loginUser.mno }">
+										<input type="hidden" name="bno" value="${b.bno}"> 
+										<input type="hidden" name="dcategory" id="dcategory">
 									</div>
 
 									<div class="modal-footer">
@@ -201,13 +204,7 @@
 							</div>
 						</div>
 					</div>
-
-				</div>
-			</form>
-		</div>
-	</div>
-	<br>
-	<br>
+	
 	
 	<jsp:include page="../includes/footer.jsp"/>
 
@@ -221,7 +218,7 @@
 		$("#declareBtn").attr("disabled", true);
 
 		// 신고동의 체크
-		$("#declare_check").on('click', function() {
+		$("#declare_check").on("click", function() {
 			if ($("input:checkbox[name='declare_check']").is(":checked")) {
 				$("#declareBtn").removeAttr("disabled");
 			} else {
@@ -247,7 +244,7 @@
 			if (d_category == 0) {
 				
 				alert("신고유형을 선택해 주세요");
-				$('#declareModal').modal();
+				$('#eexampleModal').modal();
 				return false;
 			}
 
@@ -255,7 +252,7 @@
 				
 				if (content.length == 0) {
 					alert("신고내용을 입력해주세요");
-					$('#declareModal').modal();
+					$('#eexampleModal').modal();
 					return false;
 				}
 			}
@@ -274,6 +271,7 @@
 				type:"get",
 				success:function(data){
 					$("#likeCnt").text(data);
+					$("#tb_likeBtn").text(data);
 				},
 				error:function(){
 					console.log("추천 ajax 통신 실패");
@@ -522,7 +520,7 @@
 							
 							$contentDiv = $("<div class='form-group contentDiv'></div>");
 							
-							/* $nickname = $("<h5 class='nickname'></h5>").text(value.nickName); */
+							$nickname = $("<h5 class='nickname'></h5>").text(value.nickName);
 							$rcontent = $("<span id='rcontent' class='rcontent' style='margin-left: 5px;'></span>").html(value.content);
 							
 							$update_a = $("<a id='a-update'style='text-decoration: none; display: none;'>수정</a>");
@@ -535,7 +533,6 @@
 							
 							$replyOuter.append($replyDiv);
 						
-							
 						});
 						
 					}else { // 댓글 없을때

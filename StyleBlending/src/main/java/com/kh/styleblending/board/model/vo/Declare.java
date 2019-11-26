@@ -18,7 +18,7 @@ public class Declare {
 	private int dno;
 	private int mno;
 	private int bno;
-	private String bcategory;
+	private String dcategory;
 	private String content;
 	private Date enrollDate;
 	private String ischeck;

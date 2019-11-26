@@ -31,10 +31,12 @@ import com.google.gson.JsonObject;
 import com.kh.styleblending.board.model.service.BoardService;
 import com.kh.styleblending.board.model.vo.Board;
 import com.kh.styleblending.board.model.vo.BoardReply;
+import com.kh.styleblending.board.model.vo.Declare;
 import com.kh.styleblending.board.model.vo.FashionBoard;
 import com.kh.styleblending.board.model.vo.Image;
 import com.kh.styleblending.board.model.vo.PageInfo;
 import com.kh.styleblending.board.model.vo.Pagination;
+import com.kh.styleblending.member.model.vo.Member;
 
 @Controller
 public class BoardController {
@@ -240,8 +242,10 @@ public class BoardController {
  
 	
 	@RequestMapping("bdetail.do")
-	public ModelAndView boardDetail (int bno, ModelAndView mv) {
+	public ModelAndView boardDetail (int bno,ModelAndView mv) {
 	
+		//Member loginUser = (Member)session.getAttribute("loginUser");
+		
 		Board b = bService.selectBoard(bno);
 		
 		if(b != null) {
@@ -301,7 +305,7 @@ public class BoardController {
 	
 	
 	@RequestMapping("bupdate.do")
-	public String boardUpdate(Board b , HttpServletRequest request, ModelAndView mv,
+	public ModelAndView boardUpdate(Board b , HttpServletRequest request, ModelAndView mv,
 							   MultipartFile upload) {
 		
 //			if(!upload.getOriginalFilename().equals("")) {
@@ -317,6 +321,7 @@ public class BoardController {
 //			i.setOriginalImg(upload.getOriginalFilename());
 		
 		int result = bService.updateBoard(b);
+		System.out.println("update : " + b);
 		
 		if(result > 0 ) {
 			mv.addObject("bno", b.getBno()).setViewName("redirect:bdetail.do");
@@ -325,7 +330,9 @@ public class BoardController {
 			mv.addObject("msg","게시판 수정 실패").setViewName("common/errorPage");
 		}
 		
-	return null;	
+		
+		
+		return mv;	
 	}
 	
 	
@@ -412,4 +419,24 @@ public class BoardController {
 		
 		return result;
 	}
+	
+	
+	// 신고
+	@RequestMapping("insertbDeclare.do")
+	public ModelAndView insertbDeclare(Declare d , ModelAndView mv) {
+		
+		int mno = d.getBno();
+		
+		int result = bService.insertbDeclare(d);
+		
+		if(result > 0 ) {
+			mv.addObject("msg", "게시물을 신고하였습니다.").setViewName("redirect:listDetail.do?="+ mno);
+		}else {
+			mv.addObject("msg", "게시물 신고를 실패하였습니다.").setViewName("common/error");
+		}
+		
+		return mv;
+	}
+	
+	
 }

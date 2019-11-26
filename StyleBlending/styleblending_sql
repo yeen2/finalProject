@@ -473,6 +473,7 @@ COMMENT ON COLUMN image.type IS '1-자유,2-패션';
 CREATE TABLE b_reply (
 	br_no	number		NOT NULL,
 	b_no	number		NOT NULL,
+	m_no	number		NOT NULL,
 	content	varchar2(500)		NOT NULL,
 	enroll_date	Date	DEFAULT sysdate	NOT NULL,
 	isdelete	varchar2(1)	DEFAULT 'N'	NOT NULL
@@ -746,6 +747,14 @@ ALTER TABLE b_reply ADD CONSTRAINT FK_board_TO_b_reply_1 FOREIGN KEY (
 )
 REFERENCES board (
 	b_no
+);
+
+-- breply mno테이블 추가
+ALTER TABLE b_reply ADD CONSTRAINT FK_board_TO_b_reply_2 FOREIGN KEY (
+	m_no
+)
+REFERENCES board (
+	m_no
 );
 
 ALTER TABLE b_like ADD CONSTRAINT FK_member_TO_b_like_1 FOREIGN KEY (

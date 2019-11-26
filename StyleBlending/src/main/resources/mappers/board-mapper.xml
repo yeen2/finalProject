@@ -17,6 +17,7 @@
 		<result property="likeCount" column="like_count"/>
 		
 		<result property="imagelIST" column="image_List"/>	<!-- 컬럼별칭 설정함-->
+		
 		<result column="rename_img" property="renameImg"/>
 	</resultMap>
 
@@ -46,9 +47,10 @@
 
 
 <select id="selectList" resultMap="boardResultSet">
-	select *
-	from board
-	where isdelete='N'
+	select b.*, m.nickName
+	from board b
+	join member m on(b.m_no = m.m_no)
+	where b.isdelete='N'
 	order by b_no desc
 </select>
 
@@ -60,7 +62,7 @@
 </select>
 
 <select id="selectBoard" resultMap="boardResultSet">
-	select b.*, m.rename_img 
+	select b.*, m.nickName 
 	from board b
 	join member m on(m.m_no = b.m_no)
 	where b_no=#{bno}
@@ -97,10 +99,11 @@
 
 <select id="selectBoardReplyList" resultMap="BoardReplyResultSet">
 
-	select * 
-	from b_reply
+	select r.*, m.nickName 
+	from b_reply r
+	join member m on(m.m_no = r.m_no)
 	where b_no=#{bno}
-	order by br_no desc
+	order by r.br_no desc
 	
 	<!-- select br_no ,b_no, b.m_no, content, br.enroll_date, br.isdelete, b.rename_img
 	from b_reply br
@@ -110,7 +113,7 @@
 
 <insert id="insertBoardReply">
 	insert into b_reply
-	values(seq_b_reply.nextval, #{bno}, #{content}, sysdate, default)
+	values(seq_b_reply.nextval, #{bno}, #{mno} ,#{content}, sysdate, default)
 </insert>
 
 
@@ -154,7 +157,7 @@
 
 <insert id="insertbDeclare">
 	insert into declare
-	values(seq_declare.nextval, #{mno}, #{bno}, #{bcategory}, #{content}, sysdate, default, 1)
+	values(seq_declare.nextval, #{mno}, #{bno}, #{dcategory}, #{content}, sysdate, default, 2)
 </insert>
 
 

@@ -42,7 +42,7 @@
 			<div>
 				<h4>제목</h4>
 				<br> <input type="text" class="form-control" id="write-title"
-					name="title" placeholder="제목을 입력하세요"> <br> <br>
+					name="title" placeholder="제목을 입력하세요" value="${ b.title }"> <br> <br>
 
 			</div>
 			<br> <br>
@@ -50,7 +50,7 @@
 				<input type="hidden" name="mno" value="${ loginUser.mno }">
 				<h5>내용</h5>
 				
-				<textarea id="content" name="content" rows="3" cols="80" placeholder="내용을 입력하세요"></textarea>
+				<textarea id="content" name="content" rows="3" cols="80" placeholder="내용을 입력하세요">${ b.content }</textarea>
 				<br> <br>
 
 			</div>
