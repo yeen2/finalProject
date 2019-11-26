@@ -221,17 +221,17 @@
 			     <div class="collapse navbar-collapse text-center"
             id="navbarNavDropdown-1">
             <ul class="navbar-nav ml-auto" style="margin-left: 10px;">
-               <li class="nav-item" style="margin-top:9px;"><a class="nav-link btn btn"
+               <li class="nav-item" style="margin-top:12px;"><a class="nav-link btn btn"
                   data-toggle="modal" href="#exampleModal"> <i
                      class="fas fa-sliders-h fa-lg"></i>
                </a></li>
-               <li class="nav-item" style="margin-top:5px;"><a class="nav-link" href="mainNotice.do">Notice</a>
+               <li class="nav-item" style="margin-top:10px;"><a class="nav-link" href="mainNotice.do">Notice</a>
                </li>
-               <li class="nav-item" style="margin-top:5px;"><a class="nav-link" href="blist.do">Free
+               <li class="nav-item" style="margin-top:10px;"><a class="nav-link" href="blist.do">Free
                      board</a></li>
-               <li class="nav-item" style="margin-top:5px;"><a class="nav-link" href="joinForm.do">Join</a>
+               <li class="nav-item" style="margin-top:10px;"><a class="nav-link" href="joinForm.do">Join</a>
                </li>
-               <li class="nav-item" style="margin-top:5px;"><c:if test="${ empty loginUser }">
+               <li class="nav-item" style="margin-top:10px;"><c:if test="${ empty loginUser }">
                      <a class="nav-link" href="loginForm.do">Sign In</a>
                   </c:if> <c:if test="${ !empty loginUser }">
                      <a class="nav-link" href="logout.do">LogOut</a>
@@ -239,7 +239,7 @@
 
 
 					<!-- 알림창 -->
-					<li class="nav-item" style="margin-top:5px;">
+					<li class="nav-item" style="margin-top:10px;">
 						<div style="position:relative;" id="display">
 							<a class="nav-link" id="down" href="#"> 
 								<i class="far fa-bell fa-lg" style="font-size: 25px;"></i>
@@ -264,17 +264,17 @@
 					</a></li> -->
 
 					<!-- 포스팅 등록 -->
-					<li class="nav-item" style="margin-top:5px;"><a class="nav-link" href="pInsertForm.do">
+					<li class="nav-item" style="margin-top:10px;"><a class="nav-link" href="pInsertForm.do">
 	                     <i class="fas fa-camera fa-lg" style="font-size: 25px;"></i>
 	               </a></li>
 	               <li class="nav-item dropdown"><a
 	                  class="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
 	                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	               <c:if test="${ empty loginUser }">
-	                     <i class="fas fa-user-circle fa-lg" style="font-size: 30px;"></i>
+	                     <i class="fas fa-user-circle fa-lg" style="font-size: 30px; margin-top: 10px;"></i>
 	               </c:if>
 	               <c:if test="${ !empty loginUser }">
-	                  <img class="card-img" src="${pageContext.request.contextPath}/resources/assets/img/${loginUser.renameImg}" style='height:39px; width: 50px;'>
+	                  <img class="card-img" src="${pageContext.request.contextPath}/resources/assets/img/${loginUser.renameImg}" style='height:39px; width: 39px; border-radius: 39px;'>
 	               </c:if>
 	               </a>
 	               

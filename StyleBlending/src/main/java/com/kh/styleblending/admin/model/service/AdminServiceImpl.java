@@ -166,7 +166,7 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public Statistics selectMemberCount() {
+	public ArrayList<Statistics> selectMemberCount() {
 		// 통계(가입자수)
 		return aDao.selectMemberCount();
 	}
