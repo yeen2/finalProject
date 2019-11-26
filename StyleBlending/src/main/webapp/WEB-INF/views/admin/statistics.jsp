@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<!-- 차트 보이게 cdn -->
+<!-- 차트 보이게 cdn x-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery.min.js"></script>
