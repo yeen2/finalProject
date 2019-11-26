@@ -149,18 +149,20 @@
 
 			<!-- 검색창 -->
 
-			<div style="width: 223px; padding-left: 10px;">
+			<div style="width: 223px; padding-left: 10px;" id="searchDivOne">
 
 				<i class="fa fa-search" style="font-size: x-large; color: gray;"></i>
 				&nbsp;
+					
+					<form action="pNavSearch.do" method="get" style="display: inline;">
+						<input type="text" id="nav_search" name="keyword" size="20px;" autocomplete="off"
+							style="background: none; border: none; color: white;"
+							placeholder="친구  위치 브랜드별 검색">
 				
-				<form action="pNavSearch.do" method="get" style="display: inline;">
-					<input type="text" id="nav_search" name="keyword" size="20px;" autocomplete="off"
-						style="background: none; border: none; color: white;"
-						placeholder="친구  위치 브랜드별 검색">
 				
 				
 					<div style="position:relative; margin-left:100px;" id="displaySearch">
+					
 					<!-- 검색 결과 창 -->
 						<div style="position:absolute; top:2px; left:-100px; width:400px; max-height:255px; box-shadow:0 5px 10px rgba(0, 0, 0, 0.5);
 							overflow-y:auto; overflow-x:hidden; background:white; display:none; z-index:1000;" id="searchDiv">
@@ -216,27 +218,28 @@
 			</button>
 
 			<!-- 메인 리스트 -->
-			<div class="collapse navbar-collapse text-center"
-				id="navbarNavDropdown-1">
-				<ul class="navbar-nav ml-auto" style="margin-left: 10px;">
-					<li class="nav-item"><a class="nav-link btn btn"
-						data-toggle="modal" href="#exampleModal"> <i
-							class="fas fa-sliders-h fa-lg"></i>
-					</a></li>
-					<li class="nav-item"><a class="nav-link" href="mainNotice.do">Notice</a>
-					</li>
-					<li class="nav-item"><a class="nav-link" href="blist.do">Free
-							board</a></li>
-					<li class="nav-item"><a class="nav-link" href="joinForm.do">Join</a>
-					</li>
-					<li class="nav-item"><c:if test="${ empty loginUser }">
-							<a class="nav-link" href="loginForm.do">Sign In</a>
-						</c:if> <c:if test="${ !empty loginUser }">
-							<a class="nav-link" href="logout.do">LogOut</a>
-						</c:if></li>
+			     <div class="collapse navbar-collapse text-center"
+            id="navbarNavDropdown-1">
+            <ul class="navbar-nav ml-auto" style="margin-left: 10px;">
+               <li class="nav-item" style="margin-top:9px;"><a class="nav-link btn btn"
+                  data-toggle="modal" href="#exampleModal"> <i
+                     class="fas fa-sliders-h fa-lg"></i>
+               </a></li>
+               <li class="nav-item" style="margin-top:5px;"><a class="nav-link" href="mainNotice.do">Notice</a>
+               </li>
+               <li class="nav-item" style="margin-top:5px;"><a class="nav-link" href="blist.do">Free
+                     board</a></li>
+               <li class="nav-item" style="margin-top:5px;"><a class="nav-link" href="joinForm.do">Join</a>
+               </li>
+               <li class="nav-item" style="margin-top:5px;"><c:if test="${ empty loginUser }">
+                     <a class="nav-link" href="loginForm.do">Sign In</a>
+                  </c:if> <c:if test="${ !empty loginUser }">
+                     <a class="nav-link" href="logout.do">LogOut</a>
+                  </c:if></li>
+
 
 					<!-- 알림창 -->
-					<li class="nav-item">
+					<li class="nav-item" style="margin-top:5px;">
 						<div style="position:relative;" id="display">
 							<a class="nav-link" id="down" href="#"> 
 								<i class="far fa-bell fa-lg" style="font-size: 25px;"></i>
@@ -261,15 +264,20 @@
 					</a></li> -->
 
 					<!-- 포스팅 등록 -->
-					<li class="nav-item"><a class="nav-link" href="pInsertForm.do">
-							<i class="fas fa-camera fa-lg" style="font-size: 25px;"></i>
-					</a></li>
-
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							<i class="fas fa-user-circle fa-lg" style="font-size: 30px;"></i>
-					</a>
+					<li class="nav-item" style="margin-top:5px;"><a class="nav-link" href="pInsertForm.do">
+	                     <i class="fas fa-camera fa-lg" style="font-size: 25px;"></i>
+	               </a></li>
+	               <li class="nav-item dropdown"><a
+	                  class="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
+	                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	               <c:if test="${ empty loginUser }">
+	                     <i class="fas fa-user-circle fa-lg" style="font-size: 30px;"></i>
+	               </c:if>
+	               <c:if test="${ !empty loginUser }">
+	                  <img class="card-img" src="${pageContext.request.contextPath}/resources/assets/img/${loginUser.renameImg}" style='height:39px; width: 50px;'>
+	               </c:if>
+	               </a>
+	               
 						<div class="dropdown-menu"
 							aria-labelledby="navbarDropdownMenuLink">
 							<a class="dropdown-item" href="mProfile.do">myPage</a> <a
@@ -805,6 +813,9 @@ function select(){
 			$("html").click(function(e){
 				if($("#searchDiv").css("display") == "block"){
 					if(!$("#displaySearch").has(e.target).length){
+						$("#searchDiv").hide();
+					}
+					if(!$("#searchDivOne").has(e.target).length){
 						$("#searchDiv").hide();
 					}
 				}
