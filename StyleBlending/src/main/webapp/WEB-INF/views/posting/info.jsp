@@ -856,36 +856,45 @@
 							$rrContent = $("<textarea id='rrContent' class='rrContent'></textarea>");
 							$rrSubmit = $("<button class='btn btn-dark rrSubmit' id='rrSubmit'>등록</button>");
 							
-							
-							if(value.level == 1){ //댓글
+							//댓글
+							if(value.level == 1){ 
 								$replyForm_imgDiv.append($img);
 								//대댓글
 								$replyForm_rrForm.append($prno).append($rrContent).append($rrSubmit);
 								
 								if(session_mno == value.mno){ //댓글쓴사람 = 로그인회원
-								//컨텐츠
-								// => 수정div
-								$r_modi_div.append($r_modi_textarea).append($r_modi_submit);
-								$replyForm_contentDiv.append($nickname).append($rcontent)
-												.append($r_modi_div)
-												.append('<br>').append($likecount)
-												.append($likeImg).append($rrBtn).append($date).append($r_modi).append($r_delete)
-												.append($replyForm_rrForm);
-								}else{
+									//컨텐츠
+									// => 수정div
+									$r_modi_div.append($r_modi_textarea).append($r_modi_submit);
+									$replyForm_contentDiv.append($nickname).append($rcontent)
+													.append($r_modi_div)
+													.append('<br>').append($likecount)
+													.append($likeImg).append($rrBtn).append($date).append($r_modi).append($r_delete)
+													.append($replyForm_rrForm);
+								}else{ 
 									$replyForm_contentDiv.append($nickname).append($rcontent).append('<br>').append($likecount)
 									.append($likeImg).append($rrBtn).append($date)
 									.append($replyForm_rrForm);
 								}
+								
 								$replyForm_div.append($replyForm_imgDiv).append($replyForm_contentDiv);
 								
 								$replyForm.append($replyForm_div);
+							
+							//대댓글
+							}else{ 
 								
-							}else{ //대댓글
-
-								$replyForm_imgDiv.append($img);
-								$replyForm_contentDiv.append($nickname).append($rcontent).append('<br>').append($likecount)
-												.append($likeImg).append($date);
+								if(session_mno == value.mno){ //댓글쓴사람 = 로그인회원
+									$replyForm_imgDiv.append($img);
+									$replyForm_contentDiv.append($nickname).append($rcontent).append('<br>').append($likecount)
+													.append($likeImg).append($date).append($replyForm_rrForm);
 								
+								}else {
+									$replyForm_imgDiv.append($img);
+									$replyForm_contentDiv.append($nickname).append($rcontent).append('<br>').append($likecount)
+													.append($likeImg).append($date).append($replyForm_rrForm);
+									
+								}
 								$replyForm_div_2.append($replyForm_imgDiv).append($replyForm_contentDiv);
 								
 								$replyForm.append($replyForm_div_2);
