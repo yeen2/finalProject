@@ -103,43 +103,6 @@
 	padding: 0px;
 }
 
-#addAlarm1 {
-	width: 100%;
-	height: inherit;
-	background: lightgray;
-	border: 2px solid white;
-}
-
-#addAlarmImg1 {
-	padding: 10px 0 0 10px;
-	width: 17%;
-	height: auto;
-	display: inline-block;
-	margin-left: -10px;
-}
-
-#addAlarmImg1 img {
-	width: 50px;
-	height: 50px;
-	border-radius: 1.5em;
-}
-
-#addAlarmNick1 {
-	display: inline-block;
-	width: 50%;
-	text-align: left;
-	margin-left: 10px;
-}
-
-#addAlarmDate1 {
-	display: inline-block;
-	width: 25%;
-	text-align: right;
-}
-
-#addAlarmCon1 {
-	padding: 10px 10px 10px 10px;
-}
 
 #addSearch{width:100%; height:inherit; background:lightgray; border:2px solid white;}
 #addSearchImg{padding:10px 0 10px 10px; width:10%; height:auto; display:inline-block;}
@@ -149,6 +112,15 @@
 #addSearchCon{padding:10px 10px 10px 10px;}
 #fanAreaBtn:hover, #brandAreaBtn:hover, #hashtagAreaBtn:hover, #locationAreaBtn:hover{cursor:pointer}
 #fanAreaBtn, #brandAreaBtn, #hashtagAreaBtn, #locationAreaBtn{width:24%;}
+
+.addAlarm1{width:100%; height:inherit; background:rgba(0,0,0,0.05); border-top:1px solid lightgray; border-bottom:1px solid lightgray;}
+.addAlarmImg1{padding:10px 0 0 10px; width:17%; height:auto; display:inline-block;}
+.addAlarmImg1 img{width:50px; height:50px; border-radius:1.5em;}
+.addAlarmNick1{display:inline-block; width:50%; margin-left:10px;}
+.addAlarmDate1{display:inline-block; width:25%; text-align:right;}
+.addAlarmCon1{padding:10px 10px 10px 10px;}
+.addAlarm1 p{font-size:15px;}
+#alarmDelete:hover{cursor:pointer; color:gray;}
 
 </style>
 <script type="text/javascript">
@@ -177,54 +149,61 @@
 
 			<!-- 검색창 -->
 
-			<div style="width: 223px; padding-left: 10px;">
+			<div style="width: 223px; padding-left: 10px;" id="searchDivOne">
 
 				<i class="fa fa-search" style="font-size: x-large; color: gray;"></i>
 				&nbsp;
+					
+					<form action="pNavSearch.do" method="get" style="display: inline;">
+						<input type="text" id="nav_search" name="keyword" size="20px;" autocomplete="off"
+							style="background: none; border: none; color: white;"
+							placeholder="친구  위치 브랜드별 검색">
 				
-				<form action="nav_search.ca" method="get" style="display: inline;">
-					<input type="text" id="nav_search" name="nav_search" size="20px;" autocomplete="off"
-						style="background: none; border: none; color: white;"
-						placeholder="친구  위치 브랜드별 검색">
-				</form>
 				
-				<div style="position:relative; margin-left:100px;" id="displaySearch">
-				<!-- 검색 결과 창 -->
-					<div style="position:absolute; top:2px; left:-100px; width:400px; max-height:255px; box-shadow:0 5px 10px rgba(0, 0, 0, 0.5);
-						overflow-y:auto; overflow-x:hidden; background:white; display:none; z-index:1000;" id="searchDiv">
-						<div style="width:100%; height:50px;">
-							<ul style="padding:7px 5px 5px 8px;">
-								<li class="btn btn-dark" id="fanAreaBtn">회원</li>
-								<li class="btn btn-light" id="brandAreaBtn">브랜드</li>
-								<li class="btn btn-light" id="hashtagAreaBtn">#태그</li>
-								<li class="btn btn-light" id="locationAreaBtn">위치</li>
-							</ul>
+				
+					<div style="position:relative; margin-left:100px;" id="displaySearch">
+					
+					<!-- 검색 결과 창 -->
+						<div style="position:absolute; top:2px; left:-100px; width:400px; max-height:255px; box-shadow:0 5px 10px rgba(0, 0, 0, 0.5);
+							overflow-y:auto; overflow-x:hidden; background:white; display:none; z-index:1000;" id="searchDiv">
+							<div style="width:100%; height:50px;">
+								<ul style="padding:7px 5px 5px 8px;">
+									<input type="checkbox" id="fanCheckBox" name="type" value="0">
+									<label for="fanCheckBox" class="btn btn-dark" id="fanAreaBtn">회원</label>
+									<input type="checkbox" id="brandCheckBox" name="type" value="1">
+									<label for="brandCheckBox" class="btn btn-light" id="brandAreaBtn">브랜드</label>
+									<input type="checkbox" id="hashtagCheckBox" name="type" value="2">
+									<label for="hashtagCheckBox" class="btn btn-light" id="hashtagAreaBtn">#태그</label>
+									<input type="checkbox" id="locaCheckBox" name="type" value="3">
+									<label for="locaCheckBox" class="btn btn-light" id="locationAreaBtn">위치</label>
+								</ul>
+							</div>
+							
+						    <!-- 알림 추가될 때마다 div 추가 -->
+						    <!-- 회원 추가 -->
+						    <div id="fanArea" style="display:block; padding:0 5px 5px 5px;">
+						    	
+						    </div>
+						    
+						    <!-- 브랜드 추가 -->
+						    <div id="brandArea" style="display:none; padding:0 5px 5px 5px;">
+						    	
+							</div>
+							
+							<!-- 해시태그 추가 -->
+						    <div id="hashtagArea" style="display:none; padding:0 5px 5px 5px;">
+					
+						    </div>
+						    
+						    <!-- 위치 추가 -->
+						    <div id="locationArea" style="display:none; padding:0 5px 5px 5px;">
+						    
+						    </div>
+						    
+						    
 						</div>
-						
-					    <!-- 알림 추가될 때마다 div 추가 -->
-					    <!-- 회원 추가 -->
-					    <div id="fanArea" style="display:block; padding:0 5px 5px 5px;">
-					    	
-					    </div>
-					    
-					    <!-- 브랜드 추가 -->
-					    <div id="brandArea" style="display:none; padding:0 5px 5px 5px;">
-					    	
-						</div>
-						
-						<!-- 해시태그 추가 -->
-					    <div id="hashtagArea" style="display:none; padding:0 5px 5px 5px;">
-				
-					    </div>
-					    
-					    <!-- 위치 추가 -->
-					    <div id="locationArea" style="display:none; padding:0 5px 5px 5px;">
-					    
-					    </div>
-					    
-					    
 					</div>
-				</div>
+				</form>
 				
 			</div>
 
@@ -239,40 +218,66 @@
 			</button>
 
 			<!-- 메인 리스트 -->
-			<div class="collapse navbar-collapse text-center"
-				id="navbarNavDropdown-1">
-				<ul class="navbar-nav ml-auto" style="margin-left: 10px;">
-					<li class="nav-item"><a class="nav-link btn btn"
-						data-toggle="modal" href="#exampleModal"> <i
-							class="fas fa-sliders-h fa-lg"></i>
-					</a></li>
-					<li class="nav-item"><a class="nav-link" href="mainNotice.do">Notice</a>
-					</li>
-					<li class="nav-item"><a class="nav-link" href="blist.do">Free
-							board</a></li>
-					<li class="nav-item"><a class="nav-link" href="joinForm.do">Join</a>
-					</li>
-					<li class="nav-item"><c:if test="${ empty loginUser }">
-							<a class="nav-link" href="loginForm.do">Sign In</a>
-						</c:if> <c:if test="${ !empty loginUser }">
-							<a class="nav-link" href="logout.do">LogOut</a>
-						</c:if></li>
+			     <div class="collapse navbar-collapse text-center"
+            id="navbarNavDropdown-1">
+            <ul class="navbar-nav ml-auto" style="margin-left: 10px;">
+               <li class="nav-item" style="margin-top:9px;"><a class="nav-link btn btn"
+                  data-toggle="modal" href="#exampleModal"> <i
+                     class="fas fa-sliders-h fa-lg"></i>
+               </a></li>
+               <li class="nav-item" style="margin-top:5px;"><a class="nav-link" href="mainNotice.do">Notice</a>
+               </li>
+               <li class="nav-item" style="margin-top:5px;"><a class="nav-link" href="blist.do">Free
+                     board</a></li>
+               <li class="nav-item" style="margin-top:5px;"><a class="nav-link" href="joinForm.do">Join</a>
+               </li>
+               <li class="nav-item" style="margin-top:5px;"><c:if test="${ empty loginUser }">
+                     <a class="nav-link" href="loginForm.do">Sign In</a>
+                  </c:if> <c:if test="${ !empty loginUser }">
+                     <a class="nav-link" href="logout.do">LogOut</a>
+                  </c:if></li>
+
 
 					<!-- 알림창 -->
-					<li class="nav-item"><a class="nav-link" id="down" href="#">
+					<li class="nav-item" style="margin-top:5px;">
+						<div style="position:relative;" id="display">
+							<a class="nav-link" id="down" href="#"> 
+								<i class="far fa-bell fa-lg" style="font-size: 25px;"></i>
+							</a>
+							<span id="count" class="badge badge-danger badge-pill" 
+									style="display:none; pointer-events:none; position:absolute; bottom:19px; left:19px;"></span>
+							
+							<div style="position:absolute; width:400px; max-height:255px; background:white; display:none; box-shadow:0 5px 10px rgba(0, 0, 0, 0.5);
+							overflow-y:auto; overflow-x:hidden; left:-175px; z-index:1000;" id="show" class="show">
+								<div style="padding:10px 10px 10px 10px;" align="right">
+									<i style="font-size:30px;" class="far fa-envelope-open" id="alarmDelete"></i>
+								</div>
+								<div id="contentPlus">
+									
+								</div>
+							    
+							</div>
+						</div>
+					</li>
+					<!-- <li class="nav-item"><a class="nav-link" id="down" href="#">
 							<i class="far fa-bell fa-lg" style="font-size: 25px;"></i>
-					</a></li>
+					</a></li> -->
 
 					<!-- 포스팅 등록 -->
-					<li class="nav-item"><a class="nav-link" href="pInsertForm.do">
-							<i class="fas fa-camera fa-lg" style="font-size: 25px;"></i>
-					</a></li>
-
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							<i class="fas fa-user-circle fa-lg" style="font-size: 30px;"></i>
-					</a>
+					<li class="nav-item" style="margin-top:5px;"><a class="nav-link" href="pInsertForm.do">
+	                     <i class="fas fa-camera fa-lg" style="font-size: 25px;"></i>
+	               </a></li>
+	               <li class="nav-item dropdown"><a
+	                  class="nav-link dropdown-toggle" id="navbarDropdownMenuLink"
+	                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	               <c:if test="${ empty loginUser }">
+	                     <i class="fas fa-user-circle fa-lg" style="font-size: 30px;"></i>
+	               </c:if>
+	               <c:if test="${ !empty loginUser }">
+	                  <img class="card-img" src="${pageContext.request.contextPath}/resources/assets/img/${loginUser.renameImg}" style='height:39px; width: 50px;'>
+	               </c:if>
+	               </a>
+	               
 						<div class="dropdown-menu"
 							aria-labelledby="navbarDropdownMenuLink">
 							<a class="dropdown-item" href="mProfile.do">myPage</a> <a
@@ -587,7 +592,7 @@ function select(){
 						url:"mpSSearchFan.do",
 						data:{search:search},
 						dataType:"json",
-						type:"post",
+						type:"get",
 						success:function(list){
 							$("#fanArea").html("");
 							
@@ -604,14 +609,16 @@ function select(){
 								$("#fanArea").append($fanNull);
 							}else{
 								$.each(list, function(index, value){
-									var $fan = "<div id='addSearch' class='fanFan' value='" + value.mno + "'>"
+									var $fan = "<a style='color:black;' href='mpViewProfile.do?mno=" + value.mno + "'>"
+												+"<div id='addSearch' class='fanFan'>"
 										    	+"<div id='addSearchImg'>"
 									    		+"<i class='fas fa-user-alt'></i>"
 										    	+"</div>"
 										    	+"<div id='addSearchNick'>"
 									    		+"<p>" + value.nickName + "</p>"
 										    	+"</div>"
-										    	+"</div>";
+										    	+"</div>"
+										    	+"</a>";
 										    	
 									$("#fanArea").append($fan);
 									
@@ -628,7 +635,7 @@ function select(){
 						url:"mpSSearchBrand.do",
 						data:{search:search},
 						dataType:"json",
-						type:"post",
+						type:"get",
 						success:function(list){
 							$("#brandArea").html("");
 							
@@ -645,14 +652,16 @@ function select(){
 								$("#brandArea").append($brandNull);
 							}else{
 								$.each(list, function(index, value){
-									var $brand = "<div id='addSearch' class='brandBrand' value='" + value.pno + "'>"
+									var $brand = "<a style='color:black;' href='pNavSearch.do?type=1&keyword=" + value.brand + "'>"
+												+"<div id='addSearch' class='brandBrand' value='" + value.pno + "'>"
 										    	+"<div id='addSearchImg'>"
 									    		+"<i class='fas fa-search'></i>"
 										    	+"</div>"
 										    	+"<div id='addSearchNick'>"
 									    		+"<p>" + value.brand + "</p>"
 										    	+"</div>"
-										    	+"</div>";
+										    	+"</div>"
+										    	+"</a>";
 									
 									$("#brandArea").append($brand);
 									
@@ -669,7 +678,7 @@ function select(){
 						url:"mpSSearchHashtag.do",
 						data:{search:search},
 						dataType:"json",
-						type:"post",
+						type:"get",
 						success:function(list){
 							$("#hashtagArea").html("");
 							
@@ -686,14 +695,16 @@ function select(){
 									$("#hashtagArea").append($hashtagNull);
 							}else{
 								$.each(list, function(index, value){
-									var $hashtag = "<div id='addSearch' class='hashHash' value='" + value.pno + "'>"
+									var $hashtag = "<a style='color:black;' href='pNavSearch.do?type=2&keyword=" + value.hashtag + "'>"
+													+"<div id='addSearch' class='hashHash' value='" + value.pno + "'>"
 											    	+"<div id='addSearchImg'>"
 										    		+"<i class='fas fa-hashtag'></i>"
 											    	+"</div>"
 											    	+"<div id='addSearchNick'>"
 										    		+"<p>" + value.hashtag + "</p>"
 											    	+"</div>"
-											    	+"</div>";
+											    	+"</div>"
+											   		+"</a>";
 											    	
 									$("#hashtagArea").append($hashtag);
 									
@@ -710,7 +721,7 @@ function select(){
 						url:"mpSSearchLoca.do",
 						data:{search:search},
 						dataType:"json",
-						type:"post",
+						type:"get",
 						success:function(list){
 							$("#locationArea").html("");
 							
@@ -727,14 +738,16 @@ function select(){
 								$("#locationArea").append($locationNull);
 							}else{
 								$.each(list, function(index, value){
-									var $location = "<div id='addSearch' class='locaLoca' value='" + value.pno + "'>"
+									var $location = "<a style='color:black;' href='pNavSearch.do?type=3&keyword=" + value.location + "'>"
+													+"<div id='addSearch' class='locaLoca' value='" + value.pno + "'>"
 											    	+"<div id='addSearchImg'>"
 										    		+"<i class='fas fa-map-marker-alt'></i>"
 											    	+"</div>"
 											    	+"<div id='addSearchNick'>"
 										    		+"<p>" + value.location + "</p>"
 											    	+"</div>"
-												    +"</div>";
+												    +"</div>"
+												    +"</a>";
 												    
 									$("#locationArea").append($location);
 									
@@ -802,27 +815,190 @@ function select(){
 					if(!$("#displaySearch").has(e.target).length){
 						$("#searchDiv").hide();
 					}
+					if(!$("#searchDivOne").has(e.target).length){
+						$("#searchDiv").hide();
+					}
 				}
 			});
 			
-			// 검색 결과 클릭 시 페이지 이동
-			$(document).ready(function(){
-				$(document).on("click", ".fanFan", function(){
-					location.href="mpViewProfile.do?mno=" + $(this).attr("value");
-				});
-				$(document).on("click", ".brandBrand", function(){
-					
-				});
-				$(document).on("click", ".hashHash", function(){
-					
-				});
-				$(document).on("click", ".locaLoca", function(){
-					
-				});
-					
-			});
+			$("#displaySearch input").css("display", "none");
 			
 		});
+	</script>
+	
+	<!-- 웹소켓 알람 스크립트 -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.js"></script>
+	<script type="text/javascript">
+		var sock = null;
+		var mno = ${loginUser.mno}
+		
+	    $(document).ready(function() {
+	        sock = new SockJS("/styleblending/count");
+	        
+	        // 연결 성공
+	        sock.onopen = function() {
+	        	console.log("연결 성공");
+	        	sock.send(mno);
+	        }
+	        // 연결 해제
+	        sock.onclose = function() {
+	        	console.log("연결 해제");
+	        }
+	        // 메세지 보내고 받을 때
+	        sock.onmessage = function(evt) {
+	        	var alarmCountNo = 0;
+	            var json = evt.data;
+	            
+	            var obj = JSON.parse(json);
+	            console.log(obj);
+	            
+	            if(obj != ""){
+	            	for(var i=0; i<obj.length; i++){
+		            	alarmCountNo = obj[i].alarmCount;
+		            	
+		            	if(obj[i].type == 1){
+		            		var $add = "<a class='dropdown-item' href='mpViewProfile.do?mno=" + obj[i].bmno + "'>"
+			    				+ "<div class='addAlarm1'>"
+			    				+ "<div class='addAlarmImg1'>"
+			    				+ "<img src='resources/upload/member/" + obj[i].renameImg + "'>"
+			    				+ "</div>"
+			    				+ "<div class='addAlarmNick1' align='left'>"
+			    				+ "<p>" + obj[i].nickName + "</p>"
+			    				+ "</div>"
+			    				+ "<div class='addAlarmDate1' align='right'>"
+			    				+ "<p>" + obj[i].enrollDate + "</p>"
+			    				+ "</div>"
+			    				+ "<div class='addAlarmCon1'>"
+			    				+ "<p>" + obj[i].nickName + "님이 게시글에 좋아요를 눌렀습니다.</p>"
+			    				+ "</div>"
+			    				+ "</div>"
+			    				+ "</a>";
+		    		
+		    				$("#contentPlus").append($add);
+		            	}else if(obj[i].type == 2){
+		            		var $add = "<a class='dropdown-item' href='mpViewProfile.do?mno=" + obj[i].bmno + "'>"
+			    				+ "<div class='addAlarm1'>"
+			    				+ "<div class='addAlarmImg1'>"
+			    				+ "<img src='resources/upload/member/" + obj[i].renameImg + "'>"
+			    				+ "</div>"
+			    				+ "<div class='addAlarmNick1' align='left'>"
+			    				+ "<p>" + obj[i].nickName + "</p>"
+			    				+ "</div>"
+			    				+ "<div class='addAlarmDate1' align='right'>"
+			    				+ "<p>" + obj[i].enrollDate + "</p>"
+			    				+ "</div>"
+			    				+ "<div class='addAlarmCon1'>"
+			    				+ "<p>" + obj[i].nickName + "님이 게시글에 댓글을 작성하였습니다.</p>"
+			    				+ "</div>"
+			    				+ "</div>"
+			    				+ "</a>";
+		    		
+		    				$("#contentPlus").append($add);
+		            	}else{
+		            		var $add = "<a class='dropdown-item' href='mpViewProfile.do?mno=" + obj[i].bmno + "'>"
+			    				+ "<div class='addAlarm1'>"
+			    				+ "<div class='addAlarmImg1'>"
+			    				+ "<img src='resources/upload/member/" + obj[i].renameImg + "'>"
+			    				+ "</div>"
+			    				+ "<div class='addAlarmNick1' align='left'>"
+			    				+ "<p>" + obj[i].nickName + "</p>"
+			    				+ "</div>"
+			    				+ "<div class='addAlarmDate1' align='right'>"
+			    				+ "<p>" + obj[i].enrollDate + "</p>"
+			    				+ "</div>"
+			    				+ "<div class='addAlarmCon1'>"
+			    				+ "<p>" + obj[i].nickName + "님이 팬이 되었습니다.</p>"
+			    				+ "</div>"
+			    				+ "</div>"
+			    				+ "</a>";
+		    		
+		    				$("#contentPlus").append($add);
+		            	}
+		    			
+		            }
+	            }else{
+	            	$("#show").html("");
+					
+					var $add = "<div style='padding:20px 10px 10px 10px' align='center'>"
+	    				+ "<p><span class='text-danger'><i class='far fa-frown-open'></i></span> 알림이 없습니다.</p>"
+	    				+ "</div>";
+	    		
+	    			$("#show").append($add);
+	            }
+	            
+	            
+	            if(alarmCountNo != 0){
+	            	$("#count").css("display", "block");
+					$("#count").html("");
+					$("#count").append(alarmCountNo);
+	            }
+	            
+	        }
+		    
+		});
+	    
+	    $("#down").on("click", function(){
+			if($("#show").css("display") == "block"){
+				$("#show").hide();
+				
+			}else{
+				$("#show").show();
+			}
+				
+			if(${ loginUser == null }){
+				$("#show").html("");
+				
+				var $add = "<div style='padding:20px 10px 10px 10px' align='center'>"
+					+ "<p><span class='text-danger'></span>로그인 후 이용해주세요.</p>"
+    				+ "<button class='btn btn-dark' id='alarmLogin'>로그인</button>"
+    				+ "</div>";
+    		
+    			$("#show").append($add);
+			}
+		});
+		
+		$("html").click(function(e){
+			if($("#show").css("display") == "block"){
+				if(!$("#display").has(e.target).length){
+					$("#show").hide();
+				}
+			}
+		});
+		
+		$(document).on("click", "#alarmLogin", function(){
+			location.href="loginForm.do";
+		});
+		
+		$("#alarmDelete").click(function(){
+			$.ajax({
+				url:"mpUpdateAlarm.do",
+				data:{mno:mno},
+				type:"post",
+				success:function(result){
+					if(result == 1){
+						$("#show").html("");
+						
+						var $add = "<div style='padding:20px 10px 10px 10px' align='center'>"
+		    				+ "<p><span class='text-danger'><i class='far fa-frown-open'></i></span> 알림이 없습니다.</p>"
+		    				+ "</div>";
+		    		
+		    			$("#show").append($add);
+		    			
+		    			$("#count").html("");
+		    			$("#count").css("display", "none");
+						
+					}else{
+						console.log("알람 모두읽음 실패");
+					}
+					
+				},
+				error:function(){
+					console.log("ajax 통신 실패");
+				}
+			});
+		});
+	
+		
 	</script>
 
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->

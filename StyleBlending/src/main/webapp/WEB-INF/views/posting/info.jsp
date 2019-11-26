@@ -6,6 +6,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style type="text/css">
+	.card {
+		box-shadow: none !important;
+	}
 	.replyForm_div_2 { 
 		margin-left: 50px;
 	}
@@ -262,7 +265,7 @@
 						<div style="width: 25%; height: 25%; border-radius: 50%;">
 							<img style="width: 80%; height: 80%; border-radius: 50%;"
 								src="http://placehold.it/60x60" 
-								<%-- src="${ pageContext.servletContext.contextPath }/resources/upload/member/${p.rename_img}" --%>>
+								<%-- src="${ pageContext.servletContext.contextPath }/resources/upload/member/${p.renameImg}" --%>>
 						</div>
 						<!-- 정보 -->
 						<div style="width: 75%; height: 75%;">
@@ -302,6 +305,8 @@
 					</div>
 				</div>
 				
+				<hr>
+				
 				<!-- 2. 코디 정보 -->
 				<div class="card my-4">
 					<h5 class="card-header">Clothes stylist</h5>
@@ -329,6 +334,8 @@
 						
 					</div>
 				</div>
+				
+				<hr>
 				
 				<!-- 3. 촬영위치(지도api) -->
 				<div class="card my-4">
@@ -377,26 +384,32 @@
 					</div>
 				</div>
  -->
+ 				<hr>
+ 				
 				<!-- Side Widget -->
 				<div class="card my-4">
 					<h5 class="card-header">Spotlight</h5>
 					<div class="card-body">
 						<div class="spotDiv">
+						<a href="pNavSearch.do?type=2&keyword=데일리룩">
 							<img style="width: 100%; height: 100%;" 
 								src="${ pageContext.servletContext.contextPath }/resources/image/hashtag/dailylook.jpg">
 							<div style="left: 60px; width: 100px; bottom: 80px; font-size: 1em; 
 										font-weight: bold; position: absolute; color: white;">
 								#데일리룩
 							</div>
+						</a>
 						</div>
 						
 						<div class="spotDiv" style="float: right;">
+							<a href="pNavSearch.do?type=2&keyword=봄코디">
 							<img style="width: 100%; height: 100%;" 
 								src="${ pageContext.servletContext.contextPath }/resources/image/hashtag/springlook.jpg">
 							<div style="right: 25px; width: 100px; bottom: 80px; font-size: 1em; 
 										font-weight: bold; position: absolute; color: white;">
 								#봄코디
 							</div>
+							</a>
 						</div>
 					</div>
 				</div>
@@ -842,36 +855,45 @@
 							$rrContent = $("<textarea id='rrContent' class='rrContent'></textarea>");
 							$rrSubmit = $("<button class='btn btn-dark rrSubmit' id='rrSubmit'>등록</button>");
 							
-							
-							if(value.level == 1){ //댓글
+							//댓글
+							if(value.level == 1){ 
 								$replyForm_imgDiv.append($img);
 								//대댓글
 								$replyForm_rrForm.append($prno).append($rrContent).append($rrSubmit);
 								
 								if(session_mno == value.mno){ //댓글쓴사람 = 로그인회원
-								//컨텐츠
-								// => 수정div
-								$r_modi_div.append($r_modi_textarea).append($r_modi_submit);
-								$replyForm_contentDiv.append($nickname).append($rcontent)
-												.append($r_modi_div)
-												.append('<br>').append($likecount)
-												.append($likeImg).append($rrBtn).append($date).append($r_modi).append($r_delete)
-												.append($replyForm_rrForm);
-								}else{
+									//컨텐츠
+									// => 수정div
+									$r_modi_div.append($r_modi_textarea).append($r_modi_submit);
+									$replyForm_contentDiv.append($nickname).append($rcontent)
+													.append($r_modi_div)
+													.append('<br>').append($likecount)
+													.append($likeImg).append($rrBtn).append($date).append($r_modi).append($r_delete)
+													.append($replyForm_rrForm);
+								}else{ 
 									$replyForm_contentDiv.append($nickname).append($rcontent).append('<br>').append($likecount)
 									.append($likeImg).append($rrBtn).append($date)
 									.append($replyForm_rrForm);
 								}
+								
 								$replyForm_div.append($replyForm_imgDiv).append($replyForm_contentDiv);
 								
 								$replyForm.append($replyForm_div);
+							
+							//대댓글
+							}else{ 
 								
-							}else{ //대댓글
-
-								$replyForm_imgDiv.append($img);
-								$replyForm_contentDiv.append($nickname).append($rcontent).append('<br>').append($likecount)
-												.append($likeImg).append($date);
+								if(session_mno == value.mno){ //댓글쓴사람 = 로그인회원
+									$replyForm_imgDiv.append($img);
+									$replyForm_contentDiv.append($nickname).append($rcontent).append('<br>').append($likecount)
+													.append($likeImg).append($date).append($replyForm_rrForm);
 								
+								}else {
+									$replyForm_imgDiv.append($img);
+									$replyForm_contentDiv.append($nickname).append($rcontent).append('<br>').append($likecount)
+													.append($likeImg).append($date).append($replyForm_rrForm);
+									
+								}
 								$replyForm_div_2.append($replyForm_imgDiv).append($replyForm_contentDiv);
 								
 								$replyForm.append($replyForm_div_2);

@@ -27,6 +27,7 @@ import com.kh.styleblending.admin.model.vo.Declare;
 import com.kh.styleblending.admin.model.vo.PageInfo;
 import com.kh.styleblending.admin.model.vo.Pagination;
 import com.kh.styleblending.admin.model.vo.Statistics;
+import com.kh.styleblending.main.model.vo.Notice;
 import com.kh.styleblending.member.model.vo.Member;
 
 @Controller
@@ -282,16 +283,27 @@ public class AdminController {
 	@RequestMapping(value="aChart.do", produces="application/json; charset=UTF-8")
 	public String statistics() {
 		
-		Member  statistics = aService.selectMemberCount();
+<<<<<<< HEAD
+		ArrayList<Statistics>  statistics = aService.selectMemberCount();
+		//System.out.println(statistics);
+		
+=======
+		Statistics  statistics = aService.selectMemberCount();
 		System.out.println(statistics);
+>>>>>>> branch 'dev' of https://github.com/yeen2/finalProject.git
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		
 		return gson.toJson(statistics);
 	}
 	
 	@RequestMapping("aNotice.do")
-	public String notice() {
-		return "admin/notice";
+	public ModelAndView notice(ModelAndView mv) {
+		
+		ArrayList<Notice> list = aService.selectNoticeList();
+		
+		mv.addObject("list", list).setViewName("admin/notice");
+		
+		return mv;
 	}
 	
 	

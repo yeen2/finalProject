@@ -76,6 +76,7 @@
 		<result property="enrollDate" column="enroll_date"/>
 		<result property="status" column="status"/>
 		<result property="type" column="type"/>
+		<result property="bmno" column="b_m_no"/>
 		
 		<result property="alarmCount" column="alarmCount"/>
 	</resultMap>
@@ -162,8 +163,10 @@
 	</select>
 	
 	<select id="selectAlarmList" resultMap="alarmResultSet">
-		select *
-		from alarm
+		select a.*, (select count(*) from alarm where status=1 and m_no=#{mno})alarmCount, 
+					(select nickName from member where m_no=a.b_m_no)nickName,
+					(select rename_Img from member where m_no=a.b_m_no)renameImg
+		from alarm a
 		where status=1 and m_no=#{mno}
 	</select>
 	
@@ -204,5 +207,11 @@
 		from posting 
 		where location like #{search} || '%'
 	</select>
+	
+	<update id="updateAlarm">
+		update alarm
+		set status=2
+		where m_no=#{mno}
+	</update>
 
 </mapper>

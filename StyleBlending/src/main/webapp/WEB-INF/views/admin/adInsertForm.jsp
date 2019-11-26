@@ -6,6 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+	#adImg{
+		width:500px;
+		height:300px;
+		border:1px solid black;
+	}
+</style>
 </head>
 <body>
 
@@ -68,16 +75,16 @@
 						</div>
 						<div class="form-group" style="margin-bottom:25px; position:relative;">
 							<label for="file-input" class=" form-control-label">등록 이미지</label>
-							<input type="file" id="file-input" name="uploadFile" class="form-control-file">
-							<img id="adImg" src="#"/>
+							<input type="file" id="file-input" name="uploadFile" class="form-control-file" style="display:none;" onchange="previewImg(this);">
+							<img id="adImg"/>
 							<div style="position:absolute;">
-								<p><small class="form-text text-danger">광고 신청시 관리자 승인 처리 후 30일 동안 진행됩니다. 신청 버튼클릭시 결제페이지로 이동합니다.</small></p>
+								<p><small class="form-text text-success">광고 신청시 관리자 승인 처리 후 30일 동안 진행됩니다. 신청 버튼클릭시 결제페이지로 이동합니다.</small></p>
 							</div>
 							<br>
 							<br>
 							<div class="c2 sCheck2" style="position:absolute;">
 								<p>
-								<small class="form-text text-success"><input type="checkbox" name="checkCondition" id="checkCondition" onclick="agreeCheck();"/>위 구매 조건 확인 및 결제 진행에 동의</small></p>
+								<small class="form-text text-danger"><input type="checkbox" name="checkCondition" id="checkCondition" onclick="agreeCheck();"/>위 구매 조건 확인 및 결제 진행에 동의</small></p>
 							</div>
 						</div>
 						<br>
@@ -108,20 +115,27 @@
 			
 		}
 		
+		// 이미지 부분 클릭시 input 파일나오게
+		$(function(){
+			$("#adImg").click(function(){
+				$(this).prev().click();
+			});
+				
+		});
+		
 		// 사진미리보기
 		function previewImg(input){
+			
 			if(input.files && input.files[0]){
+				
 				var reader = new FileReader();
+				
 				reader.onload = function(e){
 					$("#adImg").attr('src',e.target.result);
 				}
-				reader.readAsDataURL(input.files[0]);
+				reader.readAsDataURL(input.files[0]); // 파일읽기
 			}
 		}
-		
-		$("#file-input").change(function(){
-			readInputFile(this);
-		});
 		
 
 	 	$(function(){
@@ -183,7 +197,7 @@
 				        	success:function(data){
 				        	// 마이페이지 광고리스트 페이지로이동
 				        	alert("광고가 정상적으로 신청되었습니다.");
-				       		location.href="aAdvertisment.do";
+				       		location.href="mpSAdList.do";
 				       
 				        	},error:function(){
 				        		console.log("ajax 통신 실패");

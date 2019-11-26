@@ -112,6 +112,10 @@ public class MyPageDao {
 	public ArrayList<Posting> selectSearchLoca(String search) {
 		return (ArrayList)sqlSession.selectList("mypageMapper.selectSearchLoca", search);
 	}
+
+	public int updateAlarm(int mno) {
+		return sqlSession.update("mypageMapper.updateAlarm", mno);
+	}
 	
 
 }

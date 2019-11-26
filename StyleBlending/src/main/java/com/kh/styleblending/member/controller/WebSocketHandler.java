@@ -12,6 +12,7 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.kh.styleblending.member.model.vo.Alarm;
 
 @Controller
@@ -26,28 +27,22 @@ public class WebSocketHandler extends TextWebSocketHandler{
 		@Override
 		public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 			sessionList.add(session);
-			System.out.println(sessionList.size());
 		}
 
 		// 클라이언트가 서버로 메시지를 전송했을 때 실행되는 메서드
 		@Override
 		protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-			
 			int mno = Integer.parseInt(message.getPayload());
-			int alarmCount = sqlSession.selectOne("mypageMapper.selectAlarmCount", mno);
-		
-			ArrayList<Alarm> list = new ArrayList<>();
 			
-			if(alarmCount != 0) {
-				list = (ArrayList)sqlSession.selectList("mypageMapper.selectAlarmList", mno);
-			}
+			ArrayList<Alarm> list = (ArrayList)sqlSession.selectList("mypageMapper.selectAlarmList", mno);
 			
+			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+			String alarmList = gson.toJson(list);
+			/*
 			for(WebSocketSession s : sessionList) {
-				s.sendMessage(new TextMessage(message.getPayload()));
-			}
-			
-			/* session.sendMessage(new TextMessage(mno+"")); */
-			
+				s.sendMessage(new TextMessage(alarmList));
+			}*/
+			session.sendMessage(new TextMessage(alarmList));
 			
 		}
 

@@ -21,6 +21,10 @@ public class Alarm {
 	private Date enrollDate;
 	private String status;
 	private String type;
+	private int bmno;
 	
 	private int alarmCount;
+	
+	private String nickName;
+	private String renameImg;
 }
