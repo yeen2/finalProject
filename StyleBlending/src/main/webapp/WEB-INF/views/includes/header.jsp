@@ -154,49 +154,54 @@
 				<i class="fa fa-search" style="font-size: x-large; color: gray;"></i>
 				&nbsp;
 				
-				<form action="nav_search.ca" method="get" style="display: inline;">
-					<input type="text" id="nav_search" name="nav_search" size="20px;" autocomplete="off"
+				<form action="pNavSearch.do" method="get" style="display: inline;">
+					<input type="text" id="nav_search" name="keyword" size="20px;" autocomplete="off"
 						style="background: none; border: none; color: white;"
 						placeholder="친구  위치 브랜드별 검색">
-				</form>
 				
-				<div style="position:relative; margin-left:100px;" id="displaySearch">
-				<!-- 검색 결과 창 -->
-					<div style="position:absolute; top:2px; left:-100px; width:400px; max-height:255px; box-shadow:0 5px 10px rgba(0, 0, 0, 0.5);
-						overflow-y:auto; overflow-x:hidden; background:white; display:none; z-index:1000;" id="searchDiv">
-						<div style="width:100%; height:50px;">
-							<ul style="padding:7px 5px 5px 8px;">
-								<li class="btn btn-dark" id="fanAreaBtn">회원</li>
-								<li class="btn btn-light" id="brandAreaBtn">브랜드</li>
-								<li class="btn btn-light" id="hashtagAreaBtn">#태그</li>
-								<li class="btn btn-light" id="locationAreaBtn">위치</li>
-							</ul>
-						</div>
-						
-					    <!-- 알림 추가될 때마다 div 추가 -->
-					    <!-- 회원 추가 -->
-					    <div id="fanArea" style="display:block; padding:0 5px 5px 5px;">
-					    	
-					    </div>
-					    
-					    <!-- 브랜드 추가 -->
-					    <div id="brandArea" style="display:none; padding:0 5px 5px 5px;">
-					    	
-						</div>
-						
-						<!-- 해시태그 추가 -->
-					    <div id="hashtagArea" style="display:none; padding:0 5px 5px 5px;">
 				
-					    </div>
-					    
-					    <!-- 위치 추가 -->
-					    <div id="locationArea" style="display:none; padding:0 5px 5px 5px;">
-					    
-					    </div>
-					    
-					    
+					<div style="position:relative; margin-left:100px;" id="displaySearch">
+					<!-- 검색 결과 창 -->
+						<div style="position:absolute; top:2px; left:-100px; width:400px; max-height:255px; box-shadow:0 5px 10px rgba(0, 0, 0, 0.5);
+							overflow-y:auto; overflow-x:hidden; background:white; display:none; z-index:1000;" id="searchDiv">
+							<div style="width:100%; height:50px;">
+								<ul style="padding:7px 5px 5px 8px;">
+									<input type="checkbox" id="fanCheckBox" name="type" value="0">
+									<label for="fanCheckBox" class="btn btn-dark" id="fanAreaBtn">회원</label>
+									<input type="checkbox" id="brandCheckBox" name="type" value="1">
+									<label for="brandCheckBox" class="btn btn-light" id="brandAreaBtn">브랜드</label>
+									<input type="checkbox" id="hashtagCheckBox" name="type" value="2">
+									<label for="hashtagCheckBox" class="btn btn-light" id="hashtagAreaBtn">#태그</label>
+									<input type="checkbox" id="locaCheckBox" name="type" value="3">
+									<label for="locaCheckBox" class="btn btn-light" id="locationAreaBtn">위치</label>
+								</ul>
+							</div>
+							
+						    <!-- 알림 추가될 때마다 div 추가 -->
+						    <!-- 회원 추가 -->
+						    <div id="fanArea" style="display:block; padding:0 5px 5px 5px;">
+						    	
+						    </div>
+						    
+						    <!-- 브랜드 추가 -->
+						    <div id="brandArea" style="display:none; padding:0 5px 5px 5px;">
+						    	
+							</div>
+							
+							<!-- 해시태그 추가 -->
+						    <div id="hashtagArea" style="display:none; padding:0 5px 5px 5px;">
+					
+						    </div>
+						    
+						    <!-- 위치 추가 -->
+						    <div id="locationArea" style="display:none; padding:0 5px 5px 5px;">
+						    
+						    </div>
+						    
+						    
+						</div>
 					</div>
-				</div>
+				</form>
 				
 			</div>
 
@@ -804,6 +809,8 @@ function select(){
 					}
 				}
 			});
+			
+			$("#displaySearch input").css("display", "none");
 			
 		});
 	</script>
