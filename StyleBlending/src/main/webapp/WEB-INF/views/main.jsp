@@ -1308,7 +1308,8 @@ li {
                          "</div>"+
                          "</div>"+
                          "<div class='card-body' style='height: 400px; padding: 0px;'>"+
-                         "<a href='pInfo.do?="+data[0].pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
+                         "<a href='pInfo.do?="+data[0].pno+"' style='b
+                        		 order-bottom: 0px !important; text-decoration: none black;'>"+
                          "<img class='card-img' src="+data[0].imgPath+"/"+data[0].renameImg+" alt='dog' style='height: 100%;'>"+
                          "</a>"+
                          "</div>"+
