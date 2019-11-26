@@ -359,7 +359,6 @@
 				data:{mno:${m.mno}, loginMno:$("#loginMno").val()},
 				dataType:"json",
 				success:function(list){
-					console.log(list[0].mno);
 					if(list.length == 0){
 						$("#fanEmpty").html("");
 						
@@ -879,16 +878,18 @@
 	        });
 	    });
 
+		/*
 		// 탭 클릭 시 새로고침 해도 탭 페이지 유지 (수정 필요)
 		$(document).ready(function(){
 			var url = document.location.href;
 			var tab = url.split('/').pop();
-			/* $('a[href=' + tab + ']').trigger("click"); */
+			$('a[href=' + tab + ']').trigger("click");
 			$("#postingTabBtn").click(function(){
 				console.log(url);
 				console.log(tab);
 			});
 		});
+		*/
 		
 	</script>
 	
