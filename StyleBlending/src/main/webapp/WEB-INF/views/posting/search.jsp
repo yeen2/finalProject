@@ -111,66 +111,38 @@
 			<!-- 왼쪽부분 -->
 			<div class="col-lg-8">
 
-				<!-- Title -->
-				<h1 class="mt-4">Style Posting</h1>
 				<!-- Author -->
 				<p class="lead">
-					by <a style="font-style: italic;">Style Blending</a>
+					<span style="font-style: italic;">" ${keyword } "</span><span> 의 검색 결과</span>
 				</p>
-
 				<hr>
-				<!-- 좋아요/신고 -->
-				<div >
-					<div style="display: inline; margin-right: 40px;">
-						<button type="button" class="btn btn-secondary" id="likeBtn">LIKE</button> &nbsp;&nbsp;
-						<h3 style="display: inline; margin-bottom: 0px;" id="pLikeCountH3">${p.likeCount}</h3>
+				<!-- 게시물 작성자 정보-->
+				<div id="pWriter" style="height: 70px;">
+					<!-- 프로필 사진 -->
+					<div style="display: inline-block; width: 60px; height: 60px; border-radius: 50%; margin-right: 20px;">
+						<img style="width: 100%; height: 100%; border-radius: 50%;" src="http://placehold.it/60x60" >
 					</div>
-					<div style="display: inline; margin-right: 60px;">
-						 <!--  카카오톡 공유하기  -->
-							<a id="kakao-link-btn" href="javascript:sendLink()">
-								<img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"
-										width="40px" height="40px;">
-							</a>
-							<span>
-								<script type="text/javascript" src="https://ssl.pstatic.net/share/js/naver_sharebutton.js"></script>
-								<script type="text/javascript">
-									new ShareNaver.makeButton({"type": "e" , "title":"[공유][StyleBlending]" , "url":"https://search.naver.com/search.naver?sm=tab_hty.top&where=nexearch&query=Style+Blending&oquery=StyleBlending&tqi=UOhtCsp0J1sssTDAW8dssssssGK-038226"});
-/* 									new ShareNaver.makeButton({"type": "e" , "title":"[공유][StyleBlending]" , "url":"https://search.naver.com/search.naver?sm=tab_hty.top&where=nexearch&oquery=%EB%84%A4%EC%9D%B4%EB%B2%84+%EA%B0%9C%EB%B0%9C%EC%9E%90%EC%84%BC%ED%84%B0&ie=utf8&query=%EB%84%A4%EC%9D%B4%EB%B2%84+%EA%B0%9C%EB%B0%9C%EC%9E%90%EC%84%BC%ED%84%B0"}); */
-								</script>
-							</span>
-					</div>
-					<div style="display: inline; float: right; margin-right: 200px;">
-						<a>
-						<i class="fas fa-exclamation-triangle" id="declareBtn"
-							style="color:red; font-size: xx-large; padding-top: 5px;"></i>
-						</a>
+					<!-- 상세정보 -->
+					<div style="display: inline-block; margin: auto; height: 50px; padding-top: 5px;">
+						<div style="height: 50%;">
+							<a href="#" style="margin-right: 20px;"><span style="font-weight: bold;">닉네임</span></a>
+							<button type="button" class="btn btn-dark btn-sm fBtn" id="addFan">
+								<i class="fa fa-plus"></i><b>Fan</b>
+							</button>
+						</div>
+						<div style="height: 50%;">
+							<i class="fas fa-map-marker-alt"></i>
+							<span style="fint-size:xx-small;">위치</span>
+						</div>
 					</div>
 				</div>
-				
-				<br>
 				<!-- 이미지 -->
 				<div style="width: 500px; height: 600px;">
-				
-				
 					<img class="img-fluid rounded" style="width: 100%; height: 100%;"
-						src="${ pageContext.servletContext.contextPath }/resources/upload/posting/${p.renameImg}" alt="">
+						src="${ pageContext.servletContext.contextPath }/resources/upload/posting/" alt="">
 				</div>
-				<!-- 좋아요,신고-->
-				<div>
-					<!-- 좋아요아이콘 -->
-					<!-- 댓글 아이콘 -->
-					<!-- 신고 아이콘 -->
-				</div>
-				
-				<hr>
-				
-				<!-- Post Content -->
-				<p>${p.content }</p>
-				
-				<hr>
-		
- 				</div>  <!-- #replyForm end -->
- 
+
+  
 			</div> <!-- col-lg-8 end -->
 			
 
@@ -180,6 +152,8 @@
 			<!-- 오른쪽 -->
 			<div class="col-md-4">
 			
+			
+			<%-- 
 				<!-- 1. 작성자 정보 -->
 				<div class="card my-4" style="padding: 10px;">
 					<!-- 작성자 프로필 -->
@@ -188,7 +162,7 @@
 						<div style="width: 25%; height: 25%; border-radius: 50%;">
 							<img style="width: 80%; height: 80%; border-radius: 50%;"
 								src="http://placehold.it/60x60" 
-								<%-- src="${ pageContext.servletContext.contextPath }/resources/upload/member/${p.rename_img}" --%>>
+								src="${ pageContext.servletContext.contextPath }/resources/upload/member/${p.rename_img}">
 						</div>
 						<!-- 정보 -->
 						<div style="width: 75%; height: 75%;">
@@ -232,26 +206,6 @@
 				<div class="card my-4">
 					<h5 class="card-header">Clothes stylist</h5>
 					<div class="card-body">
-					
-						<c:forEach var="s" items="${s}">
-						<div class="row" style="margin-bottom: 10px;">
-							<div class="col-lg-3">
-								<div  style="border-radius: 50%; width: 50px; height: 50px;">
-									<img style="width: 100%; height: 100%; border-radius: 50%;"
-										src="${ pageContext.servletContext.contextPath }/resources/image/cate/${s.img}">
-								</div>
-							</div>
-							<div class="col-lg-9" style="display: inline-block;">
-								<b>${s.name }</b>
-								<br>
-								<span>${s.brand }</span>
-								<br>
-								<div style="display: inline-block; border-radius: 50%; width: 15px; height: 15px;">
-									<div style="border-radius: 50%; width:100%; height:100%; background-color: ${s.color}"></div>
-								</div>
-							</div>
-						</div>
-						</c:forEach>
 						
 					</div>
 				</div>
@@ -261,12 +215,11 @@
 					<h5 class="card-header">Location</h5>
 					<div class="card-body">
 						<div id="map" style="height: 300px;"></div>
-						<%-- <span>${p.location }</span> --%>
+						<span>${p.location }</span>
 					</div>
 				</div>
-				<!-- 
-				
-				Search Widget
+			--%>
+
 				<div class="card my-4">
 					<h5 class="card-header">Search</h5>
 					<div class="card-body">
@@ -302,7 +255,7 @@
 						</div>
 					</div>
 				</div>
- -->
+
 				<!-- Side Widget -->
 				<div class="card my-4">
 					<h5 class="card-header">Spotlight</h5>
@@ -325,7 +278,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> 
 
 			</div>
 
@@ -335,196 +288,7 @@
 	</div>
 	<!-- /.container -->
 	
-<!------------------------------------------ 팬  ---------------------------------->
 
-	<script type="text/javascript">
-		var loginUser = "${loginUser.mno}";
-		
-		// 팬추가
-		$(".fBtn").click(function () {
-			
-			var nowFanCheck = $(this).attr('id');
-			console.log(nowFanCheck);
-			
-			if(loginUser == null || loginUser == ""){
-				alert("로그인 후 이용 가능하세요");
-				return;
-			}else{ //로그인 했을때
-				
-				if(nowFanCheck == 'addFan'){
-					insertFan(${p.mno});
-				}else {
-					deleteFan(${p.mno});
-				}
-				
-				
-			}
-		});
-	
-		// insert 팬
-		function insertFan(value){
-			var meNo = value;
-			$.ajax({
-				url:"mpInsertFan.do",
-				data:{meNo:meNo, youNo:loginUser},
-				type:"post",
-				success:function(result){
-					if(result == 1){
-						$("#addFan").hide();
-						$("#removeFan").show();
-					}else{
-						console.log("실패");
-					}
-				},
-				error:function(){
-					console.log("ajax 통신 실패");
-				}
-			});
-		}
-		
-		// delete 팬
-		function deleteFan(value){
-			var meNo = value;
-			$.ajax({
-				url:"mpDeleteFan.do",
-				data:{meNo:meNo, youNo:loginUser},
-				type:"post",
-				success:function(result){
-					if(result == 1){
-						$("#removeFan").hide();
-						$("#addFan").show();
-					}else{
-						console.log("실패");
-					}
-				},
-				error:function(){
-					console.log("ajax 통신 실패");
-				}
-			});
-		}
-		
-	</script>
-
-<!------------------------------------------  좋아요 -------------------------------->
-
-	<script type="text/javascript">
-
-
-	// 이 포스팅의 좋아요 카운트 가져오기
-	function getPLikeCount() {
-		$.ajax({
-			url:"getPLikeCount.do",
-			data:{pno:${p.pno}},
-			type:"get",
-			success:function(data){
-				
-				$("#pLikeCountH3").text(data);
-				
-			},error:function(){
-				console.log("ajax 서버 실패");
-			}
-		});
-	};
-
-	$("#likeBtn").hover(function () { // 버튼 마우스
-		//likeCount = $(this).next().text();
-		var loginLike;
-		var mno = "${loginUser.mno}";
-		
-		if(mno == null || mno == ""){
-			$(this).next().text("+1");
-			
-		}else{ // 로그인 되어있을때
-		
-			loginLike = getPLikeCheck(mno);
-		
-			if(loginLike == 0){
-				$(this).next().text("+1");
-			}else{
-				$(this).next().text("-1");
-			}	
-		}
-
-	}, function () { //마우스 뗄때
-		getPLikeCount();
-	});
-	
-	
-	// 좋아요 클릭시 로그인되있는지 확인
-	$("#likeBtn").on("click", function () {
-		var loginUser = "  ${loginUser.email}";
-
-		if(loginUser == null || loginUser == ""){
-			alert("로그인 후 이용 가능하세요");
-			return;
-			
-		}else{ // 로그인 되어있을때
-			var mno = "${loginUser.mno}";
-			var loginLike = getPLikeCheck(mno);
-			
-			if(loginLike == '0'){
-				// 좋아요 추가
-				$.ajax({
-					url:"pLikeInsert.do",
-					data:{pno:${p.pno},
-						  mno:mno},
-					type:"get",
-					success:function(str){
-						if(str == 'success'){
-							console.log("좋아요 추가 성공");
-							getPLikeCount();
-
-						}else{
-							console.log("좋아요 추가 실패");
-						}
-					},error:function(){
-						console.log("ajax 서버 실패");
-					}
-				});
-				
-			}else{
-				// 좋아요 취소
-				$.ajax({
-					url:"pLikeDelete.do",
-					data:{pno:${p.pno},
-						  mno:mno},
-					type:"get",
-					success:function(str){
-						if(str == 'success'){
-							console.log("좋아요 제거 성공");
-							getPLikeCount();
-						}else{
-							console.log("좋아요 제거 실패");
-						}
-					},error:function(){
-						console.log("ajax 서버 실패");
-					}
-				});
-			}
-		}
-	});
-
-	// 로그인 회원의 해당 포스팅 좋아요 확인
-	function getPLikeCheck(mno) {
-		var result=0;
-		$.ajax({
-			url:"getPLikeCheck.do",
-			async: false,
-			data:{pno:${p.pno},
-				  mno:mno},
-			type:"get",
-			success:function(data){
-				console.log(data);
-				result = data;
-			},error:function(){
-				console.log("ajax 서버 실패");
-			}
-			
-		});
-			return result;
-	};
-	
-	</script>
 
 	<jsp:include page="../includes/footer.jsp" />
 

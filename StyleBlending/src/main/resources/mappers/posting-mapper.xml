@@ -182,7 +182,7 @@
 		from posting p
 		join member m on(p.m_no=m.m_no)
 		join style s on(p.p_no=s.p_no)
-		where hashtag like '%'||#{keyword}||'%'
+		where s.brand like '%'||#{keyword}||'%'
 	</select>
 	
 	<select id="selectSearchPosting_hash" parameterType="HashMap" resultMap="postingOneResultSet">

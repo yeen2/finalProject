@@ -61,9 +61,9 @@ public class PostingController {
 			}
 		}
 		
-
-		System.out.println(p);
-		mv.addObject("p", p).setViewName("posting/search");
+		System.out.println("키워드 : " + keyword);
+		System.out.println("검색한p : " +p);
+		mv.addObject("p", p).addObject("keyword", keyword).setViewName("posting/search");
 	
 		return mv;
 	}
