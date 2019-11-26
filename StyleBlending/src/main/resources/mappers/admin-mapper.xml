@@ -254,9 +254,7 @@
     				from member
     				group by TO_CHAR(enroll_date,'yy/mm'))
 	</select>
-	
-<<<<<<< HEAD
-=======
+
 	<!-- 최근 6개월 총 게시글수 -->
 	<select id="selectboardCount" resultMap="StResultSet">
 		select SUM(MONTH1) "month1", SUM(MONTH2) "month2",SUM(MONTH3) "month3",SUM(MONTH4) "month4",SUM(MONTH5) "month5",SUM(MONTH6) "month6"
@@ -292,7 +290,6 @@
 		    				group by TO_CHAR(enroll_date,'yy/mm')))
 	</select>
 	
->>>>>>> branch 'dev' of https://github.com/yeen2/finalProject.git
 	<select id="selectNoticeList" resultMap="NoticeResultSet">
 		select * from notice
 	</select>
