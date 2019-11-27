@@ -196,6 +196,7 @@ li {
       $.ajax({
          url:"mainFourWrap.do",
          dataType:"json",
+         async: false,
          success:function(data){
             console.log("성공 topFour");
             $.each(data,function(index, value){

@@ -18,7 +18,9 @@ public class Notice {
 	private int nno;
 	private String title;
 	private String content;
-	private String enrollDate; //다시 date로 바꿔야함.
+	private Date enrollDate; //다시 date로 바꿔야함.
+	private String isDelete;
+	
 	//private String isDelete;
 	
 	
