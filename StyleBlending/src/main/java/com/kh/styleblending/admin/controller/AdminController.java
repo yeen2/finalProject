@@ -302,7 +302,15 @@ public class AdminController {
 		return mv;
 	}
 	
-	
+	@RequestMapping("aMainNotice.do")
+	public ModelAndView notice2(ModelAndView mv) {
+		
+		ArrayList<Notice> list = aService.selectNoticeList();
+		
+		mv.addObject("list", list).setViewName("main/notice");
+		
+		return mv;
+	}
 	
 	
 	
