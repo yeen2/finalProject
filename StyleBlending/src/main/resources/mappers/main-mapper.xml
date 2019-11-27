@@ -131,9 +131,10 @@
 			            (select count(*) from p_like where p_no=p.p_no and m_no= #{mno}) loginLike,
 			             (select count(*) from fan f where me_no = p.m_no and f.you_no=#{mno}) fanCheck
 			        from posting p, style s, category c, member m
-			        where p.p_no = s.p_no and s.s_no = c.ca_no and p.m_no = m.m_no and (color = #{p.color} or gender =#{p.gender} or name = #{p.category}))
+			        where p.p_no = s.p_no and s.s_no = c.ca_no and p.m_no = m.m_no and (color = #{p.color} or gender =#{p.gender} or name = #{p.category})
+			        order by p.enroll_date)
 			group by p_no, m_no, original_img, rename_img, img_path, content, hashtag, gender, location, like_count, declare_count, enroll_date,update_date,isdelete,nickname,profile,profile_path,replycount,loginLike,fanCheck
-
+			order by enroll_date
 	</select>
 	<update id="increaseLikeCount">
 		update posting 

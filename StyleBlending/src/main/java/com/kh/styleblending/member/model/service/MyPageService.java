@@ -31,7 +31,7 @@ public interface MyPageService {
 	Member updateProfileImg(Member m);
 	
 	// 프로필 관리 - 프로필 수정
-	int updateProfile(Member m);
+	Member updateProfile(Member m);
 	
 	// 프로필 관리 - 내 광고 리스트 카운트
 	int getAdListCount(int mno);
@@ -71,5 +71,8 @@ public interface MyPageService {
 
 	// 알람 업데이트
 	int updateAlarm(int mno);
+	
+	// 닉네임 중복체크
+	int nickNameCheck(Member m);
 
 }

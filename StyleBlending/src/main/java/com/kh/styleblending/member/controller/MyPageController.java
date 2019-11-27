@@ -215,10 +215,10 @@ public class MyPageController {
 	// 내 프로필 수정 메소드
 	@RequestMapping("mpUpdatePf.do")
 	public ModelAndView updateProfile(Member m, ModelAndView mv, HttpSession session) {
-		int result = mpService.updateProfile(m);
+		Member mem = mpService.updateProfile(m);
 		
-		if(result > 0) {
-			session.setAttribute("loginUser", m);
+		if(mem != null) {
+			session.setAttribute("loginUser", mem);
 			mv.addObject("msg", "회원 정보 수정에 성공하였습니다.").setViewName("member/myPage");
 		}else {
 			mv.addObject("msg", "회원 정보 수정에 실패하였습니다.").setViewName("common/errorPage");
@@ -397,6 +397,19 @@ public class MyPageController {
 	@RequestMapping("mpUpdateAlarm.do")
 	public int updateAlarm(int mno) {
 		int result = mpService.updateAlarm(mno);
+		
+		if(result > 0) {
+			return 1;
+		}else {
+			return -1;
+		}
+	}
+	
+	// 프로필 수정 - 닉네임 ajax 체크 메소드
+	@ResponseBody
+	@RequestMapping("mpNickNameCheck.do")
+	public int nickNameCheck(Member m) {
+		int result = mpService.nickNameCheck(m);
 		
 		if(result > 0) {
 			return 1;
