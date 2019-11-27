@@ -50,14 +50,14 @@
 	<jsp:include page="header.jsp" />
      
     	<div class="content">
-            <div class="animated fadeIn">
+            <div class="animated fadeIn mt-3" >
                 <div class="row">
                 	<div class="col-lg-12">
-                        <div class="card">
+                        <div class="card" >
                             <div class="card-header">
                                 <strong class="card-title">회원 목록</strong>
                             </div>
-                            
+                            <div class="card-body mt-5" style="min-height: 800px;">	
                             <div class="row">
 	                            <div class="col-md-10 offset-md-1" style="padding:20px;">
 	                          		<label style="display:inline-flex; padding-right:20px;">Show 
@@ -126,6 +126,7 @@
                                     </c:if>
                                 </table>
                                 
+                                <br>
                                 <div class="row">
 	                                <div class="col-sm-4" style="margin-left:10px;">
 	                                	Showing <strong> ${pi.currentPage } to ${pi.endPage }</strong> of <strong> ${pi.listCount }</strong> entries	
@@ -181,6 +182,7 @@
                                 </div>
                                 
                             </div> <!-- /.table-stats -->
+                        </div>
                         </div>
                     </div>
 

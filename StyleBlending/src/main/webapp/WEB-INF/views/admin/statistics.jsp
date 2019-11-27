@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<!-- 차트 보이게 cdn -->
+<!-- 차트 보이게 cdn x-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery.min.js"></script>
@@ -55,27 +55,24 @@
       
         
        <div class="content">
-            <div class="animated fadeIn">
+            <div class="animated fadeIn mt-3">
                 <div class="row">
-                
-			      
-			     <div class="col-lg-10 offset-md-1">
-					<div class="card">
-						<div class="card-body">
-							<div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
-								<div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-									<div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+				     <div class="col-lg-10 offset-md-1">
+						<div class="card">
+							<div class="card-body mt-5 ">
+								<div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+									<div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+										<div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+									</div>
+									<div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+										<div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+									</div>
 								</div>
-								<div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-									<div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
-								</div>
+								<h4 class="mb-3"><b>현황 통계 (게시글 / 가입자)</b></h4>
+								<canvas id="sales-chart" height="528" width="1057" class="chartjs-render-monitor" style="display: block; height: 352px; width: 705px;"></canvas>
 							</div>
-							<h4 class="mb-3"><b>현황 통계 (게시글 / 가입자)</b></h4>
-							<canvas id="sales-chart" height="528" width="1057" class="chartjs-render-monitor" style="display: block; height: 352px; width: 705px;"></canvas>
 						</div>
-					</div>
-				</div>
-      
+					</div> <!-- 현황통계 끝 -->
       			</div>
       		</div>
       </div>
@@ -95,12 +92,10 @@
 			 url:"aChart.do",
 			 dataType:"json",
 			 success:function(data){
-<<<<<<< HEAD
 				
 					console.log(data[0]);
 					console.log(data[1]);
 					
-=======
 				// alert(data);
 			
 					// console.log(data[index]);
@@ -114,7 +109,6 @@
 						num.push(data.month6);
 					}
 					 
->>>>>>> branch 'dev' of https://github.com/yeen2/finalProject.git
 				    var ctx = document.getElementById( "sales-chart" );
 				    ctx.height = 500;
 				    var myChart = new Chart( ctx, {
@@ -197,11 +191,8 @@
 				        }
 				    } );
 					
-<<<<<<< HEAD
-=======
 					
 		
->>>>>>> branch 'dev' of https://github.com/yeen2/finalProject.git
 				
 			 },error:function(){
 				 console.log("ajax통신 실패");

@@ -61,18 +61,20 @@
 				<div class="col-12 col-md-5" style="margin-left:auto; margin-right:auto;">
 					<div class="register-form" id="updateForm">
 					
-						<form action="mpUpdatePf.do" method="post">
+						<form action="mpUpdatePf.do" method="post" onsubmit="return nickNameCheck();">
 							<input type="hidden" name="mno" value="${ loginUser.mno }">
 							<div class="form-group">
 								<label for="email">Email address</label>
 								<input type="email" class="form-control" id="email" name="email"
 									aria-describedby="emailHelp" placeholder="${ loginUser.email }" disabled>
 							</div>
-							<div class="form-group">
+							<div class="form-group" style="position:relative;">
 								<label for="nickname">Nickname</label>
-								<input type="text" class="form-control" id="nickName" name="nickName"
+								<input type="text" class="form-control" id="nickName" name="nickName" maxlength="8" autocomplete="off"
 									aria-describedby="nicknameHelp" value="${ loginUser.nickName }">
-								<small id="nicknameHelp" class="form-text text-danger">이미 사용중인 닉네임입니다</small>
+								<small id="nickNameCheck" class="form-text text-danger" style="display:none; position:absolute;">형식에 맞지 않는 닉네임입니다.</small>
+								<small id="nickNameFail" class="form-text text-danger" style="display:none; position:absolute;">이미 사용중인 닉네임입니다.</small>
+								<small id="nickNameSuccess" class="form-text text-success" style="display:none; position:absolute;">사용 가능한 닉네임입니다.</small>
 							</div>
 							<div class="form-group">
 								<label for="introduce">Introduce</label>
@@ -100,7 +102,7 @@
 			    <div class="modal-content">
 			      <div class="modal-header">
 			        <h5 class="modal-title" id="exampleModalLabel">비밀번호 변경</h5>
-			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="passClose">
 			          <span aria-hidden="true">&times;</span>
 			        </button>
 			      </div>
@@ -125,7 +127,7 @@
 				
 				      <div class="modal-footer">
 				        <button type="submit" class="btn btn-success">변경하기</button>
-				        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+				        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="passClose2">취소</button>
 				      </div>
 			       </form>
 			     
@@ -140,7 +142,7 @@
 			    <div class="modal-content">
 			      <div class="modal-header">
 			        <h5 class="modal-title" id="exampleModalLabel">회원 탈퇴</h5>
-			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="deleteClose">
 			          <span aria-hidden="true">&times;</span>
 			        </button>
 			      </div>
@@ -170,7 +172,7 @@
 				
 				    <div class="modal-footer">
 				      <button type="button" class="btn btn-success" id="deleteBtn">탈퇴하기</button>
-				      <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+				      <button type="button" class="btn btn-secondary" data-dismiss="modal" id="deleteClose2">취소</button>
 				    </div>
 			     
 			    </div>
@@ -182,6 +184,61 @@
 	</div>
 	
 	<script>
+		<%-- 닉네임 중복체크 ajax --%>
+		
+		
+		$("#nickName").on("input", function(){
+			var nickNameValue = $("#nickName").val();
+			var regExp = /^[가-힣a-zA-Z0-9]{3,8}$/;
+			
+			if(nickNameValue.length != 0 && regExp.test(nickNameValue)){
+				$.ajax({
+					url:"mpNickNameCheck.do",
+					type:"post",
+					data:{nickName:nickNameValue},
+					success:function(result){
+						if(result == 1){
+							$("#nickNameCheck").hide();
+							$("#nickNameFail").show();
+							$("#nickNameSuccess").hide();
+						}else{
+							$("#nickNameCheck").hide();
+							$("#nickNameFail").hide();
+							$("#nickNameSuccess").show();
+						}
+					},
+					error:function(){
+						console.log("ajax 통신 실패");
+					}
+				});
+			}else{
+				$("#nickNameCheck").show();
+				$("#nickNameFail").hide();
+				$("#nickNameSuccess").hide();
+			}
+			if(nickNameValue.length == 0){
+				$("#nickNameCheck").hide();
+				$("#nickNameFail").hide();
+				$("#nickNameSuccess").hide();
+			}
+			
+		});
+		
+		function nickNameCheck(){
+			var nickNameValue = $("#nickName").val();
+			var regExp = /^[가-힣a-zA-Z0-9]{3,8}$/;
+			
+			if(nickNameValue.length == 0){
+				alert("닉네임을 입력해주세요.");
+				return false;
+			}else if(!regExp.test(nickNameValue)){
+				alert("닉네임이 형식에 맞지 않습니다.");
+				return false;
+			}
+			
+			return true;
+		}
+		
 		<%-- 비밀번호 변경 유효성 검사 --%>
 		$("#pass").on("input", function(){
 			if($("#pass").val().length < 8){
@@ -244,6 +301,43 @@
 				alert("비밀번호가 일치하지 않습니다.");
 				$("#userPass").val("").focus();
 			}
+		});
+		
+		<%-- 모달창 닫을 때 입력값 초기화 --%>
+		$("html").click(function(e){
+			if($("#updatePass").css("display") == "block"){
+				if(!$("#updatePass").has(e.target).length){
+					$("#currentPass").val("");
+					$("#pass").val("");
+					$("#pass2").val("");
+					$(".fCheck1").hide();
+					$(".sCheck1").hide();
+					$(".fCheck2").hide();
+					$(".sCheck2").hide();
+				}
+			}
+		});
+		
+		$("html").click(function(e){
+			if($("#deleteMember").css("display") == "block"){
+				if(!$("#deleteMember").has(e.target).length){
+					$("#userPass").val("");
+				}
+			}
+		});
+		
+		$("#passClose, #passClose2").click(function(){
+			$("#currentPass").val("");
+			$("#pass").val("");
+			$("#pass2").val("");
+			$(".fCheck1").hide();
+			$(".sCheck1").hide();
+			$(".fCheck2").hide();
+			$(".sCheck2").hide();
+		});
+		
+		$("#deleteClose, #deleteClose2").click(function(){
+			$("#userPass").val("");
 		});
 		
 		

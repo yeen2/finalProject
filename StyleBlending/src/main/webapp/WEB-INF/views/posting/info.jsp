@@ -73,6 +73,23 @@
 		margin-left: 10px;
 		display: inline-block;
 	 }
+	.rr_modi_div {
+		height: 66px;
+		display: none;
+	}
+	.rrModiContent{
+		border: 1px solid #787878;
+		border-radius: .25rem;
+    	padding: .5rem 1rem;
+    	border-color : none;
+    	width: 400px;
+    	rows : 3;
+	}
+	.rrModiSubmit {
+	 	margin-bottom: 30px;
+		margin-left: 10px;
+		display: inline-block;
+	 }
 	 
 	 
 	.spotDiv {
@@ -93,6 +110,12 @@
 		margin-left: 10px;
 	}
 	.r_md:hover{
+		cursor: pointer;
+	}
+	.rr_md{
+		margin-left: 10px;
+	}
+	.rr_md:hover{
 		cursor: pointer;
 	}
 	a:hover {
@@ -264,7 +287,7 @@
 						<!-- 이미지 -->
 						<div style="width: 25%; height: 25%; border-radius: 50%;">
 							<img style="width: 80%; height: 80%; border-radius: 50%;"
-								src="http://placehold.it/60x60" 
+								src="${ pageContext.servletContext.contextPath }/resources/upload/member/${p.profileImg}"
 								<%-- src="${ pageContext.servletContext.contextPath }/resources/upload/member/${p.renameImg}" --%>>
 						</div>
 						<!-- 정보 -->
@@ -829,26 +852,32 @@
 							$replyForm_div_2 = $("<div class='media mb-4 replyForm_div_2'></div>");
 							
 							$replyForm_imgDiv = $("<div class='replyForm_imgDiv'></div>");	
-							$img = $("<img class='replyForm_img'>").attr("src",'http://placehold.it/50x50');
+							$img = $("<img class='replyForm_img'>").attr("src",'/styleblending/resources/upload/member/'+value.profileImg);
 							
 							$replyForm_contentDiv = $("<div class='replyForm_contentDiv'></div>");
 							$nickname = $("<h5 class='mt-0 replyForm_nickname'></h5>").text(value.nickName);
 							$rcontent = $("<span class='replyForm_content'></span>").html(value.content);
-							//수정div(hidden)
+							//댓글 수정div(hidden)
 							$r_modi_div = $("<div class='r_modi_div'></div>")
 							$r_modi_textarea = $("<textarea class='rModiContent'></textarea>").html(value.content);
 							$r_modi_submit = $("<button class='btn btn-dark rModiSubmit' id='rModiSubmit'>등록</button>");
+							//대댓글 수정div(hidden)
+							$rr_modi_div = $("<div class='rr_modi_div'></div>")
+							$rr_modi_textarea = $("<textarea class='rrModiContent'></textarea>").html(value.content);
+							$rr_modi_submit = $("<button class='btn btn-dark rrModiSubmit' id='rrModiSubmit'>등록</button>");
 							
 							$likecount = $("<span class='replyForm_likecount'></span>").text(value.likeCount);
 							$likeImg = $("<i class='fas fa-caret-up'></i>");
 							$rrBtn = $("<a class='rrBtn'>reply</a>");
 							$date = $("<span class='replyForm_date'></span>").text(value.enrollDate);
-							//수정 삭제 아이콘
+							//댓글 수정 삭제 아이콘
 							$r_modi = $("<i class='fas fa-pencil-alt r_md r_modiBtn'></i>");
 							$r_delete = $("<i class='fas fa-trash-alt r_md r_deleteBtn'></i>");
+							//대댓글 수정 삭제 아이콘
+							$rr_modi = $("<i class='fas fa-pencil-alt rr_md rr_modiBtn'></i>");
+							$rr_delete = $("<i class='fas fa-trash-alt rr_md rr_deleteBtn'></i>");
 							
-							
-							
+
 							// 대댓글폼
 							$replyForm_rrForm = $("<br><br><div class='replyForm_rrForm' style='display:none;'></div>");
 							$prno = $("<input type='hidden'>").text(value.prno);
@@ -884,9 +913,17 @@
 							}else{ 
 								
 								if(session_mno == value.mno){ //댓글쓴사람 = 로그인회원
+									// =>수정div
+									$rr_modi_div.append($rr_modi_textarea).append($rr_modi_submit);
 									$replyForm_imgDiv.append($img);
-									$replyForm_contentDiv.append($nickname).append($rcontent).append('<br>').append($likecount)
-													.append($likeImg).append($date).append($replyForm_rrForm);
+									//대댓글 (수정삭제할때 갖고올라고)
+									$replyForm_rrForm.append($prno).append($rrContent).append($rrSubmit);
+									
+									$replyForm_contentDiv.append($nickname).append($rcontent)
+													.append($rr_modi_div)
+													.append('<br>').append($likecount)
+													.append($likeImg).append($date).append($rr_modi).append($rr_delete)
+													.append($replyForm_rrForm);
 								
 								}else {
 									$replyForm_imgDiv.append($img);
@@ -939,6 +976,31 @@
 			}
 		});
 		
+		//대댓글 삭제
+		$(document).on("click",".rr_deleteBtn", function () {
+			var prno = $(this).parent().children(".replyForm_rrForm").children().eq(0).text();
+			
+			if(confirm('정말로 삭제하시겠습니까?')){
+				// 댓글 삭제
+				$.ajax({
+					url:"pReReplyDelete.do",
+					data:{prno:prno},
+					success:function(data){
+						
+						if(data == "success"){
+							getReplyList();
+						}else{
+							alert("댓글 삭제 실패");
+						}
+						
+					},error:function(){
+						console.log("ajax 통신 실패");
+					}
+				});
+			}
+		});
+		
+		
 		//댓글 수정
 		$(document).on("click",".r_modiBtn", function () {
 			var prno = $(this).parent().children(".replyForm_rrForm").children().eq(0).text();
@@ -969,8 +1031,38 @@
 					console.log("ajax 통신 실패");
 				}
 			});
+		});
+		
+		//대댓글 수정
+		$(document).on("click",".rr_modiBtn", function () {
+			var prno = $(this).parent().children(".replyForm_rrForm").children().eq(0).text();
+
+			$(this).parent().children(".rr_modi_div").toggle();
+			$(this).parent().children(".replyForm_content").toggle();
+		});
+		
+		$(document).on("click",".rrModiSubmit", function () {
+			var prno = $(this).parent().parent().children(".replyForm_rrForm").children().eq(0).text();
+			var content = $(this).prev().val();
+			console.log(prno);
+			console.log(content);
 			
-			
+			$.ajax({
+				url:"pReReplyUpdate.do",
+				data:{prno:prno,
+					  content:content},
+				success:function(data){
+					
+					if(data == "success"){
+						getReplyList();
+					}else{
+						alert("댓글 삭제 실패");
+					}
+					
+				},error:function(){
+					console.log("ajax 통신 실패");
+				}
+			});
 		});
 		
 	</script>
