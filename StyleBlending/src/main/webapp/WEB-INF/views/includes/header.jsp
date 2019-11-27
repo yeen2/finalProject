@@ -342,7 +342,7 @@
 								</h4>
 							</div>
 							<div class="modal-body row" style="padding-top: 0px;">
-								<div class="col-3">
+								<div class="col-6">
 									<!-- 								<a class="btn" href="index.jsp" id="man" onclick="man();">
 									<i class="fa fa-male fa-5x" aria-hidden="true"
 									aria-label="Close" class="close" data-dismiss="modal"
@@ -352,7 +352,7 @@
 									</a> <br /> <br />
 									<p style="color: white; margin: 0px;">남자</p>
 								</div>
-								<div class="col-3">
+								<div class="col-6">
 									<!-- <a class="btn" href="">
 									<i class="fa fa-female fa-5x" aria-hidden="true"></i>
 								</a> -->
@@ -360,18 +360,7 @@
 									</a> <br /> <br />
 									<p style="color: white; margin: 0px;">여자</p>
 								</div>
-								<div class="col-3">
-									<a class="btn b" id="전체"> <i class="fa fa-users fa-5x"
-										aria-hidden="true"></i>
-									</a> <br /> <br />
-									<p style="color: white; margin: 0px;">전체</p>
-								</div>
-								<div class="col-3">
-									<a class="btn b" id="기타"> <i class="fa fa-ellipsis-h fa-5x"
-										aria-hidden="true"></i>
-									</a> <br /> <br />
-									<p style="color: white; margin: 0px;">기타</p>
-								</div>
+								
 
 							</div>
 
@@ -379,7 +368,7 @@
 								style="border: 1px solid gray; width: 500px; margin-bottom: 10px;"></div>
 
 							<div class="modal-body row" style="padding-top: 0px;">
-								<div class="btn col-2" style="padding: 0px;">
+								<div class="col-2" style="padding: 0px;">
 									<a id="red" class="btn bb"> <i class="fa fa-circle fa-5x"
 										aria-hidden="true" style="color: red;" id="red"></i>
 									</a> <br /> <br />
