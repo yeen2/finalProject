@@ -227,7 +227,7 @@
 					                </div>
 					                <div class="col-md-4" >
 				                        <div class="card">
-				                            <img class="card-img-top" src="${pageContext.request.contextPath}${startAd.imgPath}${startAd.renameImg}" alt="Card image cap">
+				                            <iframe class="card-img-top" src="http://www.youtube.com/embed/NVf6_boeYIQ&list=RDhG6cUBmayDc&index=2"  frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
 				                            <div class="card-body">
 				                                <h4 class="card-title mb-3">${startAd.name}</h4>
 				                                 <p class="card-text">${startAd.startDate} ~ </p>
@@ -339,7 +339,7 @@
 				  }else{
 					  
 					  if(checkRow.charAt(checkRow.length-1) == 1){
-					    	alert("1임");
+					    	//alert("1임");
 					    	adno = checkRow.slice(0,-1);		    	
 					  	    $("#adStartModal").show();
 					  	    $("#adStartConfirm").click(function(){
@@ -440,6 +440,10 @@
 	});	
 	
 	
+	$(function(){
+		var  url = ${startAd.url};
+		console.log(url.indexOf("="));
+	});
 	
 	
 	</script>
