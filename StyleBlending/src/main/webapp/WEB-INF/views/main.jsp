@@ -196,7 +196,7 @@ li {
       $.ajax({
          url:"mainFourWrap.do",
          dataType:"json",
-         async: false,
+         async:false,	
          success:function(data){
             console.log("성공 topFour");
             $.each(data,function(index, value){
@@ -1244,6 +1244,7 @@ li {
                console.log($(window).scrollTop());
                console.log($(document).height());
                console.log($(window).height());
+
                
                var height = $(window).height() - document.body.clientHeight;
                if ($(window).scrollTop() == height&& sel == null && $(document).height() != 5073){
