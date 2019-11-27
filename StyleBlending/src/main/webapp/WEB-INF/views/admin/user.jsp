@@ -126,7 +126,7 @@
                                     </c:if>
                                 </table>
                                 
-                                <br>
+                                <br><br>
                                 <div class="row">
 	                                <div class="col-sm-4" style="margin-left:10px;">
 	                                	Showing <strong> ${pi.currentPage } to ${pi.endPage }</strong> of <strong> ${pi.listCount }</strong> entries	

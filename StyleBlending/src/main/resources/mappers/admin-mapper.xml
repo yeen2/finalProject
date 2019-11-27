@@ -289,7 +289,7 @@ select sum(m1) "month1",sum(m2) "month2",sum(m3) "month3",sum(m4) "month4",sum(m
 
 	
 	<select id="selectNoticeList" resultMap="NoticeResultSet">
-		select * from notice
+		select * from notice where isdelete='N'
 	</select>
 	 
 </mapper>
