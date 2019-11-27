@@ -240,6 +240,7 @@
 			                        </c:if>
                              </div>
                              
+                             
 							</div>
                       </div>
                 </div>
@@ -388,11 +389,12 @@
 		// 업체명검색
 		$("#adName").keyup(function(){ // 키보드 눌렀다가 뗐을때 이벤트 발생
 			var k = $(this).val();
+			var $hiddenTable = $("#hiddenTable").val();
+			
+			$hiddenTable.html("");
 			//$(".table>tbody>tr").hide();
 			//var adName = $(".table>tbody>tr> td:nth-child(5n+3):contains('" + k + "')"); // 업체명 검색
 			location.href="aAdvertisment.do?keyword="+k;
-	/* 		var $table = $(".table");
-			$table.html("");
 			
 			$.ajax({
 				url:"aSearchAdname.do",
@@ -414,23 +416,23 @@
                         "<td>"+
                         	"<c:if test='${a.status eq 1 }'>"+
                         	"<span class='badge adWaiting' style='background:#ffc107;'>등록 대기</span>"+
-                            "</c:if>"
-                            <c:if test="${a.status eq 2 }">
-                            <span class="badge adOngoing" style="background:rgb(0, 123, 255);">진행중</span>
-                            </c:if>
-                            <c:if test="${a.status eq 3 }">
-                            <span class="badge adEnd" style="background:gray;">종료</span>
-                            </c:if>
-                        </td>
-                    </tr> 
-                    $table.append($content);
+                            "</c:if>"+
+                            "<c:if test='${a.status eq 2 }'>"+
+                            "<span class='badge adOngoing' style='background:rgb(0, 123, 255);'>진행중</span>"+
+                            "</c:if>"+
+                            "<c:if test='${a.status eq 3 }'>"+
+                            "<span class='badge adEnd' style='background:gray;'>종료</span>"+
+                            "</c:if>"+
+                        "</td>"+
+                    "</tr>"
+                    $hiddenTable.append($content);
 						
 					});
 					
 				},error:function(){
 					console.log("ajax 통신 실패");
 				}
-			}); */
+			}); 
 			
 		});
 		
