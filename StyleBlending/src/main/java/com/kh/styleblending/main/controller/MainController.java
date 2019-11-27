@@ -48,17 +48,18 @@ public class MainController {
 
 		gson.toJson(list, response.getWriter());
 	}
-	@RequestMapping("mainNoticeList.do")
-	public void replyList(HttpServletResponse response) throws JsonIOException, IOException {
-
-		ArrayList<Notice> list = new ArrayList<>();
-
-		
-		response.setContentType("application/json; charset=UTF-8");
-		Gson gson = new Gson();
-
-		gson.toJson(list, response.getWriter());
-	}
+	/*
+	 * @RequestMapping("mainNoticeList.do") public void
+	 * replyList(HttpServletResponse response) throws JsonIOException, IOException {
+	 * 
+	 * ArrayList<Notice> list = mainService.selectNoticeList();
+	 * 
+	 * response.setContentType("application/json; charset=UTF-8");
+	 * 
+	 * Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+	 * 
+	 * gson.toJson(list, response.getWriter()); }
+	 */
 
 	@RequestMapping("mainFourWrap.do")
 	public void FourWrap(HttpServletResponse response) throws JsonIOException, IOException {
@@ -126,6 +127,7 @@ public class MainController {
 		
 		jsonUser.put("url", ad.getUrl());
 		jsonUser.put("originalImg", ad.getOriginalImg());
+		jsonUser.put("renameImg", ad.getRenameImg());
 		jsonUser.put("imgPath", ad.getImgPath());
 		
 		response.setContentType("application/json; charset=UTF-8");
