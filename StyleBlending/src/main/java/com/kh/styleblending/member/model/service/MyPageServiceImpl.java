@@ -210,6 +210,11 @@ public class MyPageServiceImpl implements MyPageService {
 		return mpDao.nickNameCheck(m);
 	}
 
+	@Override
+	public int updateAlarmOne(int alno) {
+		return mpDao.updateAlarmOne(alno);
+	}
+
 
 
 }

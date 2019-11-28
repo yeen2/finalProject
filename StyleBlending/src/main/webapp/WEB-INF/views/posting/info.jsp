@@ -894,6 +894,9 @@
 							
 							$likecount = $("<span class='replyForm_likecount'></span>").text(value.likeCount);
 							$likeImg = $("<i class='fas fa-caret-up'></i>");
+							// 댓글 조아요 하트
+							$r_likeBtn = $("<i class='fas fa-heart'></i>");
+						
 							$rrBtn = $("<a class='rrBtn'>reply</a>");
 							$date = $("<span class='replyForm_date'></span>").text(value.enrollDate);
 							//댓글 수정 삭제 아이콘

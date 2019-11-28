@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.styleblending.admin.model.vo.Ad;
 import com.kh.styleblending.main.model.dao.MainDao;
+import com.kh.styleblending.main.model.vo.Notice;
 import com.kh.styleblending.posting.model.vo.Posting;
 
 @Service("mainService")
@@ -52,7 +53,9 @@ public class MainServiceImpl implements MainService{
 	}
 
 	
-	
+	public ArrayList<Notice> selectNoticeContent(int nno){
+		return mainDao.selectNoticeContent(nno);
+	}
 	
 	
 	

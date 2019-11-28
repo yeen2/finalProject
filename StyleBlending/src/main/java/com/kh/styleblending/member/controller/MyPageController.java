@@ -405,6 +405,19 @@ public class MyPageController {
 		}
 	}
 	
+	// 알람 클릭한 알람 한 개만 읽음 표시 메소드
+	@ResponseBody
+	@RequestMapping("mpUpdateAlarmOne.do")
+	public int updateAlarmOne(int alno) {
+		int result = mpService.updateAlarmOne(alno);
+		
+		if(result > 0) {
+			return 1;
+		}else {
+			return -1;
+		}
+	}
+	
 	// 프로필 수정 - 닉네임 ajax 체크 메소드
 	@ResponseBody
 	@RequestMapping("mpNickNameCheck.do")

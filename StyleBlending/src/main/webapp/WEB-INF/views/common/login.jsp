@@ -161,13 +161,13 @@
 	<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
   <!-- //네이버아이디로로그인 버튼 노출 영역 -->
   <script type="text/javascript">
-  	var naver_id_login = new naver_id_login("lNlvAbGNkbK57ij7y2BJ", "http://localhost:8070/fial/views/common/naverCallback.jsp");
-  	var state = naver_id_login.getUniqState();
-  	naver_id_login.setButton("white", 2,40);
-  	naver_id_login.setDomain("YOUR_SERVICE_URL");
-  	naver_id_login.setState(state);
-  	naver_id_login.setPopup();
-  	naver_id_login.init_naver_id_login();
+	  	var naver_id_login = new naver_id_login("lNlvAbGNkbK57ij7y2BJ", "http://localhost:8070/styleblending/views/common/naverCallback.jsp");
+	  	var state = naver_id_login.getUniqState();
+	  	naver_id_login.setButton("white", 2,40);
+	  	naver_id_login.setDomain("YOUR_SERVICE_URL");
+	  	naver_id_login.setState(state);
+	  	naver_id_login.setPopup();
+	  	naver_id_login.init_naver_id_login();
   </script>
 	
 	

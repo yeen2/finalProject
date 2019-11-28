@@ -24,7 +24,6 @@
 	#abc div, #abc i{float:left;}
 	#abc div{width:45px;}
 	#abc i{line-height:30px; margin-right:5px;}
-	#imgClick:hover{cursor:pointer;}
 	#scrollTop1:hover{cursor:pointer;}
 	.fanImg:hover{cursor:pointer;}
 	.fanNickName:hover{cursor:pointer;}
@@ -672,7 +671,6 @@
 			deleteFanList(fanClassB);
 		});
 		
-		
 		// insert 팬
 		function insertFan(value){
 			var meNo = value;
@@ -684,6 +682,7 @@
 					if(result == 1){
 						$("#fanA").hide();
 						$("#fanB").show();
+						sock.send(meNo);
 						/* var data={
 								id:'${loginUser.nickName}',
 								msg:'yy',
@@ -712,6 +711,8 @@
 					if(result == 1){
 						value.hide();
 						value.siblings("button").show();
+						sock.send(meNo);
+						
 					}else{
 						console.log("실패");
 					}
@@ -733,6 +734,8 @@
 					if(result == 1){
 						$("#fanA").show();
 						$("#fanB").hide();
+						sock.send(meNo);
+						
 					}else{
 						console.log("실패");
 					}
@@ -753,6 +756,8 @@
 					if(result == 1){
 						value.hide();
 						value.siblings("button").show();
+						sock.send(meNo);
+						
 					}else{
 						console.log("실패");
 					}
@@ -796,26 +801,31 @@
 			$("#fileArea").hide();
 			
 			// 이미지 변경 시 이미지 존재 여부 확인
-			$("#imgClick").click(function(){
-				if($("#imgClick").attr("src") != "resources/upload/member/profile.png"){
-					$("#imgModal").click();
-				}else{
-					$("#uploadImg").click();
-				}
+			if(${m.mno} == $("#loginMno").val()){
+				$("#imgClick").css("cursor", "pointer");
 				
-			});
+				$("#imgClick").click(function(){
+					if($("#imgClick").attr("src") != "resources/upload/member/profile.png"){
+						$("#imgModal").click();
+					}else{
+						$("#uploadImg").click();
+					}
+					
+				});
 			
-			// 모달창 버튼 클릭 시 발생 이벤트
-			// 프로필 이미지 있을 때 이미지 변경
-			$("#updateImg1").click(function(){
-				$("#uploadImg").click();
-				$("#modalClose").click();
-			});
-			// 프로필 이미지 있을 때 기본 이미지로 변경
-			$("#updateImg2").click(function(){
-				updateBasic();
-				$("#modalClose").click();
-			});
+				// 모달창 버튼 클릭 시 발생 이벤트
+				// 프로필 이미지 있을 때 이미지 변경
+				$("#updateImg1").click(function(){
+					$("#uploadImg").click();
+					$("#modalClose").click();
+				});
+				// 프로필 이미지 있을 때 기본 이미지로 변경
+				$("#updateImg2").click(function(){
+					updateBasic();
+					$("#modalClose").click();
+				});
+			
+			}
 			
 		});
 		
