@@ -1,20 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <style type="text/css">
 	.order-table:after, .order-table:before{
 		position : relative !important;
 	}
 </style>
-</head>
-<body>
 
-
-
+<jsp:include page="header.jsp" />
 	
 <!-- Left Panel -->
     <aside id="left-panel" class="left-panel" style="padding-top:20px;">
@@ -45,14 +38,7 @@
     </aside>
     <!-- /#left-panel -->
     
-    
-       <!-- Right Panel -->
-
-    <div id="right-panel" class="right-panel">
-    
-	
-	<jsp:include page="header.jsp" />
-
+ 
         <div class="content">
             <div class="animated fadeIn">
                	<div class="card-header" style="background:white;">
@@ -248,10 +234,8 @@
         </div><!-- .content -->
 
 
-       <jsp:include page="footer.jsp" />
+    
 
-    </div><!-- /#right-panel -->
-        
            
       <!-- 광고 마감 모달창 -->     
       <div class="modal fade" id="adEndModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="true">
@@ -305,7 +289,6 @@
             </div>
         </div>
          
-    
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/admin_temp/js/admin.js"></script>
 	<script>
 	
@@ -387,7 +370,7 @@
 	$("#adName").keydown(function (key){
 		
 		if(key.keyCode == 13){
-			location.href="aAdvertisment.do?keyword="+ $("#adName").val();
+			location.href="aAdvertisment.do?keyword="+ $("#adName").val() + "&boardLimit=" +${pi.boardLimit};
 		}
 	});
 	
@@ -459,7 +442,4 @@
 	</script>
 	
 
-
-    
-</body>
-</html>
+    <jsp:include page="footer.jsp" />  

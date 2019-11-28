@@ -1,21 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <!-- 차트 보이게 cdn x-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery.min.js"></script>
-    <!-- google charts -->
-   <!--  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
-<!-- <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13" type="text/javascript"></script> -->
-</head>
-<body>
-	
+
+<jsp:include page="header.jsp" />
+
 <!-- Left Panel -->
     <aside id="left-panel" class="left-panel" style="padding-top:20px;">
         <nav class="navbar navbar-expand-sm navbar-default">
@@ -46,13 +40,7 @@
     <!-- /#left-panel -->
     
     
-    
-       <!-- Right Panel -->
-
-    <div id="right-panel" class="right-panel">
-
-      <jsp:include page="header.jsp" />
-      
+ 
         
        <div class="content">
             <div class="animated fadeIn mt-3">
@@ -77,12 +65,7 @@
       		</div>
       </div>
       
-   
-   
-    <jsp:include page="footer.jsp" />
-
-    </div><!-- /#right-panel -->
-    
+ 
     <script>
   //Sales chart
   // 총누적 회원,게시글,광고,신고
@@ -204,5 +187,4 @@
     </script>
 	
 
-</body>
-</html>
+<jsp:include page="footer.jsp" />
