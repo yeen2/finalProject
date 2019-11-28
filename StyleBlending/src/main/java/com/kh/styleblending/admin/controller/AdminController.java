@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -143,24 +145,23 @@ public class AdminController {
 		return mv;
 	}
 	
-	
-	@RequestMapping("aAdvertisment.do")
-	public ModelAndView selectAdList(ModelAndView mv, @RequestParam(value="currentPage",defaultValue="1")int currentPage,
-								String keyword,	@RequestParam(value="boardLimit", defaultValue="5")int boardLimit) {
+	@RequestMapping("aAdvertisment.do")	
+	public ModelAndView getSearchAdList(ModelAndView mv, @RequestParam(value="currentPage",defaultValue="1")int currentPage,
+			@RequestParam(value="keyword",defaultValue="")String keyword, @RequestParam(value="boardLimit", defaultValue="5")int boardLimit) {
+
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("keyword", keyword);
 		
-		int listCount = aService.getAdListCount();
+		System.out.println("keyword : " + map);
+		int listCount = aService.getAdListCount(map);
+		
+		System.out.println("listCount : "+listCount);
 		
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, boardLimit);
+		System.out.println("pi : " + pi);
+		ArrayList<Ad> list = aService.selectAdList(pi, map);	
 		
-		ArrayList<Ad> list;
-		if(keyword != null) {
-			list = aService.selectAdSearchList(pi, keyword);
-			//System.out.println("검색노노");
-		}else {
-			//System.out.println("검색함");
-			list = aService.selectAdList(pi);						
-		}
-		
+		System.out.println("list : " + list);
 		ArrayList<Ad> newList = aService.selectAdNewList();
 		Ad startAd = aService.selectStartAd();
 		
@@ -292,17 +293,18 @@ public class AdminController {
 		return gson.toJson(statistics);
 	}
 	
+	// 관리자 공지사항
 	@RequestMapping("aNotice.do")
 	public ModelAndView notice(ModelAndView mv) {
 		
 		ArrayList<Notice> list = aService.selectNoticeList();
-		
+		System.out.println(list);
 		mv.addObject("list", list).setViewName("admin/notice");
 		
 		return mv;
 	}
 	
-	
+
 	
 	
 	

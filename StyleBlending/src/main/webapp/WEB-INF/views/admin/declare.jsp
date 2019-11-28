@@ -1,18 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset=UTF-8">
+
 <style type="text/css">
 	.order-table:after, .order-table:before{
 		position : relative !important;
 	}
 </style>
-</head>
-<body>
 
+<jsp:include page="header.jsp" />
 <!-- Left Panel -->
     <aside id="left-panel" class="left-panel" style="padding-top:20px;">
         <nav class="navbar navbar-expand-sm navbar-default">
@@ -42,182 +38,175 @@
     </aside>
     <!-- /#left-panel -->
     
-    
-       <!-- Right Panel -->
-
-    <div id="right-panel" class="right-panel">
-    
-	<jsp:include page="header.jsp" />
-    
-    
-		<div class="content ">
-            <div class="animated fadeIn ">
-            <div class="card">
-               <div class="card-header" >
-                   <strong class="card-title">신고목록</strong>
-               </div>
-              
-                          
+	<div class="content">
+        <div class="animated fadeIn mt-3" >
+            <div class="row">
+            	<div class="col-lg-12">
+                    <div class="card" >
+                        <div class="card-header">
+                            <strong class="card-title">신고 목록</strong>
+                        </div>
+                        <div class="card-body mt-5" style="min-height: 800px;">	
+                         <div class="row">
+                          <div class="col-md-10 offset-md-1" style="padding:20px;">
+                        		<form action="aDeclare.do" method="get" class="form-inline">
+	                        <div class="col-5 col-md-7">
+	               			  	게시판명 &nbsp;
+	                             <select name="select" id="select" class="form-control">
+	                                 <option value="0" <c:if test="${cate.all eq '0' }">selected</c:if>>전체</option>
+	                                 <option value="1" <c:if test="${cate.posting eq '1' }">selected</c:if>>포스팅</option>
+	                                 <option value="2" <c:if test="${cate.free eq '2' }">selected</c:if>>자유</option>
+	                             </select>&nbsp;
+	                        	<button type="submit" class="btn btn-primary btn-sm">검색</button>
+	                        </div>
+	                        <div class="offset-md-4">
+	                  		   <button type="button" class="btn btn-outline-danger btn-sm" id="deleteBtn" 
+	                  		   data-toggle="modal" data-target="#deleteModal">
+	                  		   	게시물삭제
+	                  		   </button>
+	                        </div>
+	                    </form>
+                        	</div>
+                       	</div>
                   
-                  <div class="row">
-                  	<div class="col-md-10 offset-md-1" style="padding:20px;">
-                        <form action="aDeclare.do" method="get" class="form-inline">
-                        <div class="col-5 col-md-7">
-               			  	게시판명 &nbsp;
-                             <select name="select" id="select" class="form-control">
-                                 <option value="0" <c:if test="${cate.all eq '0' }">selected</c:if>>전체</option>
-                                 <option value="1" <c:if test="${cate.posting eq '1' }">selected</c:if>>포스팅</option>
-                                 <option value="2" <c:if test="${cate.free eq '2' }">selected</c:if>>자유</option>
-                             </select>&nbsp;
-                        	<button type="submit" class="btn btn-primary btn-sm">검색</button>
-                        </div>
-                        <div class="offset-md-4">
-                  		   <button type="button" class="btn btn-outline-danger btn-sm" id="deleteBtn" 
-                  		   data-toggle="modal" data-target="#deleteModal">
-                  		   	게시물삭제
-                  		   </button>
-                        </div>
-                        </form>
+                         <div class=" table-stats order-table ov-h col-md-10 offset-md-1">                            	
+                             <table class="table">
+                                 <thead>
+                                     <tr >
+                                     	<th><input type="checkbox" name="checkAll" id="checkAll" onclick="allCheck();"/></th>
+                                         <th>No.</th>
+                                         <th>신고자</th>
+                                         <th>게시판명</th>
+                                         <th>게시글</th>
+                                         <th>글쓴이</th>
+                                         <th>신고일자</th>
+                                         <th>신고사유</th>
+                                         <th>확인유무</th>
+                                     </tr>
+                                 </thead>
+                                 <c:if test="${!empty list}">
+                                 <c:forEach items="${list}" var="p">
+                                 <tbody>
+                                      <tr>
+                                      	<input type="hidden" value="${p.dno }" name="dno" />
+                                      	<input type="hidden" value="${p.bno }" name="bno"/>
+                                      	<input type="hidden" value="${p.isCheck }" name="isCheck"/>
+                                      	<input type="hidden" value="${p.type }" name="type"/>
+                                     	<td>
+                                     		<input name="checkRow" type="checkbox" value="${p.dno}" />
+                                     	</td>
+                                         <td id="dno">${p.dno}</td>
+                                         <td>
+                                         	<div data-toggle="modal" data-target="#smallmodal" onclick="dmodalCheck();">
+                                                 <a href="#">${p.email }</a>
+                                             </div>
+                                         </td>
+                                         <c:if test="${p.type eq 1 }">
+                                         <td>포스팅</td>
+                                         <td>
+                                             <a class="detailBoard" style="cursor:pointer"><img src="${pageContext.request.contextPath}/resources/upload/posting/${p.bname}"></a>
+                                         </td>
+                                         </c:if>
+                                         <c:if test="${p.type eq 2 }">
+                                         <td>자유</td>
+                                         <td>
+                                         	<a class="detailBoard" style="cursor:pointer">${p.bname}</a>
+                                         </td>
+                                         </c:if>
+                                         <td>${p.writer }</td>
+                                         <td>${p.enrollDate }</td>
+                                         <td>${p.category }</td>
+                                         <td id="check">
+                                          <c:if test="${p.isCheck eq 1 }">
+                                          <span class="badge badge-pending">확인요청</span>
+                                      	</c:if>
+                                      	<c:if test="${p.isCheck eq 2 }">
+                                      	<span class="badge badge-complete">확인</span>
+                                      	</c:if>
+                                      	<c:if test="${p.isCheck eq 3 }">
+                                      	<span class="badge" style="background:gray">삭제완료</span>
+                                      	</c:if>
+                                         </td>
+                                     </tr>
+                                 </tbody>
+                                 </c:forEach>
+                                 </c:if>
+                             </table>
+                             
+                             <br><br>
+                             <div class="row">
+                              <div class="col-sm-4" style="margin-left:10px;">
+                              	Showing <strong> ${pi.currentPage } to ${pi.endPage }</strong> of <strong> ${pi.listCount }</strong> entries	
+                              </div>
+                              
+                              <div class=".col-md-6 .offset-md-3">
+                              	<div class="dataTables_paginate paging_simple_numbers" id="bootstrap-data-table_paginate">
+                              		<ul class="pagination">
+                              		<!-- 이전 -->
+                              			<li class="paginate_button page-item previous" >
+                             				<c:if test="${pi.currentPage ne 1 }">
+                             					<c:url value="aDeclare.do" var="previous">
+                             						<c:param name="currentPage" value="${pi.currentPage -1 }"/>
+                             					</c:url>
+                             					<a href="${previous}" aria-controls="bootstrap-data-table" class="page-link">Previous</a>
+                             				</c:if>
+                             				<c:if test="${pi.currentPage eq 1}">
+                             					<button class="page-link disabled" style="color:black; cursor:text;" disabled>Previous</button>
+                             				</c:if>
+                              			</li>
+                              		<!-- 페이지 -->
+                              			<c:forEach begin="${pi.startPage}" end="${pi.endPage }" var="p">
+                              				<c:if test="${p ne pi.currentPage }">
+                                			<c:if test="${!empty cate.free }">
+	                                			<c:url value="aDeclare.do" var="page">
+	                                				<c:param name="currentPage" value="${p}"/>
+	                                				<c:param name="select" value="2"></c:param>
+	                                			</c:url>
+                                			</c:if>
+                                			<c:if test="${!empty cate.posting }">
+	                                			<c:url value="aDeclare.do" var="page">
+	                                				<c:param name="currentPage" value="${p}"/>
+	                                				<c:param name="select" value="1"></c:param>
+	                                			</c:url>
+                                			</c:if>
+                                			<c:if test="${empty cate.posting && empty cate.free }">
+	                                			<c:url value="aDeclare.do" var="page">
+	                                				<c:param name="currentPage" value="${p}"/>
+	                                			</c:url>
+                                			</c:if>
+	                                			<li class="paginate_button page-item active">
+	                                				<a href="${page}" aria-controls="bootstrap-data-table" class="page-link">${p}</a>
+	                                			</li>
+                                		</c:if>
+                               			<c:if test="${p eq pi.currentPage }">
+                               				<button class="page-link disabled" style="color:black; cursor:text;" disabled>${p}</button>
+                               			</c:if>
+                              			</c:forEach>
+                              		<!-- 다음 -->
+                              			<li class="paginate_button page-item next" id="bootstrap-data-table_next">
+                              			<c:if test="${pi.currentPage ne pi.endPage }">
+                              				<c:url value="aDeclare.do" var="next">
+                              					<c:param name="currentPage" value="${pi.currentPage +1 }" />
+                              				</c:url>
+                              				<a href="${next}" aria-controls="bootstrap-data-table" class="page-link">Next</a>
+                              			</c:if>
+                              			<c:if test="${pi.currentPage eq pi.endPage }">
+                              				<button class="page-link disabled" style="color:black; cursor:text;" disabled>Next</button>
+                              			</c:if>
+                              			</li>
+                              		</ul>
+                              	</div>
+                              </div>
+                             </div>
+                         </div> <!-- /.table-stats -->
+                    	</div> <!-- /.card-body -->
                     </div>
-                  </div>
-                          
-                            <div class=" table-stats order-table ov-h col-md-10 offset-md-1">                            	
-                                <table class="table">
-                                    <thead>
-                                        <tr >
-                                        	<th><input type="checkbox" name="checkAll" id="checkAll" onclick="allCheck();"/></th>
-                                            <th>No.</th>
-                                            <th>신고자</th>
-                                            <th>게시판명</th>
-                                            <th>게시글</th>
-                                            <th>글쓴이</th>
-                                            <th>신고일자</th>
-                                            <th>신고사유</th>
-                                            <th>확인유무</th>
-                                        </tr>
-                                    </thead>
-                                    <c:forEach items="${list}" var="p">
-                                    <tbody>
-                                         <tr>
-                                         	<input type="hidden" value="${p.dno }" name="dno" />
-                                         	<input type="hidden" value="${p.bno }" name="bno"/>
-                                         	<input type="hidden" value="${p.isCheck }" name="isCheck"/>
-                                         	<input type="hidden" value="${p.type }" name="type"/>
-                                        	<td>
-                                        		<input name="checkRow" type="checkbox" value="${p.dno}" />
-                                        	</td>
-                                            <td id="dno">${p.dno}</td>
-                                            <td>
-                                            	<div data-toggle="modal" data-target="#smallmodal">
-                                                    <a href="#">${p.email }</a>
-                                                </div>
-                                            </td>
-                                            <c:if test="${p.type eq 1 }">
-                                            <td>포스팅</td>
-                                            <td>
-                                                <a class="detailBoard"><img src="${pageContext.request.contextPath}/resources/upload/posting/${p.bname}"></a>
-                                            </td>
-                                            </c:if>
-                                            <c:if test="${p.type eq 2 }">
-                                            <td>자유</td>
-                                            <td>
-                                            	<a class="detailBoard">${p.bname}</a>
-                                            </td>
-                                            </c:if>
-                                            <td>${p.writer }</td>
-                                            <td>${p.enrollDate }</td>
-                                            <td>${p.category }</td>
-                                            <td id="check">
-	                                            <c:if test="${p.isCheck eq 1 }">
-	                                            <span class="badge badge-pending">확인요청</span>
-	                                        	</c:if>
-	                                        	<c:if test="${p.isCheck eq 2 }">
-	                                        	<span class="badge badge-complete">확인</span>
-	                                        	</c:if>
-	                                        	<c:if test="${p.isCheck eq 3 }">
-	                                        	<span class="badge" style="background:gray">삭제완료</span>
-	                                        	</c:if>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                    </c:forEach>
-                                </table>
-                                
-                                <div class="row">
-	                                <div class="col-sm-4" style="margin-left:10px;">
-	                                	Showing <b> ${pi.currentPage } to ${pi.endPage }</b> of <b> ${pi.listCount }</b> entries
-	                                </div>
-	                                
-	                                <div class=".col-md-6 .offset-md-3">
-	                                	<div class="dataTables_paginate paging_simple_numbers" id="bootstrap-data-table_paginate">
-	                                		<ul class="pagination">
-	                                		<!-- 이전 -->
-	                                			<li class="paginate_button page-item previous" >
-                                				<c:if test="${pi.currentPage ne 1 }">
-                                					<c:url value="aDeclare.do" var="previous">
-                                						<c:param name="currentPage" value="${pi.currentPage -1 }"/>
-                                					</c:url>
-                                					<a href="${previous}" aria-controls="bootstrap-data-table" class="page-link">Previous</a>
-                                				</c:if>
-                                				<c:if test="${pi.currentPage eq 1}">
-                                					<button class="page-link disabled" style="color:black; cursor:text;" disabled>Previous</button>
-                                				</c:if>
-	                                			</li>
-	                                		<!-- 페이지 -->
-	                                			<c:forEach begin="${pi.startPage}" end="${pi.endPage }" var="p">
-	                                				<c:if test="${p ne pi.currentPage }">
-			                                			<c:if test="${!empty cate.free }">
-				                                			<c:url value="aDeclare.do" var="page">
-				                                				<c:param name="currentPage" value="${p}"/>
-				                                				<c:param name="select" value="2"></c:param>
-				                                			</c:url>
-			                                			</c:if>
-			                                			<c:if test="${!empty cate.posting }">
-				                                			<c:url value="aDeclare.do" var="page">
-				                                				<c:param name="currentPage" value="${p}"/>
-				                                				<c:param name="select" value="1"></c:param>
-				                                			</c:url>
-			                                			</c:if>
-			                                			<c:if test="${empty cate.posting && empty cate.free }">
-				                                			<c:url value="aDeclare.do" var="page">
-				                                				<c:param name="currentPage" value="${p}"/>
-				                                			</c:url>
-			                                			</c:if>
-				                                			<li class="paginate_button page-item active">
-				                                				<a href="${page}" aria-controls="bootstrap-data-table" class="page-link">${p}</a>
-				                                			</li>
-			                                		</c:if>
-		                                			<c:if test="${p eq pi.currentPage }">
-		                                				<button class="page-link disabled" style="color:black; cursor:text;" disabled>${p}</button>
-		                                			</c:if>
-	                                			</c:forEach>
-	                                		<!-- 다음 -->
-	                                			<li class="paginate_button page-item next" id="bootstrap-data-table_next">
-	                                			<c:if test="${pi.currentPage ne pi.endPage }">
-	                                				<c:url value="aDeclare.do" var="next">
-	                                					<c:param name="currentPage" value="${pi.currentPage +1 }" />
-	                                				</c:url>
-	                                				<a href="${next}" aria-controls="bootstrap-data-table" class="page-link">Next</a>
-	                                			</c:if>
-	                                			<c:if test="${pi.currentPage eq pi.endPage }">
-	                                				<button class="page-link disabled" style="color:black; cursor:text;" disabled>Next</button>
-	                                			</c:if>
-	                                			</li>
-	                                		</ul>
-	                                	</div>
-	                                </div>
-                                </div>
-                                
-                            </div> <!-- /.table-stats -->
                 </div>
-            </div><!-- .animated -->
-        </div><!-- .content -->
-		
-	
-	
-	<jsp:include page="footer.jsp" />
+            </div>
+        </div><!-- .animated -->
+    </div><!-- .content -->
+        
 
-    </div><!-- /#right-panel -->
     <!-- 자바스크립트 파일 -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/admin_temp/js/admin.js"></script>
 	
@@ -311,38 +300,33 @@
         </div>
    		
    		
+  		<!-- 회원정보 모달창 -->
+   		<div class="modal fade" id="smallmodal" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
+               <div class="modal-dialog modal-sm" role="document">
+                   <div class="modal-content ">
+                       <div class="modal-header">
+                       	<i class="fa fa-user"></i><strong class="card-title pl-2">신고당한 회원</strong>
+                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                               <span aria-hidden="true">&times;</span>
+                           </button>
+                       </div>
+                       <div class="modal-body">
+                            <div class="card ">
+                            <div class="card-body">
+                                <div class="mx-auto d-block">
+                                    <img class="rounded-circle mx-auto d-block" src="${pageContext.request.contextPath}/resources/admin_temp/images/admin.jpg" alt="Card image cap">
+                                    <h5 class="text-sm-center mt-2 mb-1">Steven Lee</h5>
+                                </div>
+                                <hr>
+                                <div class="card-text text-sm-center">
+                                    <div class="location text-sm-center"><i class="fa fa-map-marker"></i> 신고내용</div>
+                                </div>
+                            </div>
+                       	</div>
+                       </div><!-- /.modal-body -->
+                   </div> <!-- /.modal-content -->
+               </div>
+           </div>
+        <!-- 회원정보 모달창  끝-->
    		
-   		
-    	<!-- 회원정보 모달창 -->
-	   <div class="modal fade" id="smallmodal" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-sm" role="document">
-                    <div class="modal-content ">
-                        <div class="modal-header">
-                        	<i class="fa fa-user"></i><strong class="card-title pl-2">신고당한 회원</strong>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                             <div class="card ">
-	                            <div class="card-body">
-	                                <div class="mx-auto d-block">
-	                                    <img class="rounded-circle mx-auto d-block" src="${pageContext.request.contextPath}/resources/admin_temp/images/admin.jpg" alt="Card image cap">
-	                                    <h5 class="text-sm-center mt-2 mb-1">Steven Lee</h5>
-	                                </div>
-	                                <hr>
-	                                <div class="card-text text-sm-center">
-	                                    <div class="location text-sm-center"><i class="fa fa-map-marker"></i> California, United States</div>
-	                                </div>
-	                            </div>
-                        	</div>
-                        </div>
-                       
-                    </div>
-                </div>
-            </div>
- 
- 
-
-</body>
-</html>
+	<jsp:include page="footer.jsp" />

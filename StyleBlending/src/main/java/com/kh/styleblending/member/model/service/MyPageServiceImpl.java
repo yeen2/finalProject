@@ -58,8 +58,31 @@ public class MyPageServiceImpl implements MyPageService {
 	}
 
 	@Override
-	public int updateProfile(Member m) {
-		return mpDao.updateProfile(m);
+	public Member updateProfile(Member m) {
+		int mno = m.getMno();
+		
+		DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+		def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
+		
+		TransactionStatus status = transactionManager.getTransaction(def);
+		
+		try {
+			sqlSession.getConnection().setAutoCommit(false);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		int result = mpDao.updateProfile(m);
+		Member mem = mpDao.selectProfile(mno);
+		
+		if(result > 0 && mem != null) {
+			transactionManager.commit(status);
+			return mem;
+		}else {
+			transactionManager.rollback(status);
+			return null;
+		}
+		
 	}
 
 	@Override
@@ -180,6 +203,16 @@ public class MyPageServiceImpl implements MyPageService {
 	@Override
 	public int updateAlarm(int mno) {
 		return mpDao.updateAlarm(mno);
+	}
+
+	@Override
+	public int nickNameCheck(Member m) {
+		return mpDao.nickNameCheck(m);
+	}
+
+	@Override
+	public int updateAlarmOne(int alno) {
+		return mpDao.updateAlarmOne(alno);
 	}
 
 

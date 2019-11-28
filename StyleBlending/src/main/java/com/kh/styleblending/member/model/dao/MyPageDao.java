@@ -116,6 +116,14 @@ public class MyPageDao {
 	public int updateAlarm(int mno) {
 		return sqlSession.update("mypageMapper.updateAlarm", mno);
 	}
+
+	public int nickNameCheck(Member m) {
+		return sqlSession.selectOne("mypageMapper.nickNameCheck", m);
+	}
+
+	public int updateAlarmOne(int alno) {
+		return sqlSession.update("mypageMapper.updateAlarmOne", alno);
+	}
 	
 
 }

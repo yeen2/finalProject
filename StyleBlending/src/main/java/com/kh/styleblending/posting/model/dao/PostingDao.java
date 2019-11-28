@@ -100,7 +100,26 @@ public class PostingDao {
 		return sqlSession.update("postingMapper.updateReply", map);
 	}
 	
+	public int deleteReReply(int prno) {
+		return sqlSession.update("postingMapper.deleteReReply", prno);
+	}
+	
+	public int updateReReply(int prno, String content) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("prno", prno);
+		map.put("content", content);
+		return sqlSession.update("postingMapper.updateReReply", map);
+	}
+	
 	//검색
+	public List<Posting> selectSearchPosting(String type, String keyword, int mno){
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("type", type);
+		map.put("keyword", keyword);
+		map.put("mno", mno);
+		return sqlSession.selectList("postingMapper.selectSearchPosting", map);
+	}
+	
 	public List<Posting> selectSearchPosting_brand(String keyword, int mno){
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("keyword", keyword);
@@ -122,7 +141,12 @@ public class PostingDao {
 		return sqlSession.selectList("postingMapper.selectSearchPosting_loca", map);
 	}
 	
-	
+	public List<Posting> selectSearchPosting_cate(String keyword, int mno){
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("keyword", keyword);
+		map.put("mno", mno);
+		return sqlSession.selectList("postingMapper.selectSearchPosting_cate", map);
+	}
 	
 	
 	

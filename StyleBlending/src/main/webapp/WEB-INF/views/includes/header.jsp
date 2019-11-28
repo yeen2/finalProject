@@ -122,6 +122,10 @@
 .addAlarm1 p{font-size:15px;}
 #alarmDelete:hover{cursor:pointer; color:gray;}
 
+#imgGoProfile:hover, #nickGoProfile:hover{cursor:pointer;}
+#deleteAlarmOne:hover{cursor:pointer; color:gray;}
+#contentPlus p{font-weight:normal;}
+
 </style>
 <script type="text/javascript">
 	$(function(){
@@ -249,7 +253,7 @@
 							
 							<div style="position:absolute; width:400px; max-height:255px; background:white; display:none; box-shadow:0 5px 10px rgba(0, 0, 0, 0.5);
 							overflow-y:auto; overflow-x:hidden; left:-175px; z-index:1000;" id="show" class="show">
-								<div style="padding:10px 10px 10px 10px;" align="right">
+								<div style="padding:10px 10px 10px 10px;" align="right" id="allDeleteDiv">
 									<i style="font-size:30px;" class="far fa-envelope-open" id="alarmDelete"></i>
 								</div>
 								<div id="contentPlus">
@@ -264,7 +268,7 @@
 					</a></li> -->
 
 					<!-- 포스팅 등록 -->
-					<li class="nav-item" style="margin-top:10px;"><a class="nav-link" href="pInsertForm.do">
+					<li class="nav-item" style="margin-top:10px;"><a class="nav-link" href="pInsertForm.do" id="pInsertBtn">
 	                     <i class="fas fa-camera fa-lg" style="font-size: 25px;"></i>
 	               </a></li>
 	               <li class="nav-item dropdown"><a
@@ -274,7 +278,7 @@
 	                     <i class="fas fa-user-circle fa-lg" style="font-size: 30px; margin-top: 10px;"></i>
 	               </c:if>
 	               <c:if test="${ !empty loginUser }">
-	                  <img class="card-img" src="${pageContext.request.contextPath}/resources/assets/img/${loginUser.renameImg}" style='height:39px; width: 39px; border-radius: 39px;'>
+	                  <img class="card-img" src="${pageContext.request.contextPath}/resources/upload/member/${loginUser.renameImg}" style='height:39px; width: 39px; border-radius: 39px;'>
 	               </c:if>
 	               </a>
 	               
@@ -342,7 +346,7 @@
 								</h4>
 							</div>
 							<div class="modal-body row" style="padding-top: 0px;">
-								<div class="col-3">
+								<div class="col-6">
 									<!-- 								<a class="btn" href="index.jsp" id="man" onclick="man();">
 									<i class="fa fa-male fa-5x" aria-hidden="true"
 									aria-label="Close" class="close" data-dismiss="modal"
@@ -352,7 +356,7 @@
 									</a> <br /> <br />
 									<p style="color: white; margin: 0px;">남자</p>
 								</div>
-								<div class="col-3">
+								<div class="col-6">
 									<!-- <a class="btn" href="">
 									<i class="fa fa-female fa-5x" aria-hidden="true"></i>
 								</a> -->
@@ -360,18 +364,7 @@
 									</a> <br /> <br />
 									<p style="color: white; margin: 0px;">여자</p>
 								</div>
-								<div class="col-3">
-									<a class="btn b" id="전체"> <i class="fa fa-users fa-5x"
-										aria-hidden="true"></i>
-									</a> <br /> <br />
-									<p style="color: white; margin: 0px;">전체</p>
-								</div>
-								<div class="col-3">
-									<a class="btn b" id="기타"> <i class="fa fa-ellipsis-h fa-5x"
-										aria-hidden="true"></i>
-									</a> <br /> <br />
-									<p style="color: white; margin: 0px;">기타</p>
-								</div>
+								
 
 							</div>
 
@@ -379,7 +372,7 @@
 								style="border: 1px solid gray; width: 500px; margin-bottom: 10px;"></div>
 
 							<div class="modal-body row" style="padding-top: 0px;">
-								<div class="btn col-2" style="padding: 0px;">
+								<div class="col-2" style="padding: 0px;">
 									<a id="red" class="btn bb"> <i class="fa fa-circle fa-5x"
 										aria-hidden="true" style="color: red;" id="red"></i>
 									</a> <br /> <br />
@@ -833,7 +826,7 @@ function select(){
 		var mno = ${loginUser.mno}
 		
 	    $(document).ready(function() {
-	        sock = new SockJS("/styleblending/count");
+	        sock = new SockJS("/styleblending/count?mno=" + mno);
 	        
 	        // 연결 성공
 	        sock.onopen = function() {
@@ -851,79 +844,86 @@ function select(){
 	            
 	            var obj = JSON.parse(json);
 	            console.log(obj);
-	            
+	            /* if(obj.mno==?) */
+	            $("#contentPlus").html("");
+	            $("#allDeleteDiv").show();
 	            if(obj != ""){
 	            	for(var i=0; i<obj.length; i++){
 		            	alarmCountNo = obj[i].alarmCount;
 		            	
 		            	if(obj[i].type == 1){
-		            		var $add = "<a class='dropdown-item' href='mpViewProfile.do?mno=" + obj[i].bmno + "'>"
-			    				+ "<div class='addAlarm1'>"
+		            		var $add = "<div class='addAlarm1'>"
 			    				+ "<div class='addAlarmImg1'>"
-			    				+ "<img src='resources/upload/member/" + obj[i].renameImg + "'>"
+			    				+ "<img src='resources/upload/member/" + obj[i].renameImg + "' id='imgGoProfile' value='" + obj[i].bmno + "'>"
 			    				+ "</div>"
 			    				+ "<div class='addAlarmNick1' align='left'>"
-			    				+ "<p>" + obj[i].nickName + "</p>"
+			    				+ "<p id='nickGoProfile' value='" + obj[i].bmno + "'>" + obj[i].nickName + "</p>"
 			    				+ "</div>"
 			    				+ "<div class='addAlarmDate1' align='right'>"
-			    				+ "<p>" + obj[i].enrollDate + "</p>"
+			    				+ "<p style='pointer-events:none;'>" + obj[i].enrollDate + "</p>"
 			    				+ "</div>"
 			    				+ "<div class='addAlarmCon1'>"
-			    				+ "<p>" + obj[i].nickName + "님이 게시글에 좋아요를 눌렀습니다.</p>"
+			    				+ "<p style='pointer-events:none;'>" + obj[i].nickName + "님이 게시글에 좋아요를 눌렀습니다.</p>"
 			    				+ "</div>"
+			    				+ "<div align='right' style='margin-top:-20px; margin-right:20px; margin-bottom:15px;'>"
+			    				+ "<i class='fas fa-times' id='deleteAlarmOne' value='" + obj[i].alno + "'></i>"
 			    				+ "</div>"
-			    				+ "</a>";
-		    		
+			    				+ "</div>";
+			    				
 		    				$("#contentPlus").append($add);
 		            	}else if(obj[i].type == 2){
-		            		var $add = "<a class='dropdown-item' href='mpViewProfile.do?mno=" + obj[i].bmno + "'>"
-			    				+ "<div class='addAlarm1'>"
+		            		var $add = "<div class='addAlarm1'>"
 			    				+ "<div class='addAlarmImg1'>"
-			    				+ "<img src='resources/upload/member/" + obj[i].renameImg + "'>"
+			    				+ "<img src='resources/upload/member/" + obj[i].renameImg + "' id='imgGoProfile' value='" + obj[i].bmno + "'>"
 			    				+ "</div>"
 			    				+ "<div class='addAlarmNick1' align='left'>"
-			    				+ "<p>" + obj[i].nickName + "</p>"
+			    				+ "<p id='nickGoProfile' value='" + obj[i].bmno + "'>" + obj[i].nickName + "</p>"
 			    				+ "</div>"
 			    				+ "<div class='addAlarmDate1' align='right'>"
-			    				+ "<p>" + obj[i].enrollDate + "</p>"
+			    				+ "<p style='pointer-events:none;'>" + obj[i].enrollDate + "</p>"
 			    				+ "</div>"
 			    				+ "<div class='addAlarmCon1'>"
-			    				+ "<p>" + obj[i].nickName + "님이 게시글에 댓글을 작성하였습니다.</p>"
+			    				+ "<p style='pointer-events:none;'>" + obj[i].nickName + "님이 게시글에 댓글을 작성하였습니다.</p>"
 			    				+ "</div>"
+			    				+ "<div align='right' style='margin-top:-20px; margin-right:20px; margin-bottom:15px;'>"
+			    				+ "<i class='fas fa-times' id='deleteAlarmOne' value='" + obj[i].alno + "'></i>"
 			    				+ "</div>"
-			    				+ "</a>";
+			    				+ "</div>";
 		    		
 		    				$("#contentPlus").append($add);
 		            	}else{
-		            		var $add = "<a class='dropdown-item' href='mpViewProfile.do?mno=" + obj[i].bmno + "'>"
-			    				+ "<div class='addAlarm1'>"
+		            		var $add = "<div class='addAlarm1'>"
 			    				+ "<div class='addAlarmImg1'>"
-			    				+ "<img src='resources/upload/member/" + obj[i].renameImg + "'>"
+			    				+ "<img src='resources/upload/member/" + obj[i].renameImg + "' id='imgGoProfile' value='" + obj[i].bmno + "'>"
 			    				+ "</div>"
 			    				+ "<div class='addAlarmNick1' align='left'>"
-			    				+ "<p>" + obj[i].nickName + "</p>"
+			    				+ "<p id='nickGoProfile' value='" + obj[i].bmno + "'>" + obj[i].nickName + "</p>"
 			    				+ "</div>"
 			    				+ "<div class='addAlarmDate1' align='right'>"
-			    				+ "<p>" + obj[i].enrollDate + "</p>"
+			    				+ "<p style='pointer-events:none;'>" + obj[i].enrollDate + "</p>"
 			    				+ "</div>"
 			    				+ "<div class='addAlarmCon1'>"
-			    				+ "<p>" + obj[i].nickName + "님이 팬이 되었습니다.</p>"
+			    				+ "<p style='pointer-events:none;'>" + obj[i].nickName + "님이 팬이 되었습니다.</p>"
 			    				+ "</div>"
+			    				+ "<div align='right' style='margin-top:-20px; margin-right:20px; margin-bottom:15px;'>"
+			    				+ "<i class='fas fa-times' id='deleteAlarmOne' value='" + obj[i].alno + "'></i>"
 			    				+ "</div>"
-			    				+ "</a>";
+			    				+ "</div>";
 		    		
 		    				$("#contentPlus").append($add);
 		            	}
 		    			
 		            }
 	            }else{
-	            	$("#show").html("");
+	            	$("#allDeleteDiv").hide();
+	            	$("#contentPlus").html("");
+	            	$("#count").hide();
 					
 					var $add = "<div style='padding:20px 10px 10px 10px' align='center'>"
 	    				+ "<p><span class='text-danger'><i class='far fa-frown-open'></i></span> 알림이 없습니다.</p>"
 	    				+ "</div>";
 	    		
-	    			$("#show").append($add);
+	    			$("#contentPlus").append($add);
 	            }
 	            
 	            
@@ -946,14 +946,15 @@ function select(){
 			}
 				
 			if(${ loginUser == null }){
-				$("#show").html("");
+				$("#allDeleteDiv").hide();
+				$("#contentPlus").html("");
 				
 				var $add = "<div style='padding:20px 10px 10px 10px' align='center'>"
 					+ "<p><span class='text-danger'></span>로그인 후 이용해주세요.</p>"
     				+ "<button class='btn btn-dark' id='alarmLogin'>로그인</button>"
     				+ "</div>";
     		
-    			$("#show").append($add);
+    			$("#contentPlus").append($add);
 			}
 		});
 		
@@ -976,13 +977,14 @@ function select(){
 				type:"post",
 				success:function(result){
 					if(result == 1){
-						$("#show").html("");
+						$("#allDeleteDiv").hide();
+						$("#contentPlus").html("");
 						
 						var $add = "<div style='padding:20px 10px 10px 10px' align='center'>"
 		    				+ "<p><span class='text-danger'><i class='far fa-frown-open'></i></span> 알림이 없습니다.</p>"
 		    				+ "</div>";
 		    		
-		    			$("#show").append($add);
+		    			$("#contentPlus").append($add);
 		    			
 		    			$("#count").html("");
 		    			$("#count").css("display", "none");
@@ -996,6 +998,35 @@ function select(){
 					console.log("ajax 통신 실패");
 				}
 			});
+		});
+		
+		
+		$(document).on("click", "#deleteAlarmOne", function(){
+			$.ajax({
+				url:"mpUpdateAlarmOne.do",
+				data:{alno:$(this).attr("value")},
+				type:"post",
+				success:function(result){
+					sock.send(mno);
+				},
+				error:function(){
+					console.log("ajax 통신 실패");
+				}
+				
+			});
+		});
+		$(document).on("click", "#imgGoProfile", function(){
+			location.href="mpViewProfile.do?mno=" + $(this).attr("value");
+		});
+		$(document).on("click", "#nickGoProfile", function(){
+			location.href="mpViewProfile.do?mno=" + $(this).attr("value");
+		});
+		
+		$("#pInsertBtn").click(function(){
+			if(${loginUser == null}){
+				alert("로그인 후 이용 가능합니다.");
+				return false;
+			}
 		});
 	
 		

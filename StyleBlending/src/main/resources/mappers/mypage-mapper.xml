@@ -213,5 +213,17 @@
 		set status=2
 		where m_no=#{mno}
 	</update>
+	
+	<update id="updateAlarmOne">
+		update alarm
+		set status=2
+		where al_no=#{alno}
+	</update>
+	
+	<select id="nickNameCheck" resultType="_int">
+		select count(*)
+		from member
+		where nickname=#{nickName}
+	</select>
 
 </mapper>

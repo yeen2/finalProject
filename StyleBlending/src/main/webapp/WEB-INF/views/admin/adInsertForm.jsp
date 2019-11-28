@@ -1,11 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+
 <style>
 	#adImg{
 		width:500px;
@@ -13,8 +9,6 @@
 		border:1px solid black;
 	}
 </style>
-</head>
-<body>
 
 	<jsp:include page="../includes/header.jsp" />
 	
@@ -98,7 +92,6 @@
 		</div> <!-- 광고신청 끝 -->
 	</div>
 		
-		<jsp:include page="../includes/footer.jsp" />
 		
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.2.js"></script>
@@ -211,5 +204,5 @@
 			})
 		})
 		</script>
-</body>
-</html>
+
+<jsp:include page="../includes/footer.jsp" />

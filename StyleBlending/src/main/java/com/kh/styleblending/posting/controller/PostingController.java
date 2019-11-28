@@ -36,21 +36,26 @@ public class PostingController {
 	private PostingService pService;
 	
 	// 포스팅 키워드 검색
-	// 1-브랜드 2-해시태그 3-위치
+	// 1-브랜드 2-해시태그 3-위치 4-카테고리
 	@RequestMapping("pNavSearch.do")
 	public ModelAndView info(String keyword, int type, ModelAndView mv, HttpSession session) {
 		
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		List<Posting> p = new ArrayList<Posting>();
 		
+		System.out.println(keyword + " " + type + " " );
+		
 		if(loginUser != null) {
 			if(type == 1) {
-				p = pService.selectSearchPosting_brand(keyword, loginUser.getMno());
+				p = pService.selectSearchPosting_brand(keyword, loginUser.getMno()); 
 			}else if(type == 2) {
 				p = pService.selectSearchPosting_hash(keyword, loginUser.getMno());
 			}else if(type == 3) {
 				p = pService.selectSearchPosting_loca(keyword, loginUser.getMno());
+			}else if(type == 4) {
+				p = pService.selectSearchPosting_cate(keyword, loginUser.getMno());
 			}
+			//p = p = pService.selectSearchPosting(type ,keyword, loginUser.getMno());
 		}else {
 			if(type == 1) {
 				p = pService.selectSearchPosting_brand(keyword, -10000);
@@ -58,7 +63,10 @@ public class PostingController {
 				p = pService.selectSearchPosting_hash(keyword, -10000);
 			}else if(type == 3) {
 				p = pService.selectSearchPosting_loca(keyword, -10000);
+			}else if(type == 4) {
+				p = pService.selectSearchPosting_cate(keyword, -10000);
 			}
+			//p = p = pService.selectSearchPosting(type ,keyword, -10000);
 		}
 		
 		System.out.println("키워드 : " + keyword);
@@ -155,15 +163,26 @@ public class PostingController {
 
 		// 2. 해시태그 추출
 		String str = p.getContent();
-		String [] strArr = str.split(" ");
+		
+		System.out.println("기본 str : "+str);
+		str = str.replace("<p>", "");
+		str = str.replace("</p>", " <br>");
+		str = str.replace("#", " #");
+		System.out.println("replace 후에 : "+str);
+		
+		String [] strArr = str.trim().split(" ");
 		String hashtag = "";
+		
+		System.out.println("strArr : " + strArr[0]);
+		System.out.println("strArr 길이 : " + strArr.length);
 		
 		HashMap<String, String> map = new HashMap<>();
 		
 		for(int i=0; i<strArr.length; i++) {
-			if(strArr[i].charAt(0) == '#') {
+
+			if(!strArr[i].equals("") && strArr[i].trim().charAt(0) == '#' ) {
 				hashtag += strArr[i];
-				map.put(strArr[i], "<a href='#'>"+strArr[i]+"</a>");
+				map.put(strArr[i], "<a href='#' class='hashtagHref'>"+strArr[i]+"</a>");
 			}
 		}
 		p.setHashtag(hashtag);
@@ -351,6 +370,30 @@ public class PostingController {
 	public String updateReply(int prno, String content) {
 		
 		int result = pService.updateReply(prno, content);
+		if(result > 0 ) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping("pReReplyDelete.do")
+	public String deleteReReply(int prno) {
+
+		int result = pService.deleteReReply(prno);
+		if(result > 0 ) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping("pReReplyUpdate.do")
+	public String updateReReply(int prno, String content) {
+		
+		int result = pService.updateReReply(prno, content);
 		if(result > 0 ) {
 			return "success";
 		}else {

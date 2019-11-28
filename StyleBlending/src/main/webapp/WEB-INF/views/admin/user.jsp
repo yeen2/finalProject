@@ -1,18 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
+
 <style type="text/css">
 	.order-table:after, .order-table:before{
 		position : relative !important;
 	}
 </style>
-</head>
-<body>
-	
+
+<jsp:include page="header.jsp" />
 <!-- Left Panel -->
     <aside id="left-panel" class="left-panel" style="padding-top:20px;">
         <nav class="navbar navbar-expand-sm navbar-default">
@@ -41,23 +37,16 @@
         </nav>
     </aside>
     <!-- /#left-panel -->
-    
-    
-       <!-- Right Panel -->
-
-    <div id="right-panel" class="right-panel">
-	
-	<jsp:include page="header.jsp" />
      
     	<div class="content">
-            <div class="animated fadeIn">
+            <div class="animated fadeIn mt-3" >
                 <div class="row">
                 	<div class="col-lg-12">
-                        <div class="card">
+                        <div class="card" >
                             <div class="card-header">
                                 <strong class="card-title">회원 목록</strong>
                             </div>
-                            
+                            <div class="card-body mt-5" style="min-height: 800px;">	
                             <div class="row">
 	                            <div class="col-md-10 offset-md-1" style="padding:20px;">
 	                          		<label style="display:inline-flex; padding-right:20px;">Show 
@@ -126,6 +115,7 @@
                                     </c:if>
                                 </table>
                                 
+                                <br><br>
                                 <div class="row">
 	                                <div class="col-sm-4" style="margin-left:10px;">
 	                                	Showing <strong> ${pi.currentPage } to ${pi.endPage }</strong> of <strong> ${pi.listCount }</strong> entries	
@@ -182,6 +172,7 @@
                                 
                             </div> <!-- /.table-stats -->
                         </div>
+                        </div>
                     </div>
 
                
@@ -191,9 +182,7 @@
         </div><!-- .content -->
 
 
-    <jsp:include page="footer.jsp" />
 
-    </div><!-- /#right-panel -->
     
      <script type="text/javascript" src="${pageContext.request.contextPath}/resources/admin_temp/js/admin.js"></script>
      <script>
@@ -273,8 +262,6 @@
                 </div>
             </div>
         </div>
-         
- 		
-    
-</body>
-</html>
+	
+
+    <jsp:include page="footer.jsp" />

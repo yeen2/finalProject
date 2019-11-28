@@ -41,11 +41,15 @@ public interface PostingService {
 	
 	int deleteReply(int prno);
 	int updateReply(int prno, String content);
+	int deleteReReply(int prno);
+	int updateReReply(int prno, String content);
 	
 	// 키워드 검색
+	List<Posting> selectSearchPosting(String type, String keyword, int mno);
 	List<Posting> selectSearchPosting_brand(String keyword, int mno);
 	List<Posting> selectSearchPosting_hash(String keyword, int mno);
 	List<Posting> selectSearchPosting_loca(String keyword, int mno);
+	List<Posting> selectSearchPosting_cate(String keyword, int mno);
 	
 	
 	

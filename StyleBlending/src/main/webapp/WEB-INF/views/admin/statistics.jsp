@@ -1,21 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <!-- 차트 보이게 cdn x-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery.min.js"></script>
-    <!-- google charts -->
-   <!--  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
-<!-- <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13" type="text/javascript"></script> -->
-</head>
-<body>
-	
+
+<jsp:include page="header.jsp" />
+
 <!-- Left Panel -->
     <aside id="left-panel" class="left-panel" style="padding-top:20px;">
         <nav class="navbar navbar-expand-sm navbar-default">
@@ -46,46 +40,32 @@
     <!-- /#left-panel -->
     
     
-    
-       <!-- Right Panel -->
-
-    <div id="right-panel" class="right-panel">
-
-      <jsp:include page="header.jsp" />
-      
+ 
         
        <div class="content">
-            <div class="animated fadeIn">
+            <div class="animated fadeIn mt-3">
                 <div class="row">
-                
-			      
-			     <div class="col-lg-10 offset-md-1">
-					<div class="card">
-						<div class="card-body">
-							<div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
-								<div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-									<div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+				     <div class="col-lg-10 offset-md-1">
+						<div class="card">
+							<div class="card-body mt-5 ">
+								<div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+									<div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+										<div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+									</div>
+									<div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+										<div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+									</div>
 								</div>
-								<div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-									<div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
-								</div>
+								<h4 class="mb-3"><b>현황 통계 (게시글 / 가입자)</b></h4>
+								<canvas id="sales-chart" height="528" width="1057" class="chartjs-render-monitor" style="display: block; height: 352px; width: 705px;"></canvas>
 							</div>
-							<h4 class="mb-3"><b>현황 통계 (게시글 / 가입자)</b></h4>
-							<canvas id="sales-chart" height="528" width="1057" class="chartjs-render-monitor" style="display: block; height: 352px; width: 705px;"></canvas>
 						</div>
-					</div>
-				</div>
-      
+					</div> <!-- 현황통계 끝 -->
       			</div>
       		</div>
       </div>
       
-   
-   
-    <jsp:include page="footer.jsp" />
-
-    </div><!-- /#right-panel -->
-    
+ 
     <script>
   //Sales chart
   // 총누적 회원,게시글,광고,신고
@@ -207,5 +187,4 @@
     </script>
 	
 
-</body>
-</html>
+<jsp:include page="footer.jsp" />

@@ -1,23 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
 
-	<!-- jQuery -->
-    <script src="https://code.jquery.com/jquery.min.js"></script>
-    <!-- google charts -->
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery.min.js"></script>
+<!-- google charts -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <style>
 	.order-table:after, .order-table:before{
 		position : relative !important;
 	}
 </style>
-</head>
-<body>
-	
+
+<jsp:include page="header.jsp" />
 <!-- Left Panel -->
     <aside id="left-panel" class="left-panel" style="padding-top:20px;">
         <nav class="navbar navbar-expand-sm navbar-default">
@@ -47,15 +43,7 @@
     </aside>
     <!-- /#left-panel -->
     
-    
-    
-       <!-- Right Panel -->
 
-    <div id="right-panel" class="right-panel">
-
-    <jsp:include page="header.jsp" />
-      
-      
     	<div class="content">
             <div class="animated fadeIn">
                <div class="card-header" >
@@ -137,6 +125,3 @@
       
       
       <jsp:include page="footer.jsp" />
-    </div>
-</body>
-</html>
