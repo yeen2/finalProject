@@ -194,9 +194,12 @@
 	<select id="getAdListCount" resultType="_int">
 		select count(*)
 		from ad
+		<if test="keyword != null">
+			where name like '%'||#{keyword}||'%'
+		</if>
 	</select>
 
-	<select id="selectAdList" resultMap="AdResultSet" parameterType="String">
+	<select id="selectAdList" resultMap="AdResultSet">
 		select t1.* from
 		(select ad.*,m.email
 		from ad

@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,14 +23,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonIOException;
 import com.kh.styleblending.admin.model.service.AdminService;
 import com.kh.styleblending.admin.model.vo.Ad;
 import com.kh.styleblending.admin.model.vo.Declare;
 import com.kh.styleblending.admin.model.vo.PageInfo;
 import com.kh.styleblending.admin.model.vo.Pagination;
 import com.kh.styleblending.admin.model.vo.Statistics;
-import com.kh.styleblending.main.model.service.MainService;
 import com.kh.styleblending.main.model.vo.Notice;
 import com.kh.styleblending.member.model.vo.Member;
 
@@ -145,21 +145,21 @@ public class AdminController {
 		return mv;
 	}
 	
-	
-	@RequestMapping("aAdvertisment.do")
-	public ModelAndView selectAdList(ModelAndView mv, @RequestParam(value="currentPage",defaultValue="1")int currentPage,
+	@RequestMapping("aAdvertisment.do")	
+	public ModelAndView getSearchAdList(ModelAndView mv, @RequestParam(value="currentPage",defaultValue="1")int currentPage,
 			@RequestParam(value="keyword",defaultValue="")String keyword, @RequestParam(value="boardLimit", defaultValue="5")int boardLimit) {
+
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("keyword", keyword);
 		
-		System.out.println(keyword);
-		int listCount = aService.getAdListCount(keyword);
+		System.out.println("keyword : " + map);
+		int listCount = aService.getAdListCount(map);
 		
 		System.out.println("listCount : "+listCount);
 		
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, boardLimit);
-		
 		System.out.println("pi : " + pi);
-		
-		ArrayList<Ad> list = aService.selectAdList(pi, keyword);						
+		ArrayList<Ad> list = aService.selectAdList(pi, map);	
 		
 		System.out.println("list : " + list);
 		ArrayList<Ad> newList = aService.selectAdNewList();
