@@ -3,6 +3,7 @@ package com.kh.styleblending.main.model.service;
 import java.util.ArrayList;
 
 import com.kh.styleblending.admin.model.vo.Ad;
+import com.kh.styleblending.main.model.vo.Notice;
 import com.kh.styleblending.posting.model.vo.Posting;
 
 public interface MainService {
@@ -19,4 +20,6 @@ public interface MainService {
 	ArrayList<Posting> selectFilter(Posting p, int mno);
 	//좋아요 증가
 	int increaseLikeCount(int pno);
+	//공지사항 내용 보여주기
+	ArrayList<Notice> selectNoticeContent(int nno);
 }

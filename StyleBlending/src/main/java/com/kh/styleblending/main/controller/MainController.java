@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
+import com.kh.styleblending.admin.model.service.AdminService;
 import com.kh.styleblending.admin.model.vo.Ad;
 import com.kh.styleblending.main.model.service.MainService;
 import com.kh.styleblending.main.model.vo.Live;
@@ -25,9 +26,12 @@ import com.kh.styleblending.posting.model.vo.Posting;
 
 @Controller
 public class MainController {
-
+	
 	@Autowired
 	public MainService mainService;
+	@Autowired
+	private AdminService aService;
+	
 
 	@RequestMapping("mainNotice.do")
 	public String mainNotice() {
@@ -191,4 +195,42 @@ public class MainController {
 		}
 		
 	}
+	@RequestMapping("aMainNotice.do")
+	public void notice2(HttpServletResponse response) throws JsonIOException, IOException {
+		
+		ArrayList<Notice> list = aService.selectNoticeList();
+		
+		System.out.println(list);
+		
+		response.setContentType("application/json; charset=UTF-8");
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		
+		gson.toJson(list, response.getWriter());
+
+	}
+	@RequestMapping("MainNoticeContent.do")
+	public void notice3(HttpServletResponse response, int nno) throws JsonIOException, IOException {
+		
+		
+		
+		ArrayList<Notice> list = mainService.selectNoticeContent(nno);
+		
+		System.out.println(list);
+		
+		response.setContentType("application/json; charset=UTF-8");
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		
+		gson.toJson(list, response.getWriter());
+		
+	}
+	@RequestMapping("mainInsertNotice.do")
+	public void insertNotice(HttpServletRequest request, String NoticeTitle, String NoticeWriter, String p_content) {
+	
+		
+		System.out.println(NoticeTitle+" " + NoticeWriter+ " " + p_content);
+		
+	}
+	
 }

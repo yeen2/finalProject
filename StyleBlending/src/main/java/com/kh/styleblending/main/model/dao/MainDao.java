@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.styleblending.admin.model.vo.Ad;
+import com.kh.styleblending.main.model.vo.Notice;
 import com.kh.styleblending.posting.model.vo.Posting;
 
 @Repository("mainDao")
@@ -43,6 +44,10 @@ public class MainDao {
 	public int increaseLikeCount(int pno) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("mainMapper.increaseLikeCount",pno);
+	}
+	public ArrayList<Notice> selectNoticeContent(int nno) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("mainMapper.selectNoticeContent",nno);
 	}
 	
 	
