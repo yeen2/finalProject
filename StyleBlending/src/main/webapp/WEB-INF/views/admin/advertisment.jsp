@@ -448,12 +448,12 @@
 	});	
 	
 */
-	
+	/* 
 	$(function(){
 		var  url = ${startAd.url};
 		console.log(url.indexOf("="));
 	});
-
+ */
 	
 	
 	</script>

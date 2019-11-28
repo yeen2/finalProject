@@ -180,7 +180,7 @@
 			    <div class="modal-content">
 			      <div class="modal-header">
 			        <h5 class="modal-title" id="exampleModalLabel">비밀번호 변경</h5>
-			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="passClose">
 			          <span aria-hidden="true">&times;</span>
 			        </button>
 			      </div>
@@ -205,7 +205,7 @@
 				
 				      <div class="modal-footer">
 				        <button type="submit" class="btn btn-success">변경하기</button>
-				        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+				        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="passClose2">취소</button>
 				      </div>
 			       </form>
 			     
@@ -220,7 +220,7 @@
 			    <div class="modal-content">
 			      <div class="modal-header">
 			        <h5 class="modal-title" id="exampleModalLabel">회원 탈퇴</h5>
-			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="deleteClose">
 			          <span aria-hidden="true">&times;</span>
 			        </button>
 			      </div>
@@ -250,12 +250,13 @@
 				
 				    <div class="modal-footer">
 				      <button type="button" class="btn btn-success" id="deleteBtn">탈퇴하기</button>
-				      <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+				      <button type="button" class="btn btn-secondary" data-dismiss="modal" id="deleteClose2">취소</button>
 				    </div>
 			     
 			    </div>
 			  </div>
 			</div>
+			
 			
 		</div>
 		
@@ -324,6 +325,43 @@
 				alert("비밀번호가 일치하지 않습니다.");
 				$("#userPass").val("").focus();
 			}
+		});
+		
+		<%-- 모달창 닫을 때 입력값 초기화 --%>
+		$("html").click(function(e){
+			if($("#updatePass").css("display") == "block"){
+				if(!$("#updatePass").has(e.target).length){
+					$("#currentPass").val("");
+					$("#pass").val("");
+					$("#pass2").val("");
+					$(".fCheck1").hide();
+					$(".sCheck1").hide();
+					$(".fCheck2").hide();
+					$(".sCheck2").hide();
+				}
+			}
+		});
+		
+		$("html").click(function(e){
+			if($("#deleteMember").css("display") == "block"){
+				if(!$("#deleteMember").has(e.target).length){
+					$("#userPass").val("");
+				}
+			}
+		});
+		
+		$("#passClose, #passClose2").click(function(){
+			$("#currentPass").val("");
+			$("#pass").val("");
+			$("#pass2").val("");
+			$(".fCheck1").hide();
+			$(".sCheck1").hide();
+			$(".fCheck2").hide();
+			$(".sCheck2").hide();
+		});
+		
+		$("#deleteClose, #deleteClose2").click(function(){
+			$("#userPass").val("");
 		});
 		
 		
