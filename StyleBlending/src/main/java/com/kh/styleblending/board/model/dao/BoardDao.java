@@ -59,6 +59,17 @@ public class BoardDao {
 
 		return sqlSession.selectOne("boardMapper.getListCount");
 	}
+	// 댓글 수정
+	public int updateBoardReply(BoardReply r) {
+
+		return sqlSession.update("boardMapper.updateBoardReply", r);
+	}
+	
+	// 댓글 삭제
+	public int deleteBoardReply(int brno) {
+
+		return sqlSession.delete("boardMapper.deleteBoardReply", brno);
+	}
 	
 	// 자유게시판 리스트
 	public ArrayList<Board> selectList(PageInfo pi) {
@@ -90,8 +101,8 @@ public class BoardDao {
 		hsm.put("bno", bno);
 		hsm.put("mno", mno);
 		
-		System.out.println("insertBno : " + bno);
-		System.out.println("insertMno : " + mno);
+		//System.out.println("insertBno : " + bno);
+		//System.out.println("insertMno : " + mno);
 		return sqlSession.insert("boardMapper.insertBoardLike", hsm);
 	}
 
@@ -99,8 +110,8 @@ public class BoardDao {
 		HashMap hsm = new HashMap<>();
 		hsm.put("bno", bno);
 		hsm.put("mno", mno);
-		System.out.println("bnoDao : " + bno);
-		System.out.println("mnoDao : " + mno);
+		//System.out.println("bnoDao : " + bno);
+		//System.out.println("mnoDao : " + mno);
 		return sqlSession.delete("boardMapper.deleteBoardLike", hsm);
 	}
 
@@ -124,8 +135,8 @@ public class BoardDao {
 		hsm.put("bno", bno);
 		hsm.put("mno", mno);
 		
-		System.out.println("checkBno : " + bno);
-		System.out.println("checkMno : " + mno);
+		//System.out.println("checkBno : " + bno);
+		//System.out.println("checkMno : " + mno);
 		return sqlSession.selectOne("boardMapper.selectBoardLikeCheck", hsm);
 	}
 
@@ -136,7 +147,6 @@ public class BoardDao {
 
 
 
-	
 	
 	
 	

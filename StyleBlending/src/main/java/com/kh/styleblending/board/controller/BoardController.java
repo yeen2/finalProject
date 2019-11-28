@@ -100,20 +100,32 @@ public class BoardController {
 //		i.setRenameImg(renameFileName);
 //		
 //	}
-		
-		
+//		
+//		
 		int result = bService.insertBoard(b);
+//		//String freeBoard = request.getParameter("freeboard");
+//		//String fasionBoard = request.getParameter("fashionboard");
+//		
+//		if(result >0) {
+//			
+//			return "redirect:fblist.do";
+// 		
+//		
+//		
+//		}
+//		
+		
 		//System.out.println(result);
 		
-		
-		if(result > 0) {
 			
-			return "redirect:blist.do";
-			
-		}else {
-			model.addAttribute("msg","게시판 작성 실패");
-			return "common/errorPage";
-		}
+			if(result > 0) {
+				
+				return "redirect:blist.do";
+				
+			}else {
+				model.addAttribute("msg","게시판 작성 실패");
+				return "common/errorPage";
+			}
 		
 	}
 	
@@ -366,6 +378,32 @@ public class BoardController {
 		
 	}
 	
+	@ResponseBody
+	@RequestMapping("rupdate.do")
+	public String updateReply(BoardReply r) {
+		
+		int result = bService.updateBoardReply(r);
+		
+		if(result > 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping("rdelete.do")
+	public String deleteReply(int brno) {
+		
+		int result = bService.deleteBoardReply(brno);
+		
+		if(result > 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
+	
 	// 추천 추가
 	@ResponseBody
 	@RequestMapping("binsertLike.do")
@@ -428,9 +466,10 @@ public class BoardController {
 		int mno = d.getBno();
 		
 		int result = bService.insertbDeclare(d);
-		
+		//System.out.println(d);
 		if(result > 0 ) {
-			mv.addObject("msg", "게시물을 신고하였습니다.").setViewName("redirect:listDetail.do?="+ mno);
+			mv.addObject("msg", "게시물을 신고하였습니다.").setViewName("board/listDetail");
+			//System.out.println(result);
 		}else {
 			mv.addObject("msg", "게시물 신고를 실패하였습니다.").setViewName("common/error");
 		}

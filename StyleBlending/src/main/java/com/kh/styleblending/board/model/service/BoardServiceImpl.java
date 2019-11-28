@@ -84,6 +84,20 @@ public class BoardServiceImpl implements BoardService{
 		return bDao.insertBoardReply(r);
 	}
 
+	
+	@Override
+	public int updateBoardReply(BoardReply r) {
+
+		return bDao.updateBoardReply(r);
+	}
+
+	@Override
+	public int deleteBoardReply(int brno) {
+
+		return bDao.deleteBoardReply(brno);
+	}
+
+
 
 
 	@Override
@@ -134,7 +148,5 @@ public class BoardServiceImpl implements BoardService{
 
 			return bDao.insertbDeclare(d);
 		}
-
-
 
 }

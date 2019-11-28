@@ -34,7 +34,7 @@
 					<select class="custom-select" style="width: 400px;">
 						<option selected>분류</option>
 						<option value="freeboard">자유게시판</option>
-						<option value="fasionboard ">패션 정보 게시판</option>
+						<option value="fashionboard ">패션 정보 게시판</option>
 					</select>
 				</div>
 			</div>

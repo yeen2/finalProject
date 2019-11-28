@@ -97,6 +97,7 @@
 	where b_no=#{bno}
 </update>
 
+<!-- 댓글 -->
 <select id="selectBoardReplyList" resultMap="BoardReplyResultSet">
 
 	select r.*, m.nickName 
@@ -115,6 +116,16 @@
 	insert into b_reply
 	values(seq_b_reply.nextval, #{bno}, #{mno} ,#{content}, sysdate, default)
 </insert>
+
+<update id="updateBoardReply">
+	update b_reply
+	set content = #{content}
+</update>
+
+<delete id="deleteBoardReply">
+	delete from b_reply
+	where brno = #{brno}
+</delete>
 
 
 <!-- 추천 -->
