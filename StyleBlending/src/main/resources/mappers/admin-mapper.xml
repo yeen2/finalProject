@@ -59,6 +59,7 @@
 		<result property="month4" column="month4"/>
 		<result property="month5" column="month5"/>
 		<result property="month6" column="month6"/>
+		<result property="totalCount" column="totalC"/>
 	</resultMap>
 	
 	<resultMap id="NoticeResultSet" type="Notice">
@@ -293,6 +294,22 @@ select sum(m1) "month1",sum(m2) "month2",sum(m3) "month3",sum(m4) "month4",sum(m
     				group by TO_CHAR(enroll_date,'yy/mm')))
 	</select>
 
+	<select id="totalCount" resultMap="StResultSet">
+		select * from(
+		select sum(a) totalC from(
+				select count(*) a
+				from posting
+				union
+				select count(*) a
+				from board
+				union
+				select count(*) a
+				from fashion_board)
+		union
+		select sum(price)
+		from pay
+		where status='1')
+	</select>
 	
 	<select id="selectNoticeList" resultMap="NoticeResultSet">
 		select * from notice where isdelete='N'

@@ -172,10 +172,17 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
+	public ArrayList<Statistics> totalCount() {
+		// 총 게시글수(positng,board,fashion) + 광고수익
+		return aDao.totalCount();
+	}
+	
+	@Override
 	public ArrayList<Notice> selectNoticeList() {
 		// 공지사항 목록 조회용
 		return aDao.selectNoticeList();
 	}
+
 
 	
 

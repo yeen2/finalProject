@@ -275,9 +275,15 @@ public class AdminController {
 	}
 	
 	@RequestMapping("aStatistics.do")
-	public String statistics(Model model) {
+	public ModelAndView statistics(ModelAndView mv) {
 		
-		return "admin/statistics";
+		int memberTotalCount = aService.getMemberListCount();
+		ArrayList<Statistics> totalCount = aService.totalCount();
+		System.out.println(totalCount);
+		mv.addObject("memberTC", memberTotalCount).addObject("totalCount", totalCount).setViewName("admin/statistics");
+		
+		return mv;
+		
 	}
 	
 	@ResponseBody
@@ -287,7 +293,6 @@ public class AdminController {
 		ArrayList<Statistics>  statistics = aService.selectMemberCount();
 		//System.out.println(statistics);
 		
-		System.out.println(statistics);
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		
 		return gson.toJson(statistics);

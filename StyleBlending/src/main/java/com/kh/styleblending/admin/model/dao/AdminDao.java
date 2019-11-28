@@ -127,6 +127,10 @@ public class AdminDao {
 		return (ArrayList)sqlSession.selectList("adminMapper.selectMemberCount");
 	}
 	
+	public ArrayList<Statistics> totalCount() {
+		return (ArrayList)sqlSession.selectList("adminMapper.totalCount");
+	}
+	
 	public ArrayList<Notice> selectNoticeList(){
 		return (ArrayList)sqlSession.selectList("adminMapper.selectNoticeList");
 	}

@@ -45,9 +45,92 @@
        <div class="content">
             <div class="animated fadeIn mt-3">
                 <div class="row">
-				     <div class="col-lg-10 offset-md-1">
+                	
+                	<div class="col-sm-12">
+                		<div class="card-group">
+                			<div class="card col-md-12 no-padding ">
+                				<div class="card-body">
+                				<b>> 총 누적</b>
+                				</div>
+                			</div>
+                		</div>
+                	</div>
+                	<div class="col-sm-12 mb-4">
+						<div class="card-group">
+							<div class="card col-md-6 no-padding ">
+								<div class="card-body">
+									<div class="h1 text-muted text-right mb-4">
+										<i class="fa fa-users"></i>
+									</div>
+									<div class="h4 mb-0">
+										<span class="count">${memberTC}</span>
+									</div>
+									<small class="text-muted text-uppercase font-weight-bold">회원</small>
+									<div class="progress progress-xs mt-3 mb-0 bg-flat-color-1" style="width: 40%; height: 5px;"></div>
+								</div>
+							</div>
+							<c:forEach items="${totalCount}" var="c" varStatus="status">
+							<div class="card col-md-6 no-padding ">
+								<div class="card-body">
+									<div class="h1 text-muted text-right mb-4">
+										<i class="fa fa-user-plus"></i>
+									</div>
+									<div class="h4 mb-0">
+									<c:if test="${status.index eq 0}">
+										<span class="count">${c.totalCount}</span>
+									</c:if>										
+									</div>
+									<small class="text-muted text-uppercase font-weight-bold">게시글</small>
+									<div class="progress progress-xs mt-3 mb-0 bg-flat-color-2" style="width: 40%; height: 5px;"></div>
+								</div>
+							</div>
+							
+							<div class="card col-md-6 no-padding ">
+								<div class="card-body">
+									<div class="h1 text-muted text-right mb-4">
+										<i class="fa fa-cart-plus"></i>
+									</div>
+									<div class="h4 mb-0">
+									<c:if test="${status.index eq 1}">
+										<span class="count">${c.totalCount}</span>
+									</c:if>	
+									</div>
+									<small class="text-muted text-uppercase font-weight-bold">Advertisment sold</small>
+									<div class="progress progress-xs mt-3 mb-0 bg-flat-color-3" style="width: 40%; height: 5px;"></div>
+								</div>
+							</div>
+							</c:forEach>
+<div class="card col-md-6 no-padding ">
+<div class="card-body">
+<div class="h1 text-muted text-right mb-4">
+<i class="fa fa-pie-chart"></i>
+</div>
+<div class="h4 mb-0">
+<span class="count">28</span>%
+</div>
+ <small class="text-muted text-uppercase font-weight-bold">Returning Visitors</small>
+<div class="progress progress-xs mt-3 mb-0 bg-flat-color-4" style="width: 40%; height: 5px;"></div>
+</div>
+</div>
+<div class="card col-md-6 no-padding ">
+<div class="card-body">
+<div class="h1 text-muted text-right mb-4">
+<i class="fa fa-comments-o"></i>
+</div>
+<div class="h4 mb-0">
+<span class="count">972</span>
+</div>
+<small class="text-muted text-uppercase font-weight-bold">COMMENTS</small>
+<div class="progress progress-xs mt-3 mb-0 bg-flat-color-1" style="width: 40%; height: 5px;"></div>
+</div>
+</div>
+</div>
+</div>
+                
+                
+				     <div class="col-lg-9 offset-md-1">
 						<div class="card">
-							<div class="card-body mt-5 ">
+							<div class="card-body mt-3">
 								<div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
 									<div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
 										<div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
@@ -61,7 +144,7 @@
 							</div>
 						</div>
 					</div> <!-- 현황통계 끝 -->
-      			</div>
+      			</div> <!-- /.row 끝  -->
       		</div>
       </div>
       
