@@ -76,7 +76,7 @@
         		m.nickname, m.profile, m.location as mlocation, m.rename_img as profileImg, 
                 (select count(*) from p_like where m_no=#{mno} and p_no=#{pno}) loginLike, 
                 (select count(*) from declare where m_no=#{mno} and b_no=#{pno} and type=1) loginDeclare, 
-                (select count(*) from p_reply where p_no=#{pno} and r_level=1) replyCount,
+                (select count(*) from p_reply where p_no=#{pno} and r_level=1 and isdelete='N') replyCount,
                 (select count(*) from fan where me_no=p.m_no and you_no=#{mno}) fanCheck 
 		from posting p
 		join member m on(p.m_no=m.m_no)

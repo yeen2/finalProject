@@ -196,7 +196,7 @@
 				<hr>
 
 				<!-- 댓글 -->
-				<p>View all <b id="rCount">4</b> comments</p>
+				<p>View all <b id="rCount">${ p.replyCount}</b> comments</p>
 				<br>
 				
 				<!-- for문 돌릴떄, 전index랑 같으면  -->
@@ -836,9 +836,7 @@
 
 					$replyForm = $("#replyForm");
 					$replyForm.html("");
-					
-					$("#rCount").text(data.length);
-					
+
 					if(data.length > 0){ // 댓글이 존재할 경우
 						
 						// 반복문을 통해서 한 행씩 추가될 수 있도록
