@@ -10,7 +10,7 @@
 </head>
 <body>
 <script type="text/javascript">
-  var naver_id_login = new naver_id_login("lNlvAbGNkbK57ij7y2BJ", "http://localhost:8070/fial/views/common/naverCallback.jsp");
+  var naver_id_login = new naver_id_login("lNlvAbGNkbK57ij7y2BJ", "http://localhost:8070/styleblending/views/common/naverCallback.jsp");
   // 접근 토큰 값 출력
   alert(naver_id_login.oauthParams.access_token);
   // 네이버 사용자 프로필 조회

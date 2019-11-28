@@ -63,9 +63,11 @@ public class HomeController {
 	@RequestMapping("join.do")
 	public ModelAndView insertMember(Member m, ModelAndView mv) {
 		
-		String encPass = bcryptPasswordEncoder.encode(m.getPass());
-		
-		m.setPass(encPass);
+		/*
+		 * String encPass = bcryptPasswordEncoder.encode(m.getPass());
+		 * 
+		 * m.setPass(encPass);
+		 */
 		
 		int result = mService.insertMember(m);
 		

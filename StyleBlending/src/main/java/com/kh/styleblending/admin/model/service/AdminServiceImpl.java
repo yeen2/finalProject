@@ -99,15 +99,15 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public int getAdListCount() {
+	public int getAdListCount(String keyword) {
 		// 총 광고수 조회
-		return aDao.getAdListCount();
+		return aDao.getAdListCount(keyword);
 	}
 
 	@Override
-	public ArrayList<Ad> selectAdList(PageInfo pi) {
+	public ArrayList<Ad> selectAdList(PageInfo pi, String keyword) {
 		// 광고 목록조회
-		return aDao.selectAdList(pi);
+		return aDao.selectAdList(pi,keyword);
 	}
 	
 	@Override
