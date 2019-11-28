@@ -196,12 +196,15 @@
 		from ad
 	</select>
 
-	<select id="selectAdList" resultMap="AdResultSet">
+	<select id="selectAdList" resultMap="AdResultSet" parameterType="String">
 		select t1.* from
 		(select ad.*,m.email
 		from ad
 		join pay p on(p.pay_no=ad.pay_no)
 		join member m on(m.m_no=ad.m_no)
+		<if test="keyword != null">
+			where name like '%'||#{keyword}||'%'
+		</if>
 		order by ad.status, ad.ad_no desc, ad.enroll_date )t1
 	</select>
 	
