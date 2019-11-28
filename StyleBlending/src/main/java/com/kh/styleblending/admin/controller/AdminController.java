@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
 import com.kh.styleblending.admin.model.service.AdminService;
 import com.kh.styleblending.admin.model.vo.Ad;
 import com.kh.styleblending.admin.model.vo.Declare;
@@ -296,12 +297,13 @@ public class AdminController {
 	public ModelAndView notice(ModelAndView mv) {
 		
 		ArrayList<Notice> list = aService.selectNoticeList();
-		
+		System.out.println(list);
 		mv.addObject("list", list).setViewName("admin/notice");
 		
 		return mv;
 	}
 	
+
 	
 	
 	

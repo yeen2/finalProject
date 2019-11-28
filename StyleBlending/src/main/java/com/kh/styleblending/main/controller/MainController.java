@@ -231,6 +231,8 @@ public class MainController {
 		
 		System.out.println(NoticeTitle+" " + NoticeWriter+ " " + p_content);
 		
+		
+		
 	}
 	
 }
