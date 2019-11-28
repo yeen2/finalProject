@@ -112,6 +112,14 @@ public class PostingDao {
 	}
 	
 	//검색
+	public List<Posting> selectSearchPosting(String type, String keyword, int mno){
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("type", type);
+		map.put("keyword", keyword);
+		map.put("mno", mno);
+		return sqlSession.selectList("postingMapper.selectSearchPosting", map);
+	}
+	
 	public List<Posting> selectSearchPosting_brand(String keyword, int mno){
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("keyword", keyword);
@@ -133,7 +141,12 @@ public class PostingDao {
 		return sqlSession.selectList("postingMapper.selectSearchPosting_loca", map);
 	}
 	
-	
+	public List<Posting> selectSearchPosting_cate(String keyword, int mno){
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("keyword", keyword);
+		map.put("mno", mno);
+		return sqlSession.selectList("postingMapper.selectSearchPosting_cate", map);
+	}
 	
 	
 	
