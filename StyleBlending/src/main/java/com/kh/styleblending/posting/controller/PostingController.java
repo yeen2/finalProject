@@ -36,12 +36,14 @@ public class PostingController {
 	private PostingService pService;
 	
 	// 포스팅 키워드 검색
-	// 1-브랜드 2-해시태그 3-위치
+	// 1-브랜드 2-해시태그 3-위치 4-카테고리
 	@RequestMapping("pNavSearch.do")
 	public ModelAndView info(String keyword, int type, ModelAndView mv, HttpSession session) {
 		
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		List<Posting> p = new ArrayList<Posting>();
+		
+		System.out.println(keyword + " " + type + " " );
 		
 		if(loginUser != null) {
 			if(type == 1) {
@@ -50,7 +52,10 @@ public class PostingController {
 				p = pService.selectSearchPosting_hash(keyword, loginUser.getMno());
 			}else if(type == 3) {
 				p = pService.selectSearchPosting_loca(keyword, loginUser.getMno());
+			}else if(type == 4) {
+				p = pService.selectSearchPosting_cate(keyword, loginUser.getMno());
 			}
+			//p = p = pService.selectSearchPosting(type ,keyword, loginUser.getMno());
 		}else {
 			if(type == 1) {
 				p = pService.selectSearchPosting_brand(keyword, -10000);
@@ -58,7 +63,10 @@ public class PostingController {
 				p = pService.selectSearchPosting_hash(keyword, -10000);
 			}else if(type == 3) {
 				p = pService.selectSearchPosting_loca(keyword, -10000);
+			}else if(type == 4) {
+				p = pService.selectSearchPosting_cate(keyword, -10000);
 			}
+			//p = p = pService.selectSearchPosting(type ,keyword, -10000);
 		}
 		
 		System.out.println("키워드 : " + keyword);

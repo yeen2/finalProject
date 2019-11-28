@@ -86,7 +86,7 @@
 		                          	<div class="col-sm-12 col-md-6">
 		                          		<div id="bootstrap-data-table_filter" class="dataTables_filter">
 		                          			<label style="display:inline-flex; padding:15px;">Search: &nbsp;
-		                          				<input type="search" id="adName" class="form-control form-control-sm col-sm-10" placeholder="업체명으로 검색" aria-controls="bootstrap-data-table">
+		                          				<input type="search" id="adName" class="form-control form-control-sm col-sm-10" placeholder="업체명으로 검색" aria-controls="bootstrap-data-table" value="${keyword }">
 		                          			</label>
 				                        	<button type="button" id="adEndBtn" data-toggle="modal" data-target="#adEndModal" class="btn btn-outline-danger btn-sm" style="float:right; margin-right:10px; margin-top:15px;">마감</button>
 				                        	<button type="button" id="adStartBtn" data-toggle="modal" data-target="#adStartModal"  class="btn btn-outline-primary btn-sm" style="float:right; margin-right:10px; margin-top:15px;">
@@ -227,7 +227,7 @@
 					                </div>
 					                <div class="col-md-4" >
 				                        <div class="card">
-				                            <img class="card-img-top" src="${pageContext.request.contextPath}${startAd.imgPath}${startAd.renameImg}" alt="Card image cap">
+				                            <iframe class="card-img-top" src="http://www.youtube.com/embed/NVf6_boeYIQ&list=RDhG6cUBmayDc&index=2"  frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
 				                            <div class="card-body">
 				                                <h4 class="card-title mb-3">${startAd.name}</h4>
 				                                 <p class="card-text">${startAd.startDate} ~ </p>
@@ -306,7 +306,7 @@
         </div>
          
     
-<%--     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/admin_temp/js/admin.js"></script> --%>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/resources/admin_temp/js/admin.js"></script>
 	<script>
 	
 	 function pageSet(boardLimit){ // 게시글수 변경
@@ -339,7 +339,7 @@
 				  }else{
 					  
 					  if(checkRow.charAt(checkRow.length-1) == 1){
-					    	alert("1임");
+					    	//alert("1임");
 					    	adno = checkRow.slice(0,-1);		    	
 					  	    $("#adStartModal").show();
 					  	    $("#adStartConfirm").click(function(){
@@ -383,7 +383,15 @@
 	
 	});
 	
+	// 엔터키 누를시 업체명 검색
+	$("#adName").keydown(function (key){
+		
+		if(key.keyCode == 13){
+			location.href="aAdvertisment.do?keyword="+ $("#adName").val();
+		}
+	});
 	
+	/*
 	$(function(){ // 검색창
 		
 		// 업체명검색
@@ -439,7 +447,13 @@
 		
 	});	
 	
+*/
 	
+	$(function(){
+		var  url = ${startAd.url};
+		console.log(url.indexOf("="));
+	});
+
 	
 	
 	</script>

@@ -17,27 +17,6 @@ $(function(){ // 검색창
 		$(nickname).parent().show();
 	});
 	
-	// 업체명검색
-	$("#adName").keyup(function(){ // 키보드 눌렀다가 뗐을때 이벤트 발생
-		var k = $(this).val();
-		$(".table>tbody>tr").hide();
-		var adName = $(".table>tbody>tr> td:nth-child(5n+3):contains('" + k + "')"); // 업체명 검색
-		
-		$.ajax({
-			url:"aSearchAdname.do",
-			data:{"keyword":k},
-			type:"post",
-			success:function(data){
-				alert("성공");
-				$(adName).parent().show();
-				
-			},error:function(){
-				console.log("ajax 통신 실패");
-			}
-		});
-		
-	});
-	
 	
 });	
 
