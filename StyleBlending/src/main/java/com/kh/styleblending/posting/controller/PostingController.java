@@ -164,18 +164,27 @@ public class PostingController {
 		// 2. 해시태그 추출
 		String str = p.getContent();
 		
-		System.out.println(str);
-		str = str.replace("<p>", " ");
+		System.out.println("기본 str : "+str);
+		str = str.replace("<p>", "");
 		str = str.replace("</p>", " <br>");
-		System.out.println(str);
+		str = str.replace("#", " #");
+		System.out.println("replace 후에 : "+str);
 		
-		String [] strArr = str.split(" ");
+		String [] strArr = str.trim().split(" ");
 		String hashtag = "";
+		
+		System.out.println("strArr : " + strArr[0]);
+		System.out.println("strArr 길이 : " + strArr.length);
 		
 		HashMap<String, String> map = new HashMap<>();
 		
 		for(int i=0; i<strArr.length; i++) {
-			if(strArr[i].charAt(0) == '#') {
+			
+			//System.out.println("0번인덱스 : " + strArr[i].charAt(0));
+			
+			
+			
+			if(!strArr[i].equals("") && strArr[i].trim().charAt(0) == '#' ) {
 				hashtag += strArr[i];
 				map.put(strArr[i], "<a href='#' class='hashtagHref'>"+strArr[i]+"</a>");
 			}

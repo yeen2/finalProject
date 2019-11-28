@@ -462,7 +462,8 @@
 
 	<script type="text/javascript">
 	$(document).on("click",".hashtagHref", function () {
-		var hashtag =                                              
+		var hashtag = $(this).val();
+		
 	}
 	</script>
 	
