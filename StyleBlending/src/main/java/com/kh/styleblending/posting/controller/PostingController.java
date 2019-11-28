@@ -47,7 +47,7 @@ public class PostingController {
 		
 		if(loginUser != null) {
 			if(type == 1) {
-				p = pService.selectSearchPosting_brand(keyword, loginUser.getMno());
+				p = pService.selectSearchPosting_brand(keyword, loginUser.getMno()); 
 			}else if(type == 2) {
 				p = pService.selectSearchPosting_hash(keyword, loginUser.getMno());
 			}else if(type == 3) {
@@ -163,6 +163,12 @@ public class PostingController {
 
 		// 2. 해시태그 추출
 		String str = p.getContent();
+		
+		System.out.println(str);
+		str = str.replace("<p>", "");
+		str = str.replace("</p>", "<br>");
+		System.out.println(str);
+		
 		String [] strArr = str.split(" ");
 		String hashtag = "";
 		
