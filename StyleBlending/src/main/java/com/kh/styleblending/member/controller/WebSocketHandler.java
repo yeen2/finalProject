@@ -2,6 +2,7 @@ package com.kh.styleblending.member.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,10 +40,20 @@ public class WebSocketHandler extends TextWebSocketHandler{
 			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 			String alarmList = gson.toJson(list);
 			/*
-			for(WebSocketSession s : sessionList) {
-				s.sendMessage(new TextMessage(alarmList));
-			}*/
-			session.sendMessage(new TextMessage(alarmList));
+			 * data={
+			 * 	a:1,
+			 * b:2,
+			 * c:3,
+			 * mno:mno,
+			 * }
+			 */
+			
+			for(WebSocketSession sess : sessionList) {
+				int sMno = (int)sess.getAttributes().get("sMno");
+				if(sMno == Integer.parseInt(message.getPayload())) {
+					sess.sendMessage(new TextMessage(alarmList));
+				}
+			}
 			
 		}
 

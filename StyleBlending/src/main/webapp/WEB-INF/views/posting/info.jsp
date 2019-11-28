@@ -120,8 +120,9 @@
 	.rr_md:hover{
 		cursor: pointer;
 	}
+
 	a:hover {
-		text-decoration: none;
+		text-decoration: none !important;
 	}
 	
 	/* 작성자누르면 마이페이지 이동 */
@@ -456,7 +457,17 @@
 
 	</div>
 	<!-- /.container -->
+
+<!----------------------------------- 해시태그 클릭시 locatio:href 정해주기 ----------------------- -->
+
+	<script type="text/javascript">
+	$(document).on("click",".hashtagHref", function () {
+		var hashtag = $(this).val();
+		
+	}
+	</script>
 	
+
 	
 <!-------------  프로필 : 마이페이지 이동  ----------------->	
 	<script type="text/javascript">

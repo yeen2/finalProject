@@ -940,14 +940,6 @@
 	
 	</script>		
 	
-	<script type="text/javascript">
-		function enter_check() {
-			if(event.KeyCode == 13){
-				
-			}
-		}
-	</script>
-	
 	<%@include file="../includes/footer.jsp" %>
 	
 </body>
