@@ -135,24 +135,24 @@
 	</select>
 	
 	<select id="selectDeclareList" resultMap="DeclareResultSet" parameterType="hashMap">
-      select t4.* from
+   	  select t4.* from
       (select t3.* from
       (select * from
-      (select d.*,m.email, p.writer, p.bname
+      (select d.*,m.email,m.profile_path, m.rename_img, p.writer,p.writer_path, p.writer_img, p.bname
       from declare d
       join member m on(m.m_no=d.m_no)
-      join (select posting.p_no, member.email writer,posting.rename_img bname from posting
+      join (select posting.p_no, member.email writer,member.profile_path writer_path, member.rename_img writer_img,posting.rename_img bname from posting
         join member using(m_no)) p on(p.p_no=d.b_no)
       where type=1) t1
       union
       select * from
-      (select d.*,m.email,b.writer, b.title 
+      (select d.*,m.email,m.profile_path, m.rename_img,b.writer,b.writer_path, b.writer_img, b.title 
       from declare d
       join member m on(m.m_no=d.m_no)
-      join (select board.b_no, member.email writer,board.title title from board 
+      join (select board.b_no, member.email writer,member.profile_path writer_path, member.rename_img writer_img, board.title title from board 
         join member using(m_no)) b on(b.b_no=d.b_no)
       where type=2) t2)
-       t3
+      t3
         <if test="posting != null">
 			where type='1'
 		</if>

@@ -112,7 +112,8 @@
 	li {
 		margin-bottom: 5px;
 	}
-
+	.writerNickname:hover{cursor: pointer; color: #0080FF;}
+	.writerImg:hover{cursor: pointer;}
 </style>
 </head>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
@@ -134,19 +135,24 @@
 					<span style="font-style: italic;">" ${keyword } "</span><span> 의 검색 결과</span>
 				</p>
 				<hr>
-				
+				<c:if test="${empty p}">
+					<span>검색 결과가 없습니다</span>
+				</c:if>
+				<c:if test="${not empty p}">
 				<c:forEach var="p" items="${p}">
+					
 					<!-- 1. 게시물 작성자 정보-->
 					<div id="pWriter" style="height: 70px; margin-bottom: 5px;">
+						<input type="hidden" value="${p.mno }">
 						<!-- 프로필 사진 -->
 						<div style="display: inline-block; width: 60px; height: 60px; border-radius: 50%; margin-right: 20px;">
-							<img style="width: 100%; height: 100%; border-radius: 50%; margin-bottom:35px;"
+							<img class="writerImg" style="width: 100%; height: 100%; border-radius: 50%; margin-bottom:35px;"
 									src="${ pageContext.servletContext.contextPath }/resources/upload/member/${p.profileImg}">
 						</div>
 						<!-- 상세정보 -->
 						<div style="display: inline-block; margin: auto; height: 50px; padding-top: 5px;">
 							<div style="height: 50%; margin-bottom:10px;">
-								<a href="#" style="margin-right: 20px;"><span style="font-weight: bold; font-size: 1.3em; color: black;">${p.nickName}</span></a>
+								<span class="writerNickname" style="font-weight: bold; font-size: 1.3em; color: black; margin-right: 20px;">${p.nickName}</span>
 								<!-- 팬추가 -->
 								<c:if test="${p.fanCheck == 0}">
 									<button type="button" class="btn btn-dark btn-sm fBtn" id="addFan">
@@ -198,85 +204,12 @@
 
 					<hr>
 				</c:forEach>
-				
+				</c:if>
 				
 			</div> <!-- col-lg-8 end -->
-			
-
-
-
 
 			<!-- 오른쪽 -->
 			<div class="col-md-4">
-			
-			
-			<%-- 
-				<!-- 1. 작성자 정보 -->
-				<div class="card my-4" style="padding: 10px;">
-					<!-- 작성자 프로필 -->
-					<div class="media mb-4" style="margin: 0 !important;">
-						<!-- 이미지 -->
-						<div style="width: 25%; height: 25%; border-radius: 50%;">
-							<img style="width: 80%; height: 80%; border-radius: 50%;"
-								src="http://placehold.it/60x60" 
-								src="${ pageContext.servletContext.contextPath }/resources/upload/member/${p.rename_img}">
-						</div>
-						<!-- 정보 -->
-						<div style="width: 75%; height: 75%;">
-							<div >
-								<!-- 닉네임 -->
-								<h6 style="display: inline-block;">${ p.nickName }</h6>
-								
-								<!-- 팬추가 버튼 -->
-								<!-- 팬추가 -->
-								<c:if test="${p.fanCheck == 0}">
-									<button type="button" class="btn btn-dark btn-sm fBtn" id="addFan">
-										<i class="fa fa-plus"></i><b>Fan</b>
-									</button>
-									<button class="btn btn-dark btn-sm fBtn" id="removeFan" style="display: none;">
-										<i style="width: 40px;" class="fas fa-check"></i>
-									</button>
-								</c:if>
-								
-								<!-- 팬제거 -->	
-								<c:if test="${p.fanCheck == 1}">
-									<button class="btn btn-dark btn-sm fBtn" id="removeFan">
-										<i style="width: 40px;" class="fas fa-check"></i>
-									</button>
-									<button type="button" class="btn btn-dark btn-sm fBtn" id="addFan" style="display: none;">
-										<i class="fa fa-plus"></i><b>Fan</b>
-									</button>
-								</c:if>
-							</div>
-							<div>
-								<!-- 자기소개 -->
-								<span style="fint-size:xx-small;">${p.profile }</span> <br>
-								<i class="fas fa-map-marker-alt"></i>
-								<span style="fint-size:xx-small;">${p.mlocation }</span>
-							</div>
-							
-						</div>
-					</div>
-				</div>
-				
-				<!-- 2. 코디 정보 -->
-				<div class="card my-4">
-					<h5 class="card-header">Clothes stylist</h5>
-					<div class="card-body">
-						
-					</div>
-				</div>
-				
-				<!-- 3. 촬영위치(지도api) -->
-				<div class="card my-4">
-					<h5 class="card-header">Location</h5>
-					<div class="card-body">
-						<div id="map" style="height: 300px;"></div>
-						<span>${p.location }</span>
-					</div>
-				</div>
-			--%>
-
 				<!-- Side Widget -->
 				<div class="card my-4">
 					<h5 class="card-header">Spotlight</h5>
@@ -309,73 +242,72 @@
 					<h5 class="card-header">상의</h5>
 					<div class="card-body">
 						<ul class="linespaced more_bottomspaced" style="margin-top: -8px; color: black;">
-							<li class="cate_li">T-SHIRT</li>
-							<li class="cate_li">SWEATSHIRT</li>
-							<li class="cate_li">SHIRT</li>
-							<li class="cate_li">BLAZER</li>
-							<li class="cate_li">JACKET</li>
-							<li class="cate_li">OUTER</li>
-							<li class="cate_li">SLEEVELESS</li>
-							<li class="cate_li">CROP TEE</li>
-							<li class="cate_li">HOODIE</li>
-							<li class="cate_li">POLO</li>
-							<li class="cate_li">KNIT</li>
-							<li class="cate_li">TANK TOP</li>
-							<li class="cate_li">VEST</li>
-							<li class="cate_li">CARDIGAN</li>
-							<li class="cate_li">COAT</li>
+							<li class="cate_li" value="1">T-SHIRT</li>
+							<li class="cate_li" value="2">SWEATSHIRT</li>
+							<li class="cate_li" value="3">SHIRT</li>
+							<li class="cate_li" value="4">BLAZER</li>
+							<li class="cate_li" value="5">JACKET</li>
+							<li class="cate_li" value="6">OUTER</li>
+							<li class="cate_li" value="7">SLEEVELESS</li>
+							<li class="cate_li" value="8">CROP TEE</li>
+							<li class="cate_li" value="10">HOODIE</li>
+							<li class="cate_li" value="11">POLO</li>
+							<li class="cate_li" value="12">KNIT</li>
+							<li class="cate_li" value="13">TANK TOP</li>
+							<li class="cate_li" value="14">VEST</li>
+							<li class="cate_li" value="15">CARDIGAN</li>
+							<li class="cate_li" value="16">COAT</li>
 						</ul>
 					</div>
 					<h5 class="card-header">하의</h5>
 					<div class="card-body">
 						<ul class="linespaced more_bottomspaced" style="margin-top: -8px; color: black;">
-							<li class="cate_li">JEANS</li>
-							<li class="cate_li">PANTS</li>
-							<li class="cate_li">SHORTS</li>
-							<li class="cate_li">SKIRT</li>
+							<li class="cate_li" value="17">JEANS</li>
+							<li class="cate_li" value="18">PANTS</li>
+							<li class="cate_li" value="19">SHORTS</li>
+							<li class="cate_li" value="20">SKIRT</li>
 						</ul>
 					</div>
 					<h5 class="card-header">신발</h5>
 					<div class="card-body">
 						<ul class="linespaced more_bottomspaced" style="margin-top: -8px; color: black;">
-							<li class="cate_li">SNEAKERS</li>
-							<li class="cate_li">BOOTS</li>
-							<li class="cate_li">HEELS</li>
-							<li class="cate_li">SANDALS</li>
-							<li class="cate_li">CASUAL SHOES</li>
-							<li class="cate_li">FORMAL SHOES</li>
+							<li class="cate_li" value="21">SNEAKERS</li>
+							<li class="cate_li" value="22">BOOTS</li>
+							<li class="cate_li" value="23">HEELS</li>
+							<li class="cate_li" value="24">SANDALS</li>
+							<li class="cate_li" value="25">CASUAL SHOES</li>
+							<li class="cate_li" value="26">FORMAL SHOES</li>
 						</ul>
 					</div>
 					<h5 class="card-header">악세사리</h5>
 					<div class="card-body">
 						<ul class="linespaced more_bottomspaced" style="margin-top: -8px; color: black;">
-							<li class="cate_li">BAG</li>
-							<li class="cate_li">BAG</li>
-							<li class="cate_li">BRACELET</li>
-							<li class="cate_li">WATCH</li>
-							<li class="cate_li">HAT</li>
-							<li class="cate_li">EYEWEAR</li>
-							<li class="cate_li">GLOVES</li>
-							<li class="cate_li">SCARF</li>
-							<li class="cate_li">SOCKS</li>
-							<li class="cate_li">WALLET</li>
-							<li class="cate_li">TIE</li>
+							<li class="cate_li" value="27">BAG</li>
+							<li class="cate_li" value="28">BRACELET</li>
+							<li class="cate_li" value="29">WATCH</li>
+							<li class="cate_li" value="30">HAT</li>
+							<li class="cate_li" value="31">EYEWEAR</li>
+							<li class="cate_li" value="32">GLOVES</li>
+							<li class="cate_li" value="33">SCARF</li>
+							<li class="cate_li" value="34">SOCKS</li>
+							<li class="cate_li" value="35">WALLET</li>
+							<li class="cate_li" value="36">TIE</li>
 						</ul>
 					</div>	
 					<h5 class="card-header">기타</h5>
 					<div class="card-body">
 						<ul class="linespaced more_bottomspaced" style="margin-top: -8px; color: black;">
-							<li class="cate_li">SWIMWEAR</li>
-							<li class="cate_li">DRESS</li>
-							<li class="cate_li">JUMPSUIT</li>
-							<li class="cate_li">OVERALL</li>
-							<li class="cate_li">SUIT</li>
-							<li class="cate_li">ONE-PIECE</li>
-							<li class="cate_li">CAMERA</li>
-							<li class="cate_li">PHONE</li>
-							<li class="cate_li">SNACK</li>
-							<li class="cate_li">ETC.</li>
-							<li class="cate_li">BIKE</li>
+							<li class="cate_li" value="37">SWIMWEAR</li>
+							<li class="cate_li" value="38">DRESS</li>
+							<li class="cate_li" value="39">JUMPSUIT</li>
+							<li class="cate_li" value="40">OVERALL</li>
+							<li class="cate_li" value="41">SUIT</li>
+							<li class="cate_li" value="42">ONE-PIECE</li>
+							<li class="cate_li" value="43">CAMERA</li>
+							<li class="cate_li" value="44">PHONE</li>
+							<li class="cate_li" value="45">SNACK</li>
+							<li class="cate_li" value="46">ETC.</li>
+							<li class="cate_li" value="47">BIKE</li>
 						</ul>
 					</div>				
 				</div>
@@ -394,16 +326,30 @@
 
 	<jsp:include page="../includes/footer.jsp" />
 	
-	
 	<script type="text/javascript">
-		
+		$(document).on("click",".writerImg", function () {
+			var mno = $(this).parent().parent().children().eq(0).val();
+			location.href="mpViewProfile.do?mno="+mno
+		});
+		$(document).on("click",".writerNickname", function () {
+			var mno = $(this).parent().parent().parent().children().eq(0).val();
+			location.href="mpViewProfile.do?mno="+mno
+		});
+	</script>
+	<script type="text/javascript">
+		// cate hover
 		$(".cate_li").hover(function () {
 			$(this).css('cursor','pointer').css('background-color','black').css('color','white');
-			
 		}, function () {
 			$(this).css('background-color','white').css('color','black');
 		});
-	
+		
+		// 클릭시 이동
+		$(".cate_li").click(function () {
+			var cate = $(this).text();
+			console.log(cate);
+			location.href="pNavSearch.do?type=4&keyword="+cate;
+		});
 	</script>
 
 </body>

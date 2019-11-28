@@ -150,6 +150,11 @@ public class PostingServiceImpl implements PostingService {
 	}
 	
 	@Override
+	public List<Posting> selectSearchPosting(String type, String keyword, int mno) {
+		return pDao.selectSearchPosting(type, keyword, mno);
+	}
+	
+	@Override
 	public List<Posting> selectSearchPosting_brand(String keyword, int mno) {
 		return pDao.selectSearchPosting_brand(keyword, mno);
 	}
@@ -164,7 +169,10 @@ public class PostingServiceImpl implements PostingService {
 		return pDao.selectSearchPosting_loca(keyword, mno);
 	}
 	
-	
+	@Override
+	public List<Posting> selectSearchPosting_cate(String keyword, int mno) {
+		return pDao.selectSearchPosting_cate(keyword, mno);
+	}
 	
 	
 	
