@@ -683,13 +683,6 @@
 						$("#fanA").hide();
 						$("#fanB").show();
 						sock.send(meNo);
-						/* var data={
-								id:'${loginUser.nickName}',
-								msg:'yy',
-								fdh:'yuftudtu',
-						}
-						console.log(data.stringify())
-						sock.send(JSON.stringify(data)) */
 						
 					}else{
 						console.log("실패");
@@ -734,7 +727,6 @@
 					if(result == 1){
 						$("#fanA").show();
 						$("#fanB").hide();
-						sock.send(meNo);
 						
 					}else{
 						console.log("실패");
@@ -756,7 +748,6 @@
 					if(result == 1){
 						value.hide();
 						value.siblings("button").show();
-						sock.send(meNo);
 						
 					}else{
 						console.log("실패");

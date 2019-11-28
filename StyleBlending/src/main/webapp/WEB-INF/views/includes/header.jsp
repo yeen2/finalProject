@@ -124,6 +124,7 @@
 
 #imgGoProfile:hover, #nickGoProfile:hover{cursor:pointer;}
 #deleteAlarmOne:hover{cursor:pointer; color:gray;}
+#contentPlus p{font-weight:normal;}
 
 </style>
 <script type="text/javascript">
@@ -252,7 +253,7 @@
 							
 							<div style="position:absolute; width:400px; max-height:255px; background:white; display:none; box-shadow:0 5px 10px rgba(0, 0, 0, 0.5);
 							overflow-y:auto; overflow-x:hidden; left:-175px; z-index:1000;" id="show" class="show">
-								<div style="padding:10px 10px 10px 10px;" align="right">
+								<div style="padding:10px 10px 10px 10px;" align="right" id="allDeleteDiv">
 									<i style="font-size:30px;" class="far fa-envelope-open" id="alarmDelete"></i>
 								</div>
 								<div id="contentPlus">
@@ -825,7 +826,7 @@ function select(){
 		var mno = ${loginUser.mno}
 		
 	    $(document).ready(function() {
-	        sock = new SockJS("/styleblending/count");
+	        sock = new SockJS("/styleblending/count?mno=" + mno);
 	        
 	        // 연결 성공
 	        sock.onopen = function() {
@@ -845,6 +846,7 @@ function select(){
 	            console.log(obj);
 	            /* if(obj.mno==?) */
 	            $("#contentPlus").html("");
+	            $("#allDeleteDiv").show();
 	            if(obj != ""){
 	            	for(var i=0; i<obj.length; i++){
 		            	alarmCountNo = obj[i].alarmCount;
@@ -913,14 +915,15 @@ function select(){
 		    			
 		            }
 	            }else{
-	            	$("#show").html("");
+	            	$("#allDeleteDiv").hide();
+	            	$("#contentPlus").html("");
 	            	$("#count").hide();
 					
 					var $add = "<div style='padding:20px 10px 10px 10px' align='center'>"
 	    				+ "<p><span class='text-danger'><i class='far fa-frown-open'></i></span> 알림이 없습니다.</p>"
 	    				+ "</div>";
 	    		
-	    			$("#show").append($add);
+	    			$("#contentPlus").append($add);
 	            }
 	            
 	            
@@ -943,14 +946,15 @@ function select(){
 			}
 				
 			if(${ loginUser == null }){
-				$("#show").html("");
+				$("#allDeleteDiv").hide();
+				$("#contentPlus").html("");
 				
 				var $add = "<div style='padding:20px 10px 10px 10px' align='center'>"
 					+ "<p><span class='text-danger'></span>로그인 후 이용해주세요.</p>"
     				+ "<button class='btn btn-dark' id='alarmLogin'>로그인</button>"
     				+ "</div>";
     		
-    			$("#show").append($add);
+    			$("#contentPlus").append($add);
 			}
 		});
 		
@@ -973,13 +977,14 @@ function select(){
 				type:"post",
 				success:function(result){
 					if(result == 1){
-						$("#show").html("");
+						$("#allDeleteDiv").hide();
+						$("#contentPlus").html("");
 						
 						var $add = "<div style='padding:20px 10px 10px 10px' align='center'>"
 		    				+ "<p><span class='text-danger'><i class='far fa-frown-open'></i></span> 알림이 없습니다.</p>"
 		    				+ "</div>";
 		    		
-		    			$("#show").append($add);
+		    			$("#contentPlus").append($add);
 		    			
 		    			$("#count").html("");
 		    			$("#count").css("display", "none");
