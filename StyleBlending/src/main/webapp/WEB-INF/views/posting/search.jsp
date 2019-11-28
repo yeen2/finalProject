@@ -112,7 +112,8 @@
 	li {
 		margin-bottom: 5px;
 	}
-
+	.writerNickname:hover{cursor: pointer; color: #0080FF;}
+	.writerImg:hover{cursor: pointer;}
 </style>
 </head>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
@@ -142,15 +143,16 @@
 					
 					<!-- 1. 게시물 작성자 정보-->
 					<div id="pWriter" style="height: 70px; margin-bottom: 5px;">
+						<input type="hidden" value="${p.mno }">
 						<!-- 프로필 사진 -->
 						<div style="display: inline-block; width: 60px; height: 60px; border-radius: 50%; margin-right: 20px;">
-							<img style="width: 100%; height: 100%; border-radius: 50%; margin-bottom:35px;"
+							<img class="writerImg" style="width: 100%; height: 100%; border-radius: 50%; margin-bottom:35px;"
 									src="${ pageContext.servletContext.contextPath }/resources/upload/member/${p.profileImg}">
 						</div>
 						<!-- 상세정보 -->
 						<div style="display: inline-block; margin: auto; height: 50px; padding-top: 5px;">
 							<div style="height: 50%; margin-bottom:10px;">
-								<a href="#" style="margin-right: 20px;"><span style="font-weight: bold; font-size: 1.3em; color: black;">${p.nickName}</span></a>
+								<span class="writerNickname" style="font-weight: bold; font-size: 1.3em; color: black; margin-right: 20px;">${p.nickName}</span>
 								<!-- 팬추가 -->
 								<c:if test="${p.fanCheck == 0}">
 									<button type="button" class="btn btn-dark btn-sm fBtn" id="addFan">
@@ -205,82 +207,9 @@
 				</c:if>
 				
 			</div> <!-- col-lg-8 end -->
-			
-
-
-
 
 			<!-- 오른쪽 -->
 			<div class="col-md-4">
-			
-			
-			<%-- 
-				<!-- 1. 작성자 정보 -->
-				<div class="card my-4" style="padding: 10px;">
-					<!-- 작성자 프로필 -->
-					<div class="media mb-4" style="margin: 0 !important;">
-						<!-- 이미지 -->
-						<div style="width: 25%; height: 25%; border-radius: 50%;">
-							<img style="width: 80%; height: 80%; border-radius: 50%;"
-								src="http://placehold.it/60x60" 
-								src="${ pageContext.servletContext.contextPath }/resources/upload/member/${p.rename_img}">
-						</div>
-						<!-- 정보 -->
-						<div style="width: 75%; height: 75%;">
-							<div >
-								<!-- 닉네임 -->
-								<h6 style="display: inline-block;">${ p.nickName }</h6>
-								
-								<!-- 팬추가 버튼 -->
-								<!-- 팬추가 -->
-								<c:if test="${p.fanCheck == 0}">
-									<button type="button" class="btn btn-dark btn-sm fBtn" id="addFan">
-										<i class="fa fa-plus"></i><b>Fan</b>
-									</button>
-									<button class="btn btn-dark btn-sm fBtn" id="removeFan" style="display: none;">
-										<i style="width: 40px;" class="fas fa-check"></i>
-									</button>
-								</c:if>
-								
-								<!-- 팬제거 -->	
-								<c:if test="${p.fanCheck == 1}">
-									<button class="btn btn-dark btn-sm fBtn" id="removeFan">
-										<i style="width: 40px;" class="fas fa-check"></i>
-									</button>
-									<button type="button" class="btn btn-dark btn-sm fBtn" id="addFan" style="display: none;">
-										<i class="fa fa-plus"></i><b>Fan</b>
-									</button>
-								</c:if>
-							</div>
-							<div>
-								<!-- 자기소개 -->
-								<span style="fint-size:xx-small;">${p.profile }</span> <br>
-								<i class="fas fa-map-marker-alt"></i>
-								<span style="fint-size:xx-small;">${p.mlocation }</span>
-							</div>
-							
-						</div>
-					</div>
-				</div>
-				
-				<!-- 2. 코디 정보 -->
-				<div class="card my-4">
-					<h5 class="card-header">Clothes stylist</h5>
-					<div class="card-body">
-						
-					</div>
-				</div>
-				
-				<!-- 3. 촬영위치(지도api) -->
-				<div class="card my-4">
-					<h5 class="card-header">Location</h5>
-					<div class="card-body">
-						<div id="map" style="height: 300px;"></div>
-						<span>${p.location }</span>
-					</div>
-				</div>
-			--%>
-
 				<!-- Side Widget -->
 				<div class="card my-4">
 					<h5 class="card-header">Spotlight</h5>
@@ -397,7 +326,16 @@
 
 	<jsp:include page="../includes/footer.jsp" />
 	
-	
+	<script type="text/javascript">
+		$(document).on("click",".writerImg", function () {
+			var mno = $(this).parent().parent().children().eq(0).val();
+			location.href="mpViewProfile.do?mno="+mno
+		});
+		$(document).on("click",".writerNickname", function () {
+			var mno = $(this).parent().parent().parent().children().eq(0).val();
+			location.href="mpViewProfile.do?mno="+mno
+		});
+	</script>
 	<script type="text/javascript">
 		// cate hover
 		$(".cate_li").hover(function () {
