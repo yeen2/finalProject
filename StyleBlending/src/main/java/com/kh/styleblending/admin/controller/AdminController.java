@@ -21,12 +21,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
 import com.kh.styleblending.admin.model.service.AdminService;
 import com.kh.styleblending.admin.model.vo.Ad;
 import com.kh.styleblending.admin.model.vo.Declare;
 import com.kh.styleblending.admin.model.vo.PageInfo;
 import com.kh.styleblending.admin.model.vo.Pagination;
 import com.kh.styleblending.admin.model.vo.Statistics;
+import com.kh.styleblending.main.model.service.MainService;
 import com.kh.styleblending.main.model.vo.Notice;
 import com.kh.styleblending.member.model.vo.Member;
 
@@ -146,21 +148,20 @@ public class AdminController {
 	
 	@RequestMapping("aAdvertisment.do")
 	public ModelAndView selectAdList(ModelAndView mv, @RequestParam(value="currentPage",defaultValue="1")int currentPage,
-								String keyword,	@RequestParam(value="boardLimit", defaultValue="5")int boardLimit) {
+			@RequestParam(value="keyword",defaultValue="")String keyword, @RequestParam(value="boardLimit", defaultValue="5")int boardLimit) {
 		
-		int listCount = aService.getAdListCount();
+		System.out.println(keyword);
+		int listCount = aService.getAdListCount(keyword);
+		
+		System.out.println("listCount : "+listCount);
 		
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, boardLimit);
 		
-		ArrayList<Ad> list;
-		if(keyword != null) {
-			list = aService.selectAdSearchList(pi, keyword);
-			//System.out.println("검색노노");
-		}else {
-			//System.out.println("검색함");
-			list = aService.selectAdList(pi);						
-		}
+		System.out.println("pi : " + pi);
 		
+		ArrayList<Ad> list = aService.selectAdList(pi, keyword);						
+		
+		System.out.println("list : " + list);
 		ArrayList<Ad> newList = aService.selectAdNewList();
 		Ad startAd = aService.selectStartAd();
 		
@@ -292,25 +293,18 @@ public class AdminController {
 		return gson.toJson(statistics);
 	}
 	
+	// 관리자 공지사항
 	@RequestMapping("aNotice.do")
 	public ModelAndView notice(ModelAndView mv) {
 		
 		ArrayList<Notice> list = aService.selectNoticeList();
-		
+		System.out.println(list);
 		mv.addObject("list", list).setViewName("admin/notice");
 		
 		return mv;
 	}
 	
-	@RequestMapping("aMainNotice.do")
-	public ModelAndView notice2(ModelAndView mv) {
-		
-		ArrayList<Notice> list = aService.selectNoticeList();
-		
-		mv.addObject("list", list).setViewName("main/notice");
-		
-		return mv;
-	}
+
 	
 	
 	

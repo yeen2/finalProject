@@ -49,10 +49,10 @@ public interface AdminService {
 	int updateIsCheck(String dno);
 
 	// 총 광고수 조회
-	int getAdListCount();
+	int getAdListCount(String keyword);
 	
 	// 광고 목록 조회용(페이징포함)
-	ArrayList<Ad> selectAdList(PageInfo pi);
+	ArrayList<Ad> selectAdList(PageInfo pi, String keyword);
 	
 	// 업체명 검색 
 	ArrayList<Ad> selectAdSearchList(PageInfo pi, String keyword);

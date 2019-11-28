@@ -120,7 +120,7 @@ invest_table .title .date {
 	});
 	function noticeList(){
 		$.ajax({
-			url:"mainNoticeList.do",
+			url:"aMainNotice.do",
 			dataType:"json",
 			success:function(data){
 				
@@ -132,7 +132,7 @@ invest_table .title .date {
 					
 					var $div1 = $("<div class='title form-inline' style='margin: 15px;'></div>");
 					var $div1_1 = $("<div class='col-11'>"+value.title+"<br> <span class='date'style='color: #cbcbcb; font-size: .7rem;'>"+value.enrollDate+"</span></div>");
-					var $div1_2 = $("<div class='col-1'><a style='margin-left: 210px;'><i class='fa fa-chevron-down' style='color: black; font-size: 30px;' id='asd'></i></a></div>");
+					var $div1_2 = $("<div class='col-1'><a style='margin-left: 210px;'><i class='fa fa-chevron-down' style='color: black; font-size: 30px;' id='asd'></i><input type='hidden' value="+value.nno+"></a></div>");
 					
 					$div1.append($div1_1);
 					$div1.append($div1_2);
@@ -160,9 +160,36 @@ invest_table .title .date {
 	$(document).on("click", "#asd", function(){
 		var iconClass = $(this).attr('class');
 		var icon = $(this);
-		console.log(this);
+		var nno = $(this).parent().children().eq(1).val();
+		console.log($(this));
+		console.log(nno);
 		if(iconClass == "fa fa-chevron-down"){
-		
+			$.ajax({
+				url:"MainNoticeContent.do",
+				dataType:"json",
+				data:{nno:nno},
+				success:function(data){
+					
+					console.log(data);
+					$(icon).parent().parent().parent().next().append("<div class='appendNotice' style='height:100%; color: #4f4f4f; padding: 20px 15px; background-color: #e9e9e9; font-size: .8rem; line-height: 1.2rem;'>"+data[0].content+"</div>");
+					$(icon).parent().parent().parent().next().append("<div class='appendNotice3' style='height:100%; color: #4f4f4f; padding: 20px 15px; background-color:white; font-size: .8rem; line-height: 1.2rem;'>");
+					icon.attr('class','fa fa-chevron-up');
+					console.log("${loginUser.email}");
+					if("${loginUser.email}" == "admin"){
+						$(".appendNotice3").append("<button class='btn btn-dark btn-sm' style='float:right; border-radius:50px' onclick='noticeDelete();'>삭제</button><button style='float:right;background-color: white;color: black;border-radius: 50px;' class='btn btn-dark btn-sm'>수정</button>");
+					}
+						
+				},
+				error:function(){
+					console.log('공지사항 내용 실패');
+				}
+			});
+		}else{
+			$(this).attr('class','fa fa-chevron-down');
+			$(icon).parent().parent().parent().next().children().remove();
+			console.log($(icon).parent().parent().parent().next().children());
+		}
+			
 		//if문으로 관리자계정이면 삭제 수정 버튼 생성
 		/* if(userid == "admin"){
 			
@@ -172,20 +199,29 @@ invest_table .title .date {
 			$(icon).parent().parent().parent().next().append("<div class='appendNotice' style='height:100%; color: #4f4f4f; padding: 20px 15px; background-color: #e9e9e9; font-size: .8rem; line-height: 1.2rem;'>안녕하세요.<br> 공지사항 입니다. <br>수고하세요/</div>");
 				
 		} */
-		$(icon).parent().parent().parent().next().append("<div class='appendNotice' style='height:100%; color: #4f4f4f; padding: 20px 15px; background-color: #e9e9e9; font-size: .8rem; line-height: 1.2rem;'>안녕하세요.<br> 공지사항 입니다. <br>수고하세요.<button class='btn btn-danger btn-sm' style='float:right'>삭제</button><button style='float:right' class='btn btn-dark btn-sm'>수정</button></div>");
+	 /* 	$.ajax({
+			url:"aMainNotice.do",
+			dataType:"json",
+			success:function(data){
+				$(icon).parent().parent().parent().next().append("<div class='appendNotice' style='height:100%; color: #4f4f4f; padding: 20px 15px; background-color: #e9e9e9; font-size: .8rem; line-height: 1.2rem;'>안녕하세요.<br> 공지사항 입니다. <br>수고하세요.<button class='btn btn-danger btn-sm' style='float:right'>삭제</button><button style='float:right' class='btn btn-dark btn-sm'>수정</button></div>");
+				
+			},
+			error:function(){
+				console.log('공지사항 ajax 실패');
+			}
 		
 		console.log($(this).parent().parent().parent().parent().children().siblings().eq(1));
-		$(this).attr('class','fa fa-chevron-up');	
+		//$(this).attr('class','fa fa-chevron-up');	
 		}else{
 			$(this).attr('class','fa fa-chevron-down');
 			$(icon).parent().parent().parent().next().children().remove();
 			
-		}/* if(iconClass == "fa fa-chevron-down dn2"){
+		} if(iconClass == "fa fa-chevron-down dn2"){
 			$div2.append("<div class='appendNotice' style='height:100%; color: #4f4f4f; padding: 20px 15px; background-color: #e9e9e9; font-size: .8rem; line-height: 1.2rem;'>"+value.content +"</div>");				
 			$noticeDiv.append($div2);
 		}
-		 */
-		
+		 
+		 */													
 	});
 
 </script>
@@ -250,7 +286,10 @@ invest_table .title .date {
 	 */
 
 </script>
+<script>
+	
 
+</script>
 
 
 	<div class="modal fade" id="registerNotice" tabindex="-1" role="dialog"
@@ -269,7 +308,7 @@ invest_table .title .date {
 					</button>
 				</div>
 				<div class="modal-body">
-					<form action="#" method="post" id="form1">
+					<form action="mainInsertNotice.do" method="post" id="form1">
 						<div class="form-row">
 							<!-- form-row : 하나의 행을 여러 열로 나눌때 사용한다. -->
 							<div class="form-group col-sm-12">
@@ -289,7 +328,7 @@ invest_table .title .date {
 								<label>내용</label>
 								<textarea class="form-control" id="p_content"></textarea>
 								<script type="text/javascript">
-									CKEDITOR.replace('p_content', {
+									CKEDITOR.replace('p_content',{
 										height : 300
 									});
 								</script>
