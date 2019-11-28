@@ -179,11 +179,7 @@ public class PostingController {
 		HashMap<String, String> map = new HashMap<>();
 		
 		for(int i=0; i<strArr.length; i++) {
-			
-			//System.out.println("0번인덱스 : " + strArr[i].charAt(0));
-			
-			
-			
+
 			if(!strArr[i].equals("") && strArr[i].trim().charAt(0) == '#' ) {
 				hashtag += strArr[i];
 				map.put(strArr[i], "<a href='#' class='hashtagHref'>"+strArr[i]+"</a>");

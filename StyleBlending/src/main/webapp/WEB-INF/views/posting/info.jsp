@@ -462,9 +462,10 @@
 
 	<script type="text/javascript">
 	$(document).on("click",".hashtagHref", function () {
-		var hashtag = $(this).val();
-		
-	}
+		var hashtag = $(this).text();
+		console.log(hashtag);
+		location.href="pNavSearch.do?type=2&keyword="+hashtag
+	}); 
 	</script>
 	
 
