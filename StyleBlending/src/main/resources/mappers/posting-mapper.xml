@@ -23,7 +23,7 @@
 		<result property="profile" column="profile"/>
 		<result property="mlocation" column="mlocation"/>
 		<result property="profileImg" column="profileImg"/>
-		<result property="log inLike" column="loginLike"/>
+		<result property="loginLike" column="loginLike"/>
 		<result property="loginDeclare" column="loginDeclare"/>
 		<result property="replyCount" column="replyCount"/>
 		<result property="fanCheck" column="fanCheck"/>

@@ -165,8 +165,8 @@ public class PostingController {
 		String str = p.getContent();
 		
 		System.out.println(str);
-		str = str.replace("<p>", "");
-		str = str.replace("</p>", "<br>");
+		str = str.replace("<p>", " ");
+		str = str.replace("</p>", " <br>");
 		System.out.println(str);
 		
 		String [] strArr = str.split(" ");
@@ -177,7 +177,7 @@ public class PostingController {
 		for(int i=0; i<strArr.length; i++) {
 			if(strArr[i].charAt(0) == '#') {
 				hashtag += strArr[i];
-				map.put(strArr[i], "<a href='#'>"+strArr[i]+"</a>");
+				map.put(strArr[i], "<a href='#' class='hashtagHref'>"+strArr[i]+"</a>");
 			}
 		}
 		p.setHashtag(hashtag);
