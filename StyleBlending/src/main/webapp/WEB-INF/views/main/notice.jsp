@@ -108,6 +108,7 @@ invest_table .title .date {
 			</div>
 		</div>
 	</c:if>
+
 		<!-- <hr style="height: 3px; color:gray; width:1250px;"/> -->
 
 	</div>
@@ -269,7 +270,21 @@ invest_table .title .date {
 	 	
 	}
 	function noticeDelete(a){
-		
+		var nno = $(a).parent().children().eq(2).val();
+		console.log(nno);
+		 $.ajax({
+				url:"noticeDelete.do",
+				data:{nno:nno},
+				dataType:"json",
+				type:"get",
+				success:function(data){
+					noticeList();	
+				},
+				error:function(){
+					console.log("서버통신실패");
+				}
+			});
+		 			
 	}
 </script>
 
