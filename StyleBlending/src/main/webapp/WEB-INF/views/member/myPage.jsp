@@ -78,7 +78,8 @@
 							</div>
 							<div class="form-group">
 								<label for="introduce">Introduce</label>
-								<textarea cols="52" rows="5" class="form-control" name="profile" style="resize:none;">${ loginUser.profile }</textarea>
+								<p><span id="lengthCheck">0</span>/100</p>
+								<textarea cols="52" rows="5" class="form-control" name="profile" style="resize:none;"><c:out value="${ loginUser.profile }"/></textarea>
 							</div>
 							<div class="form-group" style="margin-bottom:50px;">
 								<label for="userPwd2">Location</label>
@@ -205,6 +206,7 @@
 							$("#nickNameFail").show();
 							$("#nickNameSuccess").hide();
 						}else{
+							checkNick = 0;
 							$("#nickNameCheck").hide();
 							$("#nickNameFail").hide();
 							$("#nickNameSuccess").show();
@@ -240,7 +242,7 @@
 				$("#nickName").val("").focus();
 				return false;
 			}else if(checkNick == 1){
-				alert("사용중인 닉네임입니다.");
+				alert("이미 사용중인 닉네임입니다.");
 				return false;
 			}
 			
