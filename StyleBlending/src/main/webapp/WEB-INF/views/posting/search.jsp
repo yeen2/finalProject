@@ -358,12 +358,83 @@
 			location.href="pNavSearch.do?type=4&keyword="+cate;
 		});
 	</script>
-	
-	
+
+
+<!------------------------------------------ 팬  ---------------------------------->
 	
 	<script type="text/javascript">
+		var loginUser = "${loginUser.mno}";
+		
+		// 팬추가
+		$(document).on("click",".fBtn", function () {
+			
+			console.log('버튼클릭');
+			
+			var nowFanCheck = $(this).attr('id');
+			var pmno = $(this).parent().parent().parent().children().eq(0).val();
+			
+			console.log(pmno);
+			
+			if(loginUser == null || loginUser == ""){
+				alert("로그인 후 이용 가능하세요");
+				return;
+			}else{ //로그인 했을때
+				
+				if(nowFanCheck == 'addFan'){
+					insertFan(pmno);
+				}else {
+					deleteFan(pmno);
+				}
+			}
+		});
+	
+		// insert 팬
+		function insertFan(value){
+			var meNo = value;
+			$.ajax({
+				url:"mpInsertFan.do",
+				data:{meNo:meNo, youNo:loginUser},
+				type:"post",
+				success:function(result){
+					if(result == 1){
+						$("#addFan").hide();
+						$("#removeFan").show();
+					}else{
+						console.log("실패");
+					}
+				},
+				error:function(){
+					console.log("ajax 통신 실패");
+				}
+			});
+		}
+		
+		// delete 팬
+		function deleteFan(value){
+			var meNo = value;
+			$.ajax({
+				url:"mpDeleteFan.do",
+				data:{meNo:meNo, youNo:loginUser},
+				type:"post",
+				success:function(result){
+					if(result == 1){
+						$("#removeFan").hide();
+						$("#addFan").show();
+					}else{
+						console.log("실패");
+					}
+				},
+				error:function(){
+					console.log("ajax 통신 실패");
+				}
+			});
+		}
 
+	</script>	
+	
+<!------------------------------------------ 좋아요  ------------------------>
 
+	<script type="text/javascript">
 	// 이 포스팅의 좋아요 카운트 가져오기
 	function getPLikeCount(pno) {
 		$.ajax({
@@ -406,9 +477,7 @@
 			var pno = $(this).parent().prev().children().eq(0).val();
 			getPLikeCount(pno);
 		})
-		
-		
-
+	
 	});
 	
 	
