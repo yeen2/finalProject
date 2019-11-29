@@ -53,17 +53,18 @@ public class AdminController {
 	
 	@RequestMapping("aUser.do")
 	public ModelAndView selectUserList(ModelAndView mv, @RequestParam(value="currentPage", defaultValue="1")int currentPage,
-									@RequestParam(value="boardLimit", defaultValue="5")int boardLimit) {
+									@RequestParam(value="boardLimit", defaultValue="5")int boardLimit,
+									@RequestParam(value="keyword", defaultValue="")String keyword) {
 		
-		int listCount = aService.getMemberListCount();
+		int listCount = aService.getMemberListCount(keyword);
 		
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, boardLimit);
 		
-		ArrayList<Member> list = aService.selectMemberList(pi);
+		ArrayList<Member> list = aService.selectMemberList(pi, keyword);
 		
 		// System.out.println("회원리스트" + list +"\n 회원총명수" + listCount);
 		
-		mv.addObject("pi",pi).addObject("list", list).setViewName("admin/user");
+		mv.addObject("pi",pi).addObject("list", list).addObject("keyword", keyword).setViewName("admin/user");
 		
 		return mv;
 	}
@@ -277,10 +278,9 @@ public class AdminController {
 	@RequestMapping("aStatistics.do")
 	public ModelAndView statistics(ModelAndView mv) {
 		
-		int memberTotalCount = aService.getMemberListCount();
 		ArrayList<Statistics> totalCount = aService.totalCount();
 		System.out.println(totalCount);
-		mv.addObject("memberTC", memberTotalCount).addObject("totalCount", totalCount).setViewName("admin/statistics");
+		mv.addObject("totalCount", totalCount).setViewName("admin/statistics");
 		
 		return mv;
 		

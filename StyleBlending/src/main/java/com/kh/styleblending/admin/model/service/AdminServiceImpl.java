@@ -45,15 +45,15 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public int getMemberListCount() {
+	public int getMemberListCount(String keyword) {
 		// 총 회원수 조회용
-		return aDao.getMemberListCount();
+		return aDao.getMemberListCount(keyword);
 	}
 
 	@Override
-	public ArrayList<Member> selectMemberList(PageInfo pi) {
+	public ArrayList<Member> selectMemberList(PageInfo pi, String keyword) {
 		// 회원목록 조회용
-		return aDao.selectMemberList(pi);
+		return aDao.selectMemberList(pi, keyword);
 	}
 	
 	@Override

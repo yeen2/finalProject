@@ -34,6 +34,10 @@
 		<result property="email" column="email"/>
 		<result property="bname" column="bname"/>
 		<result property="writer" column="writer"/>
+		<result property="renameImg" column="rename_Img"/>
+		<result property="profilePath" column="profile_Path"/>
+		<result property="writerImg" column="writer_Img"/>
+		<result property="writerPath" column="writer_Path"/>
 	</resultMap>
 	
 	<resultMap id="AdResultSet" type="Ad">
@@ -105,11 +109,17 @@
 	<select id="getMemberListCount" resultType="_int">
 		select count(*)
 		from member
+		<if test="value != null">
+		where (email like '%'||#{keyword}||'%' or nickname like '%'||#{keyword}||'%')
+		</if>
 	</select>
 
-	<select id="selectMemberList" resultMap="MemberResultSet">
+	<select id="selectMemberList" resultMap="MemberResultSet" parameterType="String">
         select *
 		from member
+		<if test="value != null">
+		where (email like '%'||#{keyword}||'%' or nickname like '%'||#{keyword}||'%')
+		</if>
 		order by delete_date desc ,enroll_date desc,m_no desc
 	</select>
 	
@@ -308,7 +318,10 @@ select sum(m1) "month1",sum(m2) "month2",sum(m3) "month3",sum(m4) "month4",sum(m
 		union
 		select sum(price)
 		from pay
-		where status='1')
+		where status='1'
+        union
+        select count(*) a
+        from member)
 	</select>
 	
 	<select id="selectNoticeList" resultMap="NoticeResultSet">

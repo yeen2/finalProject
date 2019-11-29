@@ -26,6 +26,10 @@ public class Declare {
 	private int type; // 게시판 타입(1-포스팅,2-자유)
 	private String bname; // type1-포스팅 이미지, 2-게시물제목
 	private String writer; // 신고 포스팅 글쓴이
+	private String renameImg; // 신고한 회원이미지
+	private String profilePath; // 신고한 회원 이미지경로
+	private String writerImg; // 글쓴이 회원이미지
+	private String writerPath; // 글쓴이 이미지 경로
 	
 	
 
