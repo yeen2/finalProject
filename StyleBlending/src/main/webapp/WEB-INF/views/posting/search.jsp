@@ -142,7 +142,7 @@
 				<c:forEach var="p" items="${p}">
 					
 					<!-- 1. 게시물 작성자 정보-->
-					<div id="pWriter" style="height: 70px; margin-bottom: 5px;">
+					<div id="pWriter" class="pWriter" style="height: 70px; margin-bottom: 5px;">
 						<input type="hidden" value="${p.mno }">
 						<!-- 프로필 사진 -->
 						<div style="display: inline-block; width: 60px; height: 60px; border-radius: 50%; margin-right: 20px;">
@@ -189,19 +189,22 @@
 					</div>
 					
 					<!-- 포스팅 이미지 -->
-					<div style="width: 400px; height: 500px; margin-bottom: 10px;">
-						<img class="img-fluid rounded" style="width: 100%; height: 100%;"
-							src="${ pageContext.servletContext.contextPath }/resources/upload/posting/20191114204719.jpg" alt="">
+					<div style="width: 400px; height: 500px; margin-bottom: 20px; margin-top: 20px;">
+						<input type="hidden" value="${p.pno }">
+						<img class="img-fluid rounded pImg" style="width: 100%; height: 100%;"
+							src="${ pageContext.servletContext.contextPath }/resources/upload/posting/${p.renameImg}" alt="">
 					</div>
 					
 					<!-- 좋아요 -->
 					<div style="display: inline; margin-right: 40px;">
-						<button type="button" class="btn btn-secondary" id="likeBtn" style="width: 80px;">LIKE</button> &nbsp;&nbsp;
-						<h3 style="display: inline; margin-bottom: 0px;" id="pLikeCountH3">${p.likeCount }</h3>
+						<button type="button" class="btn btn-secondary likeBtn" style="width: 80px;">LIKE</button> &nbsp;&nbsp;
+						<h3 style="display: inline; margin-bottom: 0px;" class="pLikeCountH3">${p.likeCount }</h3>
 					</div>
-					
-					
+						
 					<!-- 해시태그 -->
+					<div style="margin-top: 20px;">
+						<%-- <span>${p.hashtag }</span> --%>
+					</div>
 
 					<hr>
 				</c:forEach>
@@ -336,6 +339,10 @@
 			var mno = $(this).parent().parent().parent().children().eq(0).val();
 			location.href="mpViewProfile.do?mno="+mno
 		});
+		$(document).on("click",".pImg", function () {
+			var pno = $(this).prev().val();
+			location.href="pInfo.do?id="+pno
+		});
 	</script>
 	<script type="text/javascript">
 		// cate hover
@@ -348,10 +355,143 @@
 		// 클릭시 이동
 		$(".cate_li").click(function () {
 			var cate = $(this).text();
-			console.log(cate);
 			location.href="pNavSearch.do?type=4&keyword="+cate;
 		});
 	</script>
+	
+	
+	
+	<script type="text/javascript">
+
+
+	// 이 포스팅의 좋아요 카운트 가져오기
+	function getPLikeCount(pno) {
+		$.ajax({
+			url:"getPLikeCount.do",
+			data:{pno:pno},
+			type:"get",
+			success:function(data){
+				
+				$(".pLikeCountH3").text(data);
+				
+			},error:function(){
+				console.log("ajax 서버 실패");
+			}
+		});
+	};
+	
+	// 좋아요버튼 마우스 올릴때
+	$(document).ready(function () {
+		$(".likeBtn").hover(function () {
+
+			var loginLike;
+			var mno = "${loginUser.mno}";
+			var pno = $(this).parent().prev().children().eq(0).val();
+			
+			if(mno == null || mno == ""){
+				$(this).next().text("+1");
+				
+			}else{ // 로그인 되어있을때
+			
+				loginLike = getPLikeCheck(mno, pno);
+			
+				if(loginLike == 0){
+					$(this).next().text("+1");
+				}else{
+					$(this).next().text("-1");
+				}	
+			}
+
+		}, function () { //마우스 뗄때
+			var pno = $(this).parent().prev().children().eq(0).val();
+			getPLikeCount(pno);
+		})
+		
+		
+
+	});
+	
+	
+	// 좋아요 클릭시 로그인되있는지 확인
+	$(document).on("click",".likeBtn", function () {
+		var loginUser = "${loginUser.email}";
+		var pno = $(this).parent().prev().children().eq(0).val();
+
+		if(loginUser == null || loginUser == ""){
+			alert("로그인 후 이용 가능하세요");
+			return;
+			
+		}else{ // 로그인 되어있을때
+			var mno = "${loginUser.mno}";
+			var loginLike = getPLikeCheck(mno, pno);
+			
+			if(loginLike == '0'){
+				// 좋아요 추가
+				$.ajax({
+					url:"pLikeInsert.do",
+					data:{pno:pno,
+						  mno:mno},
+					type:"get",
+					success:function(str){
+						if(str == 'success'){
+							console.log("좋아요 추가 성공");
+							getPLikeCount(pno);
+
+						}else{
+							console.log("좋아요 추가 실패");
+						}
+					},error:function(){
+						console.log("ajax 서버 실패");
+					}
+				});
+				
+			}else{
+				// 좋아요 취소
+				$.ajax({
+					url:"pLikeDelete.do",
+					data:{pno:pno,
+						  mno:mno},
+					type:"get",
+					success:function(str){
+						if(str == 'success'){
+							console.log("좋아요 제거 성공");
+							getPLikeCount(pno);
+						}else{
+							console.log("좋아요 제거 실패");
+						}
+					},error:function(){
+						console.log("ajax 서버 실패");
+					}
+				});
+			}
+		}
+	});
+	
+	
+
+	// 로그인 회원의 해당 포스팅 좋아요 확인
+	function getPLikeCheck(mno, pno) {
+		var result=0;
+		$.ajax({
+			url:"getPLikeCheck.do",
+			async: false,
+			data:{pno:pno,
+				  mno:mno},
+			type:"get",
+			success:function(data){
+				console.log(data);
+				result = data;
+			},error:function(){
+				console.log("ajax 서버 실패");
+			}
+			
+		});
+			return result;
+	};
+	
+	</script>
+				
+			
 
 </body>
 </html>

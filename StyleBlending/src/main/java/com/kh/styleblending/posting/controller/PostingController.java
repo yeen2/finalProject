@@ -68,9 +68,17 @@ public class PostingController {
 			}
 			//p = p = pService.selectSearchPosting(type ,keyword, -10000);
 		}
+		// 실시간검색어에 insert
+		int result = pService.insertLive(keyword);
 		
-		System.out.println("키워드 : " + keyword);
-		System.out.println("검색한p : " +p);
+		/*
+		 * String hash = ""; for(int i=0; i<p.size(); i++) { String[] arr =
+		 * p.get(i).getHashtag().split("#"); for(int j=0; j<arr.length; j++) { hash +=
+		 * arr[i].replace(arr[i], "<a>#"+arr[i]+"</a> "); } p.get(i).setHashtag(hash); }
+		 * 
+		 * 
+		 */
+		
 		mv.addObject("p", p).addObject("keyword", keyword).setViewName("posting/search");
 	
 		return mv;

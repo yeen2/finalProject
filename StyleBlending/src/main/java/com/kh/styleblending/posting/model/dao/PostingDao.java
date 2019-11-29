@@ -152,6 +152,9 @@ public class PostingDao {
 		return sqlSession.selectList("postingMapper.selectSearchPosting_cate", map);
 	}
 	
+	public int insertLive(String keyword) {
+		return sqlSession.insert("postingMapper.insertLive", keyword);
+	}
 	
 	
 	
