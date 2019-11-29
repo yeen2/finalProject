@@ -164,7 +164,4 @@
 		where n_no = #{nno}
 	
 	</update>
-	<udate>
-	</udate>
-
 </mapper>
