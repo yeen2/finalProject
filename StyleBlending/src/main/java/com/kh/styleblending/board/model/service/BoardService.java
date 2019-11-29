@@ -30,6 +30,12 @@ public interface BoardService {
 	
 	// 게시판 갯수조회
 	int getListCount();
+	
+	// 댓글 수정
+	int updateBoardReply(BoardReply r);
+	
+	// 댓글 삭제
+	int deleteBoardReply(int brno);
 
 	// 자유게시판과 패션게시판 listselect
 	ArrayList<Board> selectList(PageInfo pi);

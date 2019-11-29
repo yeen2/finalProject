@@ -40,7 +40,6 @@
 	<div class="detailOuter">
 
 		<div class="detail content">
-			<form action="" method="GET">
 				<table id="titleArea">
 					<tr>
 						<td>자유게시판</td>
@@ -52,14 +51,12 @@
 						<th><h4>${ b.title }</h4></th>
 					</tr>
 					<tr>
-						<td colspan="2">작성자 ${ b.mno }</td>
+						<td colspan="1">작성자 &nbsp;${ b.nickName }</td>
 						<!-- 작성자 -->
-						<td>조회수 ${ b.count }</td>
+						<td>조회수 &nbsp;${ b.count }</td>
 						<!-- 조회수 -->
-						<td>추천수 ${ b.likeCount }</td>
+						<td>추천수 &nbsp;${ b.likeCount }</td>
 						<!-- 추천수 -->
-						<td>댓글수 ${ r.brno }</td>
-						<!-- 댓글 -->
 					</tr>
 				</table>
 				<hr>
@@ -79,7 +76,7 @@
 					<c:if test="${ loginUser.mno eq b.mno }">
 						<button type="button" class="btn btn-light detail" id="btnUpdate"
 							style="float: right;"
-							onclick="location.href='bupdate.do?bno=${ b.bno }';">수정</button>
+							onclick="location.href='bupateView.do?bno=${ b.bno }';">수정</button>
 						<button type="button" class="btn btn-light detail" id="btnDelete"
 							style="float: right; margin-right: 5px;"
 							onclick="location.href='bdelete.do?bno=${ b.bno }';">삭제</button>
@@ -88,7 +85,6 @@
 						style="float: right; margin-right: 5px;"
 						onclick="location.href='blist.do';">목록으로</button>
 				</div>
-			</form>
 		</div>
 		<br><br>
 		<hr>
@@ -116,7 +112,7 @@
 						</tr>
 
 						<tr>
-							<td><img style="height: 62px; width: 60px; margin-right: 10px;"
+							<td><img style="height: 62px; width: 60px; margin-right: 10px; border-radius: 2.5em;"
 								src="${pageContext.request.contextPath}/resources/upload/member/profile.png"
 								alt="member">
 							</td>
@@ -148,8 +144,14 @@
 						<a href="" style="text-decoration: none; display: none;" 
 						    id="a-delete">삭제</a> -->
 					</div>
-					
-					<!-- the 신고 modal -->
+				</div>
+			</form>
+		</div>
+	</div>
+	<br>
+	<br>
+	
+	<!-- the 신고 modal -->
 					<div aria-labelledby="eexampleModal" class="modal fade"
 						id="eexampleModal" role="dialog" tabindex="-1">
 						<div class="modal-dialog modal-dialog-centered" role="document">
@@ -162,7 +164,7 @@
 									</button>
 								</div>
 
-								<form action="">
+								<form action="insertbDeclare.do" method="post" id="declare_form">
 									<div class="modal-body">
 										<div class="form-group">
 											<label for="d_category">신고항목</label> <select
@@ -184,13 +186,14 @@
 											</textarea>
 										</div>
 
-										<input type="hidden" name="mno" value="${loginUser.mno }">
-										<input type="hidden" name="bno" value="${b.bno}"> 
-										<input type="hidden" name="dcategory" id="dcategory">
 										<div>
 											<input type="checkbox" name="declare_check" id="declare_check"> 
 											<label for="declare_check">신고 동의시 체크해주세요.</label>
 										</div>
+										
+										<input type="hidden" name="mno" value="${loginUser.mno }">
+										<input type="hidden" name="bno" value="${b.bno}"> 
+										<input type="hidden" name="dcategory" id="dcategory">
 									</div>
 
 									<div class="modal-footer">
@@ -201,13 +204,7 @@
 							</div>
 						</div>
 					</div>
-
-				</div>
-			</form>
-		</div>
-	</div>
-	<br>
-	<br>
+	
 	
 	<jsp:include page="../includes/footer.jsp"/>
 
@@ -221,7 +218,7 @@
 		$("#declareBtn").attr("disabled", true);
 
 		// 신고동의 체크
-		$("#declare_check").on('click', function() {
+		$("#declare_check").on("click", function() {
 			if ($("input:checkbox[name='declare_check']").is(":checked")) {
 				$("#declareBtn").removeAttr("disabled");
 			} else {
@@ -247,7 +244,7 @@
 			if (d_category == 0) {
 				
 				alert("신고유형을 선택해 주세요");
-				$('#declareModal').modal();
+				$('#eexampleModal').modal();
 				return false;
 			}
 
@@ -255,7 +252,7 @@
 				
 				if (content.length == 0) {
 					alert("신고내용을 입력해주세요");
-					$('#declareModal').modal();
+					$('#eexampleModal').modal();
 					return false;
 				}
 			}
@@ -274,6 +271,7 @@
 				type:"get",
 				success:function(data){
 					$("#likeCnt").text(data);
+					$("#tb_likeBtn").text(data);
 				},
 				error:function(){
 					console.log("추천 ajax 통신 실패");
@@ -419,8 +417,9 @@
 		
 /* *********************************************** 댓글 ********************************************* */
 		//댓글 수정,삭제 이벤트
-		$("#reply-comment").mouseover(function(){
+		$(".otherDiv").mouseover(function(){
 			$(this).children('a').show();
+			console.log("들어오나?");
 		}).mouseleave(function(){
 			$(this).children('a').hide();
 		});
@@ -514,28 +513,33 @@
 							
 							$replyOuter = $("#reply-comment");
 							
-							$replyDiv = $("<div class='form-inline replyDiv' style='margin-bottom: 30px;'></div>");
+							$replyDiv = $("<div class='form-inline replyDiv' style='margin-right:150px;'></div>");
 							
 							$imgDiv = $("<div class='form-group imgDiv'></div>");
-							$img = $("<img class='reply_img' style='height: 62px; width: 60px; margin-right: 10px;'>").attr("src","${pageContext.request.contextPath}/resources/upload/member/profile.png");
+							$img = $("<img class='reply_img' style='border-radius: 2.5em; height: 62px; width: 60px; margin-right: 10px;'>").attr("src","${pageContext.request.contextPath}/resources/upload/member/profile.png");
 							
-							
+							$modifyDiv = $("<div class='form-inline modifyDiv' style='display:none;'></div>");
 							$contentDiv = $("<div class='form-group contentDiv'></div>");
+							$otherDiv = $("<div class'form-inline otherDiv' style='margin-right:150px;'></div>");
 							
-							/* $nickname = $("<h5 class='nickname'></h5>").text(value.nickName); */
+							$modify_textarea = $("<textarea class='modifyContent'></textarea>");
+							$modify_a = $("<a class='modify_a' id='modify_a'>등록</a>");
+							$nickname = $("<b class='nickname' style='margin-left:75px;'></b>").text(value.nickName);
 							$rcontent = $("<span id='rcontent' class='rcontent' style='margin-left: 5px;'></span>").html(value.content);
 							
-							$update_a = $("<a id='a-update'style='text-decoration: none; display: none;'>수정</a>");
-							$delete_a = $("<a id='a-delete' style='text-decoration: none; display: none;'>삭제</a>");
-							$date = $("<span class='date'></span>").text(value.enrollDate);
+							$update_a = $("<a id='a-update'style='text-decoration: none; float:right;' href='rupdate.do'>수정</a>");
+							$delete_a = $("<a id='a-delete' style='text-decoration: none; margin-right:10px; float:right;' href='rdelete.do'>삭제</a>");
+							$date = $("<span class='col-sm-2 date'></span>").text(value.enrollDate);
 							
 							$imgDiv.append($img);
-							$contentDiv.append($rcontent).append('<br>').append($update_a).append($delete_a).append('<br>').append($date);
-							$replyDiv.append($imgDiv).append($contentDiv);
+							$contentDiv.append($rcontent).append('<br>');
+							$otherDiv.append($update_a).append($delete_a);
+							$modifyDiv.append($modify_textarea).append($modify_a);
 							
-							$replyOuter.append($replyDiv);
+							$replyDiv.append($imgDiv).append($contentDiv).append($modifyDiv).append("<br>");
+							
+							$replyOuter.append($nickname).append($date).append("<br>").append($replyDiv).append($otherDiv).append("<br><br>");
 						
-							
 						});
 						
 					}else { // 댓글 없을때
@@ -552,6 +556,37 @@
 				
 			});
 		}
+		/* 
+		//댓글 수정폼
+		
+		$(document).("click","#a-update", function(){
+			//var r_form = $(this).parents("#contentDiv").children("#rcontent").eq(0).text();
+			
+			//var r_modifyForm = $(this).parents("modifyDiv").children(".modifyContent").eq(0).text();
+			$(this).parent().("")
+			
+		});
+		
+		$(document).("click","")
+		
+		
+		//댓글 수정
+		
+		function rupdateProc(brno){
+		    var updateContent = $('[name=content_'+brno+']').val();
+		    
+		    $.ajax({
+		        url:'rupdate.do',
+		        type:'post',
+		        data:{'content' : content, 
+		        		'brno' : brno},
+		        success : function(data){
+		            if(data == 1) 
+		            	getReplyList(); //댓글 수정후 목록 출력 
+		        }
+		    });
+		} */
+
 	</script>
 	
 </body>

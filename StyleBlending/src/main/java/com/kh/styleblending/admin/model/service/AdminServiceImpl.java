@@ -99,15 +99,15 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public int getAdListCount(String keyword) {
+	public int getAdListCount(HashMap<?, ?> map) {
 		// 총 광고수 조회
-		return aDao.getAdListCount(keyword);
+		return aDao.getAdListCount(map);
 	}
 
 	@Override
-	public ArrayList<Ad> selectAdList(PageInfo pi, String keyword) {
+	public ArrayList<Ad> selectAdList(PageInfo pi, HashMap<?, ?> map) {
 		// 광고 목록조회
-		return aDao.selectAdList(pi,keyword);
+		return aDao.selectAdList(pi, map);
 	}
 	
 	@Override
@@ -172,10 +172,17 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
+	public ArrayList<Statistics> totalCount() {
+		// 총 게시글수(positng,board,fashion) + 광고수익
+		return aDao.totalCount();
+	}
+	
+	@Override
 	public ArrayList<Notice> selectNoticeList() {
 		// 공지사항 목록 조회용
 		return aDao.selectNoticeList();
 	}
+
 
 	
 

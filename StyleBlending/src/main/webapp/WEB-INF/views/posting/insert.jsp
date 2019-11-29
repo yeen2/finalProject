@@ -929,7 +929,7 @@
 		}
 	</script>
 	
-<!-- 	<script type="text/javascript">
+	<script type="text/javascript">
 
 		//id가 content인 태그에 ckeditor를 적용
 		CKEDITOR.replace("content", {
@@ -938,15 +938,7 @@
 		}); 
 	
 	
-	</script>	 -->	
-	
-	<script type="text/javascript">
-		function enter_check() {
-			if(event.KeyCode == 13){
-				
-			}
-		}
-	</script>
+	</script>		
 	
 	<%@include file="../includes/footer.jsp" %>
 	

@@ -20,4 +20,8 @@ public class Statistics {
 	private int month5;
 	private int month6;
 
+	private int totalCount;
+	
+
+
 }

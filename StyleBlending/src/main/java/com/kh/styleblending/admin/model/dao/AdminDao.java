@@ -84,17 +84,16 @@ public class AdminDao {
 		return sqlSession.update("adminMapper.updateIsCheck", dno);
 	}
 	
-	public int getAdListCount(String keyword) {
+	public int getAdListCount(HashMap<?, ?> map) {
 		// 총 광고수 조회
-		return sqlSession.selectOne("adminMapper.getAdListCount",keyword);
+		return sqlSession.selectOne("adminMapper.getAdListCount", map);
 	}
 
-	public ArrayList<Ad> selectAdList(PageInfo pi, String keyword) {
+	public ArrayList<Ad> selectAdList(PageInfo pi, HashMap<?, ?> map) {
 		// 광고 목록조회
 		int offset = (pi.getCurrentPage()-1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset,pi.getBoardLimit());
-		
-		return (ArrayList)sqlSession.selectList("adminMapper.selectAdList", keyword ,rowBounds);
+		return (ArrayList)sqlSession.selectList("adminMapper.selectAdList", map, rowBounds);
 	}
 	
 	public ArrayList<Ad> selectAdSearchList(PageInfo pi, String keyword){
@@ -126,6 +125,10 @@ public class AdminDao {
 	
 	public ArrayList<Statistics> selectMemberCount() {
 		return (ArrayList)sqlSession.selectList("adminMapper.selectMemberCount");
+	}
+	
+	public ArrayList<Statistics> totalCount() {
+		return (ArrayList)sqlSession.selectList("adminMapper.totalCount");
 	}
 	
 	public ArrayList<Notice> selectNoticeList(){

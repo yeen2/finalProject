@@ -28,6 +28,10 @@ public class PostingDao {
 		return sqlSession.insert("postingMapper.insertStyle", s);
 	}
 	
+	public int insertHashtag(String hash) {
+		return sqlSession.insert("postingMapper.insertHashtag", hash);
+	}
+	
 	public Posting selectOnePosting(int id, int mno) {
 		
 		HashMap map = new HashMap<>();

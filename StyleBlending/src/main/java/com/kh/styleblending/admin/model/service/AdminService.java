@@ -49,10 +49,10 @@ public interface AdminService {
 	int updateIsCheck(String dno);
 
 	// 총 광고수 조회
-	int getAdListCount(String keyword);
+	int getAdListCount(HashMap<?, ?> map);
 	
 	// 광고 목록 조회용(페이징포함)
-	ArrayList<Ad> selectAdList(PageInfo pi, String keyword);
+	ArrayList<Ad> selectAdList(PageInfo pi, HashMap<?, ?> map);
 	
 	// 업체명 검색 
 	ArrayList<Ad> selectAdSearchList(PageInfo pi, String keyword);
@@ -69,8 +69,11 @@ public interface AdminService {
 	// 광고 마감(종료)
 	int updateEndAd(String adno);
 	
-	// 통계(가입자수)
+	// 통계(월별 가입자+게시글)
 	ArrayList<Statistics> selectMemberCount();
+	
+	// 총 게시글수(positng,board,fashion)
+	ArrayList<Statistics> totalCount();
 	
 	// 공지사항 리스트 조회
 	ArrayList<Notice> selectNoticeList();

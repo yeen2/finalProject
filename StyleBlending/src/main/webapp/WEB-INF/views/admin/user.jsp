@@ -1,18 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
+
 <style type="text/css">
 	.order-table:after, .order-table:before{
 		position : relative !important;
 	}
 </style>
-</head>
-<body>
-	
+
+<jsp:include page="header.jsp" />
 <!-- Left Panel -->
     <aside id="left-panel" class="left-panel" style="padding-top:20px;">
         <nav class="navbar navbar-expand-sm navbar-default">
@@ -41,13 +37,6 @@
         </nav>
     </aside>
     <!-- /#left-panel -->
-    
-    
-       <!-- Right Panel -->
-
-    <div id="right-panel" class="right-panel">
-	
-	<jsp:include page="header.jsp" />
      
     	<div class="content">
             <div class="animated fadeIn mt-3" >
@@ -193,9 +182,7 @@
         </div><!-- .content -->
 
 
-    <jsp:include page="footer.jsp" />
 
-    </div><!-- /#right-panel -->
     
      <script type="text/javascript" src="${pageContext.request.contextPath}/resources/admin_temp/js/admin.js"></script>
      <script>
@@ -275,8 +262,6 @@
                 </div>
             </div>
         </div>
-         
- 		
-    
-</body>
-</html>
+	
+
+    <jsp:include page="footer.jsp" />

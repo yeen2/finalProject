@@ -47,7 +47,7 @@
 				<td style="width: 430px; text-align: center;">
 				<a style="text-decoration: none; color: black;" href="bdetail.do?bno=${ b.bno }">${ b.title }</a>
 				</td>
-				<td>${ b.mno }</td>
+				<td>${ b.nickName }</td>
 				<td>${ b.count }</td>
 				<td>${ b.enrollDate }</td>
 				<td>${ b.likeCount }</td>

@@ -69,8 +69,11 @@ public interface MyPageService {
 	// 위치 검색
 	ArrayList<Posting> selectSearchLoca(String search);
 
-	// 알람 업데이트
+	// 알람 모두 읽음 표시
 	int updateAlarm(int mno);
+	
+	// 알람 하나만 읽음 표시
+	int updateAlarmOne(int alno);
 	
 	// 닉네임 중복체크
 	int nickNameCheck(Member m);

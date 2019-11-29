@@ -120,8 +120,9 @@
 	.rr_md:hover{
 		cursor: pointer;
 	}
+
 	a:hover {
-		text-decoration: none;
+		text-decoration: none !important;
 	}
 	
 	/* 작성자누르면 마이페이지 이동 */
@@ -353,7 +354,7 @@
 								<div  style="border-radius: 50%; width: 50px; height: 50px;">
 									<img style="width: 100%; height: 100%; border-radius: 50%;"
 										src="${ pageContext.servletContext.contextPath }/resources/image/cate/${s.img}">
-								</div>
+								</div>  
 							</div>
 							<div class="col-lg-9" style="display: inline-block;">
 								<b>${s.name }</b>
@@ -456,7 +457,22 @@
 
 	</div>
 	<!-- /.container -->
+
+<!----------------------------------- 해시태그 클릭시 locatio:href 정해주기 ----------------------- -->
+
+	<script type="text/javascript">
+	$(document).on("click",".hashtagHref", function () {
+		var hashtag = $(this).text();
+		console.log(hashtag);
+		
+		// #을 빼야함..
+		hashtag = hashtag.substr(1,hashtag.length-1);
+		console.log(hashtag);
+		location.href="pNavSearch.do?type=2&keyword="+hashtag
+	}); 
+	</script>
 	
+
 	
 <!-------------  프로필 : 마이페이지 이동  ----------------->	
 	<script type="text/javascript">
@@ -894,6 +910,9 @@
 							
 							$likecount = $("<span class='replyForm_likecount'></span>").text(value.likeCount);
 							$likeImg = $("<i class='fas fa-caret-up'></i>");
+							// 댓글 조아요 하트
+							$r_likeBtn = $("<i class='fas fa-heart'></i>");
+						
 							$rrBtn = $("<a class='rrBtn'>reply</a>");
 							$date = $("<span class='replyForm_date'></span>").text(value.enrollDate);
 							//댓글 수정 삭제 아이콘

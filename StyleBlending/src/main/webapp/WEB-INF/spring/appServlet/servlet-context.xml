@@ -42,6 +42,9 @@
 	<!-- 웹소켓 사용 -->
     <websocket:handlers>
         <websocket:mapping path="/count" handler="myHandler"/>
+        <websocket:handshake-interceptors>
+			<beans:bean class="com.kh.styleblending.member.controller.WebSocketInterceptor"/>
+		</websocket:handshake-interceptors>
 		<websocket:sockjs/>
     </websocket:handlers>
 	

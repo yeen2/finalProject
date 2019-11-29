@@ -17,6 +17,7 @@ public class BoardReply {
 
 	private int brno;
 	private int bno;
+	private int mno;
 	private String content;
 	private Date enrollDate;
 	private String isDelete;
@@ -24,5 +25,6 @@ public class BoardReply {
 	// 댓글 프로필 이미지
 	private String profileImg;
 	
-	
+	//닉네임
+	private String nickName;
 }
