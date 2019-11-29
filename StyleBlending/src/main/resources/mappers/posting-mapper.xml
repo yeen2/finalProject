@@ -270,7 +270,10 @@
 		where c.name like '%'||#{keyword}||'%'
 	</select>
 	
-	
+	<insert id="insertLive">
+		insert into live
+		values(seq_live.nextval, #{keyword}, sysdate)
+	</insert>
 	
 	
 	
