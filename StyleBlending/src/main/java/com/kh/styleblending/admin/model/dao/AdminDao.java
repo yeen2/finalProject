@@ -37,16 +37,16 @@ public class AdminDao {
 		return sqlSession.selectOne("adminMapper.selectStartAd");
 	}
 	
-	public int getMemberListCount() {
-		return sqlSession.selectOne("adminMapper.getMemberListCount");
+	public int getMemberListCount(String keyword) {
+		return sqlSession.selectOne("adminMapper.getMemberListCount",keyword);
 	}
 	
-	public ArrayList<Member> selectMemberList(PageInfo pi){
+	public ArrayList<Member> selectMemberList(PageInfo pi, String keyword){
 		
 		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		
-		return (ArrayList)sqlSession.selectList("adminMapper.selectMemberList", null, rowBounds);
+		return (ArrayList)sqlSession.selectList("adminMapper.selectMemberList", keyword, rowBounds);
 	}
 	
 	public int deleteMember(ArrayList mno) {

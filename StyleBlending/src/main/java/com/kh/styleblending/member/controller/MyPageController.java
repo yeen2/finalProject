@@ -22,7 +22,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.kh.styleblending.admin.model.vo.Ad;
 import com.kh.styleblending.member.model.service.MyPageService;
-import com.kh.styleblending.member.model.vo.Alarm;
 import com.kh.styleblending.member.model.vo.Fan;
 import com.kh.styleblending.member.model.vo.Member;
 import com.kh.styleblending.member.model.vo.PageInfo;
@@ -233,7 +232,7 @@ public class MyPageController {
 	}
 	
 	// 내 광고 리스트 호출 메소드
-	@RequestMapping(value="mpSAdList.do", produces="application/json; charset=UTF-8")
+	@RequestMapping("mpSAdList.do")
 	public ModelAndView selectAdList(HttpSession session, ModelAndView mv, @RequestParam(value="currentPage", defaultValue="1") int currentPage){
 		int mno = ((Member)session.getAttribute("loginUser")).getMno();
 		
@@ -431,17 +430,4 @@ public class MyPageController {
 		}
 	}
 	
-	/*
-	@ResponseBody
-	@RequestMapping("mpUpdateAlarmOne")
-	public int updateAlarmOne(int alno) {
-		int result = mpService.updateAlarmOne(alno);
-		
-		if(result > 0) {
-			return 1;
-		}else {
-			return -1;
-		}
-	}
-	*/
 }

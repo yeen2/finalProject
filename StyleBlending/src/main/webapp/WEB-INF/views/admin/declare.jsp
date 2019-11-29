@@ -88,7 +88,6 @@
                                  <c:forEach items="${list}" var="p">
                                  <tbody>
                                       <tr>
-                                      	<input type="hidden" value="${p.dno }" name="dno" />
                                       	<input type="hidden" value="${p.bno }" name="bno"/>
                                       	<input type="hidden" value="${p.isCheck }" name="isCheck"/>
                                       	<input type="hidden" value="${p.type }" name="type"/>
@@ -214,13 +213,14 @@
 	
 	$(".detailBoard").click(function(){
 		
-		var dno = $(this).parent().parent().children().eq(0).val();
-		var bno = $(this).parent().parent().children().eq(1).val();
-		var check = $(this).parent().parent().children().eq(2).val();
-		var type = $(this).parent().parent().children().eq(3).val();
+		var dno = $(this).parent().parent().children().eq(1).html();
+		var bno = $(this).parent().parent().children().eq(0).val();
+		var check = $(this).parent().parent().children().eq(1).val();
+		var type = $(this).parent().parent().children().eq(2).val();
 		
 		console.log(check);
 
+		
 		// check가 2인경우만 확인으로 바꾸도록 아니면 바로 상세페이지로
 		if(type==1){ // 포스팅
 			if(check == 1){
