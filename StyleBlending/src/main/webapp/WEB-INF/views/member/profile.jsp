@@ -270,7 +270,7 @@
 								$("#pBtn").css("display", "none");
 							}
 							var $copy1 = $("<div>").attr({"class":"col-12 col-md-4", "style":"position:relative;"});
-							$copy1.append($("<div>").attr({"class":"square imgP", "style":"background-image: url(" + "'resources/assets/img/" + list[i].renameImg + "');"}));
+							$copy1.append($("<div>").attr({"class":"square imgP", "style":"background-image: url(" + "'resources/upload/posting/" + list[i].renameImg + "');"}));
 							var $copy2 = 
 								"<div class='square imgJ' value='" + list[i].pno + "' style='position:absolute; width:92%; bottom:0; opacity:0; background:rgba(0,0,0,0.6);'>"
 								+ "<div style='margin-left:48px; margin-top:135px; font-size:22px; color:white; position:relative;'>"
@@ -325,7 +325,7 @@
 								$("#lBtn").css("display", "none");
 							}
 							var $copy1 = $("<div>").attr({"class":"col-12 col-md-4", "style":"position:relative;"});
-							$copy1.append($("<div>").attr({"class":"square imgP", "style":"background-image: url(" + "'resources/assets/img/" + list[i].renameImg + "');"}));
+							$copy1.append($("<div>").attr({"class":"square imgP", "style":"background-image: url(" + "'resources/upload/posting/" + list[i].renameImg + "');"}));
 							var $copy2 = 
 								"<div class='square imgJ' value='" + list[i].pno + "' style='position:absolute; width:92%; bottom:0; opacity:0; background:rgba(0,0,0,0.6);'>"
 								+ "<div style='margin-left:48px; margin-top:135px; font-size:22px; color:white; position:relative;'>"

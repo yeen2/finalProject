@@ -34,7 +34,7 @@
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="tab" href="#ad" id="adBtn"> 
+					<a class="nav-link" data-toggle="tab" href="#" id="adBtn"> 
 					<i class="fa fa-ad"></i>
 						광고 관리
 					</a>
@@ -78,12 +78,12 @@
 							</div>
 							<div class="form-group">
 								<label for="introduce">Introduce</label>
-								<textarea cols="52" rows="5" name="profile" style="resize:none;">${ loginUser.profile }</textarea>
+								<textarea cols="52" rows="5" class="form-control" name="profile" style="resize:none;">${ loginUser.profile }</textarea>
 							</div>
 							<div class="form-group" style="margin-bottom:50px;">
 								<label for="userPwd2">Location</label>
-								<input type="text" class="form-control"
-									id="location" name="location" placeholder="${ loginUser.location }">
+								<input type="text" class="form-control" autocomplete="off"
+									id="location" name="location" value="${ loginUser.location }">
 							</div>
 							
 							<button type="submit" class="btn btn-block btn-dark" style="height:50px;">수정</button>
@@ -187,6 +187,7 @@
 	<script>
 		<%-- 닉네임 중복체크 ajax --%>
 		
+		var checkNick = 0;
 		
 		$("#nickName").on("input", function(){
 			var nickNameValue = $("#nickName").val();
@@ -199,6 +200,7 @@
 					data:{nickName:nickNameValue},
 					success:function(result){
 						if(result == 1){
+							checkNick = 1;
 							$("#nickNameCheck").hide();
 							$("#nickNameFail").show();
 							$("#nickNameSuccess").hide();
@@ -231,9 +233,14 @@
 			
 			if(nickNameValue.length == 0){
 				alert("닉네임을 입력해주세요.");
+				$("#nickName").focus();
 				return false;
 			}else if(!regExp.test(nickNameValue)){
 				alert("닉네임이 형식에 맞지 않습니다.");
+				$("#nickName").val("").focus();
+				return false;
+			}else if(checkNick == 1){
+				alert("사용중인 닉네임입니다.");
 				return false;
 			}
 			
@@ -342,7 +349,7 @@
 		});
 		
 		
-		<%-- 내 광고 리스트 호출 --%>
+		// 광고 페이지 이동
 		$("#adBtn").click(function(){
 			location.href="mpSAdList.do";
 		});

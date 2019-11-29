@@ -22,4 +22,10 @@ public interface MainService {
 	int increaseLikeCount(int pno);
 	//공지사항 내용 보여주기
 	ArrayList<Notice> selectNoticeContent(int nno);
+	//공지사항 등록 하기
+	int insertNotice(Notice n);
+	//공지사항 수정 등록
+	int noticeUpdateConfirm(Notice n);
+	
+	
 }

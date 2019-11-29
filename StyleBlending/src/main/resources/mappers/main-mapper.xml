@@ -151,5 +151,17 @@
 		from notice
 		where n_no = #{nno}
 	</select>
-
+	<insert id="insertNotice">
+	
+	
+		insert into notice values (seq_notice.nextval,#{title}, #{content}, sysdate, default)
+	
+	
+	
+	</insert>
+	<update id="updateNotice">
+		update notice set content = #{content}, enroll_date = sysdate
+		where n_no = #{nno}
+	
+	</update>
 </mapper>

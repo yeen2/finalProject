@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.google.gson.Gson;
@@ -226,13 +227,47 @@ public class MainController {
 		
 	}
 	@RequestMapping("mainInsertNotice.do")
-	public void insertNotice(HttpServletRequest request, String NoticeTitle, String NoticeWriter, String p_content) {
-	
+	public String insertNotice(HttpServletRequest request, String title, String writer, String content, Model model) {
+		Notice n = new Notice();
+		n.setTitle(title);
+		n.setContent(content);
 		
-		System.out.println(NoticeTitle+" " + NoticeWriter+ " " + p_content);
+		int result = mainService.insertNotice(n);
+		
+		if(result > 0) {
+			return "redirect:mainNotice.do";
+		}else {
+			model.addAttribute("msg","공지사항 작성실패");
+			return "common/errorPage";
+		}
 		
 		
 		
+	}
+	@RequestMapping("noticeUpdateConfirm.do")
+	public void notice3(HttpServletResponse response, int nno,String content) throws JsonIOException, IOException {
+		
+		System.out.println(content + " " + nno);
+		
+		Notice n = new Notice();
+		
+		n.setContent(content);
+		
+		n.setNno(nno);
+		
+		
+		int result = mainService.noticeUpdateConfirm(n);
+		
+		System.out.println(result);
+		
+		if(result > 0) {
+			response.setContentType("text/html; charset=UTF-8");
+			
+			PrintWriter out = response.getWriter();
+			
+			out.print(result);
+		}
+		 
 	}
 	
 }

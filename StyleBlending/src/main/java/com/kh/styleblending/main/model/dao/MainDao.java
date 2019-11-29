@@ -49,6 +49,13 @@ public class MainDao {
 		// TODO Auto-generated method stub
 		return (ArrayList)sqlSession.selectList("mainMapper.selectNoticeContent",nno);
 	}
+	public int insertNotice(Notice n) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("mainMapper.insertNotice",n);
+	}
+	public int noticeUpdateConfirm(Notice n) {
+		return sqlSession.update("mainMapper.updateNotice",n);
+	}
 	
 	
 	
