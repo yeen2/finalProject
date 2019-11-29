@@ -354,7 +354,7 @@
 								<div  style="border-radius: 50%; width: 50px; height: 50px;">
 									<img style="width: 100%; height: 100%; border-radius: 50%;"
 										src="${ pageContext.servletContext.contextPath }/resources/image/cate/${s.img}">
-								</div>
+								</div>  
 							</div>
 							<div class="col-lg-9" style="display: inline-block;">
 								<b>${s.name }</b>
@@ -463,6 +463,10 @@
 	<script type="text/javascript">
 	$(document).on("click",".hashtagHref", function () {
 		var hashtag = $(this).text();
+		console.log(hashtag);
+		
+		// #을 빼야함..
+		hashtag = hashtag.substr(1,hashtag.length-1);
 		console.log(hashtag);
 		location.href="pNavSearch.do?type=2&keyword="+hashtag
 	}); 
