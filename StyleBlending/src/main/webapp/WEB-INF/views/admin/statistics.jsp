@@ -71,7 +71,7 @@
 									</div>
 									<div class="h4 mb-0">
 									<c:forEach items="${totalCount}" var="c" varStatus="status">
-									<c:if test="${status.index eq 0}">
+									<c:if test="${status.index eq 1}">
 										<span class="count">${c.totalCount}</span>
 									</c:if>	
 									</c:forEach>
@@ -87,7 +87,7 @@
 									</div>
 									<div class="h4 mb-0">
 									<c:forEach items="${totalCount}" var="c" varStatus="status">
-									<c:if test="${status.index eq 1}">
+									<c:if test="${status.index eq 2}">
 										<span class="count">${c.totalCount}</span>
 									</c:if>		
 									</c:forEach>								
@@ -104,41 +104,45 @@
 									</div>
 									<div class="h4 mb-0">
 									<c:forEach items="${totalCount}" var="c" varStatus="status">
-									<c:if test="${status.index eq 2}">
+									<c:if test="${status.index eq 3}">
+										<span class="count">${c.totalCount}</span>원
+									</c:if>	
+									</c:forEach>
+									</div>
+									<small class="text-muted text-uppercase font-weight-bold">광고 수익</small>
+									<div class="progress progress-xs mt-3 mb-0 bg-flat-color-3" style="width: 40%; height: 5px;"></div>
+								</div>
+							</div>
+							<div class="card col-md-6 no-padding ">
+								<div class="card-body">
+									<div class="h1 text-muted text-right mb-4">
+										<i class="fa fa-pie-chart"></i>
+									</div>
+									<div class="h4 mb-0">
+										<span class="count">28</span>%
+									</div>
+							 		<small class="text-muted text-uppercase font-weight-bold">Returning Visitors</small>
+									<div class="progress progress-xs mt-3 mb-0 bg-flat-color-4" style="width: 40%; height: 5px;"></div>
+								</div>
+							</div>
+							<div class="card col-md-6 no-padding ">
+								<div class="card-body">
+									<div class="h1 text-muted text-right mb-4">
+										<i class="fa fa-comments-o"></i>
+									</div>
+									<div class="h4 mb-0">
+									<c:forEach items="${totalCount}" var="c" varStatus="status">
+									<c:if test="${status.index eq 0}">
 										<span class="count">${c.totalCount}</span>
 									</c:if>	
 									</c:forEach>
 									</div>
-									<small class="text-muted text-uppercase font-weight-bold">Advertisment sold</small>
-									<div class="progress progress-xs mt-3 mb-0 bg-flat-color-3" style="width: 40%; height: 5px;"></div>
+									<small class="text-muted text-uppercase font-weight-bold">COMMENTS</small>
+									<div class="progress progress-xs mt-3 mb-0 bg-flat-color-1" style="width: 40%; height: 5px;"></div>
 								</div>
 							</div>
-<div class="card col-md-6 no-padding ">
-<div class="card-body">
-<div class="h1 text-muted text-right mb-4">
-<i class="fa fa-pie-chart"></i>
-</div>
-<div class="h4 mb-0">
-<span class="count">28</span>%
-</div>
- <small class="text-muted text-uppercase font-weight-bold">Returning Visitors</small>
-<div class="progress progress-xs mt-3 mb-0 bg-flat-color-4" style="width: 40%; height: 5px;"></div>
-</div>
-</div>
-<div class="card col-md-6 no-padding ">
-<div class="card-body">
-<div class="h1 text-muted text-right mb-4">
-<i class="fa fa-comments-o"></i>
-</div>
-<div class="h4 mb-0">
-<span class="count">972</span>
-</div>
-<small class="text-muted text-uppercase font-weight-bold">COMMENTS</small>
-<div class="progress progress-xs mt-3 mb-0 bg-flat-color-1" style="width: 40%; height: 5px;"></div>
-</div>
-</div>
-</div>
-</div>
+						</div>
+					</div>
                 
                 
 				     <div class="col-lg-9 offset-md-1">

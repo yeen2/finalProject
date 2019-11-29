@@ -96,8 +96,9 @@
                                      	</td>
                                          <td id="dno">${p.dno}</td>
                                          <td>
-                                         	<div data-toggle="modal" data-target="#smallmodal" onclick="dmodalCheck();">
-                                                 <a href="#">${p.email }</a>
+                                         	<div>
+                                         		 <a data-toggle="modal" data-target="#fq${ p.dno }"><img class="rounded-circle" src="${pageContext.request.contextPath}${p.profilePath}${p.renameImg}" alt=""></a>
+                                                 <%-- <a href="#">${p.email }</a> --%>
                                              </div>
                                          </td>
                                          <c:if test="${p.type eq 1 }">
@@ -112,7 +113,10 @@
                                          	<a class="detailBoard" style="cursor:pointer">${p.bname}</a>
                                          </td>
                                          </c:if>
-                                         <td>${p.writer }</td>
+                                         <td>
+                                         	<%-- <a href="#"><img class="rounded-circle" src="${pageContext.request.contextPath}${p.writerPath}${p.writerImg}" alt=""></a> --%>
+                                        	${p.writer }
+                                         </td>
                                          <td>${p.enrollDate }</td>
                                          <td>${p.category }</td>
                                          <td id="check">
@@ -213,7 +217,7 @@
 	
 	$(".detailBoard").click(function(){
 		
-		var dno = $(this).parent().parent().children().eq(1).html();
+		var dno = $(this).parent().parent().children().eq(4).html();
 		var bno = $(this).parent().parent().children().eq(0).val();
 		var check = $(this).parent().parent().children().eq(1).val();
 		var type = $(this).parent().parent().children().eq(2).val();
@@ -301,11 +305,12 @@
    		
    		
   		<!-- 회원정보 모달창 -->
-   		<div class="modal fade" id="smallmodal" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
-               <div class="modal-dialog modal-sm" role="document">
+  		<c:forEach items="${ list }" var="p">
+   		<div class="modal fade" id="fq${ p.dno }"  role="dialog"  aria-labelledby="fq${ p.dno }" aria-hidden="true">
+               <div class="modal-dialog modal-sm">
                    <div class="modal-content ">
                        <div class="modal-header">
-                       	<i class="fa fa-user"></i><strong class="card-title pl-2">신고당한 회원</strong>
+                       	<i class="fa fa-user"></i><strong class="card-title pl-2">신고내역</strong>
                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                <span aria-hidden="true">&times;</span>
                            </button>
@@ -315,11 +320,15 @@
                             <div class="card-body">
                                 <div class="mx-auto d-block">
                                     <img class="rounded-circle mx-auto d-block" src="${pageContext.request.contextPath}/resources/admin_temp/images/admin.jpg" alt="Card image cap">
-                                    <h5 class="text-sm-center mt-2 mb-1">Steven Lee</h5>
+                                    <h5 class="text-sm-center mt-2 mb-1">신고자</h5>
                                 </div>
                                 <hr>
+                                <div class="mx-auto d-block">
+                                    <img class="rounded-circle mx-auto d-block" src="${pageContext.request.contextPath}/resources/admin_temp/images/admin.jpg" alt="Card image cap">
+                                    <h5 class="text-sm-center mt-2 mb-1">신고당한 회원</h5>
+                                </div>
                                 <div class="card-text text-sm-center">
-                                    <div class="location text-sm-center"><i class="fa fa-map-marker"></i> 신고내용</div>
+                                    <div class="location text-sm-center"><i class="fa fa-map-marker"></i>${p.category}</div>
                                 </div>
                             </div>
                        	</div>
@@ -327,6 +336,11 @@
                    </div> <!-- /.modal-content -->
                </div>
            </div>
+        </c:forEach>
         <!-- 회원정보 모달창  끝-->
+        
+        <script>
+        	
+        </script>
    		
 	<jsp:include page="footer.jsp" />

@@ -321,7 +321,14 @@ select sum(m1) "month1",sum(m2) "month2",sum(m3) "month3",sum(m4) "month4",sum(m
 		where status='1'
         union
         select count(*) a
-        from member)
+        from member
+        union
+        select sum(a) totalC from(
+	      select count(br_no) a
+	      from b_reply
+	      union
+	      select count(pr_no) a
+	      from p_reply))
 	</select>
 	
 	<select id="selectNoticeList" resultMap="NoticeResultSet">

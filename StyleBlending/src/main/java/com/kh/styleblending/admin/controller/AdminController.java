@@ -170,20 +170,6 @@ public class AdminController {
 		
 		return mv;
 	}
-
-	/*
-	@RequestMapping("aSearchAdname.do")
-	public void searchAdname(String keyword, HttpServletResponse response) throws JsonIOException, IOException {
-		
-		ArrayList<Ad> ad = aService.selectAdSearchList(keyword);
-		
-		response.setContentType("application/json; charset=UTF-8");
-	      
-	      Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-	      
-	      gson.toJson(ad, response.getWriter());
-	}
-	*/
 	
 	// 광고등록+결제
 	@ResponseBody
