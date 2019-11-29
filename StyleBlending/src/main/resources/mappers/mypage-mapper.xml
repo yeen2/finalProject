@@ -81,6 +81,12 @@
 		<result property="alarmCount" column="alarmCount"/>
 	</resultMap>
 	
+	<resultMap id="hashResultSet" type="Hash">
+		<id property="hano" column="ha_no"/>
+		<result property="pno" column="p_no"/>
+		<result property="hashtag" column="hashtag"/>
+	</resultMap>
+	
 	<select id="selectProfile" resultMap="memberResultSet">
 		select m.*, (select count(*) from posting p where m.m_no=p.m_no)posCount, (select count(*) from fan f where f.me_no=m.m_no)fanCount,
 			(select count(*) from fan f where f.you_no=m.m_no)fwCount
@@ -198,7 +204,7 @@
 	
 	<select id="selectSearchHashtag" resultMap="postingResultSet">
 		select * 
-		from posting 
+		from hash
 		where hashtag like #{search} || '%'
 	</select>
 	
