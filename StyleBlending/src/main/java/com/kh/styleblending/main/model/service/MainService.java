@@ -26,6 +26,8 @@ public interface MainService {
 	int insertNotice(Notice n);
 	//공지사항 수정 등록
 	int noticeUpdateConfirm(Notice n);
+	//공지사항 삭제
+	int noticeDelete(int nno);
 	
 	
 }
