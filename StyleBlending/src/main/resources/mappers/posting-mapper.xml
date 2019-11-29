@@ -65,6 +65,11 @@
 		values(seq_style.nextval, seq_posting.currval, #{cate}, #{brand}, #{color})
 	</insert>
 	
+	<insert id="insertHashtag">
+		insert into hash
+		values(seq_hash.nextval, seq_posting.currval, #{hash})
+	</insert>
+	
 	<select id="selectOnePosting" resultMap="postingOneResultSet" parameterType="HashMap">
 		<!-- 
 		select * 

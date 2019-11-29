@@ -8,6 +8,8 @@ drop sequence seq_p_declare;
 drop sequence seq_b_declare;
 
 
+DROP TABLE brand;
+DROP TABLE hash;
 DROP TABLE category;
 DROP TABLE style;
 DROP TABLE p_like;
@@ -29,12 +31,14 @@ DROP TABLE posting;
 DROP TABLE member;
 
 
+
 drop sequence seq_member;
 drop sequence seq_posting;
 drop sequence seq_style;
 drop sequence seq_p_reply;
 drop sequence seq_p_like;
 drop sequence seq_declare;
+
 
 drop sequence seq_ad;
 drop sequence seq_fan;
@@ -49,7 +53,8 @@ drop sequence seq_image;
 drop sequence seq_b_reply;
 drop sequence seq_r_like;
 drop sequence seq_b_like;
-
+drop sequence seq_hash;
+drop sequence seq_brand;
 
 commit;
 
@@ -73,7 +78,8 @@ create sequence seq_image;
 create sequence seq_b_reply;
 create sequence seq_r_like;
 create sequence seq_b_like;
-
+create sequence seq_hash;
+create sequence seq_brand;
 
 
 
@@ -539,6 +545,27 @@ COMMENT ON COLUMN category.img IS '사진이름';
 
 
 
+CREATE TABLE hash (
+	ha_no	number		NOT NULL,
+	p_no	number		NOT NULL,
+	hashtag	varchar2(500)		NOT NULL
+);
+
+COMMENT ON COLUMN hash.ha_no IS '해시태그 번호';
+
+COMMENT ON COLUMN hash.p_no IS '포스팅번호';
+
+COMMENT ON COLUMN hash.hashtag IS '해시태그';
+
+
+CREATE TABLE brand (
+	brand_no	number		NOT NULL,
+	brand	varchar2(200)		NOT NULL
+);
+
+COMMENT ON COLUMN brand.brand_no IS '브랜드 번호';
+
+COMMENT ON COLUMN brand.brand IS '브랜드명';
 
 
 
@@ -627,7 +654,15 @@ ALTER TABLE category ADD CONSTRAINT PK_CATEGORY PRIMARY KEY (
 	ca_no
 );
 
-    
+ALTER TABLE hash ADD CONSTRAINT PK_HASH PRIMARY KEY (
+	ha_no
+);
+
+ALTER TABLE brand ADD CONSTRAINT PK_BRAND PRIMARY KEY (
+	brand_no
+);
+
+
 --FK
 
 ALTER TABLE posting ADD CONSTRAINT FK_member_TO_posting_1 FOREIGN KEY (
@@ -748,6 +783,15 @@ ALTER TABLE b_reply ADD CONSTRAINT FK_board_TO_b_reply_1 FOREIGN KEY (
 REFERENCES board (
 	b_no
 );
+
+ALTER TABLE hash ADD CONSTRAINT FK_posting_TO_hash FOREIGN KEY (
+	p_no
+)
+REFERENCES posting (
+	p_no
+);
+
+
 
 -- breply mno테이블 추가
 ALTER TABLE b_reply ADD CONSTRAINT FK_board_TO_b_reply_2 FOREIGN KEY (
