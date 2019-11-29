@@ -25,10 +25,10 @@ public interface AdminService {
 	Ad selectStartAd();
 	
 	// 총 회원수 조회용
-	int getMemberListCount();
+	int getMemberListCount(String keyword);
 	
 	// 회원 목록 조회용
-	ArrayList<Member> selectMemberList(PageInfo pi);
+	ArrayList<Member> selectMemberList(PageInfo pi, String keyword);
 	
 	// 회원 탈퇴
 	int deleteMember(ArrayList mno);

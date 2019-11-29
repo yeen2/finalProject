@@ -1,7 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%
+	Date nowTime = new Date();
+	SimpleDateFormat sdf = new SimpleDateFormat("yy/MM");
+	
+	String month = sdf.format(nowTime);
+%>
 <!-- 차트 보이게 cdn x-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 <!-- jQuery -->
@@ -63,22 +70,27 @@
 										<i class="fa fa-users"></i>
 									</div>
 									<div class="h4 mb-0">
-										<span class="count">${memberTC}</span>
+									<c:forEach items="${totalCount}" var="c" varStatus="status">
+									<c:if test="${status.index eq 0}">
+										<span class="count">${c.totalCount}</span>
+									</c:if>	
+									</c:forEach>
 									</div>
 									<small class="text-muted text-uppercase font-weight-bold">회원</small>
 									<div class="progress progress-xs mt-3 mb-0 bg-flat-color-1" style="width: 40%; height: 5px;"></div>
 								</div>
 							</div>
-							<c:forEach items="${totalCount}" var="c" varStatus="status">
 							<div class="card col-md-6 no-padding ">
 								<div class="card-body">
 									<div class="h1 text-muted text-right mb-4">
 										<i class="fa fa-user-plus"></i>
 									</div>
 									<div class="h4 mb-0">
-									<c:if test="${status.index eq 0}">
+									<c:forEach items="${totalCount}" var="c" varStatus="status">
+									<c:if test="${status.index eq 1}">
 										<span class="count">${c.totalCount}</span>
-									</c:if>										
+									</c:if>		
+									</c:forEach>								
 									</div>
 									<small class="text-muted text-uppercase font-weight-bold">게시글</small>
 									<div class="progress progress-xs mt-3 mb-0 bg-flat-color-2" style="width: 40%; height: 5px;"></div>
@@ -91,15 +103,16 @@
 										<i class="fa fa-cart-plus"></i>
 									</div>
 									<div class="h4 mb-0">
-									<c:if test="${status.index eq 1}">
+									<c:forEach items="${totalCount}" var="c" varStatus="status">
+									<c:if test="${status.index eq 2}">
 										<span class="count">${c.totalCount}</span>
 									</c:if>	
+									</c:forEach>
 									</div>
 									<small class="text-muted text-uppercase font-weight-bold">Advertisment sold</small>
 									<div class="progress progress-xs mt-3 mb-0 bg-flat-color-3" style="width: 40%; height: 5px;"></div>
 								</div>
 							</div>
-							</c:forEach>
 <div class="card col-md-6 no-padding ">
 <div class="card-body">
 <div class="h1 text-muted text-right mb-4">
@@ -139,7 +152,7 @@
 										<div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
 									</div>
 								</div>
-								<h4 class="mb-3"><b>현황 통계 (게시글 / 가입자)</b></h4>
+								<h4 class="mb-3"><b>최근 6개월 현황 통계 (게시글 / 가입자)</b></h4>
 								<canvas id="sales-chart" height="528" width="1057" class="chartjs-render-monitor" style="display: block; height: 352px; width: 705px;"></canvas>
 							</div>
 						</div>
@@ -180,7 +193,7 @@
 				    var myChart = new Chart( ctx, {
 				        type: 'line',
 				        data: {
-				            labels: [ "06", "07", "08", "09", "10", "11"],
+				            labels: [ "06", "07", "08", "09", "10", "<%= month %>"],
 				            type: 'line',
 				            defaultFontFamily: 'Montserrat',
 				            datasets: [ {
