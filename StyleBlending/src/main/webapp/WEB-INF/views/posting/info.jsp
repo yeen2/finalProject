@@ -468,6 +468,7 @@
 		// #을 빼야함..
 		hashtag = hashtag.substr(1,hashtag.length-1);
 		console.log(hashtag);
+		hashtag = hashtag.trim();
 		location.href="pNavSearch.do?type=2&keyword="+hashtag
 	}); 
 	</script>
