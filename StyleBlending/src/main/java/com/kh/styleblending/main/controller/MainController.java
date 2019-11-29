@@ -269,5 +269,24 @@ public class MainController {
 		}
 		 
 	}
+	@RequestMapping("noticeDelete.do")
+	public void notice5(HttpServletResponse response, int nno,String content) throws JsonIOException, IOException {
+		
+		//System.out.println(content + " " + nno);
+		
+		int result = mainService.noticeDelete(nno);
+		
+		//System.out.println(result);
+		
+		if(result > 0) {
+			
+			response.setContentType("text/html; charset=UTF-8");
+			
+			PrintWriter out = response.getWriter();
+			
+			out.print(result);
+		}
+		
+	}
 	
 }

@@ -56,6 +56,10 @@ public class MainDao {
 	public int noticeUpdateConfirm(Notice n) {
 		return sqlSession.update("mainMapper.updateNotice",n);
 	}
+	public int noticeDelete(int nno) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("mainMapper.deleteNotice",nno);
+	}
 	
 	
 	

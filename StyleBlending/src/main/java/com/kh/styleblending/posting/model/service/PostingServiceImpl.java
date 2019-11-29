@@ -194,6 +194,11 @@ public class PostingServiceImpl implements PostingService {
 		return pDao.selectSearchPosting_cate(keyword, mno);
 	}
 	
+	@Override
+	public int insertLive(String keyword) {
+		return pDao.insertLive(keyword);
+	}
+	
 	
 	
 }

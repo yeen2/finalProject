@@ -98,6 +98,7 @@
 		select p.*, (select count(*) from p_reply r where r.p_no=p.p_no)replyCount
 		from posting p
 		where m_no=#{mno}
+		order by p.enroll_date desc
 	</select>
 	
 	<select id="selectLikeList" resultMap="postingResultSet">
@@ -105,6 +106,7 @@
 		from posting p
 		left join p_like l on(l.p_no=p.p_no)
 		where l.m_no=#{mno}
+		order by p.enroll_date desc
 	</select>
 	
 	<select id="selectFanList" resultMap="memberResultSet">
@@ -114,6 +116,7 @@
 		from member m
 		left join fan f on(m.m_no=f.you_no)
 		where f.me_no=#{mno}
+		order by f.enroll_date desc
 	</select>
 	
 	<select id="selectFwList" resultMap="memberResultSet">
@@ -123,6 +126,7 @@
 		from member m
 		left join fan f on(m.m_no=f.me_no)
 		where f.you_no=#{mno}
+		order by f.enroll_date desc
 	</select>
 	
 	<update id="updateProfileImg">
@@ -174,6 +178,7 @@
 					(select rename_Img from member where m_no=a.b_m_no)renameImg
 		from alarm a
 		where status=1 and m_no=#{mno}
+		order by a.enroll_date desc
 	</select>
 	
 	<select id="selectFanCheck" resultType="_int">
