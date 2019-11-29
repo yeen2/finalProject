@@ -45,15 +45,15 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public int getMemberListCount() {
+	public int getMemberListCount(String keyword) {
 		// 총 회원수 조회용
-		return aDao.getMemberListCount();
+		return aDao.getMemberListCount(keyword);
 	}
 
 	@Override
-	public ArrayList<Member> selectMemberList(PageInfo pi) {
+	public ArrayList<Member> selectMemberList(PageInfo pi, String keyword) {
 		// 회원목록 조회용
-		return aDao.selectMemberList(pi);
+		return aDao.selectMemberList(pi, keyword);
 	}
 	
 	@Override
@@ -172,10 +172,17 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
+	public ArrayList<Statistics> totalCount() {
+		// 총 게시글수(positng,board,fashion) + 광고수익
+		return aDao.totalCount();
+	}
+	
+	@Override
 	public ArrayList<Notice> selectNoticeList() {
 		// 공지사항 목록 조회용
 		return aDao.selectNoticeList();
 	}
+
 
 	
 

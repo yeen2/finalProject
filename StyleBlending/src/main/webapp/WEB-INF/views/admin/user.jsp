@@ -30,7 +30,7 @@
                         <a href="aStatistics.do"><i class="menu-icon fa ti-bar-chart-alt"></i>통계 </a>
                     </li>
                     <li class="">
-                        <a href="mainNotice.do"><i class="menu-icon fa ti-pin-alt"></i>공지사항</a>
+                        <a href="aNotice.do"><i class="menu-icon fa ti-pin-alt"></i>공지사항</a>
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
@@ -58,7 +58,7 @@
 	                       				</select> entries
 	                       			</label>
 	                       			<label for="keyword" style="display:inline-flex;" >Search: &nbsp;
-	                       				<input type="search" id="keyword" class="form-control form-control-sm col-sm-12" placeholder="아이디 또는 닉네임을 입력해주세요." aria-controls="bootstrap-data-table">
+	                       				<input type="search" id="keyword" value="${keyword}" class="form-control form-control-sm col-sm-12" placeholder="아이디 또는 닉네임을 입력해주세요." aria-controls="bootstrap-data-table">
 	                       			</label>
 		                        	<button type="button" id="deleteBtn" data-toggle="modal" data-target="#deleteModal" class="btn btn-secondary btn-sm" style="float:right; margin-right:10px; margin-top:15px;" >
 		                        		회원삭제
@@ -87,8 +87,8 @@
                                         	<td>
                                         		<input name="checkRow" type="checkbox" value="${m.mno}"/>
                                         	</td>
-                                            <td >${m.mno}</td>
-                                            <td >
+                                            <td>${m.mno}</td>
+                                            <td>
                                                 <div class="round-img">
                                                     <a href="#"><img class="rounded-circle" src="${pageContext.request.contextPath}${m.profilePath}${m.renameImg}" alt=""></a>
                                                 </div>
@@ -130,6 +130,7 @@
 	                                				<c:url value="aUser.do" var="previous">	
 														<c:param name="currentPage" value="${pi.currentPage-1 }"/>
 														<c:param name="boardLimit" value="${pi.boardLimit }"/>
+														<c:param name="keyword" value="${keyword }"/>
 	                                				</c:url>
 	                                				<a href="${previous }" aria-controls="bootstrap-data-table" class="page-link">Previous</a>
 	                                			</c:if>
@@ -143,6 +144,7 @@
 	                                				<c:url value="aUser.do" var="page">	
 	                                					<c:param name="currentPage" value="${p}"/>
 	                                					<c:param name="boardLimit" value="${pi.boardLimit }"/>
+	                                					<c:param name="keyword" value="${keyword }"/>
 	                                				</c:url>
 		                                			<li class="paginate_button page-item active">
 		                                				<a href="${page}" aria-controls="bootstrap-data-table" class="page-link">${p }</a>
@@ -205,6 +207,18 @@
 			location.href="${pageContext.request.contextPath}/aDeleteMember.do?mno="+mno;  
 		  
 		}; 
+		
+		// 엔터키 누를시 회원아이디/닉네임 검색
+		$("#keyword").keydown(function(key){
+			if(key.keyCode == 13){
+				location.href="aUser.do?keyword="+ $("#keyword").val() + "&boardLimit=" +${pi.boardLimit};
+			}
+		});
+		
+		// 마이페이지로
+		$(".round-img").click(function(){
+			location.href="mpViewProfile.do?mno=" + $(this).parent().prev().html();
+		});
 
 
 	</script> 

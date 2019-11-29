@@ -52,9 +52,9 @@
 				
 				<!-- 프로필 -->
 				<div class="col-12 col-md-8 d-flex flex-column align-items-center align-items-lg-start">
-					<div class="d-flex flex-row align-items-start mt-3 mt-lg-0">
+					<div class="d-flex flex-row align-items-start mt-3 mt-lg-0" style="position:relative;">
 						<!-- 닉네임 -->
-						<div class="name">
+						<div class="name" style="position:absolute;">
 							<h2 class="mb-0">${ m.nickName }</h2>
 						</div>
 						
@@ -69,7 +69,7 @@
 						
 						<!-- 프로필 관리 버튼 -->
 						<c:if test="${ !empty loginUser && loginUser.mno == m.mno }">
-							<button class="btn btn-info btn-pill" style="margin-left:500px;"onclick="location.href='mpProfileUpdate.do';">
+							<button class="btn btn-info btn-pill" style="margin-left:570px;"onclick="location.href='mpProfileUpdate.do';">
 							    <i class="fa fa-edit mr-1"></i>
 						    	프로필 관리
 							</button>
@@ -99,7 +99,7 @@
 							<b>About Me</b>
 						</c:if>
 					</p>
-					<p class="lead text-center text-lg-left">${ m.profile }</p>
+					<pre><c:out value="${ m.profile }"/></pre>
 				</div>
 			</div>
 		</div>
@@ -270,7 +270,7 @@
 								$("#pBtn").css("display", "none");
 							}
 							var $copy1 = $("<div>").attr({"class":"col-12 col-md-4", "style":"position:relative;"});
-							$copy1.append($("<div>").attr({"class":"square imgP", "style":"background-image: url(" + "'resources/assets/img/" + list[i].renameImg + "');"}));
+							$copy1.append($("<div>").attr({"class":"square imgP", "style":"background-image: url(" + "'resources/upload/posting/" + list[i].renameImg + "');"}));
 							var $copy2 = 
 								"<div class='square imgJ' value='" + list[i].pno + "' style='position:absolute; width:92%; bottom:0; opacity:0; background:rgba(0,0,0,0.6);'>"
 								+ "<div style='margin-left:48px; margin-top:135px; font-size:22px; color:white; position:relative;'>"
@@ -325,7 +325,7 @@
 								$("#lBtn").css("display", "none");
 							}
 							var $copy1 = $("<div>").attr({"class":"col-12 col-md-4", "style":"position:relative;"});
-							$copy1.append($("<div>").attr({"class":"square imgP", "style":"background-image: url(" + "'resources/assets/img/" + list[i].renameImg + "');"}));
+							$copy1.append($("<div>").attr({"class":"square imgP", "style":"background-image: url(" + "'resources/upload/posting/" + list[i].renameImg + "');"}));
 							var $copy2 = 
 								"<div class='square imgJ' value='" + list[i].pno + "' style='position:absolute; width:92%; bottom:0; opacity:0; background:rgba(0,0,0,0.6);'>"
 								+ "<div style='margin-left:48px; margin-top:135px; font-size:22px; color:white; position:relative;'>"

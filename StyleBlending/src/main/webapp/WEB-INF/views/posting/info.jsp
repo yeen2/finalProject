@@ -354,7 +354,7 @@
 								<div  style="border-radius: 50%; width: 50px; height: 50px;">
 									<img style="width: 100%; height: 100%; border-radius: 50%;"
 										src="${ pageContext.servletContext.contextPath }/resources/image/cate/${s.img}">
-								</div>
+								</div>  
 							</div>
 							<div class="col-lg-9" style="display: inline-block;">
 								<b>${s.name }</b>
@@ -464,6 +464,11 @@
 	$(document).on("click",".hashtagHref", function () {
 		var hashtag = $(this).text();
 		console.log(hashtag);
+		
+		// #을 빼야함..
+		hashtag = hashtag.substr(1,hashtag.length-1);
+		console.log(hashtag);
+		hashtag = hashtag.trim();
 		location.href="pNavSearch.do?type=2&keyword="+hashtag
 	}); 
 	</script>
@@ -582,7 +587,7 @@
 	</script>
 	
 <!--  -------------------------------------신고하기 모달------------------------------------- -->
-	<div class="modal fade" id="declareModal" tabindex="-1" role="dialog" 
+	<div class="modal fade" id="declareModal" tabindex="-1" role="dialog"  
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">

@@ -25,10 +25,10 @@ public interface AdminService {
 	Ad selectStartAd();
 	
 	// 총 회원수 조회용
-	int getMemberListCount();
+	int getMemberListCount(String keyword);
 	
 	// 회원 목록 조회용
-	ArrayList<Member> selectMemberList(PageInfo pi);
+	ArrayList<Member> selectMemberList(PageInfo pi, String keyword);
 	
 	// 회원 탈퇴
 	int deleteMember(ArrayList mno);
@@ -69,8 +69,11 @@ public interface AdminService {
 	// 광고 마감(종료)
 	int updateEndAd(String adno);
 	
-	// 통계(가입자수)
+	// 통계(월별 가입자+게시글)
 	ArrayList<Statistics> selectMemberCount();
+	
+	// 총 게시글수(positng,board,fashion)
+	ArrayList<Statistics> totalCount();
 	
 	// 공지사항 리스트 조회
 	ArrayList<Notice> selectNoticeList();

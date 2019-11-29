@@ -31,7 +31,7 @@ public class PostingServiceImpl implements PostingService {
 	private SqlSessionTemplate sqlSession;
 	
 	@Override
-	public int insertPosting(Posting p, String[] cate, String[] brand, String[] color) {
+	public int insertPosting(Posting p, String[] cate, String[] brand, String[] color, String hash) {
 		
 		DefaultTransactionDefinition def = new DefaultTransactionDefinition();
 		def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
@@ -45,8 +45,8 @@ public class PostingServiceImpl implements PostingService {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		
+
+			
 		int result1 = pDao.insertPosting(p);
 		int result2 = 0;
 		Style s = new Style();
@@ -58,6 +58,26 @@ public class PostingServiceImpl implements PostingService {
 			
 			result2 += pDao.insertStyle(s);
 		}
+		
+		System.out.println("결과 12 :" + result1 + "   " +  result2);
+		
+		// 검색위해서 hash를 따로 hashtag 테이블에 insert
+		int result3 = 0;
+		String [] ha = hash.split("#");
+		
+		System.out.println(ha.length);
+		
+		if(ha.length > 0) {
+			for(int i=0; i<ha.length; i++) {
+				
+				System.out.println("ha의 인덱스 : " + ha[i]);
+				
+				if(!ha[i].equals("")) {
+					result3 += pDao.insertHashtag(ha[i].trim());
+				}
+			}
+		}
+		
 		
 		if(result1 > 0 && result2 >= cate.length) {
 			transactionManager.commit(status);
@@ -172,6 +192,11 @@ public class PostingServiceImpl implements PostingService {
 	@Override
 	public List<Posting> selectSearchPosting_cate(String keyword, int mno) {
 		return pDao.selectSearchPosting_cate(keyword, mno);
+	}
+	
+	@Override
+	public int insertLive(String keyword) {
+		return pDao.insertLive(keyword);
 	}
 	
 	

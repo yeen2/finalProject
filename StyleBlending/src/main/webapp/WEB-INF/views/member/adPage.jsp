@@ -28,7 +28,7 @@
 			<!-- 메뉴바 -->
 			<ul class="nav nav-primary nav-tabs mt-3 d-flex flex-column flex-md-row">
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="tab" href="#updateProfile" id="updateProfileBtn"> 
+					<a class="nav-link" data-toggle="tab" href="#" id="updateProfileBtn"> 
 					<i class="fa fa-edit"></i>
 						프로필 수정
 					</a>
@@ -365,10 +365,11 @@
 		});
 		
 		
-		<%-- 내 프로필 상세정보 호출 --%>
+		// 프로필 페이지 이동
 		$("#updateProfileBtn").click(function(){
 			location.href="mpProfileUpdate.do";
 		});
+		
 		
 	</script>
 

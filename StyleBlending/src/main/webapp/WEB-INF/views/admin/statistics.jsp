@@ -1,7 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%
+	Date nowTime = new Date();
+	SimpleDateFormat sdf = new SimpleDateFormat("yy/MM");
+	
+	String month = sdf.format(nowTime);
+%>
 <!-- 차트 보이게 cdn x-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 <!-- jQuery -->
@@ -45,9 +52,102 @@
        <div class="content">
             <div class="animated fadeIn mt-3">
                 <div class="row">
-				     <div class="col-lg-10 offset-md-1">
+                	
+                	<div class="col-sm-12">
+                		<div class="card-group">
+                			<div class="card col-md-12 no-padding ">
+                				<div class="card-body">
+                				<b>> 총 누적</b>
+                				</div>
+                			</div>
+                		</div>
+                	</div>
+                	<div class="col-sm-12 mb-4">
+						<div class="card-group">
+							<div class="card col-md-6 no-padding ">
+								<div class="card-body">
+									<div class="h1 text-muted text-right mb-4">
+										<i class="fa fa-users"></i>
+									</div>
+									<div class="h4 mb-0">
+									<c:forEach items="${totalCount}" var="c" varStatus="status">
+									<c:if test="${status.index eq 1}">
+										<span class="count">${c.totalCount}</span>
+									</c:if>	
+									</c:forEach>
+									</div>
+									<small class="text-muted text-uppercase font-weight-bold">회원</small>
+									<div class="progress progress-xs mt-3 mb-0 bg-flat-color-1" style="width: 40%; height: 5px;"></div>
+								</div>
+							</div>
+							<div class="card col-md-6 no-padding ">
+								<div class="card-body">
+									<div class="h1 text-muted text-right mb-4">
+										<i class="fa fa-user-plus"></i>
+									</div>
+									<div class="h4 mb-0">
+									<c:forEach items="${totalCount}" var="c" varStatus="status">
+									<c:if test="${status.index eq 2}">
+										<span class="count">${c.totalCount}</span>
+									</c:if>		
+									</c:forEach>								
+									</div>
+									<small class="text-muted text-uppercase font-weight-bold">게시글</small>
+									<div class="progress progress-xs mt-3 mb-0 bg-flat-color-2" style="width: 40%; height: 5px;"></div>
+								</div>
+							</div>
+							
+							<div class="card col-md-6 no-padding ">
+								<div class="card-body">
+									<div class="h1 text-muted text-right mb-4">
+										<i class="fa fa-cart-plus"></i>
+									</div>
+									<div class="h4 mb-0">
+									<c:forEach items="${totalCount}" var="c" varStatus="status">
+									<c:if test="${status.index eq 3}">
+										<span class="count">${c.totalCount}</span>원
+									</c:if>	
+									</c:forEach>
+									</div>
+									<small class="text-muted text-uppercase font-weight-bold">광고 수익</small>
+									<div class="progress progress-xs mt-3 mb-0 bg-flat-color-3" style="width: 40%; height: 5px;"></div>
+								</div>
+							</div>
+							<div class="card col-md-6 no-padding ">
+								<div class="card-body">
+									<div class="h1 text-muted text-right mb-4">
+										<i class="fa fa-pie-chart"></i>
+									</div>
+									<div class="h4 mb-0">
+										<span class="count">28</span>%
+									</div>
+							 		<small class="text-muted text-uppercase font-weight-bold">Returning Visitors</small>
+									<div class="progress progress-xs mt-3 mb-0 bg-flat-color-4" style="width: 40%; height: 5px;"></div>
+								</div>
+							</div>
+							<div class="card col-md-6 no-padding ">
+								<div class="card-body">
+									<div class="h1 text-muted text-right mb-4">
+										<i class="fa fa-comments-o"></i>
+									</div>
+									<div class="h4 mb-0">
+									<c:forEach items="${totalCount}" var="c" varStatus="status">
+									<c:if test="${status.index eq 0}">
+										<span class="count">${c.totalCount}</span>
+									</c:if>	
+									</c:forEach>
+									</div>
+									<small class="text-muted text-uppercase font-weight-bold">COMMENTS</small>
+									<div class="progress progress-xs mt-3 mb-0 bg-flat-color-1" style="width: 40%; height: 5px;"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+                
+                
+				     <div class="col-lg-9 offset-md-1">
 						<div class="card">
-							<div class="card-body mt-5 ">
+							<div class="card-body mt-3">
 								<div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
 									<div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
 										<div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
@@ -56,12 +156,12 @@
 										<div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
 									</div>
 								</div>
-								<h4 class="mb-3"><b>현황 통계 (게시글 / 가입자)</b></h4>
+								<h4 class="mb-3"><b>최근 6개월 현황 통계 (게시글 / 가입자)</b></h4>
 								<canvas id="sales-chart" height="528" width="1057" class="chartjs-render-monitor" style="display: block; height: 352px; width: 705px;"></canvas>
 							</div>
 						</div>
 					</div> <!-- 현황통계 끝 -->
-      			</div>
+      			</div> <!-- /.row 끝  -->
       		</div>
       </div>
       
@@ -97,7 +197,7 @@
 				    var myChart = new Chart( ctx, {
 				        type: 'line',
 				        data: {
-				            labels: [ "06", "07", "08", "09", "10", "11"],
+				            labels: [ "06", "07", "08", "09", "10", "<%= month %>"],
 				            type: 'line',
 				            defaultFontFamily: 'Montserrat',
 				            datasets: [ {

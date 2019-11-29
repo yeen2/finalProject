@@ -68,9 +68,17 @@ public class PostingController {
 			}
 			//p = p = pService.selectSearchPosting(type ,keyword, -10000);
 		}
+		// 실시간검색어에 insert
+		int result = pService.insertLive(keyword);
 		
-		System.out.println("키워드 : " + keyword);
-		System.out.println("검색한p : " +p);
+		/*
+		 * String hash = ""; for(int i=0; i<p.size(); i++) { String[] arr =
+		 * p.get(i).getHashtag().split("#"); for(int j=0; j<arr.length; j++) { hash +=
+		 * arr[i].replace(arr[i], "<a>#"+arr[i]+"</a> "); } p.get(i).setHashtag(hash); }
+		 * 
+		 * 
+		 */
+		
 		mv.addObject("p", p).addObject("keyword", keyword).setViewName("posting/search");
 	
 		return mv;
@@ -129,52 +137,15 @@ public class PostingController {
 			p.setRenameImg(renameFileName);
 		}
 		
-		System.out.println(p);
-		
-		/*
-		 * // 2. 해시태그 추출 String str = p.getContent(); 
-		 * String [] strArr = str.split(" ");
-		 * String hashtag = "";
-		 * 
-		 * HashMap<String, String> map = new HashMap<>();
-		 * 
-		 * for(int i=0; i<strArr.length; i++) { 
-		 * 	if(strArr[i].charAt(0) == '#') { 
-		 * 		hashtag += strArr[i]; 
-		 * 		map.put(strArr[i], "<a>"+strArr[i]+"</a>"); 
-		 * 	} 
-		 * }
-		 * p.setHashtag(hashtag);
-		 * 
-		 * //3. #태그는 <a></a>로 감싸기 
-		 * String content = p.getContent();
-		 * System.out.println("처음 content : " + content ); 
-		 * String con = ""; 
-		 * // 첫 #를 <a>
-		 * for (String key : map.keySet() ) {
-		 * System.out.println("key:"+key+",value:"+map.get(key));
-		 * 
-		 * content = content.replace(key, map.get(key)); 
-		 * } 
-		 * p.setContent(content);
-		 * System.out.println("해시태그에 <a>붙임 : " + content);
-		 */
-		
-
 		// 2. 해시태그 추출
 		String str = p.getContent();
 		
-		System.out.println("기본 str : "+str);
 		str = str.replace("<p>", "");
 		str = str.replace("</p>", " <br>");
 		str = str.replace("#", " #");
-		System.out.println("replace 후에 : "+str);
 		
 		String [] strArr = str.trim().split(" ");
 		String hashtag = "";
-		
-		System.out.println("strArr : " + strArr[0]);
-		System.out.println("strArr 길이 : " + strArr.length);
 		
 		HashMap<String, String> map = new HashMap<>();
 		
@@ -189,24 +160,19 @@ public class PostingController {
 		
 		//3. #태그는 <a></a>로 감싸기
 		String content = p.getContent();
-		System.out.println("처음 content : " + content );
+
 		String con = "";
 		// 첫 #를 <a> 
 		for (String key : map.keySet() ) {
-			System.out.println("key:"+key+",value:"+map.get(key));
 
 			content = content.replace(key, map.get(key));
 		}
 		p.setContent(content);
-		System.out.println("해시태그에 <a>붙임 : " + content);
 		
-		
-		
-		
-		
-		int result = pService.insertPosting(p, cate, brand, color);
+		int result = pService.insertPosting(p, cate, brand, color, p.getHashtag());
 		
 		if(result > 0) {
+			model.addAttribute("msg", "포스팅 작성 완료~");
 			return "redirect:main.do";
 		}else {
 			model.addAttribute("msg", "포스팅 작성하기 실패");

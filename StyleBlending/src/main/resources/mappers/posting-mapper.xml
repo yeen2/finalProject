@@ -65,6 +65,11 @@
 		values(seq_style.nextval, seq_posting.currval, #{cate}, #{brand}, #{color})
 	</insert>
 	
+	<insert id="insertHashtag">
+		insert into hash
+		values(seq_hash.nextval, seq_posting.currval, #{hash})
+	</insert>
+	
 	<select id="selectOnePosting" resultMap="postingOneResultSet" parameterType="HashMap">
 		<!-- 
 		select * 
@@ -224,7 +229,7 @@
 	</select>
 	
 	<select id="selectSearchPosting_hash" parameterType="HashMap" resultMap="postingOneResultSet">
-		select p.p_no, p.m_no, p.original_img, p.rename_img, img_path, content, hashtag, gender, p.location,
+		select p.p_no, p.m_no, p.original_img, p.rename_img, img_path, content, p.hashtag, gender, p.location,
         		like_count, declare_count, p.enroll_date, p.update_date, p.isdelete,
         		m.nickname, m.profile, m.location as mlocation, m.rename_img as profileImg, 
                 (select count(*) from p_like where m_no=#{mno} and p_no=p.p_no) loginLike, 
@@ -233,7 +238,8 @@
                 (select count(*) from fan where me_no=p.m_no and you_no=#{mno}) fanCheck
 		from posting p
 		join member m on(p.m_no=m.m_no)
-		where hashtag like '%'||#{keyword}||'%'
+		join hash h on(p.p_no=h.p_no)
+		where h.hashtag like '%'||#{keyword}||'%'
 	</select>
 	
 	<select id="selectSearchPosting_loca" parameterType="HashMap" resultMap="postingOneResultSet">
@@ -264,7 +270,10 @@
 		where c.name like '%'||#{keyword}||'%'
 	</select>
 	
-	
+	<insert id="insertLive">
+		insert into live
+		values(seq_live.nextval, #{keyword}, sysdate)
+	</insert>
 	
 	
 	

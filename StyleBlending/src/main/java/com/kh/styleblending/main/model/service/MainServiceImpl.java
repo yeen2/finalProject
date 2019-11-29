@@ -56,6 +56,23 @@ public class MainServiceImpl implements MainService{
 	public ArrayList<Notice> selectNoticeContent(int nno){
 		return mainDao.selectNoticeContent(nno);
 	}
+
+	@Override
+	public int insertNotice(Notice n) {
+		// TODO Auto-generated method stub
+		return mainDao.insertNotice(n);
+	}
+
+	@Override
+	public int noticeUpdateConfirm(Notice n) {
+		return mainDao.noticeUpdateConfirm(n);
+	}
+
+	@Override
+	public int noticeDelete(int nno) {
+		// TODO Auto-generated method stub
+		return mainDao.noticeDelete(nno);
+	}
 	
 	
 	

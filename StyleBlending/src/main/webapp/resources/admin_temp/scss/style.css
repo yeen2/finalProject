@@ -878,7 +878,7 @@ aside.left-panel {
   padding-top: 7px; }
 .right-panel .navbar-header {
   width: 100%;
-  background-color:/*  #fff; */ #000000; 
+  background-color:/*  #fff; */ #000; 
   padding: 0 1.25em 0 0; }
   .right-panel .navbar-header > a {
     display: inline-block; }
@@ -895,7 +895,7 @@ aside.left-panel {
   z-index: 999; }
 
 header.fixed-top {
-  background: /* #fff; */ #000000;
+  background: /* #fff; */ #000;
   padding: 20px; }
 
 .menutoggle {

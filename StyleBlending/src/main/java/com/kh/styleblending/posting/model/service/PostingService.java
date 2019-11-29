@@ -10,7 +10,7 @@ import com.kh.styleblending.posting.model.vo.Style;
 
 public interface PostingService {
 
-	int insertPosting(Posting p, String[] cate, String[] brand, String[] color);
+	int insertPosting(Posting p, String[] cate, String[] brand, String[] color, String hash);
 	
 	Posting selectOnePosting(int id, int mno);
 	
@@ -51,7 +51,7 @@ public interface PostingService {
 	List<Posting> selectSearchPosting_loca(String keyword, int mno);
 	List<Posting> selectSearchPosting_cate(String keyword, int mno);
 	
-	
+	int insertLive(String keyword);
 	
 	
 	

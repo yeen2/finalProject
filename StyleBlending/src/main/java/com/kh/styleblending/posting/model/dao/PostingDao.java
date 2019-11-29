@@ -28,6 +28,10 @@ public class PostingDao {
 		return sqlSession.insert("postingMapper.insertStyle", s);
 	}
 	
+	public int insertHashtag(String hash) {
+		return sqlSession.insert("postingMapper.insertHashtag", hash);
+	}
+	
 	public Posting selectOnePosting(int id, int mno) {
 		
 		HashMap map = new HashMap<>();
@@ -148,6 +152,9 @@ public class PostingDao {
 		return sqlSession.selectList("postingMapper.selectSearchPosting_cate", map);
 	}
 	
+	public int insertLive(String keyword) {
+		return sqlSession.insert("postingMapper.insertLive", keyword);
+	}
 	
 	
 	

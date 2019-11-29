@@ -582,7 +582,7 @@ li {
                        "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                        "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
                        "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'>"+
-                       "<img src='${pageContext.request.contextPath}/resources/assets/img/배너일.png' style='width: 80px; height: 50px; margin-left: 20px;' />" +
+                       "<img src='${ pageContext.servletContext.contextPath }/resources/upload/member/"+value.profileImg+"' style='width: 50px; height: 50px; margin-left: 20px; border-radius:50px;' />" +
                        "</a>"+
                        "</div>"+
                        "<div class='col-6' style='width: 50%; height: 50px; margin-left: 30px;'>"+
@@ -596,7 +596,7 @@ li {
                        "</div>"+
                        "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                        "<a href='pInfo.do?id="+value.pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                       "<img class='card-img' src="+value.imgPath+"/"+value.renameImg+" alt='dog' style='height: 100%;'>"+
+                       "<img class='card-img' src='${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.profileImg+"' alt='dog' style='height: 100%;'>"+
                        "</a>"+
                        "</div>"+
                        "<div class='card-footer row'>"+
