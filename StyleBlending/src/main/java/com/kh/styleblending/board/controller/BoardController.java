@@ -8,6 +8,7 @@ import java.io.PrintWriter;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,10 +34,9 @@ import com.kh.styleblending.board.model.vo.Board;
 import com.kh.styleblending.board.model.vo.BoardReply;
 import com.kh.styleblending.board.model.vo.Declare;
 import com.kh.styleblending.board.model.vo.FashionBoard;
-import com.kh.styleblending.board.model.vo.Image;
 import com.kh.styleblending.board.model.vo.PageInfo;
 import com.kh.styleblending.board.model.vo.Pagination;
-import com.kh.styleblending.member.model.vo.Member;
+import com.sun.javafx.collections.MappingChange.Map;
 
 @Controller
 public class BoardController {
@@ -51,7 +51,18 @@ public class BoardController {
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
 	@RequestMapping("blist.do")
-	public ModelAndView boardList(ModelAndView mv, @RequestParam(value="currentPage", defaultValue="1") int currentPage) {
+	public ModelAndView boardList(ModelAndView mv, /*
+													 * @RequestParam(value="type", defaultValue = "title") String type,
+													 * 
+													 * @RequestParam(value="search", defaultValue = "") String search,
+													 */
+									@RequestParam(value="currentPage", defaultValue="1") int currentPage) {
+		
+	
+		/*
+		 * HashMap<String, Object> map = new HashMap<String, Object>(); map.put("type",
+		 * type); map.put("search", search);
+		 */
 		
 		int listCount = bService.getListCount();
 		
@@ -67,7 +78,11 @@ public class BoardController {
 	}
 	
 	@RequestMapping("fblist.do")
-	public ModelAndView fashionBoardList(ModelAndView mv, @RequestParam(value="currentPage", defaultValue="1") int currentPage) {
+	public ModelAndView fashionBoardList(ModelAndView mv, /*
+															 * @RequestParam(value="type", defaultValue = "") String
+															 * type, HashMap<String,String> search,
+															 */
+								@RequestParam(value="currentPage", defaultValue="1") int currentPage) {
 		
 		int listCount = bService.getListCount();
 		
@@ -89,7 +104,8 @@ public class BoardController {
 	
 	
 	@RequestMapping("binsert.do")
-	public String insertBoard(Board b , HttpServletRequest request, Model model, 
+	public String insertBoard(Board b , @RequestParam(value="bcategory", defaultValue = "") 
+								HttpServletRequest request, Model model, 
 								MultipartFile upload) {
 							
 //		if(!upload.getOriginalFilename().equals("")) {
@@ -99,33 +115,21 @@ public class BoardController {
 //		i.setOriginalImg(upload.getOriginalFilename());
 //		i.setRenameImg(renameFileName);
 //		
-//	}
-//		
-//		
-		int result = bService.insertBoard(b);
-//		//String freeBoard = request.getParameter("freeboard");
-//		//String fasionBoard = request.getParameter("fashionboard");
-//		
-//		if(result >0) {
-//			
-//			return "redirect:fblist.do";
-// 		
-//		
-//		
-//		}
-//		
+//	}	
 		
-		//System.out.println(result);
 		
-			
-			if(result > 0) {
-				
-				return "redirect:blist.do";
-				
-			}else {
-				model.addAttribute("msg","게시판 작성 실패");
-				return "common/errorPage";
-			}
+		
+		  int result = bService.insertBoard(b);
+		  
+		  if(result > 0) {
+		  
+		  return "redirect:blist.do";
+		  
+		  }else { 
+			  model.addAttribute("msg","게시판 작성 실패"); return "common/errorPage"; 
+		  
+		  }
+		 
 		
 	}
 	
@@ -168,7 +172,7 @@ public class BoardController {
 	@RequestMapping(value = "imageUpload.do", method = RequestMethod.POST)
 	public String imageUpload(HttpServletRequest request, HttpServletResponse response,
 							MultipartFile upload) {
-		//System.out.println("dd");
+		
 		JsonObject json = new JsonObject();
 		OutputStream out = null;
 		PrintWriter printWriter = null;
@@ -380,10 +384,10 @@ public class BoardController {
 	
 	@ResponseBody
 	@RequestMapping("rupdate.do")
-	public String updateReply(BoardReply r) {
+	public String updateReply(int brno, String content) {
 		
-		int result = bService.updateBoardReply(r);
-		
+		int result = bService.updateBoardReply(brno, content);
+		//System.out.println("rupdate : " + result);
 		if(result > 0) {
 			return "success";
 		}else {
@@ -393,15 +397,17 @@ public class BoardController {
 	
 	@ResponseBody
 	@RequestMapping("rdelete.do")
-	public String deleteReply(int brno) {
+	public String deleteReply(int brno, HttpServletResponse response) throws IOException {
+		System.out.println(brno);
 		
-		int result = bService.deleteBoardReply(brno);
+		int result1 = bService.deleteBoardReply(brno);
 		
-		if(result > 0) {
+		if(result1 > 0) {
 			return "success";
 		}else {
 			return "fail";
 		}
+
 	}
 	
 	// 추천 추가

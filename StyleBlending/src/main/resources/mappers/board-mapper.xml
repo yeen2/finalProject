@@ -46,12 +46,22 @@
 </resultMap>
 
 
-<select id="selectList" resultMap="boardResultSet">
+<select id="selectList" resultMap="boardResultSet" parameterType="HashMap">
 	select b.*, m.nickName
 	from board b
 	join member m on(b.m_no = m.m_no)
 	where b.isdelete='N'
+	<if test="title != null">
+		and title like '%' || #{title} || '%'
+	</if>
+	<if test="writer != null">
+		and m.nickName like '%' || #{writer} || '%'
+	</if>
+	<if test="content != null">
+		and content like '%' || ${content} || '%'
+	</if>
 	order by b_no desc
+	
 </select>
 
 <select id="fashionSelectList" resultMap="fashionBoardResultSet">
@@ -79,6 +89,12 @@
 	values(seq_board.nextval, #{mno} , #{title} , #{content} , default , sysdate, sysdate, default , default)
 </insert>
 
+<insert id="insertfBoard">
+	insert into fashion_board 
+	values(SEQ_FASHION_BOARD.nextval, #{mno} , #{title} , #{content}
+    , default , sysdate, sysdate, default);
+</insert>
+
 <update id="updateCount">
 	update board
 	set count = count+1
@@ -103,7 +119,7 @@
 	select r.*, m.nickName 
 	from b_reply r
 	join member m on(m.m_no = r.m_no)
-	where b_no=#{bno}
+	where b_no=#{bno} and r.isdelete='N'
 	order by r.br_no desc
 	
 	<!-- select br_no ,b_no, b.m_no, content, br.enroll_date, br.isdelete, b.rename_img
@@ -117,15 +133,17 @@
 	values(seq_b_reply.nextval, #{bno}, #{mno} ,#{content}, sysdate, default)
 </insert>
 
-<update id="updateBoardReply">
+<update id="updateBoardReply" parameterType="HashMap">
 	update b_reply
-	set content = #{content}
+	set content=#{content}
+	where br_no=#{brno}
 </update>
 
-<delete id="deleteBoardReply">
-	delete from b_reply
-	where brno = #{brno}
-</delete>
+<update id="deleteBoardReply">
+	update b_reply
+	set isdelete='Y'
+	where br_no=#{brno}
+</update>
 
 
 <!-- 추천 -->

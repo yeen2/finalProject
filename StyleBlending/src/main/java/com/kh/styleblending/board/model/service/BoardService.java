@@ -1,6 +1,7 @@
 package com.kh.styleblending.board.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.kh.styleblending.board.model.vo.Board;
 import com.kh.styleblending.board.model.vo.BoardReply;
@@ -13,6 +14,7 @@ public interface BoardService {
 	// 게시판 작성하기
 	int insertBoard(Board b);
 
+	int insertfBoard(FashionBoard fb);
 	// 게시판 상세조회
 	Board selectBoard(int bno);
 	
@@ -32,7 +34,7 @@ public interface BoardService {
 	int getListCount();
 	
 	// 댓글 수정
-	int updateBoardReply(BoardReply r);
+	int updateBoardReply(int brno, String content);
 	
 	// 댓글 삭제
 	int deleteBoardReply(int brno);
