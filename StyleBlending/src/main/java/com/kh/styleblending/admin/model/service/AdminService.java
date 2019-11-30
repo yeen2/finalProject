@@ -9,6 +9,7 @@ import com.kh.styleblending.admin.model.vo.PageInfo;
 import com.kh.styleblending.admin.model.vo.Statistics;
 import com.kh.styleblending.main.model.vo.Notice;
 import com.kh.styleblending.member.model.vo.Member;
+import com.kh.styleblending.posting.model.vo.Hash;
 
 public interface AdminService {
 	
@@ -23,6 +24,9 @@ public interface AdminService {
 	
 	// 진행중인 광고
 	Ad selectStartAd();
+	
+	// hashtag 순위
+	ArrayList<Hash> selectHashRank();
 	
 	// 총 회원수 조회용
 	int getMemberListCount(String keyword);

@@ -201,7 +201,7 @@
 				            type: 'line',
 				            defaultFontFamily: 'Montserrat',
 				            datasets: [ {
-				                label: "게시글수",
+				                label: "가입자수",
 				                data: [data[0].month1,data[0].month2,data[0].month3,data[0].month4,data[0].month5,data[0].month6],
 				                backgroundColor: 'transparent',
 				                borderColor: 'rgba(220,53,69,0.75)',
@@ -211,7 +211,7 @@
 				                pointBorderColor: 'transparent',
 				                pointBackgroundColor: 'rgba(220,53,69,0.75)',
 				                    }, {
-				                label: "가입자수",
+				                label: "게시글수",
 				                data: [data[1].month1,data[1].month2,data[1].month3,data[1].month4,data[1].month5,data[1].month6],
 				                backgroundColor: 'transparent',
 				                borderColor: 'rgba(40,167,69,0.75)',

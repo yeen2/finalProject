@@ -9,14 +9,15 @@
 	SimpleDateFormat sdf = new SimpleDateFormat("a hh:mm:ss");
 %>
 
-<link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.css" rel="stylesheet"/>
+
 <style>
-#weatherWidget .currentDesc {
-    color: #ffffff!important;
-}
-    .traffic-chart {
-        min-height: 335px;
-    }
+	.order-table:after, .order-table:before{
+		position : relative !important;
+	}
+	#weatherWidget .currentDesc {
+	    color: #ffffff!important;
+	}
     #flotPie1  {
         height: 150px;
     }
@@ -29,7 +30,7 @@
     }
     .chart-container {
         display: table;
-        min-width: 270px ;
+        min-width: 370px ;
         text-align: left;
         padding-top: 10px;
         padding-bottom: 10px;
@@ -38,9 +39,6 @@
          height: 105px;
     }
 
-    #flotBarChart {
-        height: 150px;
-    }
     #cellPaiChart{
         height: 160px;
     }
@@ -165,37 +163,80 @@
                 
                  
                 <div class="col-sm-6 col-lg-3">
-					<div class="card text-white bg-flat-color-1">
+					<div class="card text-white bg-flat-color-6">
 						<div class="card-body">
 							<div class="card-left pt-1 float-left">
 								<h3 class="mb-0 fw-r">
-									<span class="currency float-left mr-1">$</span>
-									<span class="count">23569</span>
+									<span class="currency float-left mr-1"></span>
+									<span class="count">${newBoard}</span>
 								</h3>
 								<p class="text-light mt-1 m-0">새 게시글</p>
 							</div>
 							<div class="card-right float-right text-right">
-								<i class="icon fade-5 icon-lg pe-7s-users"></i>
+								<i class="icon fade-5 icon-lg pe-7s-notebook"></i>
 							</div>
 						 </div>
 					 </div>
 				 </div>
 				 
 				 <div class="col-sm-6 col-lg-3">
-					<div class="card text-white bg-flat-color-3">
+					<div class="card text-white bg-flat-color-6">
 						<div class="card-body">
 							<div class="card-left pt-1 float-left">
 								<h3 class="mb-0 fw-r">
-									<span class="count">6569</span>
+									<span class="count">${fn:length(newMember) }</span>
 								</h3>
-								<p class="text-light mt-1 m-0">Total clients</p>
+								<p class="text-light mt-1 m-0">가입자 수</p>
 							</div>
-						<div class="card-right float-right text-right">
-							<i class="icon fade-5 icon-lg pe-7s-users"></i>
+							<div class="card-right float-right text-right">
+								<i class="icon fade-5 icon-lg  pe-7s-users"></i>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+				
+				 <div class="col-sm-6 col-lg-3">
+					<div class="card text-white bg-flat-color-6">
+						<div class="card-body">
+							<div class="card-left pt-1 float-left">
+								<h3 class="mb-0 fw-r">
+								<c:if test="${!empty startAd}">
+                                    <c:if test="${startAd.status eq '2' }">
+                                    <div class="text-left dib">
+                                    	<span class="">${startAd.name}</span>
+                                        <p class="text-light mt-1 m-0">진행중</p>
+                                    </div>
+                                    </c:if>
+                                </c:if>
+                                <c:if test="${empty startAd}">
+                                	<p class="text-light mt-1 m-0">모집중</p>
+                                </c:if>
+									
+								</h3>
+								
+							</div>
+							<div class="card-right float-right text-right">
+								<i class="icon fade-5 icon-lg pe-7s-display1"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-sm-6 col-lg-3">
+					<div class="card text-white bg-flat-color-4">
+						<div class="card-body">
+							<div class="card-left pt-1 float-left">
+								<h3 class="mb-0 fw-r">
+									<span class="count">${declareCount}</span>
+								</h3>
+								<p class="text-light mt-1 m-0">미처리 신고</p>
+							</div>
+							<div class="card-right float-right text-right">
+								<i class="icon fade-5 icon-lg pe-7s-attention"></i>
+							</div>
+						</div>
+					</div>
+				</div>
 
             </div>
             <!-- /Widgets -->
@@ -270,82 +311,77 @@
                              </div>
                          </div>
                      </div><!-- /.card -->
-                         <div class="card  ">
-				<div class="card-body">
-					<div class="h1 text-muted text-right mb-1">
-						<i class="fa fa-clock-o"></i>
+                     
+                     <!-- 해시태그 통계 -->
+                     <div class="card">
+						<div class="card-body">
+                     	<b>해시태그 순위</b>
+							<div class="chart-container">
+								<div id="flotPie1" class="float-chart" style="padding: 0px; position: relative;">
+									<canvas class="flot-base" width="405" height="225" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 270px; height: 150px;"></canvas>
+									<canvas class="flot-overlay" width="405" height="225" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 270px; height: 150px;"></canvas>
+									<div class="legend">
+										<div style="position: absolute; width: 107px; height: 70px; top: 5px; right: 5px; background-color: rgb(255, 255, 255); opacity: 0.85;"></div>
+										<table style="position:absolute;top:5px;right:5px;;font-size:smaller;color:#545454">
+											<tbody>
+												<tr>
+													<td class="legendColorBox">
+														<div style="border:1px solid #ccc;padding:1px">
+															<div style="width:4px;height:0;border:5px solid #5c6bc0;overflow:hidden"></div>
+														</div>
+													</td>
+													<c:forEach items="${hashRank}" var="r" varStatus="status">
+													<c:if test="${status.index eq 0 }">
+													<td class="legendLabel" id="hash1">1. ${r.hashtag }</td>
+													</c:if>
+													</c:forEach>
+												</tr>
+												<tr>
+													<td class="legendColorBox">
+														<div style="border:1px solid #ccc;padding:1px">
+															<div style="width:4px;height:0;border:5px solid #ef5350;overflow:hidden"></div>
+														</div>
+													</td>
+													<c:forEach items="${hashRank}" var="r" varStatus="status">
+													<c:if test="${status.index eq 1 }">
+													<td class="legendLabel" id="hash2">2. ${r.hashtag }</td>
+													</c:if>
+													</c:forEach>
+												</tr>
+												<tr>
+													<td class="legendColorBox">
+														<div style="border:1px solid #ccc;padding:1px">
+															<div style="width:4px;height:0;border:5px solid #66bb6a;overflow:hidden"></div>
+														</div>
+													</td>
+													<c:forEach items="${hashRank}" var="r" varStatus="status">
+													<c:if test="${status.index eq 2 }">
+													<td class="legendLabel" id="hash3">3. ${r.hashtag }</td>
+													</c:if>
+													</c:forEach>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div><!-- flotPie1 끝 -->
+							</div>
+						</div>
 					</div>
-					<div class="h4 mb-0"><%= sdf.format(nowTime) %></div>
-					<small class="text-muted text-uppercase font-weight-bold">Avg. Time</small>
-					<div class="progress progress-xs mt-3 mb-0 bg-flat-color-5" style="width: 40%; height: 5px;"></div>
-				</div>
-			</div>	
+                     
+                     
+                    <div class="card  ">
+						<div class="card-body">
+							<div class="h1 text-muted text-right mb-1">
+								<i class="fa fa-clock-o"></i>
+							</div>
+							<div class="h4 mb-0"><%= sdf.format(nowTime) %></div>
+							<small class="text-muted text-uppercase font-weight-bold">Avg. Time</small>
+							<div class="progress progress-xs mt-3 mb-0 bg-flat-color-5" style="width: 40%; height: 5px;"></div>
+						</div>
+					</div>	
                  </div>
-  
-            	<!-- /Calender  -->
-						
-	<div class="col-lg-7">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title box-title">To Do List</h4>
-                            <div class="card-content">
-                                <div class="todo-list">
-                                    <div class="tdl-holder">
-                                        <div class="tdl-content">
-                                            <ul>
-                                                <li>
-                                                    <label>
-                                                        <input type="checkbox"><i class="check-box"></i><span>Conveniently fabricate interactive technology for ....</span>
-                                                        <a href='#' class="fa fa-times"></a>
-                                                        <a href='#' class="fa fa-pencil"></a>
-                                                        <a href='#' class="fa fa-check"></a>
-                                                    </label>
-                                                </li>
-                                                <li>
-                                                    <label>
-                                                        <input type="checkbox"><i class="check-box"></i><span>Creating component page</span>
-                                                        <a href='#' class="fa fa-times"></a>
-                                                        <a href='#' class="fa fa-pencil"></a>
-                                                        <a href='#' class="fa fa-check"></a>
-                                                    </label>
-                                                </li>
-                                                <li>
-                                                    <label>
-                                                        <input type="checkbox" checked><i class="check-box"></i><span>Follow back those who follow you</span>
-                                                        <a href='#' class="fa fa-times"></a>
-                                                        <a href='#' class="fa fa-pencil"></a>
-                                                        <a href='#' class="fa fa-check"></a>
-                                                    </label>
-                                                </li>
-                                                <li>
-                                                    <label>
-                                                        <input type="checkbox" checked><i class="check-box"></i><span>Design One page theme</span>
-                                                        <a href='#' class="fa fa-times"></a>
-                                                        <a href='#' class="fa fa-pencil"></a>
-                                                        <a href='#' class="fa fa-check"></a>
-                                                    </label>
-                                                </li>
-
-                                                <li>
-                                                    <label>
-                                                        <input type="checkbox" checked><i class="check-box"></i><span>Creating component page</span>
-                                                        <a href='#' class="fa fa-times"></a>
-                                                        <a href='#' class="fa fa-pencil"></a>
-                                                        <a href='#' class="fa fa-check"></a>
-                                                    </label>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div> <!-- /.todo-list -->
-                            </div>
-                        </div> <!-- /.card-body -->
-                    </div><!-- /.card -->
-                </div>
-		
-                    
-                </div>
-            </div>
+               </div>
+           </div>
             <!-- /.orders -->
             
             
@@ -414,24 +450,58 @@
     <!-- /.content -->
     
    
-    <!--  Chart js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.bundle.min.js"></script>
 
     <!--Chartist Chart-->
-    <script src="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartist-plugin-legend@0.6.2/chartist-plugin-legend.min.js"></script>
+   <!--  <script src="https://cdn.jsdelivr.net/npm/chartist-plugin-legend@0.6.2/chartist-plugin-legend.min.js"></script> -->
+ 
+    <!-- <script src="https://cdn.jsdelivr.net/npm/flot-spline@0.0.1/js/jquery.flot.spline.min.js"></script> -->
 
-    <script src="https://cdn.jsdelivr.net/npm/jquery.flot@0.8.3/jquery.flot.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flot-pie@1.0.0/src/jquery.flot.pie.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flot-spline@0.0.1/js/jquery.flot.spline.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/simpleweather@3.1.0/jquery.simpleWeather.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/admin_temp/js/init/weather-init.js"></script>
-
+	<!-- 캘린더 -->
     <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script> 
     <script src="${pageContext.request.contextPath}/resources/admin_temp/js/init/fullcalendar-init.js"></script>
+    <!--  Chart -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery.flot@0.8.3/jquery.flot.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flot-pie@1.0.0/src/jquery.flot.pie.min.js"></script> 
+    <script>
+    $(function() {
+    	
+    	var hash1 = $("#hash1").html();
+    	var hash2 = $("#hash2").html();
+    	var hash3 = $("#hash3").html();
+    	    
+            // Pie chart flotPie1 
+            var piedata = [
+                { label: hash1, data: [[1,32]], color: '#5c6bc0'},
+                { label: hash2, data: [[1,33]], color: '#ef5350'},
+                { label: hash3, data: [[1,35]], color: '#66bb6a'}
+            ];
+
+            $.plot('#flotPie1', piedata, {
+                series: {
+                    pie: {
+                        show: true,
+                        radius: 1,
+                        innerRadius: 0.65,
+                        label: {
+                            show: true,
+                            radius: 2/3,
+                            threshold: 1
+                        },
+                        stroke: { 
+                            width: 0
+                        }
+                    }
+                },
+                grid: {
+                    hoverable: true,
+                    clickable: true
+                }
+            });
+    });
+            // Pie chart flotPie1  End
     
-    
+    </script>
 
 <jsp:include page="footer.jsp" />

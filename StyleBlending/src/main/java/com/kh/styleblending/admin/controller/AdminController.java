@@ -31,6 +31,7 @@ import com.kh.styleblending.admin.model.vo.Pagination;
 import com.kh.styleblending.admin.model.vo.Statistics;
 import com.kh.styleblending.main.model.vo.Notice;
 import com.kh.styleblending.member.model.vo.Member;
+import com.kh.styleblending.posting.model.vo.Hash;
 
 @Controller
 public class AdminController {
@@ -45,8 +46,9 @@ public class AdminController {
 		ArrayList<Member> newMember = aService.selectNewMember();
 		int declareCount = aService.selectNoCheckDeclare(); 
 		Ad startAd = aService.selectStartAd();
+		ArrayList<Hash> hashRank = aService.selectHashRank();
 		
-		model.addAttribute("newBoard",newBoard).addAttribute("newMember", newMember).addAttribute("declareCount",declareCount).addAttribute("startAd",startAd);
+		model.addAttribute("newBoard",newBoard).addAttribute("newMember", newMember).addAttribute("declareCount",declareCount).addAttribute("startAd",startAd).addAttribute("hashRank",hashRank);
 		//System.out.println(newMember);
 		return "admin/adminPage";
 	}

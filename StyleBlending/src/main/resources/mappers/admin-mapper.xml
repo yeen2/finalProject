@@ -33,6 +33,7 @@
 		<result property="type" column="type"/>
 		<result property="email" column="email"/>
 		<result property="bname" column="bname"/>
+		<result property="writerMno" column="writerMno"/>
 		<result property="writer" column="writer"/>
 		<result property="renameImg" column="rename_Img"/>
 		<result property="profilePath" column="profile_Path"/>
@@ -71,6 +72,10 @@
 		<result property="title" column="title"/>
 		<result property="content" column="content"/>
 		<result property="enrollDate" column="enroll_date"/>
+	</resultMap>
+	
+	<resultMap id="HashResultSet" type="Hash">
+		<result property="hashtag" column="hash"/>
 	</resultMap>
 	
 	<select id="selectNewBcount" resultType="_int">
@@ -149,18 +154,18 @@
    	  select t4.* from
       (select t3.* from
       (select * from
-      (select d.*,m.email,m.profile_path, m.rename_img, p.writer,p.writer_path, p.writer_img, p.bname
+      (select d.*,m.email,m.profile_path, m.rename_img, p.writer,p.writer_path, p.writer_img, p.writerMno, p.bname
       from declare d
       join member m on(m.m_no=d.m_no)
-      join (select posting.p_no, member.email writer,member.profile_path writer_path, member.rename_img writer_img,posting.rename_img bname from posting
+      join (select posting.p_no, member.email writer,member.profile_path writer_path, member.rename_img writer_img, m_no writerMno,posting.rename_img bname from posting
         join member using(m_no)) p on(p.p_no=d.b_no)
       where type=1) t1
       union
       select * from
-      (select d.*,m.email,m.profile_path, m.rename_img,b.writer,b.writer_path, b.writer_img, b.title 
+      (select d.*,m.email,m.profile_path, m.rename_img,b.writer,b.writer_path, b.writer_img, b.writerMno, b.title 
       from declare d
       join member m on(m.m_no=d.m_no)
-      join (select board.b_no, member.email writer,member.profile_path writer_path, member.rename_img writer_img, board.title title from board 
+      join (select board.b_no, member.email writer,member.profile_path writer_path, member.rename_img writer_img, m_no writerMno, board.title title from board 
         join member using(m_no)) b on(b.b_no=d.b_no)
       where type=2) t2)
       t3
@@ -331,8 +336,48 @@ select sum(m1) "month1",sum(m2) "month2",sum(m3) "month3",sum(m4) "month4",sum(m
 	      from p_reply))
 	</select>
 	
+	<!-- 해시태그 순위 -->
+	<select id="selectHashRank" resultMap="HashResultSet">
+		<![CDATA[
+		select rownum, hash from(
+		select hashtag hash
+		from hash
+		group by hashtag
+		order by count(hashtag) desc)
+		where rownum <= 3
+		]]>
+	</select>
+	
 	<select id="selectNoticeList" resultMap="NoticeResultSet">
 		select * from notice where isdelete='N'
 	</select>
+	
+	  
+	  
+	<!-- 카테고리별 순위
+	<select>
+		select category.name
+		from style
+		join category on(ca_no=cate)
+		group by name
+		order by count(cate) desc
+	</select>
+	 -->
 	 
+	 <!-- 브랜드별 순위
+	 select brand
+	 from style
+	 group by brand
+	 order by count(brand) desc
+	   -->
+	   
+	<!-- 카테고리별 순위
+	<select>
+		select color
+		from style
+		group by color
+		order by count(color) desc
+	</select>
+	 --> 
+	   
 </mapper>

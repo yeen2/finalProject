@@ -160,6 +160,7 @@
 	                                				<c:url value="aUser.do" var="next" >
 	                                					<c:param name="currentPage" value="${pi.currentPage+1 }"/>
 	                                					<c:param name="boardLimit" value="${pi.boardLimit }"/>
+	                                					<c:param name="keyword" value="${keyword }"/>
 	                                				</c:url>
 	                                				<a href="${next }" aria-controls="bootstrap-data-table" class="page-link">Next</a>
 	                                			</c:if>
@@ -234,8 +235,8 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                             <div class="card ">
-	                            <div class="card-body">
+                             <div class="card">
+	                            <div class="card-body row">
 	                                <div class="mx-auto d-block">
 	                                    <img class="rounded-circle mx-auto d-block" src="${pageContext.request.contextPath}/resources/admin_temp/images/admin.jpg" alt="Card image cap">
 	                                    <h5 class="text-sm-center mt-2 mb-1">Steven Lee</h5>
