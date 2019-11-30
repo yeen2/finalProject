@@ -78,8 +78,8 @@
 							</div>
 							<div class="form-group">
 								<label for="introduce">Introduce</label>
-								<p><span id="lengthCheck">0</span>/100</p>
-								<textarea cols="52" rows="5" class="form-control" name="profile" style="resize:none;"><c:out value="${ loginUser.profile }"/></textarea>
+								<p style="display:block;" align="right"><span id="lengthCheck">0</span>/100</p>
+								<textarea cols="52" rows="5" class="form-control" id="profileContent" name="profile" style="resize:none;"><c:out value="${ loginUser.profile }"/></textarea>
 							</div>
 							<div class="form-group" style="margin-bottom:50px;">
 								<label for="userPwd2">Location</label>
@@ -245,6 +245,10 @@
 				alert("이미 사용중인 닉네임입니다.");
 				return false;
 			}
+			if($("#profileContent").val().length > 100){
+				alert("자기소개는 100자 이하로 작성해주세요.");
+				return false;
+			}
 			
 			return true;
 		}
@@ -306,7 +310,10 @@
 		<%-- 회원탈퇴 유효성검사 --%>
 		$("#deleteBtn").on("click", function(){
 			if($("#userPass").val() == "${loginUser.pass}"){
-				location.href="mpDeleteMem.do";
+				var real = confirm("정말로 탈퇴하시겠습니까?");
+				if(real){
+					location.href="mpDeleteMem.do";
+				}
 			}else{
 				alert("비밀번호가 일치하지 않습니다.");
 				$("#userPass").val("").focus();
@@ -350,6 +357,19 @@
 			$("#userPass").val("");
 		});
 		
+		
+		// 자기소개 글자수 체크
+		$("#profileContent").on("input", function(){
+			var profileLength = $(this).val().length;
+			
+			$("#lengthCheck").text(profileLength);
+			
+			if(profileLength >100){
+				$("#lengthCheck").css("color", "red");
+			}else{
+				$("#lengthCheck").css("color", "black");
+			}
+		});
 		
 		// 광고 페이지 이동
 		$("#adBtn").click(function(){

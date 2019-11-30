@@ -158,7 +158,7 @@
 				<i class="fa fa-search" style="font-size: x-large; color: gray;"></i>
 				&nbsp;
 					
-					<form action="pNavSearch.do" method="get" style="display: inline;">
+					<form action="pNavSearch.do" method="get" style="display: inline;" onsubmit="return fanCheckBox();">
 						<input type="text" id="nav_search" name="keyword" size="20px;" autocomplete="off"
 							style="background: none; border: none; color: white;"
 							placeholder="친구  위치 브랜드별 검색">
@@ -284,8 +284,8 @@
 	               
 						<div class="dropdown-menu"
 							aria-labelledby="navbarDropdownMenuLink">
-							<a class="dropdown-item" href="mProfile.do">myPage</a> <a
-								class="dropdown-item" href="aPage.do">adminPage</a>
+							<a class="dropdown-item" href="mProfile.do" id="myPageBtn1">myPage</a> <a
+								class="dropdown-item" href="aPage.do" id="adminPageBtn1">adminPage</a>
 							<c:if test="${ empty loginUser }">
 								<a class="dropdown-item" href="loginForm.do">Sign In</a>
 							</c:if>
@@ -1028,6 +1028,26 @@ function select(){
 				return false;
 			}
 		});
+		
+		
+		// 마이페이지, 관리자페이지 이동 시 로그인 상태, 관리자 로그인 상태 체크 
+		$("#myPageBtn1").click(function(){
+			if(${loginUser == null}){
+				alert("로그인 후 이용 가능합니다.");
+				return false;
+			}
+		});
+		
+		$("#adminPageBtn1").click(function(){
+			if(${loginUser == null}){
+				alert("관리자로 로그인 후 이용 가능합니다.");
+				return false;
+			}else if(${loginUser.email != "admin"}){
+				alert("관리자만 이용 가능합니다.");
+				return false;
+			}
+		});
+		
 	
 		
 	</script>
