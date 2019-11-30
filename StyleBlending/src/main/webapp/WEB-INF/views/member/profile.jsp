@@ -51,10 +51,10 @@
 				</div>
 				
 				<!-- 프로필 -->
-				<div class="col-12 col-md-8 d-flex flex-column align-items-center align-items-lg-start">
-					<div class="d-flex flex-row align-items-start mt-3 mt-lg-0" style="position:relative;">
+				<div class="col-12 col-md-8 d-flex flex-column align-items-center align-items-lg-start" style="position:relative;">
+					<div class="d-flex flex-row align-items-start mt-3 mt-lg-0">
 						<!-- 닉네임 -->
-						<div class="name" style="position:absolute;">
+						<div class="name">
 							<h2 class="mb-0">${ m.nickName }</h2>
 						</div>
 						
@@ -69,7 +69,7 @@
 						
 						<!-- 프로필 관리 버튼 -->
 						<c:if test="${ !empty loginUser && loginUser.mno == m.mno }">
-							<button class="btn btn-info btn-pill" style="margin-left:570px;"onclick="location.href='mpProfileUpdate.do';">
+							<button class="btn btn-info btn-pill" style="margin-left:570px; position:absolute;"onclick="location.href='mpProfileUpdate.do';">
 							    <i class="fa fa-edit mr-1"></i>
 						    	프로필 관리
 							</button>
@@ -97,9 +97,11 @@
 					<p class="lead mb-0 mt-2">
 						<c:if test="${ m.profile != null }">
 							<b>About Me</b>
+							<div class="form-group" align="right">
+								<textarea cols="52" rows="5" class="form-control" style="resize:none;"><c:out value="${ m.profile }"/></textarea>
+							</div>
 						</c:if>
 					</p>
-					<pre><c:out value="${ m.profile }"/></pre>
 				</div>
 			</div>
 		</div>

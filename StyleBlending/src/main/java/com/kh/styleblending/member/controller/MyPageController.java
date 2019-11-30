@@ -272,7 +272,7 @@ public class MyPageController {
 		
 		if(result > 0) {
 			session.invalidate();
-			mv.addObject("msg", "회원탈퇴에 성공하였습니다.").setViewName("main");
+			mv.addObject("msg", "회원탈퇴에 성공하였습니다.").setViewName("redirect:main.do");
 		}else {
 			mv.addObject("msg", "회원탈퇴에 실패하였습니다.").setViewName("common/errorPage");
 		}
