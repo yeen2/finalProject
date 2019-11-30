@@ -224,6 +224,10 @@
 		background-color: gray;
 		width: 188px; height: 40px; padding: 10px;
 	}
+	.searchBrand:hover{
+		cursor:pointer;
+		background-color: #A4A4A4;
+	}
 	
 </style>
 <%-- <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery.placeholder.js"></script> --%>
@@ -439,9 +443,9 @@
 							<label>브랜드</label>
 							&nbsp;&nbsp;&nbsp;&nbsp;
 							<div class="form-group" style="display: inline-block; position: relative;">
-								<input type="text" class="form-control" name="brand" id="brand" placeholder="브랜드를 적어주세요">
+								<input type="text" class="form-control brand" name="brand" placeholder="브랜드를 적어주세요">
 							</div>
-							<div id="searchBrandDiv" style="display: none;
+							<div class="searchBrandDiv" style="display: none;
 									position: absolute; top: 188px; left: 100px;">
 								
 							</div>
@@ -590,44 +594,48 @@
 	
 	<!----------------------------------------------- 브랜드 검색 -------------------------------------->
 	<script type="text/javascript">
-		$(function(){
-			$("#brand").on("input", function(){
-				var brand = $("#brand").val();
+		//$(function(){
+			$(document).on("input",".brand", function () {
+			//$(".brand").on("input", function(){
+				var tt = $(this);
+				var brand = tt.val();
 				
-				$("#searchBrandDiv").show();
-				$.ajax({
-					url:"pSelectBrand.do",
-					data:{brand:brand},
-					dataType:"json",
-					type:"get",
-					success:function(list){
-						$("#searchBrandDiv").html("");
-						
-						if(list != ""){
-							$.each(list, function(index, value){
-								var $selectBrandList = "<div class='searchBrand'>" 
-								    					+"<p>" + value.brand + "</p>"
-									    				+"</div>";
-								$("#searchBrandDiv").append($selectBrandList);
-							});
+				tt.parent().next().show();
+				
+				if(brand != ""){
+					$.ajax({
+						url:"pSelectBrand.do",
+						data:{brand:brand},
+						dataType:"json",
+						type:"get",
+						success:function(list){
+							$(".searchBrandDiv").html("");
+							
+							if(list != ""){
+								$.each(list, function(index, value){
+									var $selectBrandList = "<div class='searchBrand'>" 
+									    					+ value.brand 
+										    				+"</div>";
+									$(".searchBrandDiv").append($selectBrandList);
+								});
+							}else{
+								tt.parent().next().hide();
+							}
+						},
+						error:function(){
+							console.log("ajax 통신 실패");
 						}
-					},
-					error:function(){
-						console.log("ajax 통신 실패");
-					}
-				}); 
-				
-				
+					}); 
+				}
 			});
+		//});
+	</script>
+	<script type="text/javascript">
+		// 검색된 브랜드들 hover 할떄
+		$(".searchBrand").click(function () {
+			console.log("클릭");
 		});
 	</script>
-	
-	
-	
-	
-	
-	
-	
 	
 	<!----------------------------------------------------- 지도 modal ----------------------------------------------->
 	
