@@ -13,6 +13,7 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import com.kh.styleblending.posting.model.dao.PostingDao;
+import com.kh.styleblending.posting.model.vo.Brand;
 import com.kh.styleblending.posting.model.vo.Declare;
 import com.kh.styleblending.posting.model.vo.Posting;
 import com.kh.styleblending.posting.model.vo.PostingReply;
@@ -199,6 +200,9 @@ public class PostingServiceImpl implements PostingService {
 		return pDao.insertLive(keyword);
 	}
 	
-	
+	@Override
+	public ArrayList<Brand> selectBrand(String brand) {
+		return pDao.selectBrand(brand);
+	}
 	
 }

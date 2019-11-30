@@ -3,6 +3,7 @@ package com.kh.styleblending.posting.model.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.kh.styleblending.posting.model.vo.Brand;
 import com.kh.styleblending.posting.model.vo.Declare;
 import com.kh.styleblending.posting.model.vo.Posting;
 import com.kh.styleblending.posting.model.vo.PostingReply;
@@ -53,6 +54,7 @@ public interface PostingService {
 	
 	int insertLive(String keyword);
 	
+	ArrayList<Brand> selectBrand(String brand);
 	
 	
 	

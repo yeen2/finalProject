@@ -220,6 +220,11 @@
 		width: 80%;
 	}
 	
+	#searchBrand, .searchBrand{
+		background-color: gray;
+		width: 188px; height: 40px; padding: 10px;
+	}
+	
 </style>
 <%-- <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery.placeholder.js"></script> --%>
 <script src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
@@ -433,8 +438,12 @@
 							<!-- 2. 브랜드 -->
 							<label>브랜드</label>
 							&nbsp;&nbsp;&nbsp;&nbsp;
-							<div class="form-group" style="display: inline-block;">
-								<input type="text" class="form-control" name="brand" placeholder="브랜드를 적어주세요">
+							<div class="form-group" style="display: inline-block; position: relative;">
+								<input type="text" class="form-control" name="brand" id="brand" placeholder="브랜드를 적어주세요">
+							</div>
+							<div id="searchBrandDiv" style="display: none;
+									position: absolute; top: 188px; left: 100px;">
+								
 							</div>
 							
 							<br>
@@ -542,22 +551,12 @@
 			            $('#btnAdd').click (function () {
 			            	
 			            	var addContent = $('#addDiv').html();
-			            	//console.log(addContent);
-			            	
-			            	//var origin = $("#addDiv").clone();
-			            	//$('#addLocation').append(origin);
-			            	
+
 			                $('#addLocation').append(
 			                	'<div class="card-body" id="addDiv" style="border-radius: 0; border: none; box-shadow: 0 0 2rem rgba(0, 0, 0, 0.1); transition: transform 800ms cubic-bezier(0.165, 0.84, 0.44, 1); display: inline-block; margin-right: 10px; margin-left: 10px;"><div><br><div style="display: inline-block; float: right;"><button type="button" id="removeDiv" style="cursor: pointer; background-color: transparent; border: none; text-decoration: none;"><i class="fas fa-times"></i></button></div>' + addContent + '</div>' 
 			               	).append(
 			               		'<br><br>'		
 			               	); // end append    
-			                
-			               /*  $('#removeDiv').on('click', function () { 
-			                    $(this).parent().parent().parent().remove (); // remove the textbox
-			                    $(this).next ().remove (); // remove the <br>
-			                    $(this).remove (); // remove the button
-			                }); */
 			            }); // end click                                            
 			        }); // end ready 
 			        
@@ -568,15 +567,6 @@
 			      		$(div_).next().remove();
 			      		$(div_).remove();
 			        	
-			        	//removeThis.parent().parent().parent().prev().remove (); // remove the textbox
-			        	//removeThis.parent().parent().parent().remove (); // remove the textbox
-			        	//removeThis.next().remove(); // remove the <br>
-			        	//removeThis.remove (); // remove the button
-			        
-			        	//$(this).parent().parent().parent().prev().remove (); // remove the textbox
-			        	//$(this).parent().parent().parent().remove (); // remove the textbox
-	                    //$(this).next().remove (); // remove the <br>
-	                    //$(this).remove (); // remove the button
 			        });
 			    </script> 
 			    
@@ -594,6 +584,49 @@
 		</form>
 	</div>
 	<!-- /.container -->
+	
+	
+	
+	
+	<!----------------------------------------------- 브랜드 검색 -------------------------------------->
+	<script type="text/javascript">
+		$(function(){
+			$("#brand").on("input", function(){
+				var brand = $("#brand").val();
+				
+				$("#searchBrandDiv").show();
+				$.ajax({
+					url:"pSelectBrand.do",
+					data:{brand:brand},
+					dataType:"json",
+					type:"get",
+					success:function(list){
+						$("#searchBrandDiv").html("");
+						
+						if(list != ""){
+							$.each(list, function(index, value){
+								var $selectBrandList = "<div class='searchBrand'>" 
+								    					+"<p>" + value.brand + "</p>"
+									    				+"</div>";
+								$("#searchBrandDiv").append($selectBrandList);
+							});
+						}
+					},
+					error:function(){
+						console.log("ajax 통신 실패");
+					}
+				}); 
+				
+				
+			});
+		});
+	</script>
+	
+	
+	
+	
+	
+	
 	
 	
 	<!----------------------------------------------------- 지도 modal ----------------------------------------------->
