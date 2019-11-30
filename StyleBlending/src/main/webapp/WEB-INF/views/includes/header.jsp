@@ -125,6 +125,7 @@
 #imgGoProfile:hover, #nickGoProfile:hover{cursor:pointer;}
 #deleteAlarmOne:hover{cursor:pointer; color:gray;}
 #contentPlus p{font-weight:normal;}
+#searchDiv p{font-size:15px;}
 
 </style>
 <script type="text/javascript">
