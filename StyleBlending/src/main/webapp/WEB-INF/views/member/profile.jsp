@@ -97,8 +97,8 @@
 					<p class="lead mb-0 mt-2">
 						<c:if test="${ m.profile != null }">
 							<b>About Me</b>
-							<div class="form-group" align="right">
-								<textarea cols="52" rows="5" class="form-control" style="resize:none; pointer-events:none;"><c:out value="${ m.profile }"/></textarea>
+							<div>
+								<textarea cols="52" rows="5" style="resize:none; border:none; font-size:15px; pointer-events:none;"><c:out value="${ m.profile }"/></textarea>
 							</div>
 						</c:if>
 					</p>
