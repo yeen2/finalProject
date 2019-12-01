@@ -78,6 +78,12 @@
 		<result property="hashtag" column="hash"/>
 	</resultMap>
 	
+	<resultMap id="StyleResultSet" type="Style">
+		<result property="sno" column="rnum"/>
+		<result property="name" column="name"/>
+		<result property="pno" column="count"/>
+	</resultMap>
+	
 	<select id="selectNewBcount" resultType="_int">
 		select sum(c) from
 		(select count(*) c 
@@ -225,14 +231,6 @@
 			where name like '%'||#{keyword}||'%'
 		</if>
 		order by ad.status, ad.ad_no desc, ad.enroll_date )t1
-	</select>
-	
-	<select id="selectAdSearchList" resultMap="AdResultSet">
-		select ad.*,m.email
-		from ad
-		join pay p on(p.pay_no=ad.pay_no)
-		join member m on(m.m_no=ad.m_no)
-        where name like '%'||#{keyword}||'%'
 	</select>
 	
 	<select id="selectAdNewList" resultMap="AdResultSet">
@@ -396,32 +394,30 @@ select sum(d1) "day1",sum(d2) "day2",sum(d3) "day3",sum(d4) "day4",sum(d5) "day5
 		select * from notice where isdelete='N'
 	</select>
 	
-	  
-	  
-	<!-- 카테고리별 순위
-	<select>
-		select category.name
+	<select id="selectCateRank" resultMap="StyleResultSet">
+		<![CDATA[
+		select rownum, name,count  from
+        (select category.name name,count(category.name) count
 		from style
 		join category on(ca_no=cate)
 		group by name
-		order by count(cate) desc
+		order by count(cate) desc)
+        where rownum <= 3
+        ]]>
 	</select>
-	 -->
-	 
-	 <!-- 브랜드별 순위
-	 select brand
-	 from style
-	 group by brand
-	 order by count(brand) desc
-	   -->
-	   
-	<!-- 카테고리별 순위
-	<select>
-		select color
+	
+	 <!-- 브랜드별 순위-->
+	 <select id="selectBrandRank" resultMap="StyleResultSet">
+		<![CDATA[
+		select rownum rnum, name,count  from
+        (select brand name,count(brand) count
 		from style
-		group by color
-		order by count(color) desc
+		group by brand
+		order by count(brand) desc)
+        where rownum <= 3
+        ]]>
 	</select>
-	 --> 
+	 
+	   
 	   
 </mapper>

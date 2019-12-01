@@ -189,12 +189,12 @@
                               <c:forEach items="${newList}" var="a">
 			                    <div class="col-md-4" >
 			                        <div class="card col-md-8">
-			                            <img class="card-img-top" src="${pageContext.request.contextPath}${a.imgPath}${a.renameImg}" alt="Card image cap">
+			                            <img class="card-img-top" src="${pageContext.request.contextPath}${a.imgPath}${a.renameImg}" width="100%" height="300px"  alt="Card image cap">
 				                        <c:set var="url" value="${a.url}"/>
 				                        <c:set var="idx1" value="${fn:indexOf(url,'=')}"/>
 				                        <c:set var="idx2" value="${fn:indexOf(url,'&')}"/>
 				                        <c:set var="resultUrl2" value="${fn:substring(url,idx1 +1,idx2)}"/>
-				                        <iframe class="card-img-top" src="https://www.youtube.com/embed/${resultUrl2}" width="100%" height="90%" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+				                        <iframe class="card-img-top" src="https://www.youtube.com/embed/${resultUrl2}" width="100%" height="200px" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
 			                            <div class="card-body">
 			                                <h4 class="card-title mb-3" align="center"><b>${a.name}</b></h4>
 			                                 <p class="card-text"align="center"><b>${a.enrollDate}</b></p>

@@ -50,7 +50,7 @@
                          <div class="row">
                           <div class="col-md-10 offset-md-1" style="padding:20px;">
                         		<form action="aDeclare.do" method="get" class="form-inline">
-	                        <div class="col-5 col-md-7">
+	                        <div class="col-5 col-md-10">
 	               			  	게시판명 &nbsp;
 	                             <select name="select" id="select" class="form-control">
 	                                 <option value="0" <c:if test="${cate.all eq '0' }">selected</c:if>>전체</option>
@@ -59,12 +59,10 @@
 	                             </select>&nbsp;
 	                        	<button type="submit" class="btn btn-primary btn-sm">검색</button>
 	                        </div>
-	                        <div class="offset-md-4">
 	                  		   <button type="button" class="btn btn-outline-danger btn-sm" id="deleteBtn" 
-	                  		   data-toggle="modal" data-target="#deleteModal">
+	                  		   data-toggle="modal" data-target="#deleteModal" style="float:right; margin-top:15px;">
 	                  		   	게시물삭제
 	                  		   </button>
-	                        </div>
 	                    </form>
                         	</div>
                        	</div>
