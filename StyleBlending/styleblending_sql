@@ -834,82 +834,6 @@ REFERENCES b_reply (
 );
 
 
--- board 댓글 작성 트리거
-CREATE OR REPLACE TRIGGER TRG_B_REPLY
-AFTER INSERT
-ON B_REPLY
-FOR EACH ROW
-DECLARE
-tg_no NUMBER;
-
-BEGIN
-    select m_no into tg_no from board where b_no=:NEW.B_NO;
-    insert into alarm values(seq_alarm.nextval, :NEW.BR_NO, 1, sysdate, default, 1, :NEW.M_NO);
-END;
-/
--- posting 댓글 작성 트리거
-CREATE OR REPLACE TRIGGER TRG_P_REPLY
-AFTER INSERT
-ON P_REPLY
-FOR EACH ROW
-DECLARE
-tg_no NUMBER;
-
-BEGIN
-    select m_no into tg_no from posting where p_no=:NEW.P_NO;
-    insert into alarm values(seq_alarm.nextval, :NEW.PR_NO, 1, sysdate, default, 1, :NEW.M_NO);
-END;
-/
--- posting 좋아요 트리거
-CREATE OR REPLACE TRIGGER TRG_P_LIKE
-AFTER INSERT
-ON P_LIKE
-FOR EACH ROW
-DECLARE
-tg_no NUMBER;
-
-BEGIN
-    select m_no into tg_no from posting where p_no=:NEW.P_NO;
-    insert into alarm values(seq_alarm.nextval, :NEW.P_NO, tg_no, sysdate, default, 1, :NEW.M_NO);
-END;
-/
--- board 좋아요 트리거
-CREATE OR REPLACE TRIGGER TRG_B_LIKE
-AFTER INSERT
-ON B_LIKE
-FOR EACH ROW
-DECLARE
-tg_no NUMBER;
-
-BEGIN
-    select m_no into tg_no from board where b_no=:NEW.B_NO;
-    insert into alarm values(seq_alarm.nextval, :NEW.B_NO, 1, sysdate, default, 1, :NEW.M_NO);
-END;
-/
--- board 댓글 좋아요 트리거
-CREATE OR REPLACE TRIGGER TRG_R_LIKE
-AFTER INSERT
-ON R_LIKE
-FOR EACH ROW
-DECLARE
-tg_no NUMBER;
-
-BEGIN
-    select m_no into tg_no from b_reply where br_no=:NEW.R_NO;
-    insert into alarm values(seq_alarm.nextval, :NEW.R_NO, 1, sysdate, default, 1, :NEW.M_NO);
-END;
-/
--- fan 추가 트리거
-CREATE OR REPLACE TRIGGER TRG_FAN
-AFTER INSERT
-ON FAN
-FOR EACH ROW
-BEGIN
-    insert into alarm values(seq_alarm.nextval, :NEW.F_NO, :NEW.ME_NO, sysdate, default, 3, :NEW.YOU_NO);
-END;
-/
-
-
 --샘플데이터
 --member 더미
 insert into member values(seq_member.nextval,default,null,'admin','1234','관리자',null,null,'profile1.jpg','profile1.jpg','resources/upload/member/',sysdate,null,null,default);
@@ -2363,6 +2287,83 @@ insert into brand values(seq_brand.nextval,'홀러');
 insert into brand values(seq_brand.nextval,'후아유');
 insert into brand values(seq_brand.nextval,'휠라');
 insert into brand values(seq_brand.nextval,'힐');
+
+
+-- board 댓글 작성 트리거
+CREATE OR REPLACE TRIGGER TRG_B_REPLY
+AFTER INSERT
+ON B_REPLY
+FOR EACH ROW
+DECLARE
+tg_no NUMBER;
+
+BEGIN
+    select m_no into tg_no from board where b_no=:NEW.B_NO;
+    insert into alarm values(seq_alarm.nextval, :NEW.BR_NO, 1, sysdate, default, 1, :NEW.M_NO);
+END;
+/
+-- posting 댓글 작성 트리거
+CREATE OR REPLACE TRIGGER TRG_P_REPLY
+AFTER INSERT
+ON P_REPLY
+FOR EACH ROW
+DECLARE
+tg_no NUMBER;
+
+BEGIN
+    select m_no into tg_no from posting where p_no=:NEW.P_NO;
+    insert into alarm values(seq_alarm.nextval, :NEW.PR_NO, 1, sysdate, default, 1, :NEW.M_NO);
+END;
+/
+-- posting 좋아요 트리거
+CREATE OR REPLACE TRIGGER TRG_P_LIKE
+AFTER INSERT
+ON P_LIKE
+FOR EACH ROW
+DECLARE
+tg_no NUMBER;
+
+BEGIN
+    select m_no into tg_no from posting where p_no=:NEW.P_NO;
+    insert into alarm values(seq_alarm.nextval, :NEW.P_NO, tg_no, sysdate, default, 1, :NEW.M_NO);
+END;
+/
+-- board 좋아요 트리거
+CREATE OR REPLACE TRIGGER TRG_B_LIKE
+AFTER INSERT
+ON B_LIKE
+FOR EACH ROW
+DECLARE
+tg_no NUMBER;
+
+BEGIN
+    select m_no into tg_no from board where b_no=:NEW.B_NO;
+    insert into alarm values(seq_alarm.nextval, :NEW.B_NO, 1, sysdate, default, 1, :NEW.M_NO);
+END;
+/
+-- board 댓글 좋아요 트리거
+CREATE OR REPLACE TRIGGER TRG_R_LIKE
+AFTER INSERT
+ON R_LIKE
+FOR EACH ROW
+DECLARE
+tg_no NUMBER;
+
+BEGIN
+    select m_no into tg_no from b_reply where br_no=:NEW.R_NO;
+    insert into alarm values(seq_alarm.nextval, :NEW.R_NO, 1, sysdate, default, 1, :NEW.M_NO);
+END;
+/
+-- fan 추가 트리거
+CREATE OR REPLACE TRIGGER TRG_FAN
+AFTER INSERT
+ON FAN
+FOR EACH ROW
+BEGIN
+    insert into alarm values(seq_alarm.nextval, :NEW.F_NO, :NEW.ME_NO, sysdate, default, 3, :NEW.YOU_NO);
+END;
+/
+
 
 commit;
 
