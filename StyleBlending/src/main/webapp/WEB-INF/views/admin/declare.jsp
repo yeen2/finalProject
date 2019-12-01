@@ -50,7 +50,7 @@
                          <div class="row">
                           <div class="col-md-10 offset-md-1" style="padding:20px;">
                         		<form action="aDeclare.do" method="get" class="form-inline">
-	                        <div class="col-5 col-md-7">
+	                        <div class="col-5 col-md-10">
 	               			  	게시판명 &nbsp;
 	                             <select name="select" id="select" class="form-control">
 	                                 <option value="0" <c:if test="${cate.all eq '0' }">selected</c:if>>전체</option>
@@ -59,12 +59,10 @@
 	                             </select>&nbsp;
 	                        	<button type="submit" class="btn btn-primary btn-sm">검색</button>
 	                        </div>
-	                        <div class="offset-md-4">
 	                  		   <button type="button" class="btn btn-outline-danger btn-sm" id="deleteBtn" 
-	                  		   data-toggle="modal" data-target="#deleteModal">
+	                  		   data-toggle="modal" data-target="#deleteModal" style="float:right; margin-top:15px;">
 	                  		   	게시물삭제
 	                  		   </button>
-	                        </div>
 	                    </form>
                         	</div>
                        	</div>
@@ -96,9 +94,8 @@
                                      	</td>
                                          <td id="dno">${p.dno}</td>
                                          <td>
-                                         	<div>
+                                         	<div style="cursor:pointer">
                                          		 <a data-toggle="modal" data-target="#fq${ p.dno }"><img class="rounded-circle" src="${pageContext.request.contextPath}${p.profilePath}${p.renameImg}" alt=""></a>
-                                                 <%-- <a href="#">${p.email }</a> --%>
                                              </div>
                                          </td>
                                          <c:if test="${p.type eq 1 }">
@@ -114,7 +111,6 @@
                                          </td>
                                          </c:if>
                                          <td>
-                                         	<%-- <a href="#"><img class="rounded-circle" src="${pageContext.request.contextPath}${p.writerPath}${p.writerImg}" alt=""></a> --%>
                                         	${p.writer }
                                          </td>
                                          <td>${p.enrollDate }</td>
@@ -256,8 +252,8 @@
 		 var bno ="";
 		  $( "input[name='checkRow']:checked" ).each (function (){
 		    checkRow = checkRow + $(this).val()+"," ;
-		    type = type + $(this).parent().parent().children().eq(3).val()+","; 
-		    bno = bno + $(this).parent().parent().children().eq(1).val()+",";
+		    type = type + $(this).parent().parent().children().eq(2).val()+","; 
+		    bno = bno + $(this).parent().parent().children().eq(0).val()+",";
 		  });
 		  
 		  console.log(type);
@@ -304,13 +300,13 @@
         </div>
    		
    		
-  		<!-- 회원정보 모달창 -->
+  		<!-- 신고 상세정보 모달창 -->
   		<c:forEach items="${ list }" var="p">
    		<div class="modal fade" id="fq${ p.dno }"  role="dialog"  aria-labelledby="fq${ p.dno }" aria-hidden="true">
-               <div class="modal-dialog modal-sm">
+               <div class="modal-dialog">
                    <div class="modal-content ">
                        <div class="modal-header">
-                       	<i class="fa fa-user"></i><strong class="card-title pl-2">신고내역</strong>
+                       	<i class="fa fa-exclamation-triangle"></i><strong class="card-title pl-2">신고내역</strong>
                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                <span aria-hidden="true">&times;</span>
                            </button>
@@ -318,17 +314,19 @@
                        <div class="modal-body">
                             <div class="card ">
                             <div class="card-body">
-                                <div class="mx-auto d-block">
-                                    <img class="rounded-circle mx-auto d-block" src="${pageContext.request.contextPath}/resources/admin_temp/images/admin.jpg" alt="Card image cap">
-                                    <h5 class="text-sm-center mt-2 mb-1">신고자</h5>
+                                <div class="mx-auto" style="display:inline-flex;">
+                                    <img class="rounded-circle" style="max-width:100px;" src="${pageContext.request.contextPath}${p.profilePath}${p.renameImg}" >
+                                    <h5 class="text-sm-center mt-2 mb-1">신고자 <b>${p.email }</b></h5>
+                                    <img class="rounded-circle" style="max-width:100px;" src="${pageContext.request.contextPath}${p.writerPath}${p.writerImg}" >
+                                    <h5 class="text-sm-center mt-2 mb-1">신고당한 회원 <b>${p.writer }</b> <br><br><br>
+                                    <a href="mpViewProfile.do?mno=${p.writerMno}"><i class="fa fa-address-card"></i>마이페이지</h5></a>
                                 </div>
                                 <hr>
-                                <div class="mx-auto d-block">
-                                    <img class="rounded-circle mx-auto d-block" src="${pageContext.request.contextPath}/resources/admin_temp/images/admin.jpg" alt="Card image cap">
-                                    <h5 class="text-sm-center mt-2 mb-1">신고당한 회원</h5>
-                                </div>
                                 <div class="card-text text-sm-center">
-                                    <div class="location text-sm-center"><i class="fa fa-map-marker"></i>${p.category}</div>
+	                                <div class=""><i class="fa fa-check-square-o"></i>신고 사유 : ${p.category}</div>
+	                                <c:if test="${!empty p.content }">
+	                                <div class="text-sm-center"><i class="fa fa-comment-o"></i>${p.content}</div>
+									</c:if>	                                
                                 </div>
                             </div>
                        	</div>

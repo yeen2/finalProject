@@ -5,7 +5,7 @@
 <style>
 	#adImg{
 		width:500px;
-		height:300px;
+		height:600px;
 		border:1px solid black;
 	}
 </style>
@@ -54,8 +54,8 @@
 			        	<h5 class="modal-title" id="exampleModalLabel">광고 신청</h5>
 			      	</div>
 			      
-			      	<form id="adInsertForm" action="" method="post" enctype="multipart/form-data" onsubmit="return insertPay();">
-						<input type="hidden" name="mno" id="mno" value="${loginUser.mno }"/>
+			      	<form id="adInsertForm" method="post" enctype="multipart/form-data" onsubmit="return insertPay();">
+						<input type="hidden" name="mno" id="mno" value="${loginUser.mno}"/>
 						<div class="form-group" style="margin-bottom:25px;">
 							<label for="adName">업체명</label>
 							<input type="text" id="adName" class="form-control" name="name" placeholder="업체명을 입력해주세요." maxlength="16">
@@ -65,14 +65,15 @@
 							<input type="text" class="form-control" id="url" name="url" placeholder="http://" maxlength="50">
 						<div style="position:absolute;">
 							<p>
-								<small class="form-text text-success">광고 등록할 유튜브 주소를 입력해주세요.</small></p></div>
+								<small class="form-text text-success"><i class="fa fa-check"></i> 광고 등록할 유튜브 주소를 입력해주세요.</small></p></div>
 						</div>
 						<div class="form-group" style="margin-bottom:25px; position:relative;">
 							<label for="file-input" class=" form-control-label">등록 이미지</label>
 							<input type="file" id="file-input" name="uploadFile" class="form-control-file" style="display:none;" onchange="previewImg(this);">
 							<img id="adImg"/>
 							<div style="position:absolute;">
-								<p><small class="form-text text-success">광고 신청시 관리자 승인 처리 후 30일 동안 진행됩니다. 신청 버튼클릭시 결제페이지로 이동합니다.</small></p>
+								<p><small class="form-text text-success"><i class="fa fa-check"></i> 광고 신청시 관리자 승인 처리 후 7일 동안 진행됩니다. 
+								<br><i class="fa fa-check"></i> 신청 버튼 클릭시 결제페이지로 이동합니다.</small></p>
 							</div>
 							<br>
 							<br>
@@ -167,16 +168,12 @@
 				}, function(rsp) {
 				    if ( rsp.success ) {
 				        var msg = '결제가 완료되었습니다.';
-				        msg += '고유ID : ' + rsp.imp_uid;
-				        msg += '상점 거래ID : ' + rsp.merchant_uid;
-				        msg += '결제 금액 : ' + rsp.paid_amount;
-				        msg += '카드 승인번호 : ' + rsp.apply_num;
+				       // msg += '고유ID : ' + rsp.imp_uid;
+				       // msg += '상점 거래ID : ' + rsp.merchant_uid;
+				        //msg += '결제 금액 : ' + rsp.paid_amount;
+				       // msg += '카드 승인번호 : ' + rsp.apply_num;
 				        
-				    } else {
-				        var msg = '결제에 실패하였습니다.';
-				        msg += '에러내용 : ' + rsp.error_msg;
-				        
-				    	var form = $("#adInsertForm")[0];
+				        var form = $("#adInsertForm")[0];
 				        var formData = new FormData(form);
 				
 				        //console.log(formData);
@@ -196,6 +193,12 @@
 				        		console.log("ajax 통신 실패");
 				        	}
 				        }); 
+				        
+				    } else {
+				        var msg = '결제에 실패하였습니다.';
+				        msg += '에러내용 : ' + rsp.error_msg;
+				        
+				    	
 				        
 				    }
 				

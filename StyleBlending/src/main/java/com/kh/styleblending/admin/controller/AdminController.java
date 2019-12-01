@@ -9,12 +9,11 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,6 +30,8 @@ import com.kh.styleblending.admin.model.vo.Pagination;
 import com.kh.styleblending.admin.model.vo.Statistics;
 import com.kh.styleblending.main.model.vo.Notice;
 import com.kh.styleblending.member.model.vo.Member;
+import com.kh.styleblending.posting.model.vo.Hash;
+import com.kh.styleblending.posting.model.vo.Style;
 
 @Controller
 public class AdminController {
@@ -39,21 +40,31 @@ public class AdminController {
 	private AdminService aService;
 	
 	@RequestMapping("aPage.do")
-	public String adminPage(Model model) {
+	public String adminPage(Model model, HttpSession session) {
+		
+		String admin = ((Member)session.getAttribute("loginUser")).getEmail();
 		
 		int newBoard = aService.selectNewBcount();
 		ArrayList<Member> newMember = aService.selectNewMember();
 		int declareCount = aService.selectNoCheckDeclare(); 
 		Ad startAd = aService.selectStartAd();
+		ArrayList<Hash> hashRank = aService.selectHashRank();
 		
-		model.addAttribute("newBoard",newBoard).addAttribute("newMember", newMember).addAttribute("declareCount",declareCount).addAttribute("startAd",startAd);
-		//System.out.println(newMember);
-		return "admin/adminPage";
+		if(admin.equals("admin")) { // 관리자일때 
+			model.addAttribute("newBoard",newBoard).addAttribute("newMember", newMember).addAttribute("declareCount",declareCount).addAttribute("startAd",startAd).addAttribute("hashRank",hashRank);
+			//System.out.println(newMember);
+			return "admin/adminPage";
+			
+		}else { // 관리자가 아닐시
+			model.addAttribute("msg", "접근권한이 없습니다.");
+			return "common/errorPage";
+		}
+		
 	}
 	
 	@RequestMapping("aUser.do")
 	public ModelAndView selectUserList(ModelAndView mv, @RequestParam(value="currentPage", defaultValue="1")int currentPage,
-									@RequestParam(value="boardLimit", defaultValue="5")int boardLimit,
+									@RequestParam(value="boardLimit", defaultValue="10")int boardLimit,
 									@RequestParam(value="keyword", defaultValue="")String keyword) {
 		
 		int listCount = aService.getMemberListCount(keyword);
@@ -85,7 +96,7 @@ public class AdminController {
 	@RequestMapping("aDeclare.do")
 	public ModelAndView selectDeclareList(ModelAndView mv, @RequestParam(value="currentPage", defaultValue="1")int currentPage,
 											@RequestParam(value="select", defaultValue="0") String select, HashMap<String,String> cate,
-											@RequestParam(value="boardLimit", defaultValue="5")int boardLimit) {
+											@RequestParam(value="boardLimit", defaultValue="10")int boardLimit) {
 		
 		if(select.equals("1")) {
 			cate.put("posting","1" );
@@ -225,6 +236,18 @@ public class AdminController {
 		
 	}
 	
+	// 업로드 되어있는 광고이미지파일 삭제용 메소드
+	public void deleteFile(String renameFileName, HttpServletRequest request) {
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = root + "/upload/advertisment";
+		
+		File f = new File(savePath + "/" + renameFileName);
+		
+		if(f.exists()) {
+			f.delete();
+		}
+	}
+	
 	@RequestMapping("aInsertAdView.do")
 	public String insertAdView() {
 		return "admin/adInsertForm";
@@ -232,7 +255,14 @@ public class AdminController {
 	
 	
 	@RequestMapping("aUpdateStartAd.do")
-	public String updateStartAd(String adno, Model model) {
+	public String updateStartAd(String adno, Model model,HttpServletRequest request) {
+		
+		Ad startAd = aService.selectStartAd();
+		// 진행중인광고 첨부파일 존재할 경우
+		if(startAd != null && startAd.getOriginalImg() != null) {
+			// 업로드되어잇는 파일 삭제
+			deleteFile(startAd.getRenameImg(),request); // 삭제하고자하는 파일명과  request 전달
+		}
 		
 		int result = aService.updateStartAd(adno);
 		//System.out.println(adno);
@@ -246,9 +276,15 @@ public class AdminController {
 	}
 	
 	@RequestMapping("aUpdateEndAd.do")
-	public ModelAndView updateEndAd(String adno, ModelAndView mv) {
+	public ModelAndView updateEndAd(String adno, ModelAndView mv, HttpServletRequest request) {
 		
-		System.out.println(adno);
+		//System.out.println(adno);
+		Ad startAd = aService.selectStartAd();
+		// 진행중인광고 첨부파일 존재할 경우
+		if(startAd.getOriginalImg() != null) {
+			// 업로드되어잇는 파일 삭제
+			deleteFile(startAd.getRenameImg(),request); // 삭제하고자하는 파일명과  request 전달
+		}
 		
 		int result = aService.updateEndAd(adno);
 		
@@ -265,13 +301,14 @@ public class AdminController {
 	public ModelAndView statistics(ModelAndView mv) {
 		
 		ArrayList<Statistics> totalCount = aService.totalCount();
-		System.out.println(totalCount);
+		//System.out.println(totalCount);
 		mv.addObject("totalCount", totalCount).setViewName("admin/statistics");
 		
 		return mv;
 		
 	}
 	
+	// chart ajax(6개월)
 	@ResponseBody
 	@RequestMapping(value="aChart.do", produces="application/json; charset=UTF-8")
 	public String statistics() {
@@ -284,12 +321,47 @@ public class AdminController {
 		return gson.toJson(statistics);
 	}
 	
+	// chart ajax(일별)
+	@ResponseBody
+	@RequestMapping(value="aDayChart.do", produces="application/json; charset=UTF-8")
+	public String dayStatistics() {
+		ArrayList<Statistics> statistics = aService.selectDayCount();
+		
+		Gson gson = new GsonBuilder().setDateFormat("MM-dd").create();
+		
+		return gson.toJson(statistics);
+	}
+	
+	// chart 카테고리별
+	@ResponseBody
+	@RequestMapping(value="aCateChart.do", produces="application/json; charset=UTF-8")
+	public String selectCateRank() {
+		ArrayList<Style> cateRank = aService.selectCateRank();
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		//System.out.println(cateRank);
+		return gson.toJson(cateRank);
+		
+	}
+	
+	// chart 카테고리별
+	@ResponseBody
+	@RequestMapping(value="aBrandChart.do", produces="application/json; charset=UTF-8")
+	public String selectBrandRank() {
+		ArrayList<Style> BrandRank = aService.selectBrandRank();
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		//System.out.println(BrandRank);
+		return gson.toJson(BrandRank);
+		
+	}
+	
 	// 관리자 공지사항
 	@RequestMapping("aNotice.do")
 	public ModelAndView notice(ModelAndView mv) {
 		
 		ArrayList<Notice> list = aService.selectNoticeList();
-		System.out.println(list);
+		//System.out.println(list);
 		mv.addObject("list", list).setViewName("admin/notice");
 		
 		return mv;

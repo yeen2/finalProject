@@ -47,6 +47,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<typeAlias type="com.kh.styleblending.posting.model.vo.Posting" alias="Posting"/>
 		<typeAlias type="com.kh.styleblending.posting.model.vo.PostingReply" alias="PostingReply"/>
 		<typeAlias type="com.kh.styleblending.posting.model.vo.Style" alias="Style"/>
+		<typeAlias type="com.kh.styleblending.posting.model.vo.Brand" alias="Brand"/>
 		<typeAlias type="com.kh.styleblending.posting.model.vo.Hash" alias="Hash"/>
 		
 

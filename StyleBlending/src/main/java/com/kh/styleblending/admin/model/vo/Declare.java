@@ -25,6 +25,7 @@ public class Declare {
 	private String isCheck; // 신고상태 
 	private int type; // 게시판 타입(1-포스팅,2-자유)
 	private String bname; // type1-포스팅 이미지, 2-게시물제목
+	private int writerMno; // 글쓴이 회원번호
 	private String writer; // 신고 포스팅 글쓴이
 	private String renameImg; // 신고한 회원이미지
 	private String profilePath; // 신고한 회원 이미지경로

@@ -53,6 +53,11 @@
 		<result property="name" column="name"/>
 		<result property="img" column="img"/>
 	</resultMap>
+	
+	<resultMap type="Brand" id="brandResultSet">
+		<id property="brandno" column="brand_no"/>
+		<result property="brand" column="brand"/>
+	</resultMap>
 
 	<insert id="insertPosting">
 		insert into posting
@@ -275,7 +280,11 @@
 		values(seq_live.nextval, #{keyword}, sysdate)
 	</insert>
 	
-	
+	<select id="selectBrand" resultMap="brandResultSet">
+		select * 
+		from brand 
+		where brand like #{brand}||'%'
+	</select>
 	
 	
 	

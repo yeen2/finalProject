@@ -33,6 +33,7 @@
 		<result property="type" column="type"/>
 		<result property="email" column="email"/>
 		<result property="bname" column="bname"/>
+		<result property="writerMno" column="writerMno"/>
 		<result property="writer" column="writer"/>
 		<result property="renameImg" column="rename_Img"/>
 		<result property="profilePath" column="profile_Path"/>
@@ -71,6 +72,16 @@
 		<result property="title" column="title"/>
 		<result property="content" column="content"/>
 		<result property="enrollDate" column="enroll_date"/>
+	</resultMap>
+	
+	<resultMap id="HashResultSet" type="Hash">
+		<result property="hashtag" column="hash"/>
+	</resultMap>
+	
+	<resultMap id="StyleResultSet" type="Style">
+		<result property="sno" column="rnum"/>
+		<result property="name" column="name"/>
+		<result property="pno" column="count"/>
 	</resultMap>
 	
 	<select id="selectNewBcount" resultType="_int">
@@ -149,18 +160,18 @@
    	  select t4.* from
       (select t3.* from
       (select * from
-      (select d.*,m.email,m.profile_path, m.rename_img, p.writer,p.writer_path, p.writer_img, p.bname
+      (select d.*,m.email,m.profile_path, m.rename_img, p.writer,p.writer_path, p.writer_img, p.writerMno, p.bname
       from declare d
       join member m on(m.m_no=d.m_no)
-      join (select posting.p_no, member.email writer,member.profile_path writer_path, member.rename_img writer_img,posting.rename_img bname from posting
+      join (select posting.p_no, member.email writer,member.profile_path writer_path, member.rename_img writer_img, m_no writerMno,posting.rename_img bname from posting
         join member using(m_no)) p on(p.p_no=d.b_no)
       where type=1) t1
       union
       select * from
-      (select d.*,m.email,m.profile_path, m.rename_img,b.writer,b.writer_path, b.writer_img, b.title 
+      (select d.*,m.email,m.profile_path, m.rename_img,b.writer,b.writer_path, b.writer_img, b.writerMno, b.title 
       from declare d
       join member m on(m.m_no=d.m_no)
-      join (select board.b_no, member.email writer,member.profile_path writer_path, member.rename_img writer_img, board.title title from board 
+      join (select board.b_no, member.email writer,member.profile_path writer_path, member.rename_img writer_img, m_no writerMno, board.title title from board 
         join member using(m_no)) b on(b.b_no=d.b_no)
       where type=2) t2)
       t3
@@ -220,14 +231,6 @@
 			where name like '%'||#{keyword}||'%'
 		</if>
 		order by ad.status, ad.ad_no desc, ad.enroll_date )t1
-	</select>
-	
-	<select id="selectAdSearchList" resultMap="AdResultSet">
-		select ad.*,m.email
-		from ad
-		join pay p on(p.pay_no=ad.pay_no)
-		join member m on(m.m_no=ad.m_no)
-        where name like '%'||#{keyword}||'%'
 	</select>
 	
 	<select id="selectAdNewList" resultMap="AdResultSet">
@@ -303,6 +306,50 @@ select sum(m1) "month1",sum(m2) "month2",sum(m3) "month3",sum(m4) "month4",sum(m
     				from fashion_board
     				group by TO_CHAR(enroll_date,'yy/mm')))
 	</select>
+	
+	<!-- 일간 가입자수/게시글수 -->
+	<select id="selectDayCount" resultMap="StResultSet">
+		select sum(d1) "month1",sum(d2) "month2",sum(d3) "month3",sum(d4) "month4",sum(d5) "month5",sum(d6) "month6"
+		from(select decode(TO_CHAR(enroll_date,'mm-dd'),(select to_char(sysdate-5,'mm-dd')FROM DUAL),count(*),0) d1,
+ 					decode(TO_CHAR(enroll_date,'mm-dd'),(select to_char(sysdate-4,'mm-dd')FROM DUAL),count(*),0) d2,
+ 					decode(TO_CHAR(enroll_date,'mm-dd'),(select to_char(sysdate-3,'mm-dd')FROM DUAL),count(*),0) d3,
+ 					decode(TO_CHAR(enroll_date,'mm-dd'),(select to_char(sysdate-2,'mm-dd')FROM DUAL),count(*),0) d4,
+  					decode(TO_CHAR(enroll_date,'mm-dd'),(select to_char(sysdate-1,'mm-dd')FROM DUAL),count(*),0) d5,
+ 					decode(TO_CHAR(enroll_date,'mm-dd'),(select to_char(sysdate,'mm-dd')FROM DUAL),count(*),0) d6
+    				from member
+    				group by TO_CHAR(enroll_date,'mm-dd'))
+                    union
+select sum(DAY1) "day1",sum(DAY2) "DAY2",sum(day3) "DAY3",sum(day4) "DAY4",sum(day5) "DAY5",sum(day6) "DAY6" from
+    (select sum(d1) "DAY1",sum(d2) "DAY2",sum(d3) "DAY3",sum(d4) "DAY4",sum(d5) "DAY5",sum(d6) "DAY6"
+		from(select decode(TO_CHAR(enroll_date,'mm-dd'),(select to_char(sysdate-5,'mm-dd')FROM DUAL),count(*),0) d1,
+ 					decode(TO_CHAR(enroll_date,'mm-dd'),(select to_char(sysdate-4,'mm-dd')FROM DUAL),count(*),0) d2,
+ 					decode(TO_CHAR(enroll_date,'mm-dd'),(select to_char(sysdate-3,'mm-dd')FROM DUAL),count(*),0) d3,
+ 					decode(TO_CHAR(enroll_date,'mm-dd'),(select to_char(sysdate-2,'mm-dd')FROM DUAL),count(*),0) d4,
+  					decode(TO_CHAR(enroll_date,'mm-dd'),(select to_char(sysdate-1,'mm-dd')FROM DUAL),count(*),0) d5,
+ 					decode(TO_CHAR(enroll_date,'mm-dd'),(select to_char(sysdate,'mm-dd')FROM DUAL),count(*),0) d6
+    				from posting
+    				group by TO_CHAR(enroll_date,'mm-dd'))
+                    union
+select sum(d1) "day1",sum(d2) "day2",sum(d3) "day3",sum(d4) "day4",sum(d5) "day5",sum(d6) "day6"
+		from(select decode(TO_CHAR(enroll_date,'mm-dd'),(select to_char(sysdate-5,'mm-dd')FROM DUAL),count(*),0) d1,
+ 					decode(TO_CHAR(enroll_date,'mm-dd'),(select to_char(sysdate-4,'mm-dd')FROM DUAL),count(*),0) d2,
+ 					decode(TO_CHAR(enroll_date,'mm-dd'),(select to_char(sysdate-3,'mm-dd')FROM DUAL),count(*),0) d3,
+ 					decode(TO_CHAR(enroll_date,'mm-dd'),(select to_char(sysdate-2,'mm-dd')FROM DUAL),count(*),0) d4,
+  					decode(TO_CHAR(enroll_date,'mm-dd'),(select to_char(sysdate-1,'mm-dd')FROM DUAL),count(*),0) d5,
+ 					decode(TO_CHAR(enroll_date,'mm-dd'),(select to_char(sysdate,'mm-dd')FROM DUAL),count(*),0) d6
+    				from board
+    				group by TO_CHAR(enroll_date,'mm-dd'))
+                    union
+select sum(d1) "day1",sum(d2) "day2",sum(d3) "day3",sum(d4) "day4",sum(d5) "day5",sum(d6) "day6"
+		from(select decode(TO_CHAR(enroll_date,'mm-dd'),(select to_char(sysdate-5,'mm-dd')FROM DUAL),count(*),0) d1,
+ 					decode(TO_CHAR(enroll_date,'mm-dd'),(select to_char(sysdate-4,'mm-dd')FROM DUAL),count(*),0) d2,
+ 					decode(TO_CHAR(enroll_date,'mm-dd'),(select to_char(sysdate-3,'mm-dd')FROM DUAL),count(*),0) d3,
+ 					decode(TO_CHAR(enroll_date,'mm-dd'),(select to_char(sysdate-2,'mm-dd')FROM DUAL),count(*),0) d4,
+  					decode(TO_CHAR(enroll_date,'mm-dd'),(select to_char(sysdate-1,'mm-dd')FROM DUAL),count(*),0) d5,
+ 					decode(TO_CHAR(enroll_date,'mm-dd'),(select to_char(sysdate,'mm-dd')FROM DUAL),count(*),0) d6
+    				from fashion_board
+    				group by TO_CHAR(enroll_date,'mm-dd')))
+	</select>
 
 	<select id="totalCount" resultMap="StResultSet">
 		select * from(
@@ -331,8 +378,46 @@ select sum(m1) "month1",sum(m2) "month2",sum(m3) "month3",sum(m4) "month4",sum(m
 	      from p_reply))
 	</select>
 	
+	<!-- 해시태그 순위 -->
+	<select id="selectHashRank" resultMap="HashResultSet">
+		<![CDATA[
+		select rownum, hash from(
+		select hashtag hash
+		from hash
+		group by hashtag
+		order by count(hashtag) desc)
+		where rownum <= 3
+		]]>
+	</select>
+	
 	<select id="selectNoticeList" resultMap="NoticeResultSet">
 		select * from notice where isdelete='N'
 	</select>
+	
+	<select id="selectCateRank" resultMap="StyleResultSet">
+		<![CDATA[
+		select rownum, name,count  from
+        (select category.name name,count(category.name) count
+		from style
+		join category on(ca_no=cate)
+		group by name
+		order by count(cate) desc)
+        where rownum <= 3
+        ]]>
+	</select>
+	
+	 <!-- 브랜드별 순위-->
+	 <select id="selectBrandRank" resultMap="StyleResultSet">
+		<![CDATA[
+		select rownum rnum, name,count  from
+        (select brand name,count(brand) count
+		from style
+		group by brand
+		order by count(brand) desc)
+        where rownum <= 3
+        ]]>
+	</select>
 	 
+	   
+	   
 </mapper>

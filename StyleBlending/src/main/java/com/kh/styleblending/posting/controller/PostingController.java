@@ -24,6 +24,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.kh.styleblending.member.model.vo.Member;
 import com.kh.styleblending.posting.model.service.PostingService;
+import com.kh.styleblending.posting.model.vo.Brand;
 import com.kh.styleblending.posting.model.vo.Declare;
 import com.kh.styleblending.posting.model.vo.Posting;
 import com.kh.styleblending.posting.model.vo.PostingReply;
@@ -70,15 +71,7 @@ public class PostingController {
 		}
 		// 실시간검색어에 insert
 		int result = pService.insertLive(keyword);
-		
-		/*
-		 * String hash = ""; for(int i=0; i<p.size(); i++) { String[] arr =
-		 * p.get(i).getHashtag().split("#"); for(int j=0; j<arr.length; j++) { hash +=
-		 * arr[i].replace(arr[i], "<a>#"+arr[i]+"</a> "); } p.get(i).setHashtag(hash); }
-		 * 
-		 * 
-		 */
-		
+
 		mv.addObject("p", p).addObject("keyword", keyword).setViewName("posting/search");
 	
 		return mv;
@@ -93,9 +86,6 @@ public class PostingController {
 		
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		Posting p;
-		//SelectPosting sp = new SelectPosting();
-		//sp.setId(id);
-		
 		
 		if(loginUser != null) {
 			//sp.setMno(loginUser.getMno());
@@ -367,6 +357,17 @@ public class PostingController {
 		}
 	}
 	
+	// insert시 brand목록 ajax
+	@ResponseBody
+	@RequestMapping(value="pSelectBrand.do", produces="application/json; charset=UTF-8")
+	public String selectBrand(String brand) {
+		
+		ArrayList<Brand> list = pService.selectBrand(brand);
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		return gson.toJson(list);
+		
+	}
 	
 	
 	

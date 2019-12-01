@@ -519,6 +519,26 @@ img {
 	display: block;
 }
 
+/* 모달 정가운데로 */
+.modal {
+        text-align: center;
+}
+ 
+@media screen and (min-width: 768px) { 
+        .modal:before {
+                display: inline-block;
+                vertical-align: middle;
+                content: " ";
+                height: 100%;
+        }
+}
+ 
+.modal-dialog {
+        display: inline-block;
+        text-align: left;
+        vertical-align: middle;
+}
+/* 모달 정가운데로 끝*/
 .mb-0 {
 	margin-bottom: 0;
 }

@@ -14,6 +14,8 @@ import com.kh.styleblending.admin.model.vo.PageInfo;
 import com.kh.styleblending.admin.model.vo.Statistics;
 import com.kh.styleblending.main.model.vo.Notice;
 import com.kh.styleblending.member.model.vo.Member;
+import com.kh.styleblending.posting.model.vo.Hash;
+import com.kh.styleblending.posting.model.vo.Style;
 
 @Repository("aDao")
 public class AdminDao {
@@ -96,13 +98,6 @@ public class AdminDao {
 		return (ArrayList)sqlSession.selectList("adminMapper.selectAdList", map, rowBounds);
 	}
 	
-	public ArrayList<Ad> selectAdSearchList(PageInfo pi, String keyword){
-		int offset = (pi.getCurrentPage()-1) * pi.getBoardLimit();
-		RowBounds rowBounds = new RowBounds(offset,pi.getBoardLimit());
-		
-		return (ArrayList)sqlSession.selectList("adminMapper.selectAdSearchList", keyword, rowBounds);
-	}
-	
 	public ArrayList<Ad> selectAdNewList(){
 		return (ArrayList)sqlSession.selectList("adminMapper.selectAdNewList");
 	}
@@ -127,11 +122,27 @@ public class AdminDao {
 		return (ArrayList)sqlSession.selectList("adminMapper.selectMemberCount");
 	}
 	
+	public ArrayList<Statistics> selectDayCount() {
+		return (ArrayList)sqlSession.selectList("adminMapper.selectDayCount");
+	}
+	
 	public ArrayList<Statistics> totalCount() {
 		return (ArrayList)sqlSession.selectList("adminMapper.totalCount");
 	}
 	
 	public ArrayList<Notice> selectNoticeList(){
 		return (ArrayList)sqlSession.selectList("adminMapper.selectNoticeList");
+	}
+	
+	public ArrayList<Hash> selectHashRank() {
+		return (ArrayList)sqlSession.selectList("adminMapper.selectHashRank");
+	}
+	
+	public ArrayList<Style> selectCateRank() {
+		return (ArrayList)sqlSession.selectList("adminMapper.selectCateRank");
+	}
+	
+	public ArrayList<Style> selectBrandRank() {
+		return (ArrayList)sqlSession.selectList("adminMapper.selectBrandRank");
 	}
 }

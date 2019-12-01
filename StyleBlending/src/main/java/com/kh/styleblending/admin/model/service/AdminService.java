@@ -9,6 +9,8 @@ import com.kh.styleblending.admin.model.vo.PageInfo;
 import com.kh.styleblending.admin.model.vo.Statistics;
 import com.kh.styleblending.main.model.vo.Notice;
 import com.kh.styleblending.member.model.vo.Member;
+import com.kh.styleblending.posting.model.vo.Hash;
+import com.kh.styleblending.posting.model.vo.Style;
 
 public interface AdminService {
 	
@@ -23,6 +25,9 @@ public interface AdminService {
 	
 	// 진행중인 광고
 	Ad selectStartAd();
+	
+	// hashtag 순위
+	ArrayList<Hash> selectHashRank();
 	
 	// 총 회원수 조회용
 	int getMemberListCount(String keyword);
@@ -54,9 +59,6 @@ public interface AdminService {
 	// 광고 목록 조회용(페이징포함)
 	ArrayList<Ad> selectAdList(PageInfo pi, HashMap<?, ?> map);
 	
-	// 업체명 검색 
-	ArrayList<Ad> selectAdSearchList(PageInfo pi, String keyword);
-	
 	// 광고 승인대기 리스트 조회용
 	ArrayList<Ad> selectAdNewList();
 	
@@ -71,6 +73,15 @@ public interface AdminService {
 	
 	// 통계(월별 가입자+게시글)
 	ArrayList<Statistics> selectMemberCount();
+	
+	// 통계(일별 가입자+게시글)
+	ArrayList<Statistics> selectDayCount();
+	
+	// 카테고리별 순위
+	ArrayList<Style> selectCateRank();
+	
+	// 브랜드별 순위
+	ArrayList<Style> selectBrandRank();
 	
 	// 총 게시글수(positng,board,fashion)
 	ArrayList<Statistics> totalCount();

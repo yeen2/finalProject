@@ -125,7 +125,9 @@
 #imgGoProfile:hover, #nickGoProfile:hover{cursor:pointer;}
 #deleteAlarmOne:hover{cursor:pointer; color:gray;}
 #contentPlus p{font-weight:normal;}
+#searchDiv p{font-size:15px;}
 
+#joinBtn:hover { cursor: pointer;}
 </style>
 <script type="text/javascript">
 	$(function(){
@@ -147,7 +149,7 @@
 			<a class="navbar-brand d-flex align-items-center"
 				href="${pageContext.request.contextPath}"> <img
 				src="${pageContext.request.contextPath}/resources/assets/img/logo.svg"
-				class="mr-2" height="30"> Stlye Blending
+				class="mr-2" height="30"> Style Blending
 			</a>
 
 
@@ -158,8 +160,8 @@
 				<i class="fa fa-search" style="font-size: x-large; color: gray;"></i>
 				&nbsp;
 					
-					<form action="pNavSearch.do" method="get" style="display: inline;">
-						<input type="text" id="nav_search" name="keyword" size="20px;" autocomplete="off"
+					<form action="pNavSearch.do" method="get" style="display: inline;" onsubmit="return fanSearchBtn();">
+						<input type="text" id="nav_search" name="keyword" size="20px;" autocomplete="off" onsubmit="return fanCheckBox();"
 							style="background: none; border: none; color: white;"
 							placeholder="친구  위치 브랜드별 검색">
 				
@@ -172,14 +174,14 @@
 							overflow-y:auto; overflow-x:hidden; background:white; display:none; z-index:1000;" id="searchDiv">
 							<div style="width:100%; height:50px;">
 								<ul style="padding:7px 5px 5px 8px;">
-									<input type="checkbox" id="fanCheckBox" name="type" value="0">
-									<label for="fanCheckBox" class="btn btn-dark" id="fanAreaBtn">회원</label>
-									<input type="checkbox" id="brandCheckBox" name="type" value="1">
-									<label for="brandCheckBox" class="btn btn-light" id="brandAreaBtn">브랜드</label>
-									<input type="checkbox" id="hashtagCheckBox" name="type" value="2">
-									<label for="hashtagCheckBox" class="btn btn-light" id="hashtagAreaBtn">#태그</label>
-									<input type="checkbox" id="locaCheckBox" name="type" value="3">
-									<label for="locaCheckBox" class="btn btn-light" id="locationAreaBtn">위치</label>
+									<input type="radio" id="fanCheckBox" name="type" value="0" checked="checked">
+									<li class="btn btn-dark" id="fanAreaBtn">회원</li>
+									<input type="radio" id="brandCheckBox" name="type" value="1">
+									<li class="btn btn-light" id="brandAreaBtn">브랜드</li>
+									<input type="radio" id="hashtagCheckBox" name="type" value="2">
+									<li class="btn btn-light" id="hashtagAreaBtn">#태그</li>
+									<input type="radio" id="locaCheckBox" name="type" value="3">
+									<li class="btn btn-light" id="locationAreaBtn">위치</li>
 								</ul>
 							</div>
 							
@@ -229,17 +231,17 @@
                   data-toggle="modal" href="#exampleModal"> <i
                      class="fas fa-sliders-h fa-lg"></i>
                </a></li>
-               <li class="nav-item" style="margin-top:10px;"><a class="nav-link" href="mainNotice.do">Notice</a>
+               <li class="nav-item" style="margin-top:10px;"><a class="nav-link" href="mainNotice.do">Notice</a></li>
+               <li class="nav-item" style="margin-top:10px;"><a class="nav-link" href="blist.do">Free board</a></li>
+               <li class="nav-item" style="margin-top:10px;"><a class="nav-link" id="joinBtn">Join</a></li>
+               <li class="nav-item" style="margin-top:10px;">
+	               <c:if test="${ empty loginUser }">
+	                     <a class="nav-link" href="loginForm.do">Sign In</a>
+	               </c:if> 
+	               <c:if test="${ !empty loginUser }">
+	                     <a class="nav-link" href="logout.do">LogOut</a>
+	               </c:if>
                </li>
-               <li class="nav-item" style="margin-top:10px;"><a class="nav-link" href="blist.do">Free
-                     board</a></li>
-               <li class="nav-item" style="margin-top:10px;"><a class="nav-link" href="joinForm.do">Join</a>
-               </li>
-               <li class="nav-item" style="margin-top:10px;"><c:if test="${ empty loginUser }">
-                     <a class="nav-link" href="loginForm.do">Sign In</a>
-                  </c:if> <c:if test="${ !empty loginUser }">
-                     <a class="nav-link" href="logout.do">LogOut</a>
-                  </c:if></li>
 
 
 					<!-- 알림창 -->
@@ -284,8 +286,8 @@
 	               
 						<div class="dropdown-menu"
 							aria-labelledby="navbarDropdownMenuLink">
-							<a class="dropdown-item" href="mProfile.do">myPage</a> <a
-								class="dropdown-item" href="aPage.do">adminPage</a>
+							<a class="dropdown-item" href="mProfile.do" id="myPageBtn1">myPage</a> <a
+								class="dropdown-item" href="aPage.do" id="adminPageBtn1">adminPage</a>
 							<c:if test="${ empty loginUser }">
 								<a class="dropdown-item" href="loginForm.do">Sign In</a>
 							</c:if>
@@ -576,7 +578,7 @@ function select(){
 	<!-- 검색창 스크립트 -->
 	<script>
 		$(function(){
-			$("#nav_search").on("input", function(){
+			$("#nav_search").on("input focus", function(){
 				var search = $("#nav_search").val();
 				
 				if(search != ""){
@@ -762,6 +764,11 @@ function select(){
 			
 			// 검색 메뉴 클릭 시
 			$("#fanAreaBtn").click(function(){
+				$("#fanCheckBox").attr("checked", true);
+				$("#brandCheckBox").removeAttr("checked");
+				$("#hashtagCheckBox").removeAttr("checked");
+				$("#locaCheckBox").removeAttr("checked");
+				$("#nav_search").focus();
 				$("#fanArea").show();
 				$("#fanAreaBtn").attr("class","btn btn-dark");
 				$("#brandArea").hide();
@@ -772,6 +779,11 @@ function select(){
 				$("#locationAreaBtn").attr("class","btn btn-light");
 			});
 			$("#brandAreaBtn").click(function(){
+				$("#brandCheckBox").attr("checked", true);
+				$("#fanCheckBox").removeAttr("checked");
+				$("#hashtagCheckBox").removeAttr("checked");
+				$("#locaCheckBox").removeAttr("checked");
+				$("#nav_search").focus();
 				$("#fanArea").hide();
 				$("#fanAreaBtn").attr("class","btn btn-light");
 				$("#brandArea").show();
@@ -782,6 +794,11 @@ function select(){
 				$("#locationAreaBtn").attr("class","btn btn-light");
 			});
 			$("#hashtagAreaBtn").click(function(){
+				$("#hashtagCheckBox").attr("checked", true);
+				$("#fanCheckBox").removeAttr("checked");
+				$("#brandCheckBox").removeAttr("checked");
+				$("#locaCheckBox").removeAttr("checked");
+				$("#nav_search").focus();
 				$("#fanArea").hide();
 				$("#fanAreaBtn").attr("class","btn btn-light");
 				$("#brandArea").hide();
@@ -792,6 +809,11 @@ function select(){
 				$("#locationAreaBtn").attr("class","btn btn-light");
 			});
 			$("#locationAreaBtn").click(function(){
+				$("#locaCheckBox").attr("checked", true);
+				$("#fanCheckBox").removeAttr("checked");
+				$("#brandCheckBox").removeAttr("checked");
+				$("#hashtagCheckBox").removeAttr("checked");
+				$("#nav_search").focus();
 				$("#fanArea").hide();
 				$("#fanAreaBtn").attr("class","btn btn-light");
 				$("#brandArea").hide();
@@ -805,9 +827,6 @@ function select(){
 			// 검색 결과 뷰 영역 외 클릭 시
 			$("html").click(function(e){
 				if($("#searchDiv").css("display") == "block"){
-					if(!$("#displaySearch").has(e.target).length){
-						$("#searchDiv").hide();
-					}
 					if(!$("#searchDivOne").has(e.target).length){
 						$("#searchDiv").hide();
 					}
@@ -817,6 +836,14 @@ function select(){
 			$("#displaySearch input").css("display", "none");
 			
 		});
+		
+		// 회원 검색은 검색 기능 안 됨
+		function fanSearchBtn(){
+			if($("#fanCheckBox").attr("checked") == "checked"){
+				return false;
+			}
+		}
+		
 	</script>
 	
 	<!-- 웹소켓 알람 스크립트 -->
@@ -1028,7 +1055,35 @@ function select(){
 				return false;
 			}
 		});
-	
+		
+		
+		// 마이페이지, 관리자페이지 이동 시 로그인 상태, 관리자 로그인 상태 체크 
+		$("#myPageBtn1").click(function(){
+			if(${loginUser == null}){
+				alert("로그인 후 이용 가능합니다.");
+				return false;
+			}
+		});
+		
+		$("#adminPageBtn1").click(function(){
+			if(${loginUser == null}){
+				alert("관리자로 로그인 후 이용 가능합니다.");
+				return false;
+			}else if(${loginUser.email != "admin"}){
+				alert("관리자만 이용 가능합니다.");
+				return false;
+			}
+		});
+		
+		//join 누를때
+		$("#joinBtn").click(function () {
+			if(${loginUser != null}){
+				alert("로그아웃 후 이용 가능합니다.");
+			}else{
+				location.href="joinForm.do";	
+			}
+		
+		});
 		
 	</script>
 

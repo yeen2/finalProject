@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <style type="text/css">
 	.order-table:after, .order-table:before{
 		position : relative !important;
@@ -188,10 +189,15 @@
                               <c:forEach items="${newList}" var="a">
 			                    <div class="col-md-4" >
 			                        <div class="card col-md-8">
-			                            <img class="card-img-top" src="${pageContext.request.contextPath}${a.imgPath}${a.renameImg}" alt="Card image cap">
+			                            <img class="card-img-top" src="${pageContext.request.contextPath}${a.imgPath}${a.renameImg}" width="100%" height="300px"  alt="Card image cap">
+				                        <c:set var="url" value="${a.url}"/>
+				                        <c:set var="idx1" value="${fn:indexOf(url,'=')}"/>
+				                        <c:set var="idx2" value="${fn:indexOf(url,'&')}"/>
+				                        <c:set var="resultUrl2" value="${fn:substring(url,idx1 +1,idx2)}"/>
+				                        <iframe class="card-img-top" src="https://www.youtube.com/embed/${resultUrl2}" width="100%" height="200px" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
 			                            <div class="card-body">
-			                                <h4 class="card-title mb-3">${a.name}</h4>
-			                                 <p class="card-text">${a.enrollDate}</p>
+			                                <h4 class="card-title mb-3" align="center"><b>${a.name}</b></h4>
+			                                 <p class="card-text"align="center"><b>${a.enrollDate}</b></p>
 			                            </div>
 			                        </div>
 				                </div>
@@ -206,18 +212,18 @@
 				                        <div class="card">
 				                            <img class="card-img-top" src="${pageContext.request.contextPath}${startAd.imgPath}${startAd.renameImg}" alt="Card image cap">
 				                            <div class="card-body">
-				                                <h4 class="card-title mb-3">${startAd.name}</h4>
+				                                <h4 class="card-title mb-3"><b>${startAd.name}</b></h4>
 				                                 <p class="card-text">${startAd.startDate}~ </p>
 				                            </div>
 				                        </div>
 					                </div>
 					                <div class="col-md-4" >
 				                        <div class="card">
-				                            <iframe class="card-img-top" src="http://www.youtube.com/embed/NVf6_boeYIQ&list=RDhG6cUBmayDc&index=2"  frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
-				                            <div class="card-body">
-				                                <h4 class="card-title mb-3">${startAd.name}</h4>
-				                                 <p class="card-text">${startAd.startDate} ~ </p>
-				                            </div>
+				                        <c:set var="url" value="${startAd.url}"/>
+				                        <c:set var="idx1" value="${fn:indexOf(url,'=')}"/>
+				                        <c:set var="idx2" value="${fn:indexOf(url,'&')}"/>
+				                        <c:set var="resultUrl2" value="${fn:substring(url,idx1 +1,idx2)}"/>
+				                             <iframe class="card-img-top" src="https://www.youtube.com/embed/${resultUrl2}" width="100%" height="90%" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
 				                        </div>
 					                </div>
 			                        </c:if>
@@ -374,69 +380,25 @@
 		}
 	});
 	
-	/*
-	$(function(){ // 검색창
-		
-		// 업체명검색
-		$("#adName").keyup(function(){ // 키보드 눌렀다가 뗐을때 이벤트 발생
-			var k = $(this).val();
-			var $hiddenTable = $("#hiddenTable").val();
-			
-			$hiddenTable.html("");
-			//$(".table>tbody>tr").hide();
-			//var adName = $(".table>tbody>tr> td:nth-child(5n+3):contains('" + k + "')"); // 업체명 검색
-			location.href="aAdvertisment.do?keyword="+k;
-			
-			$.ajax({
-				url:"aSearchAdname.do",
-				data:{"keyword":k},
-				dataType:"json",
-				type:"post",
-				success:function(a){
-					alert("성공");
-				//	$(adName).parent().show();
-					$.each(a,function(index, value){
-						$content = 
-							"<td>" +
-                			"<input name='checkRow' type='checkbox' id='checkRow' value='${a.adno}${a.status}'/></td>"
-                         +"<td class='serial'>${a.adno}</td>"+
-                        "<td>${a.name }</td>"+
-                        "<td> ${a.enrollDate } </td>"+
-                        "<td> ${a.startDate } </td>"+
-                        "<td> ${a.endDate } </td>"+
-                        "<td>"+
-                        	"<c:if test='${a.status eq 1 }'>"+
-                        	"<span class='badge adWaiting' style='background:#ffc107;'>등록 대기</span>"+
-                            "</c:if>"+
-                            "<c:if test='${a.status eq 2 }'>"+
-                            "<span class='badge adOngoing' style='background:rgb(0, 123, 255);'>진행중</span>"+
-                            "</c:if>"+
-                            "<c:if test='${a.status eq 3 }'>"+
-                            "<span class='badge adEnd' style='background:gray;'>종료</span>"+
-                            "</c:if>"+
-                        "</td>"+
-                    "</tr>"
-                    $hiddenTable.append($content);
-						
-					});
-					
-				},error:function(){
-					console.log("ajax 통신 실패");
-				}
-			}); 
-			
-		});
-		
-		
-	});	
 	
-*/
-	/* 
+	/*
 	$(function(){
-		var  url = ${startAd.url};
+		var url = "${startAd.url}";
 		console.log(url.indexOf("="));
+		var idx1 = url.indexOf("="); 
+		var idx2 = url.indexOf("&");
+		console.log(idx2);
+        
+        if(idx2 == -1){
+        	var result = url.substring(idx1+1);
+        	console.log(result);
+        }else{
+        	var result = url.substring(idx1+1,idx2);
+        	console.log(result);        	
+        }
+        
 	});
- */
+	*/
 	
 	
 	</script>

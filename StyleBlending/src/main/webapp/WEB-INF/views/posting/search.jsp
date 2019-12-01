@@ -114,6 +114,8 @@
 	}
 	.writerNickname:hover{cursor: pointer; color: #0080FF;}
 	.writerImg:hover{cursor: pointer;}
+	.pImg:hover{cursor: pointer;}
+	.postingImg:hover{cursor: pointer;}
 </style>
 </head>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
@@ -189,7 +191,7 @@
 					</div>
 					
 					<!-- 포스팅 이미지 -->
-					<div style="width: 400px; height: 500px; margin-bottom: 20px; margin-top: 20px;">
+					<div style="width: 400px; height: 500px; margin-bottom: 20px; margin-top: 20px;" class="postingImg">
 						<input type="hidden" value="${p.pno }">
 						<img class="img-fluid rounded pImg" style="width: 100%; height: 100%;"
 							src="${ pageContext.servletContext.contextPath }/resources/upload/posting/${p.renameImg}" alt="">
