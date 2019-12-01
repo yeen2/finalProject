@@ -310,6 +310,15 @@
 								<h5 style="display: inline-block;" id="writerNickname">${ p.nickName }</h5>
 								
 								<!-- 팬추가 버튼 -->
+								<!-- 로그인한 회원 = 포스팅등록 회원 -->
+								<%-- <c:if test="${p.mno == 0}">
+									<button type="button" class="btn btn-dark btn-sm fBtn" id="addFan">
+										<i class="fa fa-plus"></i><b>Fan</b>
+									</button>
+									<button class="btn btn-dark btn-sm fBtn" id="removeFan" style="display: none;">
+										<i style="width: 40px;" class="fas fa-check"></i>
+									</button>
+								</c:if> --%>
 								<!-- 팬추가 -->
 								<c:if test="${p.fanCheck == 0}">
 									<button type="button" class="btn btn-dark btn-sm fBtn" id="addFan">
