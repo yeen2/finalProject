@@ -24,6 +24,11 @@ public class BoardDao {
 		
 		return sqlSession.insert("boardMapper.insertBoard", b);
 	}
+	
+	public int insertfBoard(FashionBoard fb) {
+		
+		return sqlSession.insert("boardMapper.insertfBoard", fb);
+	}
 
 	public Board selectBoard(int bno) {
 		return sqlSession.selectOne("boardMapper.selectBoard", bno);
@@ -60,15 +65,18 @@ public class BoardDao {
 		return sqlSession.selectOne("boardMapper.getListCount");
 	}
 	// 댓글 수정
-	public int updateBoardReply(BoardReply r) {
-
-		return sqlSession.update("boardMapper.updateBoardReply", r);
+	public int updateBoardReply(int brno, String content) {
+		HashMap<String, Object> hsm = new HashMap<>();
+		hsm.put("brno", brno);
+		hsm.put("content", content);
+		
+		return sqlSession.update("boardMapper.updateBoardReply", hsm);
 	}
 	
 	// 댓글 삭제
 	public int deleteBoardReply(int brno) {
 
-		return sqlSession.delete("boardMapper.deleteBoardReply", brno);
+		return sqlSession.update("boardMapper.deleteBoardReply", brno);
 	}
 	
 	// 자유게시판 리스트
@@ -144,6 +152,7 @@ public class BoardDao {
 
 		return sqlSession.insert("boardMapper.insertbDeclare", d);
 	}
+
 
 
 

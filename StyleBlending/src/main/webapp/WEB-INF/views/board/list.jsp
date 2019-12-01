@@ -8,7 +8,7 @@
 <title>Free Board</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style>
-	.detailOuter{width: 900px; height:auto; margin-left: auto; margin-right: auto; margin-top: 100px;}
+	.detailOuter{width: 900px; height:auto; margin-left: auto; margin-right: auto; margin-top: 150px;}
 	#readBtn{float: right;}
 	.detailOuter{font-size: 13px !important;}
 	
@@ -59,23 +59,26 @@
 		<!-- 검색 -->
 		<div id="searchArea" align="center" style="margin-top: 50px;">
 			<form action="blist.do" method="get" id="searchForm">
- 				<input type="text" class="form-control input-sm" id="searchInput" placeholder="검색어를 입력해주세요" style="width: 300px; float: left; height: 32px;">
+			
+ 				<input type="text" class="form-control input-sm" name="search" id="searchInput" placeholder="검색어를 입력해주세요" 
+ 						style="width: 300px; float: left;">
  				
-					<select class="custom-select" name="type" id="selected-type" style="width: 100px; float: left; margin-left: 5px; height: 32px;" >
-						<option value="">선택</option>
-						<option value="title">제목</option>
-						<option value="writer">작성자</option>
-						<option value="content">내용</option>
-						<option value="reply">댓글</option>
+					<select class="custom-select" name="type" id="selected-type" style="width: 100px; float: left; margin-left: 10px;">
+							<option value="title">제목</option>
+							<option value="writer">작성자</option>
+							<option value="content">내용</option>	
 					</select>
+					
 				<button class="btn btn-primary btn-sm" id="searchBtn" type="submit" 
-						style="float: left; margin-left: 5px;">검색하기</button>
+						style="float: left; margin-left: 10px; height:38px;">검색하기</button>
 			</form>
 		</div>
 
 		<div id="readBtn">
 			<c:if test="${ !empty loginUser }">
-			<button class="btn btn-primary btn-sm" id="write" type="submit" onclick="location.href='binsertForm.do';">글쓰기</button>
+			<button class="btn btn-primary btn-sm" id="write" type="submit"
+					style="height: 38px;"
+					onclick="location.href='binsertForm.do';">글쓰기</button>
 			</c:if>
 		</div>
 		</div>
@@ -139,6 +142,12 @@
 	
 	<jsp:include page="../includes/footer.jsp"/>
 	
+	
+	<!-- <script type="text/javascript">
+		$("#searchBtn").keydown(function(){
+			location.href=""
+		});
+	</script> -->
 	
 </body>
 </html>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <style type="text/css">
 	.order-table:after, .order-table:before{
 		position : relative !important;
@@ -189,9 +190,14 @@
 			                    <div class="col-md-4" >
 			                        <div class="card col-md-8">
 			                            <img class="card-img-top" src="${pageContext.request.contextPath}${a.imgPath}${a.renameImg}" alt="Card image cap">
+				                        <c:set var="url" value="${startAd.url}"/>
+				                        <c:set var="idx1" value="${fn:indexOf(url,'=')}"/>
+				                        <c:set var="idx2" value="${fn:indexOf(url,'&')}"/>
+				                        <c:set var="resultUrl2" value="${fn:substring(url,idx1 +1,idx2)}"/>
+				                        <iframe class="card-img-top" src="https://www.youtube.com/embed/${resultUrl2}" width="100%" height="90%" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
 			                            <div class="card-body">
-			                                <h4 class="card-title mb-3">${a.name}</h4>
-			                                 <p class="card-text">${a.enrollDate}</p>
+			                                <h4 class="card-title mb-3" align="center"><b>${a.name}</b></h4>
+			                                 <p class="card-text"align="center"><b>${a.enrollDate}</b></p>
 			                            </div>
 			                        </div>
 				                </div>
@@ -206,18 +212,18 @@
 				                        <div class="card">
 				                            <img class="card-img-top" src="${pageContext.request.contextPath}${startAd.imgPath}${startAd.renameImg}" alt="Card image cap">
 				                            <div class="card-body">
-				                                <h4 class="card-title mb-3">${startAd.name}</h4>
+				                                <h4 class="card-title mb-3"><b>${startAd.name}</b></h4>
 				                                 <p class="card-text">${startAd.startDate}~ </p>
 				                            </div>
 				                        </div>
 					                </div>
 					                <div class="col-md-4" >
 				                        <div class="card">
-				                            <iframe class="card-img-top" src="http://www.youtube.com/embed/NVf6_boeYIQ&list=RDhG6cUBmayDc&index=2"  frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
-				                            <div class="card-body">
-				                                <h4 class="card-title mb-3">${startAd.name}</h4>
-				                                 <p class="card-text">${startAd.startDate} ~ </p>
-				                            </div>
+				                        <c:set var="url" value="${startAd.url}"/>
+				                        <c:set var="idx1" value="${fn:indexOf(url,'=')}"/>
+				                        <c:set var="idx2" value="${fn:indexOf(url,'&')}"/>
+				                        <c:set var="resultUrl2" value="${fn:substring(url,idx1 +1,idx2)}"/>
+				                             <iframe class="card-img-top" src="https://www.youtube.com/embed/${resultUrl2}" width="100%" height="90%" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
 				                        </div>
 					                </div>
 			                        </c:if>
@@ -431,12 +437,24 @@
 	});	
 	
 */
-	/* 
+	
 	$(function(){
-		var  url = ${startAd.url};
+		var url = "${startAd.url}";
 		console.log(url.indexOf("="));
+		var idx1 = url.indexOf("="); 
+		var idx2 = url.indexOf("&");
+		console.log(idx2);
+        
+        if(idx2 == -1){
+        	var result = url.substring(idx1+1);
+        	console.log(result);
+        }else{
+        	var result = url.substring(idx1+1,idx2);
+        	console.log(result);        	
+        }
+        
 	});
- */
+
 	
 	
 	</script>

@@ -46,7 +46,7 @@
                             <div class="card-header">
                                 <strong class="card-title">회원 목록</strong>
                             </div>
-                            <div class="card-body mt-5" style="min-height: 800px;">	
+                            <div class="card-body mt-3" style="min-height: 800px;">	
                             <div class="row">
 	                            <div class="col-md-10 offset-md-1" style="padding:20px;">
 	                          		<label style="display:inline-flex; padding-right:20px;">Show 
@@ -90,7 +90,7 @@
                                             <td>${m.mno}</td>
                                             <td>
                                                 <div class="round-img">
-                                                    <a href="#"><img class="rounded-circle" src="${pageContext.request.contextPath}${m.profilePath}${m.renameImg}" alt=""></a>
+                                                    <a href="mpViewProfile.do?mno=${m.mno}"><img class="rounded-circle" src="${pageContext.request.contextPath}${m.profilePath}${m.renameImg}" alt=""></a>
                                                 </div>
                                             </td>
                                             <td>${m.email}</td>
@@ -160,6 +160,7 @@
 	                                				<c:url value="aUser.do" var="next" >
 	                                					<c:param name="currentPage" value="${pi.currentPage+1 }"/>
 	                                					<c:param name="boardLimit" value="${pi.boardLimit }"/>
+	                                					<c:param name="keyword" value="${keyword }"/>
 	                                				</c:url>
 	                                				<a href="${next }" aria-controls="bootstrap-data-table" class="page-link">Next</a>
 	                                			</c:if>
@@ -234,8 +235,8 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                             <div class="card ">
-	                            <div class="card-body">
+                             <div class="card">
+	                            <div class="card-body row">
 	                                <div class="mx-auto d-block">
 	                                    <img class="rounded-circle mx-auto d-block" src="${pageContext.request.contextPath}/resources/admin_temp/images/admin.jpg" alt="Card image cap">
 	                                    <h5 class="text-sm-center mt-2 mb-1">Steven Lee</h5>

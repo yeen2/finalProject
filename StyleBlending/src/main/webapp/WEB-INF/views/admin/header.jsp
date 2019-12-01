@@ -110,7 +110,7 @@
 
                  <div class="user-area dropdown float-right">
                      <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                         <img class="user-avatar rounded-circle" src="${pageContext.request.contextPath}/resources/admin_temp/images/admin.jpg" alt="User Avatar">
+                         <img class="user-avatar rounded-circle" src="${pageContext.request.contextPath}/resources/upload/member/${loginUser.renameImg}" alt="User Avatar">
                      </a>
 
                      <div class="user-menu dropdown-menu">
@@ -118,11 +118,10 @@
 
                          <a class="nav-link" href="#"><i class="fa fa-bell-o"></i>Notifications <span class="count">13</span></a>
 
-                         <a class="nav-link" href="#"><i class="fa fa-cog"></i>Settings</a>
-				<c:if test="${ empty loginUser }">
+				<c:if test="${ empty loginUser}">
 					<a class="nav-link" href="loginForm.do"><i class="fa fa-power-off"></i>Sign In</a>
 				</c:if>
-				<c:if test="${ !empty loginUser }">
+				<c:if test="${ !empty loginUser && loginUser.email eq 'admin'  }">
 					<a class="nav-link" href="logout.do"><i class="fa fa-power-off"></i>Logout</a>
 				</c:if>
                          

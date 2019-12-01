@@ -63,7 +63,7 @@
 
 				<div id="writeviewArea"
 					style="height: auto; width: 80%; padding-bottom: 80px;">
-					<p style="height: auto; margin-left: 20px; margin-top: 40px;">${ b.content }</p>
+					<div style="height: auto; margin-top: 40px;"><p style="margin: auto;">${ b.content }<p></div>
 				</div>
 
 				<div id="best" align="center">
@@ -522,19 +522,21 @@
 							$contentDiv = $("<div class='form-group contentDiv'></div>");
 							$otherDiv = $("<div class'form-inline otherDiv' style='margin-right:150px;'></div>");
 							
-							$modify_textarea = $("<textarea class='modifyContent'></textarea>");
-							$modify_a = $("<a class='modify_a' id='modify_a'>등록</a>");
+							$modify_textarea = $("<textarea class='modifyContent'></textarea>").text(value.content);;
+							$hiddenBrno = $("<input type='hidden' id='hiddenBrno'>").val(value.brno);
+							$rmodifyBtn = $("<button class='btn btn-dark rmodifyBtn'>등록</button>");
 							$nickname = $("<b class='nickname' style='margin-left:75px;'></b>").text(value.nickName);
 							$rcontent = $("<span id='rcontent' class='rcontent' style='margin-left: 5px;'></span>").html(value.content);
 							
-							$update_a = $("<a id='a-update'style='text-decoration: none; float:right;' href='rupdate.do'>수정</a>");
-							$delete_a = $("<a id='a-delete' style='text-decoration: none; margin-right:10px; float:right;' href='rdelete.do'>삭제</a>");
+							$update_a = $("<a class='a-update'style='text-decoration: none; float:right; cursor:pointer;'>수정</a>");
+							$delete_a = $("<a class='a-delete' style='text-decoration: none; margin-right:10px; float:right; cursor:pointer;'>삭제</a>");
 							$date = $("<span class='col-sm-2 date'></span>").text(value.enrollDate);
 							
 							$imgDiv.append($img);
 							$contentDiv.append($rcontent).append('<br>');
-							$otherDiv.append($update_a).append($delete_a);
-							$modifyDiv.append($modify_textarea).append($modify_a);
+							$otherDiv.append($update_a).append($delete_a).append($hiddenBrno);
+							
+							$modifyDiv.append($modify_textarea).append($rmodifyBtn);
 							
 							$replyDiv.append($imgDiv).append($contentDiv).append($modifyDiv).append("<br>");
 							
@@ -556,36 +558,69 @@
 				
 			});
 		}
-		/* 
-		//댓글 수정폼
 		
-		$(document).("click","#a-update", function(){
-			//var r_form = $(this).parents("#contentDiv").children("#rcontent").eq(0).text();
-			
+		//댓글 수정
+		$(document).on("click",".a-update", function(){
+			//console.log("zmfflr");
 			//var r_modifyForm = $(this).parents("modifyDiv").children(".modifyContent").eq(0).text();
-			$(this).parent().("")
+			var brno = $(this).next().next().val();
+			console.log(brno);
+			$(this).parent().parent().children(".replyDiv").children('.modifyDiv').eq(0).toggle();
+			$(this).parent().parent().children(".replyDiv").children('.contentDiv').eq(0).toggle();
+			
+			//$(this).parent().parent().children(".contentDiv").toggle();
 			
 		});
 		
-		$(document).("click","")
+		$(document).on("click",".rmodifyBtn", function() {
+			var brno = $(this).parent().parent().next().children('#hiddenBrno').val();
+			console.log(brno)
+			var content = $(this).prev().val();
+			//console.log("dfdfdfdf");
+			//console.log(brno);
+			 $.ajax({
+				url:"rupdate.do",
+				data:{brno:brno,
+					  content:content},
+				success:function(data){
+					
+					if(data == "success"){
+						getReplyList();
+					}else{
+						alert("댓글 수정 실패");
+					}
+				},
+				error:function(){
+					console.log("ajax 통신 실패");
+				}
+				
+			});
+		});
 		
-		
-		//댓글 수정
-		
-		function rupdateProc(brno){
-		    var updateContent = $('[name=content_'+brno+']').val();
-		    
-		    $.ajax({
-		        url:'rupdate.do',
-		        type:'post',
-		        data:{'content' : content, 
-		        		'brno' : brno},
-		        success : function(data){
-		            if(data == 1) 
-		            	getReplyList(); //댓글 수정후 목록 출력 
-		        }
-		    });
-		} */
+		// 댓글 삭제
+		$(document).on("click",".a-delete", function(){
+			
+			var brno = $(this).parent().children().eq(2).val();
+			console.log($(this).parent().children().eq(2).val());
+			 if(confirm("댓글을 삭제하시겠습니까?")){
+				
+				$.ajax({
+					url:"rdelete.do",
+					data:{brno:brno},
+					success:function(data){
+						
+						if(data == "success"){
+							getReplyList();
+						}else{
+							alert("댓글 삭제 실패");
+						}
+					},
+					error:function(){
+						console.log("ajax 통신 실패");
+					}
+				}); 
+			}
+		});
 
 	</script>
 	

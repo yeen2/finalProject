@@ -13,6 +13,7 @@ import com.kh.styleblending.admin.model.vo.PageInfo;
 import com.kh.styleblending.admin.model.vo.Statistics;
 import com.kh.styleblending.main.model.vo.Notice;
 import com.kh.styleblending.member.model.vo.Member;
+import com.kh.styleblending.posting.model.vo.Hash;
 
 @Service("aService")
 public class AdminServiceImpl implements AdminService{
@@ -42,6 +43,12 @@ public class AdminServiceImpl implements AdminService{
 	public Ad selectStartAd() {
 		// 진행중인 광고
 		return aDao.selectStartAd();
+	}
+	
+	@Override
+	public ArrayList<Hash> selectHashRank() {
+		// hash 순위
+		return aDao.selectHashRank();
 	}
 
 	@Override
@@ -167,8 +174,14 @@ public class AdminServiceImpl implements AdminService{
 
 	@Override
 	public ArrayList<Statistics> selectMemberCount() {
-		// 통계(가입자수)
+		// 통계(가입자수)-월별
 		return aDao.selectMemberCount();
+	}
+	
+	@Override
+	public ArrayList<Statistics> selectDayCount() {
+		// 통계(가입자수)-일별
+		return aDao.selectDayCount();
 	}
 
 	@Override
@@ -182,6 +195,10 @@ public class AdminServiceImpl implements AdminService{
 		// 공지사항 목록 조회용
 		return aDao.selectNoticeList();
 	}
+
+	
+
+	
 
 
 	

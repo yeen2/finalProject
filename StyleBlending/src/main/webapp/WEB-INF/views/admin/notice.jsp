@@ -76,11 +76,7 @@
 		                            <tbody>
 		                                 <tr>
 		                                    <td>${n.nno }</td>
-		                                    <td>
-		                                    	<div data-toggle="modal" data-target="#smallmodal">
-		                                            <a href="#">${n.title }</a>
-		                                        </div>
-		                                    </td>
+		                                    <td>${n.title }</td>
 		                                    <td>${n.content }</td>
 		                                    <td>${loginUser.email }</td>
 		                                    <td>${n.enrollDate }</td>
@@ -135,6 +131,7 @@
 	                                				<c:url value="aNotice.do" var="next" >
 	                                					<c:param name="currentPage" value="${pi.currentPage+1 }"/>
 	                                					<c:param name="boardLimit" value="${pi.boardLimit }"/>
+	                                					<c:param name="keyword" value="${keyword }"/>
 	                                				</c:url>
 	                                				<a href="${next }" aria-controls="bootstrap-data-table" class="page-link">Next</a>
 	                                			</c:if>

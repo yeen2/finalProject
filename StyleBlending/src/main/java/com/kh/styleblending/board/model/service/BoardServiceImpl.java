@@ -1,6 +1,7 @@
 package com.kh.styleblending.board.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,7 +11,6 @@ import com.kh.styleblending.board.model.vo.Board;
 import com.kh.styleblending.board.model.vo.BoardReply;
 import com.kh.styleblending.board.model.vo.Declare;
 import com.kh.styleblending.board.model.vo.FashionBoard;
-import com.kh.styleblending.board.model.vo.Image;
 import com.kh.styleblending.board.model.vo.PageInfo;
 
 @Service("bService")
@@ -32,10 +32,18 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	@Override
-	public int insertBoard(Board b) {
-		
+	public int insertBoard( Board b) {
+			
 		return bDao.insertBoard(b);
+	
 	}
+	
+	@Override
+	public int insertfBoard(FashionBoard fb) {
+
+		return bDao.insertfBoard(fb);
+	}
+	
 	
 	@Override
 	public Board selectBoard(int bno) {
@@ -86,9 +94,9 @@ public class BoardServiceImpl implements BoardService{
 
 	
 	@Override
-	public int updateBoardReply(BoardReply r) {
+	public int updateBoardReply(int brno, String content) {
 
-		return bDao.updateBoardReply(r);
+		return bDao.updateBoardReply(brno, content);
 	}
 
 	@Override
@@ -148,5 +156,6 @@ public class BoardServiceImpl implements BoardService{
 
 			return bDao.insertbDeclare(d);
 		}
+
 
 }
