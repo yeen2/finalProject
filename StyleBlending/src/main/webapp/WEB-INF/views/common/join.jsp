@@ -46,11 +46,13 @@
 						<div class="form-group">
 							<label for="userPwd">Password</label>
 							<input type="password" class="form-control" id="pass" name="pass" placeholder="Password">
-							<small id="passwordHelp" style="display:none;" class="form-text text-danger">형식에 맞지 않습니다</small>
+							<small id="passwordHelp1" style="display:none;" class="form-text text-success">사용가능한 비밀번호 입니다.</small>
+							<small id="passwordHelp2" style="display:none;" class="form-text text-danger">형식에 맞지 않습니다</small>
 						</div>
 						<div class="form-group">
 							<label for="pass2">Password Confirmation</label>
 							<input type="password" class="form-control" id="pass2" name="pass2" placeholder="Password">
+							<small id="passwordCheck" style="display:none;" class="form-text text-danger">비밀번호가 틀립니다.</small>
 						</div>
 						
 						<button type="submit" class="btn btn-block btn-dark" style="height:50px; margin-top:50px;">회원가입</button>
@@ -153,14 +155,15 @@
 						data:{email:email},
 						type:"post",
 						success:function(result){
-							if(result == "1"){
+							
+							if(result == "1"){ //아이디 사용가능
 								$("#emailCheck1").css("display", "block");
 								$("#emailCheck2").css("display", "none");
 								$("#emailCheck3").css("display", "none");
 								$("#emailCheck1").css({"color":"#1DDB16", "font-weight":"bold"});
 								
 								emailB = true;
-							}else{
+							}else{ // 아이디 사용불가
 								$("#emailCheck2").css("display", "block");
 								$("#emailCheck1").css("display", "none");
 								$("#emailCheck3").css("display", "none");
@@ -169,7 +172,7 @@
 								$(".box button").attr("disabled", true);
 							}
 							
-							if(email == ""){
+							if(email == ""){ 
 								$("#emailCheck1").css("display", "none");
 								$("#emailCheck2").css("display", "none");
 								$("#emailCheck3").css("display", "none");
@@ -181,7 +184,9 @@
 						}
 						
 					});
-				}else{
+					
+				}else{  // 형식 잘못됨
+					
 					$("#emailCheck1").css("display", "none");
 					$("#emailCheck2").css("display", "none");
 					$("#emailCheck3").css("display", "block");
@@ -255,6 +260,9 @@
 				var pass = $("#pass").val();
 				var pass2 = $("#pass2").val();
 				
+				console.log("pass : " + pass);
+				console.log("pass2 : " + pass2);
+				
 				var regExp = /^[a-zA-Z0-9!@#$%^&*]{8,16}$/;
 				
 				if (regExp.test(pass)) {
@@ -262,19 +270,15 @@
 						url:"joinCheckPass.do",
 						data:{pass:pass, pass2:pass2},
 						success:function(result){
-							if(result == "1"){
-								$("#passCheck").css("color", "#1DDB16");
-								$("#pass2Check").css("color", "#1DDB16");
-								
+							if(result == "1"){ //비번맞음
+								$("#passwordCheck1").show();
 								passB = true;
-							}else{
-								$("#passCheck").css("color", "gray");
-								$("#pass2Check").css("color", "gray");
+							}else{ // 비번틀림
+								$("#passwordCheck2").show();
 							}
 							
 							if(pass == "" && pass2 == ""){
-								$("#passCheck").css("color", "gray");
-								$("#pass2Check").css("color", "gray");
+								
 							}
 						},
 						error:function(result){
@@ -282,8 +286,7 @@
 						}
 					});
 				}else{
-					$("#passCheck").css("color", "gray");
-					$("#pass2Check").css("color", "gray");
+					$("#passwordCheck").show();
 				}
 				
 			});

@@ -13,7 +13,7 @@ public interface MemberService {
 	// 3. 비밀번호 찾기
 	
 	// 4. 이메일ajax
-	int joinCheckEmail(String id);
+	int joinCheckEmail(String email);
 	
 	// 5. 닉네임ajax
 	int joinCheckNickName(String nickName);
