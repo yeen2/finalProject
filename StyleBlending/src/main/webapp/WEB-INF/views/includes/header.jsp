@@ -127,6 +127,7 @@
 #contentPlus p{font-weight:normal;}
 #searchDiv p{font-size:15px;}
 
+#joinBtn:hover { cursor: pointer;}
 </style>
 <script type="text/javascript">
 	$(function(){
@@ -230,17 +231,17 @@
                   data-toggle="modal" href="#exampleModal"> <i
                      class="fas fa-sliders-h fa-lg"></i>
                </a></li>
-               <li class="nav-item" style="margin-top:10px;"><a class="nav-link" href="mainNotice.do">Notice</a>
+               <li class="nav-item" style="margin-top:10px;"><a class="nav-link" href="mainNotice.do">Notice</a></li>
+               <li class="nav-item" style="margin-top:10px;"><a class="nav-link" href="blist.do">Free board</a></li>
+               <li class="nav-item" style="margin-top:10px;"><a class="nav-link" id="joinBtn">Join</a></li>
+               <li class="nav-item" style="margin-top:10px;">
+	               <c:if test="${ empty loginUser }">
+	                     <a class="nav-link" href="loginForm.do">Sign In</a>
+	               </c:if> 
+	               <c:if test="${ !empty loginUser }">
+	                     <a class="nav-link" href="logout.do">LogOut</a>
+	               </c:if>
                </li>
-               <li class="nav-item" style="margin-top:10px;"><a class="nav-link" href="blist.do">Free
-                     board</a></li>
-               <li class="nav-item" style="margin-top:10px;"><a class="nav-link" href="joinForm.do">Join</a>
-               </li>
-               <li class="nav-item" style="margin-top:10px;"><c:if test="${ empty loginUser }">
-                     <a class="nav-link" href="loginForm.do">Sign In</a>
-                  </c:if> <c:if test="${ !empty loginUser }">
-                     <a class="nav-link" href="logout.do">LogOut</a>
-                  </c:if></li>
 
 
 					<!-- 알림창 -->
@@ -1073,7 +1074,16 @@ function select(){
 				return false;
 			}
 		});
-	
+		
+		//join 누를때
+		$("#joinBtn").click(function () {
+			if(${loginUser != null}){
+				alert("로그아웃 후 이용 가능합니다.");
+			}else{
+				location.href="joinForm.do";	
+			}
+		
+		});
 		
 	</script>
 
