@@ -1,17 +1,24 @@
 package com.kh.styleblending.board.model.service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import com.kh.styleblending.board.model.dao.BoardDao;
 import com.kh.styleblending.board.model.vo.Board;
 import com.kh.styleblending.board.model.vo.BoardReply;
 import com.kh.styleblending.board.model.vo.Declare;
 import com.kh.styleblending.board.model.vo.FashionBoard;
+import com.kh.styleblending.board.model.vo.Image;
 import com.kh.styleblending.board.model.vo.PageInfo;
+import com.kh.styleblending.board.model.vo.Search;
 
 @Service("bService")
 public class BoardServiceImpl implements BoardService{
@@ -19,6 +26,13 @@ public class BoardServiceImpl implements BoardService{
 	@Autowired
 	private BoardDao bDao;
 
+	@Autowired
+	private DataSourceTransactionManager transactionManager;
+	
+	@Autowired
+	private SqlSessionTemplate sqlSession;
+	
+	
 	@Override
 	public int getListCount() {
 		
@@ -32,9 +46,26 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	@Override
-	public int insertBoard( Board b) {
-			
+	public int insertBoard(Board b) {
+		
 		return bDao.insertBoard(b);
+			
+		/*
+		 * DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+		 * def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
+		 * 
+		 * TransactionStatus status = transactionManager.getTransaction(def);
+		 * 
+		 * try { sqlSession.getConnection().setAutoCommit(false); } catch (SQLException
+		 * e) { e.printStackTrace(); }
+		 * 
+		 * 
+		 * int result1 = bDao.insertBoard(b); int result2 = bDao.insertImgFile(i);
+		 * 
+		 * if(result1 > 0 && result2 > 0) { transactionManager.commit(status); return 1;
+		 * }else { transactionManager.rollback(status); return 0; }
+		 */
+		
 	
 	}
 	
@@ -42,6 +73,18 @@ public class BoardServiceImpl implements BoardService{
 	public int insertfBoard(FashionBoard fb) {
 
 		return bDao.insertfBoard(fb);
+	}
+	
+	@Override
+	public int insertbImgFile(Image i) {
+
+		return bDao.insertbImgFile(i);
+	}
+	
+	@Override
+	public int insertfImgFile(Image i) {
+
+		return bDao.insertfImgFile(i);
 	}
 	
 	
@@ -156,6 +199,67 @@ public class BoardServiceImpl implements BoardService{
 
 			return bDao.insertbDeclare(d);
 		}
+
+		@Override
+		public int getSearchListCount(Search sc) {
+
+			return bDao.getSearchListCount(sc);
+		}
+
+		@Override
+		public ArrayList<Board> SearchselectList(PageInfo pi, Search sc) {
+
+			return bDao.SearchselectList(pi, sc);
+		}
+
+		@Override
+		public FashionBoard selectfBoard(int fbno) {
+	
+			int result = bDao.FbupdateCount(fbno);
+	
+			if (result > 0) {
+				return bDao.selectfBoard(fbno);
+			} else {
+				return null;
+			}
+		}
+
+		@Override
+		public int getfbListCount() {
+
+			return bDao.getfbListCount();
+		}
+
+		@Override
+		public int FbdeleteBoard(int fbno) {
+
+			return bDao.FbdeleteBoard(fbno);
+		}
+
+		@Override
+		public FashionBoard selectUpdatefBoard(int fbno) {
+
+			return bDao.selectfBoard(fbno); 
+		}
+
+		@Override
+		public int updatefBoard(FashionBoard fb) {
+
+			return bDao.updatefBoard(fb);
+		}
+
+		@Override
+		public int getfbSearchListCount(Search sc) {
+
+			return bDao.getfbSearchListCount(sc);
+		}
+
+		@Override
+		public ArrayList<FashionBoard> SearchfselectList(PageInfo pi, Search sc) {
+
+			return bDao.SearchfselectList(pi, sc);
+		}
+
 
 
 }

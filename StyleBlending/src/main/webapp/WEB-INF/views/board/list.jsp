@@ -19,11 +19,11 @@
 	<jsp:include page="../includes/header.jsp"/>
 	
 	<div class="detailOuter">
-		<h4>자유게시판 </h4>
+		<h4 style="cursor: pointer;" onclick="location.href='blist.do';">자유게시판 </h4>
 
 		<br>
 		<div class="form-group" style="float: left; width: 200px;">
-				<select class="custom-select" onchange="location.href=this.value">
+				<select style="cursor: pointer;" class="custom-select" onchange="location.href=this.value">
 					<option selected>분류</option>
 					<option value="blist.do">자유게시판</option>
 					<option value="fblist.do">패션정보게시판</option>
@@ -58,19 +58,38 @@
 		<div class="">
 		<!-- 검색 -->
 		<div id="searchArea" align="center" style="margin-top: 50px;">
-			<form action="blist.do" method="get" id="searchForm">
-			
- 				<input type="text" class="form-control input-sm" name="search" id="searchInput" placeholder="검색어를 입력해주세요" 
- 						style="width: 300px; float: left;">
- 				
-					<select class="custom-select" name="type" id="selected-type" style="width: 100px; float: left; margin-left: 10px;">
-							<option value="title">제목</option>
-							<option value="writer">작성자</option>
-							<option value="content">내용</option>	
+			<form action="bsearch.do" method="get" id="searchForm">
+						
+					<c:if test="${ empty sc }">
+						<input type="text" class="form-control input-sm" name="search"
+							id="searchInput" placeholder="검색어를 입력해주세요"
+							style="width: 300px; float: left;">
+					</c:if>
+
+					<c:if test="${ !empty sc }">
+						<input type="text" class="form-control input-sm"
+							value="${ search }" name="search" id="searchInput"
+							placeholder="검색어를 입력해주세요" style="width: 300px; float: left;">
+					</c:if>
+
+					<c:if test="${ type eq 'title' }">
+						<c:set var="tSelected" value="selected" />
+					</c:if>
+					<c:if test="${ type eq 'writer' }">
+						<c:set var="wSelected" value="selected" />
+					</c:if>
+					<c:if test="${ type eq 'content' }">
+						<c:set var="cSelected" value="selected" />
+					</c:if>
+					<select class="custom-select" name="type" id="selected-type" style="width: 100px; float: left; margin-left: 8px;">
+							<option value="title" ${ tSelected }>제목</option>
+							<option value="writer" ${ wSelected }>작성자</option>
+							<option value="content" ${ cSelected }>내용</option>	
 					</select>
 					
 				<button class="btn btn-primary btn-sm" id="searchBtn" type="submit" 
-						style="float: left; margin-left: 10px; height:38px;">검색하기</button>
+						style="float: left; margin-left: 8px; height:38px;">검색하기</button>
+				
 			</form>
 		</div>
 
