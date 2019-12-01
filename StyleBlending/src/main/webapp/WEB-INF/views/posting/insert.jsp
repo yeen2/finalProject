@@ -608,7 +608,7 @@
 				console.log(tttop);
 				console.log(llleft);
 				
-				//tt.parent().next().css('position', 'absolute');
+				tt.parent().next().css('position', 'absolute');
 				//tt.parent().next().css('top', tttop+20);
 				//tt.parent().next().css('left', llleft+500);
 				if(brand != ""){
@@ -705,6 +705,7 @@
 			// 각각의 input 요소들 변수에 담아두기 
 			var fileImg = $("#insertForm input[name=fileImg]");
 			var content = $("#insertForm #content");
+			var location = $("#insertForm input[name=location]");
 			
 			console.log(content);
 
@@ -718,6 +719,11 @@
 				alert("내용을 입력해주세요");
 				content.focus();
 				return false;
+			}else if(location.val() == ""){
+				alert("위치를 등록해주세요.");
+				location.focus();
+				return false;
+				
 			}
 
 		}
