@@ -106,7 +106,7 @@ li {
    font-family: Gulim;
    font-size: 12px;
 }
-
+	
 .block, #ticker, #ticker2, .block li {
    margin: 0;
    padding: 0;
@@ -543,7 +543,7 @@ li {
                    "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                    "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
                    "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'>"+
-                   "<img src='${pageContext.request.contextPath}/resources/assets/img/배너일.png' style='width: 80px; height: 50px; margin-left: 20px;' />" +
+                   "<img src='${ pageContext.servletContext.contextPath }/resources/upload/member/"+value.profileImg+"' style='width: 50px; height: 50px; margin-left: 20px; border-radius:50px;' />" +
                    "</a>"+
                    "</div>"+
                    "<div class='col-6' style='width: 50%; height: 50px; margin-left: 30px;'>"+
@@ -557,7 +557,7 @@ li {
                    "</div>"+
                    "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                    "<a href='pInfo.do?id="+value.pno+" 'style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                   "<img class='card-img' src="+value.imgPath+"/"+value.renameImg+" alt='dog' style='height: 100%;'>"+
+                   "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.profileImg+"' alt='dog' style='height: 100%;'>"+
                    "</a>"+
                    "</div>"+
                    "<div class='card-footer row'>"+
@@ -566,7 +566,7 @@ li {
                    "<p style='margin: 0px;margin-left:5px;'>"+value.likeCount+"</p>"+
                    "</div>"+
                    "<div class='col-3 form-inline' style='padding: 0px;'>"+
-                   "<a href=''><i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i></a>"+
+                   "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
                    "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
                    "</div>"+
                    "</div>"+
@@ -605,8 +605,8 @@ li {
                        "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
                        "</div>"+
                        "<div class='col-3 form-inline' style='padding: 0px;'>"+
-                       "<a href=''><i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i></a>"+
-                       "<p style='margin-left:5px;margin: 0px;'>"+value.replyCount+"</p>"+
+                       "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
+                       "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
                        "</div>"+
                        "</div>"+
                        "</div>"+
@@ -621,7 +621,7 @@ li {
                       "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                       "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
                       "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'>"+
-                      "<img src='${pageContext.request.contextPath}/resources/assets/img/배너일.png' style='width: 80px; height: 50px; margin-left: 20px;' />" +
+                      "<img src='${ pageContext.servletContext.contextPath }/resources/upload/member/"+value.profileImg+"' style='width: 50px; height: 50px; margin-left: 20px; border-radius:50px;' />" +
                       "</a>"+
                       "</div>"+
                       "<div class='col-6' style='width: 50%; height: 50px; margin-left: 30px;'>"+
@@ -635,7 +635,7 @@ li {
                       "</div>"+
                       "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                       "<a href='pInfo.do?id="+value.pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                      "<img class='card-img' src="+value.imgPath+"/"+value.renameImg+" alt='dog' style='height: 100%;'>"+
+                      "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.profileImg+"' alt='dog' style='height: 100%;'>"+
                       "</a>"+
                       "</div>"+
                       "<div class='card-footer row'>"+
@@ -644,8 +644,8 @@ li {
                       "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
                       "</div>"+
                       "<div class='col-3 form-inline' style='padding: 0px;'>"+
-                      "<a href=''><i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i></a>"+
-                      "<p style='margin-left:5px;margin: 0px;'>"+value.replyCount+"</p>"+
+                      "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
+                      "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
                       "</div>"+
                       "</div>"+
                       "</div>"+
@@ -660,7 +660,7 @@ li {
                       "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                       "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
                       "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'>"+
-                      "<img src='${pageContext.request.contextPath}/resources/assets/img/배너일.png' style='width: 80px; height: 50px; margin-left: 20px;' />" +
+                      "<img src='${ pageContext.servletContext.contextPath }/resources/upload/member/"+value.profileImg+"' style='width: 50px; height: 50px; margin-left: 20px; border-radius:50px;' />" +
                       "</a>"+
                       "</div>"+
                       "<div class='col-6' style='width: 50%; height: 50px; margin-left: 30px;'>"+
@@ -683,8 +683,8 @@ li {
                       "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
                       "</div>"+
                       "<div class='col-3 form-inline' style='padding: 0px;'>"+
-                      "<a href=''><i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i></a>"+
-                      "<p style='margin-left:5px;margin: 0px;'>"+value.replyCount+"</p>"+
+                      "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
+                      "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
                       "</div>"+
                       "</div>"+
                       "</div>"+
@@ -699,7 +699,7 @@ li {
                       "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                       "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
                       "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'>"+
-                      "<img src='${pageContext.request.contextPath}/resources/assets/img/배너일.png' style='width: 80px; height: 50px; margin-left: 20px;' />" +
+                      "<img src='${ pageContext.servletContext.contextPath }/resources/upload/member/"+value.profileImg+"' style='width: 50px; height: 50px; margin-left: 20px; border-radius:50px;' />" +
                       "</a>"+
                       "</div>"+
                       "<div class='col-6' style='width: 50%; height: 50px; margin-left: 30px;'>"+
@@ -713,7 +713,7 @@ li {
                       "</div>"+
                       "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                       "<a href='pInfo.do?id="+value.pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                      "<img class='card-img' src="+value.imgPath+"/"+value.renameImg+" alt='dog' style='height: 100%;'>"+
+                      "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.profileImg+"' alt='dog' style='height: 100%;'>"+
                       "</a>"+
                       "</div>"+
                       "<div class='card-footer row'>"+
@@ -722,8 +722,8 @@ li {
                       "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
                       "</div>"+
                       "<div class='col-3 form-inline' style='padding: 0px;'>"+
-                      "<a href=''><i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i></a>"+
-                      "<p style='margin-left:5px;margin: 0px;'>"+value.replyCount+"</p>"+
+                      "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
+                      "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
                       "</div>"+
                       "</div>"+
                       "</div>"+
@@ -737,7 +737,7 @@ li {
                        "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                        "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
                        "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'>"+
-                       "<img src='${pageContext.request.contextPath}/resources/assets/img/배너일.png' style='width: 80px; height: 50px; margin-left: 20px;' />" +
+                       "<img src='${ pageContext.servletContext.contextPath }/resources/upload/member/"+value.profileImg+"' style='width: 50px; height: 50px; margin-left: 20px; border-radius:50px;' />" +
                        "</a>"+
                        "</div>"+
                        "<div class='col-6' style='width: 50%; height: 50px; margin-left: 30px;'>"+
@@ -751,7 +751,7 @@ li {
                        "</div>"+
                        "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                        "<a href='pInfo.do?id="+value.pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                       "<img class='card-img' src="+value.imgPath+"/"+value.renameImg+" alt='dog' style='height: 100%;'>"+
+                       "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.profileImg+"' alt='dog' style='height: 100%;'>"+
                        "</a>"+
                        "</div>"+
                        "<div class='card-footer row'>"+
@@ -760,8 +760,8 @@ li {
                        "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
                        "</div>"+
                        "<div class='col-3 form-inline' style='padding: 0px;'>"+
-                       "<a href=''><i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i></a>"+
-                       "<p style='margin-left:5px;margin: 0px;'>"+value.replyCount+"</p>"+
+                       "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
+                       "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
                        "</div>"+
                        "</div>"+
                        "</div>"+
@@ -775,7 +775,7 @@ li {
                        "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                        "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
                        "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'>"+
-                       "<img src='${pageContext.request.contextPath}/resources/assets/img/배너일.png' style='width: 80px; height: 50px; margin-left: 20px;' />" +
+                       "<img src='${ pageContext.servletContext.contextPath }/resources/upload/member/"+value.profileImg+"' style='width: 50px; height: 50px; margin-left: 20px; border-radius:50px;' />" +
                        "</a>"+
                        "</div>"+
                        "<div class='col-6' style='width: 50%; height: 50px; margin-left: 30px;'>"+
@@ -789,7 +789,7 @@ li {
                        "</div>"+
                        "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                        "<a href='pInfo.do?id="+value.pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                       "<img class='card-img' src="+value.imgPath+"/"+value.renameImg+" alt='dog' style='height: 100%;'>"+
+                       "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.profileImg+"' alt='dog' style='height: 100%;'>"+
                        "</a>"+
                        "</div>"+
                        "<div class='card-footer row'>"+
@@ -798,8 +798,8 @@ li {
                        "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
                        "</div>"+
                        "<div class='col-3 form-inline' style='padding: 0px;'>"+
-                       "<a href=''><i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i></a>"+
-                       "<p style='margin-left:5px;margin: 0px;'>"+value.replyCount+"</p>"+
+                       "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
+                       "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
                        "</div>"+
                        "</div>"+
                        "</div>"+
@@ -1269,7 +1269,7 @@ li {
                                 "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                                 "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
                                 "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'>"+
-                                "<img src='${pageContext.request.contextPath}/resources/assets/img/배너일.png' style='width: 80px; height: 50px; margin-left: 20px;' />" +
+                                "<img src='${ pageContext.servletContext.contextPath }/resources/upload/member/"+value.profileImg+"' style='width: 50px; height: 50px; margin-left: 20px; border-radius:50px;' />" +
                                 "</a>"+
                                 "</div>"+
                                 "<div class='col-6' style='width: 50%; height: 50px; margin-left: 30px;'>"+
@@ -1283,7 +1283,7 @@ li {
                                 "</div>"+
                                 "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                                 "<a href='pInfo.do?id="+value.pno+" 'style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                                "<img class='card-img' src="+value.imgPath+"/"+value.renameImg+" alt='dog' style='height: 100%;'>"+
+                                "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.profileImg+"' alt='dog' style='height: 100%;'>"+
                                 "</a>"+
                                 "</div>"+
                                 "<div class='card-footer row'>"+
@@ -1292,7 +1292,7 @@ li {
                                 "<p style='margin: 0px;margin-left:5px;'>"+value.likeCount+"</p>"+
                                 "</div>"+
                                 "<div class='col-3 form-inline' style='padding: 0px;'>"+
-                                "<a href=''><i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i></a>"+
+                                "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
                                 "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
                                 "</div>"+
                                 "</div>"+
@@ -1308,7 +1308,7 @@ li {
                                          "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                                          "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
                                          "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'>"+
-                                         "<img src='${pageContext.request.contextPath}/resources/assets/img/배너일.png' style='width: 80px; height: 50px; margin-left: 20px;' />" +
+                                         "<img src='${ pageContext.servletContext.contextPath }/resources/upload/member/"+value.profileImg+"' style='width: 50px; height: 50px; margin-left: 20px; border-radius:50px;' />" +
                                          "</a>"+
                                          "</div>"+
                                          "<div class='col-6' style='width: 50%; height: 50px; margin-left: 30px;'>"+
@@ -1322,7 +1322,7 @@ li {
                                          "</div>"+
                                          "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                                          "<a href='pInfo.do?id="+value.pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                                         "<img class='card-img' src="+value.imgPath+"/"+value.renameImg+" alt='dog' style='height: 100%;'>"+
+                                         "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.profileImg+"' alt='dog' style='height: 100%;'>"+
                                          "</a>"+
                                          "</div>"+
                                          "<div class='card-footer row'>"+
@@ -1331,8 +1331,8 @@ li {
                                          "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
                                          "</div>"+
                                          "<div class='col-3 form-inline' style='padding: 0px;'>"+
-                                         "<a href=''><i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i></a>"+
-                                         "<p style='margin-left:5px;margin: 0px;'>"+value.replyCount+"</p>"+
+                                         "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
+                                         "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
                                          "</div>"+
                                          "</div>"+
                                          "</div>"+
@@ -1347,7 +1347,7 @@ li {
                                         "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                                         "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
                                         "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'>"+
-                                        "<img src='${pageContext.request.contextPath}/resources/assets/img/배너일.png' style='width: 80px; height: 50px; margin-left: 20px;' />" +
+                                        "<img src='${ pageContext.servletContext.contextPath }/resources/upload/member/"+value.profileImg+"' style='width: 50px; height: 50px; margin-left: 20px; border-radius:50px;' />" +
                                         "</a>"+
                                         "</div>"+
                                         "<div class='col-6' style='width: 50%; height: 50px; margin-left: 30px;'>"+
@@ -1361,13 +1361,13 @@ li {
                                         "</div>"+
                                         "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                                         "<a href='pInfo.do?id="+value.pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                                        "<img class='card-img' src="+value.imgPath+"/"+value.renameImg+" alt='dog' style='height: 100%;'>"+
+                                        "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.profileImg+"' alt='dog' style='height: 100%;'>"+
                                         "</a>"+
                                         "</div>"+
                                         "<div class='card-footer row'>"+
                                         "<div class='col-3 form-inline'>"+
-                                        "<a onclick='like(this);'><i class='fa fa-heart'style='color: red; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
-                                        "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
+                                        "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
+                                        "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
                                         "</div>"+
                                         "<div class='col-3 form-inline' style='padding: 0px;'>"+
                                         "<a href=''><i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i></a>"+
@@ -1388,7 +1388,7 @@ li {
                                    "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                                    "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
                                    "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'>"+
-                                   "<img src='${pageContext.request.contextPath}/resources/assets/img/배너일.png' style='width: 80px; height: 50px; margin-left: 20px;' />" +
+                                   "<img src='${ pageContext.servletContext.contextPath }/resources/upload/member/"+value.profileImg+"' style='width: 50px; height: 50px; margin-left: 20px; border-radius:50px;' />" +
                                    "</a>"+
                                    "</div>"+
                                    "<div class='col-6' style='width: 50%; height: 50px; margin-left: 30px;'>"+
@@ -1402,7 +1402,7 @@ li {
                                    "</div>"+
                                    "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                                    "<a href='pInfo.do?id="+value.pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                                   "<img class='card-img' src="+value.imgPath+"/"+value.renameImg+" alt='dog' style='height: 100%;'>"+
+                                   "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.profileImg+"' alt='dog' style='height: 100%;'>"+
                                    "</a>"+
                                    "</div>"+
                                    "<div class='card-footer row'>"+
@@ -1411,8 +1411,8 @@ li {
                                    "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
                                    "</div>"+
                                    "<div class='col-3 form-inline' style='padding: 0px;'>"+
-                                   "<a href=''><i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i></a>"+
-                                   "<p style='margin-left:5px;margin: 0px;'>"+value.replyCount+"</p>"+
+                                   "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
+                                   "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
                                    "</div>"+
                                    "</div>"+
                                    "</div>"+
@@ -1427,7 +1427,7 @@ li {
                                    "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                                    "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
                                    "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'>"+
-                                   "<img src='${pageContext.request.contextPath}/resources/assets/img/배너일.png' style='width: 80px; height: 50px; margin-left: 20px;' />" +
+                                   "<img src='${ pageContext.servletContext.contextPath }/resources/upload/member/"+value.profileImg+"' style='width: 50px; height: 50px; margin-left: 20px; border-radius:50px;' />" +
                                    "</a>"+
                                    "</div>"+
                                    "<div class='col-6' style='width: 50%; height: 50px; margin-left: 30px;'>"+
@@ -1441,13 +1441,13 @@ li {
                                    "</div>"+
                                    "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                                    "<a href='pInfo.do?id="+value.pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                                   "<img class='card-img' src="+value.imgPath+"/"+value.renameImg+" alt='dog' style='height: 100%;'>"+
+                                   "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.profileImg+"' alt='dog' style='height: 100%;'>"+
                                    "</a>"+
                                    "</div>"+
                                    "<div class='card-footer row'>"+
                                    "<div class='col-3 form-inline'>"+
-                                   "<a onclick='like(this);'><i class='fa fa-heart'style='color: red; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
-                                   "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
+                                   "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
+                                   "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
                                    "</div>"+
                                    "<div class='col-3 form-inline' style='padding: 0px;'>"+
                                    "<a href=''><i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i></a>"+
@@ -1465,8 +1465,8 @@ li {
                                     "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                                     "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
                                     "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'>"+
-                                    "<img src='${pageContext.request.contextPath}/resources/assets/img/배너일.png' style='width: 80px; height: 50px; margin-left: 20px;' />" +
-                                    "</a>"+
+                                    "<img src='${ pageContext.servletContext.contextPath }/resources/upload/member/"+value.profileImg+"' style='width: 50px; height: 50px; margin-left: 20px; border-radius:50px;' />" +
+                                     "</a>"+
                                     "</div>"+
                                     "<div class='col-6' style='width: 50%; height: 50px; margin-left: 30px;'>"+
                                     "<span style='margin-bottom: 0px; margin-top: 23px;'>"+value.nickName+"<br>"+value.enrollDate+"</span>"+
@@ -1479,8 +1479,8 @@ li {
                                     "</div>"+
                                     "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                                     "<a href='pInfo.do?id="+value.pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                                    "<img class='card-img' src="+value.imgPath+"/"+value.renameImg+" alt='dog' style='height: 100%;'>"+
-                                    "</a>"+
+                                    "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.profileImg+"' alt='dog' style='height: 100%;'>"+
+                                     "</a>"+
                                     "</div>"+
                                     "<div class='card-footer row'>"+
                                     "<div class='col-3 form-inline'>"+
@@ -1488,8 +1488,8 @@ li {
                                     "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
                                     "</div>"+
                                     "<div class='col-3 form-inline' style='padding: 0px;'>"+
-                                    "<a href=''><i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i></a>"+
-                                    "<p style='margin-left:5px;margin: 0px;'>"+value.replyCount+"</p>"+
+                                    "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
+                                    "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
                                     "</div>"+
                                     "</div>"+
                                     "</div>"+
@@ -1503,7 +1503,7 @@ li {
                                     "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                                     "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
                                     "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'>"+
-                                    "<img src='${pageContext.request.contextPath}/resources/assets/img/배너일.png' style='width: 80px; height: 50px; margin-left: 20px;' />" +
+                                    "<img src='${ pageContext.servletContext.contextPath }/resources/upload/member/"+value.profileImg+"' style='width: 50px; height: 50px; margin-left: 20px; border-radius:50px;' />" +
                                     "</a>"+
                                     "</div>"+
                                     "<div class='col-6' style='width: 50%; height: 50px; margin-left: 30px;'>"+
@@ -1517,7 +1517,7 @@ li {
                                     "</div>"+
                                     "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                                     "<a href='pInfo.do?id="+value.pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                                    "<img class='card-img' src="+value.imgPath+"/"+value.renameImg+" alt='dog' style='height: 100%;'>"+
+                                    "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.profileImg+"' alt='dog' style='height: 100%;'>"+
                                     "</a>"+
                                     "</div>"+
                                     "<div class='card-footer row'>"+
@@ -1526,8 +1526,8 @@ li {
                                     "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
                                     "</div>"+
                                     "<div class='col-3 form-inline' style='padding: 0px;'>"+
-                                    "<a href=''><i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i></a>"+
-                                    "<p style='margin-left:5px;margin: 0px;'>"+value.replyCount+"</p>"+
+                                    "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
+                                    "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
                                     "</div>"+
                                     "</div>"+
                                     "</div>"+
@@ -1626,7 +1626,7 @@ li {
                      "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                      "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
                      "<a class='btn' href='mpViewProfile.do?mno="+data[0].mno+"' style='margin:0px; padding:0px;'>"+
-                     "<img src='${pageContext.request.contextPath}/resources/assets/img/배너일.png' style='width: 80px; height: 50px; margin-left: 20px;' />" +
+                     "<img src='${ pageContext.servletContext.contextPath }/resources/upload/member/"+data[0].profileImg+"' style='width: 50px; height: 50px; margin-left: 20px; border-radius:50px;' />" +
                      "</a>"+
                      "</div>"+
                      "<div class='col-6' style='width: 50%; height: 50px; margin-left: 30px;'>"+
@@ -1640,7 +1640,7 @@ li {
                      "</div>"+
                      "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                      "<a href='pInfo.do?id="+data[0].pno+" 'style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                     "<img class='card-img' src="+data[0].imgPath+"/"+data[0].renameImg+" alt='dog' style='height: 100%;'>"+
+                     "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+data[0].profileImg+"' alt='dog' style='height: 100%;'>"+
                      "</a>"+
                      "</div>"+
                      "<div class='card-footer row'>"+
@@ -1649,7 +1649,7 @@ li {
                      "<p style='margin: 0px;margin-left:5px;'>"+data[0].likeCount+"</p>"+	
                      "</div>"+
                      "<div class='col-3 form-inline' style='padding: 0px;'>"+
-                     "<a href=''><i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i></a>"+
+                     "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
                      "<p style='margin: 0px;margin-left:5px;'>"+data[0].replyCount+"</p>"+
                      "</div>"+
                      "</div>"+
@@ -1665,7 +1665,7 @@ li {
                              "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                              "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
                              "<a class='btn' href='mpViewProfile.do?mno="+data[0].mno+"' style='margin:0px; padding:0px;'>"+
-                             "<img src='${pageContext.request.contextPath}/resources/assets/img/배너일.png' style='width: 80px; height: 50px; margin-left: 20px;' />" +
+                             "<img src='${ pageContext.servletContext.contextPath }/resources/upload/member/"+data[0].profileImg+"' style='width: 50px; height: 50px; margin-left: 20px; border-radius:50px;' />" +
                              "</a>"+
                              "</div>"+
                              "<div class='col-6' style='width: 50%; height: 50px; margin-left: 30px;'>"+
@@ -1679,7 +1679,7 @@ li {
                              "</div>"+
                              "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                              "<a href='pInfo.do?id="+data[0].pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                             "<img class='card-img' src="+data[0].imgPath+"/"+data[0].renameImg+" alt='dog' style='height: 100%;'>"+
+                             "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+data[0].profileImg+"' alt='dog' style='height: 100%;'>"+
                              "</a>"+
                              "</div>"+
                              "<div class='card-footer row'>"+
@@ -1688,9 +1688,9 @@ li {
                              "<p style='margin: 0px; margin-left:5px;'value="+data[0].pno+">"+data[0].likeCount+"</p>"+
                              "</div>"+
                              "<div class='col-3 form-inline' style='padding: 0px;'>"+
-                             "<a href=''><i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i></a>"+
-                             "<p style='margin-left:5px;margin: 0px;'>"+data[0].replyCount+"</p>"+
-                             "</div>"+
+                             "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
+                             "<p style='margin: 0px;margin-left:5px;'>"+data[0].replyCount+"</p>"+
+                              "</div>"+
                              "</div>"+
                              "</div>"+
                              "</div>"+
@@ -1704,21 +1704,21 @@ li {
                             "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                             "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
                             "<a class='btn' href='mpViewProfile.do?mno="+data[0].mno+"' style='margin:0px; padding:0px;'>"+
-                            "<img src='${pageContext.request.contextPath}/resources/assets/img/배너일.png' style='width: 80px; height: 50px; margin-left: 20px;' />" +
+                            "<img src='${ pageContext.servletContext.contextPath }/resources/upload/member/"+data[0].profileImg+"' style='width: 50px; height: 50px; margin-left: 20px; border-radius:50px;' />" +
                             "</a>"+
                             "</div>"+
                             "<div class='col-6' style='width: 50%; height: 50px; margin-left: 30px;'>"+
                             "<span style='margin-bottom: 0px; margin-top: 23px;'>"+data[0].nickName+"<br>"+data[0].enrollDate+"</span>"+
                             "</div>"+
                             "<div class='col-3'style='width: 20%; height: 50px; margin-top: 5px; padding-right: 10px; padding-left: 10px; padding-bottom: 5px;'>"+
-                            "<a class='btn btn-dark'><input type='hidden' value="+value.mno+" id='hiddenmno'/><input type='hidden' value="+"${loginUser.mno}"+" id='hiddenmno'/>"+
+                            "<a class='btn btn-dark'><input type='hidden' value="+data[0].mno+" id='hiddenmno'/><input type='hidden' value="+"${loginUser.mno}"+" id='hiddenmno'/>"+
                             "<span style='font-size: 1.2em; color:white;' >My</span>"+
                            "</a>"+
                            "</div>"+
                             "</div>"+
                             "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                             "<a href='pInfo.do?id="+data[0].pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                            "<img class='card-img' src="+data[0].imgPath+"/"+data[0].renameImg+" alt='dog' style='height: 100%;'>"+
+                            "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+data[0].profileImg+"' alt='dog' style='height: 100%;'>"+
                             "</a>"+
                             "</div>"+
                             "<div class='card-footer row'>"+
@@ -1727,8 +1727,8 @@ li {
                             "<p style='margin: 0px; margin-left:5px;'value="+data[0].pno+">"+data[0].likeCount+"</p>"+
                             "</div>"+
                             "<div class='col-3 form-inline' style='padding: 0px;'>"+
-                            "<a href=''><i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i></a>"+
-                            "<p style='margin-left:5px;margin: 0px;'>"+data[0].replyCount+"</p>"+
+                            "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
+                            "<p style='margin: 0px;margin-left:5px;'>"+data[0].replyCount+"</p>"+
                             "</div>"+
                             "</div>"+
                             "</div>"+
@@ -1745,7 +1745,7 @@ li {
                         "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                         "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
                         "<a class='btn' href='mpViewProfile.do?mno="+data[0].mno+"' style='margin:0px; padding:0px;'>"+
-                        "<img src='${pageContext.request.contextPath}/resources/assets/img/배너일.png' style='width: 80px; height: 50px; margin-left: 20px;' />" +
+                        "<img src='${ pageContext.servletContext.contextPath }/resources/upload/member/"+data[0].profileImg+"' style='width: 50px; height: 50px; margin-left: 20px; border-radius:50px;' />" +
                         "</a>"+
                         "</div>"+
                         "<div class='col-6' style='width: 50%; height: 50px; margin-left: 30px;'>"+
@@ -1759,7 +1759,7 @@ li {
                         "</div>"+
                         "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                         "<a href='pInfo.do?id="+data[0].pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                        "<img class='card-img' src="+data[0].imgPath+"/"+data[0].renameImg+" alt='dog' style='height: 100%;'>"+
+                        "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+data[0].profileImg+"' alt='dog' style='height: 100%;'>"+
                         "</a>"+
                         "</div>"+
                         "<div class='card-footer row'>"+
@@ -1768,8 +1768,8 @@ li {
                         "<p style='margin: 0px; margin-left:5px;'value="+data[0].pno+">"+data[0].likeCount+"</p>"+
                         "</div>"+
                         "<div class='col-3 form-inline' style='padding: 0px;'>"+
-                        "<a href=''><i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i></a>"+
-                        "<p style='margin-left:5px;margin: 0px;'>"+data[0].replyCount+"</p>"+
+                        "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
+                        "<p style='margin: 0px;margin-left:5px;'>"+data[0].replyCount+"</p>"+
                         "</div>"+
                         "</div>"+
                         "</div>"+
@@ -1783,8 +1783,8 @@ li {
                         "<div class='card' style='overflow:hidden;'>"+
                         "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                         "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
-                        "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'>"+
-                        "<img src='${pageContext.request.contextPath}/resources/assets/img/배너일.png' style='width: 80px; height: 50px; margin-left: 20px;' />" +
+                        "<a class='btn' href='mpViewProfile.do?mno="+data[0].mno+"' style='margin:0px; padding:0px;'>"+
+                        "<img src='${ pageContext.servletContext.contextPath }/resources/upload/member/"+data[0].profileImg+"' style='width: 50px; height: 50px; margin-left: 20px; border-radius:50px;' />" +
                         "</a>"+
                         "</div>"+
                         "<div class='col-6' style='width: 50%; height: 50px; margin-left: 30px;'>"+
@@ -1798,7 +1798,7 @@ li {
                         "</div>"+
                         "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                         "<a href='pInfo.do?id="+data[0].pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                        "<img class='card-img' src="+data[0].imgPath+"/"+data[0].renameImg+" alt='dog' style='height: 100%;'>"+
+                        "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+data[0].profileImg+"' alt='dog' style='height: 100%;'>"+
                         "</a>"+
                         "</div>"+
                         "<div class='card-footer row'>"+
@@ -1807,8 +1807,8 @@ li {
                         "<p style='margin: 0px; margin-left:5px;'value="+data[0].pno+">"+data[0].likeCount+"</p>"+
                         "</div>"+
                         "<div class='col-3 form-inline' style='padding: 0px;'>"+
-                        "<a href=''><i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i></a>"+
-                        "<p style='margin-left:5px;margin: 0px;'>"+data[0].replyCount+"</p>"+
+                        "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
+                        "<p style='margin: 0px;margin-left:5px;'>"+data[0].replyCount+"</p>"+
                         "</div>"+
                         "</div>"+
                         "</div>"+
@@ -1821,8 +1821,8 @@ li {
                          "<div class='card' style='overflow:hidden;'>"+
                          "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                          "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
-                         "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'>"+
-                         "<img src='${pageContext.request.contextPath}/resources/assets/img/배너일.png' style='width: 80px; height: 50px; margin-left: 20px;' />" +
+                         "<a class='btn' href='mpViewProfile.do?mno="+data[0].mno+"' style='margin:0px; padding:0px;'>"+
+                         "<img src='${ pageContext.servletContext.contextPath }/resources/upload/member/"+data[0].profileImg+"' style='width: 50px; height: 50px; margin-left: 20px; border-radius:50px;' />" +
                          "</a>"+
                          "</div>"+
                          "<div class='col-6' style='width: 50%; height: 50px; margin-left: 30px;'>"+
@@ -1836,7 +1836,7 @@ li {
                          "</div>"+
                          "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                          "<a href='pInfo.do?id="+data[0].pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                         "<img class='card-img' src="+data[0].imgPath+"/"+data[0].renameImg+" alt='dog' style='height: 100%;'>"+
+                         "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+data[0].profileImg+"' alt='dog' style='height: 100%;'>"+
                          "</a>"+
                          "</div>"+
                          "<div class='card-footer row'>"+
@@ -1845,8 +1845,8 @@ li {
                          "<p style='margin: 0px; margin-left:5px;'value="+data[0].pno+">"+data[0].likeCount+"</p>"+
                          "</div>"+
                          "<div class='col-3 form-inline' style='padding: 0px;'>"+
-                         "<a href=''><i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i></a>"+
-                         "<p style='margin-left:5px;margin: 0px;'>"+data[0].replyCount+"</p>"+
+                         "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
+                         "<p style='margin: 0px;margin-left:5px;'>"+data[0].replyCount+"</p>"+
                          "</div>"+
                          "</div>"+
                          "</div>"+
@@ -1860,7 +1860,7 @@ li {
                          "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                          "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
                          "<a class='btn' href='mpViewProfile.do?mno="+data[0].mno+"' style='margin:0px; padding:0px;'>"+
-                         "<img src='${pageContext.request.contextPath}/resources/assets/img/배너일.png' style='width: 80px; height: 50px; margin-left: 20px;' />" +
+                         "<img src='${ pageContext.servletContext.contextPath }/resources/upload/member/"+data[0].profileImg+"' style='width: 50px; height: 50px; margin-left: 20px; border-radius:50px;' />" +
                          "</a>"+
                          "</div>"+
                          "<div class='col-6' style='width: 50%; height: 50px; margin-left: 30px;'>"+
@@ -1874,7 +1874,7 @@ li {
                          "</div>"+
                          "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                          "<a href='pInfo.do?id="+data[0].pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                         "<img class='card-img' src="+data[0].imgPath+"/"+data[0].renameImg+" alt='dog' style='height: 100%;'>"+
+                         "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+data[0].profileImg+"' alt='dog' style='height: 100%;'>"+
                          "</a>"+
                          "</div>"+
                          "<div class='card-footer row'>"+
@@ -1883,8 +1883,8 @@ li {
                          "<p style='margin: 0px; margin-left:5px;'value="+data[0].pno+">"+data[0].likeCount+"</p>"+
                          "</div>"+
                          "<div class='col-3 form-inline' style='padding: 0px;'>"+
-                         "<a href=''><i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i></a>"+
-                         "<p style='margin-left:5px;margin: 0px;'>"+data[0].replyCount+"</p>"+
+                         "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
+                         "<p style='margin: 0px;margin-left:5px;'>"+data[0].replyCount+"</p>"+
                          "</div>"+
                          "</div>"+
                          "</div>"+
@@ -1907,7 +1907,7 @@ li {
                          "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                          "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
                          "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'>"+
-                         "<img src='${pageContext.request.contextPath}/resources/assets/img/배너일.png' style='width: 80px; height: 50px; margin-left: 20px;' />" +
+                         "<img src='${ pageContext.servletContext.contextPath }/resources/upload/member/"+value.profileImg+"' style='width: 50px; height: 50px; margin-left: 20px; border-radius:50px;' />" +
                          "</a>"+
                          "</div>"+
                          "<div class='col-6' style='width: 50%; height: 50px; margin-left: 30px;'>"+
@@ -1921,7 +1921,7 @@ li {
                          "</div>"+
                          "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                          "<a href='pInfo.do?id="+value.pno+" 'style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                         "<img class='card-img' src="+value.imgPath+"/"+value.renameImg+" alt='dog' style='height: 100%;'>"+
+                         "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.profileImg+"' alt='dog' style='height: 100%;'>"+
                          "</a>"+
                          "</div>"+
                          "<div class='card-footer row'>"+
@@ -1930,7 +1930,7 @@ li {
                          "<p style='margin: 0px;margin-left:5px;'>"+value.likeCount+"</p>"+
                          "</div>"+
                          "<div class='col-3 form-inline' style='padding: 0px;'>"+
-                         "<a href=''><i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i></a>"+
+                         "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
                          "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
                          "</div>"+
                          "</div>"+
@@ -1947,7 +1947,7 @@ li {
                          "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                          "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
                          "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'>"+
-                         "<img src='${pageContext.request.contextPath}/resources/assets/img/배너일.png' style='width: 80px; height: 50px; margin-left: 20px;' />" +
+                         "<img src='${ pageContext.servletContext.contextPath }/resources/upload/member/"+value.profileImg+"' style='width: 50px; height: 50px; margin-left: 20px; border-radius:50px;' />" +
                          "</a>"+
                          "</div>"+
                          "<div class='col-6' style='width: 50%; height: 50px; margin-left: 30px;'>"+
@@ -1961,7 +1961,8 @@ li {
                          "</div>"+
                          "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                          "<a href='pInfo.do?id="+value.pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                         "<img class='card-img' src="+value.imgPath+"/"+value.renameImg+" alt='dog' style='height: 100%;'>"+
+                         "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.profileImg+"' alt='dog' style='height: 100%;'>"+
+                         
                          "</a>"+
                          "</div>"+
                          "<div class='card-footer row'>"+
@@ -1970,8 +1971,8 @@ li {
                          "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
                          "</div>"+
                          "<div class='col-3 form-inline' style='padding: 0px;'>"+
-                         "<a href=''><i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i></a>"+
-                         "<p style='margin-left:5px;margin: 0px;'>"+value.replyCount+"</p>"+
+                         "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
+                         "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
                          "</div>"+
                          "</div>"+
                          "</div>"+
@@ -1986,7 +1987,7 @@ li {
                         "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                         "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
                         "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'>"+
-                        "<img src='${pageContext.request.contextPath}/resources/assets/img/배너일.png' style='width: 80px; height: 50px; margin-left: 20px;' />" +
+                        "<img src='${ pageContext.servletContext.contextPath }/resources/upload/member/"+value.profileImg+"' style='width: 50px; height: 50px; margin-left: 20px; border-radius:50px;' />" +
                         "</a>"+
                         "</div>"+
                         "<div class='col-6' style='width: 50%; height: 50px; margin-left: 30px;'>"+
@@ -2000,7 +2001,7 @@ li {
                         "</div>"+
                         "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                         "<a href='pInfo.do?id="+value.pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                        "<img class='card-img' src="+value.imgPath+"/"+value.renameImg+" alt='dog' style='height: 100%;'>"+
+                        "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.profileImg+"' alt='dog' style='height: 100%;'>"+
                         "</a>"+
                         "</div>"+
                         "<div class='card-footer row'>"+
@@ -2009,8 +2010,8 @@ li {
                         "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
                         "</div>"+
                         "<div class='col-3 form-inline' style='padding: 0px;'>"+
-                        "<a href=''><i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i></a>"+
-                        "<p style='margin-left:5px;margin: 0px;'>"+value.replyCount+"</p>"+
+                        "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
+                        "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
                         "</div>"+
                         "</div>"+
                         "</div>"+
@@ -2025,7 +2026,7 @@ li {
                             "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                             "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
                             "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'>"+
-                            "<img src='${pageContext.request.contextPath}/resources/assets/img/배너일.png' style='width: 80px; height: 50px; margin-left: 20px;' />" +
+                            "<img src='${ pageContext.servletContext.contextPath }/resources/upload/member/"+value.profileImg+"' style='width: 50px; height: 50px; margin-left: 20px; border-radius:50px;' />" +
                             "</a>"+
                             "</div>"+
                             "<div class='col-6' style='width: 50%; height: 50px; margin-left: 30px;'>"+
@@ -2039,7 +2040,7 @@ li {
                             "</div>"+
                             "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                             "<a href='pInfo.do?id="+value.pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                            "<img class='card-img' src="+value.imgPath+"/"+value.renameImg+" alt='dog' style='height: 100%;'>"+
+                            "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.profileImg+"' alt='dog' style='height: 100%;'>"+
                             "</a>"+
                             "</div>"+
                             "<div class='card-footer row'>"+
@@ -2048,8 +2049,8 @@ li {
                             "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
                             "</div>"+
                             "<div class='col-3 form-inline' style='padding: 0px;'>"+
-                            "<a href=''><i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i></a>"+
-                            "<p style='margin-left:5px;margin: 0px;'>"+value.replyCount+"</p>"+
+                            "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
+                            "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
                             "</div>"+
                             "</div>"+
                             "</div>"+
@@ -2064,7 +2065,7 @@ li {
                             "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                             "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
                             "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'>"+
-                            "<img src='${pageContext.request.contextPath}/resources/assets/img/배너일.png' style='width: 80px; height: 50px; margin-left: 20px;' />" +
+                            "<img src='${ pageContext.servletContext.contextPath }/resources/upload/member/"+value.profileImg+"' style='width: 50px; height: 50px; margin-left: 20px; border-radius:50px;' />" +
                             "</a>"+
                             "</div>"+
                             "<div class='col-6' style='width: 50%; height: 50px; margin-left: 30px;'>"+
@@ -2078,7 +2079,7 @@ li {
                             "</div>"+
                             "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                             "<a href='pInfo.do?id="+value.pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                            "<img class='card-img' src="+value.imgPath+"/"+value.renameImg+" alt='dog' style='height: 100%;'>"+
+                            "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.profileImg+"' alt='dog' style='height: 100%;'>"+
                             "</a>"+
                             "</div>"+
                             "<div class='card-footer row'>"+
@@ -2087,8 +2088,8 @@ li {
                             "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
                             "</div>"+
                             "<div class='col-3 form-inline' style='padding: 0px;'>"+
-                            "<a href=''><i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i></a>"+
-                            "<p style='margin-left:5px;margin: 0px;'>"+value.replyCount+"</p>"+
+                            "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
+                            "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
                             "</div>"+
                             "</div>"+
                             "</div>"+
@@ -2102,7 +2103,7 @@ li {
                              "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                              "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
                              "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'>"+
-                             "<img src='${pageContext.request.contextPath}/resources/assets/img/배너일.png' style='width: 80px; height: 50px; margin-left: 20px;' />" +
+                             "<img src='${ pageContext.servletContext.contextPath }/resources/upload/member/"+value.profileImg+"' style='width: 50px; height: 50px; margin-left: 20px; border-radius:50px;' />" +
                              "</a>"+
                              "</div>"+
                              "<div class='col-6' style='width: 50%; height: 50px; margin-left: 30px;'>"+
@@ -2116,7 +2117,7 @@ li {
                              "</div>"+
                              "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                              "<a href='pInfo.do?id="+value.pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                             "<img class='card-img' src="+value.imgPath+"/"+value.renameImg+" alt='dog' style='height: 100%;'>"+
+                             "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.profileImg+"' alt='dog' style='height: 100%;'>"+
                              "</a>"+
                              "</div>"+
                              "<div class='card-footer row'>"+
@@ -2125,8 +2126,8 @@ li {
                              "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
                              "</div>"+
                              "<div class='col-3 form-inline' style='padding: 0px;'>"+
-                             "<a href=''><i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i></a>"+
-                             "<p style='margin-left:5px;margin: 0px;'>"+value.replyCount+"</p>"+
+                             "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
+                             "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
                              "</div>"+
                              "</div>"+
                              "</div>"+
@@ -2140,7 +2141,7 @@ li {
                              "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                              "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
                              "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'>"+
-                             "<img src='${pageContext.request.contextPath}/resources/assets/img/배너일.png' style='width: 80px; height: 50px; margin-left: 20px;' />" +
+                             "<img src='${ pageContext.servletContext.contextPath }/resources/upload/member/"+value.profileImg+"' style='width: 50px; height: 50px; margin-left: 20px; border-radius:50px;' />" +
                              "</a>"+
                              "</div>"+
                              "<div class='col-6' style='width: 50%; height: 50px; margin-left: 30px;'>"+
@@ -2154,7 +2155,7 @@ li {
                              "</div>"+
                              "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                              "<a href='pInfo.do?id="+value.pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                             "<img class='card-img' src="+value.imgPath+"/"+value.renameImg+" alt='dog' style='height: 100%;'>"+
+                             "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.profileImg+"' alt='dog' style='height: 100%;'>"+
                              "</a>"+
                              "</div>"+
                              "<div class='card-footer row'>"+
@@ -2163,8 +2164,8 @@ li {
                              "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
                              "</div>"+
                              "<div class='col-3 form-inline' style='padding: 0px;'>"+
-                             "<a href=''><i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i></a>"+
-                             "<p style='margin-left:5px;margin: 0px;'>"+value.replyCount+"</p>"+
+                             "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
+                             "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
                              "</div>"+
                              "</div>"+
                              "</div>"+

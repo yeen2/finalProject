@@ -162,7 +162,7 @@ invest_table .title .date {
 		
 		});
 	}
-	
+	var content;
 	$(document).on("click", "#asd", function(){
 		var iconClass = $(this).attr('class');
 		var icon = $(this);
@@ -178,6 +178,7 @@ invest_table .title .date {
 					
 					console.log(data);
 					$(icon).parent().parent().parent().next().append("<div class='appendNotice' style='height:100%; color: #4f4f4f; padding: 20px 15px; background-color: #e9e9e9; font-size: .8rem; line-height: 1.2rem;'><span>"+data[0].content+"</span></div>");
+					content = data[0].content;
 					if("${loginUser.email}" == "admin"){
 						$(icon).parent().parent().parent().next().append("<div class='appendNotice3' style='height:50px; color: #4f4f4f;background-color:white; font-size: .8rem; line-height: 1.2rem;'>");
 					}
@@ -242,7 +243,7 @@ invest_table .title .date {
 		console.log($(a).parent().children().eq(2).val());
 		//$(icon).parent().parent().parent().next().append("<div class='appendNotice' style='height:100%; color: #4f4f4f; padding: 20px 15px; background-color: #e9e9e9; font-size: .8rem; line-height: 1.2rem;'>"+data[0].content+"</div>");
 		console.log($(a).parent().siblings().eq(0).children().remove());
-		$(a).parent().siblings().eq(0).append("<textarea rows='3' cols='200' class='form-control'resize: none placeholder='수정내용입력'></textarea>");
+		$(a).parent().siblings().eq(0).append("<textarea rows='3' cols='200' class='form-control'resize: none placeholder='수정내용입력'>"+content+"</textarea>");
 		console.log($(a).parent().eq(0).append());
 		console.log($(a).parent().children().eq(1).attr('value','등록'));
 		console.log($(a).parent().children().eq(0).remove());
