@@ -220,6 +220,16 @@
 		width: 80%;
 	}
 	
+	.searchBrand {
+		background-color: gray;
+		width: 188px; 
+		height: 40px; padding: 10px;
+	}
+	.searchBrand:hover{
+		cursor:pointer;
+		background-color: #A4A4A4;
+	}
+	
 </style>
 <%-- <script type="text/javascript" src="<%=request.getContextPath() %>/resources/js/jquery.placeholder.js"></script> --%>
 <script src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
@@ -433,8 +443,11 @@
 							<!-- 2. 브랜드 -->
 							<label>브랜드</label>
 							&nbsp;&nbsp;&nbsp;&nbsp;
-							<div class="form-group" style="display: inline-block;">
-								<input type="text" class="form-control" name="brand" placeholder="브랜드를 적어주세요">
+							<div class="form-group" style="display: inline-block; position: relative;">
+								<input type="text" class="form-control brand" name="brand" placeholder="브랜드를 적어주세요">
+							</div>
+							<div class="searchBrandDiv" style="display: none; top: 188px; left: 100px;">
+								
 							</div>
 							
 							<br>
@@ -443,66 +456,66 @@
 							<label>컬러</label>
 							<div style="margin: auto; text-align: center; background-color: #F2F2F2">
 							
-							<div style="padding:0; margin: 0px; display: inline-block; width: 28px; height: 28px;">
-								<a id="red" class="btn bb" style="padding:0; margin: 0px;"> 
-									<i class="fa fa-circle fa-2x" aria-hidden="true" style="color: red;" id="red"></i>
-								</a> 
-							</div>
-							<div style="padding:0; margin: 0px; display: inline-block; width: 28px; height: 28px;">
-								<a id="orange" class="btn bb" style="padding:0; margin: 0px;"> 
-									<i class="fa fa-circle fa-2x" aria-hidden="true" style="color: orange;" id="orange"></i>
-								</a> 
-							</div>
-							<div style="padding:0; margin: 0px; display: inline-block; width: 28px; height: 28px;">
-								<a id="yellow" class="btn bb" style="padding:0; margin: 0px;"> 
-									<i class="fa fa-circle fa-2x" aria-hidden="true" style="color:yellow;" id="yellow"></i>
-								</a> 
-							</div>
-							<div style="padding:0; margin: 0px; display: inline-block; width: 28px; height: 28px;">
-								<a id="green" class="btn bb" style="padding:0; margin: 0px;"> 
-									<i class="fa fa-circle fa-2x" aria-hidden="true" style="color: green;" id="green"></i>
-								</a> 
-							</div>
-							<div style="padding:0; margin: 0px; display: inline-block; width: 28px; height: 28px;">
-								<a id="blue" class="btn bb" style="padding:0; margin: 0px;"> 
-									<i class="fa fa-circle fa-2x" aria-hidden="true" style="color: blue;" id="blue"></i>
-								</a> 
-							</div>
-							<div style="padding:0; margin: 0px; display: inline-block; width: 28px; height: 28px;">
-								<a id="navy" class="btn bb" style="padding:0; margin: 0px;"> 
-									<i class="fa fa-circle fa-2x" aria-hidden="true" style="color:navy;" id="navy"></i>
-								</a> 
-							</div>
-							<div style="padding:0; margin: 0px; display: inline-block; width: 28px; height: 28px;">
-								<a id="black" class="btn bb" style="padding:0; margin: 0px;"> 
-									<i class="fa fa-circle fa-2x" aria-hidden="true" style="color: black;" id="black"></i>
-								</a> 
-							</div>
-							<div style="padding:0; margin: 0px; display: inline-block; width: 28px; height: 28px;">
-								<a id="white" class="btn bb" style="padding:0; margin: 0px;"> 
-									<i class="fa fa-circle fa-2x" aria-hidden="true" style="color: white; border-color: gray;" id="white"></i>
-								</a> 
-							</div>
-							<div style="padding:0; margin: 0px; display: inline-block; width: 28px; height: 28px;">
-								<a id="pink" class="btn bb" style="padding:0; margin: 0px;"> 
-									<i class="fa fa-circle fa-2x" aria-hidden="true" style="color: pink;" id="pink"></i>
-								</a> 
-							</div>
-							<div style="padding:0; margin: 0px; display: inline-block; width: 28px; height: 28px;">
-								<a id="brown" class="btn bb" style="padding:0; margin: 0px;"> 
-									<i class="fa fa-circle fa-2x" aria-hidden="true" style="color: brown;" id="brown"></i>
-								</a> 
-							</div>
-							<div style="padding:0; margin: 0px; display: inline-block; width: 28px; height: 28px;">
-								<a id="gray" class="btn bb" style="padding:0; margin: 0px;"> 
-									<i class="fa fa-circle fa-2x" aria-hidden="true" style="color: gray;" id="gray"></i>
-								</a> 
-							</div>
-							<div style="padding:0; margin: 0px; display: inline-block; width: 28px; height: 28px;">
-								<a id="aqua" class="btn bb" style="padding:0; margin: 0px;"> 
-									<i class="fa fa-circle fa-2x" aria-hidden="true" style="color: aqua;" id="aqua"></i>
-								</a> 
-							</div>
+								<div style="padding:0; margin: 0px; display: inline-block; width: 28px; height: 28px;">
+									<a id="red" class="btn bb" style="padding:0; margin: 0px;"> 
+										<i class="fa fa-circle fa-2x" aria-hidden="true" style="color: red;" id="red"></i>
+									</a> 
+								</div>
+								<div style="padding:0; margin: 0px; display: inline-block; width: 28px; height: 28px;">
+									<a id="orange" class="btn bb" style="padding:0; margin: 0px;"> 
+										<i class="fa fa-circle fa-2x" aria-hidden="true" style="color: orange;" id="orange"></i>
+									</a> 
+								</div>
+								<div style="padding:0; margin: 0px; display: inline-block; width: 28px; height: 28px;">
+									<a id="yellow" class="btn bb" style="padding:0; margin: 0px;"> 
+										<i class="fa fa-circle fa-2x" aria-hidden="true" style="color:yellow;" id="yellow"></i>
+									</a> 
+								</div>
+								<div style="padding:0; margin: 0px; display: inline-block; width: 28px; height: 28px;">
+									<a id="green" class="btn bb" style="padding:0; margin: 0px;"> 
+										<i class="fa fa-circle fa-2x" aria-hidden="true" style="color: green;" id="green"></i>
+									</a> 
+								</div>
+								<div style="padding:0; margin: 0px; display: inline-block; width: 28px; height: 28px;">
+									<a id="blue" class="btn bb" style="padding:0; margin: 0px;"> 
+										<i class="fa fa-circle fa-2x" aria-hidden="true" style="color: blue;" id="blue"></i>
+									</a> 
+								</div>
+								<div style="padding:0; margin: 0px; display: inline-block; width: 28px; height: 28px;">
+									<a id="navy" class="btn bb" style="padding:0; margin: 0px;"> 
+										<i class="fa fa-circle fa-2x" aria-hidden="true" style="color:navy;" id="navy"></i>
+									</a> 
+								</div>
+								<div style="padding:0; margin: 0px; display: inline-block; width: 28px; height: 28px;">
+									<a id="black" class="btn bb" style="padding:0; margin: 0px;"> 
+										<i class="fa fa-circle fa-2x" aria-hidden="true" style="color: black;" id="black"></i>
+									</a> 
+								</div>
+								<div style="padding:0; margin: 0px; display: inline-block; width: 28px; height: 28px;">
+									<a id="white" class="btn bb" style="padding:0; margin: 0px;"> 
+										<i class="fa fa-circle fa-2x" aria-hidden="true" style="color: white; border-color: gray;" id="white"></i>
+									</a> 
+								</div>
+								<div style="padding:0; margin: 0px; display: inline-block; width: 28px; height: 28px;">
+									<a id="pink" class="btn bb" style="padding:0; margin: 0px;"> 
+										<i class="fa fa-circle fa-2x" aria-hidden="true" style="color: pink;" id="pink"></i>
+									</a> 
+								</div>
+								<div style="padding:0; margin: 0px; display: inline-block; width: 28px; height: 28px;">
+									<a id="brown" class="btn bb" style="padding:0; margin: 0px;"> 
+										<i class="fa fa-circle fa-2x" aria-hidden="true" style="color: brown;" id="brown"></i>
+									</a> 
+								</div>
+								<div style="padding:0; margin: 0px; display: inline-block; width: 28px; height: 28px;">
+									<a id="gray" class="btn bb" style="padding:0; margin: 0px;"> 
+										<i class="fa fa-circle fa-2x" aria-hidden="true" style="color: gray;" id="gray"></i>
+									</a> 
+								</div>
+								<div style="padding:0; margin: 0px; display: inline-block; width: 28px; height: 28px;">
+									<a id="aqua" class="btn bb" style="padding:0; margin: 0px;"> 
+										<i class="fa fa-circle fa-2x" aria-hidden="true" style="color: aqua;" id="aqua"></i>
+									</a> 
+								</div>
 							</div>
 							<input type="hidden" name="color" id="selectColor">
 							
@@ -542,22 +555,12 @@
 			            $('#btnAdd').click (function () {
 			            	
 			            	var addContent = $('#addDiv').html();
-			            	//console.log(addContent);
-			            	
-			            	//var origin = $("#addDiv").clone();
-			            	//$('#addLocation').append(origin);
-			            	
+
 			                $('#addLocation').append(
 			                	'<div class="card-body" id="addDiv" style="border-radius: 0; border: none; box-shadow: 0 0 2rem rgba(0, 0, 0, 0.1); transition: transform 800ms cubic-bezier(0.165, 0.84, 0.44, 1); display: inline-block; margin-right: 10px; margin-left: 10px;"><div><br><div style="display: inline-block; float: right;"><button type="button" id="removeDiv" style="cursor: pointer; background-color: transparent; border: none; text-decoration: none;"><i class="fas fa-times"></i></button></div>' + addContent + '</div>' 
 			               	).append(
 			               		'<br><br>'		
 			               	); // end append    
-			                
-			               /*  $('#removeDiv').on('click', function () { 
-			                    $(this).parent().parent().parent().remove (); // remove the textbox
-			                    $(this).next ().remove (); // remove the <br>
-			                    $(this).remove (); // remove the button
-			                }); */
 			            }); // end click                                            
 			        }); // end ready 
 			        
@@ -568,15 +571,6 @@
 			      		$(div_).next().remove();
 			      		$(div_).remove();
 			        	
-			        	//removeThis.parent().parent().parent().prev().remove (); // remove the textbox
-			        	//removeThis.parent().parent().parent().remove (); // remove the textbox
-			        	//removeThis.next().remove(); // remove the <br>
-			        	//removeThis.remove (); // remove the button
-			        
-			        	//$(this).parent().parent().parent().prev().remove (); // remove the textbox
-			        	//$(this).parent().parent().parent().remove (); // remove the textbox
-	                    //$(this).next().remove (); // remove the <br>
-	                    //$(this).remove (); // remove the button
 			        });
 			    </script> 
 			    
@@ -595,6 +589,64 @@
 	</div>
 	<!-- /.container -->
 	
+	
+	
+	
+	<!----------------------------------------------- 브랜드 검색 -------------------------------------->
+	<script type="text/javascript">
+		//$(function(){
+			$(document).on("input",".brand", function () {
+			//$(".brand").on("input", function(){
+				var tt = $(this);
+				var brand = tt.val();
+				
+				tt.parent().next().show();
+
+				// 해당 top가져오기
+				var tttop = tt.parent().offset().top;
+				var llleft = tt.parent().offset().left;
+				console.log(tttop);
+				console.log(llleft);
+				
+				//tt.parent().next().css('position', 'absolute');
+				//tt.parent().next().css('top', tttop+20);
+				//tt.parent().next().css('left', llleft+500);
+				if(brand != ""){
+					$.ajax({
+						url:"pSelectBrand.do",
+						data:{brand:brand},
+						dataType:"json",
+						type:"get",
+						success:function(list){
+							tt.parent().next().html("");
+							
+							if(list != ""){
+								$.each(list, function(index, value){
+									var $selectBrandList = "<div class='searchBrand'>" 
+									    					+ value.brand 
+										    				+"</div>";
+									tt.parent().next().append($selectBrandList);
+								});
+							}else{
+								tt.parent().next().hide();
+							}
+						},
+						error:function(){
+							console.log("ajax 통신 실패");
+						}
+					}); 
+				}
+			});
+		//});
+	</script>
+	<script type="text/javascript">
+		// 검색된 브랜드들 클릭 할떄
+		$(document).on("click",".searchBrand", function () {
+			var tt = $(this).text();
+			$(this).parent().prev().children().eq(0).val(tt);
+			$(this).parent().hide();
+		});
+	</script>
 	
 	<!----------------------------------------------------- 지도 modal ----------------------------------------------->
 	

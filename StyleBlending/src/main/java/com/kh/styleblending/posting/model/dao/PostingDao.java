@@ -3,12 +3,12 @@ package com.kh.styleblending.posting.model.dao;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.styleblending.posting.model.vo.Brand;
 import com.kh.styleblending.posting.model.vo.Declare;
 import com.kh.styleblending.posting.model.vo.Posting;
 import com.kh.styleblending.posting.model.vo.PostingReply;
@@ -156,7 +156,9 @@ public class PostingDao {
 		return sqlSession.insert("postingMapper.insertLive", keyword);
 	}
 	
-	
+	public ArrayList<Brand> selectBrand(String brand) {
+		return (ArrayList)sqlSession.selectList("postingMapper.selectBrand", brand);
+	}
 	
 	
 	

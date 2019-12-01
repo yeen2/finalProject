@@ -24,6 +24,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.kh.styleblending.member.model.vo.Member;
 import com.kh.styleblending.posting.model.service.PostingService;
+import com.kh.styleblending.posting.model.vo.Brand;
 import com.kh.styleblending.posting.model.vo.Declare;
 import com.kh.styleblending.posting.model.vo.Posting;
 import com.kh.styleblending.posting.model.vo.PostingReply;
@@ -367,6 +368,17 @@ public class PostingController {
 		}
 	}
 	
+	// insert시 brand목록 ajax
+	@ResponseBody
+	@RequestMapping(value="pSelectBrand.do", produces="application/json; charset=UTF-8")
+	public String selectBrand(String brand) {
+		
+		ArrayList<Brand> list = pService.selectBrand(brand);
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		return gson.toJson(list);
+		
+	}
 	
 	
 	
