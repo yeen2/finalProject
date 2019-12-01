@@ -314,7 +314,6 @@
 								<!-- 팬추가 -->
 								<c:if test="${p.fanCheck == 0}">
 									<c:choose>
-										<!-- 로그인한 회원 = 포스팅등록 회원 일때-->
 										<c:when test="${p.mno == loginUser.mno}">
 											<button class="btn btn-dark btn-sm fBtn" id="removeFan" style="" disabled="disabled">
 												<i style="width: 40px;" class="fas fa-check"></i>
@@ -355,6 +354,20 @@
 				
 				<hr>
 				
+				<!-- 성별 -->
+				<div class="card my-4">
+					<h5 class="card-header">Gender</h5>
+					<div class="card-body">
+						<c:if test="${p.gender == 'M'}">
+							<div style="padding-left: 20px;"><i class="fa fa-male fa-3x"></i></div>
+						</c:if>
+						<c:if test="${p.gender == 'F'}">
+							<div style="padding-left: 20px;"><i class="fa fa-female fa-3x"></i></div>
+						</c:if>
+					</div>
+				</div>
+				
+				<hr>
 				<!-- 2. 코디 정보 -->
 				<div class="card my-4">
 					<h5 class="card-header">Clothes stylist</h5>
