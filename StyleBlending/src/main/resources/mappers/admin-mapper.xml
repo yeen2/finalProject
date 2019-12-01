@@ -308,6 +308,50 @@ select sum(m1) "month1",sum(m2) "month2",sum(m3) "month3",sum(m4) "month4",sum(m
     				from fashion_board
     				group by TO_CHAR(enroll_date,'yy/mm')))
 	</select>
+	
+	<!-- 일간 가입자수/게시글수 -->
+	<select id="selectDayCount" resultMap="StResultSet">
+		select sum(d1) "month1",sum(d2) "month2",sum(d3) "month3",sum(d4) "month4",sum(d5) "month5",sum(d6) "month6"
+		from(select decode(TO_CHAR(enroll_date,'mm-dd'),(select to_char(sysdate-5,'mm-dd')FROM DUAL),count(*),0) d1,
+ 					decode(TO_CHAR(enroll_date,'mm-dd'),(select to_char(sysdate-4,'mm-dd')FROM DUAL),count(*),0) d2,
+ 					decode(TO_CHAR(enroll_date,'mm-dd'),(select to_char(sysdate-3,'mm-dd')FROM DUAL),count(*),0) d3,
+ 					decode(TO_CHAR(enroll_date,'mm-dd'),(select to_char(sysdate-2,'mm-dd')FROM DUAL),count(*),0) d4,
+  					decode(TO_CHAR(enroll_date,'mm-dd'),(select to_char(sysdate-1,'mm-dd')FROM DUAL),count(*),0) d5,
+ 					decode(TO_CHAR(enroll_date,'mm-dd'),(select to_char(sysdate,'mm-dd')FROM DUAL),count(*),0) d6
+    				from member
+    				group by TO_CHAR(enroll_date,'mm-dd'))
+                    union
+select sum(DAY1) "day1",sum(DAY2) "DAY2",sum(day3) "DAY3",sum(day4) "DAY4",sum(day5) "DAY5",sum(day6) "DAY6" from
+    (select sum(d1) "DAY1",sum(d2) "DAY2",sum(d3) "DAY3",sum(d4) "DAY4",sum(d5) "DAY5",sum(d6) "DAY6"
+		from(select decode(TO_CHAR(enroll_date,'mm-dd'),(select to_char(sysdate-5,'mm-dd')FROM DUAL),count(*),0) d1,
+ 					decode(TO_CHAR(enroll_date,'mm-dd'),(select to_char(sysdate-4,'mm-dd')FROM DUAL),count(*),0) d2,
+ 					decode(TO_CHAR(enroll_date,'mm-dd'),(select to_char(sysdate-3,'mm-dd')FROM DUAL),count(*),0) d3,
+ 					decode(TO_CHAR(enroll_date,'mm-dd'),(select to_char(sysdate-2,'mm-dd')FROM DUAL),count(*),0) d4,
+  					decode(TO_CHAR(enroll_date,'mm-dd'),(select to_char(sysdate-1,'mm-dd')FROM DUAL),count(*),0) d5,
+ 					decode(TO_CHAR(enroll_date,'mm-dd'),(select to_char(sysdate,'mm-dd')FROM DUAL),count(*),0) d6
+    				from posting
+    				group by TO_CHAR(enroll_date,'mm-dd'))
+                    union
+select sum(d1) "day1",sum(d2) "day2",sum(d3) "day3",sum(d4) "day4",sum(d5) "day5",sum(d6) "day6"
+		from(select decode(TO_CHAR(enroll_date,'mm-dd'),(select to_char(sysdate-5,'mm-dd')FROM DUAL),count(*),0) d1,
+ 					decode(TO_CHAR(enroll_date,'mm-dd'),(select to_char(sysdate-4,'mm-dd')FROM DUAL),count(*),0) d2,
+ 					decode(TO_CHAR(enroll_date,'mm-dd'),(select to_char(sysdate-3,'mm-dd')FROM DUAL),count(*),0) d3,
+ 					decode(TO_CHAR(enroll_date,'mm-dd'),(select to_char(sysdate-2,'mm-dd')FROM DUAL),count(*),0) d4,
+  					decode(TO_CHAR(enroll_date,'mm-dd'),(select to_char(sysdate-1,'mm-dd')FROM DUAL),count(*),0) d5,
+ 					decode(TO_CHAR(enroll_date,'mm-dd'),(select to_char(sysdate,'mm-dd')FROM DUAL),count(*),0) d6
+    				from board
+    				group by TO_CHAR(enroll_date,'mm-dd'))
+                    union
+select sum(d1) "day1",sum(d2) "day2",sum(d3) "day3",sum(d4) "day4",sum(d5) "day5",sum(d6) "day6"
+		from(select decode(TO_CHAR(enroll_date,'mm-dd'),(select to_char(sysdate-5,'mm-dd')FROM DUAL),count(*),0) d1,
+ 					decode(TO_CHAR(enroll_date,'mm-dd'),(select to_char(sysdate-4,'mm-dd')FROM DUAL),count(*),0) d2,
+ 					decode(TO_CHAR(enroll_date,'mm-dd'),(select to_char(sysdate-3,'mm-dd')FROM DUAL),count(*),0) d3,
+ 					decode(TO_CHAR(enroll_date,'mm-dd'),(select to_char(sysdate-2,'mm-dd')FROM DUAL),count(*),0) d4,
+  					decode(TO_CHAR(enroll_date,'mm-dd'),(select to_char(sysdate-1,'mm-dd')FROM DUAL),count(*),0) d5,
+ 					decode(TO_CHAR(enroll_date,'mm-dd'),(select to_char(sysdate,'mm-dd')FROM DUAL),count(*),0) d6
+    				from fashion_board
+    				group by TO_CHAR(enroll_date,'mm-dd')))
+	</select>
 
 	<select id="totalCount" resultMap="StResultSet">
 		select * from(

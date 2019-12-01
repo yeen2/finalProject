@@ -174,8 +174,14 @@ public class AdminServiceImpl implements AdminService{
 
 	@Override
 	public ArrayList<Statistics> selectMemberCount() {
-		// 통계(가입자수)
+		// 통계(가입자수)-월별
 		return aDao.selectMemberCount();
+	}
+	
+	@Override
+	public ArrayList<Statistics> selectDayCount() {
+		// 통계(가입자수)-일별
+		return aDao.selectDayCount();
 	}
 
 	@Override
@@ -189,6 +195,8 @@ public class AdminServiceImpl implements AdminService{
 		// 공지사항 목록 조회용
 		return aDao.selectNoticeList();
 	}
+
+	
 
 	
 

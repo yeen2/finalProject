@@ -46,7 +46,7 @@
                             <div class="card-header">
                                 <strong class="card-title">회원 목록</strong>
                             </div>
-                            <div class="card-body mt-5" style="min-height: 800px;">	
+                            <div class="card-body mt-3" style="min-height: 800px;">	
                             <div class="row">
 	                            <div class="col-md-10 offset-md-1" style="padding:20px;">
 	                          		<label style="display:inline-flex; padding-right:20px;">Show 
@@ -90,7 +90,7 @@
                                             <td>${m.mno}</td>
                                             <td>
                                                 <div class="round-img">
-                                                    <a href="#"><img class="rounded-circle" src="${pageContext.request.contextPath}${m.profilePath}${m.renameImg}" alt=""></a>
+                                                    <a href="mpViewProfile.do?mno=${m.mno}"><img class="rounded-circle" src="${pageContext.request.contextPath}${m.profilePath}${m.renameImg}" alt=""></a>
                                                 </div>
                                             </td>
                                             <td>${m.email}</td>

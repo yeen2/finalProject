@@ -76,6 +76,9 @@ public interface AdminService {
 	// 통계(월별 가입자+게시글)
 	ArrayList<Statistics> selectMemberCount();
 	
+	// 통계(일별 가입자+게시글)
+	ArrayList<Statistics> selectDayCount();
+	
 	// 총 게시글수(positng,board,fashion)
 	ArrayList<Statistics> totalCount();
 	

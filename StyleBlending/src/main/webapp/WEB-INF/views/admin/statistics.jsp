@@ -1,13 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="java.util.Date" %>
+<%@ page import="java.util.*, java.text.*" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%
 	Date nowTime = new Date();
 	SimpleDateFormat sdf = new SimpleDateFormat("yy/MM");
 	
 	String month = sdf.format(nowTime);
+	
+	Calendar cal = Calendar.getInstance();
+	
+	sdf.format(cal.getTime());
+	// 오늘자 기준 6개월
+	String[] m = new String[6];
+	for(int i=0; i<6; i++){
+		cal.add(cal.MONTH,-1);
+		String a = sdf.format(cal.getTime());
+		m[i] = a;
+		//System.out.println(m[i]);
+	}
+	
 %>
 <!-- 차트 보이게 cdn x-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
@@ -144,7 +157,7 @@
 						</div>
 					</div>
                 
-                
+                	
 				     <div class="col-lg-9 offset-md-1">
 						<div class="card">
 							<div class="card-body mt-3">
@@ -156,31 +169,238 @@
 										<div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
 									</div>
 								</div>
-								<h4 class="mb-3"><b>최근 6개월 현황 통계 (게시글 / 가입자)</b></h4>
+								<h4 class="mb-3"><b>현황 통계 (게시글 / 가입자)</b></h4>
+								<div style="float:right;">
+								<span>
+									<a id="monthRank" onclick="monthChart();" style="cursor:pointer;"><b>월간</b></a>&nbsp;
+								</span>	
+									<a id="dateRank" onclick="dayChart();" style="cursor:pointer;"><b>일간</b></a>
+								</div>
 								<canvas id="sales-chart" height="528" width="1057" class="chartjs-render-monitor" style="display: block; height: 352px; width: 705px;"></canvas>
 							</div>
 						</div>
 					</div> <!-- 현황통계 끝 -->
+					<!-- 
+					<div class="col-lg-6">
+						<div class="card">
+							<div class="card-body">
+								<div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+									<div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+										<div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+									</div>
+									<div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+										<div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+									</div>
+								</div>
+								<h4 class="mb-3">최근 6개월 현황통계</h4>
+								<canvas id="lineChart" height="528" width="1057" class="chartjs-render-monitor" style="display: block; height: 352px; width: 705px;"></canvas>
+							</div>
+						</div>
+					</div>			
+					 -->	
+					 <!--  -->	
+					<div class="col-lg-6">
+						<div class="card">
+							<div class="card-body">
+								<div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+									<div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+										<div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+									</div>
+									<div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+									<div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+									</div>
+								</div>
+								<h4 class="mb-3">Pie Chart </h4>
+								<canvas id="pieChart" height="1129" width="1129" class="chartjs-render-monitor" style="display: block; height: 753px; width: 753px;"></canvas>
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-lg-6">
+						<div class="card">
+							<div class="card-body">
+								<div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+									<div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+										<div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+									</div>
+									<div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+									<div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+									</div>
+								</div>
+								<h4 class="mb-3">Pie Chart2 </h4>
+								<canvas id="pieChart2" height="1129" width="1129" class="chartjs-render-monitor" style="display: block; height: 753px; width: 753px;"></canvas>
+							</div>
+						</div>
+					</div>
       			</div> <!-- /.row 끝  -->
       		</div>
       </div>
       
  
     <script>
-  //Sales chart
-  // 총누적 회원,게시글,광고,신고
+    
+  //pie chart
+  
   $(function(){
+	  
 	  $.ajax({
 			 type:"post",
-			 url:"aChart.do",
+			 url:"aDayChart.do",
 			 dataType:"json",
 			 success:function(data){
 				
 					console.log(data[0]);
 					console.log(data[1]);
 					
-				// alert(data);
-			
+					// console.log(data[index]);
+					var num =[];
+					for(var i in data){
+						num.push(data.month1);
+						num.push(data.month2);
+						num.push(data.month3);
+						num.push(data.month4);
+						num.push(data.month5);
+						num.push(data.month6);
+					}
+					 
+					 var ctx = document.getElementById( "lineChart" );
+					    ctx.height = 450;
+					    var myChart = new Chart( ctx, {
+					        type: 'line',
+					        data: {
+					            labels: [ "<%=m[4]%>","<%=m[3]%>","<%=m[2]%>","<%=m[1]%>","<%=m[0]%>", "<%= month %>"],
+					            datasets: [
+					                {
+					                	label: "게시글수",
+						                data: [data[0].month1,data[0].month2,data[0].month3,data[0].month4,data[0].month5,data[0].month6],
+					                    borderColor: "rgba(0,0,0,.09)",
+					                    borderWidth: "1",
+					                    backgroundColor: 'rgba(220,53,69,0.75)',
+					                            },
+					                {
+		                            	label: "가입자수",
+						                data: [data[1].month1,data[1].month2,data[1].month3,data[1].month4,data[1].month5,data[1].month6],
+					                    borderColor: "rgba(0, 194, 146, 0.9)",
+					                    borderWidth: "1",
+					                    backgroundColor: "rgba(0, 194, 146, 0.5)",
+					                    pointHighlightStroke: "rgba(26,179,148,1)",
+					                    data: [ 16, 32, 18, 27, 42, 33, 44 ]
+					                            }
+					                        ]
+					        },
+					        options: {
+					            responsive: true,
+					            tooltips: {
+					                mode: 'index',
+					                intersect: false
+					            },
+					            hover: {
+					                mode: 'nearest',
+					                intersect: true
+					            }
+
+					        }
+					    } );
+					
+					
+		
+				
+			 },error:function(){
+				 console.log("ajax통신 실패");
+			 }
+		  }); 
+	  //line chart
+	   
+	  
+
+    var ctx = document.getElementById( "pieChart" );
+    ctx.height = 500;
+    var myChart = new Chart( ctx, {
+        type: 'pie',
+        data: {
+            datasets: [ {
+                data: [ 45, 25, 20, 10 ],
+                backgroundColor: [
+                                    "rgba(0, 194, 146,0.9)",
+                                    "rgba(0, 194, 146,0.7)",
+                                    "rgba(0, 194, 146,0.5)",
+                                    "rgba(0,0,0,0.07)"
+                                ],
+                hoverBackgroundColor: [
+                                    "rgba(0, 194, 146,0.9)",
+                                    "rgba(0, 194, 146,0.7)",
+                                    "rgba(0, 194, 146,0.5)",
+                                    "rgba(0,0,0,0.07)"
+                                ]
+
+                            } ],
+            labels: [
+                            "green",
+                            "green",
+                            "green"
+                        ]
+        },
+        options: {
+            responsive: true
+        }
+    } );
+    
+    var ctx = document.getElementById( "pieChart2" );
+    ctx.height = 500;
+    var myChart = new Chart( ctx, {
+        type: 'pie',
+        data: {
+            datasets: [ {
+                data: [ 45, 25, 20, 10 ],
+                backgroundColor: [
+                                    "rgba(0, 194, 146,0.9)",
+                                    "rgba(0, 194, 146,0.7)",
+                                    "rgba(0, 194, 146,0.5)",
+                                    "rgba(0,0,0,0.07)"
+                                ],
+                hoverBackgroundColor: [
+                                    "rgba(0, 194, 146,0.9)",
+                                    "rgba(0, 194, 146,0.7)",
+                                    "rgba(0, 194, 146,0.5)",
+                                    "rgba(0,0,0,0.07)"
+                                ]
+
+                            } ],
+            labels: [
+                            "green",
+                            "green",
+                            "green"
+                        ]
+        },
+        options: {
+            responsive: true
+        }
+    } );
+
+    
+  });  
+    
+    
+  //Sales chart
+  // 총누적 회원,게시글,광고,신고
+ 	 $(function(){
+	  monthChart();
+	 });
+ // 일간별 
+ function dayChart(){
+	  
+	  $("#dateRank").attr("color","rgb(132, 132, 132)");
+	  $("#monthRank").attr("color","rgb(33, 37, 41)");
+	  
+	  $.ajax({
+			 type:"post",
+			 url:"aDayChart.do",
+			 dataType:"json",
+			 success:function(data){
+				
+					console.log(data[0]);
+					console.log(data[1]);
+					
 					// console.log(data[index]);
 					var num =[];
 					for(var i in data){
@@ -193,15 +413,15 @@
 					}
 					 
 				    var ctx = document.getElementById( "sales-chart" );
-				    ctx.height = 500;
+				    ctx.height = 450;
 				    var myChart = new Chart( ctx, {
 				        type: 'line',
 				        data: {
-				            labels: [ "06", "07", "08", "09", "10", "<%= month %>"],
+				            labels: [ "11/26","11/27","11/28","11/29","11/30", "12/01"],
 				            type: 'line',
 				            defaultFontFamily: 'Montserrat',
 				            datasets: [ {
-				                label: "가입자수",
+				                label: "게시글수",
 				                data: [data[0].month1,data[0].month2,data[0].month3,data[0].month4,data[0].month5,data[0].month6],
 				                backgroundColor: 'transparent',
 				                borderColor: 'rgba(220,53,69,0.75)',
@@ -211,7 +431,7 @@
 				                pointBorderColor: 'transparent',
 				                pointBackgroundColor: 'rgba(220,53,69,0.75)',
 				                    }, {
-				                label: "게시글수",
+				                label: "가입자수",
 				                data: [data[1].month1,data[1].month2,data[1].month3,data[1].month4,data[1].month5,data[1].month6],
 				                backgroundColor: 'transparent',
 				                borderColor: 'rgba(40,167,69,0.75)',
@@ -281,7 +501,130 @@
 				 console.log("ajax통신 실패");
 			 }
 		  });  
-  });
+	  
+  }
+ 
+  
+  function monthChart(){
+	  
+	  $("#dateRank").attr("color","rgb(33, 37, 41)");
+	  $("#monthRank").attr("color","rgb(132, 132, 132)");
+	  
+	  $.ajax({
+			 type:"post",
+			 url:"aChart.do",
+			 dataType:"json",
+			 success:function(data){
+				
+					console.log(data[0]);
+					console.log(data[1]);
+					
+				// alert(data);
+			
+					// console.log(data[index]);
+					var num =[];
+					for(var i in data){
+						num.push(data.month1);
+						num.push(data.month2);
+						num.push(data.month3);
+						num.push(data.month4);
+						num.push(data.month5);
+						num.push(data.month6);
+					}
+					 
+				    var ctx = document.getElementById( "sales-chart" );
+				    ctx.height = 450;
+				    var myChart = new Chart( ctx, {
+				        type: 'line',
+				        data: {
+				            labels: [ "<%=m[4]%>","<%=m[3]%>","<%=m[2]%>","<%=m[1]%>","<%=m[0]%>", "<%= month %>"],
+				            type: 'line',
+				            defaultFontFamily: 'Montserrat',
+				            datasets: [ {
+				                label: "게시글수",
+				                data: [data[0].month1,data[0].month2,data[0].month3,data[0].month4,data[0].month5,data[0].month6],
+				                backgroundColor: 'transparent',
+				                borderColor: 'rgba(220,53,69,0.75)',
+				                borderWidth: 3,
+				                pointStyle: 'circle',
+				                pointRadius: 5,
+				                pointBorderColor: 'transparent',
+				                pointBackgroundColor: 'rgba(220,53,69,0.75)',
+				                    }, {
+				                label: "가입자수",
+				                data: [data[1].month1,data[1].month2,data[1].month3,data[1].month4,data[1].month5,data[1].month6],
+				                backgroundColor: 'transparent',
+				                borderColor: 'rgba(40,167,69,0.75)',
+				                borderWidth: 3,
+				                pointStyle: 'circle',
+				                pointRadius: 5,
+				                pointBorderColor: 'transparent',
+				                pointBackgroundColor: 'rgba(40,167,69,0.75)',
+				                    } ]
+				        },
+				        options: {
+				            responsive: true,
+
+				            tooltips: {
+				                mode: 'index',
+				                titleFontSize: 12,
+				                titleFontColor: '#000',
+				                bodyFontColor: '#000',
+				                backgroundColor: '#fff',
+				                titleFontFamily: 'Montserrat',
+				                bodyFontFamily: 'Montserrat',
+				                cornerRadius: 3,
+				                intersect: false,
+				            },
+				            legend: {
+				                display: false,
+				                labels: {
+				                    usePointStyle: true,
+				                    fontFamily: 'Montserrat',
+				                },
+				            },
+				            scales: {
+				                xAxes: [ {
+				                    display: true,
+				                    gridLines: {
+				                        display: false,
+				                        drawBorder: false
+				                    },
+				                    scaleLabel: {
+				                        display: false,
+				                        labelString: 'Month'
+				                    }
+				                        } ],
+				                yAxes: [ {
+				                    display: true,
+				                    gridLines: {
+				                        display: false,
+				                        drawBorder: false
+				                    },
+				                    scaleLabel: {
+				                        display: true,
+				                        labelString: 'Value'
+				                    }
+				                        } ]
+				            },
+				            title: {
+				                display: false,
+				                text: 'Normal Legend'
+				            }
+				        }
+				    } );
+					
+					
+		
+				
+			 },error:function(){
+				 console.log("ajax통신 실패");
+			 }
+		  });  
+	  
+  } 
+	 
+ 
  
   
     </script>

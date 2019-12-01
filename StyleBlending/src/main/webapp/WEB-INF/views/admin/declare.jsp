@@ -254,8 +254,8 @@
 		 var bno ="";
 		  $( "input[name='checkRow']:checked" ).each (function (){
 		    checkRow = checkRow + $(this).val()+"," ;
-		    type = type + $(this).parent().parent().children().eq(3).val()+","; 
-		    bno = bno + $(this).parent().parent().children().eq(1).val()+",";
+		    type = type + $(this).parent().parent().children().eq(2).val()+","; 
+		    bno = bno + $(this).parent().parent().children().eq(0).val()+",";
 		  });
 		  
 		  console.log(type);

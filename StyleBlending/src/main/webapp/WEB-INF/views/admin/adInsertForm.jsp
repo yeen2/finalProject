@@ -55,7 +55,7 @@
 			      	</div>
 			      
 			      	<form id="adInsertForm" action="" method="post" enctype="multipart/form-data" onsubmit="return insertPay();">
-						<input type="hidden" name="mno" id="mno" value="${loginUser.mno }"/>
+						<input type="hidden" name="mno" id="mno" value="${loginUser.mno}"/>
 						<div class="form-group" style="margin-bottom:25px;">
 							<label for="adName">업체명</label>
 							<input type="text" id="adName" class="form-control" name="name" placeholder="업체명을 입력해주세요." maxlength="16">
@@ -65,14 +65,14 @@
 							<input type="text" class="form-control" id="url" name="url" placeholder="http://" maxlength="50">
 						<div style="position:absolute;">
 							<p>
-								<small class="form-text text-success">광고 등록할 유튜브 주소를 입력해주세요.</small></p></div>
+								<small class="form-text">광고 등록할 유튜브 주소를 입력해주세요.</small></p></div>
 						</div>
 						<div class="form-group" style="margin-bottom:25px; position:relative;">
 							<label for="file-input" class=" form-control-label">등록 이미지</label>
 							<input type="file" id="file-input" name="uploadFile" class="form-control-file" style="display:none;" onchange="previewImg(this);">
 							<img id="adImg"/>
 							<div style="position:absolute;">
-								<p><small class="form-text text-success">광고 신청시 관리자 승인 처리 후 30일 동안 진행됩니다. 신청 버튼클릭시 결제페이지로 이동합니다.</small></p>
+								<p><small class="form-text text-success">광고 신청시 관리자 승인 처리 후 7일 동안 진행됩니다. 신청 버튼 클릭시 결제페이지로 이동합니다.</small></p>
 							</div>
 							<br>
 							<br>

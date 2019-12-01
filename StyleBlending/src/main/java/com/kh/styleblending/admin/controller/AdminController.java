@@ -9,12 +9,11 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -40,7 +39,9 @@ public class AdminController {
 	private AdminService aService;
 	
 	@RequestMapping("aPage.do")
-	public String adminPage(Model model) {
+	public String adminPage(Model model, HttpSession session) {
+		
+		String admin = ((Member)session.getAttribute("loginUser")).getEmail();
 		
 		int newBoard = aService.selectNewBcount();
 		ArrayList<Member> newMember = aService.selectNewMember();
@@ -48,14 +49,21 @@ public class AdminController {
 		Ad startAd = aService.selectStartAd();
 		ArrayList<Hash> hashRank = aService.selectHashRank();
 		
-		model.addAttribute("newBoard",newBoard).addAttribute("newMember", newMember).addAttribute("declareCount",declareCount).addAttribute("startAd",startAd).addAttribute("hashRank",hashRank);
-		//System.out.println(newMember);
-		return "admin/adminPage";
+		if(admin.equals("admin")) { // 관리자일때 
+			model.addAttribute("newBoard",newBoard).addAttribute("newMember", newMember).addAttribute("declareCount",declareCount).addAttribute("startAd",startAd).addAttribute("hashRank",hashRank);
+			//System.out.println(newMember);
+			return "admin/adminPage";
+			
+		}else { // 관리자가 아닐시
+			model.addAttribute("msg", "접근권한이 없습니다.");
+			return "common/errorPage";
+		}
+		
 	}
 	
 	@RequestMapping("aUser.do")
 	public ModelAndView selectUserList(ModelAndView mv, @RequestParam(value="currentPage", defaultValue="1")int currentPage,
-									@RequestParam(value="boardLimit", defaultValue="5")int boardLimit,
+									@RequestParam(value="boardLimit", defaultValue="10")int boardLimit,
 									@RequestParam(value="keyword", defaultValue="")String keyword) {
 		
 		int listCount = aService.getMemberListCount(keyword);
@@ -87,7 +95,7 @@ public class AdminController {
 	@RequestMapping("aDeclare.do")
 	public ModelAndView selectDeclareList(ModelAndView mv, @RequestParam(value="currentPage", defaultValue="1")int currentPage,
 											@RequestParam(value="select", defaultValue="0") String select, HashMap<String,String> cate,
-											@RequestParam(value="boardLimit", defaultValue="5")int boardLimit) {
+											@RequestParam(value="boardLimit", defaultValue="10")int boardLimit) {
 		
 		if(select.equals("1")) {
 			cate.put("posting","1" );
@@ -274,6 +282,7 @@ public class AdminController {
 		
 	}
 	
+	// chart ajax(6개월)
 	@ResponseBody
 	@RequestMapping(value="aChart.do", produces="application/json; charset=UTF-8")
 	public String statistics() {
@@ -282,6 +291,16 @@ public class AdminController {
 		//System.out.println(statistics);
 		
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		
+		return gson.toJson(statistics);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="aDayChart.do", produces="application/json; charset=UTF-8")
+	public String dayStatistics() {
+		ArrayList<Statistics> statistics = aService.selectDayCount();
+		
+		Gson gson = new GsonBuilder().setDateFormat("MM-dd").create();
 		
 		return gson.toJson(statistics);
 	}
