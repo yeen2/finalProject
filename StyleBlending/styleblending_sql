@@ -176,7 +176,7 @@ CREATE TABLE member (
 	profile	varchar2(1000)		NULL,
 	location	varchar2(1000)		NULL,
 	original_img varchar2(1000) DEFAULT 'profile.png'   NULL,
-	rename_img	varchar2(1000)	NULL,
+	rename_img	varchar2(1000)	DEFAULT 'profile.png' NULL,
 	profile_path	varchar2(1000)		NULL,
 	enroll_date	date	DEFAULT sysdate	NOT NULL,
 	update_date	date	 NULL,

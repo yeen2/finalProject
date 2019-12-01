@@ -377,7 +377,7 @@
 							<label>카테고리</label> 
 							&nbsp;&nbsp;&nbsp;&nbsp;
 							<div class="form-group" style="display: inline-block;">
-								<select class="custom-select" name="cate">
+								<select class="custom-select cate" name="cate">
 									<option value="" disabled>상의</option>
 									<option value="1">&nbsp;&nbsp;&nbsp;T-SHIRT</option>
 									<option value="2">&nbsp;&nbsp;&nbsp;SWEATSHIRT</option>
@@ -608,7 +608,7 @@
 				console.log(tttop);
 				console.log(llleft);
 				
-				//tt.parent().next().css('position', 'absolute');
+				tt.parent().next().css('position', 'absolute');
 				//tt.parent().next().css('top', tttop+20);
 				//tt.parent().next().css('left', llleft+500);
 				if(brand != ""){
@@ -705,6 +705,10 @@
 			// 각각의 input 요소들 변수에 담아두기 
 			var fileImg = $("#insertForm input[name=fileImg]");
 			var content = $("#insertForm #content");
+			var location = $("#insertForm input[name=location]");
+			//var cate = $("#insertForm .cate option:selected").val();
+			var brand = $("#insertForm input[name=brand]");
+			var color = $("#insertForm input[name=color]");
 			
 			console.log(content);
 
@@ -717,6 +721,18 @@
 			}else if(CKEDITOR.instances.content.getData() == ""){
 				alert("내용을 입력해주세요");
 				content.focus();
+				return false;
+			}else if(location.val() == ""){
+				alert("위치를 등록해주세요.");
+				location.focus();
+				return false;	
+			}else if(brand.val() == ""){
+				alert("브랜드를 등록해주세요.");
+				brand.focus();
+				return false;
+			}else if(color.val() == ""){
+				alert("컬러를 등록해주세요.");
+				color.focus();
 				return false;
 			}
 

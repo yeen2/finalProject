@@ -71,15 +71,7 @@ public class PostingController {
 		}
 		// 실시간검색어에 insert
 		int result = pService.insertLive(keyword);
-		
-		/*
-		 * String hash = ""; for(int i=0; i<p.size(); i++) { String[] arr =
-		 * p.get(i).getHashtag().split("#"); for(int j=0; j<arr.length; j++) { hash +=
-		 * arr[i].replace(arr[i], "<a>#"+arr[i]+"</a> "); } p.get(i).setHashtag(hash); }
-		 * 
-		 * 
-		 */
-		
+
 		mv.addObject("p", p).addObject("keyword", keyword).setViewName("posting/search");
 	
 		return mv;
@@ -94,9 +86,6 @@ public class PostingController {
 		
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		Posting p;
-		//SelectPosting sp = new SelectPosting();
-		//sp.setId(id);
-		
 		
 		if(loginUser != null) {
 			//sp.setMno(loginUser.getMno());

@@ -310,14 +310,25 @@
 								<h5 style="display: inline-block;" id="writerNickname">${ p.nickName }</h5>
 								
 								<!-- 팬추가 버튼 -->
+			
 								<!-- 팬추가 -->
 								<c:if test="${p.fanCheck == 0}">
-									<button type="button" class="btn btn-dark btn-sm fBtn" id="addFan">
-										<i class="fa fa-plus"></i><b>Fan</b>
-									</button>
-									<button class="btn btn-dark btn-sm fBtn" id="removeFan" style="display: none;">
-										<i style="width: 40px;" class="fas fa-check"></i>
-									</button>
+									<c:choose>
+										<c:when test="${p.mno == loginUser.mno}">
+											<button class="btn btn-dark btn-sm fBtn" id="removeFan" style="" disabled="disabled">
+												<i style="width: 40px;" class="fas fa-check"></i>
+											</button>
+										</c:when>
+										<c:otherwise>
+											<button type="button" class="btn btn-dark btn-sm fBtn" id="addFan">
+												<i class="fa fa-plus"></i><b>Fan</b>
+											</button>
+											<button class="btn btn-dark btn-sm fBtn" id="removeFan" style="display: none;">
+												<i style="width: 40px;" class="fas fa-check"></i>
+											</button>
+										</c:otherwise>
+									</c:choose>
+									
 								</c:if>
 								
 								<!-- 팬제거 -->	
@@ -343,6 +354,20 @@
 				
 				<hr>
 				
+				<!-- 성별 -->
+				<div class="card my-4">
+					<h5 class="card-header">Gender</h5>
+					<div class="card-body">
+						<c:if test="${p.gender == 'M'}">
+							<div style="padding-left: 20px;"><i class="fa fa-male fa-3x"></i></div>
+						</c:if>
+						<c:if test="${p.gender == 'F'}">
+							<div style="padding-left: 20px;"><i class="fa fa-female fa-3x"></i></div>
+						</c:if>
+					</div>
+				</div>
+				
+				<hr>
 				<!-- 2. 코디 정보 -->
 				<div class="card my-4">
 					<h5 class="card-header">Clothes stylist</h5>
@@ -381,45 +406,7 @@
 						<%-- <span>${p.location }</span> --%>
 					</div>
 				</div>
-				<!-- 
 				
-				Search Widget
-				<div class="card my-4">
-					<h5 class="card-header">Search</h5>
-					<div class="card-body">
-						<div class="input-group">
-							<input type="text" class="form-control"
-								placeholder="Search for..."> <span
-								class="input-group-btn">
-								<button class="btn btn-secondary" type="button">Go!</button>
-							</span>
-						</div>
-					</div>
-				</div>
-
-				Categories Widget
-				<div class="card my-4">
-					<h5 class="card-header">Categories</h5>
-					<div class="card-body">
-						<div class="row">
-							<div class="col-lg-6">
-								<ul class="list-unstyled mb-0">
-									<li><a href="#">Web Design</a></li>
-									<li><a href="#">HTML</a></li>
-									<li><a href="#">Freebies</a></li>
-								</ul>
-							</div>
-							<div class="col-lg-6">
-								<ul class="list-unstyled mb-0">
-									<li><a href="#">JavaScript</a></li>
-									<li><a href="#">CSS</a></li>
-									<li><a href="#">Tutorials</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
- -->
  				<hr>
  				
 				<!-- Side Widget -->

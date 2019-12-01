@@ -172,14 +172,14 @@ public class HomeController {
 	
 	@ResponseBody
 	@RequestMapping("joinCheckEmail.do")
-	public String joinCheckEmail(String id) throws IOException {
+	public String joinCheckEmail(String email) throws IOException {
 		
-		int result = mService.joinCheckEmail(id);
-		
+		int result = mService.joinCheckEmail(email);
+
 		if(result > 0) {
-			return "2";
+			return "2"; //해당 아이디 있음
 		}else {
-			return "1";
+			return "1"; // 해당 아이디 없음
 		}
 	}
 	
@@ -196,7 +196,17 @@ public class HomeController {
 		}
 	}
 	
-
+	@ResponseBody
+	@RequestMapping("joinCheckPass.do")
+	public String joinCheckNickName(String pass, String pass2) throws IOException {
+		
+		if(pass.equals(pass2)) { 
+			return "1";
+		}else {
+			return "2"; //비번틀림
+		}
+		
+	}
 
 
 
