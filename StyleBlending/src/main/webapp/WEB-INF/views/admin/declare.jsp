@@ -96,7 +96,7 @@
                                      	</td>
                                          <td id="dno">${p.dno}</td>
                                          <td>
-                                         	<div>
+                                         	<div style="cursor:pointer">
                                          		 <a data-toggle="modal" data-target="#fq${ p.dno }"><img class="rounded-circle" src="${pageContext.request.contextPath}${p.profilePath}${p.renameImg}" alt=""></a>
                                              </div>
                                          </td>
@@ -302,7 +302,7 @@
         </div>
    		
    		
-  		<!-- 회원정보 모달창 -->
+  		<!-- 신고 상세정보 모달창 -->
   		<c:forEach items="${ list }" var="p">
    		<div class="modal fade" id="fq${ p.dno }"  role="dialog"  aria-labelledby="fq${ p.dno }" aria-hidden="true">
                <div class="modal-dialog">
@@ -317,9 +317,9 @@
                             <div class="card ">
                             <div class="card-body">
                                 <div class="mx-auto" style="display:inline-flex;">
-                                    <img class="rounded-circle" style="max-width:100px;" src="${pageContext.request.contextPath}${p.profilePath}${p.renameImg}" alt="Card image cap">
+                                    <img class="rounded-circle" style="max-width:100px;" src="${pageContext.request.contextPath}${p.profilePath}${p.renameImg}" >
                                     <h5 class="text-sm-center mt-2 mb-1">신고자 <b>${p.email }</b></h5>
-                                    <img class="rounded-circle" style="max-width:100px;" src="${pageContext.request.contextPath}${p.writerPath}${p.writerImg}" alt="Card image cap">
+                                    <img class="rounded-circle" style="max-width:100px;" src="${pageContext.request.contextPath}${p.writerPath}${p.writerImg}" >
                                     <h5 class="text-sm-center mt-2 mb-1">신고당한 회원 <b>${p.writer }</b> <br><br><br>
                                     <a href="mpViewProfile.do?mno=${p.writerMno}"><i class="fa fa-address-card"></i>마이페이지</h5></a>
                                 </div>
