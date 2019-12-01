@@ -27,12 +27,13 @@ public class Board {
 	private Date updateDate;
 	private String isDelete;
 	private int likeCount;
-	private String renameImg;
 	
-	private ArrayList<Image> imageList;
+	private String originalImg;
+	private String renameImg;
 	
 	//닉네임
 	private String nickName;
+	private String loginUser;
 	
 	
 	// 로그인한 회원이 좋아요

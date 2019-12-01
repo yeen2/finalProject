@@ -1,6 +1,7 @@
 package com.kh.styleblending.board.model.vo;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,17 +14,9 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class FashionBoard {
-
-	private int fbno;
-	private int mno;
+public class Search {
+	private String writer;
 	private String title;
 	private String content;
-	private int count;
-	private Date enrollDate;
-	private Date updateDate;
-	private String isDelete;
 	
-	private String nickName;
-	private String loginUser;
 }
