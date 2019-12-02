@@ -261,7 +261,12 @@
 			 dataType:"json",
 			 success:function(data){
 					
-				 	console.log(data);
+				 	console.log(data.length);
+				 	for(var i in data){
+				 		console.log(data[i].pno);
+				 		var count = data[i].pno;
+				 	}
+				 	console.log(count);
 				 	
 				$.each(data,function(index, value){
 				 
@@ -271,7 +276,7 @@
 				        type: 'pie',
 				        data: {
 				            datasets: [{
-				                data: [data[0].pno,data[1].pno,data[2].pno],
+				                data: [data[0].pno,data[1].pno,data[2].pno,data[3].pno],
 				                backgroundColor: [
 				                                    "rgb(96, 198, 207)",
 				                                    "rgb(152, 156, 255)",
@@ -288,7 +293,7 @@
 				                                ]
 
 				                            } ],
-				            labels: [data[0].name,data[1].name,data[2].name]
+				            labels: [data[index].name]
 				        },
 				        options: {
 				            responsive: true
