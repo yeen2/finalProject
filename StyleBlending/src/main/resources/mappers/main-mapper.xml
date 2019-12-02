@@ -78,6 +78,7 @@
 		<id property="liveno" column="live_no"/>
 		<result property="keyword" column="keyword"/>
 		<result property="enrolldate" column="enroll_date"/>
+		<result property="type" column="type"/>
 	</resultMap>
 	
 	<resultMap id="NoticeResultSet" type="Notice">
@@ -179,8 +180,12 @@
 		where n_no = #{nno}
 	</update>
 	<select id="selectTopSearch" resultMap="topSearchResultSet">
-		select DISTINCT keyword,(select count(*) from live l2 where l2.keyword=l1.keyword)c
+            select * from
+            (select a.*,rownum rnum
+            from
+            (select DISTINCT keyword,(select count(*) from live l2 where l2.keyword=l1.keyword)c ,type
 			from live l1
-			order by c desc
+			order by c desc) a)
+            where rnum between 1 and 5
 	</select>
 </mapper>
