@@ -124,6 +124,10 @@ public class MyPageDao {
 	public int updateAlarmOne(int alno) {
 		return sqlSession.update("mypageMapper.updateAlarmOne", alno);
 	}
+
+	public int deleteAd(Ad ad) {
+		return sqlSession.delete("mypageMapper.deleteAd", ad);
+	}
 	
 
 }
