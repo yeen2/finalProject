@@ -179,17 +179,6 @@ public class BoardController {
 									,HttpServletRequest request, HttpServletResponse response,
 									@RequestParam(value="bcategory", defaultValue = "") String bcategory,
 									Model model, MultipartFile upload, MultipartHttpServletRequest multifile) throws IOException {
-		
-		//int bno = Integer.parseInt(request.getParameter("bno"));
-		
-		/*
-		 * if(!upload.getOriginalFilename().equals("")) {
-		 * 
-		 * MultipartFile file = multifile.getFile("upload"); String renameFileName =
-		 * imageUpload(request, response, multifile, i);
-		 * i.setOriginalImg(upload.getOriginalFilename());
-		 * i.setRenameImg(renameFileName); }
-		 */
 			
 		if (bcategory.equals("freeboard")) {
 			int result1 = bService.insertBoard(b);
@@ -274,7 +263,7 @@ public class BoardController {
 	               
 	               int result = bService.insertfImgFile(i);
 	               
-	               System.out.println(i);
+	               //System.out.println(i);
 	               response.setContentType("application/json; charset=UTF-8");
 	               printWriter.println(json);
 	               
@@ -416,7 +405,8 @@ public class BoardController {
 
 
 		int result = bService.updatefBoard(fb);
-		System.out.println("fbupdate : " + fb);
+		//System.out.println("fbupdate : " + fb);
+		//System.out.println("fbupdate : " + result);
 
 		if (result > 0) {
 			mv.addObject("fbno", fb.getFbno()).setViewName("redirect:fbdetail.do");

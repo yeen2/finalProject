@@ -25,6 +25,9 @@
    }
 }
 
+border:none;
+
+}
 h1 {
    color: white;
 }
@@ -545,7 +548,7 @@ a{
                    "<div class='card' style='overflow:hidden;'>"+
                    "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                    "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
-                   "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'>"+
+                   "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'onfocus='blur()'>"+
                    "<img src='${ pageContext.servletContext.contextPath }/resources/upload/member/"+value.profileImg+"' style='width: 50px; height: 50px; margin-left: 20px; border-radius:50px;' />" +
                    "</a>"+
                    "</div>"+
@@ -584,7 +587,7 @@ a{
                        "<div class='card' style='overflow:hidden;'>"+
                        "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                        "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
-                       "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'>"+
+                       "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'onfocus='blur()'>"+
                        "<img src='${ pageContext.servletContext.contextPath }/resources/upload/member/"+value.profileImg+"' style='width: 50px; height: 50px; margin-left: 20px; border-radius:50px;' />" +
                        "</a>"+
                        "</div>"+
@@ -623,7 +626,7 @@ a{
                       "<div class='card' style='overflow:hidden;'>"+
                       "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                       "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
-                      "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'>"+
+                      "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'onfocus='blur()'>"+
                       "<img src='${ pageContext.servletContext.contextPath }/resources/upload/member/"+value.profileImg+"' style='width: 50px; height: 50px; margin-left: 20px; border-radius:50px;' />" +
                       "</a>"+
                       "</div>"+
@@ -662,7 +665,7 @@ a{
                       "<div class='card' style='overflow:hidden;'>"+
                       "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                       "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
-                      "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'>"+
+                      "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'onfocus='blur()'>"+
                       "<img src='${ pageContext.servletContext.contextPath }/resources/upload/member/"+value.profileImg+"' style='width: 50px; height: 50px; margin-left: 20px; border-radius:50px;' />" +
                       "</a>"+
                       "</div>"+
@@ -701,7 +704,7 @@ a{
                       "<div class='card' style='overflow:hidden;'>"+
                       "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                       "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
-                      "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'>"+
+                      "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'onfocus='blur()'>"+
                       "<img src='${ pageContext.servletContext.contextPath }/resources/upload/member/"+value.profileImg+"' style='width: 50px; height: 50px; margin-left: 20px; border-radius:50px;' />" +
                       "</a>"+
                       "</div>"+
@@ -739,7 +742,7 @@ a{
                        "<div class='card' style='overflow:hidden;'>"+
                        "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                        "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
-                       "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'>"+
+                       "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'onfocus='blur()'>"+
                        "<img src='${ pageContext.servletContext.contextPath }/resources/upload/member/"+value.profileImg+"' style='width: 50px; height: 50px; margin-left: 20px; border-radius:50px;' />" +
                        "</a>"+
                        "</div>"+
@@ -777,7 +780,7 @@ a{
                        "<div class='card' style='overflow:hidden;'>"+
                        "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                        "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
-                       "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'>"+
+                       "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'onfocus='blur()'>"+
                        "<img src='${ pageContext.servletContext.contextPath }/resources/upload/member/"+value.profileImg+"' style='width: 50px; height: 50px; margin-left: 20px; border-radius:50px;' />" +
                        "</a>"+
                        "</div>"+
@@ -1271,7 +1274,7 @@ a{
                                 "<div class='card' style='overflow:hidden;'>"+
                                 "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                                 "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
-                                "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'>"+
+                                "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'onfocus='blur()'>"+
                                 "<img src='${ pageContext.servletContext.contextPath }/resources/upload/member/"+value.profileImg+"' style='width: 50px; height: 50px; margin-left: 20px; border-radius:50px;' />" +
                                 "</a>"+
                                 "</div>"+
@@ -1310,7 +1313,7 @@ a{
                                          "<div class='card' style='overflow:hidden;'>"+
                                          "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                                          "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
-                                         "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'>"+
+                                         "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'onfocus='blur()'>"+
                                          "<img src='${ pageContext.servletContext.contextPath }/resources/upload/member/"+value.profileImg+"' style='width: 50px; height: 50px; margin-left: 20px; border-radius:50px;' />" +
                                          "</a>"+
                                          "</div>"+
@@ -1349,7 +1352,7 @@ a{
                                         "<div class='card' style='overflow:hidden;'>"+
                                         "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                                         "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
-                                        "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'>"+
+                                        "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'onfocus='blur()'>"+
                                         "<img src='${ pageContext.servletContext.contextPath }/resources/upload/member/"+value.profileImg+"' style='width: 50px; height: 50px; margin-left: 20px; border-radius:50px;' />" +
                                         "</a>"+
                                         "</div>"+
@@ -1390,7 +1393,7 @@ a{
                                    "<div class='card' style='overflow:hidden;'>"+
                                    "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                                    "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
-                                   "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'>"+
+                                   "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'onfocus='blur()'>"+
                                    "<img src='${ pageContext.servletContext.contextPath }/resources/upload/member/"+value.profileImg+"' style='width: 50px; height: 50px; margin-left: 20px; border-radius:50px;' />" +
                                    "</a>"+
                                    "</div>"+
@@ -1429,7 +1432,7 @@ a{
                                    "<div class='card' style='overflow:hidden;'>"+
                                    "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                                    "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
-                                   "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'>"+
+                                   "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'onfocus='blur()'>"+
                                    "<img src='${ pageContext.servletContext.contextPath }/resources/upload/member/"+value.profileImg+"' style='width: 50px; height: 50px; margin-left: 20px; border-radius:50px;' />" +
                                    "</a>"+
                                    "</div>"+
@@ -1467,7 +1470,7 @@ a{
                                     "<div class='card' style='overflow:hidden;'>"+
                                     "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                                     "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
-                                    "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'>"+
+                                    "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'onfocus='blur()'>"+
                                     "<img src='${ pageContext.servletContext.contextPath }/resources/upload/member/"+value.profileImg+"' style='width: 50px; height: 50px; margin-left: 20px; border-radius:50px;' />" +
                                      "</a>"+
                                     "</div>"+
@@ -1505,7 +1508,7 @@ a{
                                     "<div class='card' style='overflow:hidden;'>"+
                                     "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                                     "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
-                                    "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'>"+
+                                    "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'onfocus='blur()'>"+
                                     "<img src='${ pageContext.servletContext.contextPath }/resources/upload/member/"+value.profileImg+"' style='width: 50px; height: 50px; margin-left: 20px; border-radius:50px;' />" +
                                     "</a>"+
                                     "</div>"+
@@ -1913,7 +1916,7 @@ a{
                          "<div class='card' style='overflow:hidden;'>"+
                          "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                          "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
-                         "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'>"+
+                         "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'onfocus='blur()'>"+
                          "<img src='${ pageContext.servletContext.contextPath }/resources/upload/member/"+value.profileImg+"' style='width: 50px; height: 50px; margin-left: 20px; border-radius:50px;' />" +
                          "</a>"+
                          "</div>"+
@@ -1953,7 +1956,7 @@ a{
                          "<div class='card' style='overflow:hidden;'>"+
                          "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                          "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
-                         "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'>"+
+                         "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'onfocus='blur()'>"+
                          "<img src='${ pageContext.servletContext.contextPath }/resources/upload/member/"+value.profileImg+"' style='width: 50px; height: 50px; margin-left: 20px; border-radius:50px;' />" +
                          "</a>"+
                          "</div>"+
@@ -1993,7 +1996,7 @@ a{
                         "<div class='card' style='overflow:hidden;'>"+
                         "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                         "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
-                        "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'>"+
+                        "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'onfocus='blur()'>"+
                         "<img src='${ pageContext.servletContext.contextPath }/resources/upload/member/"+value.profileImg+"' style='width: 50px; height: 50px; margin-left: 20px; border-radius:50px;' />" +
                         "</a>"+
                         "</div>"+
@@ -2032,7 +2035,7 @@ a{
                             "<div class='card' style='overflow:hidden;'>"+
                             "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                             "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
-                            "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'>"+
+                            "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'onfocus='blur()'>"+
                             "<img src='${ pageContext.servletContext.contextPath }/resources/upload/member/"+value.profileImg+"' style='width: 50px; height: 50px; margin-left: 20px; border-radius:50px;' />" +
                             "</a>"+
                             "</div>"+
@@ -2071,7 +2074,7 @@ a{
                             "<div class='card' style='overflow:hidden;'>"+
                             "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                             "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
-                            "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'>"+
+                            "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'onfocus='blur()'>"+
                             "<img src='${ pageContext.servletContext.contextPath }/resources/upload/member/"+value.profileImg+"' style='width: 50px; height: 50px; margin-left: 20px; border-radius:50px;' />" +
                             "</a>"+
                             "</div>"+
@@ -2109,7 +2112,7 @@ a{
                              "<div class='card' style='overflow:hidden;'>"+
                              "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                              "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
-                             "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'>"+
+                             "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'onfocus='blur()'>"+
                              "<img src='${ pageContext.servletContext.contextPath }/resources/upload/member/"+value.profileImg+"' style='width: 50px; height: 50px; margin-left: 20px; border-radius:50px;' />" +
                              "</a>"+
                              "</div>"+
@@ -2147,7 +2150,7 @@ a{
                              "<div class='card' style='overflow:hidden;'>"+
                              "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                              "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
-                             "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'>"+
+                             "<a class='btn' href='mpViewProfile.do?mno="+value.mno+"' style='margin:0px; padding:0px;'onfocus='blur()'>"+
                              "<img src='${ pageContext.servletContext.contextPath }/resources/upload/member/"+value.profileImg+"' style='width: 50px; height: 50px; margin-left: 20px; border-radius:50px;' />" +
                              "</a>"+
                              "</div>"+
@@ -2430,11 +2433,11 @@ a{
                                  function(index, value) {
 
                                     $ul
-                                          .append("<li class='ddd'><a href='#'><span style='font-size:15px;margin-right:9px;'>"
-       	                                         + (index+1)
-                                                + "</span>"
-                                                + value.keyword
-                                                + "</a></li>");
+	                                          .append("<li class='ddd'><a onclick='Stype(this);'><span style='font-size:15px;margin-right:9px;'><input type='hidden' value="+value.type+"><input type='hidden' value="+value.keyword+">"
+	       	                                         + (index+1)
+	                                                + "</span>"
+	                                                + value.keyword
+	                                                + "</a></li>");
 
                                  });
                   },
@@ -2444,7 +2447,22 @@ a{
                });
 
       }
-
+	function Stype(a){
+		var type = $(a).children().children().eq(0).val();
+		var keyword = $(a).children().children().eq(1).val();
+		console.log(type);
+		console.log(keyword.substr(0,1));
+		if(keyword.substr(0,1) == '#'){
+			keyword = keyword.substr(1, keyword.length-1);
+	    	
+		}
+	    /* if(keyword.indexOf(0) == '#'){
+	    	keyword = keyword.substr(1, keyword.length-1);
+	    	console.log(keyword);
+	    } */
+	 location.href='pNavSearch.do?type='+type+'&keyword='+keyword;
+		 
+	}
       function topSearch2() {
 
          var $ul = $("#ticker2");
