@@ -386,12 +386,10 @@ public class BoardController {
 		return mv;
 
 	}
-	
 
 	
 	@RequestMapping("bupdate.do")
 	public ModelAndView boardUpdate(Board b, HttpServletRequest request, ModelAndView mv, MultipartFile upload) {
-
 
 
 		int result = bService.updateBoard(b);
@@ -413,7 +411,7 @@ public class BoardController {
 
 
 		int result = bService.updatefBoard(fb);
-		//System.out.println("update : " + fb);
+		System.out.println("fbupdate : " + fb);
 
 		if (result > 0) {
 			mv.addObject("fbno", fb.getFbno()).setViewName("redirect:fbdetail.do");

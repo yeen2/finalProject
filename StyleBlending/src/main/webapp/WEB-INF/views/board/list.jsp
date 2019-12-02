@@ -19,7 +19,7 @@
 	<jsp:include page="../includes/header.jsp"/>
 	
 	<div class="detailOuter">
-		<h4 style="cursor: pointer;" onclick="location.href='blist.do';">자유게시판 </h4>
+		<h4 style="cursor: pointer; width: 150px;" onclick="location.href='blist.do';">자유게시판 </h4>
 
 		<br>
 		<div class="form-group" style="float: left; width: 200px;">
@@ -40,7 +40,6 @@
 				<th>날짜</th>
 				<th>추천수</th>
 			</tr>
-			
 			<c:forEach items="${ list }" var="b">
 			<tr>
 				<td>${ b.bno }</td>
