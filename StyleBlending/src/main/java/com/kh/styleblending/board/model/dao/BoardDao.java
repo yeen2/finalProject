@@ -204,6 +204,7 @@ public class BoardDao {
 
 	public int updatefBoard(FashionBoard fb) {
 
+		System.out.println(fb);
 		return sqlSession.update("boardMapper.updatefBoard", fb);
 	}
 
@@ -222,6 +223,16 @@ public class BoardDao {
 
 		return list;
 		
+	}
+
+	public int updatefImgfile(int resultImgno) {
+
+		return sqlSession.update("boardMapper.updatefImgfile", resultImgno);
+	}
+
+	public int selectImg() {
+
+		return sqlSession.selectOne("boardMapper.selectImg");
 	}
 
 	

@@ -19,7 +19,7 @@
 }
 
 #titleArea {
-	width: 100%;
+	width: auto;
 	border-collapse: separate;
 	border-spacing: 20px;
 }
@@ -44,14 +44,14 @@
 				<table id="titleArea">
 					<tr>
 						<td>자유게시판</td>
-						<td>${ b.enrollDate }</td>
-						<td><a href="#eexampleModal" data-toggle="modal">신고</a></td>
+						<td colspan="1">${ b.enrollDate }</td>
+						<td><a id="bdeclareBtn" href="#eexampleModal" data-toggle="modal">신고</a></td>
 					</tr>
 					<hr>
 					<tr>
 						<th colspan="5"><h4>${ b.title }</h4></th>
 					</tr>
-					<tr>
+					<%-- <tr>
 						<!-- 작성자 -->
 						<td>${ b.nickName }</td>
 						<td> ㅣ </td>
@@ -60,8 +60,11 @@
 						<!-- 조회수 -->
 						<td>추천수 &nbsp;${ b.likeCount }</td>
 						<!-- 추천수 -->
-					</tr>
+					</tr> --%>
 				</table>
+				<div>
+				<b style="margin-left: 20px;">${ b.nickName }</b>&nbsp;&nbsp;ㅣ&nbsp;&nbsp;조회수<b>${ b.count }</b> &nbsp;&nbsp;ㅣ&nbsp;추천수  &nbsp;<b>${ b.likeCount }</b>
+				</div>
 				<hr>
 
 				<div id="writeviewArea"
@@ -115,7 +118,7 @@
 
 						<tr>
 							<td><img style="height: 62px; width: 60px; margin-right: 10px; border-radius: 2.5em;"
-								src="${pageContext.request.contextPath}/resources/upload/member/profile.png"
+								src="${pageContext.request.contextPath}/resources/upload/member/${ loginUser.renameImg }"
 								alt="member">
 							</td>
 							
@@ -181,9 +184,7 @@
 										</div>
 										<div class="form-group">
 											<label for="content">신고내용</label>
-											<textarea name="content" style="height: 180px"
-												class="form-control" id="declare_content">
-											</textarea>
+											<textarea name="content" style="height: 180px" class="form-control" id="declare_content"></textarea>
 										</div>
 
 										<div>
@@ -198,7 +199,7 @@
 
 									<div class="modal-footer">
 										<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-										<button type="submit" class="btn btn-success" id="declareBtn">신고</button>
+										<button type="submit" class="btn btn-success" id="declareBtn" >신고</button>
 									</div>
 								</form>
 							</div>
@@ -212,7 +213,8 @@
 		
 		// 신고 이벤트
 		$("#declareBtn").attr("disabled", true);
-
+		
+		
 		// 신고동의 체크
 		$("#declare_check").on("click", function() {
 			if ($("input:checkbox[name='declare_check']").is(":checked")) {
@@ -255,6 +257,20 @@
 
 		});
 
+		
+		// f5 버튼 막는 이벤트
+		function noEvent() {
+		if (event.keyCode == 116) {
+		event.keyCode= 2;
+		return false;
+		}
+		else if(event.ctrlKey && (event.keyCode==78 || event.keyCode == 82))
+		{
+		return false;
+		}
+		}
+		document.onkeydown = noEvent;
+		
 		
 
 	/* ******************************************* 추천 ******************************************** */

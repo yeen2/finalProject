@@ -19,13 +19,13 @@
 	<jsp:include page="../includes/header.jsp"/>
 	
 	<div class="detailOuter">
-		<h4 style="cursor: pointer;" onclick="location.href='blist.do';">자유게시판 </h4>
+		<h4 style="cursor: pointer; width: 150px;" onclick="location.href='blist.do';">자유게시판 </h4>
 
 		<br>
 		<div class="form-group" style="float: left; width: 200px;">
 				<select style="cursor: pointer;" class="custom-select" onchange="location.href=this.value">
-					<option selected>분류</option>
-					<option value="blist.do">자유게시판</option>
+					<option>분류</option>
+					<option selected value="blist.do">자유게시판</option>
 					<option value="fblist.do">패션정보게시판</option>
 				</select>
 		</div>
@@ -40,7 +40,6 @@
 				<th>날짜</th>
 				<th>추천수</th>
 			</tr>
-			
 			<c:forEach items="${ list }" var="b">
 			<tr>
 				<td>${ b.bno }</td>
