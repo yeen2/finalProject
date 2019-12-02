@@ -5,7 +5,7 @@
 /**
  * 키워드 검색
  */
-/*
+
 $(function(){ // 검색창
 	
 	$("#keyword").keyup(function(){ // 키보드 눌렀다가 뗐을때 이벤트 발생
@@ -20,7 +20,7 @@ $(function(){ // 검색창
 	
 	
 });	
-*/
+
 function allCheck(){ // 전체 선택,해제
     if( $("#checkAll").is(':checked') ){
       $("input[name=checkRow]").prop("checked", true);

@@ -55,8 +55,7 @@
 		</div>
 		
 	
-	<!-- 광고신청 -->
-	
+		<!-- 광고신청 -->
         <div tabindex="-1" role="dialog" >
 			<div class="modal-dialog modal-dialog-centered" role="document">
 			    <div class="modal-content">
@@ -87,9 +86,11 @@
 							</div>
 							<br>
 							<br>
-							<div class="c2 sCheck2" style="position:absolute;">
+							<div style="position:absolute;">
 								<p>
-								<small class="form-text text-danger"><input type="checkbox" name="checkCondition" id="checkCondition" onclick="agreeCheck();"/>위 구매 조건 확인 및 결제 진행에 동의</small></p>
+								<input type="checkbox" name="checkCondition" id="checkCondition" onclick="agreeCheck();"/>
+								<label class="text-danger" for="checkCondition">위 구매 조건 확인 및 결제 진행에 동의</label>
+								</p>
 							</div>
 						</div>
 						<br>
@@ -262,7 +263,7 @@
 				    buyer_postcode : '123-456'
 				}, function(rsp) {
 				    if ( rsp.success ) {
-				        var msg = '결제가 완료되었습니다.';
+				        var msg = '결제가 완료되었습니다. 광고가 정상적으로 신청되었습니다.';
 				       // msg += '고유ID : ' + rsp.imp_uid;
 				       // msg += '상점 거래ID : ' + rsp.merchant_uid;
 				        //msg += '결제 금액 : ' + rsp.paid_amount;
