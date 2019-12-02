@@ -13,14 +13,14 @@
 		margin-left: 50px;
 	}
 	.replyForm_imgDiv{
-		width: 10%; height: 10%; border-radius: 50%;
+		width: 50px; height: 50px; border-radius: 50%;
 	}
 	.replyForm_img{
-		width: 70%; height: 70%; border-radius: 50%;
+		width: 50px; height: 50px; border-radius: 50%;
 	}
 	.replyForm_img:hover {cursor: pointer;}
 	.replyForm_contentDiv{
-		width: 90%; height: 90%;
+		width: 90%; height: 90%; padding-left: 20px;
 	}
 	.replyForm_nickname {
 		font-weight: bold;
@@ -105,7 +105,8 @@
 		cursor: pointer;
 	}
 	.fBtn {
-		float: right; margin-right: 20px;
+		float: right; 
+		/* margin-right: 20px; */
 	}
 	/* 댓글 수정삭제 아이콘 */
 	.r_md{
@@ -298,13 +299,13 @@
 					<!-- 작성자 프로필 -->
 					<div class="media mb-4" style="margin: 0 !important;">
 						<!-- 이미지 -->
-						<div style="width: 25%; height: 25%; border-radius: 50%;" id="writerImg">
-							<img style="width: 80%; height: 80%; border-radius: 50%;"
+						<div style="width: 50px; height: 50px; border-radius: 50%;" id="writerImg">
+							<img style="width: 50px; height: 50px; border-radius: 50%;"
 								src="${ pageContext.servletContext.contextPath }/resources/upload/member/${p.profileImg}"
 								<%-- src="${ pageContext.servletContext.contextPath }/resources/upload/member/${p.renameImg}" --%>>
 						</div>
 						<!-- 정보 -->
-						<div style="width: 75%; height: 75%;">
+						<div style="width: 70%; height: 70%; padding-left: 20px;">
 							<div >
 								<!-- 닉네임 -->
 								<h5 style="display: inline-block;" id="writerNickname">${ p.nickName }</h5>
@@ -315,7 +316,7 @@
 								<c:if test="${p.fanCheck == 0}">
 									<c:choose>
 										<c:when test="${p.mno == loginUser.mno}">
-											<button class="btn btn-dark btn-sm fBtn" id="removeFan" style="" disabled="disabled">
+											<button class="btn btn-dark btn-sm fBtn" id="removeFan" disabled="disabled">
 												<i style="width: 40px;" class="fas fa-check"></i>
 											</button>
 										</c:when>
@@ -341,7 +342,7 @@
 									</button>
 								</c:if>
 							</div>
-							<div>
+							<div style="margin-top: 10px;">
 								<!-- 자기소개 -->
 								<span style="fint-size:xx-small;">${p.profile }</span> <br>
 								<i class="fas fa-map-marker-alt"></i>
@@ -359,10 +360,14 @@
 					<h5 class="card-header">Gender</h5>
 					<div class="card-body">
 						<c:if test="${p.gender == 'M'}">
-							<div style="padding-left: 20px;"><i class="fa fa-male fa-3x"></i></div>
+							<div style="padding-left: 20px;"><i class="fa fa-male fa-3x"></i>
+								<span style="margin-left: 20px;">Men</span>
+							</div>
 						</c:if>
 						<c:if test="${p.gender == 'F'}">
-							<div style="padding-left: 20px;"><i class="fa fa-female fa-3x"></i></div>
+							<div style="padding-left: 20px;"><i class="fa fa-female fa-3x"></i>
+								<span style="margin-left: 20px;">Woman</span>
+							</div>
 						</c:if>
 					</div>
 				</div>
@@ -403,7 +408,7 @@
 					<h5 class="card-header">Location</h5>
 					<div class="card-body">
 						<div id="map" style="height: 300px;"></div>
-						<%-- <span>${p.location }</span> --%>
+						<span>${p.location }</span> 
 					</div>
 				</div>
 				

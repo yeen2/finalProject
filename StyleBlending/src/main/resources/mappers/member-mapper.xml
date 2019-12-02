@@ -37,7 +37,7 @@
 	<insert id="insertMember">
 		insert into member
 		values(seq_member.nextval, default, null, #{email}, #{pass}, #{nickName}, 
-				null, null, default, null, null, sysdate, null, null, default)
+				default, null, default, default, null, sysdate, null, null, default)
 	</insert>
 	
 	<select id="joinCheckEmail" resultType="_int">

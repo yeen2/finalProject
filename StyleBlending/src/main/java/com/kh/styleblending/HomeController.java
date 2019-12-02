@@ -18,12 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.styleblending.member.model.service.MemberService;
 import com.kh.styleblending.member.model.vo.Member;
 
-
-// jang hhf
-
-// jang hhdd hh
-
-
 @Controller
 public class HomeController {
 	
@@ -63,11 +57,9 @@ public class HomeController {
 	@RequestMapping("join.do")
 	public ModelAndView insertMember(Member m, ModelAndView mv) {
 		
-		/*
-		 * String encPass = bcryptPasswordEncoder.encode(m.getPass());
-		 * 
-		 * m.setPass(encPass);
-		 */
+		//비밀번호 암호화
+		//String encPass = bcryptPasswordEncoder.encode(m.getPass());
+		//m.setPass(encPass);
 		
 		int result = mService.insertMember(m);
 		
@@ -87,19 +79,8 @@ public class HomeController {
 		
 		Member loginUser = mService.loginMember(m);
 		
-		/* 암호화
-		//if(loginUser != null) { // 로그인 성공
-		if(loginUser != null && bcryptPasswordEncoder.matches(m.getPass(), loginUser.getPass())) {
-			session.setAttribute("loginUser", loginUser);
-			
-			mv.setViewName("redirect:main.do");
-			
-		}else { // 로그인 실패
-			
-			mv.addObject("msg", "로그인 실패").setViewName("common/errorPage");
-		}
-		*/
 
+		//if(loginUser != null && bcryptPasswordEncoder.matches(m.getPass(), loginUser.getPass())) {  //암호화
 		if(loginUser != null) { // 로그인 성공
 			session.setAttribute("loginUser", loginUser);
 			
@@ -143,7 +124,9 @@ public class HomeController {
 				
 				
 			}
+			//session.setAttribute("msg", loginUser.getNickName() +"님 환영합니다~");
 			mv.setViewName("redirect:" + session.getAttribute("prevPage"));
+			//mv.setViewName("redirect:main.do");
 		}else {
 			mv.addObject("msg", "로그인 실패").setViewName("common/login");
 		}
