@@ -155,6 +155,7 @@ public class BoardController {
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 
 		ArrayList<FashionBoard> list = bService.fashionSelectList(pi);
+		
 
 		mv.addObject("pi", pi).addObject("list", list).setViewName("board/fashionList");
 
