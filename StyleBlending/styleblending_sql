@@ -524,12 +524,15 @@ COMMENT ON COLUMN r_like.r_no IS '댓글번호';
 CREATE TABLE live (
 	live_no	number		NOT NULL,
 	keyword	varchar2(100)		NOT NULL,
+	type	varchar2(100)		NOT NULL,
 	enroll_date	date	DEFAULT sysdate	NOT NULL
 );
 
 COMMENT ON COLUMN live.live_no IS '실시간검색어 번호';
 
 COMMENT ON COLUMN live.keyword IS '검색어';
+
+COMMENT ON COLUMN live.type IS '타입';
 
 COMMENT ON COLUMN live.enroll_date IS '검색시간';
 
