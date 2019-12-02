@@ -24,8 +24,8 @@
 		<br>
 		<div class="form-group" style="float: left; width: 200px;">
 				<select style="cursor: pointer;" class="custom-select" onchange="location.href=this.value">
-					<option selected>분류</option>
-					<option value="blist.do">자유게시판</option>
+					<option>분류</option>
+					<option selected value="blist.do">자유게시판</option>
 					<option value="fblist.do">패션정보게시판</option>
 				</select>
 		</div>

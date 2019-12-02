@@ -121,9 +121,9 @@ body {padding-top: 20px;}
 			<br>
 			<div class="form-group" style="float: left; width: 200px;">
 				<select class="custom-select" onchange="location.href=this.value">
-					<option selected>분류</option>
+					<option>분류</option>
 					<option value="blist.do">자유게시판</option>
-					<option value="fblist.do">패션정보게시판</option>
+					<option selected value="fblist.do">패션정보게시판</option>
 				</select>
 			</div>
 			<br><br>
@@ -134,7 +134,7 @@ body {padding-top: 20px;}
 			<c:forEach items="${ list }" var="f">
 				<div class="col-sm-6 col-md-3 line">
 					<div class="thumbnail">
-						<img src="" alt="..." 
+						<img src="${pageContext.request.contextPath}/resources/bImgUploadFiles/${ f.renameImg }" alt="..." 
 							onclick="location.href='fbdetail.do?fbno=${ f.fbno }';" class="img-responsive img-thumbnail">
 						<div class="caption">
 							<h5 style="height: 40px;">${ f.title }</h5>

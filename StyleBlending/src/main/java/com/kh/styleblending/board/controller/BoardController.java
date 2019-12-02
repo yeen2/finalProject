@@ -269,7 +269,11 @@ public class BoardController {
 	               json.addProperty("url", fileUrl);
 	               
 	               i.setOriginalImg(originalImg);
+	               i.setRenameImg(renameImg);
 	               
+	               int result = bService.insertfImgFile(i);
+	               
+	               System.out.println(i);
 	               response.setContentType("application/json; charset=UTF-8");
 	               printWriter.println(json);
 	               
@@ -393,10 +397,10 @@ public class BoardController {
 
 
 		int result = bService.updateBoard(b);
-		System.out.println("update : " + b);
+		//System.out.println("update : " + b);
 
 		if (result > 0) {
-			mv.addObject("bno", b.getBno()).setViewName("redirect:bdetail.do");
+			mv.addObject("bno", b.getBno()).addObject("msg","게시판 수정 하였습니다.").setViewName("redirect:bdetail.do");
 
 		} else {
 			mv.addObject("msg", "게시판 수정 실패").setViewName("common/errorPage");
@@ -534,12 +538,12 @@ public class BoardController {
 	@RequestMapping("insertbDeclare.do")
 	public ModelAndView insertbDeclare(Declare d, ModelAndView mv) {
 
-		int mno = d.getBno();
+		int bno = d.getBno();
 
 		int result = bService.insertbDeclare(d);
 		// System.out.println(d);
 		if (result > 0) {
-			mv.addObject("msg", "게시물을 신고하였습니다.").setViewName("board/listDetail");
+			mv.addObject("msg", "게시물을 신고하였습니다.").setViewName("redirect:bdetail.do?bno="+bno);
 			// System.out.println(result);
 		} else {
 			mv.addObject("msg", "게시물 신고를 실패하였습니다.").setViewName("common/error");

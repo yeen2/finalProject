@@ -9,7 +9,7 @@
 <title>패션 게시판</title>
 <style>
 .detailOuter {
-	width: 1000px;
+	width: 1100px;
 	height: auto;
 	margin-left: auto;
 	margin-right: auto;
@@ -43,19 +43,22 @@
 				<table id="titleArea">
 					<tr>
 						<td>패션정보게시판</td>
-						<td colspan="6">${ fb.enrollDate }</td>
+						<td>${ fb.enrollDate }</td>
 					</tr>
 					<hr>
 					<tr>
-						<th colspan="3"><h4>${ fb.title }</h4></th>
+						<th><h4>${ fb.title }</h4></th>
 					</tr>
-					<tr>
+					<%-- <tr>
 						<!-- 작성자 -->
-						<td>${ fb.nickName }</td>
+						<td colspan="1">${ fb.nickName }</td>
 						<td> ㅣ </td>
 						<td>조회수 &nbsp;${ fb.count }</td>
-					</tr>
+					</tr> --%>
 				</table>
+			<div>
+				<b style="margin-left: 20px;">${ fb.nickName }</b>&nbsp;&nbsp;ㅣ&nbsp;&nbsp;조회수<b>${ fb.count }</b>
+			</div>
 				<hr>
 
 				<div id="writeviewArea"
@@ -77,6 +80,7 @@
 					style="float: right; margin-right: 5px;"
 					onclick="location.href='fblist.do';">목록으로</button>
 			</div>
+			<br><br>
 		</div>
 	</div>
 	
