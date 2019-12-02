@@ -136,7 +136,6 @@
 		if(msg != null && msg != ""){
 			alert(msg);
 			sessionStorage.removeItem("msg");
-
 		}
 	});
 </script>	

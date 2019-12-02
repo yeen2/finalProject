@@ -53,12 +53,12 @@
 	 </bean>
 	 
 	 <!-- 메일smtp -->
-     <!-- naver mail -->
+ <!--     naver mail
 	<bean class="org.springframework.mail.javamail.JavaMailSenderImpl"
    		p:host="smtp.naver.com"
     	p:port="465"
     	p:username="jang_test@naver.com"
-    	p:password="3288aall!">
+    	p:password="3288aall!!">
 	    <property name="javaMailProperties">
 	    <props>
 	    	<prop key="mail.smtp.starttls.enable">true</prop>
@@ -69,8 +69,21 @@
 	    	<prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
 	    </props>
 	    </property>
-	</bean>
-	 
+	</bean> -->
+	<!-- 구글 -->
+	   <!-- Gmail -->
+  <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+    <property name="host" value="smtp.gmail.com" />
+    <property name="port" value="587" />
+    <property name="username" value="jang32880634@gmail.com" />
+    <property name="password" value="3288aall!!" />
+    <property name="javaMailProperties">
+    <props>
+      <prop key="mail.smtp.auth">true</prop>
+      <prop key="mail.smtp.starttls.enable">true</prop>
+    </props>
+    </property>
+  </bean>
 	 
 	 
 </beans>
