@@ -3,6 +3,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8" />
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="703722063317-f13j5nmldg04ladv3i9cjrgcb8muql2o.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- 네이버로그인 -->
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
@@ -74,12 +79,11 @@
 				<div style="margin-top:35px;">
 					<button type="button"id="kakaoBtn" style="border: none; background-color: white;">
 						<img id="kakao-login-btn" src="https://kauth.kakao.com/public/widget/login/kr/kr_02_medium.png" style="cursor: pointer"></button>
-				
+					
 				</div>
-				<div style="margin-top:10px;">
-					<button type="button" class="form-control btn btn-danger" id="googleBtn"><b>구글 로그인</b></button>
-				</div>
-				<div style="margin-top:10px;" id="naver_id_login">
+
+
+					<div style="margin-top:10px;" id="naver_id_login">
 					<button type="button" class="form-control btn btn-success" id="navarBtn"><b>네이버 로그인</b></button>
 				</div>
 			</div>
@@ -87,6 +91,15 @@
 		</form>
 		
 	</div>
+<<<<<<< HEAD
+
+
+
+
+
+ 
+	<!-- 아이디/비번 기억하기 -->
+=======
 	
 	<!------------------------ 비밀번호 찾기 모달 ------------------------------>
 	<script type="text/javascript">
@@ -166,6 +179,7 @@
 	</div>
 	
 	<!------------------------ 아이디/비번 기억하기 ---------------------------->
+>>>>>>> branch 'dev' of https://github.com/yeen2/finalProject.git
 	<script>
 	$(function(){
 		$("#email").val(Cookies.get('email'));      
