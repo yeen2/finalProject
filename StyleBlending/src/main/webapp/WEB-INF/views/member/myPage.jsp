@@ -81,11 +81,11 @@
 								<p style="display:block;" align="right"><span id="lengthCheck">0</span>/100</p>
 								<textarea cols="52" rows="5" class="form-control" id="profileContent" name="profile" style="resize:none;"><c:out value="${ loginUser.profile }"/></textarea>
 							</div>
-							<div class="form-group" style="margin-bottom:50px;">
+							<%-- <div class="form-group" style="margin-bottom:50px;">
 								<label for="userPwd2">Location</label>
 								<input type="text" class="form-control" autocomplete="off"
 									id="location" name="location" value="${ loginUser.location }">
-							</div>
+							</div> --%>
 							
 							<button type="submit" class="btn btn-block btn-dark" style="height:50px;">수정</button>
 						</form>

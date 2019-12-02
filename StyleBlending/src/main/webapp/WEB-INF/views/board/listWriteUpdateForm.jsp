@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
-<title>게시판 수정하기</title>
+<title>자유게시판 수정하기</title>
 
 <style>
 .writeOuter {
@@ -71,7 +71,7 @@
 
 	//id가 content인 태그에 ckeditor를 적용
 	CKEDITOR.replace("content", {
-		height:300,
+		height:500,
 		filebrowserUploadUrl : "/styleblending/imageUpload.do",
 	}); 
 	

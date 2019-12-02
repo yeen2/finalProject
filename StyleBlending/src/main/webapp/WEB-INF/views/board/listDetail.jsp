@@ -10,7 +10,7 @@
 <script src="//cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
 <style>
 .detailOuter {
-	width: 900px;
+	width: 1000px;
 	height: auto;
 	margin-left: auto;
 	margin-right: auto;
@@ -19,6 +19,7 @@
 }
 
 #titleArea {
+	width: 100%;
 	border-collapse: separate;
 	border-spacing: 20px;
 }
@@ -43,17 +44,19 @@
 				<table id="titleArea">
 					<tr>
 						<td>자유게시판</td>
-						<td colspan="6">${ b.enrollDate }</td>
+						<td>${ b.enrollDate }</td>
 						<td><a href="#eexampleModal" data-toggle="modal">신고</a></td>
 					</tr>
 					<hr>
 					<tr>
-						<th><h4>${ b.title }</h4></th>
+						<th colspan="5"><h4>${ b.title }</h4></th>
 					</tr>
 					<tr>
-						<td colspan="1">작성자 &nbsp;${ b.nickName }</td>
 						<!-- 작성자 -->
+						<td>${ b.nickName }</td>
+						<td> ㅣ </td>
 						<td>조회수 &nbsp;${ b.count }</td>
+						<td> ㅣ </td>
 						<!-- 조회수 -->
 						<td>추천수 &nbsp;${ b.likeCount }</td>
 						<!-- 추천수 -->
@@ -103,8 +106,7 @@
 						
 						<tr>
 							<td>
-								<img alt="check"
-								src="${pageContext.request.contextPath}/resources/assets/img/board/icons8-checkmark-40.png">
+								<img alt="check" src="${pageContext.request.contextPath}/resources/assets/img/board/icons8-checkmark-40.png">
 							</td>
 							<td>
 								<strong style="font-size: 15px;">댓글 쓰기</strong>
@@ -119,9 +121,7 @@
 							
 							<td>
 								<div id=replytextArea>
-									<textarea rows="3" cols="80" id="comment" name="comment" 
-								 		style="resize: none;" placeholder="댓글을 작성해주세요">
-									</textarea>
+									<textarea rows="3" cols="80" id="comment" name="comment" style="resize: none;" placeholder="댓글을 작성해주세요"></textarea>
 								</div>
 							</td>
 							<td>
@@ -209,10 +209,6 @@
 	<jsp:include page="../includes/footer.jsp"/>
 
 	<script>
-		// 삭제시 이벤트
-		
-		
-		
 		
 		// 신고 이벤트
 		$("#declareBtn").attr("disabled", true);
@@ -520,11 +516,11 @@
 							
 							$modifyDiv = $("<div class='form-inline modifyDiv' style='display:none;'></div>");
 							$contentDiv = $("<div class='form-group contentDiv'></div>");
-							$otherDiv = $("<div class'form-inline otherDiv' style='margin-right:150px;'></div>");
+							$otherDiv = $("<div class'form-inline otherDiv' style='margin-right:150px; margin-top:10px;'></div>");
 							
-							$modify_textarea = $("<textarea class='modifyContent'></textarea>").text(value.content);;
+							$modify_textarea = $("<textarea rows='3' cols='80' style='margin-left: 5px; border-radius: 0.8m;' class='modifyContent'></textarea>").text(value.content);;
 							$hiddenBrno = $("<input type='hidden' id='hiddenBrno'>").val(value.brno);
-							$rmodifyBtn = $("<button class='btn btn-dark rmodifyBtn'>등록</button>");
+							$rmodifyBtn = $("<button class='btn btn-light rmodifyBtn' style='width: 80px; height: 67px; margin-left: 10px;'>등록</button>");
 							$nickname = $("<b class='nickname' style='margin-left:75px;'></b>").text(value.nickName);
 							$rcontent = $("<span id='rcontent' class='rcontent' style='margin-left: 5px;'></span>").html(value.content);
 							
@@ -562,13 +558,11 @@
 		//댓글 수정
 		$(document).on("click",".a-update", function(){
 			//console.log("zmfflr");
-			//var r_modifyForm = $(this).parents("modifyDiv").children(".modifyContent").eq(0).text();
 			var brno = $(this).next().next().val();
 			console.log(brno);
 			$(this).parent().parent().children(".replyDiv").children('.modifyDiv').eq(0).toggle();
 			$(this).parent().parent().children(".replyDiv").children('.contentDiv').eq(0).toggle();
 			
-			//$(this).parent().parent().children(".contentDiv").toggle();
 			
 		});
 		
@@ -576,7 +570,6 @@
 			var brno = $(this).parent().parent().next().children('#hiddenBrno').val();
 			console.log(brno)
 			var content = $(this).prev().val();
-			//console.log("dfdfdfdf");
 			//console.log(brno);
 			 $.ajax({
 				url:"rupdate.do",
@@ -601,7 +594,7 @@
 		$(document).on("click",".a-delete", function(){
 			
 			var brno = $(this).parent().children().eq(2).val();
-			console.log($(this).parent().children().eq(2).val());
+			//console.log($(this).parent().children().eq(2).val());
 			 if(confirm("댓글을 삭제하시겠습니까?")){
 				
 				$.ajax({

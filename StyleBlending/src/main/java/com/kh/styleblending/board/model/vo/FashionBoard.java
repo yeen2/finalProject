@@ -24,5 +24,6 @@ public class FashionBoard {
 	private Date updateDate;
 	private String isDelete;
 	
-	
+	private String nickName;
+	private String loginUser;
 }

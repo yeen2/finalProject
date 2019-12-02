@@ -50,7 +50,7 @@
                          <div class="row">
                           <div class="col-md-10 offset-md-1" style="padding:20px;">
                         		<form action="aDeclare.do" method="get" class="form-inline">
-	                        <div class="col-5 col-md-7">
+	                        <div class="col-5 col-md-10">
 	               			  	게시판명 &nbsp;
 	                             <select name="select" id="select" class="form-control">
 	                                 <option value="0" <c:if test="${cate.all eq '0' }">selected</c:if>>전체</option>
@@ -59,12 +59,10 @@
 	                             </select>&nbsp;
 	                        	<button type="submit" class="btn btn-primary btn-sm">검색</button>
 	                        </div>
-	                        <div class="offset-md-4">
 	                  		   <button type="button" class="btn btn-outline-danger btn-sm" id="deleteBtn" 
-	                  		   data-toggle="modal" data-target="#deleteModal">
+	                  		   data-toggle="modal" data-target="#deleteModal" style="float:right; margin-top:15px;">
 	                  		   	게시물삭제
 	                  		   </button>
-	                        </div>
 	                    </form>
                         	</div>
                        	</div>
@@ -96,7 +94,7 @@
                                      	</td>
                                          <td id="dno">${p.dno}</td>
                                          <td>
-                                         	<div>
+                                         	<div style="cursor:pointer">
                                          		 <a data-toggle="modal" data-target="#fq${ p.dno }"><img class="rounded-circle" src="${pageContext.request.contextPath}${p.profilePath}${p.renameImg}" alt=""></a>
                                              </div>
                                          </td>
@@ -302,7 +300,7 @@
         </div>
    		
    		
-  		<!-- 회원정보 모달창 -->
+  		<!-- 신고 상세정보 모달창 -->
   		<c:forEach items="${ list }" var="p">
    		<div class="modal fade" id="fq${ p.dno }"  role="dialog"  aria-labelledby="fq${ p.dno }" aria-hidden="true">
                <div class="modal-dialog">
@@ -317,9 +315,9 @@
                             <div class="card ">
                             <div class="card-body">
                                 <div class="mx-auto" style="display:inline-flex;">
-                                    <img class="rounded-circle" style="max-width:100px;" src="${pageContext.request.contextPath}${p.profilePath}${p.renameImg}" alt="Card image cap">
+                                    <img class="rounded-circle" style="max-width:100px;" src="${pageContext.request.contextPath}${p.profilePath}${p.renameImg}" >
                                     <h5 class="text-sm-center mt-2 mb-1">신고자 <b>${p.email }</b></h5>
-                                    <img class="rounded-circle" style="max-width:100px;" src="${pageContext.request.contextPath}${p.writerPath}${p.writerImg}" alt="Card image cap">
+                                    <img class="rounded-circle" style="max-width:100px;" src="${pageContext.request.contextPath}${p.writerPath}${p.writerImg}" >
                                     <h5 class="text-sm-center mt-2 mb-1">신고당한 회원 <b>${p.writer }</b> <br><br><br>
                                     <a href="mpViewProfile.do?mno=${p.writerMno}"><i class="fa fa-address-card"></i>마이페이지</h5></a>
                                 </div>

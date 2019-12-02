@@ -12,7 +12,9 @@ import com.kh.styleblending.board.model.vo.Board;
 import com.kh.styleblending.board.model.vo.BoardReply;
 import com.kh.styleblending.board.model.vo.Declare;
 import com.kh.styleblending.board.model.vo.FashionBoard;
+import com.kh.styleblending.board.model.vo.Image;
 import com.kh.styleblending.board.model.vo.PageInfo;
+import com.kh.styleblending.board.model.vo.Search;
 
 @Repository("bDao")
 public class BoardDao {
@@ -30,6 +32,17 @@ public class BoardDao {
 		return sqlSession.insert("boardMapper.insertfBoard", fb);
 	}
 
+	public int insertbImgFile(Image i) {
+
+		return sqlSession.insert("boardMapper.insertbImgFile", i);
+	}
+	
+	public int insertfImgFile(Image i) {
+
+		return sqlSession.insert("boardMapper.insertfImgFile", i);
+	}
+
+	
 	public Board selectBoard(int bno) {
 		return sqlSession.selectOne("boardMapper.selectBoard", bno);
 	}
@@ -86,7 +99,7 @@ public class BoardDao {
 		
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());		
 		
-		ArrayList<Board> list = (ArrayList)sqlSession.selectList("boardMapper.selectList", null , rowBounds);
+		ArrayList<Board> list = (ArrayList)sqlSession.selectList("boardMapper.selectList",null , rowBounds);
 		
 		return list;
 	}
@@ -153,6 +166,65 @@ public class BoardDao {
 		return sqlSession.insert("boardMapper.insertbDeclare", d);
 	}
 
+	public int getSearchListCount(Search sc) {
+
+		return sqlSession.selectOne("boardMapper.getSearchListCount", sc);
+	}
+
+	public ArrayList<Board> SearchselectList(PageInfo pi, Search sc) {
+
+		HashMap hsm = new HashMap();
+		hsm.put("pi", pi);
+		hsm.put("sc", sc);
+		
+		ArrayList<Board> list = (ArrayList)sqlSession.selectList("boardMapper.SearchselectList", hsm);
+		//System.out.println("dao list : " + list);
+		return list;
+	}
+
+	public FashionBoard selectfBoard(int fbno) {
+
+		return sqlSession.selectOne("boardMapper.selectfBoard", fbno);
+	}
+
+	public int FbupdateCount(int fbno) {
+
+		return sqlSession.update("boardMapper.FbupdateCount", fbno);
+	}
+
+	public int getfbListCount() {
+
+		return sqlSession.selectOne("boardMapper.getfbListCount");
+	}
+
+	public int FbdeleteBoard(int fbno) {
+
+		return sqlSession.update("boardMapper.FbdeleteBoard", fbno);
+	}
+
+	public int updatefBoard(FashionBoard fb) {
+
+		return sqlSession.update("boardMapper.updatefBoard", fb);
+	}
+
+	public int getfbSearchListCount(Search sc) {
+
+		return sqlSession.selectOne("boardMapper.getfbSearchListCount", sc);
+	}
+
+	public ArrayList<FashionBoard> SearchfselectList(PageInfo pi, Search sc) {
+
+		HashMap hsm = new HashMap();
+		hsm.put("pi", pi);
+		hsm.put("sc", sc);
+		
+		ArrayList<FashionBoard> list = (ArrayList)sqlSession.selectList("boardMapper.SearchfselectList", hsm);
+
+		return list;
+		
+	}
+
+	
 
 
 

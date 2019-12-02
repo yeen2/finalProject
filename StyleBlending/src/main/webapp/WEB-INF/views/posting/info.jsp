@@ -13,14 +13,14 @@
 		margin-left: 50px;
 	}
 	.replyForm_imgDiv{
-		width: 10%; height: 10%; border-radius: 50%;
+		width: 50px; height: 50px; border-radius: 50%;
 	}
 	.replyForm_img{
-		width: 70%; height: 70%; border-radius: 50%;
+		width: 50px; height: 50px; border-radius: 50%;
 	}
 	.replyForm_img:hover {cursor: pointer;}
 	.replyForm_contentDiv{
-		width: 90%; height: 90%;
+		width: 90%; height: 90%; padding-left: 20px;
 	}
 	.replyForm_nickname {
 		font-weight: bold;
@@ -105,7 +105,8 @@
 		cursor: pointer;
 	}
 	.fBtn {
-		float: right; margin-right: 20px;
+		float: right; 
+		/* margin-right: 20px; */
 	}
 	/* 댓글 수정삭제 아이콘 */
 	.r_md{
@@ -298,35 +299,37 @@
 					<!-- 작성자 프로필 -->
 					<div class="media mb-4" style="margin: 0 !important;">
 						<!-- 이미지 -->
-						<div style="width: 25%; height: 25%; border-radius: 50%;" id="writerImg">
-							<img style="width: 80%; height: 80%; border-radius: 50%;"
+						<div style="width: 50px; height: 50px; border-radius: 50%;" id="writerImg">
+							<img style="width: 50px; height: 50px; border-radius: 50%;"
 								src="${ pageContext.servletContext.contextPath }/resources/upload/member/${p.profileImg}"
 								<%-- src="${ pageContext.servletContext.contextPath }/resources/upload/member/${p.renameImg}" --%>>
 						</div>
 						<!-- 정보 -->
-						<div style="width: 75%; height: 75%;">
+						<div style="width: 70%; height: 70%; padding-left: 20px;">
 							<div >
 								<!-- 닉네임 -->
 								<h5 style="display: inline-block;" id="writerNickname">${ p.nickName }</h5>
 								
 								<!-- 팬추가 버튼 -->
-								<!-- 로그인한 회원 = 포스팅등록 회원 -->
-								<%-- <c:if test="${p.mno == 0}">
-									<button type="button" class="btn btn-dark btn-sm fBtn" id="addFan">
-										<i class="fa fa-plus"></i><b>Fan</b>
-									</button>
-									<button class="btn btn-dark btn-sm fBtn" id="removeFan" style="display: none;">
-										<i style="width: 40px;" class="fas fa-check"></i>
-									</button>
-								</c:if> --%>
+			
 								<!-- 팬추가 -->
 								<c:if test="${p.fanCheck == 0}">
-									<button type="button" class="btn btn-dark btn-sm fBtn" id="addFan">
-										<i class="fa fa-plus"></i><b>Fan</b>
-									</button>
-									<button class="btn btn-dark btn-sm fBtn" id="removeFan" style="display: none;">
-										<i style="width: 40px;" class="fas fa-check"></i>
-									</button>
+									<c:choose>
+										<c:when test="${p.mno == loginUser.mno}">
+											<button class="btn btn-dark btn-sm fBtn" id="removeFan" disabled="disabled">
+												<i style="width: 40px;" class="fas fa-check"></i>
+											</button>
+										</c:when>
+										<c:otherwise>
+											<button type="button" class="btn btn-dark btn-sm fBtn" id="addFan">
+												<i class="fa fa-plus"></i><b>Fan</b>
+											</button>
+											<button class="btn btn-dark btn-sm fBtn" id="removeFan" style="display: none;">
+												<i style="width: 40px;" class="fas fa-check"></i>
+											</button>
+										</c:otherwise>
+									</c:choose>
+									
 								</c:if>
 								
 								<!-- 팬제거 -->	
@@ -339,7 +342,7 @@
 									</button>
 								</c:if>
 							</div>
-							<div>
+							<div style="margin-top: 10px;">
 								<!-- 자기소개 -->
 								<span style="fint-size:xx-small;">${p.profile }</span> <br>
 								<i class="fas fa-map-marker-alt"></i>
@@ -352,6 +355,24 @@
 				
 				<hr>
 				
+				<!-- 성별 -->
+				<div class="card my-4">
+					<h5 class="card-header">Gender</h5>
+					<div class="card-body">
+						<c:if test="${p.gender == 'M'}">
+							<div style="padding-left: 20px;"><i class="fa fa-male fa-3x"></i>
+								<span style="margin-left: 20px;">Men</span>
+							</div>
+						</c:if>
+						<c:if test="${p.gender == 'F'}">
+							<div style="padding-left: 20px;"><i class="fa fa-female fa-3x"></i>
+								<span style="margin-left: 20px;">Woman</span>
+							</div>
+						</c:if>
+					</div>
+				</div>
+				
+				<hr>
 				<!-- 2. 코디 정보 -->
 				<div class="card my-4">
 					<h5 class="card-header">Clothes stylist</h5>
@@ -387,48 +408,10 @@
 					<h5 class="card-header">Location</h5>
 					<div class="card-body">
 						<div id="map" style="height: 300px;"></div>
-						<%-- <span>${p.location }</span> --%>
+						<span>${p.location }</span> 
 					</div>
 				</div>
-				<!-- 
 				
-				Search Widget
-				<div class="card my-4">
-					<h5 class="card-header">Search</h5>
-					<div class="card-body">
-						<div class="input-group">
-							<input type="text" class="form-control"
-								placeholder="Search for..."> <span
-								class="input-group-btn">
-								<button class="btn btn-secondary" type="button">Go!</button>
-							</span>
-						</div>
-					</div>
-				</div>
-
-				Categories Widget
-				<div class="card my-4">
-					<h5 class="card-header">Categories</h5>
-					<div class="card-body">
-						<div class="row">
-							<div class="col-lg-6">
-								<ul class="list-unstyled mb-0">
-									<li><a href="#">Web Design</a></li>
-									<li><a href="#">HTML</a></li>
-									<li><a href="#">Freebies</a></li>
-								</ul>
-							</div>
-							<div class="col-lg-6">
-								<ul class="list-unstyled mb-0">
-									<li><a href="#">JavaScript</a></li>
-									<li><a href="#">CSS</a></li>
-									<li><a href="#">Tutorials</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
- -->
  				<hr>
  				
 				<!-- Side Widget -->
@@ -639,7 +622,7 @@
 					
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-					<button type="submit" class="btn btn-success" id="declare_submit">신고하기</button>
+					<button type="submit" class="btn btn-danger" id="declare_submit">신고하기</button>
 				</div>
 				</form>
 				<script type="text/javascript">

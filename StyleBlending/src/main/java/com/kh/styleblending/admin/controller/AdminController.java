@@ -31,6 +31,7 @@ import com.kh.styleblending.admin.model.vo.Statistics;
 import com.kh.styleblending.main.model.vo.Notice;
 import com.kh.styleblending.member.model.vo.Member;
 import com.kh.styleblending.posting.model.vo.Hash;
+import com.kh.styleblending.posting.model.vo.Style;
 
 @Controller
 public class AdminController {
@@ -235,6 +236,18 @@ public class AdminController {
 		
 	}
 	
+	// 업로드 되어있는 광고이미지파일 삭제용 메소드
+	public void deleteFile(String renameFileName, HttpServletRequest request) {
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = root + "/upload/advertisment";
+		
+		File f = new File(savePath + "/" + renameFileName);
+		
+		if(f.exists()) {
+			f.delete();
+		}
+	}
+	
 	@RequestMapping("aInsertAdView.do")
 	public String insertAdView() {
 		return "admin/adInsertForm";
@@ -242,7 +255,14 @@ public class AdminController {
 	
 	
 	@RequestMapping("aUpdateStartAd.do")
-	public String updateStartAd(String adno, Model model) {
+	public String updateStartAd(String adno, Model model,HttpServletRequest request) {
+		
+		Ad startAd = aService.selectStartAd();
+		// 진행중인광고 첨부파일 존재할 경우
+		if(startAd != null && startAd.getOriginalImg() != null) {
+			// 업로드되어잇는 파일 삭제
+			deleteFile(startAd.getRenameImg(),request); // 삭제하고자하는 파일명과  request 전달
+		}
 		
 		int result = aService.updateStartAd(adno);
 		//System.out.println(adno);
@@ -256,9 +276,15 @@ public class AdminController {
 	}
 	
 	@RequestMapping("aUpdateEndAd.do")
-	public ModelAndView updateEndAd(String adno, ModelAndView mv) {
+	public ModelAndView updateEndAd(String adno, ModelAndView mv, HttpServletRequest request) {
 		
-		System.out.println(adno);
+		//System.out.println(adno);
+		Ad startAd = aService.selectStartAd();
+		// 진행중인광고 첨부파일 존재할 경우
+		if(startAd.getOriginalImg() != null) {
+			// 업로드되어잇는 파일 삭제
+			deleteFile(startAd.getRenameImg(),request); // 삭제하고자하는 파일명과  request 전달
+		}
 		
 		int result = aService.updateEndAd(adno);
 		
@@ -275,7 +301,7 @@ public class AdminController {
 	public ModelAndView statistics(ModelAndView mv) {
 		
 		ArrayList<Statistics> totalCount = aService.totalCount();
-		System.out.println(totalCount);
+		//System.out.println(totalCount);
 		mv.addObject("totalCount", totalCount).setViewName("admin/statistics");
 		
 		return mv;
@@ -295,6 +321,7 @@ public class AdminController {
 		return gson.toJson(statistics);
 	}
 	
+	// chart ajax(일별)
 	@ResponseBody
 	@RequestMapping(value="aDayChart.do", produces="application/json; charset=UTF-8")
 	public String dayStatistics() {
@@ -305,12 +332,36 @@ public class AdminController {
 		return gson.toJson(statistics);
 	}
 	
+	// chart 카테고리별
+	@ResponseBody
+	@RequestMapping(value="aCateChart.do", produces="application/json; charset=UTF-8")
+	public String selectCateRank() {
+		ArrayList<Style> cateRank = aService.selectCateRank();
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		//System.out.println(cateRank);
+		return gson.toJson(cateRank);
+		
+	}
+	
+	// chart 카테고리별
+	@ResponseBody
+	@RequestMapping(value="aBrandChart.do", produces="application/json; charset=UTF-8")
+	public String selectBrandRank() {
+		ArrayList<Style> BrandRank = aService.selectBrandRank();
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		//System.out.println(BrandRank);
+		return gson.toJson(BrandRank);
+		
+	}
+	
 	// 관리자 공지사항
 	@RequestMapping("aNotice.do")
 	public ModelAndView notice(ModelAndView mv) {
 		
 		ArrayList<Notice> list = aService.selectNoticeList();
-		System.out.println(list);
+		//System.out.println(list);
 		mv.addObject("list", list).setViewName("admin/notice");
 		
 		return mv;

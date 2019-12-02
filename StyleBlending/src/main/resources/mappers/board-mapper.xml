@@ -46,28 +46,54 @@
 </resultMap>
 
 
-<select id="selectList" resultMap="boardResultSet" parameterType="HashMap">
+<select id="selectList" resultMap="boardResultSet">
 	select b.*, m.nickName
 	from board b
 	join member m on(b.m_no = m.m_no)
 	where b.isdelete='N'
-	<if test="title != null">
-		and title like '%' || #{title} || '%'
-	</if>
-	<if test="writer != null">
-		and m.nickName like '%' || #{writer} || '%'
-	</if>
-	<if test="content != null">
-		and content like '%' || ${content} || '%'
-	</if>
 	order by b_no desc
 	
 </select>
 
+<select id="SearchselectList" resultMap="boardResultSet" parameterType="hashmap">
+	select b.*, m.nickName
+	from board b
+	join member m on(b.m_no = m.m_no)
+	where b.isdelete='N'
+	<if test="sc.title != null">
+		and title like '%' || #{sc.title} || '%'
+	</if>
+	<if test="sc.writer != null">
+		and m.nickName like '%' || #{sc.writer} || '%'
+	</if>
+	<if test="sc.content != null">
+		and content like '%' || #{sc.content} || '%'
+	</if>
+	order by b_no desc
+</select>
+
+<select id="SearchfselectList" resultMap="fashionBoardResultSet" parameterType="hashmap">
+	select fb.*, m.nickName
+	from fashion_board fb
+	join member m on(fb.m_no = m.m_no)
+	where fb.isdelete='N'
+	<if test="sc.title != null">
+		and title like '%' || #{sc.title} || '%'
+	</if>
+	<if test="sc.writer != null">
+		and m.nickName like '%' || #{sc.writer} || '%'
+	</if>
+	<if test="sc.content != null">
+		and content like '%' || #{sc.content} || '%'
+	</if>
+	order by fb_no desc
+</select>
+
 <select id="fashionSelectList" resultMap="fashionBoardResultSet">
-	select * 
-	from fashion_board 
-	where isdelete='N'
+	select fb.* , m.nickName 
+	from fashion_board fb
+	join member m on(fb.m_no = m.m_no)
+	where fb.isdelete='N'
 	order by fb_no desc
 </select>
 
@@ -78,10 +104,60 @@
 	where b_no=#{bno}
 </select>
 
+<select id="selectfBoard" resultMap="fashionBoardResultSet">
+	select fb.*, m.nickName 
+	from fashion_board fb
+	join member m on(m.m_no = fb.m_no)
+	where fb_no=#{fbno}
+</select>
+
 <select id="getListCount" resultType="_int">
 	select count(*)
 	from board
 	where isdelete='N'
+</select>
+
+<select id="getfbListCount" resultType="_int">
+	select count(*)
+	from fashion_board
+	where isdelete='N'
+</select>
+
+
+<select id="getSearchListCount" resultType="_int">
+	select count(*)
+	from board b
+	join member m on(m.m_no = b.m_no)
+	where b.isdelete = 'N'
+	<if test="writer != null">
+		and m.nickname like '%' || #{writer} || '%'
+	</if>
+
+	<if test="title != null">
+		and title like '%' || #{title} || '%'
+	</if>
+
+	<if test="content != null">
+		and content like '%' || #{content} || '%'
+	</if>
+</select>
+
+<select id="getfbSearchListCount" resultType="_int">
+	select count(*)
+	from fashion_board fb
+	join member m on(m.m_no = fb.m_no)
+	where fb.isdelete = 'N'
+	<if test="writer != null">
+		and m.nickname like '%' || #{writer} || '%'
+	</if>
+
+	<if test="title != null">
+		and title like '%' || #{title} || '%'
+	</if>
+
+	<if test="content != null">
+		and content like '%' || #{content} || '%'
+	</if>
 </select>
 
 <insert id="insertBoard">
@@ -91,14 +167,30 @@
 
 <insert id="insertfBoard">
 	insert into fashion_board 
-	values(SEQ_FASHION_BOARD.nextval, #{mno} , #{title} , #{content}
-    , default , sysdate, sysdate, default);
+	values(SEQ_FASHION_BOARD.nextval, #{mno} , #{title} , #{content}, default , sysdate, sysdate, default)
 </insert>
+
+<!-- <insert id="insertbImgFile">
+	insert into image
+	values(SEQ_IMAGE.nextval, seq_board.currval, null, #{renameImg}, #{imgPath}, #{type})
+</insert>
+
+<insert id="insertfImgFile">
+	insert into image
+	values(SEQ_IMAGE.nextval, seq_board.currval, null, #{renameImg}, #{imgPath}, #{type})
+</insert>
+ -->
 
 <update id="updateCount">
 	update board
 	set count = count+1
 	where b_no = #{bno} 
+</update>
+
+<update id="FbupdateCount">
+	update fashion_board
+	set count = count+1
+	where fb_no = #{fbno}
 </update>
 
 <update id="deleteBoard"> 
@@ -107,10 +199,22 @@
 	where b_no=#{bno} 
 </update>
 
+<update id="FbdeleteBoard">
+	update fashion_board
+	set isdelete='Y'
+	where fb_no=#{fbno}
+</update>
+
 <update id="updateBoard"> 
 	update board 
 	set title=#{title}, content=#{content}
 	where b_no=#{bno}
+</update>
+
+<update id="updatefBoard">
+	update fashion_board
+	set title=#{title}, content=#{content}
+	where fb_no=#{fbno}
 </update>
 
 <!-- 댓글 -->

@@ -210,7 +210,7 @@
 									<div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
 									</div>
 								</div>
-								<h4 class="mb-3">Pie Chart </h4>
+								<h4 class="mb-3"><b>카테고리별 순위</b></h4>
 								<canvas id="pieChart" height="1129" width="1129" class="chartjs-render-monitor" style="display: block; height: 753px; width: 753px;"></canvas>
 							</div>
 						</div>
@@ -227,7 +227,7 @@
 									<div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
 									</div>
 								</div>
-								<h4 class="mb-3">Pie Chart2 </h4>
+								<h4 class="mb-3"><b>브랜드별 순위</b></h4>
 								<canvas id="pieChart2" height="1129" width="1129" class="chartjs-render-monitor" style="display: block; height: 753px; width: 753px;"></canvas>
 							</div>
 						</div>
@@ -243,139 +243,98 @@
   
   $(function(){
 	  
+	  // 카테고리별 순위
 	  $.ajax({
 			 type:"post",
-			 url:"aDayChart.do",
+			 url:"aCateChart.do",
 			 dataType:"json",
 			 success:function(data){
-				
-					console.log(data[0]);
-					console.log(data[1]);
 					
-					// console.log(data[index]);
-					var num =[];
-					for(var i in data){
-						num.push(data.month1);
-						num.push(data.month2);
-						num.push(data.month3);
-						num.push(data.month4);
-						num.push(data.month5);
-						num.push(data.month6);
-					}
-					 
-					 var ctx = document.getElementById( "lineChart" );
-					    ctx.height = 450;
-					    var myChart = new Chart( ctx, {
-					        type: 'line',
-					        data: {
-					            labels: [ "<%=m[4]%>","<%=m[3]%>","<%=m[2]%>","<%=m[1]%>","<%=m[0]%>", "<%= month %>"],
-					            datasets: [
-					                {
-					                	label: "게시글수",
-						                data: [data[0].month1,data[0].month2,data[0].month3,data[0].month4,data[0].month5,data[0].month6],
-					                    borderColor: "rgba(0,0,0,.09)",
-					                    borderWidth: "1",
-					                    backgroundColor: 'rgba(220,53,69,0.75)',
-					                            },
-					                {
-		                            	label: "가입자수",
-						                data: [data[1].month1,data[1].month2,data[1].month3,data[1].month4,data[1].month5,data[1].month6],
-					                    borderColor: "rgba(0, 194, 146, 0.9)",
-					                    borderWidth: "1",
-					                    backgroundColor: "rgba(0, 194, 146, 0.5)",
-					                    pointHighlightStroke: "rgba(26,179,148,1)",
-					                    data: [ 16, 32, 18, 27, 42, 33, 44 ]
-					                            }
-					                        ]
-					        },
-					        options: {
-					            responsive: true,
-					            tooltips: {
-					                mode: 'index',
-					                intersect: false
-					            },
-					            hover: {
-					                mode: 'nearest',
-					                intersect: true
-					            }
+				 	console.log(data);
+				 	
+				$.each(data,function(index, value){
+				 
+					var ctx = document.getElementById( "pieChart" );
+				    ctx.height = 400;
+				    var myChart = new Chart( ctx, {
+				        type: 'pie',
+				        data: {
+				            datasets: [{
+				                data: [data[0].pno,data[1].pno,data[2].pno],
+				                backgroundColor: [
+				                                    "rgb(96, 198, 207)",
+				                                    "rgb(152, 156, 255)",
+				                                    "#ef5350",
+				                                    "rgba(0,0,0,0.07)"
+				                                ],
+				                hoverBackgroundColor: [
+				                                    "rgb(96, 198, 207)",
+				                                    "rgb(152, 156, 255)",
+				                                    "#ef5350",
+				                                    "rgba(0,0,0,0.07)"
+				                                ]
 
-					        }
-					    } );
-					
-					
-		
+				                            } ],
+				            labels: [data[0].name,data[1].name,data[2].name]
+				        },
+				        options: {
+				            responsive: true
+				        }
+				    } );
+			 });
 				
 			 },error:function(){
 				 console.log("ajax통신 실패");
 			 }
-		  }); 
-	  //line chart
-	   
+			 
+		  });  
+	
 	  
+      // 브랜드별 순위
+	  $.ajax({
+			 type:"post",
+			 url:"aBrandChart.do",
+			 dataType:"json",
+			 success:function(data){
+					
+				 	console.log(data);
+				 	
+				$.each(data,function(index, value){
+				 
+					var ctx = document.getElementById( "pieChart2" );
+				    ctx.height = 400;
+				    var myChart = new Chart( ctx, {
+				        type: 'pie',
+				        data: {
+				            datasets: [{
+				                data: [data[0].pno,data[1].pno,data[2].pno],
+				                backgroundColor: [
+				                                    "rgba(0, 194, 146,0.9)",
+				                                    "rgba(0, 194, 146,0.7)",
+				                                    "rgba(0, 194, 146,0.5)",
+				                                    "rgba(0,0,0,0.07)"
+				                                ],
+				                hoverBackgroundColor: [
+				                                    "rgba(0, 194, 146,0.9)",
+				                                    "rgba(0, 194, 146,0.7)",
+				                                    "rgba(0, 194, 146,0.5)",
+				                                    "rgba(0,0,0,0.07)"
+				                                ]
 
-    var ctx = document.getElementById( "pieChart" );
-    ctx.height = 500;
-    var myChart = new Chart( ctx, {
-        type: 'pie',
-        data: {
-            datasets: [ {
-                data: [ 45, 25, 20, 10 ],
-                backgroundColor: [
-                                    "rgba(0, 194, 146,0.9)",
-                                    "rgba(0, 194, 146,0.7)",
-                                    "rgba(0, 194, 146,0.5)",
-                                    "rgba(0,0,0,0.07)"
-                                ],
-                hoverBackgroundColor: [
-                                    "rgba(0, 194, 146,0.9)",
-                                    "rgba(0, 194, 146,0.7)",
-                                    "rgba(0, 194, 146,0.5)",
-                                    "rgba(0,0,0,0.07)"
-                                ]
-
-                            } ],
-            labels: [
-                            "green",
-                            "green",
-                            "green"
-                        ]
-        },
-        options: {
-            responsive: true
-        }
-    } );
-    
-    var ctx = document.getElementById( "pieChart2" );
-    ctx.height = 500;
-    var myChart = new Chart( ctx, {
-        type: 'pie',
-        data: {
-            datasets: [ {
-                data: [ 45, 25, 20, 10 ],
-                backgroundColor: [
-                                    "rgba(0, 194, 146,0.9)",
-                                    "rgba(0, 194, 146,0.7)",
-                                    "rgba(0, 194, 146,0.5)",
-                                    "rgba(0,0,0,0.07)"
-                                ],
-                hoverBackgroundColor: [
-                                    "rgba(0, 194, 146,0.9)",
-                                    "rgba(0, 194, 146,0.7)",
-                                    "rgba(0, 194, 146,0.5)",
-                                    "rgba(0,0,0,0.07)"
-                                ]
-
-                            } ],
-            labels: [
-                            "green",
-                            "green",
-                            "green"
-                        ]
-        },
-        options: {
-            responsive: true
-        }
-    } );
+				                            } ],
+				            labels: [data[0].name,data[1].name,data[2].name]
+				        },
+				        options: {
+				            responsive: true
+				        }
+				    } );
+			 });
+				
+			 },error:function(){
+				 console.log("ajax통신 실패");
+			 }
+			 
+		  });  
 
     
   });  
@@ -613,8 +572,6 @@
 				            }
 				        }
 				    } );
-					
-					
 		
 				
 			 },error:function(){

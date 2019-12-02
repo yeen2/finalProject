@@ -272,10 +272,10 @@
 								$("#pBtn").css("display", "none");
 							}
 							var $copy1 = $("<div>").attr({"class":"col-12 col-md-4", "style":"position:relative;"});
-							$copy1.append($("<div>").attr({"class":"square imgP", "style":"background-image: url(" + "'resources/upload/posting/" + list[i].renameImg + "');"}));
+							$copy1.append($("<div>").attr({"class":"square imgP", "style":"height:500px; background-image: url(" + "'resources/upload/posting/" + list[i].renameImg + "');"}));
 							var $copy2 = 
-								"<div class='square imgJ' value='" + list[i].pno + "' style='position:absolute; width:92%; bottom:0; opacity:0; background:rgba(0,0,0,0.6);'>"
-								+ "<div style='margin-left:48px; margin-top:135px; font-size:22px; color:white; position:relative;'>"
+								"<div class='square imgJ' value='" + list[i].pno + "' style='position:absolute; width:92%; height:94%; bottom:0; opacity:0; background:rgba(0,0,0,0.6);'>"
+								+ "<div style='margin-left:48px; margin-top:225px; font-size:22px; color:white; position:relative;'>"
 								+ "<div style='float:left; left:40px; position:absolute;'><i class='fas fa-heart'></i></div>"
 								+ "<div style='float:left; left:70px; position:absolute;'>" + list[i].likeCount + "</div>"
 								+ "<div style='float:left; left:160px; position:absolute;'><i class='fas fa-comment'></i></div>"
@@ -327,10 +327,10 @@
 								$("#lBtn").css("display", "none");
 							}
 							var $copy1 = $("<div>").attr({"class":"col-12 col-md-4", "style":"position:relative;"});
-							$copy1.append($("<div>").attr({"class":"square imgP", "style":"background-image: url(" + "'resources/upload/posting/" + list[i].renameImg + "');"}));
+							$copy1.append($("<div>").attr({"class":"square imgP", "style":"height:500px; background-image: url(" + "'resources/upload/posting/" + list[i].renameImg + "');"}));
 							var $copy2 = 
-								"<div class='square imgJ' value='" + list[i].pno + "' style='position:absolute; width:92%; bottom:0; opacity:0; background:rgba(0,0,0,0.6);'>"
-								+ "<div style='margin-left:48px; margin-top:135px; font-size:22px; color:white; position:relative;'>"
+								"<div class='square imgJ' value='" + list[i].pno + "' style='position:absolute; width:92%; height:94%; bottom:0; opacity:0; background:rgba(0,0,0,0.6);'>"
+								+ "<div style='margin-left:48px; margin-top:225px; font-size:22px; color:white; position:relative;'>"
 								+ "<div style='float:left; left:40px; position:absolute;'><i class='fas fa-heart'></i></div>"
 								+ "<div style='float:left; left:70px; position:absolute;'>" + list[i].likeCount + "</div>"
 								+ "<div style='float:left; left:160px; position:absolute;'><i class='fas fa-comment'></i></div>"
@@ -384,7 +384,7 @@
 								var $fan1 = "<div style='height:60px;'>"
 									+"<input type='hidden' class='fanCheckClass' value='" + list[i].fanCheck + "'>"
 									+"<div style='float:left;'>"
-									+"<img src='resources/assets/img/lorde.png' value='" + list[i].mno + "' alt='Raised circle image'"
+									+"<img style='width:50px; height:50px;' src='resources/upload/member/" + list[i].renameImg + "' value='" + list[i].mno + "' alt='Raised circle image'"
 									+"class='img-fluid rounded-circle shadow-lg fanImg' style='width: 50px;'>"
 									+"</div>"
 									+"<div style='float:left; margin-left:15px;'>"
@@ -409,7 +409,7 @@
 								var $fan1 = "<div style='height:60px;'>"
 									+"<input type='hidden' class='fanCheckClass' value='" + list[i].fanCheck + "'>"
 									+"<div style='float:left;'>"
-									+"<img src='resources/assets/img/lorde.png' value='" + list[i].mno + "' alt='Raised circle image'"
+									+"<img style='width:50px; height:50px;' src='resources/upload/member/" + list[i].renameImg + "' value='" + list[i].mno + "' alt='Raised circle image'"
 									+"class='img-fluid rounded-circle shadow-lg fanImg' style='width: 50px;'>"
 									+"</div>"
 									+"<div style='float:left; margin-left:15px;'>"
@@ -434,7 +434,7 @@
 								var $fan1 = "<div style='height:60px;'>"
 									+"<input type='hidden' class='fanCheckClass' value='" + list[i].fanCheck + "'>"
 									+"<div style='float:left;'>"
-									+"<img src='resources/assets/img/lorde.png' value='" + list[i].mno + "' alt='Raised circle image'"
+									+"<img style='width:50px; height:50px;' src='resources/upload/member/" + list[i].renameImg + "' value='" + list[i].mno + "' alt='Raised circle image'"
 									+"class='img-fluid rounded-circle shadow-lg fanImg' style='width: 50px;'>"
 									+"</div>"
 									+"<div style='float:left; margin-left:15px;'>"
@@ -501,7 +501,7 @@
 								var $fan1 = "<div style='height:60px;'>"
 									+"<input type='hidden' class='fanCheckCount' value='" + list[i].fanCheck + "'>"
 									+"<div style='float:left;'>"
-									+"<img src='resources/assets/img/lorde.png' value='" + list[i].mno + "' alt='Raised circle image'"
+									+"<img style='width:50px; height:50px;' src='resources/upload/member/" + list[i].renameImg + "' value='" + list[i].mno + "' alt='Raised circle image'"
 									+"class='img-fluid rounded-circle shadow-lg fanImg' style='width: 50px;'>"
 									+"</div>"
 									+"<div style='float:left; margin-left:15px;'>"
@@ -524,7 +524,7 @@
 								var $fan1 = "<div style='height:60px;'>"
 									+"<input type='hidden' class='fanCheckCount' value='" + list[i].fanCheck + "'>"
 									+"<div style='float:left;'>"
-									+"<img src='resources/assets/img/lorde.png' value='" + list[i].mno + "' alt='Raised circle image'"
+									+"<img style='width:50px; height:50px;' src='resources/upload/member/" + list[i].renameImg + "' value='" + list[i].mno + "' alt='Raised circle image'"
 									+"class='img-fluid rounded-circle shadow-lg fanImg' style='width: 50px;'>"
 									+"</div>"
 									+"<div style='float:left; margin-left:15px;'>"
@@ -547,7 +547,7 @@
 								var $fan1 = "<div style='height:60px;'>"
 									+"<input type='hidden' class='fanCheckCount' value='" + list[i].fanCheck + "'>"
 									+"<div style='float:left;'>"
-									+"<img src='resources/assets/img/lorde.png' value='" + list[i].mno + "' alt='Raised circle image'"
+									+"<img style='width:50px; height:50px;' src='resources/upload/member/" + list[i].renameImg + "' value='" + list[i].mno + "' alt='Raised circle image'"
 									+"class='img-fluid rounded-circle shadow-lg fanImg' style='width: 50px;'>"
 									+"</div>"
 									+"<div style='float:left; margin-left:15px;'>"

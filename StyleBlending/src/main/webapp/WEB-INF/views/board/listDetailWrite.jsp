@@ -26,7 +26,7 @@
 		<h2>게시물 작성</h2>
 		<br>
 
-		<form id="form1" name="form1" method="post" action="binsert.do">
+		<form id="form1" name="form1" method="post" action="binsert.do" enctype="multipart/form-data">
 			<div class="writeArea">
 				<h4>게시판 분류</h4>
 				<br>
@@ -48,9 +48,10 @@
 			<br> <br>
 			<div class="write-inputArea" style="width: auto;">
 				<input type="hidden" name="mno" value="${ loginUser.mno }">
+				
 				<h5>내용</h5>
 				
-				<textarea id="content" name="content" rows="3" cols="80" placeholder="내용을 입력하세요">${ b.content }</textarea>
+				<textarea id="content" name="content" rows="3" cols="80">${ b.content }</textarea>
 				<br> <br>
 
 			</div>
@@ -69,12 +70,13 @@
 
 	//id가 content인 태그에 ckeditor를 적용
 	CKEDITOR.replace("content", {
-		height:300,
+		height:500,
 		filebrowserUploadUrl : "/styleblending/imageUpload.do",
 	}); 
-	
-	
 	</script>	
 	
+	<script type="text/javascript">
+		
+	</script>
 </body>
 </html>

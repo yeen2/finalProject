@@ -121,6 +121,7 @@ public class MyPageController {
 	public String updateProfileImg(Member m, HttpSession session, ModelAndView mv, HttpServletRequest request, MultipartHttpServletRequest req) {
 		int mno = ((Member)session.getAttribute("loginUser")).getMno();
 		String renameFileNameD = ((Member)session.getAttribute("loginUser")).getRenameImg();
+		String renameSub = renameFileNameD.substring(0, 2);
 		
 		m.setMno(mno);
 		
@@ -139,7 +140,7 @@ public class MyPageController {
 		
 		if(mem != null) {
 			session.setAttribute("loginUser", mem);
-			if(!renameFileNameD.equals("profile.png")) {
+			if(renameSub.equals("20")) {
 				deleteProfileImg(renameFileNameD, request);
 			}
 			return m.getRenameImg();
