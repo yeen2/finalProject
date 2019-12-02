@@ -622,7 +622,7 @@
 					
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-					<button type="submit" class="btn btn-success" id="declare_submit">신고하기</button>
+					<button type="submit" class="btn btn-danger" id="declare_submit">신고하기</button>
 				</div>
 				</form>
 				<script type="text/javascript">
