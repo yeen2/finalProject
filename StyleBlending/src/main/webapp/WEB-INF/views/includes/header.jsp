@@ -584,6 +584,11 @@ function select(){
 				
 				if(search != ""){
 					$("#searchDiv").show();
+					
+					var brandCheck = 0;
+					var hashCheck = 0;
+					var locaCheck = 0;
+					
 					$.ajax({
 						url:"mpSSearchFan.do",
 						data:{search:search},
@@ -648,18 +653,31 @@ function select(){
 								$("#brandArea").append($brandNull);
 							}else{
 								$.each(list, function(index, value){
-									var $brand = "<a style='color:black;' href='pNavSearch.do?type=1&keyword=" + value.brand + "'>"
-												+"<div id='addSearch' class='brandBrand' value='" + value.pno + "'>"
-										    	+"<div id='addSearchImg'>"
-									    		+"<i class='fas fa-search'></i>"
-										    	+"</div>"
-										    	+"<div id='addSearchNick'>"
-									    		+"<p>" + value.brand + "</p>"
-										    	+"</div>"
-										    	+"</div>"
-										    	+"</a>";
+									var brandArr = "";
 									
-									$("#brandArea").append($brand);
+									for(var i=0; i<brandArr.length; i++){
+										if(brandArr[i] == value.brand){
+											brandCheck = 1;
+										}
+									}
+									
+									if(brandCheck == 0){
+										var $brand = "<a style='color:black;' href='pNavSearch.do?type=1&keyword=" + value.brand + "'>"
+										+"<div id='addSearch' class='brandBrand' value='" + value.pno + "'>"
+								    	+"<div id='addSearchImg'>"
+							    		+"<i class='fas fa-search'></i>"
+								    	+"</div>"
+								    	+"<div id='addSearchNick'>"
+							    		+"<p>" + value.brand + "</p>"
+								    	+"</div>"
+								    	+"</div>"
+								    	+"</a>";
+							
+										$("#brandArea").append($brand);
+									}
+									
+									brandCheck = 0;
+									brandArr.push(value.brand);
 									
 								});
 							}
@@ -691,18 +709,31 @@ function select(){
 									$("#hashtagArea").append($hashtagNull);
 							}else{
 								$.each(list, function(index, value){
-									var $hashtag = "<a style='color:black;' href='pNavSearch.do?type=2&keyword=" + value.hashtag + "'>"
-													+"<div id='addSearch' class='hashHash' value='" + value.pno + "'>"
-											    	+"<div id='addSearchImg'>"
-										    		+"<i class='fas fa-hashtag'></i>"
-											    	+"</div>"
-											    	+"<div id='addSearchNick'>"
-										    		+"<p>" + value.hashtag + "</p>"
-											    	+"</div>"
-											    	+"</div>"
-											   		+"</a>";
-											    	
-									$("#hashtagArea").append($hashtag);
+									var hashArr = "";
+									
+									for(var i=0; i<hashArr.length; i++){
+										if(hashArr[i] == value.hashtag){
+											hashCheck = 1;
+										}
+									}
+									
+									if(hashCheck == 0){
+										var $hashtag = "<a style='color:black;' href='pNavSearch.do?type=2&keyword=" + value.hashtag + "'>"
+										+"<div id='addSearch' class='hashHash' value='" + value.pno + "'>"
+								    	+"<div id='addSearchImg'>"
+							    		+"<i class='fas fa-hashtag'></i>"
+								    	+"</div>"
+								    	+"<div id='addSearchNick'>"
+							    		+"<p>" + value.hashtag + "</p>"
+								    	+"</div>"
+								    	+"</div>"
+								   		+"</a>";
+								    	
+										$("#hashtagArea").append($hashtag);
+									}
+									
+									hashCheck = 0;
+									hashArr.push(value.hashtag);
 									
 								});
 							}
@@ -734,18 +765,31 @@ function select(){
 								$("#locationArea").append($locationNull);
 							}else{
 								$.each(list, function(index, value){
-									var $location = "<a style='color:black;' href='pNavSearch.do?type=3&keyword=" + value.location + "'>"
-													+"<div id='addSearch' class='locaLoca' value='" + value.pno + "'>"
-											    	+"<div id='addSearchImg'>"
-										    		+"<i class='fas fa-map-marker-alt'></i>"
-											    	+"</div>"
-											    	+"<div id='addSearchNick'>"
-										    		+"<p>" + value.location + "</p>"
-											    	+"</div>"
-												    +"</div>"
-												    +"</a>";
-												    
-									$("#locationArea").append($location);
+									var locaArr = "";
+									
+									for(var i=0; i<locaArr.length; i++){
+										if(locaArr[i] == value.location){
+											locaCheck = 1;
+										}
+									}
+									
+									if(locaCheck == 0){
+										var $location = "<a style='color:black;' href='pNavSearch.do?type=3&keyword=" + value.location + "'>"
+										+"<div id='addSearch' class='locaLoca' value='" + value.pno + "'>"
+								    	+"<div id='addSearchImg'>"
+							    		+"<i class='fas fa-map-marker-alt'></i>"
+								    	+"</div>"
+								    	+"<div id='addSearchNick'>"
+							    		+"<p>" + value.location + "</p>"
+								    	+"</div>"
+									    +"</div>"
+									    +"</a>";
+									    
+										$("#locationArea").append($location);
+									}
+									
+									locaCheck = 0;
+									locaArr.push(value.location);
 									
 								});
 							}

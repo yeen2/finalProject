@@ -210,7 +210,7 @@
 	<select id="selectSearchHashtag" resultMap="postingResultSet">
 		select * 
 		from hash
-		where hashtag like #{search} || '%'
+		where hashtag like '#' || #{search} || '%'
 	</select>
 	
 	<select id="selectSearchLoca" resultMap="postingResultSet">
