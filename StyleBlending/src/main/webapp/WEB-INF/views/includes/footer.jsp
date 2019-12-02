@@ -40,7 +40,7 @@
 				<p class="small"> &copy; 2019, made with 
 					<span class="text-danger">
 					<i class="fas fa-heart"></i></span> 
-					by BootstrapBay
+					by styleblending
 				</p>
 			</div>
 		</div>

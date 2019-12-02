@@ -78,9 +78,7 @@ public class HomeController {
 		}
 		return mv;
 	}
-	
-	
-	
+
 	@RequestMapping("login.do")
 	public ModelAndView loginMember(Member m, HttpSession session, ModelAndView mv, 
 								String remember, String idid , HttpServletResponse res, HttpServletRequest req) {
