@@ -45,14 +45,14 @@
 						</div>
 						<div class="form-group">
 							<label for="userPwd">Password</label>
-							<input type="password" class="form-control" id="pass" name="pass" placeholder="Password">
-							<small id="passwordHelp1" style="display:none;" class="form-text text-success">사용가능한 비밀번호 입니다.</small>
-							<small id="passwordHelp2" style="display:none;" class="form-text text-danger">형식에 맞지 않습니다</small>
+							<input type="password" class="form-control" id="pass" name="pass" placeholder="Password">	
+							<small id="passwordCheck1" style="display:none;" class="form-text text-danger">형식에 맞지 않습니다</small>
 						</div>
 						<div class="form-group">
 							<label for="pass2">Password Confirmation</label>
 							<input type="password" class="form-control" id="pass2" name="pass2" placeholder="Password">
-							<small id="passwordCheck" style="display:none;" class="form-text text-danger">비밀번호가 틀립니다.</small>
+							<small id="passwordCheck2" style="display:none;" class="form-text text-danger">비밀번호가 틀립니다.</small>
+							<small id="passwordCheck3" style="display:none;" class="form-text text-success">사용가능한 비밀번호 입니다.</small>
 						</div>
 						
 						<button type="submit" class="btn btn-block btn-dark" style="height:50px; margin-top:50px;">회원가입</button>
@@ -71,32 +71,32 @@
 	</div>
 
 
-
-
-
 	<%-- 가입정보 체크  --%>
 		<script>
 			function joinValidate() {
 				// 각각의 input 요소들 변수에 담아두기 
 				var email = $("#joinForm input[name=email]");
-				var nickname = $("#joinForm input[name=nickname]");
+				var nickname = $("#joinForm input[name=nickName]");
 				var pass = $("#joinForm input[name=pass]");
 				var pass2 = $("#joinForm input[name=pass2]");
-				
+
 				// 값 다 있나 검사
 				if(email.val().trim() == ""){
 					alert("이메일을 입력해주세요.");
 					email.focus();
 					return false;
-				}else if(nickname.val().trim() == ""){
+				}
+				if(nickname.val().trim() == ""){
 					alert("닉네임을 입력해주세요.");
 					nickname.focus();
 					return false;
-				}else if(pass.val().trim() == ""){
+				}
+				if(pass.val().trim() == ""){
 					alert("비밀번호를 입력해주세요.");
 					pass.focus();
 					return false;
-				}else if(pass2.val().trim() == ""){
+				}
+				if(pass2.val().trim() == ""){
 					alert("비밀번호를 확인해주세요.");
 					pass2.focus();
 					return false;
@@ -113,27 +113,27 @@
 				// 닉네임 검사
 				regExp = /^[가-힣a-zA-Z0-9]{3,8}$/;
 				
-				if (!regExp.test(nickName.val())) {
+				if (!regExp.test(nickname.val())) {
 					alert("닉네임이 형식에 맞지 않습니다.");
 					nickName.val("").focus();
 					return false;
 				}
 
-				// 비밀번호 검사
-				regExp = /^[a-zA-Z0-9!@#$%^&*]{8,16}$/;
-				if (!regExp.test(pass.val())) {
-					alert("비밀번호를 형식에 맞게 입력해주세요.");
-					pass.val("").focus();
-					pass2.val("");
-					return false;
-				}
-
-				
+				// 비번체크 확인
 				if (pass.val() != pass2.val()) {
 					alert("비밀번호가 일치하지 않습니다.");
 					pass2.val("").focus();
 					return false;
 				}
+				
+				// 비밀번호 검사
+				/* regExp = /^[a-zA-Z0-9!@#$%^&*]{8,16}$/;
+				if (!regExp.test(pass.val())) {
+					alert("비밀번호를 형식에 맞게 입력해주세요.");
+					pass.val("").focus();
+					pass2.val("");
+					return false;
+				} */
 
 			}
 			
@@ -260,20 +260,19 @@
 				var pass = $("#pass").val();
 				var pass2 = $("#pass2").val();
 				
-				console.log("pass : " + pass);
-				console.log("pass2 : " + pass2);
-				
 				var regExp = /^[a-zA-Z0-9!@#$%^&*]{8,16}$/;
 				
-				if (regExp.test(pass)) {
+				//if (regExp.test(pass)) {
 					$.ajax({
 						url:"joinCheckPass.do",
 						data:{pass:pass, pass2:pass2},
 						success:function(result){
 							if(result == "1"){ //비번맞음
-								$("#passwordCheck1").show();
+								$("#passwordCheck2").hide();
+								$("#passwordCheck3").show();
 								passB = true;
 							}else{ // 비번틀림
+								$("#passwordCheck3").hide();
 								$("#passwordCheck2").show();
 							}
 							
@@ -285,9 +284,9 @@
 							alert("실패!");
 						}
 					});
-				}else{
-					$("#passwordCheck").show();
-				}
+				//}else{ //형식틀림
+					//$("#passwordCheck1").show();
+				//}
 				
 			});
 		</script>
