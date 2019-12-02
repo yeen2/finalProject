@@ -3,6 +3,7 @@ package com.kh.styleblending.main.model.service;
 import java.util.ArrayList;
 
 import com.kh.styleblending.admin.model.vo.Ad;
+import com.kh.styleblending.main.model.vo.Live;
 import com.kh.styleblending.main.model.vo.Notice;
 import com.kh.styleblending.posting.model.vo.Posting;
 
@@ -28,6 +29,7 @@ public interface MainService {
 	int noticeUpdateConfirm(Notice n);
 	//공지사항 삭제
 	int noticeDelete(int nno);
+	ArrayList<Live> topSearch();
 	
 	
 }

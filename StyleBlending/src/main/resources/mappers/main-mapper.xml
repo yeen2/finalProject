@@ -74,6 +74,12 @@
 	
 	</resultMap>
 	
+	<resultMap id="topSearchResultSet" type="Live">
+		<id property="liveno" column="live_no"/>
+		<result property="keyword" column="keyword"/>
+		<result property="enrolldate" column="enroll_date"/>
+	</resultMap>
+	
 	<resultMap id="NoticeResultSet" type="Notice">
 		<id property="nno" column="n_no"/>
 		<result property="title" column="title"/>
@@ -170,4 +176,9 @@
 		update notice set isdelete = 'Y'
 		where n_no = #{nno}
 	</update>
+	<select id="selectTopSearch" resultMap="topSearchResultSet">
+		select DISTINCT keyword,(select count(*) from live l2 where l2.keyword=l1.keyword)c
+			from live l1
+			order by c desc
+	</select>
 </mapper>

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.styleblending.admin.model.vo.Ad;
+import com.kh.styleblending.main.model.vo.Live;
 import com.kh.styleblending.main.model.vo.Notice;
 import com.kh.styleblending.posting.model.vo.Posting;
 
@@ -59,6 +60,10 @@ public class MainDao {
 	public int noticeDelete(int nno) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("mainMapper.deleteNotice",nno);
+	}
+	public ArrayList<Live> topSearch() {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("mainMapper.selectTopSearch");
 	}
 	
 	

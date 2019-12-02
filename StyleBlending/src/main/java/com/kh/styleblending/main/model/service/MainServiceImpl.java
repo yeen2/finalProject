@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.styleblending.admin.model.vo.Ad;
 import com.kh.styleblending.main.model.dao.MainDao;
+import com.kh.styleblending.main.model.vo.Live;
 import com.kh.styleblending.main.model.vo.Notice;
 import com.kh.styleblending.posting.model.vo.Posting;
 
@@ -72,6 +73,12 @@ public class MainServiceImpl implements MainService{
 	public int noticeDelete(int nno) {
 		// TODO Auto-generated method stub
 		return mainDao.noticeDelete(nno);
+	}
+
+	@Override
+	public ArrayList<Live> topSearch() {
+		// TODO Auto-generated method stub
+		return mainDao.topSearch();
 	}
 	
 	
