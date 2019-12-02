@@ -2362,7 +2362,7 @@ tg_no NUMBER;
 
 BEGIN
     select m_no into tg_no from board where b_no=:NEW.B_NO;
-    insert into alarm values(seq_alarm.nextval, :NEW.BR_NO, 1, sysdate, default, 1, :NEW.M_NO);
+    insert into alarm values(seq_alarm.nextval, :NEW.BR_NO, tg_no, sysdate, default, 2, :NEW.M_NO);
 END;
 /
 -- posting 댓글 작성 트리거
@@ -2375,7 +2375,7 @@ tg_no NUMBER;
 
 BEGIN
     select m_no into tg_no from posting where p_no=:NEW.P_NO;
-    insert into alarm values(seq_alarm.nextval, :NEW.PR_NO, 1, sysdate, default, 1, :NEW.M_NO);
+    insert into alarm values(seq_alarm.nextval, :NEW.PR_NO, tg_no, sysdate, default, 2, :NEW.M_NO);
 END;
 /
 -- posting 좋아요 트리거
@@ -2401,7 +2401,7 @@ tg_no NUMBER;
 
 BEGIN
     select m_no into tg_no from board where b_no=:NEW.B_NO;
-    insert into alarm values(seq_alarm.nextval, :NEW.B_NO, 1, sysdate, default, 1, :NEW.M_NO);
+    insert into alarm values(seq_alarm.nextval, :NEW.B_NO, tg_no, sysdate, default, 1, :NEW.M_NO);
 END;
 /
 -- board 댓글 좋아요 트리거
@@ -2414,7 +2414,7 @@ tg_no NUMBER;
 
 BEGIN
     select m_no into tg_no from b_reply where br_no=:NEW.R_NO;
-    insert into alarm values(seq_alarm.nextval, :NEW.R_NO, 1, sysdate, default, 1, :NEW.M_NO);
+    insert into alarm values(seq_alarm.nextval, :NEW.R_NO, tg_no, sysdate, default, 1, :NEW.M_NO);
 END;
 /
 -- fan 추가 트리거
