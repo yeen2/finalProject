@@ -120,13 +120,15 @@
 
        select * from
 		(select a.*,rownum rnum
-		from (select p.p_no,p.m_no, p.original_img,p.rename_img,p.img_path,content,p.hashtag,p.gender,p.location,like_count,p.declare_count,p.enroll_date,p.update_date,p.isdelete,m.nickname, m.profile, m.profile_path,m.rename_img ren,
+		from (select p.p_no,p.m_no, p.original_img,p.rename_img,p.img_path,content,
+		p.hashtag,p.gender,p.location,like_count,p.declare_count,p.enroll_date,
+		p.update_date,p.isdelete,m.nickname, m.profile, m.profile_path,m.rename_img ren,
 				(select count(*) from p_reply r where r.r_level=1 and r.p_no=p.p_no)as replyCount,
                 (select count(*) from p_like l where l.p_no=p.p_no and l.m_no=#{mno}) loginLike,
                 (select count(*) from fan f where me_no = p.m_no and f.you_no=#{mno}) fanCheck
 				from posting p join member m on(p.m_no = m.m_no) 
 				order by p.enroll_date desc) a)
-		where rnum between 10 and 20
+		where rnum between 10 and 10000
 
 
 	</select>
@@ -156,7 +158,7 @@
 	</update>
 	<select id="selectNoticeContent" resultMap="NoticeResultSet">
 		select *
-		from notice
+		from notice	
 		where n_no = #{nno}
 	</select>
 	<insert id="insertNotice">
