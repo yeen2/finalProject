@@ -275,9 +275,9 @@
 		where c.name like '%'||#{keyword}||'%'
 	</select>
 	
-	<insert id="insertLive">
+	<insert id="insertLive" parameterType="HashMap">
 		insert into live
-		values(seq_live.nextval, #{keyword}, sysdate)
+		values(seq_live.nextval, #{keyword}, #{type}, sysdate)
 	</insert>
 	
 	<select id="selectBrand" resultMap="brandResultSet">

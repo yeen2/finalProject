@@ -52,7 +52,7 @@ public interface PostingService {
 	List<Posting> selectSearchPosting_loca(String keyword, int mno);
 	List<Posting> selectSearchPosting_cate(String keyword, int mno);
 	
-	int insertLive(String keyword);
+	int insertLive(String keyword, int type);
 	
 	ArrayList<Brand> selectBrand(String brand);
 	

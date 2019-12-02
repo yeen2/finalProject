@@ -196,8 +196,8 @@ public class PostingServiceImpl implements PostingService {
 	}
 	
 	@Override
-	public int insertLive(String keyword) {
-		return pDao.insertLive(keyword);
+	public int insertLive(String keyword, int type) {
+		return pDao.insertLive(keyword, type);
 	}
 	
 	@Override
