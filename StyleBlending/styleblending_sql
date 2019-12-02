@@ -2285,6 +2285,29 @@ insert into brand values(seq_brand.nextval,'후아유');
 insert into brand values(seq_brand.nextval,'휠라');
 insert into brand values(seq_brand.nextval,'힐');
 
+-- style 더미
+insert into style values(seq_style.nextval,70,'4','가까이','aqua');
+insert into style values(seq_style.nextval,70,'18','고트','brown');
+insert into style values(seq_style.nextval,69,'3','골','pink');
+insert into style values(seq_style.nextval,69,'8','갭','black');
+insert into style values(seq_style.nextval,68,'21','그라빈','red');
+insert into style values(seq_style.nextval,68,'19','굿우드','navy');
+insert into style values(seq_style.nextval,67,'10','블랭크','orange');
+insert into style values(seq_style.nextval,67,'27','사피르','brown');
+insert into style values(seq_style.nextval,66,'11','빈폴','yellow');
+insert into style values(seq_style.nextval,66,'22','후아유','navy');
+insert into style values(seq_style.nextval,65,'44','생로랑','green');
+insert into style values(seq_style.nextval,65,'33','블랙후디','brown');
+insert into style values(seq_style.nextval,64,'29','블랙하인드','blue');
+insert into style values(seq_style.nextval,64,'1','솔로베어','gray');
+insert into style values(seq_style.nextval,63,'9','소다몬','orange');
+insert into style values(seq_style.nextval,63,'26','수아레','brown');
+insert into style values(seq_style.nextval,62,'21','그라빈','red');
+insert into style values(seq_style.nextval,62,'19','굿우드','navy');
+insert into style values(seq_style.nextval,61,'18','생로랑','green');
+insert into style values(seq_style.nextval,61,'8','블랙후디','black');
+insert into style values(seq_style.nextval,60,'2','헨더','green');
+insert into style values(seq_style.nextval,60,'25','가로','black');
 
 -- board 댓글 작성 트리거
 CREATE OR REPLACE TRIGGER TRG_B_REPLY
