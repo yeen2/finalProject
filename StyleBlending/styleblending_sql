@@ -296,7 +296,7 @@ COMMENT ON COLUMN fan.enroll_date IS '시작날짜';
 CREATE TABLE board (
 	b_no	number		NOT NULL,
 	m_no	number		NOT NULL,
-	title	varchar2(50)		NOT NULL,
+	title	varchar2(200)		NOT NULL,
 	content	varchar2(4000)		NOT NULL,
 	count	number	DEFAULT 0	NOT NULL,
 	enroll_date	Date	DEFAULT SYSDATE	NOT NULL,
@@ -386,7 +386,7 @@ COMMENT ON COLUMN ad.status IS '광고상태(1-승인요청,2-진행중,3-마감
 CREATE TABLE fashion_board (
 	fb_no	number		NOT NULL,
 	m_no	number		NOT NULL,
-	title	varchar2(500)		NOT NULL,
+	title	varchar2(200)		NOT NULL,
 	content	varchar2(4000)		NOT NULL,
 	count	number	DEFAULT 0	NOT NULL,
 	enroll_date	Date	DEFAULT SYSDATE	NOT NULL,
@@ -1354,6 +1354,46 @@ INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,9, '댓글9', sysdate, default);
 insert into declare values(seq_declare.nextval,1,1,'비방',null,sysdate,1,2);
 insert into declare values(seq_declare.nextval,17,1,'비방',null,sysdate,1,2);
 insert into declare values(seq_declare.nextval,7,1,'도배',null,'19/11/15',1,2);
+
+
+-- 패션정보게시판 더미 
+
+insert into fashion_board values(seq_fashion_board.nextval,1,'서울 패션 페스티벌 2019','fashion12.jpg',default,sysdate,sysdate, default);
+insert into fashion_board values(seq_fashion_board.nextval,2,'서울 패션 페스티벌 2019','fashion11.jpg',default,sysdate,sysdate, default);
+insert into fashion_board values(seq_fashion_board.nextval,3,'서울 패션 페스티벌 2019','fashion10.jpg',default,sysdate,sysdate, default);
+insert into fashion_board values(seq_fashion_board.nextval,4,'서울 패션 페스티벌 2019','fashion9.jpg',default,sysdate,sysdate, default);
+insert into fashion_board values(seq_fashion_board.nextval,5,'서울 패션 페스티벌 2019','fashion8.jpg',default,sysdate,sysdate, default);
+insert into fashion_board values(seq_fashion_board.nextval,6,'서울 패션 페스티벌 2019','fashion7.jpg',default,sysdate,sysdate, default);
+insert into fashion_board values(seq_fashion_board.nextval,7,'서울 패션 페스티벌 2019','fashion6.jpg',default,sysdate,sysdate, default);
+insert into fashion_board values(seq_fashion_board.nextval,8,'서울 패션 페스티벌 2019','fashion5.jpg',default,sysdate,sysdate, default);
+insert into fashion_board values(seq_fashion_board.nextval,9,'서울 패션 페스티벌 2019','fashion4.jpg',default,sysdate,sysdate, default);
+insert into fashion_board values(seq_fashion_board.nextval,10,'서울 패션 페스티벌 2019','fashion3.jpg',default,sysdate,sysdate, default);
+insert into fashion_board values(seq_fashion_board.nextval,11,'서울 패션 페스티벌 2019','fashion2.jpg',default,sysdate,sysdate, default);
+insert into fashion_board values(seq_fashion_board.nextval,12,'서울 패션 페스티벌 2019','fashion1.jpg',default,sysdate,sysdate, default);
+insert into fashion_board values(seq_fashion_board.nextval,13,'서울 패션 페스티벌 2019','fashion13.jpg',default,sysdate,sysdate, default);
+insert into fashion_board values(seq_fashion_board.nextval,14,'서울 패션 페스티벌 2019','fashion14.jpg',default,sysdate,sysdate, default);
+insert into fashion_board values(seq_fashion_board.nextval,15,'서울 패션 페스티벌 2019','fashion15.jpg',default,sysdate,sysdate, default);
+insert into fashion_board values(seq_fashion_board.nextval,16,'서울 패션 페스티벌 2019','fashion16.jpg',default,sysdate,sysdate, default);
+insert into fashion_board values(seq_fashion_board.nextval,17,'서울 패션 페스티벌 2019','fa.jpg',default,sysdate,sysdate, default);
+
+-- 이미지 더미
+insert into image values(seq_image.nextval,1,'fashion12.jpg','fashion12.jpg','resources/bImgUploadFiles/',2);
+insert into image values(seq_image.nextval,2,'fashion11.jpg','fashion11.jpg','resources/bImgUploadFiles/',2);
+insert into image values(seq_image.nextval,3,'fashion10.jpg','fashion10.jpg','resources/bImgUploadFiles/',2);
+insert into image values(seq_image.nextval,4,'fashion9.jpg','fashion9.jpg','resources/bImgUploadFiles/',2);
+insert into image values(seq_image.nextval,5,'fashion8.jpg','fashion8.jpg','resources/bImgUploadFiles/',2);
+insert into image values(seq_image.nextval,6,'fashion7.jpg','fashion7.jpg','resources/bImgUploadFiles/',2);
+insert into image values(seq_image.nextval,7,'fashion6.jpg','fashion6.jpg','resources/bImgUploadFiles/',2);
+insert into image values(seq_image.nextval,8,'fashion5.jpg','fashion5.jpg','resources/bImgUploadFiles/',2);
+insert into image values(seq_image.nextval,9,'fashion4.jpg','fashion4.jpg','resources/bImgUploadFiles/',2);
+insert into image values(seq_image.nextval,10,'fashion3.jpg','fashion3.jpg','resources/bImgUploadFiles/',2);
+insert into image values(seq_image.nextval,11,'fashion2.jpg','fashion2.jpg','resources/bImgUploadFiles/',2);
+insert into image values(seq_image.nextval,12,'fashion1.jpg','fashion1.jpg','resources/bImgUploadFiles/',2);
+insert into image values(seq_image.nextval,13,'fashion13.jpg','fashion13.jpg','resources/bImgUploadFiles/',2);
+insert into image values(seq_image.nextval,14,'fashion14.jpg','fashion14.jpg','resources/bImgUploadFiles/',2);
+insert into image values(seq_image.nextval,15,'fashion15.jpg','fashion15.jpg','resources/bImgUploadFiles/',2);
+insert into image values(seq_image.nextval,16,'fashion16.jpg','fashion16.jpg','resources/bImgUploadFiles/',2);
+insert into image values(seq_image.nextval,17,'fa.jpg','fa.jpg','resources/bImgUploadFiles/',2);
 
 
 -- 포스팅 좋아요 알람

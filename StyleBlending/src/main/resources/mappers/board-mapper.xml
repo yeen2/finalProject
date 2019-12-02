@@ -90,7 +90,8 @@
 </select>
 
 <select id="fashionSelectList" resultMap="fashionBoardResultSet">
-	select fb.* , m.nickName 
+	select fb.* , m.nickName , 
+	(select rename_img from image where b_no = fb.fb_no )renameImg
 	from fashion_board fb
 	join member m on(fb.m_no = m.m_no)
 	where fb.isdelete='N'
@@ -173,13 +174,23 @@
 <!-- <insert id="insertbImgFile">
 	insert into image
 	values(SEQ_IMAGE.nextval, seq_board.currval, null, #{renameImg}, #{imgPath}, #{type})
-</insert>
+</insert> -->
 
 <insert id="insertfImgFile">
 	insert into image
-	values(SEQ_IMAGE.nextval, seq_board.currval, null, #{renameImg}, #{imgPath}, #{type})
+	values(SEQ_IMAGE.nextval, 0 , #{originalImg}, #{renameImg}, 'resources/bImgUploadFiles/' , 2)
 </insert>
- -->
+
+<update id="updatefImgfile">
+	update image
+	set b_no = seq_fashion_board.currval
+	where img_no = #{resultImgno}
+</update>
+
+<select id="selectImg" resultType="_int">
+	select seq_image.currval
+	from dual
+</select>
 
 <update id="updateCount">
 	update board
