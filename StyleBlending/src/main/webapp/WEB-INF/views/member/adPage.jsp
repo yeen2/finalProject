@@ -95,7 +95,8 @@
 						  		<td scope="col">${ ad.endDate }</td>
 						  		<td scope="col">
 							  		<c:if test="${ ad.status == 1 }">
-							  		승인 대기
+							  		승인 대기&nbsp;&nbsp;
+							  		<a style="font-size:10px;" class="btn btn-dark cancelAdBtn" href="mpDeleteAd.do?adno=${ ad.adno }">취소</a>
 							  		</c:if>
 							  		<c:if test="${ ad.status == 2 }">
 							  		등록중
@@ -364,6 +365,17 @@
 		
 		$("#deleteClose, #deleteClose2").click(function(){
 			$("#userPass").val("");
+		});
+		
+		// 광고 등록 취소 버튼
+		$(document).on("click", ".cancelAdBtn", function(){
+			var real = confirm("광고 등록을 취소하시겠습니까?");
+			
+			if(real){
+				return true;
+			}else{
+				return false;
+			}
 		});
 		
 		

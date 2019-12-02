@@ -90,7 +90,7 @@
                                             <td>${m.mno}</td>
                                             <td>
                                                 <div class="round-img">
-                                                    <a href="mpViewProfile.do?mno=${m.mno}"><img class="rounded-circle" src="${pageContext.request.contextPath}${m.profilePath}${m.renameImg}" alt=""></a>
+                                                    <a href="mpViewProfile.do?mno=${m.mno}"><img class="rounded-circle" src="${pageContext.request.contextPath}${m.profilePath}${m.renameImg}"  style="width:50px; height:50px;" alt=""></a>
                                                 </div>
                                             </td>
                                             <td>${m.email}</td>

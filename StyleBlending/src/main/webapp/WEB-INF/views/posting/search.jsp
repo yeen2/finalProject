@@ -175,7 +175,7 @@
 									</button>
 								</c:if>
 							</div>
-							<div style="height: 50%;">
+							<div style="height: 50%; padding-top: 10px;">
 								<i class="fas fa-map-marker-alt"></i>
 								<span style="fint-size:xx-small;">${p.mlocation }</span>
 							</div>
@@ -221,21 +221,25 @@
 					<h5 class="card-header">Spotlight</h5>
 					<div class="card-body">
 						<div class="spotDiv">
-							<img style="width: 100%; height: 100%;" 
-								src="${ pageContext.servletContext.contextPath }/resources/image/hashtag/dailylook.jpg">
-							<div style="left: 60px; width: 100px; bottom: 80px; font-size: 1em; 
-										font-weight: bold; position: absolute; color: white;">
-								#데일리룩
-							</div>
+							<a href="pNavSearch.do?type=2&keyword=데일리룩">
+								<img style="width: 100%; height: 100%;" 
+									src="${ pageContext.servletContext.contextPath }/resources/image/hashtag/dailylook.jpg">
+								<div style="left: 60px; width: 100px; bottom: 80px; font-size: 1em; 
+											font-weight: bold; position: absolute; color: white;">
+									#데일리룩
+								</div>
+							</a>
 						</div>
 						
 						<div class="spotDiv" style="float: right;">
-							<img style="width: 100%; height: 100%;" 
-								src="${ pageContext.servletContext.contextPath }/resources/image/hashtag/springlook.jpg">
-							<div style="right: 25px; width: 100px; bottom: 80px; font-size: 1em; 
-										font-weight: bold; position: absolute; color: white;">
-								#봄코디
-							</div>
+							<a href="pNavSearch.do?type=2&keyword=봄코디">
+								<img style="width: 100%; height: 100%;" 
+									src="${ pageContext.servletContext.contextPath }/resources/image/hashtag/springlook.jpg">
+								<div style="right: 25px; width: 100px; bottom: 80px; font-size: 1em; 
+											font-weight: bold; position: absolute; color: white;">
+									#봄코디
+								</div>
+							</a>
 						</div>
 					</div>
 				</div> 

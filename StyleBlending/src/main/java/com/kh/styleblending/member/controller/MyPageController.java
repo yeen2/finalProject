@@ -431,4 +431,18 @@ public class MyPageController {
 		}
 	}
 	
+	@RequestMapping("mpDeleteAd.do")
+	public ModelAndView deleteAd(Ad ad, ModelAndView mv) {
+		int result = mpService.deleteAd(ad);
+		
+		if(result > 0) {
+			mv.setViewName("redirect:mpSAdList.do");
+		}else {
+			mv.addObject("msg", "광고 등록 취소에 실패하였습니다.").setViewName("common/errorPage");
+		}
+		
+		return mv;
+		
+	}
+	
 }

@@ -145,4 +145,8 @@ public class AdminDao {
 	public ArrayList<Style> selectBrandRank() {
 		return (ArrayList)sqlSession.selectList("adminMapper.selectBrandRank");
 	}
+	
+	public ArrayList<Style> selectColorRank() {
+		return (ArrayList)sqlSession.selectList("adminMapper.selectColorRank");
+	}
 }

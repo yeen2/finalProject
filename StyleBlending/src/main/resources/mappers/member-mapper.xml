@@ -58,8 +58,17 @@
 		where email=#{email}
 	</select>
 	
+	<update id="updateSearchPass" parameterType="HashMap">
+		update member
+		set pass=#{pass}
+		where email=#{email}
+	</update>
 
-
+	<select id="selectSearchPass" resultMap="memberResultSet">
+		select * 
+		from member
+		where email=#{email}
+	</select>
 
 
 

@@ -77,5 +77,8 @@ public interface MyPageService {
 	
 	// 닉네임 중복체크
 	int nickNameCheck(Member m);
+	
+	// 광고 등록 취소
+	int deleteAd(Ad ad);
 
 }

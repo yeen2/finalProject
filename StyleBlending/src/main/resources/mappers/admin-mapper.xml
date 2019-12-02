@@ -390,10 +390,6 @@ select sum(d1) "day1",sum(d2) "day2",sum(d3) "day3",sum(d4) "day4",sum(d5) "day5
 		]]>
 	</select>
 	
-	<select id="selectNoticeList" resultMap="NoticeResultSet">
-		select * from notice where isdelete='N'
-	</select>
-	
 	<select id="selectCateRank" resultMap="StyleResultSet">
 		<![CDATA[
 		select rownum, name,count  from
@@ -402,7 +398,7 @@ select sum(d1) "day1",sum(d2) "day2",sum(d3) "day3",sum(d4) "day4",sum(d5) "day5
 		join category on(ca_no=cate)
 		group by name
 		order by count(cate) desc)
-        where rownum <= 3
+        where rownum <= 5
         ]]>
 	</select>
 	
@@ -414,8 +410,24 @@ select sum(d1) "day1",sum(d2) "day2",sum(d3) "day3",sum(d4) "day4",sum(d5) "day5
 		from style
 		group by brand
 		order by count(brand) desc)
-        where rownum <= 3
+        where rownum <= 5
         ]]>
+	</select>
+	
+	 <!-- 색깔별 순위-->
+	 <select id="selectColorRank" resultMap="StyleResultSet">
+		<![CDATA[
+		select rownum rnum, name,count  from
+        (select color name,count(color) count
+		from style
+		group by color
+		order by count(color) desc)
+        where rownum <= 5
+        ]]>
+	</select>
+	
+	<select id="selectNoticeList" resultMap="NoticeResultSet">
+		select * from notice where isdelete='N'
 	</select>
 	 
 	   

@@ -131,13 +131,13 @@
 	
 	<update id="updateProfileImg">
 		update member
-		set original_img=#{originalImg}, rename_img=#{renameImg}
+		set original_img=#{originalImg}, rename_img=#{renameImg}, update_date=sysdate
 		where m_no=#{mno}
 	</update>
 	
 	<update id="updateProfile">
 		update member
-		set nickname=#{nickName}, profile=#{profile}, location=#{location}
+		set nickname=#{nickName}, profile=#{profile}, location=#{location}, update_date=sysdate
 		where m_no=#{mno}
 	</update>
 	
@@ -156,13 +156,13 @@
 	
 	<update id="updatePass">
 		update member
-		set pass=#{pass}
+		set pass=#{pass}, update_date=sysdate
 		where m_no=#{mno}
 	</update>
 	
 	<update id="deleteMember">
 		update member
-		set isdelete='Y'
+		set isdelete='Y', delete_date=sysdate
 		where m_no=#{mno}
 	</update>
 	
@@ -236,5 +236,10 @@
 		from member
 		where nickname=#{nickName}
 	</select>
+	
+	<delete id="deleteAd">
+		delete from ad
+		where ad_no=#{adno}
+	</delete>
 
 </mapper>

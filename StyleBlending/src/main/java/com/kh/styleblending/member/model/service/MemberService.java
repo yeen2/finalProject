@@ -11,6 +11,7 @@ public interface MemberService {
 	Member loginMember(Member m);
 	
 	// 3. 비밀번호 찾기
+	Member searchPass(String email, String randomPass);
 	
 	// 4. 이메일ajax
 	int joinCheckEmail(String email);
@@ -20,5 +21,8 @@ public interface MemberService {
 	
 	// 6. 자동로그인시, id로 정보 가져오기
 	Member getMember(String email);
+	
+
+
 	
 }
