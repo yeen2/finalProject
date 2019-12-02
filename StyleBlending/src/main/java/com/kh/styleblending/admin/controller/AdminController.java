@@ -344,7 +344,7 @@ public class AdminController {
 		
 	}
 	
-	// chart 카테고리별
+	// chart 브랜드별
 	@ResponseBody
 	@RequestMapping(value="aBrandChart.do", produces="application/json; charset=UTF-8")
 	public String selectBrandRank() {
@@ -354,6 +354,16 @@ public class AdminController {
 		//System.out.println(BrandRank);
 		return gson.toJson(BrandRank);
 		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="aColorChart.do", produces="application/json; charset=UTF-8")
+	public String selectColorRank() {
+		ArrayList<Style> colorRank = aService.selectColorRank();
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		
+		return gson.toJson(colorRank);
 	}
 	
 	// 관리자 공지사항

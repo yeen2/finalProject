@@ -155,7 +155,7 @@
 				var IMP = window.IMP;
 				IMP.init('iamport');
 				IMP.request_pay({
-					pg : 'kakaopay',
+					pg : 'html5_inicis',
 				    pay_method : 'card',
 				    merchant_uid : 'merchant_' + new Date().getTime(),
 				    name : '광고 등록',

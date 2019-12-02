@@ -191,7 +191,7 @@
                                                 <td class="serial">${m+1}</td>
                                                 <td>
                                               <div class="round-img">
-                                                  <a href="#"><img class="rounded-circle" src="${pageContext.request.contextPath}${newMember[m].profilePath }${newMember[m].renameImg}" alt=""></a>
+                                                  <a href=""><img class="rounded-circle" src="${pageContext.request.contextPath}${newMember[m].profilePath }${newMember[m].renameImg}" style="width:50px; height:50px;" alt=""></a>
                                               </div>
                                           </td> 
                                                 <td> ${newMember[m].email } </td>
@@ -370,13 +370,6 @@
     </div>
     <!-- /.content -->
     
-   
-
-    <!--Chartist Chart-->
-   <!--  <script src="https://cdn.jsdelivr.net/npm/chartist-plugin-legend@0.6.2/chartist-plugin-legend.min.js"></script> -->
- 
-    <!-- <script src="https://cdn.jsdelivr.net/npm/flot-spline@0.0.1/js/jquery.flot.spline.min.js"></script> -->
-
 
 	<!-- 캘린더 -->
     <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
