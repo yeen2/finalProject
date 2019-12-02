@@ -217,7 +217,28 @@ public class MyPageServiceImpl implements MyPageService {
 
 	@Override
 	public int deleteAd(Ad ad) {
-		return mpDao.deleteAd(ad);
+		DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+		def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
+		
+		TransactionStatus status = transactionManager.getTransaction(def);
+		
+		try {
+			sqlSession.getConnection().setAutoCommit(false);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		int result1 = mpDao.deleteAd(ad);
+		int result2 = mpDao.deletePay(ad);
+		
+		if(result1 > 0 && result2 > 0) {
+			transactionManager.commit(status);
+			return 1;
+		}else {
+			transactionManager.rollback(status);
+			return 0;
+		}
+		
 	}
 
 

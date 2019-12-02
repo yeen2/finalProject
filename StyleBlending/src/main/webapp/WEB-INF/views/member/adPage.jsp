@@ -96,7 +96,7 @@
 						  		<td scope="col">
 							  		<c:if test="${ ad.status == 1 }">
 							  		승인 대기&nbsp;&nbsp;
-							  		<a style="font-size:10px;" class="btn btn-dark cancelAdBtn" href="mpDeleteAd.do?adno=${ ad.adno }">취소</a>
+							  		<a style="font-size:10px;" class="btn btn-dark cancelAdBtn" href="mpDeleteAd.do?adno=${ ad.adno }&payno=${ ad.payno }">취소</a>
 							  		</c:if>
 							  		<c:if test="${ ad.status == 2 }">
 							  		등록중

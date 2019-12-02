@@ -128,6 +128,10 @@ public class MyPageDao {
 	public int deleteAd(Ad ad) {
 		return sqlSession.delete("mypageMapper.deleteAd", ad);
 	}
+
+	public int deletePay(Ad ad) {
+		return sqlSession.update("mypageMapper.deletePay", ad);
+	}
 	
 
 }
