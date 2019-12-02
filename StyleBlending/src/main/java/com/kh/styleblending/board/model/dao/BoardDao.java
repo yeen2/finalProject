@@ -224,6 +224,16 @@ public class BoardDao {
 		
 	}
 
+	public int updatefImgfile(int resultImgno) {
+
+		return sqlSession.update("boardMapper.updatefImgfile", resultImgno);
+	}
+
+	public int selectImg() {
+
+		return sqlSession.selectOne("boardMapper.selectImg");
+	}
+
 	
 
 

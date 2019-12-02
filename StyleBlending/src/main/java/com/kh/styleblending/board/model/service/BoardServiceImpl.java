@@ -49,30 +49,45 @@ public class BoardServiceImpl implements BoardService{
 	public int insertBoard(Board b) {
 		
 		return bDao.insertBoard(b);
-			
-		/*
-		 * DefaultTransactionDefinition def = new DefaultTransactionDefinition();
-		 * def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
-		 * 
-		 * TransactionStatus status = transactionManager.getTransaction(def);
-		 * 
-		 * try { sqlSession.getConnection().setAutoCommit(false); } catch (SQLException
-		 * e) { e.printStackTrace(); }
-		 * 
-		 * 
-		 * int result1 = bDao.insertBoard(b); int result2 = bDao.insertImgFile(i);
-		 * 
-		 * if(result1 > 0 && result2 > 0) { transactionManager.commit(status); return 1;
-		 * }else { transactionManager.rollback(status); return 0; }
-		 */
-		
 	
 	}
 	
 	@Override
 	public int insertfBoard(FashionBoard fb) {
 
-		return bDao.insertfBoard(fb);
+		
+		 DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+		 def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
+		  
+		 TransactionStatus status = transactionManager.getTransaction(def);
+		 
+		try {
+			sqlSession.getConnection().setAutoCommit(false);
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+
+		int result1 = bDao.insertfBoard(fb);
+		
+		int resultImgno = bDao.selectImg();
+
+		if (result1 > 0 && resultImgno > 0) {
+			
+			int result2 = bDao.updatefImgfile(resultImgno);
+			if (result2 > 0) {
+				transactionManager.commit(status);
+				return 1;
+
+			} else {
+
+				transactionManager.rollback(status);
+				return 0;
+			}
+		} else {
+
+			return 0;
+		}
 	}
 	
 	@Override
