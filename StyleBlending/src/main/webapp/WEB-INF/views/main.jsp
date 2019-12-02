@@ -134,6 +134,9 @@ li {
    width: 1000px;
    height: 1000px;
 }
+a{
+ cursor:pointer;
+}
 </style>
 <link rel="stylesheet" type="text/css"
    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -206,8 +209,8 @@ li {
                         "<div class='component'>" +
                         "<div class='card' style='overflow:hidden;'>" +
                         "<div class='card-body' style='height: 400px; padding: 0px;'>" +
-                        "<a class='btn' href='pInfo.do?id="+value.pno+"' style='margin:0px; padding:0px;'>"+
-                        "<img class='card-img' src="+value.imgPath+"/"+value.renameImg + " style='height:100%'>"+
+                        "<a class='btn' href='pInfo.do?id="+value.pno+"' style='margin:0px; padding:0px; width:100%;'>"+
+                        "<img class='card-img' src='${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.renameImg+"' style='height:100%'>"+
                         "</a>"+
                         "<div>"+
                         "<div class='card-footer' style='padding:0px;'>" +
@@ -557,7 +560,7 @@ li {
                    "</div>"+
                    "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                    "<a href='pInfo.do?id="+value.pno+" 'style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                   "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.profileImg+"' alt='dog' style='height: 100%;'>"+
+                   "<img class='card-img' src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.renameImg+"' alt='dog' style='height: 100%;'>"+
                    "</a>"+
                    "</div>"+
                    "<div class='card-footer row'>"+
@@ -596,7 +599,7 @@ li {
                        "</div>"+
                        "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                        "<a href='pInfo.do?id="+value.pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                       "<img class='card-img' src='${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.profileImg+"' alt='dog' style='height: 100%;'>"+
+                       "<img class='card-img' src='${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.renameImg+"' alt='dog' style='height: 100%;'>"+
                        "</a>"+
                        "</div>"+
                        "<div class='card-footer row'>"+
@@ -635,7 +638,7 @@ li {
                       "</div>"+
                       "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                       "<a href='pInfo.do?id="+value.pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                      "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.profileImg+"' alt='dog' style='height: 100%;'>"+
+                      "<img class='card-img' src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.renameImg+"' alt='dog' style='height: 100%;'>"+
                       "</a>"+
                       "</div>"+
                       "<div class='card-footer row'>"+
@@ -674,8 +677,8 @@ li {
                       "</div>"+
                       "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                       "<a href='pInfo.do?id="+value.pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                      "<img class='card-img' src="+value.imgPath+"/"+value.renameImg+" alt='dog' style='height: 100%;'>"+
-                      "</a>"+
+                      "<img class='card-img' src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.renameImg+"' alt='dog' style='height: 100%;'>"+
+                       "</a>"+
                       "</div>"+
                       "<div class='card-footer row'>"+
                       "<div class='col-3 form-inline'>"+
@@ -713,7 +716,7 @@ li {
                       "</div>"+
                       "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                       "<a href='pInfo.do?id="+value.pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                      "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.profileImg+"' alt='dog' style='height: 100%;'>"+
+                      "<img class='card-img' src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.renameImg+"' alt='dog' style='height: 100%;'>"+
                       "</a>"+
                       "</div>"+
                       "<div class='card-footer row'>"+
@@ -751,7 +754,7 @@ li {
                        "</div>"+
                        "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                        "<a href='pInfo.do?id="+value.pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                       "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.profileImg+"' alt='dog' style='height: 100%;'>"+
+                       "<img class='card-img' src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.renameImg+"' alt='dog' style='height: 100%;'>"+
                        "</a>"+
                        "</div>"+
                        "<div class='card-footer row'>"+
@@ -789,7 +792,7 @@ li {
                        "</div>"+
                        "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                        "<a href='pInfo.do?id="+value.pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                       "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.profileImg+"' alt='dog' style='height: 100%;'>"+
+                       "<img class='card-img' src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.renameImg+"' alt='dog' style='height: 100%;'>"+
                        "</a>"+
                        "</div>"+
                        "<div class='card-footer row'>"+
@@ -1283,7 +1286,7 @@ li {
                                 "</div>"+
                                 "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                                 "<a href='pInfo.do?id="+value.pno+" 'style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                                "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.profileImg+"' alt='dog' style='height: 100%;'>"+
+                                "<img class='card-img' src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.renameImg+"' alt='dog' style='height: 100%;'>"+
                                 "</a>"+
                                 "</div>"+
                                 "<div class='card-footer row'>"+
@@ -1322,7 +1325,7 @@ li {
                                          "</div>"+
                                          "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                                          "<a href='pInfo.do?id="+value.pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                                         "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.profileImg+"' alt='dog' style='height: 100%;'>"+
+                                         "<img class='card-img' src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.renameImg+"' alt='dog' style='height: 100%;'>"+
                                          "</a>"+
                                          "</div>"+
                                          "<div class='card-footer row'>"+
@@ -1361,7 +1364,7 @@ li {
                                         "</div>"+
                                         "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                                         "<a href='pInfo.do?id="+value.pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                                        "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.profileImg+"' alt='dog' style='height: 100%;'>"+
+                                        "<img class='card-img' src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.renameImg+"' alt='dog' style='height: 100%;'>"+
                                         "</a>"+
                                         "</div>"+
                                         "<div class='card-footer row'>"+
@@ -1402,7 +1405,7 @@ li {
                                    "</div>"+
                                    "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                                    "<a href='pInfo.do?id="+value.pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                                   "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.profileImg+"' alt='dog' style='height: 100%;'>"+
+                                   "<img class='card-img' src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.renameImg+"' alt='dog' style='height: 100%;'>"+
                                    "</a>"+
                                    "</div>"+
                                    "<div class='card-footer row'>"+
@@ -1441,7 +1444,7 @@ li {
                                    "</div>"+
                                    "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                                    "<a href='pInfo.do?id="+value.pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                                   "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.profileImg+"' alt='dog' style='height: 100%;'>"+
+                                   "<img class='card-img' src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.renameImg+"' alt='dog' style='height: 100%;'>"+
                                    "</a>"+
                                    "</div>"+
                                    "<div class='card-footer row'>"+
@@ -1479,8 +1482,8 @@ li {
                                     "</div>"+
                                     "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                                     "<a href='pInfo.do?id="+value.pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                                    "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.profileImg+"' alt='dog' style='height: 100%;'>"+
-                                     "</a>"+
+                                    "<img class='card-img' src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.renameImg+"' alt='dog' style='height: 100%;'>"+
+                                    "</a>"+
                                     "</div>"+
                                     "<div class='card-footer row'>"+
                                     "<div class='col-3 form-inline'>"+
@@ -1517,7 +1520,7 @@ li {
                                     "</div>"+
                                     "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                                     "<a href='pInfo.do?id="+value.pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                                    "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.profileImg+"' alt='dog' style='height: 100%;'>"+
+                                    "<img class='card-img' src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.renameImg+"' alt='dog' style='height: 100%;'>"+
                                     "</a>"+
                                     "</div>"+
                                     "<div class='card-footer row'>"+
@@ -1616,10 +1619,14 @@ li {
                //console.log(data[0].nickName)
                $("#loading").remove();
                $("#inputWrap").children().remove();
-               var $input 
+               var $input
+               if(data == null){
+            	   console.log('필터 없다 ~~~');
+               }
                if(data.length == 1){
                   var loginUser = "${loginUser.mno}";
                   if(loginUser == null || loginUser == ""){
+
                      $input = "<div class='col-md-4 mt-3'>"+
                      "<div class='component' style='width:360px;'>"+ 
                      "<div class='card' style='overflow:hidden;'>"+
@@ -1640,7 +1647,7 @@ li {
                      "</div>"+
                      "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                      "<a href='pInfo.do?id="+data[0].pno+" 'style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                     "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+data[0].profileImg+"' alt='dog' style='height: 100%;'>"+
+                     "<img class='card-img' src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+data[0].renameImg+"' alt='dog' style='height: 100%;'>"+
                      "</a>"+
                      "</div>"+
                      "<div class='card-footer row'>"+
@@ -1660,7 +1667,7 @@ li {
                  }else{
                 	   if((data[0].loginLike == 0 && data[0].fanCheck == 0) && ("${loginUser.mno}" == data[0].mno)){
                         	 $input = "<div class='col-md-4 mt-3'>"+
-                             "<div class='component'>"+ 
+                             "<div class='component' style='width:360px;'>"+ 
                              "<div class='card' style='overflow:hidden;'>"+
                              "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                              "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
@@ -1672,14 +1679,14 @@ li {
                              "<span style='margin-bottom: 0px; margin-top: 23px;'>"+data[0].nickName+"<br>"+data[0].enrollDate+"</span>"+
                              "</div>"+
                              "<div class='col-3'style='width: 20%; height: 50px; margin-top: 5px; padding-right: 10px; padding-left: 10px; padding-bottom: 5px;'>"+
-                             "<a class='btn btn-dark'><input type='hidden' value="+value.mno+" id='hiddenmno'/><input type='hidden' value="+"${loginUser.mno}"+" id='hiddenmno'/>"+
+                             "<a class='btn btn-dark'><input type='hidden' value="+data[0].mno+" id='hiddenmno'/><input type='hidden' value="+"${loginUser.mno}"+" id='hiddenmno'/>"+
                              "<span style='font-size: 1.2em; color:white;' >My</span>"+
                             "</a>"+
                             "</div>"+
                              "</div>"+
                              "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                              "<a href='pInfo.do?id="+data[0].pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                             "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+data[0].profileImg+"' alt='dog' style='height: 100%;'>"+
+                             "<img class='card-img' src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+data[0].renameImg+"' alt='dog' style='height: 100%;'>"+
                              "</a>"+
                              "</div>"+
                              "<div class='card-footer row'>"+
@@ -1697,9 +1704,9 @@ li {
                              "</div>";
                              
                         }else if((data[0].loginLike == 1 && data[0].fanCheck == 0) && ("${loginUser.mno}" == data[0].mno)){
-                        
+                        	
                         	$input = "<div class='col-md-4 mt-3'>"+
-                            "<div class='component'>"+ 
+                            "<div class='component'style='width:360px;'>"+ 
                             "<div class='card' style='overflow:hidden;'>"+
                             "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
                             "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
@@ -1718,8 +1725,8 @@ li {
                             "</div>"+
                             "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                             "<a href='pInfo.do?id="+data[0].pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                            "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+data[0].profileImg+"' alt='dog' style='height: 100%;'>"+
-                            "</a>"+
+                            "<img class='card-img' src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+data[0].renameImg+"' alt='dog' style='height: 100%;'>"+
+                             "</a>"+
                             "</div>"+
                             "<div class='card-footer row'>"+
                             "<div class='col-3 form-inline'>"+
@@ -1759,7 +1766,7 @@ li {
                         "</div>"+
                         "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                         "<a href='pInfo.do?id="+data[0].pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                        "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+data[0].profileImg+"' alt='dog' style='height: 100%;'>"+
+                        "<img class='card-img' src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+data[0].renameImg+"' alt='dog' style='height: 100%;'>"+
                         "</a>"+
                         "</div>"+
                         "<div class='card-footer row'>"+
@@ -1798,7 +1805,7 @@ li {
                         "</div>"+
                         "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                         "<a href='pInfo.do?id="+data[0].pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                        "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+data[0].profileImg+"' alt='dog' style='height: 100%;'>"+
+                        "<img class='card-img' src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+data[0].renameImg+"' alt='dog' style='height: 100%;'>"+
                         "</a>"+
                         "</div>"+
                         "<div class='card-footer row'>"+
@@ -1836,7 +1843,7 @@ li {
                          "</div>"+
                          "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                          "<a href='pInfo.do?id="+data[0].pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                         "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+data[0].profileImg+"' alt='dog' style='height: 100%;'>"+
+                         "<img class='card-img' src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+data[0].renameImg+"' alt='dog' style='height: 100%;'>"+
                          "</a>"+
                          "</div>"+
                          "<div class='card-footer row'>"+
@@ -1874,7 +1881,7 @@ li {
                          "</div>"+
                          "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                          "<a href='pInfo.do?id="+data[0].pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                         "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+data[0].profileImg+"' alt='dog' style='height: 100%;'>"+
+                         "<img class='card-img' src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+data[0].renameImg+"' alt='dog' style='height: 100%;'>"+
                          "</a>"+
                          "</div>"+
                          "<div class='card-footer row'>"+
@@ -1921,7 +1928,7 @@ li {
                          "</div>"+
                          "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                          "<a href='pInfo.do?id="+value.pno+" 'style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                         "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.profileImg+"' alt='dog' style='height: 100%;'>"+
+                         "<img class='card-img' src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.renameImg+"' alt='dog' style='height: 100%;'>"+
                          "</a>"+
                          "</div>"+
                          "<div class='card-footer row'>"+
@@ -1961,7 +1968,7 @@ li {
                          "</div>"+
                          "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                          "<a href='pInfo.do?id="+value.pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                         "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.profileImg+"' alt='dog' style='height: 100%;'>"+
+                         "<img class='card-img' src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.renameImg+"' alt='dog' style='height: 100%;'>"+
                          
                          "</a>"+
                          "</div>"+
@@ -2001,7 +2008,7 @@ li {
                         "</div>"+
                         "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                         "<a href='pInfo.do?id="+value.pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                        "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.profileImg+"' alt='dog' style='height: 100%;'>"+
+                        "<img class='card-img' src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.renameImg+"' alt='dog' style='height: 100%;'>"+
                         "</a>"+
                         "</div>"+
                         "<div class='card-footer row'>"+
@@ -2040,7 +2047,7 @@ li {
                             "</div>"+
                             "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                             "<a href='pInfo.do?id="+value.pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                            "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.profileImg+"' alt='dog' style='height: 100%;'>"+
+                            "<img class='card-img' src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.renameImg+"' alt='dog' style='height: 100%;'>"+
                             "</a>"+
                             "</div>"+
                             "<div class='card-footer row'>"+
@@ -2079,7 +2086,7 @@ li {
                             "</div>"+
                             "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                             "<a href='pInfo.do?id="+value.pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                            "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.profileImg+"' alt='dog' style='height: 100%;'>"+
+                            "<img class='card-img' src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.renameImg+"' alt='dog' style='height: 100%;'>"+
                             "</a>"+
                             "</div>"+
                             "<div class='card-footer row'>"+
@@ -2117,7 +2124,7 @@ li {
                              "</div>"+
                              "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                              "<a href='pInfo.do?id="+value.pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                             "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.profileImg+"' alt='dog' style='height: 100%;'>"+
+                             "<img class='card-img' src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.renameImg+"' alt='dog' style='height: 100%;'>"+
                              "</a>"+
                              "</div>"+
                              "<div class='card-footer row'>"+
@@ -2155,7 +2162,7 @@ li {
                              "</div>"+
                              "<div class='card-body' style='height: 400px; padding: 0px;'>"+
                              "<a href='pInfo.do?id="+value.pno+"' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                             "<img class='card-img' 'src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.profileImg+"' alt='dog' style='height: 100%;'>"+
+                             "<img class='card-img' src= '${ pageContext.servletContext.contextPath }/resources/upload/posting/"+value.renameImg+"' alt='dog' style='height: 100%;'>"+
                              "</a>"+
                              "</div>"+
                              "<div class='card-footer row'>"+
@@ -2423,8 +2430,8 @@ li {
                                  function(index, value) {
 
                                     $ul
-                                          .append("<li class='ddd'><a href='#'><span style='margin-right:9px;'>"
-                                                + value.liveno
+                                          .append("<li class='ddd'><a href='#'><span style='font-size:15px;margin-right:9px;'>"
+       	                                         + (index+1)
                                                 + "</span>"
                                                 + value.keyword
                                                 + "</a></li>");
@@ -2453,8 +2460,8 @@ li {
                                  function(index, value) {
 
                                     $ul
-                                          .append("<li class='ddd' style='margin-bottom:10px;'><a href='#'><span style='margin-right:9px;'>"
-                                                + value.liveno
+                                          .append("<li class='ddd' style='margin-bottom:10px;'><a href='#'><span style='font-size:15px;margin-right:9px;'>"
+                                                + (index+1)
                                                 + "</span>"
                                                 + value.keyword
                                                 + "</a></li>");
@@ -2525,15 +2532,22 @@ li {
               url:"youtubeUrl.do",
               success:function(data){
                 var url = data.url;
-                var idx = url.indexOf("="); 
-                var url2 = url.substring(idx+1);
+                var idx1 = url.indexOf("=");
+                var idx2 = url.indexOf("&");
+                if(idx2 == -1){
+                	var result = url.substring(idx1+1);
+                }else{
+                	var result = url.substring(idx1+1,idx2);
+              	
+                }
+                
                 console.log("dkdkdkdk"+data.imgPath);
                 window.open("${pageContext.request.contextPath}/resources/assets/ad.jsp?img="+data.imgPath+"&originalImg="+data.renameImg,'','width=345px, height=321px, left=700px, top=300px, toolbar=0, status=yes, menubars=0, scrollbars=0, resizable=0, location=0, directories=0');
              
          player = new YT.Player('player', {
           height: '1000',
           width: '1000',
-          videoId: url2,
+          videoId: result,
           events: {
             'onReady': onPlayerReady
             //,'onStateChange': onPlayerStateChange

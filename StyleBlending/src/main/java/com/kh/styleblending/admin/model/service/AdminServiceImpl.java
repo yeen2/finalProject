@@ -198,10 +198,17 @@ public class AdminServiceImpl implements AdminService{
 	}
 	
 	@Override
+	public ArrayList<Style> selectColorRank() {
+		// 색깔별 순위
+		return aDao.selectColorRank();
+	}
+	
+	@Override
 	public ArrayList<Notice> selectNoticeList() {
 		// 공지사항 목록 조회용
 		return aDao.selectNoticeList();
 	}
+
 
 	
 

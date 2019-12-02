@@ -4,7 +4,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<style type="text/css">
+	#singIn:hover {
+		text-decoration: none;
+	}
+
+</style>
 </head>
 <body class="register">
 <jsp:include page="../includes/header.jsp" />
@@ -14,8 +19,11 @@
 
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-12 col-md-6 offset-md-1 d-flex" style="margin-top: 80px;">
-				<div class="full-picture flex-grow-1"></div>
+			<div class="col-12 col-md-6 offset-md-1 d-flex" style="margin-top: 100px;">
+				<!-- 450 *730 -->
+				<img style="width: 500px; height: 730px;"
+					src="${ pageContext.servletContext.contextPath }/resources/image/join/joinImg.png">
+				
 			</div>
 			
 			<div class="col-12 col-md-4 offset-md-1">
@@ -59,7 +67,7 @@
 					</form>
 
 					<p class="small my-4 text-center">
-						Already have an account? <a href="loginForm.do">Sign In</a>
+						Already have an account? <a href="loginForm.do" id="singIn">Sign In</a>
 					</p>
 				</div>
 			</div>

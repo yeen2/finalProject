@@ -215,6 +215,11 @@ public class MyPageServiceImpl implements MyPageService {
 		return mpDao.updateAlarmOne(alno);
 	}
 
+	@Override
+	public int deleteAd(Ad ad) {
+		return mpDao.deleteAd(ad);
+	}
+
 
 
 }

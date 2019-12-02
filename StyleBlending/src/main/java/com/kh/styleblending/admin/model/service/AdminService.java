@@ -83,6 +83,9 @@ public interface AdminService {
 	// 브랜드별 순위
 	ArrayList<Style> selectBrandRank();
 	
+	// 색깔별 순위
+	ArrayList<Style> selectColorRank();
+	
 	// 총 게시글수(positng,board,fashion)
 	ArrayList<Statistics> totalCount();
 	

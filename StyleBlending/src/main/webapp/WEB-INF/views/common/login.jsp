@@ -3,11 +3,24 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8" />
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="703722063317-f13j5nmldg04ladv3i9cjrgcb8muql2o.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- 네이버로그인 -->
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@beta/dist/js.cookie.min.js"></script>
+
+<style type="text/css">
+	.aTag:hover {
+		text-decoration: none;
+		cursor: pointer;
+		color: #007bff;
+	}
+</style>
 </head>
 <body>
 <jsp:include page="../includes/header.jsp" />
@@ -59,19 +72,18 @@
 				<hr>
 				
 				<div class="input-group-prepend" style="margin-top:10px;">
-					<a href="searchPass.do" style="margin-right:235px;">Forgot Password?</a>
-					<a href="joinForm.do">회원가입</a>
+					<a style="margin-right:235px;" class="aTag" id="forgotPassBtn">Forgot Password?</a>
+					<a href="joinForm.do" class="aTag">회원가입</a>
 				</div>
 				
 				<div style="margin-top:35px;">
 					<button type="button"id="kakaoBtn" style="border: none; background-color: white;">
 						<img id="kakao-login-btn" src="https://kauth.kakao.com/public/widget/login/kr/kr_02_medium.png" style="cursor: pointer"></button>
-				
+					
 				</div>
-				<div style="margin-top:10px;">
-					<button type="button" class="form-control btn btn-danger" id="googleBtn"><b>구글 로그인</b></button>
-				</div>
-				<div style="margin-top:10px;" id="naver_id_login">
+
+
+					<div style="margin-top:10px;" id="naver_id_login">
 					<button type="button" class="form-control btn btn-success" id="navarBtn"><b>네이버 로그인</b></button>
 				</div>
 			</div>
@@ -79,8 +91,95 @@
 		</form>
 		
 	</div>
-	
+<<<<<<< HEAD
+
+
+
+
+
+ 
 	<!-- 아이디/비번 기억하기 -->
+=======
+	
+	<!----------------------------------------- 비밀번호 찾기 모달 ------------------------------>
+	<script type="text/javascript">
+		$("#forgotPassBtn").click(function () {
+			console.log('클릭');
+			$("#searchPassModal").modal('show');
+		});
+	</script>
+
+	<div class="modal fade" id="searchPassModal" tabindex="-1" role="dialog"  
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+			
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">비밀번호 찾기</h5>
+					<!-- 닫기 버튼 -->
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				
+				<form action="searchPass.do" method="post">
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="searchEmail">이메일</label>
+						<input type="email" class="form-control"
+								name="email" id="searchPassEmail">
+						<small id="emailCheck1" style="display:none;" class="form-text text-danger">존재하지 않는 이메일입니다.</small>
+						<small id="emailCheck2" style="display:none;" class="form-text text-success">존재하는 이메일입니다.</small>
+					</div>
+				</div>
+					
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">돌아가기</button>
+					<button type="submit" class="btn btn-success" id="searchPass_submit">찾기</button>
+				</div>
+				</form>
+				<script type="text/javascript">
+					$("#searchPass_submit").attr("disabled", true);
+	
+					$("#searchPassEmail").on("keyup", function(){	
+						var email = $("#searchPassEmail").val();
+						console.log(email);
+						
+						// 이메일 존재 체크ajax
+						$.ajax({
+							url:"joinCheckEmail.do",
+							data:{email:email},
+							type:"post",
+							success:function(result){
+								console.log('결과' + result);
+								if(result == "1"){ //아이디 없음
+									$("#emailCheck1").show();
+									$("#emailCheck2").hide();
+								}else{ // 아이디 존재
+									$("#emailCheck1").hide();
+									$("#emailCheck2").show();
+									$("#searchPass_submit").removeAttr("disabled");
+								}
+							},
+							error:function(result){
+								alert("실패!");
+							}
+						});
+					});
+
+					// 찾기버튼 누를때	
+					$("#searchPass_submit").click(function() {
+						var email = $("#searchPassEmail").val();
+						
+					});
+				
+				</script>
+			</div>
+		</div>
+	</div>
+	
+	<!------------------------ 아이디/비번 기억하기 ---------------------------->
+>>>>>>> branch 'dev' of https://github.com/yeen2/finalProject.git
 	<script>
 	$(function(){
 		$("#email").val(Cookies.get('email'));      

@@ -70,7 +70,7 @@ public class PostingController {
 			//p = p = pService.selectSearchPosting(type ,keyword, -10000);
 		}
 		// 실시간검색어에 insert
-		int result = pService.insertLive(keyword);
+		int result = pService.insertLive(keyword, type);
 
 		mv.addObject("p", p).addObject("keyword", keyword).setViewName("posting/search");
 	

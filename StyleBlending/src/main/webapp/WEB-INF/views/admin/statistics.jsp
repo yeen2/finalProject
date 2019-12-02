@@ -58,12 +58,9 @@
         </nav>
     </aside>
     <!-- /#left-panel -->
-    
-    
- 
         
        <div class="content">
-            <div class="animated fadeIn mt-3">
+            <div class="animated fadeIn ">
                 <div class="row">
                 	
                 	<div class="col-sm-12">
@@ -75,7 +72,7 @@
                 			</div>
                 		</div>
                 	</div>
-                	<div class="col-sm-12 mb-4">
+                	<div class="col-sm-12 mb-2">
 						<div class="card-group">
 							<div class="card col-md-6 no-padding ">
 								<div class="card-body">
@@ -199,7 +196,7 @@
 					</div>			
 					 -->	
 					 <!--  -->	
-					<div class="col-lg-6">
+					<div class="col-lg-4">
 						<div class="card">
 							<div class="card-body">
 								<div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
@@ -207,16 +204,15 @@
 										<div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
 									</div>
 									<div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-									<div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
 									</div>
 								</div>
 								<h4 class="mb-3"><b>카테고리별 순위</b></h4>
-								<canvas id="pieChart" height="1129" width="1129" class="chartjs-render-monitor" style="display: block; height: 753px; width: 753px;"></canvas>
+								<canvas id="pieChart" height="500" width="500" class="chartjs-render-monitor" style="display: block; height: 753px; width: 753px;"></canvas>
 							</div>
 						</div>
 					</div>
 					
-					<div class="col-lg-6">
+					<div class="col-lg-4">
 						<div class="card">
 							<div class="card-body">
 								<div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
@@ -224,11 +220,26 @@
 										<div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
 									</div>
 									<div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-									<div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
 									</div>
 								</div>
 								<h4 class="mb-3"><b>브랜드별 순위</b></h4>
-								<canvas id="pieChart2" height="1129" width="1129" class="chartjs-render-monitor" style="display: block; height: 753px; width: 753px;"></canvas>
+								<canvas id="pieChart2" height="500" width="500" class="chartjs-render-monitor" style="display: block; height: 753px; width: 753px;"></canvas>
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-lg-4">
+						<div class="card">
+							<div class="card-body">
+								<div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+									<div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+										<div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+									</div>
+									<div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+									</div>
+								</div>
+								<h4 class="mb-3"><b>색깔별 순위</b></h4>
+								<canvas id="pieChart3" height="500" width="500" class="chartjs-render-monitor" style="display: block; height: 753px; width: 753px;"></canvas>
 							</div>
 						</div>
 					</div>
@@ -250,32 +261,39 @@
 			 dataType:"json",
 			 success:function(data){
 					
-				 	console.log(data);
+				 	console.log(data.length);
+				 	for(var i in data){
+				 		console.log(data[i].pno);
+				 		var count = data[i].pno;
+				 	}
+				 	console.log(count);
 				 	
 				$.each(data,function(index, value){
 				 
 					var ctx = document.getElementById( "pieChart" );
-				    ctx.height = 400;
+				    ctx.height = 450;
 				    var myChart = new Chart( ctx, {
 				        type: 'pie',
 				        data: {
 				            datasets: [{
-				                data: [data[0].pno,data[1].pno,data[2].pno],
+				                data: [data[0].pno,data[1].pno,data[2].pno,data[3].pno],
 				                backgroundColor: [
 				                                    "rgb(96, 198, 207)",
 				                                    "rgb(152, 156, 255)",
 				                                    "#ef5350",
+				                                    "rgba(0, 194, 146,0.5)",
 				                                    "rgba(0,0,0,0.07)"
 				                                ],
 				                hoverBackgroundColor: [
 				                                    "rgb(96, 198, 207)",
 				                                    "rgb(152, 156, 255)",
 				                                    "#ef5350",
+				                                    "rgba(0, 194, 146,0.5)",
 				                                    "rgba(0,0,0,0.07)"
 				                                ]
 
 				                            } ],
-				            labels: [data[0].name,data[1].name,data[2].name]
+				            labels: [data[index].name]
 				        },
 				        options: {
 				            responsive: true
@@ -302,12 +320,12 @@
 				$.each(data,function(index, value){
 				 
 					var ctx = document.getElementById( "pieChart2" );
-				    ctx.height = 400;
+				    ctx.height = 450;
 				    var myChart = new Chart( ctx, {
 				        type: 'pie',
 				        data: {
 				            datasets: [{
-				                data: [data[0].pno,data[1].pno,data[2].pno],
+				                data: [data[0].pno,data[1].pno,data[2].pno,data[3].pno],
 				                backgroundColor: [
 				                                    "rgba(0, 194, 146,0.9)",
 				                                    "rgba(0, 194, 146,0.7)",
@@ -318,6 +336,53 @@
 				                                    "rgba(0, 194, 146,0.9)",
 				                                    "rgba(0, 194, 146,0.7)",
 				                                    "rgba(0, 194, 146,0.5)",
+				                                    "rgba(0,0,0,0.07)"
+				                                ]
+
+				                            } ],
+				            labels: [data[0].name,data[1].name,data[2].name,data[3].name]
+				        },
+				        options: {
+				            responsive: true
+				        }
+				    } );
+			 });
+				
+			 },error:function(){
+				 console.log("ajax통신 실패");
+			 }
+			 
+		  });  
+      
+      
+	  // 색깔별 순위
+	  $.ajax({
+			 type:"post",
+			 url:"aColorChart.do",
+			 dataType:"json",
+			 success:function(data){
+					
+				 	console.log(data);
+				 	
+				$.each(data,function(index, value){
+				 
+					var ctx = document.getElementById( "pieChart3" );
+				    ctx.height = 450;
+				    var myChart = new Chart( ctx, {
+				        type: 'pie',
+				        data: {
+				            datasets: [{
+				                data: [data[0].pno,data[1].pno,data[2].pno],
+				                backgroundColor: [
+				                                    "rgb(96, 198, 207)",
+				                                    "rgb(152, 156, 255)",
+				                                    "#ef5350",
+				                                    "rgba(0,0,0,0.07)"
+				                                ],
+				                hoverBackgroundColor: [
+				                                    "rgb(96, 198, 207)",
+				                                    "rgb(152, 156, 255)",
+				                                    "#ef5350",
 				                                    "rgba(0,0,0,0.07)"
 				                                ]
 
@@ -372,7 +437,7 @@
 					}
 					 
 				    var ctx = document.getElementById( "sales-chart" );
-				    ctx.height = 450;
+				    ctx.height = 350;
 				    var myChart = new Chart( ctx, {
 				        type: 'line',
 				        data: {
@@ -492,7 +557,7 @@
 					}
 					 
 				    var ctx = document.getElementById( "sales-chart" );
-				    ctx.height = 450;
+				    ctx.height = 350;
 				    var myChart = new Chart( ctx, {
 				        type: 'line',
 				        data: {

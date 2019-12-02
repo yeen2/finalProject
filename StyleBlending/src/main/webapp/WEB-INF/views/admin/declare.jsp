@@ -95,7 +95,7 @@
                                          <td id="dno">${p.dno}</td>
                                          <td>
                                          	<div style="cursor:pointer">
-                                         		 <a data-toggle="modal" data-target="#fq${ p.dno }"><img class="rounded-circle" src="${pageContext.request.contextPath}${p.profilePath}${p.renameImg}" alt=""></a>
+                                         		 <a data-toggle="modal" data-target="#fq${ p.dno }"><img src="${pageContext.request.contextPath}${p.profilePath}${p.renameImg}" style="width:50px; height:50px; border-radius: 60px;" alt=""></a>
                                              </div>
                                          </td>
                                          <c:if test="${p.type eq 1 }">

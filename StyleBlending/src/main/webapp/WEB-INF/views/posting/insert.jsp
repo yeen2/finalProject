@@ -445,10 +445,12 @@
 							&nbsp;&nbsp;&nbsp;&nbsp;
 							<div class="form-group" style="display: inline-block; position: relative;">
 								<input type="text" class="form-control brand" name="brand" placeholder="브랜드를 적어주세요">
-							</div>
-							<div class="searchBrandDiv" style="display: none; top: 188px; left: 100px;">
+								<!-- 브랜드ajax검색 -->
+								<div class="searchBrandDiv" style="display: none; top: 35px; left: 0px;">
 								
+								</div>
 							</div>
+							
 							
 							<br>
 							
@@ -593,24 +595,16 @@
 	
 	
 	<!----------------------------------------------- 브랜드 검색 -------------------------------------->
-	<script type="text/javascript">
+	 	<script type="text/javascript">
 		//$(function(){
 			$(document).on("input",".brand", function () {
 			//$(".brand").on("input", function(){
 				var tt = $(this);
 				var brand = tt.val();
 				
-				tt.parent().next().show();
+				tt.next().show();
+				tt.next().css('position', 'absolute');
 
-				// 해당 top가져오기
-				var tttop = tt.parent().offset().top;
-				var llleft = tt.parent().offset().left;
-				console.log(tttop);
-				console.log(llleft);
-				
-				tt.parent().next().css('position', 'absolute');
-				//tt.parent().next().css('top', tttop+20);
-				//tt.parent().next().css('left', llleft+500);
 				if(brand != ""){
 					$.ajax({
 						url:"pSelectBrand.do",
@@ -618,17 +612,17 @@
 						dataType:"json",
 						type:"get",
 						success:function(list){
-							tt.parent().next().html("");
+							tt.next().html("");
 							
 							if(list != ""){
 								$.each(list, function(index, value){
 									var $selectBrandList = "<div class='searchBrand'>" 
 									    					+ value.brand 
 										    				+"</div>";
-									tt.parent().next().append($selectBrandList);
+									tt.next().append($selectBrandList);
 								});
 							}else{
-								tt.parent().next().hide();
+								tt.next().hide();
 							}
 						},
 						error:function(){
@@ -643,11 +637,10 @@
 		// 검색된 브랜드들 클릭 할떄
 		$(document).on("click",".searchBrand", function () {
 			var tt = $(this).text();
-			$(this).parent().prev().children().eq(0).val(tt);
+			$(this).parent().prev().val(tt);
 			$(this).parent().hide();
 		});
 	</script>
-	
 	<!----------------------------------------------------- 지도 modal ----------------------------------------------->
 	
 	<!-- 모달창 열기 -->
