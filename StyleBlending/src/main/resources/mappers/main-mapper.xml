@@ -38,7 +38,7 @@
 		<result property="isDelete" column="isdelete"/>
 		<result property="nickName" column="nickname"/>
 		<result property="profile" column="profile"/>
-		<result property="profileImg" column="profile_path"/>
+		<result property="profileImg" column="ren"/>
 		<result property="replyCount" column="replyCount"/>
 		<result property="color" column="color"/>
 		<result property="category" column="name"/>

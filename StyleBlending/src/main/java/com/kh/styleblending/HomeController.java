@@ -76,9 +76,7 @@ public class HomeController {
 		}
 		return mv;
 	}
-	
-	
-	
+
 	@RequestMapping("login.do")
 	public ModelAndView loginMember(Member m, HttpSession session, ModelAndView mv, 
 								String remember, String idid , HttpServletResponse res, HttpServletRequest req) {
@@ -199,35 +197,48 @@ public class HomeController {
 	
 	// 비밀번호 찾고, 메일로 전송
 	@RequestMapping("searchPass.do")
-	public String searchPass(HttpServletRequest request, String email) {
+	public ModelAndView searchPass(HttpServletRequest request, String email, ModelAndView mv) {
 		
 		// 해당 이메일의 pass를 난수발생한 값으로 변경하고
 		String randomPass = getRamdomPassword(10);
 		
+		System.out.println("난수 비번 : " + randomPass);
+		
 		// 이 비밀번호로 db비밀번호 변경하기 - 이때 Member객체로 받아와서 닉네임도 받아오기
+		Member m = mService.searchPass(email, randomPass);
 		
+		System.out.println("받는이메일 : " + email);
 		
-		String setfrom = "";
-		String tomail = request.getParameter(email); // 받는 사람 이메일
-		String title = request.getParameter("[StyleBlending] 요청하신 비밀번호 보내드립니다."); // 제목
-		String content = request.getParameter("content"); // 내용
-
-		try {
-			MimeMessage message = mailSender.createMimeMessage();
-			MimeMessageHelper messageHelper = new MimeMessageHelper(message,
-					true, "UTF-8");
-
-			messageHelper.setFrom(setfrom); // 보내는사람 생략하면 정상작동을 안함
-			messageHelper.setTo(tomail); // 받는사람 이메일
-			messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
-			messageHelper.setText(content); // 메일 내용
-
-			mailSender.send(message);
-		} catch (Exception e) {
-			System.out.println(e);
-		}
+		if(m != null) {
+			
+			//String setfrom = "jang_test@naver.com";
+			String setfrom = "jang32880634@gmail.com";
+			//String tomail = request.getParameter(email); // 받는 사람 이메일
+			String title = "[StyleBlending] " + m.getNickName() + "님 요청하신 비밀번호 보내드립니다~"; // 제목
+			String content = "새로운 비밀번호는 " + randomPass + "입니다. 로그인 하신 후, 비밀번호는 새로 변경해 주세요~"; // 내용
 	
-		return "redirect:main.do";
+			try {
+				MimeMessage message = mailSender.createMimeMessage();
+				MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+	
+				messageHelper.setFrom(setfrom); // 보내는사람 생략하면 정상작동을 안함
+				messageHelper.setTo(email); // 받는사람 이메일
+				messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
+				messageHelper.setText(content); // 메일 내용
+	
+				mailSender.send(message);
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+			
+			mv.setViewName("redirect:main.do");
+			
+		}else {
+			mv.addObject("msg", "비밀번호 찾기 실패").setViewName("common/errorPage");
+		}
+		
+		
+		return mv;
 	}
 
 	// 비밀번호 난수발생 메소드

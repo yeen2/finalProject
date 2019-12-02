@@ -236,5 +236,10 @@
 		from member
 		where nickname=#{nickName}
 	</select>
+	
+	<delete id="deleteAd">
+		delete from ad
+		where ad_no=#{adno}
+	</delete>
 
 </mapper>
