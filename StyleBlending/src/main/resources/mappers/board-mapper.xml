@@ -103,14 +103,14 @@
 	select b.*, m.nickName 
 	from board b
 	join member m on(m.m_no = b.m_no)
-	where b_no=#{bno}
+	where b_no=#{bno} and b.isdelete='N'
 </select>
 
 <select id="selectfBoard" resultMap="fashionBoardResultSet">
 	select fb.*, m.nickName 
 	from fashion_board fb
 	join member m on(m.m_no = fb.m_no)
-	where fb_no=#{fbno}
+	where fb_no=#{fbno} and fb.isdelete='N'
 </select>
 
 <select id="getListCount" resultType="_int">
