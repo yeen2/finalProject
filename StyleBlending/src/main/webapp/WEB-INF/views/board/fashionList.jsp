@@ -148,6 +148,7 @@ body {padding-top: 20px;}
 				</div>
 			</c:forEach>
 			
+			
 			<%-- <c:forEach items="${ list }" var="f">
 				<figure class="snip1361"> 
 				<img
