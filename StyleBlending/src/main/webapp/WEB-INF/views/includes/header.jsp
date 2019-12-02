@@ -147,8 +147,8 @@
 
 			<a class="navbar-brand d-flex align-items-center"
 				href="${pageContext.request.contextPath}"> <img
-				src="${pageContext.request.contextPath}/resources/assets/img/logo.svg"
-				class="mr-2" height="30"> Style Blending
+				src="${pageContext.request.contextPath}/resources/assets/img/파이널로고.PNG"
+				class="mr-2" height="50" width="50"> Style Blending
 			</a>
 
 
