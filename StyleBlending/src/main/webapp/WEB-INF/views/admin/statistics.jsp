@@ -262,21 +262,25 @@
 			 success:function(data){
 					
 				 	console.log(data.length);
-				 	for(var i in data){
-				 		console.log(data[i].pno);
-				 		var count = data[i].pno;
+				 	
+				 	var count = [];
+				 	for(var i=0; i<data.length; i++){
+				 			count.push(data[i].pno);
 				 	}
 				 	console.log(count);
 				 	
-				$.each(data,function(index, value){
-				 
+				 	var name = [];
+				 	for(var i=0; i<data.length; i++){
+				 			name.push(data[i].name);
+				 	}
+				
 					var ctx = document.getElementById( "pieChart" );
 				    ctx.height = 450;
 				    var myChart = new Chart( ctx, {
 				        type: 'pie',
 				        data: {
 				            datasets: [{
-				                data: [data[0].pno,data[1].pno,data[2].pno,data[3].pno],
+				                data:count,
 				                backgroundColor: [
 				                                    "rgb(96, 198, 207)",
 				                                    "rgb(152, 156, 255)",
@@ -293,13 +297,13 @@
 				                                ]
 
 				                            } ],
-				            labels: [data[index].name]
+				            labels: name
 				        },
 				        options: {
 				            responsive: true
 				        }
 				    } );
-			 });
+			 
 				
 			 },error:function(){
 				 console.log("ajax통신 실패");
@@ -315,9 +319,16 @@
 			 dataType:"json",
 			 success:function(data){
 					
-				 	console.log(data);
+				 	var count = [];
+				 	for(var i=0; i<data.length; i++){
+				 			count.push(data[i].pno);
+				 	}
+				 	console.log(count);
 				 	
-				$.each(data,function(index, value){
+				 	var name = [];
+				 	for(var i=0; i<data.length; i++){
+				 			name.push(data[i].name);
+				 	}
 				 
 					var ctx = document.getElementById( "pieChart2" );
 				    ctx.height = 450;
@@ -325,7 +336,7 @@
 				        type: 'pie',
 				        data: {
 				            datasets: [{
-				                data: [data[0].pno,data[1].pno,data[2].pno,data[3].pno],
+				                data: count,
 				                backgroundColor: [
 				                                    "rgba(0, 194, 146,0.9)",
 				                                    "rgba(0, 194, 146,0.7)",
@@ -340,13 +351,12 @@
 				                                ]
 
 				                            } ],
-				            labels: [data[0].name,data[1].name,data[2].name,data[3].name]
+				            labels: name
 				        },
 				        options: {
 				            responsive: true
 				        }
 				    } );
-			 });
 				
 			 },error:function(){
 				 console.log("ajax통신 실패");
@@ -362,17 +372,24 @@
 			 dataType:"json",
 			 success:function(data){
 					
-				 	console.log(data);
+			 	var count = [];
+			 	for(var i=0; i<data.length; i++){
+			 			count.push(data[i].pno);
+			 	}
+			 	console.log(count);
+			 	
+			 	var name = [];
+			 	for(var i=0; i<data.length; i++){
+			 			name.push(data[i].name);
+			 	}
 				 	
-				$.each(data,function(index, value){
-				 
 					var ctx = document.getElementById( "pieChart3" );
 				    ctx.height = 450;
 				    var myChart = new Chart( ctx, {
 				        type: 'pie',
 				        data: {
 				            datasets: [{
-				                data: [data[0].pno,data[1].pno,data[2].pno],
+				                data: count,
 				                backgroundColor: [
 				                                    "rgb(96, 198, 207)",
 				                                    "rgb(152, 156, 255)",
@@ -387,13 +404,12 @@
 				                                ]
 
 				                            } ],
-				            labels: [data[0].name,data[1].name,data[2].name]
+				            labels: name
 				        },
 				        options: {
 				            responsive: true
 				        }
 				    } );
-			 });
 				
 			 },error:function(){
 				 console.log("ajax통신 실패");
@@ -518,9 +534,6 @@
 				        }
 				    } );
 					
-					
-		
-				
 			 },error:function(){
 				 console.log("ajax통신 실패");
 			 }
