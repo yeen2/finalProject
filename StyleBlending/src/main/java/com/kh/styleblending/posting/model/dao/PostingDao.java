@@ -152,8 +152,11 @@ public class PostingDao {
 		return sqlSession.selectList("postingMapper.selectSearchPosting_cate", map);
 	}
 	
-	public int insertLive(String keyword) {
-		return sqlSession.insert("postingMapper.insertLive", keyword);
+	public int insertLive(String keyword, int type) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("keyword", keyword);
+		map.put("type", type);
+		return sqlSession.insert("postingMapper.insertLive", map);
 	}
 	
 	public ArrayList<Brand> selectBrand(String brand) {
