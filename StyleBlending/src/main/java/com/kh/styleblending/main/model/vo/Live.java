@@ -18,5 +18,5 @@ public class Live {
 
 	private int liveno;
 	private String keyword;
-	
+	private Date enrolldate;
 }

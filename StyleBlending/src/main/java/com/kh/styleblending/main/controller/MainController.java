@@ -42,15 +42,13 @@ public class MainController {
 	@RequestMapping("topSearch.do")
 	public void topSearch(HttpServletResponse response) throws JsonIOException, IOException {
 
-		ArrayList<Live> list = new ArrayList<>();
-		list.add(new Live(1,"몽블랑"));
-		list.add(new Live(2,"프라다"));
-		list.add(new Live(3,"구찌"));
-		list.add(new Live(4,"나이키"));
-		list.add(new Live(5,"아디다스"));
+		ArrayList<Live> list = mainService.topSearch();
+		
+		
 		response.setContentType("application/json; charset=UTF-8");
-		Gson gson = new Gson();
-
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+	      
 		gson.toJson(list, response.getWriter());
 	}
 	/*
@@ -73,6 +71,7 @@ public class MainController {
 	      
 	      System.out.println(list);
 	      
+	      System.out.println(list);
 	      response.setContentType("application/json; charset=UTF-8");
 	      
 	      Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
