@@ -73,7 +73,8 @@
 </select>
 
 <select id="SearchfselectList" resultMap="fashionBoardResultSet" parameterType="hashmap">
-	select fb.*, m.nickName
+	select fb.*, m.nickName,
+	(select rename_img from image where b_no = fb.fb_no )renameImg
 	from fashion_board fb
 	join member m on(fb.m_no = m.m_no)
 	where fb.isdelete='N'

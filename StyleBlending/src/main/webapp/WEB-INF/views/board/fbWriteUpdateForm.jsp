@@ -43,7 +43,7 @@
 				<h4>제목</h4>
 				<br> <input type="text" class="form-control" id="write-title"
 					name="title" placeholder="제목을 입력하세요" value="${ fb.title }"> <br> <br>
-				<input type="hidden" name="bno" value="${ fb.fbno }">
+				<input type="hidden" name="fbno" value="${ fb.fbno }">
 			</div>
 			<br> <br>
 			<div class="write-inputArea" style="width: auto;">

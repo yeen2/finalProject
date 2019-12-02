@@ -204,6 +204,7 @@ public class BoardDao {
 
 	public int updatefBoard(FashionBoard fb) {
 
+		System.out.println(fb);
 		return sqlSession.update("boardMapper.updatefBoard", fb);
 	}
 
