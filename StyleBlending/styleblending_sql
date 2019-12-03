@@ -1343,15 +1343,32 @@ insert into board values(seq_board.nextval, 16 , '오늘도 코딩', '뼈속 까
 
 
 -- 자유게시판 댓글 insert
-INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,5, '댓글1', sysdate, default);
-INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,4, '댓글2', sysdate, default);
-INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,3, '댓글3', sysdate, default);
-INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,2, '댓글4', sysdate, default);
-INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,1, '댓글5', sysdate, default);
-INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,6, '댓글6', sysdate, default);
-INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,7, '댓글7', sysdate, default);
-INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,8, '댓글8', sysdate, default);
-INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,9, '댓글9', sysdate, default);
+INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,5,1 ,'댓글1', sysdate, default);
+INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,4,2,'댓글2', sysdate, default);
+INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,3,3 ,'댓글3', sysdate, default);
+INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,2,4 ,'댓글4', sysdate, default);
+INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,1,5'댓글5', sysdate, default);
+INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,6, 6,'댓글6', sysdate, default);
+INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,7,7 ,'댓글7', sysdate, default);
+INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,8,8 ,'댓글8', sysdate, default);
+INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,9, 9,'댓글9', sysdate, default);
+INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,10, 10,'댓글9', sysdate, default);
+INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,11,11,'댓글10', sysdate, default);
+INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,12, 12,'댓글11', sysdate, default);
+INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,13, 13,'댓글12', sysdate, default);
+INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,14, 14,'댓글13', sysdate, default);
+INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,15, 15,'댓글14', sysdate, default);
+INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,15, 16,'댓글15', sysdate, default);
+INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,15, 17,'댓글16', sysdate, default);
+INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,9, 18,'댓글17', sysdate, default);
+INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,9, 19,'댓글18', sysdate, default);
+INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,10, 20,'댓글19', sysdate, default);
+INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,9, 21,'댓글20', sysdate, default);
+INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,11, 22,'댓글21', sysdate, default);
+INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,12, 23,'댓글22', sysdate, default);
+INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,13, 24,'댓글23', sysdate, default);
+INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,15, 25,'댓글24', sysdate, default);
+INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,12, 26,'댓글25', sysdate, default);
  
 
 -- 자유게시판 신고  insert
@@ -1362,7 +1379,7 @@ insert into declare values(seq_declare.nextval,8,9,'도배',null,'19/11/15',1,2)
 
 -- 패션정보게시판 더미 
 
-insert into fashion_board values(seq_fashion_board.nextval,1,'서울 패션 페스티벌 2019','fashion12.jpg',default,sysdate,sysdate, default);
+insert into fashion_board values(seq_fashion_board.nextval,1,'서울 패션 페스티벌 2019','resoufashion12.jpg',default,sysdate,sysdate, default);
 insert into fashion_board values(seq_fashion_board.nextval,2,'서울 패션 페스티벌 2019','fashion11.jpg',default,sysdate,sysdate, default);
 insert into fashion_board values(seq_fashion_board.nextval,3,'서울 패션 페스티벌 2019','fashion10.jpg',default,sysdate,sysdate, default);
 insert into fashion_board values(seq_fashion_board.nextval,4,'서울 패션 페스티벌 2019','fashion9.jpg',default,sysdate,sysdate, default);
