@@ -268,7 +268,7 @@ public class AdminController {
 		int result = aService.updateStartAd(adno);
 		//System.out.println(adno);
 		if(result > 0) {
-			session.setAttribute("msg", "진행중인 광고가 변경되었습니다.");
+			session.setAttribute("msg", "광고가 진행중으로 변경되었습니다.");
 			return "redirect:aAdvertisment.do";
 		}else {
 			model.addAttribute("msg", "광고 등록 실패");
