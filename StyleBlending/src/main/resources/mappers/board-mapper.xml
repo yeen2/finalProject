@@ -163,6 +163,7 @@
 </select>
 
 <insert id="insertBoard">
+
 	insert into board 
 	values(seq_board.nextval, #{mno} , #{title} , #{content} , default , sysdate, sysdate, default , default)
 </insert>

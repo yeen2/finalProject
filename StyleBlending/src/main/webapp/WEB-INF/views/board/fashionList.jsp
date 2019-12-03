@@ -21,6 +21,10 @@
 	margin-top: 100px;
 	font-size: 13px !important;
 }
+.line:hover{
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
 
 body {padding-top: 20px;}
 #readBtn{float: right;}
@@ -138,7 +142,7 @@ body {padding-top: 20px;}
 							onclick="location.href='fbdetail.do?fbno=${ f.fbno }';" class="img-responsive img-thumbnail">
 						<div class="caption">
 							<h5 style="height: 40px;">${ f.title }</h5>
-							<p style="margin-top: 20px;" id="writer">${ f.nickName }</p>
+							<p style="margin-top: 20px; font-style: italic;" id="writer">${ f.nickName }</p>
 							<div class="date-count">
 							<p id="createDate">${ f.enrollDate }</p>
 							<p id="count">${ f.count }</p>
@@ -166,19 +170,6 @@ body {padding-top: 20px;}
 			</div>
 		</div>
 		<br><br>
-		<!-- 검색 -->
-		<!-- <div id="searchArea" align="center">
-			<form action="" method="get">
- 				<input type="text" name="search" class="form-control" id="searchInput" placeholder="내용을 입력해주세요" style="width: 300px; float: left;">
-					<select name="type" class="custom-select" style="width: 100px; float: left; margin-left: 10px;" >
-						<option value="title">제목</option>
-						<option value="writer">작성자</option>
-						<option value="content">내용</option>
-						<option value="reply">댓글</option>
-					</select>
-				<button class="btn btn-primary btn-sm" type="submit" style="float: left; margin-left: 8px; height: 38px;"  onclick="search();">검색하기</button>
-			</form>
-		</div> -->
 		
 		<!-- 검색 -->
 		<div id="searchArea" align="center" style="margin-top: 50px;">
@@ -217,7 +208,7 @@ body {padding-top: 20px;}
 			</div>
 
 		<div id="readBtn">
-			<c:if test="${ !empty loginUser }">
+			<c:if test="${ loginUser.email eq 'admin'  }">
 			<button class="btn btn-primary btn-sm" id="write" type="submit" style="float: right; height: 38px;"
 			onclick="location.href=location.href='binsertForm.do';">글쓰기</button>
 			</c:if>
