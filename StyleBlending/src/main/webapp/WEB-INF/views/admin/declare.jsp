@@ -60,13 +60,13 @@
 	                                 <option value="1" <c:if test="${cate.posting eq '1' }">selected</c:if>>포스팅</option>
 	                                 <option value="2" <c:if test="${cate.free eq '2' }">selected</c:if>>자유</option>
 	                             </select>&nbsp;
-	                           	  확인유무 &nbsp;
+	                           	<%--   확인유무 &nbsp;
 	                             <select name="isCheck" id="isCheck" class="form-control">
 	                             	 <option value="0" <c:if test="${isCheck eq '0' }">selected</c:if>>전체</option>
 	                                 <option value="1" <c:if test="${isCheck eq '1' }">selected</c:if>>확인요청</option>
 	                                 <option value="2" <c:if test="${isCheck eq '2' }">selected</c:if>>확인</option>
 	                                 <option value="3" <c:if test="${isCheck eq '3' }">selected</c:if>>삭제완료</option>
-	                             </select>&nbsp;
+	                             </select>&nbsp; --%>
 	                        	<button type="submit" class="btn btn-primary btn-sm">검색</button>
 	                        </div>
 	                  		   <button type="button" class="btn btn-outline-danger btn-sm" id="deleteBtn" 

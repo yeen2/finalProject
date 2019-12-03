@@ -79,9 +79,12 @@
 							</div>
 							<div class="form-group" style="margin-bottom:50px;" style="position:relative;">
 								<label for="userPwd2">Location</label>
-								<input type="button" class="btn btn-dark" style="display:block; margin-left:auto;"onclick="sample6_execDaumPostcode();" value="주소 찾기">
+								<div align="right">
+									<input type="button" class="btn btn-dark" style="display:inline-block;" onclick="sample6_execDaumPostcode();" value="주소 찾기">
+									<input type="button" class="btn btn-info" id="resetLocation" style="display:inline-block;" value="초기화">
+								</div>
 				                <input type="text" class="form-control" id="sample6_postcode" name="content1" placeholder="우편번호" style="display:none;">
-								<input type="text" class="form-control" id="sample6_address" name="location" placeholder="주소" value="${ loginUser.location }" style="pointer-events:none;">
+								<input type="text" class="form-control" id="sample6_address" name="location" placeholder="주소가 없습니다." value="${ loginUser.location }" style="pointer-events:none;">
 								<input type="text" class="form-control" id="sample6_detailAddress" name="content3" placeholder="상세주소" style="display:none;">
 								<input type="text" class="form-control" id="sample6_extraAddress" name="content4" placeholder="참고항목" style="display:none;">
 								<small id="locationAlert" class="form-text text-success" style="position:absolute;">프로필의 주소는 시/구/군 까지만 보여집니다.</small>
@@ -374,6 +377,11 @@
 			}else{
 				$("#lengthCheck").css("color", "black");
 			}
+		});
+		
+		// 주소 초기화
+		$("#resetLocation").click(function(){
+			$("#sample6_address").val("");
 		});
 		
 		// 광고 페이지 이동
