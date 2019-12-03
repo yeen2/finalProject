@@ -54,6 +54,7 @@
                             <div class="card-body mt-5" style="min-height: 800px;">	
                             <div class="row">
 	                            <div class="col-md-10 offset-md-1" style="padding:20px;">
+	                            Showing <strong> ${pi.currentPage }</strong> to <strong>  ${pi.endPage }</strong> of <strong> ${pi.listCount }</strong> entries	
 		                        	<button type="button" onclick="location.href='mainNotice.do';" class="btn btn-sm" style="float:right; margin-right:10px; margin-top:15px; background:#ffc107; color:black;" >
 		                        		수정하기
 		                        	</button>
@@ -100,8 +101,6 @@
 	                                			<c:if test="${pi.currentPage ne 1 }">
 	                                				<c:url value="aNotice.do" var="previous">	
 														<c:param name="currentPage" value="${pi.currentPage-1 }"/>
-														<c:param name="boardLimit" value="${pi.boardLimit }"/>
-														<c:param name="keyword" value="${keyword }"/>
 	                                				</c:url>
 	                                				<a href="${previous }" aria-controls="bootstrap-data-table" class="page-link">Previous</a>
 	                                			</c:if>
@@ -114,8 +113,6 @@
 	                                			<c:if test="${p ne pi.currentPage }">
 	                                				<c:url value="aNotice.do" var="page">	
 	                                					<c:param name="currentPage" value="${p}"/>
-	                                					<c:param name="boardLimit" value="${pi.boardLimit }"/>
-	                                					<c:param name="keyword" value="${keyword }"/>
 	                                				</c:url>
 		                                			<li class="paginate_button page-item active">
 		                                				<a href="${page}" aria-controls="bootstrap-data-table" class="page-link">${p }</a>
@@ -130,8 +127,6 @@
 	                                			<c:if test="${pi.currentPage ne pi.endPage }">	
 	                                				<c:url value="aNotice.do" var="next" >
 	                                					<c:param name="currentPage" value="${pi.currentPage+1 }"/>
-	                                					<c:param name="boardLimit" value="${pi.boardLimit }"/>
-	                                					<c:param name="keyword" value="${keyword }"/>
 	                                				</c:url>
 	                                				<a href="${next }" aria-controls="bootstrap-data-table" class="page-link">Next</a>
 	                                			</c:if>
