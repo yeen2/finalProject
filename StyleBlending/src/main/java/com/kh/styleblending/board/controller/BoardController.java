@@ -92,6 +92,11 @@ public class BoardController {
 		} else {
 			sc.setContent(search);
 		}
+		
+		if(request.getParameter("currentPage") != null) {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
 		// logger.info("sc : " + sc);
 
 		int listCount = bService.getSearchListCount(sc);
@@ -129,6 +134,11 @@ public class BoardController {
 			sc.setContent(search);
 		}
 		// logger.info("sc : " + sc);
+		
+		if(request.getParameter("currentPage") != null) {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		
 
 		int listCount = bService.getfbSearchListCount(sc);
 
@@ -463,7 +473,7 @@ public class BoardController {
 	@ResponseBody
 	@RequestMapping("rdelete.do")
 	public String deleteReply(int brno, HttpServletResponse response) throws IOException {
-		System.out.println(brno);
+		//System.out.println(brno);
 
 		int result1 = bService.deleteBoardReply(brno);
 
@@ -534,7 +544,7 @@ public class BoardController {
 		int result = bService.insertbDeclare(d);
 		// System.out.println(d);
 		if (result > 0) {
-			mv.addObject("msg", "게시물을 신고하였습니다.").setViewName("redirect:bdetail.do?bno="+bno);
+			mv.addObject("msg", "게시물을 신고").setViewName("redirect:bdetail.do?bno="+bno);
 			// System.out.println(result);
 		} else {
 			mv.addObject("msg", "게시물 신고를 실패하였습니다.").setViewName("common/error");

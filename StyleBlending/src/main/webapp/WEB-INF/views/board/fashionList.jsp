@@ -217,7 +217,7 @@ body {padding-top: 20px;}
 			</div>
 
 		<div id="readBtn">
-			<c:if test="${ !empty loginUser }">
+			<c:if test="${ loginUser.email eq 'admin'  }">
 			<button class="btn btn-primary btn-sm" id="write" type="submit" style="float: right; height: 38px;"
 			onclick="location.href=location.href='binsertForm.do';">글쓰기</button>
 			</c:if>

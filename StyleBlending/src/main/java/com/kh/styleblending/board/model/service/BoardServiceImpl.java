@@ -90,6 +90,7 @@ public class BoardServiceImpl implements BoardService{
 		}
 	}
 	
+
 	@Override
 	public int insertbImgFile(Image i) {
 
