@@ -961,6 +961,11 @@ insert into posting values(seq_posting.nextval,47,'posting47.jpg','posting47.jpg
 insert into posting values(seq_posting.nextval,48,'posting48.jpg','posting48.jpg','/resources/upload/posting/','내용45 <a href="#" class="hashtagHref">#코디</a>','#코디','W',default,1,0,sysdate,default, default);
 insert into posting values(seq_posting.nextval,49,'posting49.jpg','posting49.jpg','/resources/upload/posting/','내용46 <a href="#" class="hashtagHref">#코디</a>','#코디','W',default,1,1,sysdate,default, default);
 insert into posting values(seq_posting.nextval,50,'posting50.jpg','posting50.jpg','/resources/upload/posting/','내용47 <a href="#" class="hashtagHref">#코디</a>','#코디','W',default,1,0,sysdate,default, default);
+insert into posting values(seq_posting.nextval,10,'p1.JPEG','p1.JPEG','/resources/upload/posting/','오랫만에<a href="#" class="hashtagHref">#책방</a> <a href="#" class="hashtagHref">#데일리룩</a><a href="#" class="hashtagHref">#가을</a>','#책방#데일리룩#가을','M','서울시 종로구',843,0,sysdate,default, default);
+insert into posting values(seq_posting.nextval,11,'p2.JPEG','p2.JPEG','/resources/upload/posting/','가을갬성 <a href="#" class="hashtagHref">#석촌호수</a> <a href="#" class="hashtagHref">#데일리룩</a><a href="#" class="hashtagHref">#가을</a>노랭노랭이','#석촌호수#데일리룩#가을','M','서울시 송파구 잠실동',987,0,sysdate,default, default);
+insert into posting values(seq_posting.nextval,10,'p1.JPEG','p1.JPEG','/resources/upload/posting/','오랫만에<a href="#" class="hashtagHref">#책방</a> <a href="#" class="hashtagHref">#데일리룩</a><a href="#" class="hashtagHref">#가을</a>','#책방#데일리룩','M','서울시 종로구',843,0,sysdate,default, default);
+
+
 
 --p_like 더미
 insert into p_like values(2,10);
@@ -1133,6 +1138,12 @@ insert into p_reply values(seq_p_reply.nextval,24,7,'댓글3',sysdate,null,seq_p
 insert into p_reply values(seq_p_reply.nextval,24,8,'대댓글1',sysdate,null,139,2,default,default);
 insert into p_reply values(seq_p_reply.nextval,24,9,'대댓글2',sysdate,null,140,2,default,default);
 insert into p_reply values(seq_p_reply.nextval,24,10,'대댓글3',sysdate,null,141,2,default,default);
+insert into p_reply values(seq_p_reply.nextval,71,5,'멋져용',sysdate,null,seq_p_reply.currval,1,default,default);
+insert into p_reply values(seq_p_reply.nextval,71,15,'코디 귀엽네여~',sysdate,null,seq_p_reply.currval,1,default,default);
+insert into p_reply values(seq_p_reply.nextval,72,30,'노랭노랭',sysdate,null,seq_p_reply.currval,1,default,default);
+
+
+
 
 --fan 더미
 insert into fan values(seq_fan.nextval,2,1,sysdate);
@@ -1288,6 +1299,13 @@ insert into style values(seq_style.nextval,23,'1','나이키','black');
 insert into style values(seq_style.nextval,23,'17','아디다스','gray');
 insert into style values(seq_style.nextval,24,'1','나이키','black');
 insert into style values(seq_style.nextval,24,'17','아디다스','gray');
+insert into style values(seq_style.nextval,71,'30','셉스','green');
+insert into style values(seq_style.nextval,71,'16','리바이스','black');
+insert into style values(seq_style.nextval,71,'5','커버낫','black');
+insert into style values(seq_style.nextval,71,'33','꼼데가르송','white');
+insert into style values(seq_style.nextval,72,'6','커버낫','yellow');
+insert into style values(seq_style.nextval,72,'20','나이키','black');
+insert into style values(seq_style.nextval,72,'17','보세','gray');
 
 --hash 더미
 insert into hash values(seq_hash.nextval,1,'#코디');
@@ -1314,6 +1332,14 @@ insert into hash values(seq_hash.nextval,21,'#코디');
 insert into hash values(seq_hash.nextval,22,'#코디');
 insert into hash values(seq_hash.nextval,23,'#코디');
 insert into hash values(seq_hash.nextval,24,'#코디');
+insert into hash values(seq_hash.nextval,71,'#책방');
+insert into hash values(seq_hash.nextval,71,'#데일리룩');
+insert into hash values(seq_hash.nextval,71,'#가을');
+insert into hash values(seq_hash.nextval,72,'#석촌호수');
+insert into hash values(seq_hash.nextval,72,'#데일리룩');
+insert into hash values(seq_hash.nextval,72,'#가을');
+
+
 
 -- 포스팅 신고 insert
 insert into declare values(seq_declare.nextval,4,2,'비방',null,sysdate,1,1);
