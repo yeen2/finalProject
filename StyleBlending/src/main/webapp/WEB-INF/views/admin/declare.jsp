@@ -6,6 +6,9 @@
 	.order-table:after, .order-table:before{
 		position : relative !important;
 	}
+	/* .table-stats table th img, .table-stats table td img{
+		min-width:50px;
+	} */
 </style>
 
 <jsp:include page="header.jsp" />
@@ -101,14 +104,19 @@
                                      	</td>
                                          <td id="dno">${p.dno}</td>
                                          <td>
-                                         	<div style="cursor:pointer">
-                                         		 <a data-toggle="modal" data-target="#fq${ p.dno }"><img src="${pageContext.request.contextPath}${p.profilePath}${p.renameImg}" style="width:50px; height:50px; border-radius: 60px;" alt=""></a>
-                                             </div>
+                                         	<div>
+                                         		<a data-toggle="modal" data-target="#fq${ p.dno }">
+                                         			<img src="${pageContext.request.contextPath}${p.profilePath}${p.renameImg}" 
+                                         		 	style="width:50px; margin:0; height:50px; border-radius: 50px;">
+                                         		</a>
+                                            </div>
                                          </td>
                                          <c:if test="${p.type eq 1 }">
                                          <td>포스팅</td>
                                          <td>
-                                             <a class="detailBoard" style="cursor:pointer"><img src="${pageContext.request.contextPath}/resources/upload/posting/${p.bname}"></a>
+                                             <a class="detailBoard" style="cursor:pointer">
+                                             <img src="${pageContext.request.contextPath}/resources/upload/posting/${p.bname}">
+                                             </a>
                                          </td>
                                          </c:if>
                                          <c:if test="${p.type eq 2 }">

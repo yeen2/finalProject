@@ -163,6 +163,9 @@ public class PostingDao {
 		return (ArrayList)sqlSession.selectList("postingMapper.selectBrand", brand);
 	}
 	
+	public int deletePosting(int pno) {
+		return sqlSession.update("postingMapper.deletePosting", pno);
+	}
 	
 	
 	

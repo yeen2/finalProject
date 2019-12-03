@@ -179,7 +179,8 @@
 								</script>
 							</span>
 					</div>
-					<div style="display: inline; float: right; margin-right: 200px;">
+					<!-- 신고버튼 -->
+					<div style="display: inline; float: right; margin-right: 230px;">
 						<a>
 						<i class="fas fa-exclamation-triangle" id="declareBtn"
 							style="color:red; font-size: xx-large; padding-top: 5px;"></i>
@@ -208,7 +209,12 @@
 				<p>${p.content }</p>
 				
 				<hr>
-
+				<!-- 삭제버튼  -->
+				<c:if test="${loginUser.mno == p.mno }">
+					<span id="pDeleteBtn">삭제하기</span>
+					<hr>
+				</c:if>
+				
 				<!-- 댓글 -->
 				<p>View all <b id="rCount">${ p.replyCount}</b> comments</p>
 				<br>
@@ -364,7 +370,7 @@
 								<span style="margin-left: 20px;">Men</span>
 							</div>
 						</c:if>
-						<c:if test="${p.gender == 'F'}">
+						<c:if test="${p.gender == 'W'}">
 							<div style="padding-left: 20px;"><i class="fa fa-female fa-3x"></i>
 								<span style="margin-left: 20px;">Woman</span>
 							</div>
@@ -450,6 +456,18 @@
 	</div>
 	<!-- /.container -->
 
+
+<!----------------------------------- 포스팅 삭제 ---------------------------------- -->
+
+	<script type="text/javascript">
+		$("#pDeleteBtn").click(function () {
+			if(confirm("정말로 삭제하시겠습니까?")){
+				location.href='pDelete.do?pno='+${p.pno}
+			}
+		});
+	</script>
+
+
 <!----------------------------------- 해시태그 클릭시 locatio:href 정해주기 ----------------------- -->
 
 	<script type="text/javascript">
@@ -518,6 +536,7 @@
 					if(result == 1){
 						$("#addFan").hide();
 						$("#removeFan").show();
+						sock.send(${p.mno});
 					}else{
 						console.log("실패");
 					}
@@ -720,7 +739,7 @@
 	
 	// 좋아요 클릭시 로그인되있는지 확인
 	$("#likeBtn").on("click", function () {
-		var loginUser = "  ${loginUser.email}";
+		var loginUser = "${loginUser.email}";
 
 		if(loginUser == null || loginUser == ""){
 			alert("로그인 후 이용 가능하세요");
@@ -741,6 +760,7 @@
 						if(str == 'success'){
 							console.log("좋아요 추가 성공");
 							getPLikeCount();
+							sock.send(${p.mno});
 
 						}else{
 							console.log("좋아요 추가 실패");
@@ -844,6 +864,8 @@
 							if(data == "success"){
 								getReplyList();
 								$("#rContent").val("");
+								sock.send(${p.mno});
+								
 							}else{
 								alert("댓글 작성 실패");
 							}
