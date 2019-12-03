@@ -291,7 +291,11 @@
 		where brand like #{brand}||'%'
 	</select>
 	
-	
+	<update id="deletePosting">
+		update posting
+		set isdelete='Y'
+		where pno=#{pno}	
+	</update>
 	
 	
 	
