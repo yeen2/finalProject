@@ -1,8 +1,4 @@
 
-<<<<<<< HEAD
-  
-=======
-
 DROP TABLE p_declare;
 DROP TABLE b_declare;
 drop sequence seq_p_declare;
@@ -2502,4 +2498,3 @@ commit;
 
 
 
->>>>>>> branch 'dev' of https://github.com/yeen2/finalProject.git
