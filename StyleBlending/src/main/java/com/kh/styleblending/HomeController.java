@@ -61,7 +61,7 @@ public class HomeController {
 	}
 	
 	@RequestMapping("join.do")
-	public ModelAndView insertMember(Member m, ModelAndView mv) {
+	public ModelAndView insertMember(Member m, ModelAndView mv, HttpSession session) {
 		
 		//비밀번호 암호화
 		//String encPass = bcryptPasswordEncoder.encode(m.getPass());
@@ -70,6 +70,7 @@ public class HomeController {
 		int result = mService.insertMember(m);
 		
 		if(result > 0) {
+			session.setAttribute("msg", "회원가입 성공");
 			mv.setViewName("redirect:main.do");
 		}else {
 			mv.addObject("msg", "회원가입실패").setViewName("common/errorPage");
@@ -128,7 +129,7 @@ public class HomeController {
 				
 				
 			}
-			//session.setAttribute("msg", loginUser.getNickName() +"님 환영합니다~");
+			session.setAttribute("msg", loginUser.getNickName() +"님 환영합니다~");
 			mv.setViewName("redirect:" + session.getAttribute("prevPage"));
 			//mv.setViewName("redirect:main.do");
 		}else {
@@ -197,7 +198,7 @@ public class HomeController {
 	
 	// 비밀번호 찾고, 메일로 전송
 	@RequestMapping("searchPass.do")
-	public ModelAndView searchPass(HttpServletRequest request, String email, ModelAndView mv) {
+	public ModelAndView searchPass(HttpServletRequest request, String email, ModelAndView mv, HttpSession session) {
 		
 		// 해당 이메일의 pass를 난수발생한 값으로 변경하고
 		String randomPass = getRamdomPassword(10);
@@ -231,6 +232,7 @@ public class HomeController {
 				System.out.println(e);
 			}
 			
+			session.setAttribute("msg", "가입하신 이메일로 전송해드렸습니다~");
 			mv.setViewName("redirect:main.do");
 			
 		}else {

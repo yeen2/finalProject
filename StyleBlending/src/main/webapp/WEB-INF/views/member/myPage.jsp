@@ -10,7 +10,7 @@
 	.c1, .c2{display:none;}
 	#color input{width:30px; height:30px; border:1px solid lightgray; margin-right:5px;}
 	#updateForm>form>div{margin-bottom:35px;}
-	li{margin-bottom:20px; color:orangered;}
+	#deleteInfo li{margin-bottom:20px; color:orangered;}
 	#searchForm div{display:inline-block;}
 	.form-center {
 		text-align: center !important;
@@ -147,7 +147,7 @@
 			          <span aria-hidden="true">&times;</span>
 			        </button>
 			      </div>
-			      <div class="modal-body">
+			      <div class="modal-body" id="deleteInfo">
 			        <ul>
 			        	<li><b>탈퇴 시 회원정보는 복구할 수 없습니다.</b></li>
 			        	<li><b>모든 업로드 사진들이 같이 삭제됩니다.</b></li>

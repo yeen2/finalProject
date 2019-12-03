@@ -205,4 +205,15 @@ public class PostingServiceImpl implements PostingService {
 		return pDao.selectBrand(brand);
 	}
 	
+	@Override
+	public int deletePosting(int pno) {
+		return pDao.deletePosting(pno);
+	}
+	
+	
+	
+	
+	
+	
+	
 }

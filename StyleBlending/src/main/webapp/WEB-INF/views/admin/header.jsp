@@ -34,6 +34,17 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/admin_temp/css/cs-skin-elastic.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/admin_temp/css/lib/datatable/dataTables.bootstrap.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/admin_temp/css/style.css">
+<script type="text/javascript">
+	$(function(){
+		
+		var msg = "${msg}";
+		if(msg != null && msg != ""){
+			alert(msg);
+			//sessionStorage.removeItem("msg");
+			<%session.removeAttribute("msg");%>
+		}
+	});
+</script>	
 </head>
 <body>
 	 <!-- Right Panel -->

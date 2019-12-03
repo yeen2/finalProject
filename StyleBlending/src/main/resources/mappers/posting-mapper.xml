@@ -61,7 +61,7 @@
 
 	<insert id="insertPosting">
 		insert into posting
-		values(seq_posting.nextval, #{mno}, #{originalImg}, #{renameImg}, null, #{content}, #{hashtag}, #{gender},
+		values(seq_posting.nextval, #{mno}, #{originalImg}, #{renameImg}, default, #{content}, #{hashtag}, #{gender},
 				#{location}, default, default, sysdate, null, 'N')
 	</insert>
 	
@@ -138,8 +138,13 @@
 	</delete>
 	
 	<select id="selectPLikeCount" resultType="_int">
+		<!-- 
 		select count(*)
 		from p_like
+		where p_no=#{pno} 
+		-->
+		select like_count
+		from posting
 		where p_no=#{pno}
 	</select>
 	
@@ -285,6 +290,13 @@
 		from brand 
 		where brand like #{brand}||'%'
 	</select>
+	
+	<update id="deletePosting">
+		update posting
+		set isdelete='Y'
+		where p_no=#{pno}	
+	</update>
+	
 	
 	
 	

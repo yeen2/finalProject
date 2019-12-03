@@ -102,6 +102,9 @@
 .modal-body .btn {
 	padding: 0px;
 }
+#nav_search:focus {
+	outline: none;
+}
 
 
 #addSearch{width:100%; height:inherit; background:lightgray; border:2px solid white;}
@@ -135,7 +138,8 @@
 		var msg = "${msg}";
 		if(msg != null && msg != ""){
 			alert(msg);
-			sessionStorage.removeItem("msg");
+			//sessionStorage.removeItem("msg");
+			<%session.removeAttribute("msg");%>
 		}
 	});
 </script>	
