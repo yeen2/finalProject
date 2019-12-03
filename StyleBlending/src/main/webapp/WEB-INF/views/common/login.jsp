@@ -91,15 +91,8 @@
 		</form>
 		
 	</div>
-<<<<<<< HEAD
 
 
-
-
-
- 
-	<!-- 아이디/비번 기억하기 -->
-=======
 	
 	<!----------------------------------------- 비밀번호 찾기 모달 ------------------------------>
 	<script type="text/javascript">
@@ -179,7 +172,7 @@
 	</div>
 	
 	<!------------------------ 아이디/비번 기억하기 ---------------------------->
->>>>>>> branch 'dev' of https://github.com/yeen2/finalProject.git
+
 	<script>
 	$(function(){
 		$("#email").val(Cookies.get('email'));      

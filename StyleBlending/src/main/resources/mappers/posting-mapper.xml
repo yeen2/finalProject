@@ -294,7 +294,7 @@
 	<update id="deletePosting">
 		update posting
 		set isdelete='Y'
-		where pno=#{pno}	
+		where p_no=#{pno}	
 	</update>
 	
 	
