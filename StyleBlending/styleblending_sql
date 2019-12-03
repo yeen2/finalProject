@@ -801,7 +801,7 @@ REFERENCES posting (
 
 
 -- breply mno테이블 추가
-ALTER TABLE b_reply ADD CONSTRAINT FK_board_TO_b_reply_2 FOREIGN KEY (
+ALTER TABLE b_reply ADD CONSTRAINT FK_member_TO_b_reply_2 FOREIGN KEY (
 	m_no
 )
 REFERENCES board (
