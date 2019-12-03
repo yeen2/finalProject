@@ -151,7 +151,7 @@
 		select *
 		from ad
 		where m_no=#{mno}
-		order by enroll_date desc
+		order by status
 	</select>
 	
 	<update id="updatePass">

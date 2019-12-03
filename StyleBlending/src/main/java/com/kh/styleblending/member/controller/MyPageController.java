@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.mail.Session;
 import javax.servlet.http.HttpSession;
 
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
@@ -219,7 +220,8 @@ public class MyPageController {
 		
 		if(mem != null) {
 			session.setAttribute("loginUser", mem);
-			mv.addObject("msg", "회원 정보 수정에 성공하였습니다.").setViewName("member/myPage");
+			session.setAttribute("msg", "회원 정보 수정에 성공하였습니다.");
+			mv.setViewName("member/myPage");
 		}else {
 			mv.addObject("msg", "회원 정보 수정에 실패하였습니다.").setViewName("common/errorPage");
 		}
@@ -273,7 +275,7 @@ public class MyPageController {
 		
 		if(result > 0) {
 			session.invalidate();
-			mv.addObject("msg", "회원탈퇴에 성공하였습니다.").setViewName("redirect:main.do");
+			mv.addObject("msg", "회원탈퇴에 성공하였습니다.").setViewName("main");
 		}else {
 			mv.addObject("msg", "회원탈퇴에 실패하였습니다.").setViewName("common/errorPage");
 		}
@@ -432,10 +434,11 @@ public class MyPageController {
 	}
 	
 	@RequestMapping("mpDeleteAd.do")
-	public ModelAndView deleteAd(Ad ad, ModelAndView mv) {
+	public ModelAndView deleteAd(Ad ad, ModelAndView mv, HttpSession session) {
 		int result = mpService.deleteAd(ad);
 		
 		if(result > 0) {
+			session.setAttribute("msg", "광고 등록 취소에 성공하였습니다.");
 			mv.setViewName("redirect:mpSAdList.do");
 		}else {
 			mv.addObject("msg", "광고 등록 취소에 실패하였습니다.").setViewName("common/errorPage");
