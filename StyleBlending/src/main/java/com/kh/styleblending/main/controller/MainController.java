@@ -226,7 +226,7 @@ public class MainController {
 		
 	}
 	@RequestMapping("mainInsertNotice.do")
-	public String insertNotice(HttpServletRequest request, String title, String writer, String content, Model model) {
+	public String insertNotice(HttpServletRequest request, String title, String writer, String content, Model model, HttpSession session) {
 		Notice n = new Notice();
 		n.setTitle(title);
 		n.setContent(content);
@@ -234,6 +234,7 @@ public class MainController {
 		int result = mainService.insertNotice(n);
 		
 		if(result > 0) {
+			session.setAttribute("msg", "등록 성공함");
 			return "redirect:mainNotice.do";
 		}else {
 			model.addAttribute("msg","공지사항 작성실패");

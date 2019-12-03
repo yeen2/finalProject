@@ -1372,11 +1372,11 @@ a{
                                         "</div>"+
                                         "<div class='card-footer row'>"+
                                         "<div class='col-3 form-inline'>"+
-                                        "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                                        "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
+                                        "<a onclick='like(this);'><i class='fa fa-heart'style='color: red; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
+                                        "<p style='margin: 0px;margin-left:5px;'>"+value.likeCount+"</p>"+
                                         "</div>"+
                                         "<div class='col-3 form-inline' style='padding: 0px;'>"+
-                                        "<a href=''><i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i></a>"+
+                                        "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
                                         "<p style='margin-left:5px;margin: 0px;'>"+value.replyCount+"</p>"+
                                         "</div>"+
                                         "</div>"+
@@ -1452,11 +1452,11 @@ a{
                                    "</div>"+
                                    "<div class='card-footer row'>"+
                                    "<div class='col-3 form-inline'>"+
-                                   "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                                   "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
+                                   "<a onclick='like(this);'><i class='fa fa-heart'style='color: red; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
+                                   "<p style='margin: 0px;margin-left:5px;'>"+value.likeCount+"</p>"+
                                    "</div>"+
                                    "<div class='col-3 form-inline' style='padding: 0px;'>"+
-                                   "<a href=''><i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i></a>"+
+                                   "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
                                    "<p style='margin-left:5px;margin: 0px;'>"+value.replyCount+"</p>"+
                                    "</div>"+
                                    "</div>"+
@@ -2593,6 +2593,7 @@ a{
           done = true;
         }
       }
+      
       function stopVideo() {
         player.stopVideo();
       }
