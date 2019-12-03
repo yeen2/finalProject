@@ -58,7 +58,7 @@
 		<!-- 광고신청 -->
         <div tabindex="-1" role="dialog" >
 			<div class="modal-dialog modal-dialog-centered" role="document">
-			    <div class="modal-content">
+			    <div class="modal-content" style="border: none !important;">
 			    	<div class="modal-header">
 			        	<h5 class="modal-title" id="exampleModalLabel">광고 신청</h5>
 			      	</div>
@@ -69,32 +69,31 @@
 							<label for="adName">업체명</label>
 							<input type="text" id="adName" class="form-control" name="name" placeholder="업체명을 입력해주세요." maxlength="16">
 						</div>
-						<div class="form-group" style="margin-bottom:25px; position:relative;">
+						<div class="form-group">
 							<label for="url">연결 URL</label>
 							<input type="text" class="form-control" id="url" name="url" placeholder="http://" maxlength="50">
-						<div style="position:absolute;">
+						<div>
 							<p>
-								<small class="form-text text-success"><i class="fa fa-check"></i> 광고 등록할 유튜브 주소를 입력해주세요.</small></p></div>
+								<small class="form-text text-success"><i class="fa fa-check"></i> 광고 등록할 유튜브 주소를 입력해주세요.</small>
+							</p>
 						</div>
-						<div class="form-group" style="margin-bottom:25px; position:relative;">
+						</div>
+						<div class="form-group">
 							<label for="file-input" class=" form-control-label">등록 이미지</label>
 							<input type="file" id="file-input" name="uploadFile" class="form-control-file" style="display:none;" onchange="previewImg(this);">
 							<img id="adImg"/>
-							<div style="position:absolute;">
-								<p><small class="form-text text-success"><i class="fa fa-check"></i> 광고 신청시 관리자 승인 처리 후 7일 동안 진행됩니다. 
-								<br><i class="fa fa-check"></i> 신청 버튼 클릭시 결제페이지로 이동합니다.</small></p>
-							</div>
-							<br>
-							<br>
-							<div style="position:absolute;">
+							<div>
+								<p><small class="form-text text-success"><i class="fa fa-check"></i> 금액(390,000원)을 선지불하고 계약 기간 동안 광고가 노출되는 정액제 상품입니다.
+								<br><i class="fa fa-check"></i> 신청 버튼 클릭시 결제페이지로 이동합니다.
+								<br><i class="fa fa-check"></i> 광고 신청시 관리자 승인 처리 후 7일 동안 진행됩니다. 
+								</small></p>
 								<p>
 								<input type="checkbox" name="checkCondition" id="checkCondition" onclick="agreeCheck();"/>
 								<label class="text-danger" for="checkCondition">위 구매 조건 확인 및 결제 진행에 동의</label>
 								</p>
 							</div>
 						</div>
-						<br>
-				      	<div class="modal-footer">
+				      	<div class="modal-footer" style="margin-top:20px; ">
 				        	<button type="button" class="btn btn-success" id="adConfirm" disabled>광고신청</button>
 				        	<button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeBtn123">취소</button>
 				      	</div>

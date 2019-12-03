@@ -156,7 +156,7 @@
 		</if>
 	</select>
 	
-	<select id="selectDeclareList" resultMap="DeclareResultSet" parameterType="hashMap">
+	<select id="selectDeclareList" resultMap="DeclareResultSet">
    	  select t4.* from
       (select t3.* from
       (select * from
