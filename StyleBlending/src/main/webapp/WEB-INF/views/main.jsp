@@ -1373,7 +1373,7 @@ a{
                                         "<div class='card-footer row'>"+
                                         "<div class='col-3 form-inline'>"+
                                         "<a onclick='like(this);'><i class='fa fa-heart'style='color: red; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
-                                        "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
+                                        "<p style='margin: 0px;margin-left:5px;'>"+value.likeCount+"</p>"+
                                         "</div>"+
                                         "<div class='col-3 form-inline' style='padding: 0px;'>"+
                                         "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
@@ -1453,7 +1453,7 @@ a{
                                    "<div class='card-footer row'>"+
                                    "<div class='col-3 form-inline'>"+
                                    "<a onclick='like(this);'><i class='fa fa-heart'style='color: red; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
-                                   "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
+                                   "<p style='margin: 0px;margin-left:5px;'>"+value.likeCount+"</p>"+
                                    "</div>"+
                                    "<div class='col-3 form-inline' style='padding: 0px;'>"+
                                    "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
