@@ -536,6 +536,7 @@
 					if(result == 1){
 						$("#addFan").hide();
 						$("#removeFan").show();
+						sock.send(${p.mno});
 					}else{
 						console.log("실패");
 					}
@@ -759,6 +760,7 @@
 						if(str == 'success'){
 							console.log("좋아요 추가 성공");
 							getPLikeCount();
+							sock.send(${p.mno});
 
 						}else{
 							console.log("좋아요 추가 실패");
@@ -862,6 +864,8 @@
 							if(data == "success"){
 								getReplyList();
 								$("#rContent").val("");
+								sock.send(${p.mno});
+								
 							}else{
 								alert("댓글 작성 실패");
 							}
