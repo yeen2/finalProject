@@ -10,7 +10,7 @@
 	.c1, .c2{display:none;}
 	#color input{width:30px; height:30px; border:1px solid lightgray; margin-right:5px;}
 	#updateForm>form>div{margin-bottom:35px;}
-	li{margin-bottom:20px; color:orangered;}
+	#deleteInfo li{margin-bottom:20px; color:orangered;}
 	#searchForm div{display:inline-block;}
 	.form-center {
 		text-align: center !important;
@@ -79,15 +79,14 @@
 				    </tr>
 				  </thead>
 				  <tbody>
-				  	<c:forEach items="${ list }" var="ad">
-				  		
-				  		<c:if test="${ empty list }">
-				  			<tr>
-				  				<td scope="col" colspan="6">내 광고가 없습니다.</td>
-				  			</tr>
-				  		</c:if>
-				  		<c:if test="${ !empty list }">
-					  		<tr>
+				  	<c:if test="${ empty list }">
+			  			<tr>
+			  				<td style="border-bottom:2px solid #EAEAEA;" scope="col" colspan="6">내 광고가 없습니다.</td>
+			  			</tr>
+			  		</c:if>
+			  		<c:if test="${ !empty list }">
+					  	<c:forEach items="${ list }" var="ad">
+					  		<tr style="border-bottom:2px solid #EAEAEA;">
 						  		<td scope="col">${ ad.adno }</td>
 						  		<td scope="col">${ ad.name }</td>
 						  		<td scope="col">${ ad.enrollDate }</td>
@@ -95,19 +94,19 @@
 						  		<td scope="col">${ ad.endDate }</td>
 						  		<td scope="col">
 							  		<c:if test="${ ad.status == 1 }">
-							  		승인 대기&nbsp;&nbsp;
-							  		<a style="font-size:10px;" class="btn btn-dark cancelAdBtn" href="mpDeleteAd.do?adno=${ ad.adno }">취소</a>
+								  		<button style="font-size:10px; pointer-events:none;" class="btn btn-secondary">승인 대기</button>
+								  		<a style="font-size:10px;" class="btn btn-dark cancelAdBtn" href="mpDeleteAd.do?adno=${ ad.adno }&payno=${ ad.payno }">취소</a>
 							  		</c:if>
 							  		<c:if test="${ ad.status == 2 }">
-							  		등록중
+							  			<button style="font-size:10px; pointer-events:none;" class="btn btn-danger">등록중</button>
 							  		</c:if>
 							  		<c:if test="${ ad.status == 3 }">
-							  		등록 종료
+							  			<button style="font-size:10px; pointer-events:none;" class="btn btn-warning">등록 종료</button>
 							  		</c:if>
 						  		</td>
 					  		</tr>
-				  		</c:if>
-				  	</c:forEach>
+					  	</c:forEach>
+				  	</c:if>
 				  	
 				   </tbody>
 				</table>
@@ -227,7 +226,7 @@
 			          <span aria-hidden="true">&times;</span>
 			        </button>
 			      </div>
-			      <div class="modal-body">
+			      <div class="modal-body" id="deleteInfo">
 			        <ul>
 			        	<li><b>탈퇴 시 회원정보는 복구할 수 없습니다.</b></li>
 			        	<li><b>모든 업로드 사진들이 같이 삭제됩니다.</b></li>

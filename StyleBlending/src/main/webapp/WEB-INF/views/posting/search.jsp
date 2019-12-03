@@ -405,6 +405,8 @@
 					if(result == 1){
 						$("#addFan").hide();
 						$("#removeFan").show();
+						sock.send(meNo);
+						
 					}else{
 						console.log("실패");
 					}
@@ -511,6 +513,7 @@
 						if(str == 'success'){
 							console.log("좋아요 추가 성공");
 							getPLikeCount(pno);
+							sock.send(pno);
 
 						}else{
 							console.log("좋아요 추가 실패");

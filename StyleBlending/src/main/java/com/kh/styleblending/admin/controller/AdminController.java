@@ -81,11 +81,12 @@ public class AdminController {
 	}
 	
 	@RequestMapping("aDeleteMember.do")
-	public String deleteMember(@RequestParam ArrayList mno, Model model) {
+	public String deleteMember(@RequestParam ArrayList mno, Model model, HttpSession session) {
 		System.out.println(mno);
 		int result = aService.deleteMember(mno);
 		
-		if(result > 0) {			
+		if(result > 0) {	
+			session.setAttribute("msg","정상적으로 회원 탈퇴에 성공하셨습니다.");
 			return "redirect:aUser.do";
 		}else {
 			model.addAttribute("msg","회원 탈퇴 실패");
@@ -118,7 +119,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping("aDeleteDeclareBoard.do")
-	public String deleteDeclareBoard(@RequestParam ArrayList dno, @RequestParam int[] type,@RequestParam int[] bno, Model model) {
+	public String deleteDeclareBoard(@RequestParam ArrayList dno, @RequestParam int[] type,@RequestParam int[] bno, Model model,HttpSession session) {
 		int result1 = 0;
 		
 		for(int i=0; i<type.length; i++) {
@@ -130,7 +131,7 @@ public class AdminController {
 		//System.out.println("result1 : " + result1);
 		
 		if(result1 >=type.length && result2 > 0) {
-			
+			session.setAttribute("msg", "신고 게시물 삭제 처리가 완료되었습니다.");
 			return "redirect:aDeclare.do";
 		}else {
 			model.addAttribute("msg","신고 게시물 삭제 실패");
@@ -255,7 +256,7 @@ public class AdminController {
 	
 	
 	@RequestMapping("aUpdateStartAd.do")
-	public String updateStartAd(String adno, Model model,HttpServletRequest request) {
+	public String updateStartAd(String adno, Model model,HttpServletRequest request, HttpSession session) {
 		
 		Ad startAd = aService.selectStartAd();
 		// 진행중인광고 첨부파일 존재할 경우
@@ -267,7 +268,7 @@ public class AdminController {
 		int result = aService.updateStartAd(adno);
 		//System.out.println(adno);
 		if(result > 0) {
-			model.addAttribute("msg", "광고 신청이 정상적으로 이루어졌습니다. 관리자 검토 후 승인시 진행됩니다.");
+			session.setAttribute("msg", "광고가 진행중으로 변경되었습니다.");
 			return "redirect:aAdvertisment.do";
 		}else {
 			model.addAttribute("msg", "광고 등록 실패");
@@ -276,7 +277,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping("aUpdateEndAd.do")
-	public ModelAndView updateEndAd(String adno, ModelAndView mv, HttpServletRequest request) {
+	public ModelAndView updateEndAd(String adno, ModelAndView mv, HttpServletRequest request, HttpSession session) {
 		
 		//System.out.println(adno);
 		Ad startAd = aService.selectStartAd();
@@ -289,6 +290,7 @@ public class AdminController {
 		int result = aService.updateEndAd(adno);
 		
 		if(result > 0) {
+			session.setAttribute("msg", "정상적으로 광고 종료처리 되었습니다.");
 			mv.addObject("msg", "정상적으로 광고 종료처리 되었습니다.").setViewName("redirect:aAdvertisment.do");
 		}else {
 			mv.addObject("msg","광고 마감 실패").setViewName("common/errorPage");

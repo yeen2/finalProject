@@ -56,7 +56,7 @@ public interface PostingService {
 	
 	ArrayList<Brand> selectBrand(String brand);
 	
-	
+	int deletePosting(int pno);
 	
 	
 	

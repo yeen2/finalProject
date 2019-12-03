@@ -151,7 +151,7 @@
 		select *
 		from ad
 		where m_no=#{mno}
-		order by enroll_date desc
+		order by status
 	</select>
 	
 	<update id="updatePass">
@@ -241,5 +241,11 @@
 		delete from ad
 		where ad_no=#{adno}
 	</delete>
+	
+	<update id="deletePay">
+		update pay
+		set status='2'
+		where pay_no=#{payno}
+	</update>
 
 </mapper>

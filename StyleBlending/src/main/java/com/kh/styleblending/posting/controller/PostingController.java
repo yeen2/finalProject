@@ -101,7 +101,7 @@ public class PostingController {
 			System.out.println(p);
 			mv.addObject("p", p).addObject("s", s).setViewName("posting/info");
 		}else {
-			mv.addObject("msg", "게시글 상세조회 실패").setViewName("common/errorPage");
+			mv.addObject("msg", "삭제된 게시물입니다.").setViewName("common/errorPage");
 		}
 		
 		return mv;
@@ -366,7 +366,22 @@ public class PostingController {
 		
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		return gson.toJson(list);
+	}
+	
+	// 포스팅 삭제
+	@RequestMapping("pDelete.do")
+	public ModelAndView deletePosting(int pno, ModelAndView mv, HttpSession session) {
 		
+		int result = pService.deletePosting(pno);
+		
+		if(result > 0) {
+			session.setAttribute("msg", "게시물이 삭제되었습니다");
+			mv.setViewName("redirect:main.do");
+		}else {
+			mv.addObject("msg", "게시물 삭제 실패").setViewName("common/error");
+		}
+		
+		return mv;
 	}
 	
 	

@@ -151,16 +151,17 @@ body {padding-top: 20px;}
 			
 			<%-- <c:forEach items="${ list }" var="f">
 				<figure class="snip1361"> 
-				<img
-					src="http://seoulfashionfestival.co.kr/wp-content/uploads/2019/04/sff2019_designer_heroine.jpg"
+				<img style="width: 300px; height: 250px;"
+					src="${pageContext.request.contextPath}/resources/bImgUploadFiles/${ f.renameImg }"
+					onclick="location.href='fbdetail.do?fbno=${ f.fbno }';" 
 					alt="sample45" /> 
 				<figcaption>
 					<h3>${ f.title }</h3>
 					<p>${ f.content }</p>	
 				</figcaption>
-				<a href="bdetail.do?bno=${ b.bno }"></a> 
+				<a href="fbdetail.do?fbno=${ f.fbno }"></a> 
 			</figure>
-			</c:forEach> --%>
+			</c:forEach --%>
 				
 			</div>
 		</div>
