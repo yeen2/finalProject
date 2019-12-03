@@ -1610,7 +1610,15 @@ a{
          console.log(sel);
          console.log(selectC);
          console.log(category);
-         
+         if(sel == '남자'){
+        	 sel = 'M'
+         }else{
+        	 sel = 'W'
+         }
+         console.log(sel);
+         console.log(selectC);
+         console.log(category);
+         	
          var $inputWrap = $("#inputWrap");
          
          $.ajax({
@@ -1623,10 +1631,9 @@ a{
                $("#loading").remove();
                $("#inputWrap").children().remove();
                var $input
-               if(data == null){
-            	   console.log('필터 없다 ~~~');
-               }
+
                if(data.length == 1){
+            	  console.log(data);
                   var loginUser = "${loginUser.mno}";
                   if(loginUser == null || loginUser == ""){
 
