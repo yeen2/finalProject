@@ -958,9 +958,9 @@ insert into posting values(seq_posting.nextval,47,'posting47.jpg','posting47.jpg
 insert into posting values(seq_posting.nextval,48,'posting48.jpg','posting48.jpg','/resources/upload/posting/','내용45 <a href="#" class="hashtagHref">#코디</a>','#코디','W',default,1,0,sysdate,default, default);
 insert into posting values(seq_posting.nextval,49,'posting49.jpg','posting49.jpg','/resources/upload/posting/','내용46 <a href="#" class="hashtagHref">#코디</a>','#코디','W',default,1,1,sysdate,default, default);
 insert into posting values(seq_posting.nextval,50,'posting50.jpg','posting50.jpg','/resources/upload/posting/','내용47 <a href="#" class="hashtagHref">#코디</a>','#코디','W',default,1,0,sysdate,default, default);
-insert into posting values(seq_posting.nextval,10,'p1.JPEG','p1.JPEG','/resources/upload/posting/','오랫만에<a href="#" class="hashtagHref">#책방</a> <a href="#" class="hashtagHref">#데일리룩</a><a href="#" class="hashtagHref">#가을</a>','#책방#데일리룩#가을','M','서울시 종로구',843,0,sysdate,default, default);
-insert into posting values(seq_posting.nextval,11,'p2.JPEG','p2.JPEG','/resources/upload/posting/','가을갬성 <a href="#" class="hashtagHref">#석촌호수</a> <a href="#" class="hashtagHref">#데일리룩</a><a href="#" class="hashtagHref">#가을</a>노랭노랭이','#석촌호수#데일리룩#가을','M','서울시 송파구 잠실동',987,0,sysdate,default, default);
-insert into posting values(seq_posting.nextval,10,'p1.JPEG','p1.JPEG','/resources/upload/posting/','오랫만에<a href="#" class="hashtagHref">#책방</a> <a href="#" class="hashtagHref">#데일리룩</a><a href="#" class="hashtagHref">#가을</a>','#책방#데일리룩','M','서울시 종로구',843,0,sysdate,default, default);
+insert into posting values(seq_posting.nextval,10,'p1.JPEG','p1.jpeg','/resources/upload/posting/','오랫만에<a href="#" class="hashtagHref">#책방</a> <a href="#" class="hashtagHref">#데일리룩</a><a href="#" class="hashtagHref">#가을</a>','#책방#데일리룩#가을','M','서울시 종로구',843,0,sysdate,default, default);
+insert into posting values(seq_posting.nextval,11,'p2.JPEG','p2.jpeg','/resources/upload/posting/','가을갬성 <a href="#" class="hashtagHref">#석촌호수</a> <a href="#" class="hashtagHref">#데일리룩</a><a href="#" class="hashtagHref">#가을</a>노랭노랭이','#석촌호수#데일리룩#가을','M','서울시 송파구 잠실동',987,0,sysdate,default, default);
+
 
 
 
