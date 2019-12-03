@@ -6,9 +6,6 @@
 	.order-table:after, .order-table:before{
 		position : relative !important;
 	}
-	/* .table-stats table th img, .table-stats table td img{
-		min-width:50px;
-	} */
 </style>
 
 <jsp:include page="header.jsp" />
@@ -104,8 +101,8 @@
                                      	</td>
                                          <td id="dno">${p.dno}</td>
                                          <td>
-                                         	<div>
-                                         		<a data-toggle="modal" data-target="#fq${ p.dno }">
+                                         	<div >
+                                         		<a data-toggle="modal" data-target="#fq${ p.dno }" style="cursor:pointer;">
                                          			<img src="${pageContext.request.contextPath}${p.profilePath}${p.renameImg}" 
                                          		 	style="width:50px; margin:0; height:50px; border-radius: 50px;">
                                          		</a>

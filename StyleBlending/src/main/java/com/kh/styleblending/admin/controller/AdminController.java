@@ -370,11 +370,15 @@ public class AdminController {
 	
 	// 관리자 공지사항
 	@RequestMapping("aNotice.do")
-	public ModelAndView notice(ModelAndView mv) {
+	public ModelAndView notice(ModelAndView mv, @RequestParam(value="currentPage",defaultValue="1")int currentPage, @RequestParam(value="boardLimit", defaultValue="5")int boardLimit) {
 		
-		ArrayList<Notice> list = aService.selectNoticeList();
+		int listCount = aService.getNoticeListCount();
+		
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, boardLimit);
+		
+		ArrayList<Notice> list = aService.selectNoticeAdminList(pi);
 		//System.out.println(list);
-		mv.addObject("list", list).setViewName("admin/notice");
+		mv.addObject("list", list).addObject("pi",pi).setViewName("admin/notice");
 		
 		return mv;
 	}
