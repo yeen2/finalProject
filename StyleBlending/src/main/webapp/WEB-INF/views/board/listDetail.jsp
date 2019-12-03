@@ -45,7 +45,7 @@
 					<tr>
 						<td>자유게시판</td>
 						<td colspan="1">${ b.enrollDate }</td>
-						<td><a id="bdeclareBtn" href="#eexampleModal" data-toggle="modal">신고</a></td>
+						<td><a style="text-decoration: none;" id="bdeclareBtn" href="#eexampleModal" data-toggle="modal">신고</a></td>
 					</tr>
 					<hr>
 					<tr>
@@ -68,7 +68,7 @@
 				<hr>
 
 				<div id="writeviewArea"
-					style="height: auto; width: 80%; padding-bottom: 80px;">
+					style="height: auto; margin-left:50px; padding-bottom: 80px;">
 					<div style="height: auto; margin-top: 40px;"><p style="margin: auto;">${ b.content }<p></div>
 				</div>
 
@@ -98,7 +98,7 @@
 
 		<!-- 로그인시 댓글 사용가능 -->
 		<div class="replyArea">
-			<form id="replylistForm" name="replylistForm" method="post">
+			<!-- <form id="replylistForm" name="replylistForm" method="post"> -->
 				<div class="replylist">
 					<br>
 					<div>
@@ -124,13 +124,13 @@
 							
 							<td>
 								<div id=replytextArea>
-									<textarea rows="3" cols="80" id="comment" name="comment" style="resize: none;" placeholder="댓글을 작성해주세요"></textarea>
+									<textarea class="form-control" rows="3" cols="80" id="comment" name="comment" style="resize: none;" placeholder="댓글을 작성해주세요"></textarea>
 								</div>
 							</td>
 							<td>
 								<div class="replyBtn">
 									<button class="btn btn-light" id="rBtn"
-										style="width: 80px; height: 67px; margin-left: 10px;">등록</button>
+										style="width: 85px; height: 82px; margin-left: 10px;">등록</button>
 								</div>
 							</td>
 						</tr>
@@ -148,7 +148,7 @@
 						    id="a-delete">삭제</a> -->
 					</div>
 				</div>
-			</form>
+			<!-- </form> -->
 		</div>
 	</div>
 	<br>
@@ -256,20 +256,6 @@
 			}
 
 		});
-
-		
-		// f5 버튼 막는 이벤트
-		function noEvent() {
-		if (event.keyCode == 116) {
-		event.keyCode= 2;
-		return false;
-		}
-		else if(event.ctrlKey && (event.keyCode==78 || event.keyCode == 82))
-		{
-		return false;
-		}
-		}
-		document.onkeydown = noEvent;
 		
 		
 
@@ -440,9 +426,9 @@
 		$(function(){
 			getReplyList();
 			
-			 setInterval(function(){
+			 /* setInterval(function(){
 				getReplyList();
-			}, 50000 ); 
+			}, 50000 );  */
 			
 			//console.log("들어오나?");
 			/* $("#rBtn").on("click", function(){
@@ -489,6 +475,8 @@
 						if(data == "success"){
 							getReplyList();
 							$("#comment").val("");
+							sock.send(${b.mno});
+							//console.log(${b.mno});
 						}else{
 							alert("댓글 작성 실패");
 						}
@@ -528,20 +516,20 @@
 							$replyDiv = $("<div class='form-inline replyDiv' style='margin-right:150px;'></div>");
 							
 							$imgDiv = $("<div class='form-group imgDiv'></div>");
-							$img = $("<img class='reply_img' style='border-radius: 2.5em; height: 62px; width: 60px; margin-right: 10px;'>").attr("src","${pageContext.request.contextPath}/resources/upload/member/profile.png");
+							$img = $("<img class='reply_img' style='border-radius: 2.5em; height: 62px; width: 60px; margin-right: 10px;'>").attr("src","${pageContext.request.contextPath}/resources/upload/member/${ loginUser.renameImg }");
 							
-							$modifyDiv = $("<div class='form-inline modifyDiv' style='display:none;'></div>");
+							$modifyDiv = $("<div class='form-inline modifyDiv' style='display:none; margin-top:10px;'></div>");
 							$contentDiv = $("<div class='form-group contentDiv'></div>");
 							$otherDiv = $("<div class'form-inline otherDiv' style='margin-right:150px; margin-top:10px;'></div>");
 							
-							$modify_textarea = $("<textarea rows='3' cols='80' style='margin-left: 5px; border-radius: 0.8m;' class='modifyContent'></textarea>").text(value.content);;
+							$modify_textarea = $("<textarea rows='3' cols='80' style='margin-left: 5px;' class='form-control modifyContent'></textarea>").text(value.content);;
 							$hiddenBrno = $("<input type='hidden' id='hiddenBrno'>").val(value.brno);
-							$rmodifyBtn = $("<button class='btn btn-light rmodifyBtn' style='width: 80px; height: 67px; margin-left: 10px;'>등록</button>");
+							$rmodifyBtn = $("<button class='btn btn-light rmodifyBtn' style='width: 85px; height: 82px; margin-left: 10px;'>등록</button>");
 							$nickname = $("<b class='nickname' style='margin-left:75px;'></b>").text(value.nickName);
 							$rcontent = $("<span id='rcontent' class='rcontent' style='margin-left: 5px;'></span>").html(value.content);
 							
-							$update_a = $("<a class='a-update'style='text-decoration: none; float:right; cursor:pointer;'>수정</a>");
-							$delete_a = $("<a class='a-delete' style='text-decoration: none; margin-right:10px; float:right; cursor:pointer;'>삭제</a>");
+							$update_a = $("<a class='btn-sm btn-light a-update'style='text-decoration: none; float:right; cursor:pointer;'>수정</a>");
+							$delete_a = $("<a class='btn-sm btn-light a-delete' style='text-decoration: none; margin-right:10px; float:right; cursor:pointer;'>삭제</a>");
 							$date = $("<span class='col-sm-2 date'></span>").text(value.enrollDate);
 							
 							$imgDiv.append($img);
@@ -576,8 +564,10 @@
 			//console.log("zmfflr");
 			var brno = $(this).next().next().val();
 			console.log(brno);
-			$(this).parent().parent().children(".replyDiv").children('.modifyDiv').eq(0).toggle();
-			$(this).parent().parent().children(".replyDiv").children('.contentDiv').eq(0).toggle();
+			
+			$(this).parent().prev().children().eq(1).toggle();
+			$(this).parent().prev().children().eq(2).toggle();
+			//$(this).parent().parent().children(".replyDiv").children('.contentDiv').eq(0).toggle();
 			
 			
 		});
@@ -585,8 +575,8 @@
 		$(document).on("click",".rmodifyBtn", function() {
 			var brno = $(this).parent().parent().next().children('#hiddenBrno').val();
 			console.log(brno)
-			var content = $(this).prev().val();
-			//console.log(brno);
+			var content = $(this).parent().children().eq(0).val();
+			//console.log(content);
 			 $.ajax({
 				url:"rupdate.do",
 				data:{brno:brno,
@@ -595,6 +585,7 @@
 					
 					if(data == "success"){
 						getReplyList();
+						alert("댓글을 수정하였습니다.");
 					}else{
 						alert("댓글 수정 실패");
 					}
