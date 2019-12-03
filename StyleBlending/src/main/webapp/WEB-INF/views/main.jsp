@@ -567,13 +567,13 @@ a{
                    "</a>"+
                    "</div>"+
                    "<div class='card-footer row'>"+
-                   "<div class='col-3 form-inline'>"+
+                   "<div class='col-3 form-inline' style='padding:0px; margin-left:10px;'>"+
                    "<a onclick=unLike(); style='cursor:pointer;'><i class='far fa-heart'style='color: gray; font-size: 30px;'></i></a>"+
-                   "<p style='margin: 0px;margin-left:5px;'>"+value.likeCount+"</p>"+
+                   "<p style='margin: 0px;margin-left:9px;'>"+value.likeCount+"</p>"+
                    "</div>"+
                    "<div class='col-3 form-inline' style='padding: 0px;'>"+
                    "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                   "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
+                   "<p style='margin: 0px;margin-left:9px;'>"+value.replyCount+"</p>"+
                    "</div>"+
                    "</div>"+
                    "</div>"+
@@ -606,13 +606,13 @@ a{
                        "</a>"+
                        "</div>"+
                        "<div class='card-footer row'>"+
-                       "<div class='col-3 form-inline'>"+
+                       "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                        "<a onclick='like(this);'><i class='far fa-heart'style='color: gray; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
-                       "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
+                       "<p style='margin: 0px; margin-left:9px;'value="+value.pno+">"+value.likeCount+"</p>"+
                        "</div>"+
                        "<div class='col-3 form-inline' style='padding: 0px;'>"+
                        "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                       "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
+                       "<p style='margin: 0px;margin-left:9px;'>"+value.replyCount+"</p>"+
                        "</div>"+
                        "</div>"+
                        "</div>"+
@@ -645,13 +645,13 @@ a{
                       "</a>"+
                       "</div>"+
                       "<div class='card-footer row'>"+
-                      "<div class='col-3 form-inline'>"+
+                      "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                       "<a onclick='like(this);'><i class='fa fa-heart'style='color: red; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
-                      "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
+                      "<p style='margin: 0px; margin-left:9px;'value="+value.pno+">"+value.likeCount+"</p>"+
                       "</div>"+
                       "<div class='col-3 form-inline' style='padding: 0px;'>"+
                       "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                      "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
+                      "<p style='margin: 0px;margin-left:9px;'>"+value.replyCount+"</p>"+
                       "</div>"+
                       "</div>"+
                       "</div>"+
@@ -684,13 +684,13 @@ a{
                        "</a>"+
                       "</div>"+
                       "<div class='card-footer row'>"+
-                      "<div class='col-3 form-inline'>"+
+                      "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                       "<a onclick='like(this);'><i class='far fa-heart'style='color: gray; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
-                      "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
+                      "<p style='margin: 0px; margin-left:9px;'value="+value.pno+">"+value.likeCount+"</p>"+
                       "</div>"+
                       "<div class='col-3 form-inline' style='padding: 0px;'>"+
                       "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                      "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
+                      "<p style='margin: 0px;margin-left:9px;'>"+value.replyCount+"</p>"+
                       "</div>"+
                       "</div>"+
                       "</div>"+
@@ -723,13 +723,13 @@ a{
                       "</a>"+
                       "</div>"+
                       "<div class='card-footer row'>"+
-                      "<div class='col-3 form-inline'>"+
+                      "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                       "<a onclick='like(this);'><i class='fa fa-heart'style='color: red; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
-                      "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
+                      "<p style='margin: 0px; margin-left:9px;'value="+value.pno+">"+value.likeCount+"</p>"+
                       "</div>"+
                       "<div class='col-3 form-inline' style='padding: 0px;'>"+
                       "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                      "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
+                      "<p style='margin: 0px;margin-left:9px;'>"+value.replyCount+"</p>"+
                       "</div>"+
                       "</div>"+
                       "</div>"+
@@ -761,13 +761,13 @@ a{
                        "</a>"+
                        "</div>"+
                        "<div class='card-footer row'>"+
-                       "<div class='col-3 form-inline'>"+
+                       "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                        "<a onclick='like(this);'><i class='far fa-heart'style='color: gray; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
-                       "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
+                       "<p style='margin: 0px; margin-left:9px;'value="+value.pno+">"+value.likeCount+"</p>"+
                        "</div>"+
                        "<div class='col-3 form-inline' style='padding: 0px;'>"+
                        "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                       "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
+                       "<p style='margin: 0px;margin-left:9px;'>"+value.replyCount+"</p>"+
                        "</div>"+
                        "</div>"+
                        "</div>"+
@@ -799,13 +799,13 @@ a{
                        "</a>"+
                        "</div>"+
                        "<div class='card-footer row'>"+
-                       "<div class='col-3 form-inline'>"+
+                       "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                        "<a onclick='like(this);'><i class='fa fa-heart'style='color: red; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
-                       "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
+                       "<p style='margin: 0px; margin-left:9px;'value="+value.pno+">"+value.likeCount+"</p>"+
                        "</div>"+
                        "<div class='col-3 form-inline' style='padding: 0px;'>"+
                        "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                       "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
+                       "<p style='margin: 0px;margin-left:9px;'>"+value.replyCount+"</p>"+
                        "</div>"+
                        "</div>"+
                        "</div>"+
@@ -1293,13 +1293,13 @@ a{
                                 "</a>"+
                                 "</div>"+
                                 "<div class='card-footer row'>"+
-                                "<div class='col-3 form-inline'>"+
+                                "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                                 "<a onclick=unLike(); style='cursor:pointer;'><i class='far fa-heart'style='color: gray; font-size: 30px;'></i></a>"+
-                                "<p style='margin: 0px;margin-left:5px;'>"+value.likeCount+"</p>"+
+                                "<p style='margin: 0px;margin-left:9px;'>"+value.likeCount+"</p>"+
                                 "</div>"+
                                 "<div class='col-3 form-inline' style='padding: 0px;'>"+
                                 "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                                "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
+                                "<p style='margin: 0px;margin-left:9px;'>"+value.replyCount+"</p>"+
                                 "</div>"+
                                 "</div>"+
                                 "</div>"+
@@ -1332,19 +1332,19 @@ a{
                                          "</a>"+
                                          "</div>"+
                                          "<div class='card-footer row'>"+
-                                         "<div class='col-3 form-inline'>"+
+                                         "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                                          "<a onclick='like(this);'><i class='far fa-heart'style='color: gray; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
-                                         "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
+                                         "<p style='margin: 0px; margin-left:9px;'value="+value.pno+">"+value.likeCount+"</p>"+
                                          "</div>"+
                                          "<div class='col-3 form-inline' style='padding: 0px;'>"+
                                          "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                                         "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
+                                         "<p style='margin: 0px;margin-left:9px;'>"+value.replyCount+"</p>"+
                                          "</div>"+
                                          "</div>"+
                                          "</div>"+
                                          "</div>"+
                                          "</div>";
-                                         
+                                    	     
                                     }else if((value.loginLike == 1 && value.fanCheck == 0) && ("${loginUser.mno}" == value.mno)){
                                     
                                     	$input = "<div class='col-md-4 mt-3'>"+
@@ -1371,13 +1371,13 @@ a{
                                         "</a>"+
                                         "</div>"+
                                         "<div class='card-footer row'>"+
-                                        "<div class='col-3 form-inline'>"+
+                                        "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                                         "<a onclick='like(this);'><i class='fa fa-heart'style='color: red; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
-                                        "<p style='margin: 0px;margin-left:5px;'>"+value.likeCount+"</p>"+
+                                        "<p style='margin: 0px;margin-left:9px;'>"+value.likeCount+"</p>"+
                                         "</div>"+
                                         "<div class='col-3 form-inline' style='padding: 0px;'>"+
                                         "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                                        "<p style='margin-left:5px;margin: 0px;'>"+value.replyCount+"</p>"+
+                                        "<p style='margin-left:9px;margin: 0px;'>"+value.replyCount+"</p>"+
                                         "</div>"+
                                         "</div>"+
                                         "</div>"+
@@ -1412,13 +1412,13 @@ a{
                                    "</a>"+
                                    "</div>"+
                                    "<div class='card-footer row'>"+
-                                   "<div class='col-3 form-inline'>"+
+                                   "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                                    "<a onclick='like(this);'><i class='far fa-heart'style='color: gray; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
-                                   "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
+                                   "<p style='margin: 0px; margin-left:9px;'value="+value.pno+">"+value.likeCount+"</p>"+
                                    "</div>"+
                                    "<div class='col-3 form-inline' style='padding: 0px;'>"+
                                    "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                                   "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
+                                   "<p style='margin: 0px;margin-left:9px;'>"+value.replyCount+"</p>"+
                                    "</div>"+
                                    "</div>"+
                                    "</div>"+
@@ -1451,13 +1451,13 @@ a{
                                    "</a>"+
                                    "</div>"+
                                    "<div class='card-footer row'>"+
-                                   "<div class='col-3 form-inline'>"+
+                                   "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                                    "<a onclick='like(this);'><i class='fa fa-heart'style='color: red; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
-                                   "<p style='margin: 0px;margin-left:5px;'>"+value.likeCount+"</p>"+
+                                   "<p style='margin: 0px;margin-left:9px;'>"+value.likeCount+"</p>"+
                                    "</div>"+
                                    "<div class='col-3 form-inline' style='padding: 0px;'>"+
                                    "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                                   "<p style='margin-left:5px;margin: 0px;'>"+value.replyCount+"</p>"+
+                                   "<p style='margin-left:9px;margin: 0px;'>"+value.replyCount+"</p>"+
                                    "</div>"+
                                    "</div>"+
                                    "</div>"+
@@ -1489,13 +1489,13 @@ a{
                                     "</a>"+
                                     "</div>"+
                                     "<div class='card-footer row'>"+
-                                    "<div class='col-3 form-inline'>"+
+                                    "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                                     "<a onclick='like(this);'><i class='far fa-heart'style='color: gray; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
-                                    "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
+                                    "<p style='margin: 0px; margin-left:9px;'value="+value.pno+">"+value.likeCount+"</p>"+
                                     "</div>"+
                                     "<div class='col-3 form-inline' style='padding: 0px;'>"+
                                     "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                                    "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
+                                    "<p style='margin: 0px;margin-left:9px;'>"+value.replyCount+"</p>"+
                                     "</div>"+
                                     "</div>"+
                                     "</div>"+
@@ -1527,13 +1527,13 @@ a{
                                     "</a>"+
                                     "</div>"+
                                     "<div class='card-footer row'>"+
-                                    "<div class='col-3 form-inline'>"+
+                                    "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                                     "<a onclick='like(this);'><i class='fa fa-heart'style='color: red; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
-                                    "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
+                                    "<p style='margin: 0px; margin-left:9px;'value="+value.pno+">"+value.likeCount+"</p>"+
                                     "</div>"+
                                     "<div class='col-3 form-inline' style='padding: 0px;'>"+
                                     "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                                    "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
+                                    "<p style='margin: 0px;margin-left:9px;'>"+value.replyCount+"</p>"+
                                     "</div>"+
                                     "</div>"+
                                     "</div>"+
@@ -1661,13 +1661,13 @@ a{
                      "</a>"+
                      "</div>"+
                      "<div class='card-footer row'>"+
-                     "<div class='col-3 form-inline'>"+
+                     "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                      "<a onclick=unLike(); style='cursor:pointer;'><i class='far fa-heart'style='color: gray; font-size: 30px;'></i></a>"+
-                     "<p style='margin: 0px;margin-left:5px;'>"+data[0].likeCount+"</p>"+	
+                     "<p style='margin: 0px;margin-left:9px;'>"+data[0].likeCount+"</p>"+	
                      "</div>"+
                      "<div class='col-3 form-inline' style='padding: 0px;'>"+
                      "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                     "<p style='margin: 0px;margin-left:5px;'>"+data[0].replyCount+"</p>"+
+                     "<p style='margin: 0px;margin-left:9px;'>"+data[0].replyCount+"</p>"+
                      "</div>"+
                      "</div>"+
                      "</div>"+
@@ -1700,13 +1700,13 @@ a{
                              "</a>"+
                              "</div>"+
                              "<div class='card-footer row'>"+
-                             "<div class='col-3 form-inline'>"+
+                             "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                              "<a onclick='like(this);'><i class='far fa-heart'style='color: gray; font-size: 30px;'></i><input type='hidden' value="+data[0].pno+" id='hiddenpno'/><input type='hidden' value="+data[0].mno+" id='hiddenmno'/></a>"+
-                             "<p style='margin: 0px; margin-left:5px;'value="+data[0].pno+">"+data[0].likeCount+"</p>"+
+                             "<p style='margin: 0px; margin-left:9px;'value="+data[0].pno+">"+data[0].likeCount+"</p>"+
                              "</div>"+
                              "<div class='col-3 form-inline' style='padding: 0px;'>"+
                              "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                             "<p style='margin: 0px;margin-left:5px;'>"+data[0].replyCount+"</p>"+
+                             "<p style='margin: 0px;margin-left:9px;'>"+data[0].replyCount+"</p>"+
                               "</div>"+
                              "</div>"+
                              "</div>"+
@@ -1739,13 +1739,13 @@ a{
                              "</a>"+
                             "</div>"+
                             "<div class='card-footer row'>"+
-                            "<div class='col-3 form-inline'>"+
+                            "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                             "<a onclick='like(this);'><i class='fa fa-heart'style='color: red; font-size: 30px;'></i><input type='hidden' value="+data[0].pno+" id='hiddenpno'/><input type='hidden' value="+data[0].mno+" id='hiddenmno'/></a>"+
-                            "<p style='margin: 0px; margin-left:5px;'value="+data[0].pno+">"+data[0].likeCount+"</p>"+
+                            "<p style='margin: 0px; margin-left:9px;'value="+data[0].pno+">"+data[0].likeCount+"</p>"+
                             "</div>"+
                             "<div class='col-3 form-inline' style='padding: 0px;'>"+
                             "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                            "<p style='margin: 0px;margin-left:5px;'>"+data[0].replyCount+"</p>"+
+                            "<p style='margin: 0px;margin-left:9px;'>"+data[0].replyCount+"</p>"+
                             "</div>"+
                             "</div>"+
                             "</div>"+
@@ -1780,13 +1780,13 @@ a{
                         "</a>"+
                         "</div>"+
                         "<div class='card-footer row'>"+
-                        "<div class='col-3 form-inline'>"+
+                        "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                         "<a onclick='filterLike(this);'><i class='far fa-heart'style='color: gray; font-size: 30px;'></i><input type='hidden' value="+data[0].pno+" id='hiddenpno'/><input type='hidden' value="+data[0].mno+" id='hiddenmno'/></a>"+
-                        "<p style='margin: 0px; margin-left:5px;'value="+data[0].pno+">"+data[0].likeCount+"</p>"+
+                        "<p style='margin: 0px; margin-left:9px;'value="+data[0].pno+">"+data[0].likeCount+"</p>"+
                         "</div>"+
                         "<div class='col-3 form-inline' style='padding: 0px;'>"+
                         "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                        "<p style='margin: 0px;margin-left:5px;'>"+data[0].replyCount+"</p>"+
+                        "<p style='margin: 0px;margin-left:9px;'>"+data[0].replyCount+"</p>"+
                         "</div>"+
                         "</div>"+
                         "</div>"+
@@ -1819,13 +1819,13 @@ a{
                         "</a>"+
                         "</div>"+
                         "<div class='card-footer row'>"+
-                        "<div class='col-3 form-inline'>"+
+                        "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                         "<a onclick='filterLike(this);'><i class='fa fa-heart'style='color: red; font-size: 30px;'></i><input type='hidden' value="+data[0].pno+" id='hiddenpno'/><input type='hidden' value="+data[0].mno+" id='hiddenmno'/></a>"+
-                        "<p style='margin: 0px; margin-left:5px;'value="+data[0].pno+">"+data[0].likeCount+"</p>"+
+                        "<p style='margin: 0px; margin-left:9px;'value="+data[0].pno+">"+data[0].likeCount+"</p>"+
                         "</div>"+
                         "<div class='col-3 form-inline' style='padding: 0px;'>"+
                         "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                        "<p style='margin: 0px;margin-left:5px;'>"+data[0].replyCount+"</p>"+
+                        "<p style='margin: 0px;margin-left:9px;'>"+data[0].replyCount+"</p>"+
                         "</div>"+
                         "</div>"+
                         "</div>"+
@@ -1857,13 +1857,13 @@ a{
                          "</a>"+
                          "</div>"+
                          "<div class='card-footer row'>"+
-                         "<div class='col-3 form-inline'>"+
+                         "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                          "<a onclick='filterLike(this);'><i class='far fa-heart'style='color: gray; font-size: 30px;'></i><input type='hidden' value="+data[0].pno+" id='hiddenpno'/><input type='hidden' value="+data[0].mno+" id='hiddenmno'/></a>"+
-                         "<p style='margin: 0px; margin-left:5px;'value="+data[0].pno+">"+data[0].likeCount+"</p>"+
+                         "<p style='margin: 0px; margin-left:9px;'value="+data[0].pno+">"+data[0].likeCount+"</p>"+
                          "</div>"+
                          "<div class='col-3 form-inline' style='padding: 0px;'>"+
                          "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                         "<p style='margin: 0px;margin-left:5px;'>"+data[0].replyCount+"</p>"+
+                         "<p style='margin: 0px;margin-left:9px;'>"+data[0].replyCount+"</p>"+
                          "</div>"+
                          "</div>"+
                          "</div>"+
@@ -1895,13 +1895,13 @@ a{
                          "</a>"+
                          "</div>"+
                          "<div class='card-footer row'>"+
-                         "<div class='col-3 form-inline'>"+
+                         "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                          "<a onclick='filterLike(this);'><i class='fa fa-heart'style='color: red; font-size: 30px;'></i><input type='hidden' value="+data[0].pno+" id='hiddenpno'/><input type='hidden' value="+data[0].mno+" id='hiddenmno'/></a>"+
-                         "<p style='margin: 0px; margin-left:5px;'value="+data[0].pno+">"+data[0].likeCount+"</p>"+
+                         "<p style='margin: 0px; margin-left:9px;'value="+data[0].pno+">"+data[0].likeCount+"</p>"+
                          "</div>"+
                          "<div class='col-3 form-inline' style='padding: 0px;'>"+
                          "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                         "<p style='margin: 0px;margin-left:5px;'>"+data[0].replyCount+"</p>"+
+                         "<p style='margin: 0px;margin-left:9px;'>"+data[0].replyCount+"</p>"+
                          "</div>"+
                          "</div>"+
                          "</div>"+
@@ -1942,13 +1942,13 @@ a{
                          "</a>"+
                          "</div>"+
                          "<div class='card-footer row'>"+
-                         "<div class='col-3 form-inline'>"+
+                         "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                          "<a onclick=unLike(); style='cursor:pointer;'><i class='far fa-heart'style='color: gray; font-size: 30px;'></i></a>"+
-                         "<p style='margin: 0px;margin-left:5px;'>"+value.likeCount+"</p>"+
+                         "<p style='margin: 0px;margin-left:9px;'>"+value.likeCount+"</p>"+
                          "</div>"+
                          "<div class='col-3 form-inline' style='padding: 0px;'>"+
                          "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                         "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
+                         "<p style='margin: 0px;margin-left:9px;'>"+value.replyCount+"</p>"+
                          "</div>"+
                          "</div>"+
                          "</div>"+
@@ -1983,13 +1983,13 @@ a{
                          "</a>"+
                          "</div>"+
                          "<div class='card-footer row'>"+
-                         "<div class='col-3 form-inline'>"+
+                         "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                          "<a onclick='filterLike(this);'><i class='far fa-heart'style='color: gray; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
-                         "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
+                         "<p style='margin: 0px; margin-left:9px;'value="+value.pno+">"+value.likeCount+"</p>"+
                          "</div>"+
                          "<div class='col-3 form-inline' style='padding: 0px;'>"+
                          "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                         "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
+                         "<p style='margin: 0px;margin-left:9px;'>"+value.replyCount+"</p>"+
                          "</div>"+
                          "</div>"+
                          "</div>"+
@@ -2022,13 +2022,13 @@ a{
                         "</a>"+
                         "</div>"+
                         "<div class='card-footer row'>"+
-                        "<div class='col-3 form-inline'>"+
+                        "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                         "<a onclick='filterLike(this);'><i class='fa fa-heart'style='color: red; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
-                        "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
+                        "<p style='margin: 0px; margin-left:9px;'value="+value.pno+">"+value.likeCount+"</p>"+
                         "</div>"+
                         "<div class='col-3 form-inline' style='padding: 0px;'>"+
                         "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                        "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
+                        "<p style='margin: 0px;margin-left:9px;'>"+value.replyCount+"</p>"+
                         "</div>"+
                         "</div>"+
                         "</div>"+
@@ -2061,13 +2061,13 @@ a{
                             "</a>"+
                             "</div>"+
                             "<div class='card-footer row'>"+
-                            "<div class='col-3 form-inline'>"+
+                            "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                             "<a onclick='filterLike(this);'><i class='far fa-heart'style='color: gray; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
-                            "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
+                            "<p style='margin: 0px; margin-left:9px;'value="+value.pno+">"+value.likeCount+"</p>"+
                             "</div>"+
                             "<div class='col-3 form-inline' style='padding: 0px;'>"+
                             "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                            "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
+                            "<p style='margin: 0px;margin-left:9px;'>"+value.replyCount+"</p>"+
                             "</div>"+
                             "</div>"+
                             "</div>"+
@@ -2100,13 +2100,13 @@ a{
                             "</a>"+
                             "</div>"+
                             "<div class='card-footer row'>"+
-                            "<div class='col-3 form-inline'>"+
+                            "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                             "<a onclick='filterLike(this);'><i class='fa fa-heart'style='color: red; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
-                            "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
+                            "<p style='margin: 0px; margin-left:9px;'value="+value.pno+">"+value.likeCount+"</p>"+
                             "</div>"+
                             "<div class='col-3 form-inline' style='padding: 0px;'>"+
                             "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                            "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
+                            "<p style='margin: 0px;margin-left:9px;'>"+value.replyCount+"</p>"+
                             "</div>"+
                             "</div>"+
                             "</div>"+
@@ -2138,13 +2138,13 @@ a{
                              "</a>"+
                              "</div>"+
                              "<div class='card-footer row'>"+
-                             "<div class='col-3 form-inline'>"+
+                             "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                              "<a onclick='filterLike(this);'><i class='far fa-heart'style='color: gray; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
-                             "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
+                             "<p style='margin: 0px; margin-left:9px;'value="+value.pno+">"+value.likeCount+"</p>"+
                              "</div>"+
                              "<div class='col-3 form-inline' style='padding: 0px;'>"+
                              "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                             "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
+                             "<p style='margin: 0px;margin-left:9px;'>"+value.replyCount+"</p>"+
                              "</div>"+
                              "</div>"+
                              "</div>"+
@@ -2176,13 +2176,13 @@ a{
                              "</a>"+
                              "</div>"+
                              "<div class='card-footer row'>"+
-                             "<div class='col-3 form-inline'>"+
+                             "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                              "<a onclick='filterLike(this);'><i class='fa fa-heart'style='color: red; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
-                             "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
+                             "<p style='margin: 0px; margin-left:9px;'value="+value.pno+">"+value.likeCount+"</p>"+
                              "</div>"+
                              "<div class='col-3 form-inline' style='padding: 0px;'>"+
                              "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                             "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
+                             "<p style='margin: 0px;margin-left:9px;'>"+value.replyCount+"</p>"+
                              "</div>"+
                              "</div>"+
                              "</div>"+
