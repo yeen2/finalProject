@@ -130,10 +130,6 @@ public class AdminDao {
 		return (ArrayList)sqlSession.selectList("adminMapper.totalCount");
 	}
 	
-	public ArrayList<Notice> selectNoticeList(){
-		return (ArrayList)sqlSession.selectList("adminMapper.selectNoticeList");
-	}
-	
 	public ArrayList<Hash> selectHashRank() {
 		return (ArrayList)sqlSession.selectList("adminMapper.selectHashRank");
 	}
@@ -149,4 +145,22 @@ public class AdminDao {
 	public ArrayList<Style> selectColorRank() {
 		return (ArrayList)sqlSession.selectList("adminMapper.selectColorRank");
 	}
+	
+	public int getNoticeListCount() {
+		return sqlSession.selectOne("adminMapper.getNoticeListCount");
+	}
+
+	public ArrayList<Notice> selectNoticeAdminList(PageInfo pi) {
+		
+		int offset = (pi.getCurrentPage()-1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset,pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("adminMapper.selectNoticeList",null,rowBounds);
+	}
+	
+	public ArrayList<Notice> selectNoticeList() {
+		
+		return (ArrayList)sqlSession.selectList("adminMapper.selectNoticeList");
+	}
+	
+	
 }

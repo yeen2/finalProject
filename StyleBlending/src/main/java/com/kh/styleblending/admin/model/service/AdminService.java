@@ -89,8 +89,12 @@ public interface AdminService {
 	// 총 게시글수(positng,board,fashion)
 	ArrayList<Statistics> totalCount();
 	
+	// 공지사항 게시글수
+	int getNoticeListCount();
+	
 	// 공지사항 리스트 조회
-	ArrayList<Notice> selectNoticeList();
+	ArrayList<Notice> selectNoticeAdminList(PageInfo pi);
 	
-	
+	// 공지사항 리스트 조회
+		ArrayList<Notice> selectNoticeList();
 }
