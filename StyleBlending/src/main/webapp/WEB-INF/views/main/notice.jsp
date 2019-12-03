@@ -20,6 +20,11 @@ invest_table .title .date {
 	position: relative;
 	line-height: 1.2rem;
 }
+i{
+ cursor:pointer;
+
+
+}
 </style>
 </head>
 <body>
@@ -272,6 +277,8 @@ invest_table .title .date {
 	}
 	function noticeDelete(a){
 		var nno = $(a).parent().children().eq(2).val();
+		var confi = confirm('정말 삭제하시겠습니까?');
+		if(confi){
 		console.log(nno);
 		 $.ajax({
 				url:"noticeDelete.do",
@@ -285,7 +292,9 @@ invest_table .title .date {
 					console.log("서버통신실패");
 				}
 			});
-		 			
+		}else{
+			return;
+		}
 	}
 </script>
 
@@ -394,21 +403,22 @@ invest_table .title .date {
 							</div>
 						</div>
 						<div class="modal-footer"style="margin:auto;">
-							<button class="btn btn-dark btn-lg" type="button"
+							<button class="btn btn-white btn-lg" type="button"
 								data-dismiss="modal" id="reset1" style="background:white;
     color: black;
     border-radius: 50px;
-    border: 1px solid black;"><span>취소</span></button>
-							<button type="submit" class="btn btn-success btn-lg" style="background: white;
+    "><span>취소</span></button>
+							<button type="submit" class="btn btn-white btn-lg" style="background: white;
     color: black;
     border-radius: 50px;
-    border: 1px solid black;
+    
 }">등록</button>
 							<!-- 취소 눌렀을때 form 양식 초기화 스크립트 추가 -->
 							<script type="text/javascript">
 								$(document).ready(function() {
 									$("#reset1").click(function() {
 										$("#form1")[0].reset();
+										$(".cke_wysiwyg_frame cke_reset").val("");
 									});
 								});
 							</script>
