@@ -366,7 +366,22 @@ public class PostingController {
 		
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		return gson.toJson(list);
+	}
+	
+	// 포스팅 삭제
+	@RequestMapping("pDelete.do")
+	public ModelAndView deletePDeclare(Declare d, ModelAndView mv, int pno) {
 		
+		int id = d.getBno();
+		int result = pService.insertPDeclare(d);
+		
+		if(result > 0) {
+			mv.addObject("msg", "신고하기 성공!").setViewName("redirect:pInfo.do?id="+id);
+		}else {
+			mv.addObject("msg", "신고하기 실패!").setViewName("common/error");
+		}
+		
+		return mv;
 	}
 	
 	
