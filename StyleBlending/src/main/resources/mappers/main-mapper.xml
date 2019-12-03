@@ -129,7 +129,7 @@
                 (select count(*) from fan f where me_no = p.m_no and f.you_no=#{mno}) fanCheck
 				from posting p join member m on(p.m_no = m.m_no) 
 				order by p.enroll_date desc) a)
-		where rnum between 10 and 10000
+		where rnum between 10 and 70
 
 
 	</select>

@@ -89,16 +89,13 @@
 .icon-separator {
 	border-bottom: 2px solid orange;
 }
-
 .modal-body {
 	
 }
-
 .modal-body a:hover {
 	transform: scale(1.5);
 	transition: transform .5s;
 }
-
 .modal-body .btn {
 	padding: 0px;
 }

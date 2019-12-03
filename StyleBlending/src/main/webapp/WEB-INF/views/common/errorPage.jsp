@@ -4,6 +4,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css">
+	a:hover{
+		text-decoration: none;
+	}
+</style>
 </head>
 <body>
 <jsp:include page="../includes/header.jsp" />
