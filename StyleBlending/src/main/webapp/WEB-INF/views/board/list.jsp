@@ -24,7 +24,7 @@
 		<br>
 		<div class="form-group" style="float: left; width: 200px;">
 				<select style="cursor: pointer;" class="custom-select" onchange="location.href=this.value">
-					<option>분류</option>
+					<option value="">분류</option>
 					<option selected value="blist.do">자유게시판</option>
 					<option value="fblist.do">패션정보게시판</option>
 				</select>
@@ -86,11 +86,21 @@
 							<option value="content" ${ cSelected }>내용</option>	
 					</select>
 					
-				<button class="btn btn-primary btn-sm" id="searchBtn" type="submit" 
+				<button class="btn btn-primary btn-sm" id="searchBtn" onclick="return subreturn()" type="submit" 
 						style="float: left; margin-left: 8px; height:38px;">검색하기</button>
 				
 			</form>
 		</div>
+		<!-- 검색이 공백일때 클릭 안되게끔 -->
+		<script>
+			function subreturn(){
+				if($("#searchInput").val().trim() == ""){
+					alert("검색내용을 입력해주세요");
+					return false;
+				}
+					
+			}
+		</script>
 
 		<div id="readBtn">
 			<c:if test="${ !empty loginUser }">
