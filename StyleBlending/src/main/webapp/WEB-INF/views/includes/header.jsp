@@ -150,7 +150,7 @@
 
 			<a class="navbar-brand d-flex align-items-center"
 				href="${pageContext.request.contextPath}"> <img
-				src="${pageContext.request.contextPath}/resources/assets/img/파이널로고.PNG"
+				src="${pageContext.request.contextPath}/resources/assets/img/logo5.PNG"
 				class="mr-2" height="50" width="50"> Style Blending
 			</a>
 
@@ -356,7 +356,7 @@
 									aria-label="Close" class="close" data-dismiss="modal"
 				 					data-toggle="tooltip" title="Exit"></i>
 								</a> -->
-									<a class="btn b" id="남자"> <i class="fa fa-male fa-5x"></i>
+									<a class="btn b" id="M"> <i class="fa fa-male fa-5x"></i>
 									</a> <br /> <br />
 									<p style="color: white; margin: 0px;">남자</p>
 								</div>
@@ -364,7 +364,7 @@
 									<!-- <a class="btn" href="">
 									<i class="fa fa-female fa-5x" aria-hidden="true"></i>
 								</a> -->
-									<a class="btn b" id="여자"> <i class="fa fa-female fa-5x"></i>
+									<a class="btn b" id="W"> <i class="fa fa-female fa-5x"></i>
 									</a> <br /> <br />
 									<p style="color: white; margin: 0px;">여자</p>
 								</div>
