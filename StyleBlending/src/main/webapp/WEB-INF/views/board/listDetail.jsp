@@ -98,7 +98,6 @@
 
 		<!-- 로그인시 댓글 사용가능 -->
 		<div class="replyArea">
-			<!-- <form id="replylistForm" name="replylistForm" method="post"> -->
 				<div class="replylist">
 					<br>
 					<div>
@@ -148,7 +147,6 @@
 						    id="a-delete">삭제</a> -->
 					</div>
 				</div>
-			<!-- </form> -->
 		</div>
 	</div>
 	<br>
@@ -414,14 +412,7 @@
 		};
 		
 /* *********************************************** 댓글 ********************************************* */
-		//댓글 수정,삭제 이벤트
-		$(".otherDiv").mouseover(function(){
-			$(this).children('a').show();
-			console.log("들어오나?");
-		}).mouseleave(function(){
-			$(this).children('a').hide();
-		});
-		
+
 		//댓글 작성
 		$(function(){
 			getReplyList();
@@ -465,6 +456,7 @@
 				var mno = "${loginUser.mno}";
 				
 				
+				
 				$.ajax({
 					url:"rinsert.do",
 					data:{content:content,
@@ -476,7 +468,7 @@
 							getReplyList();
 							$("#comment").val("");
 							sock.send(${b.mno});
-							//console.log(${b.mno});
+							//console.log(b.mno);
 						}else{
 							alert("댓글 작성 실패");
 						}
@@ -495,6 +487,7 @@
 		// 댓글 리스트
 		function getReplyList(){
 			//console.log("들어오나?");
+			
 			$.ajax({
 				url:"replyList.do",
 				data:{bno:${b.bno}},
@@ -510,6 +503,9 @@
 					if(data.length > 0){	// 댓글이 있을때
 						
 						$.each(data, function(index, value){
+							//console.log(data.value);
+							console.log(value.renameImg);
+							
 							
 							$replyOuter = $("#reply-comment");
 							
@@ -523,7 +519,8 @@
 							$otherDiv = $("<div class'form-inline otherDiv' style='margin-right:150px; margin-top:10px;'></div>");
 							
 							$modify_textarea = $("<textarea rows='3' cols='80' style='margin-left: 5px;' class='form-control modifyContent'></textarea>").text(value.content);;
-							$hiddenBrno = $("<input type='hidden' id='hiddenBrno'>").val(value.brno);
+							$hiddenMmno = $("<input type='hidden' class='hiddenMmno'>").val(value.mmno);
+							$hiddenBrno = $("<input type='hidden' class='hiddenBrno'>").val(value.brno);
 							$rmodifyBtn = $("<button class='btn btn-light rmodifyBtn' style='width: 85px; height: 82px; margin-left: 10px;'>등록</button>");
 							$nickname = $("<b class='nickname' style='margin-left:75px;'></b>").text(value.nickName);
 							$rcontent = $("<span id='rcontent' class='rcontent' style='margin-left: 5px;'></span>").html(value.content);
@@ -534,7 +531,7 @@
 							
 							$imgDiv.append($img);
 							$contentDiv.append($rcontent).append('<br>');
-							$otherDiv.append($update_a).append($delete_a).append($hiddenBrno);
+							$otherDiv.append($update_a).append($delete_a).append($hiddenBrno).append($hiddenBrno);
 							
 							$modifyDiv.append($modify_textarea).append($rmodifyBtn);
 							

@@ -62,7 +62,7 @@
 				<hr>
 
 				<div id="writeviewArea"
-					style="height: auto; width: 80%; padding-bottom: 80px;">
+					style="height: auto; margin-left:50px; padding-bottom: 80px;">
 					<div style="height: auto; margin-top: 40px;"><p style="margin: auto;">${ fb.content }<p></div>
 				</div>
 
