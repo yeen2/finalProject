@@ -882,7 +882,7 @@ insert into member values(seq_member.nextval,default,null,'user42','pass42','cor
 insert into member values(seq_member.nextval,default,null,'user43','pass43','kimsl1023','자기소개가 없습니다.','서울시 강남구','profile44.jpg','profile44.jpg','/resources/upload/member/',sysdate,null,null,default);
 insert into member values(seq_member.nextval,default,null,'user44','pass44','보람쨩','수고하셨습니다~~~','서울시 강북구','보람쌤프로필.jpg','보람쌤프로필.jpg','/resources/upload/member/',sysdate,null,null,default);
 insert into member values(seq_member.nextval,default,null,'user45','pass45','나는 예은','자기소개가 없습니다.','부산광역시 해운대구','profile46.jpg','profile46.jpg','/resources/upload/member/',sysdate,null,null,default);
-insert into member values(seq_member.nextval,default,null,'user46','pass46','나는 종배','자기소개가 없습니다.','서울시 광진구','profile47.jpg','profile47.jpg','/resources/upload/member/',sysdate,null,null,default);
+insert into member values(seq_member.nextval,default,null,'user46','pass46','나는 종배','자기소개가 없습니다.','서울시 광진구','종배프로필.jpg','종배프로필.jpg','/resources/upload/member/',sysdate,null,null,default);
 insert into member values(seq_member.nextval,default,null,'user47','pass47','나는 혜은','자기소개가 없습니다.','서울시 성동구','혜은프로필.jpg','혜은프로필.jpg','/resources/upload/member/',sysdate,null,null,default);
 insert into member values(seq_member.nextval,default,null,'user48','pass48','나는 성환','자기소개가 없습니다.','경기도 성남시','성환프로필.jpg','성환프로필.jpg','/resources/upload/member/',sysdate,null,null,default);
 insert into member values(seq_member.nextval,default,null,'user49','pass49','나는 정호','자기소개가 없습니다.','경기도 고양시','정호프로필.jpg','정호프로필.jpg','/resources/upload/member/',sysdate,null,null,default);
