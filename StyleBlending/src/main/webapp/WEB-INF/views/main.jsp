@@ -1609,15 +1609,8 @@ a{
          var category = $("#category").val();
          console.log(sel);
          console.log(selectC);
-         console.log(category);
-         if(sel == '남자'){
-        	 sel = 'M'
-         }else{
-        	 sel = 'W'
-         }
-         console.log(sel);
-         console.log(selectC);
-         console.log(category);
+
+
          	
          var $inputWrap = $("#inputWrap");
          
@@ -1701,7 +1694,7 @@ a{
                              "</div>"+
                              "<div class='card-footer row'>"+
                              "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
-                             "<a onclick='like(this);'><i class='far fa-heart'style='color: gray; font-size: 30px;'></i><input type='hidden' value="+data[0].pno+" id='hiddenpno'/><input type='hidden' value="+data[0].mno+" id='hiddenmno'/></a>"+
+                             "<a onclick='filterLike(this);'><i class='far fa-heart'style='color: gray; font-size: 30px;'></i><input type='hidden' value="+data[0].pno+" id='hiddenpno'/><input type='hidden' value="+data[0].mno+" id='hiddenmno'/></a>"+
                              "<p style='margin: 0px; margin-left:9px;'value="+data[0].pno+">"+data[0].likeCount+"</p>"+
                              "</div>"+
                              "<div class='col-3 form-inline' style='padding: 0px;'>"+
@@ -1740,7 +1733,7 @@ a{
                             "</div>"+
                             "<div class='card-footer row'>"+
                             "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
-                            "<a onclick='like(this);'><i class='fa fa-heart'style='color: red; font-size: 30px;'></i><input type='hidden' value="+data[0].pno+" id='hiddenpno'/><input type='hidden' value="+data[0].mno+" id='hiddenmno'/></a>"+
+                            "<a onclick='filterLike(this);'><i class='fa fa-heart'style='color: red; font-size: 30px;'></i><input type='hidden' value="+data[0].pno+" id='hiddenpno'/><input type='hidden' value="+data[0].mno+" id='hiddenmno'/></a>"+
                             "<p style='margin: 0px; margin-left:9px;'value="+data[0].pno+">"+data[0].likeCount+"</p>"+
                             "</div>"+
                             "<div class='col-3 form-inline' style='padding: 0px;'>"+
