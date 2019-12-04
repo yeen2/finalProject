@@ -23,7 +23,7 @@ public class BoardReply {
 	private String isDelete;
 	
 	// 댓글 프로필 이미지
-	//private String profileImg;
+	private String profileImg;
 	private String renameImg;
 	
 	//닉네임

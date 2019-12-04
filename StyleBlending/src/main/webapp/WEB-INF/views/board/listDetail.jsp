@@ -197,7 +197,7 @@
 
 									<div class="modal-footer">
 										<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-										<button type="submit" class="btn btn-success" id="declareBtn" >신고</button>
+										<button type="submit" class="btn btn-success" id="declareBtn">신고</button>
 									</div>
 								</form>
 							</div>
@@ -531,7 +531,7 @@
 							
 							$imgDiv.append($img);
 							$contentDiv.append($rcontent).append('<br>');
-							$otherDiv.append($update_a).append($delete_a).append($hiddenBrno).append($hiddenBrno);
+							$otherDiv.append($update_a).append($delete_a).append($hiddenBrno).append($hiddenMmno);
 							
 							$modifyDiv.append($modify_textarea).append($rmodifyBtn);
 							
@@ -570,7 +570,7 @@
 		});
 		
 		$(document).on("click",".rmodifyBtn", function() {
-			var brno = $(this).parent().parent().next().children('#hiddenBrno').val();
+			var brno = $(this).parent().parent().next().children('.hiddenBrno').val();
 			console.log(brno)
 			var content = $(this).parent().children().eq(0).val();
 			//console.log(content);

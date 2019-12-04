@@ -111,22 +111,13 @@
 		</div>
 		</div>
 		
-		<!-- 검색  -->
-		<!-- <script type="text/javascript">
-			$("searchBtn")on("click", function(){
-				
-				var searchType = ${"#selected-type"}
-			});
-		</script> -->
-		
-		
 		<!-- 페이징  -->
 		<br><br>
 		
 		<div class="pagingArea" style="margin-top: 50px; margin-bottom: 50px;">
 			<ul class="pagination" style="justify-content: center;">
 				<li class="page-item disabled">
-				<!-- 이전 --> <!-- 수정중 -->
+				<!-- 이전 -->
 					<c:if test="${ pi.currentPage eq 1 }">
 						<i class="fas fa-long-arrow-alt-left"></i>
 					</c:if>
@@ -134,9 +125,10 @@
 						<c:url value="blist.do" var="before">
 							<c:param name="currentPage" value="${ pi.currentPage-1 }"/>
 						</c:url>
-						<a class="page-link" href="${ before }"><i class="fas fa-long-arrow-alt-left"></i></a>
+						<a class="page-link" href="${ before }">@ <!-- <i class="fas fa-long-arrow-alt-left"></i> --></a>
 					</c:if>
 				</li>
+				
 				<!-- 페이지  -->
 				<c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
 					<li class="page-item active">
@@ -161,7 +153,7 @@
 						<c:url value="blist.do" var="last">
 							<c:param name="currentPage" value="${ pi.currentPage+1 }"/>
 						</c:url>
-						<a class="page-link" href="${ last }"> <i class="fas fa-long-arrow-alt-right"></i></a>
+						<a class="page-link" href="${ last }"> <!-- <i class="fas fa-long-arrow-alt-right"></i> -->></a>
 					</c:if>
 				</li>
 			</ul>
@@ -171,11 +163,6 @@
 	<jsp:include page="../includes/footer.jsp"/>
 	
 	
-	<!-- <script type="text/javascript">
-		$("#searchBtn").keydown(function(){
-			location.href=""
-		});
-	</script> -->
 	
 </body>
 </html>
