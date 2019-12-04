@@ -150,7 +150,7 @@
 
 			<a class="navbar-brand d-flex align-items-center"
 				href="${pageContext.request.contextPath}"> <img
-				src="${pageContext.request.contextPath}/resources/assets/img/final_logo.PNG"
+				src="${pageContext.request.contextPath}/resources/assets/img/logo5.PNG"
 				class="mr-2" height="50" width="50"> Style Blending
 			</a>
 

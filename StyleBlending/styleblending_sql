@@ -887,6 +887,83 @@ insert into member values(seq_member.nextval,default,null,'user47','pass47','dld
 insert into member values(seq_member.nextval,default,null,'user48','pass48','scvn323','자기소개가 없습니다.','경기도 성남시','profile49.jpg','profile49.jpg','/resources/upload/member/',sysdate,null,null,default);
 insert into member values(seq_member.nextval,default,null,'user49','pass49','soon1010','자기소개가 없습니다.','경기도 고양시','profile50.jpg','profile50.jpg','/resources/upload/member/',sysdate,null,null,default);
 
+
+
+
+
+
+
+
+
+
+
+insert into live values(seq_live.nextval,'샤넬','1',sysdate);
+insert into live values(seq_live.nextval,'샤넬','1',sysdate);
+insert into live values(seq_live.nextval,'샤넬','1',sysdate);
+insert into live values(seq_live.nextval,'샤넬','1',sysdate);
+insert into live values(seq_live.nextval,'샤넬','1',sysdate);
+insert into live values(seq_live.nextval,'샤넬','1',sysdate);
+insert into live values(seq_live.nextval,'샤넬','1',sysdate);
+insert into live values(seq_live.nextval,'샤넬','1',sysdate);
+insert into live values(seq_live.nextval,'샤넬','1',sysdate);
+insert into live values(seq_live.nextval,'샤넬','1',sysdate);
+insert into live values(seq_live.nextval,'샤넬','1',sysdate);
+insert into live values(seq_live.nextval,'샤넬','1',sysdate);
+insert into live values(seq_live.nextval,'샤넬','1',sysdate);
+insert into live values(seq_live.nextval,'샤넬','1',sysdate);
+insert into live values(seq_live.nextval,'샤넬','1',sysdate);
+
+insert into live values(seq_live.nextval,'구찌','1',sysdate);
+insert into live values(seq_live.nextval,'구찌','1',sysdate);
+insert into live values(seq_live.nextval,'구찌','1',sysdate);
+insert into live values(seq_live.nextval,'구찌','1',sysdate);
+insert into live values(seq_live.nextval,'구찌','1',sysdate);
+insert into live values(seq_live.nextval,'구찌','1',sysdate);
+insert into live values(seq_live.nextval,'구찌','1',sysdate);
+insert into live values(seq_live.nextval,'구찌','1',sysdate);
+insert into live values(seq_live.nextval,'구찌','1',sysdate);
+insert into live values(seq_live.nextval,'구찌','1',sysdate);
+insert into live values(seq_live.nextval,'구찌','1',sysdate);
+insert into live values(seq_live.nextval,'구찌','1',sysdate);
+insert into live values(seq_live.nextval,'구찌','1',sysdate);
+
+insert into live values(seq_live.nextval,'#아우터','2',sysdate);
+insert into live values(seq_live.nextval,'#아우터','2',sysdate);
+insert into live values(seq_live.nextval,'#아우터','2',sysdate);
+insert into live values(seq_live.nextval,'#아우터','2',sysdate);
+insert into live values(seq_live.nextval,'#아우터','2',sysdate);
+insert into live values(seq_live.nextval,'#아우터','2',sysdate);
+insert into live values(seq_live.nextval,'#아우터','2',sysdate);
+insert into live values(seq_live.nextval,'#아우터','2',sysdate);
+insert into live values(seq_live.nextval,'#아우터','2',sysdate);
+
+insert into live values(seq_live.nextval,'강남','3',sysdate);
+insert into live values(seq_live.nextval,'강남','3',sysdate);
+insert into live values(seq_live.nextval,'강남','3',sysdate);
+insert into live values(seq_live.nextval,'강남','3',sysdate);
+insert into live values(seq_live.nextval,'강남','3',sysdate);
+insert into live values(seq_live.nextval,'강남','3',sysdate);
+insert into live values(seq_live.nextval,'강남','3',sysdate);
+insert into live values(seq_live.nextval,'강남','3',sysdate);
+
+insert into live values(seq_live.nextval,'JACKET','4',sysdate);
+insert into live values(seq_live.nextval,'JACKET','4',sysdate);
+insert into live values(seq_live.nextval,'JACKET','4',sysdate);
+insert into live values(seq_live.nextval,'JACKET','4',sysdate);
+insert into live values(seq_live.nextval,'JACKET','4',sysdate);
+insert into live values(seq_live.nextval,'JACKET','4',sysdate);
+
+insert into live values(seq_live.nextval,'프라다','1',sysdate);
+insert into live values(seq_live.nextval,'프라다','1',sysdate);
+insert into live values(seq_live.nextval,'프라다','1',sysdate);
+insert into live values(seq_live.nextval,'프라다','1',sysdate);
+insert into live values(seq_live.nextval,'프라다','1',sysdate);
+insert into live values(seq_live.nextval,'프라다','1',sysdate);
+insert into live values(seq_live.nextval,'프라다','1',sysdate);
+insert into live values(seq_live.nextval,'프라다','1',sysdate);
+insert into live values(seq_live.nextval,'프라다','1',sysdate);
+insert into live values(seq_live.nextval,'프라다','1',sysdate);
+
 --posting 더미
 insert into posting values(seq_posting.nextval,2,'posting01.jpg','posting01.jpg','/resources/upload/posting/','히히 <a href="#" class="hashtagHref">#블랙</a> <a href="#" class="hashtagHref">#코디</a>','#블랙#코디','W',default,23,0,sysdate,default, default);
 insert into posting values(seq_posting.nextval,2,'posting02.jpg','posting02.jpg','/resources/upload/posting/','잘나옴 <a href="#" class="hashtagHref">#청바지</a> <a href="#" class="hashtagHref">#가을코디</a> <a href="#" class="hashtagHref">#데일리룩</a>','#청바지#가을코디#데일리룩','W',default,45,0,sysdate,default, default);

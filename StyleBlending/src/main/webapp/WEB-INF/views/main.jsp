@@ -855,7 +855,7 @@ a{
                console.log($(window).height());
 
                
-               var height = $(window).height() - document.body.clientHeight;
+               var height = $(window).height() - 561.333251953125;
                if ($(window).scrollTop() == height&& sel == null && $(document).height() != 5073){
                   
                   console.log(++page);
@@ -1234,7 +1234,7 @@ a{
 					   sel='여자';
 				   }
 				   
-				   $inputWrap.append("<div class='col-md-12 mt-5' style='margin-left:300px;'><h5>"+sel+" | "+selectC.toUpperCase()+" | "+category+" 의검색결과가 존재하지 않습니다.</h5></div>")
+				   $inputWrap.append("<div class='col-md-12 mt-5' style='margin-left:300px;'><h5>"+sel+" | "+selectC.toUpperCase()+" | "+category+" 의 검색결과가 존재하지 않습니다.</h5></div>")
 			   }
                
                if(data.length == 1){
