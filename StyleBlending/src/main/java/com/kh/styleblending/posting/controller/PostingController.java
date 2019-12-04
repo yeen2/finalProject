@@ -115,7 +115,7 @@ public class PostingController {
 	
 	// 포스팅등록 처리
 	@RequestMapping("pInsert.do")
-	public String insert(Posting p, HttpServletRequest request, Model model,
+	public String insert(Posting p, HttpServletRequest request, Model model, HttpSession session,
 								@RequestParam(value="fileImg", required=false) MultipartFile file,
 								String[] cate, String[] brand, String[] color) {
 		
@@ -162,7 +162,7 @@ public class PostingController {
 		int result = pService.insertPosting(p, cate, brand, color, p.getHashtag());
 		
 		if(result > 0) {
-			model.addAttribute("msg", "포스팅 작성 완료~");
+			session.setAttribute("msg", "성공적으로 등록되었습니다~");
 			return "redirect:main.do";
 		}else {
 			model.addAttribute("msg", "포스팅 작성하기 실패");
@@ -295,13 +295,14 @@ public class PostingController {
 	}
 
 	@RequestMapping("pDeclare.do")
-	public ModelAndView insertPDeclare(Declare d, ModelAndView mv) {
+	public ModelAndView insertPDeclare(Declare d, ModelAndView mv, HttpSession session) {
 		
 		int id = d.getBno();
 		int result = pService.insertPDeclare(d);
 		
 		if(result > 0) {
-			mv.addObject("msg", "신고하기 성공!").setViewName("redirect:pInfo.do?id="+id);
+			session.setAttribute("msg", "신고하기 성공!");
+			mv.setViewName("redirect:pInfo.do?id="+id);
 		}else {
 			mv.addObject("msg", "신고하기 실패!").setViewName("common/error");
 		}
