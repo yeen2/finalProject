@@ -381,6 +381,7 @@
     <script>
     $(function() {
     	
+    	
     	var hash1 = $("#hash1").html();
     	var hash2 = $("#hash2").html();
     	var hash3 = $("#hash3").html();
