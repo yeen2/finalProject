@@ -260,7 +260,8 @@ a{
                
                if(data == 'success'){
                console.log("좋아요성공");
-               postList(); 
+               sock.send(likePno);
+               postList();
                   
                }else{
                   console.log("실패");
@@ -310,6 +311,7 @@ a{
                if(data == 'success'){
                console.log("좋아요성공");
                select(); 
+               sock.send(likePno);
                   
                }else{
                   console.log("실패");
@@ -385,6 +387,8 @@ a{
                if(data == 1){
                console.log("친구추가 성공");
                postList(); 
+               sock.send(meNo);
+               
                   
                }else{
                   console.log("실패");
@@ -442,7 +446,7 @@ a{
                if(data == 1){
                console.log("친구추가 성공");
                select(); 
-                  
+               sock.send(meNo);
                }else{
                   console.log("실패");
                }
@@ -499,7 +503,7 @@ a{
                if(data == 1){
                console.log("친구추가 성공");
                postList(); 
-                  
+               sock.send(meNo);
                }else{
                   console.log("실패");
                }
@@ -567,13 +571,13 @@ a{
                    "</a>"+
                    "</div>"+
                    "<div class='card-footer row'>"+
-                   "<div class='col-3 form-inline'>"+
+                   "<div class='col-3 form-inline' style='padding:0px; margin-left:10px;'>"+
                    "<a onclick=unLike(); style='cursor:pointer;'><i class='far fa-heart'style='color: gray; font-size: 30px;'></i></a>"+
-                   "<p style='margin: 0px;margin-left:5px;'>"+value.likeCount+"</p>"+
+                   "<p style='margin: 0px;margin-left:9px;'>"+value.likeCount+"</p>"+
                    "</div>"+
                    "<div class='col-3 form-inline' style='padding: 0px;'>"+
                    "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                   "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
+                   "<p style='margin: 0px;margin-left:9px;'>"+value.replyCount+"</p>"+
                    "</div>"+
                    "</div>"+
                    "</div>"+
@@ -606,13 +610,13 @@ a{
                        "</a>"+
                        "</div>"+
                        "<div class='card-footer row'>"+
-                       "<div class='col-3 form-inline'>"+
+                       "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                        "<a onclick='like(this);'><i class='far fa-heart'style='color: gray; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
-                       "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
+                       "<p style='margin: 0px; margin-left:9px;'value="+value.pno+">"+value.likeCount+"</p>"+
                        "</div>"+
                        "<div class='col-3 form-inline' style='padding: 0px;'>"+
                        "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                       "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
+                       "<p style='margin: 0px;margin-left:9px;'>"+value.replyCount+"</p>"+
                        "</div>"+
                        "</div>"+
                        "</div>"+
@@ -645,13 +649,13 @@ a{
                       "</a>"+
                       "</div>"+
                       "<div class='card-footer row'>"+
-                      "<div class='col-3 form-inline'>"+
+                      "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                       "<a onclick='like(this);'><i class='fa fa-heart'style='color: red; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
-                      "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
+                      "<p style='margin: 0px; margin-left:9px;'value="+value.pno+">"+value.likeCount+"</p>"+
                       "</div>"+
                       "<div class='col-3 form-inline' style='padding: 0px;'>"+
                       "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                      "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
+                      "<p style='margin: 0px;margin-left:9px;'>"+value.replyCount+"</p>"+
                       "</div>"+
                       "</div>"+
                       "</div>"+
@@ -684,13 +688,13 @@ a{
                        "</a>"+
                       "</div>"+
                       "<div class='card-footer row'>"+
-                      "<div class='col-3 form-inline'>"+
+                      "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                       "<a onclick='like(this);'><i class='far fa-heart'style='color: gray; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
-                      "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
+                      "<p style='margin: 0px; margin-left:9px;'value="+value.pno+">"+value.likeCount+"</p>"+
                       "</div>"+
                       "<div class='col-3 form-inline' style='padding: 0px;'>"+
                       "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                      "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
+                      "<p style='margin: 0px;margin-left:9px;'>"+value.replyCount+"</p>"+
                       "</div>"+
                       "</div>"+
                       "</div>"+
@@ -723,13 +727,13 @@ a{
                       "</a>"+
                       "</div>"+
                       "<div class='card-footer row'>"+
-                      "<div class='col-3 form-inline'>"+
+                      "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                       "<a onclick='like(this);'><i class='fa fa-heart'style='color: red; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
-                      "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
+                      "<p style='margin: 0px; margin-left:9px;'value="+value.pno+">"+value.likeCount+"</p>"+
                       "</div>"+
                       "<div class='col-3 form-inline' style='padding: 0px;'>"+
                       "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                      "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
+                      "<p style='margin: 0px;margin-left:9px;'>"+value.replyCount+"</p>"+
                       "</div>"+
                       "</div>"+
                       "</div>"+
@@ -761,13 +765,13 @@ a{
                        "</a>"+
                        "</div>"+
                        "<div class='card-footer row'>"+
-                       "<div class='col-3 form-inline'>"+
+                       "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                        "<a onclick='like(this);'><i class='far fa-heart'style='color: gray; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
-                       "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
+                       "<p style='margin: 0px; margin-left:9px;'value="+value.pno+">"+value.likeCount+"</p>"+
                        "</div>"+
                        "<div class='col-3 form-inline' style='padding: 0px;'>"+
                        "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                       "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
+                       "<p style='margin: 0px;margin-left:9px;'>"+value.replyCount+"</p>"+
                        "</div>"+
                        "</div>"+
                        "</div>"+
@@ -799,13 +803,13 @@ a{
                        "</a>"+
                        "</div>"+
                        "<div class='card-footer row'>"+
-                       "<div class='col-3 form-inline'>"+
+                       "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                        "<a onclick='like(this);'><i class='fa fa-heart'style='color: red; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
-                       "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
+                       "<p style='margin: 0px; margin-left:9px;'value="+value.pno+">"+value.likeCount+"</p>"+
                        "</div>"+
                        "<div class='col-3 form-inline' style='padding: 0px;'>"+
                        "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                       "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
+                       "<p style='margin: 0px;margin-left:9px;'>"+value.replyCount+"</p>"+
                        "</div>"+
                        "</div>"+
                        "</div>"+
@@ -834,412 +838,11 @@ a{
          
 </script>
 
-      <div class="row" style="margin-top: 1rem !important" id="fourWrap">
-      <%--   <div class="col-3">
-             <div class="component">
-               <div class="card" style="overflow: hidden;">
-
-                  <div class="card-body" style="height: 400px; padding: 0px;">
-                     <img class="card-img"
-                        src="${pageContext.request.contextPath}/resources/assets/img/dog-2.jpg"
-                        alt="dog" style="height: 100%;">
-                  </div>
-                  <div class="card-footer" style="padding: 0px">
-                     <figcaption class="card-caption form-inline"
-                        style="left: 0px; right: 0px;">
-                        <b class="pop-rank pull-left"
-                           style="line-height: 41px; font-size: 30px; padding: 7px 12px 6px;">1st</b>
-                        <div class="photographer"
-                           style="padding-top: 7px; padding-bottom: 7px; line-height: 20px; font-size: 14px;">
-                           <!-- react-text: 1729 -->
-                           Inspired by
-                           <!-- /react-text -->
-                           <b>StyleBlending</b>
-                        </div>
-                     </figcaption>
-                  </div>
-               </div>
-            </div> 
-         </div>
---%>
-   <%--       <div class="col-3">
-            <div class="component">
-               <div class="card" style="overflow: hidden;">
-
-                  <div class="card-body" style="height: 400px; padding: 0px;">
-                     <img class="card-img"
-                        src="${pageContext.request.contextPath}/resources/assets/img/dog-2.jpg"
-                        alt="dog" style="height: 100%;">
-                  </div>
-                  <div class="card-footer" style="padding: 0px">
-                     <figcaption class="card-caption form-inline"
-                        style="left: 0px; right: 0px;">
-                        <b class="pop-rank pull-left"
-                           style="line-height: 41px; font-size: 30px; padding: 7px 12px 6px;">2nd</b>
-                        <div class="photographer"
-                           style="padding-top: 7px; padding-bottom: 7px; line-height: 20px; font-size: 14px;">
-                           <!-- react-text: 1729 -->
-                           Inspired by
-                           <!-- /react-text -->
-                           <b>StyleBlending</b>
-                        </div>
-                     </figcaption>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div class="col-3">
-            <div class="component">
-               <div class="card" style="overflow: hidden;">
-
-                  <div class="card-body" style="height: 400px; padding: 0px;">
-                     <img class="card-img"
-                        src="${pageContext.request.contextPath}/resources/assets/img/dog-2.jpg"
-                        alt="dog" style="height: 100%;">
-                  </div>
-                  <div class="card-footer" style="padding: 0px">
-                     <figcaption class="card-caption form-inline"
-                        style="left: 0px; right: 0px;">
-                        <b class="pop-rank pull-left"
-                           style="line-height: 41px; font-size: 30px; padding: 7px 12px 6px;">3rd</b>
-                        <div class="photographer"
-                           style="padding-top: 7px; padding-bottom: 7px; line-height: 20px; font-size: 14px;">
-                           <!-- react-text: 1729 -->
-                           Inspired by
-                           <!-- /react-text -->
-                           <b>StyleBlending</b>
-                        </div>
-                     </figcaption>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div class="col-3">
-            <div class="component">
-               <div class="card" style="overflow: hidden;">
-
-                  <div class="card-body" style="height: 400px; padding: 0px;">
-                     <img class="card-img"
-                        src="${pageContext.request.contextPath}/resources/assets/img/dog-2.jpg"
-                        alt="dog" style="height: 100%;">
-                  </div>
-                  <div class="card-footer" style="padding: 0px">
-                     <figcaption class="card-caption form-inline"
-                        style="left: 0px; right: 0px;">
-                        <b class="pop-rank pull-left"
-                           style="line-height: 41px; font-size: 30px; padding: 7px 12px 6px;">4th</b>
-                        <div class="photographer"
-                           style="padding-top: 7px; padding-bottom: 7px; line-height: 20px; font-size: 14px;">
-                           <!-- react-text: 1729 -->
-                           Inspired by
-                           <!-- /react-text -->
-                           <b>StyleBlending</b>
-                        </div>
-                     </figcaption>
-                  </div>
-               </div>
-            </div>
-         </div>
- --%>
- 
- 
- 
-       <div class="row mt-3" id="inputWrap">
-       <%-- 
-             <div class="col-md-4">
-               <div class="component">
-                  <div class="card" style="overflow: hidden;">
-                     <div class="form-inline"
-                        style="width: 100%; height: 80px; margin: 0px; color: black;">
-
-                        <div class="col-2"
-                           style="width: 30%; height: 50px; padding: 0px;">
-                           <img
-                              src="${pageContext.request.contextPath}/resources/assets/img/배너일.png"
-                              alt="" style="width: 80px; height: 50px; margin-left: 20px;" />
-                        </div>
-                        <div class="col-6"
-                           style="width: 50%; height: 50px; margin-left: 30px;">
-                           <span style="margin-bottom: 0px; margin-top: 23px;">kimsh940607<br>30주전
-                           </span>
-
-                        </div>
-                        <div class="col-3"
-                           style="width: 20%; height: 50px; margin-top: 5px; padding-right: 10px; padding-left: 10px; padding-bottom: 5px;">
-                           <button class="btn btn-dark">
-                              <span style="font-size: 1.2em">+Fan</span>
-                           </button>
-
-                        </div>
-                     </div>
-
-                     <div class="card-body" style="height: 400px; padding: 0px;">
-                        <a href="pInfo.do?id=1"
-                           style="border-bottom: 0px !important; text-decoration: none black;">
-                           <img class="card-img"
-                           src="${pageContext.request.contextPath}/resources/assets/img/dog-2.jpg"
-                           alt="dog" style="height: 100%;">
-                        </a>
-                     </div>
-                     <div class="card-footer row">
-                        <div class="col-3 form-inline">
-                           <a href=""><i class="far fa-heart"
-                              style="color: black; font-size: 30px;"></i> </a>
-                           <p style="margin: 0px;">30</p>
-                        </div>
-                        <div class="col-3 form-inline" style="padding: 0px;">
-                           <a href=""><i class="far fa-comment" aria-hidden="true"
-                              style="color: black; font-size: 30px;"></i></a>
-                           <p style="margin: 0px;">30</p>
-                        </div>
-
-
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <div class="col-md-4">
-               <div class="component">
-                  <div class="card" style="overflow: hidden;">
-                     <div class="form-inline"
-                        style="width: 100%; height: 80px; margin: 0px; color: black;">
-
-                        <div class="col-2"
-                           style="width: 30%; height: 50px; padding: 0px;">
-                           <img
-                              src="${pageContext.request.contextPath}/resources/assets/img/배너일.png"
-                              alt="" style="width: 80px; height: 50px; margin-left: 20px;" />
-                        </div>
-                        <div class="col-6"
-                           style="width: 50%; height: 50px; margin-left: 30px;">
-                           <span style="margin-bottom: 0px; margin-top: 23px;">kimsh940607<br>30주전
-                           </span>
-
-                        </div>
-                        <div class="col-3"
-                           style="width: 20%; height: 50px; margin-top: 5px; padding-right: 10px; padding-left: 10px; padding-bottom: 5px;">
-                           <button class="btn btn-dark">
-                              <span style="font-size: 1.2em">+Fan</span>
-                           </button>
-
-                        </div>
-                     </div>
-
-                     <div class="card-body" style="height: 400px; padding: 0px;">
-                        <a href="pInfo.do?id=1"
-                           style="border-bottom: 0px !important; text-decoration: none black;">
-                           <img class="card-img"
-                           src="${pageContext.request.contextPath}/resources/assets/img/dog-2.jpg"
-                           alt="dog" style="height: 100%;">
-                        </a>
-                     </div>
-                     <div class="card-footer row">
-                        <div class="col-3 form-inline">
-                           <a href=""><i class="far fa-heart"
-                              style="color: black; font-size: 30px;"></i> </a>
-                           <p style="margin: 0px;">30</p>
-                        </div>
-                        <div class="col-3 form-inline" style="padding: 0px;">
-                           <a href=""><i class="far fa-comment" aria-hidden="true"
-                              style="color: black; font-size: 30px;"></i></a>
-                           <p style="margin: 0px;">30</p>
-                        </div>
-
-
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <div class="col-md-4">
-               <div class="component">
-                  <div class="card" style="overflow: hidden;">
-                     <div class="form-inline"
-                        style="width: 100%; height: 80px; margin: 0px; color: black;">
-
-                        <div class="col-2"
-                           style="width: 30%; height: 50px; padding: 0px;">
-                           <img
-                              src="${pageContext.request.contextPath}/resources/assets/img/배너일.png"
-                              alt="" style="width: 80px; height: 50px; margin-left: 20px;" />
-                        </div>
-                        <div class="col-6"
-                           style="width: 50%; height: 50px; margin-left: 30px;">
-                           <span style="margin-bottom: 0px; margin-top: 23px;">kimsh940607<br>30주전
-                           </span>
-
-                        </div>
-                        <div class="col-3"
-                           style="width: 20%; height: 50px; margin-top: 5px; padding-right: 10px; padding-left: 10px; padding-bottom: 5px;">
-                           <button class="btn btn-dark">
-                              <span style="font-size: 1.2em">+Fan</span>
-                           </button>
-
-                        </div>
-                     </div>
-
-                     <div class="card-body" style="height: 400px; padding: 0px;">
-                        <a href="pInfo.do?id=1"
-                           style="border-bottom: 0px !important; text-decoration: none black;">
-                           <img class="card-img"
-                           src="${pageContext.request.contextPath}/resources/assets/img/dog-2.jpg"
-                           alt="dog" style="height: 100%;">
-                        </a>
-                     </div>
-                     <div class="card-footer row">
-                        <div class="col-3 form-inline">
-                           <a href=""><i class="far fa-heart"
-                              style="color: black; font-size: 30px;"></i> </a>
-                           <p style="margin: 0px;">30</p>
-                        </div>
-                        <div class="col-3 form-inline" style="padding: 0px;">
-                           <a href=""><i class="far fa-comment" aria-hidden="true"
-                              style="color: black; font-size: 30px;"></i></a>
-                           <p style="margin: 0px;">30</p>
-                        </div>
-
-
-                     </div>
-                  </div>
-               </div>
-            </div>
-         <div class="row mt-3">
-            <div class="col-md-4">
-               <div class="component">
-                  <div class="card">
-                     <a href="pInfo.do">
-                        <div class="card-header">
-                           <img class="card-img"
-                              src="${pageContext.request.contextPath}/resources/assets/img/dog-1.jpg"
-                              alt="dog">
-                        </div>
-                     </a>
-                     <div class="card-body">
-                        <span class="badge badge-success mb-2">Pets</span>
-                        <h4 class="card-title">How to look after and care for a dog</h4>
-                        <p class="card-text">Owning a dog is great fun and immensely
-                           rewarding. But, dogs have complex needs and each dog is unique.
-                        </p>
-                     </div>
-                     <div class="card-footer">
-                        <a href="#a" class="btn btn-primary">Read More</a>
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <div class="col-md-4">
-               <div class="component">
-                  <div class="card">
-                     <div class="card-header">
-                        <img class="card-img"
-                           src="${pageContext.request.contextPath}/resources/assets/img/dog-2.jpg"
-                           alt="dog">
-                     </div>
-                     <div class="card-body">
-                        <span class="badge badge-warning mb-2">Vacation</span>
-                        <h4 class="card-title">Woof! How to find dog-friendly
-                           beaches in Spain</h4>
-                        <p class="card-text">Considering Spain's abundant coastline,
-                           beaches that do allow you to take your pooch to feel sand...</p>
-                     </div>
-                     <div class="card-footer">
-                        <a href="#a" class="btn btn-outline-primary">Read More</a>
-                     </div>
-                  </div>
-               </div>
-            </div>
-
-            <div class="col-md-4">
-               <div class="component">
-                  <div class="card">
-                     <div class="card-header">
-                        <img class="card-img"
-                           src="${pageContext.request.contextPath}/resources/assets/img/dog-3.jpg"
-                           alt="dog">
-                     </div>
-                     <div class="card-body">
-                        <span class="badge badge-secondary mb-2">Hobby</span>
-                        <h4 class="card-title">Getting Started With Your Puppy</h4>
-                        <p class="card-text">This new addition to your family will
-                           require lots of love, attention and plenty of supplies.</p>
-                     </div>
-                     <div class="card-footer">
-                        <a href="#a" class="btn btn-outline-primary">Read More</a>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div class="row mt-3" id="ttt">
-            <div class="col-md-4">
-               <div class="component">
-                  <div class="card">
-                     <a href="pInfo">
-                        <div class="card-header">
-                           <img class="card-img"
-                              src="${pageContext.request.contextPath}/resources/assets/img/dog-1.jpg"
-                              alt="dog">
-                        </div>
-                     </a>
-                     <div class="card-body">
-                        <span class="badge badge-success mb-2">Pets</span>
-                        <h4 class="card-title">How to look after and care for a dog</h4>
-                        <p class="card-text">Owning a dog is great fun and immensely
-                           rewarding. But, dogs have complex needs and each dog is unique.
-                        </p>
-                     </div>
-                     <div class="card-footer">
-                        <a href="#a" class="btn btn-primary">Read More</a>
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <div class="col-md-4">
-               <div class="component">
-                  <div class="card">
-                     <div class="card-header">
-                        <img class="card-img"
-                           src="${pageContext.request.contextPath}/resources/assets/img/dog-2.jpg"
-                           alt="dog">
-                     </div>
-                     <div class="card-body">
-                        <span class="badge badge-warning mb-2">Vacation</span>
-                        <h4 class="card-title">Woof! How to find dog-friendly
-                           beaches in Spain</h4>
-                        <p class="card-text">Considering Spain's abundant coastline,
-                           beaches that do allow you to take your pooch to feel sand...</p>
-                     </div>
-                     <div class="card-footer">
-                        <a href="#a" class="btn btn-outline-primary">Read More</a>
-                     </div>
-                  </div>
-               </div>
-            </div>
-
-            <div class="col-md-4" id="ddd">
-               <div class="component">
-                  <div class="card">
-                     <div class="card-header">
-                        <img class="card-img"
-                           src="${pageContext.request.contextPath}/resources/assets/img/dog-3.jpg"
-                           alt="dog">
-                     </div>
-                     <div class="card-body">
-                        <span class="badge badge-secondary mb-2">Hobby</span>
-                        <h4 class="card-title">Getting Started With Your Puppy</h4>
-                        <p class="card-text">This new addition to your family will
-                           require lots of love, attention and plenty of supplies.</p>
-                     </div>
-                     <div class="card-footer">
-                        <a href="#a" class="btn btn-outline-primary">Read More</a>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
- --%>
-      </div> 
-   </div>
-</div>
+		<div class="row" style="margin-top: 1rem !important" id="fourWrap">
+			<div class="row mt-3" id="inputWrap">
+			</div>
+		</div>
+	</div>
    <script>
       var page = 2;
       var flag = 0;
@@ -1252,7 +855,7 @@ a{
                console.log($(window).height());
 
                
-               var height = $(window).height() - document.body.clientHeight;
+               var height = $(window).height() - 561.333251953125;
                if ($(window).scrollTop() == height&& sel == null && $(document).height() != 5073){
                   
                   console.log(++page);
@@ -1293,13 +896,13 @@ a{
                                 "</a>"+
                                 "</div>"+
                                 "<div class='card-footer row'>"+
-                                "<div class='col-3 form-inline'>"+
+                                "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                                 "<a onclick=unLike(); style='cursor:pointer;'><i class='far fa-heart'style='color: gray; font-size: 30px;'></i></a>"+
-                                "<p style='margin: 0px;margin-left:5px;'>"+value.likeCount+"</p>"+
+                                "<p style='margin: 0px;margin-left:9px;'>"+value.likeCount+"</p>"+
                                 "</div>"+
                                 "<div class='col-3 form-inline' style='padding: 0px;'>"+
                                 "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                                "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
+                                "<p style='margin: 0px;margin-left:9px;'>"+value.replyCount+"</p>"+
                                 "</div>"+
                                 "</div>"+
                                 "</div>"+
@@ -1332,19 +935,19 @@ a{
                                          "</a>"+
                                          "</div>"+
                                          "<div class='card-footer row'>"+
-                                         "<div class='col-3 form-inline'>"+
+                                         "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                                          "<a onclick='like(this);'><i class='far fa-heart'style='color: gray; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
-                                         "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
+                                         "<p style='margin: 0px; margin-left:9px;'value="+value.pno+">"+value.likeCount+"</p>"+
                                          "</div>"+
                                          "<div class='col-3 form-inline' style='padding: 0px;'>"+
                                          "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                                         "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
+                                         "<p style='margin: 0px;margin-left:9px;'>"+value.replyCount+"</p>"+
                                          "</div>"+
                                          "</div>"+
                                          "</div>"+
                                          "</div>"+
                                          "</div>";
-                                         
+                                    	     
                                     }else if((value.loginLike == 1 && value.fanCheck == 0) && ("${loginUser.mno}" == value.mno)){
                                     
                                     	$input = "<div class='col-md-4 mt-3'>"+
@@ -1371,13 +974,13 @@ a{
                                         "</a>"+
                                         "</div>"+
                                         "<div class='card-footer row'>"+
-                                        "<div class='col-3 form-inline'>"+
+                                        "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                                         "<a onclick='like(this);'><i class='fa fa-heart'style='color: red; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
-                                        "<p style='margin: 0px;margin-left:5px;'>"+value.likeCount+"</p>"+
+                                        "<p style='margin: 0px;margin-left:9px;'>"+value.likeCount+"</p>"+
                                         "</div>"+
                                         "<div class='col-3 form-inline' style='padding: 0px;'>"+
                                         "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                                        "<p style='margin-left:5px;margin: 0px;'>"+value.replyCount+"</p>"+
+                                        "<p style='margin-left:9px;margin: 0px;'>"+value.replyCount+"</p>"+
                                         "</div>"+
                                         "</div>"+
                                         "</div>"+
@@ -1412,13 +1015,13 @@ a{
                                    "</a>"+
                                    "</div>"+
                                    "<div class='card-footer row'>"+
-                                   "<div class='col-3 form-inline'>"+
+                                   "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                                    "<a onclick='like(this);'><i class='far fa-heart'style='color: gray; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
-                                   "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
+                                   "<p style='margin: 0px; margin-left:9px;'value="+value.pno+">"+value.likeCount+"</p>"+
                                    "</div>"+
                                    "<div class='col-3 form-inline' style='padding: 0px;'>"+
                                    "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                                   "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
+                                   "<p style='margin: 0px;margin-left:9px;'>"+value.replyCount+"</p>"+
                                    "</div>"+
                                    "</div>"+
                                    "</div>"+
@@ -1451,13 +1054,13 @@ a{
                                    "</a>"+
                                    "</div>"+
                                    "<div class='card-footer row'>"+
-                                   "<div class='col-3 form-inline'>"+
+                                   "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                                    "<a onclick='like(this);'><i class='fa fa-heart'style='color: red; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
-                                   "<p style='margin: 0px;margin-left:5px;'>"+value.likeCount+"</p>"+
+                                   "<p style='margin: 0px;margin-left:9px;'>"+value.likeCount+"</p>"+
                                    "</div>"+
                                    "<div class='col-3 form-inline' style='padding: 0px;'>"+
                                    "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                                   "<p style='margin-left:5px;margin: 0px;'>"+value.replyCount+"</p>"+
+                                   "<p style='margin-left:9px;margin: 0px;'>"+value.replyCount+"</p>"+
                                    "</div>"+
                                    "</div>"+
                                    "</div>"+
@@ -1489,13 +1092,13 @@ a{
                                     "</a>"+
                                     "</div>"+
                                     "<div class='card-footer row'>"+
-                                    "<div class='col-3 form-inline'>"+
+                                    "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                                     "<a onclick='like(this);'><i class='far fa-heart'style='color: gray; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
-                                    "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
+                                    "<p style='margin: 0px; margin-left:9px;'value="+value.pno+">"+value.likeCount+"</p>"+
                                     "</div>"+
                                     "<div class='col-3 form-inline' style='padding: 0px;'>"+
                                     "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                                    "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
+                                    "<p style='margin: 0px;margin-left:9px;'>"+value.replyCount+"</p>"+
                                     "</div>"+
                                     "</div>"+
                                     "</div>"+
@@ -1527,13 +1130,13 @@ a{
                                     "</a>"+
                                     "</div>"+
                                     "<div class='card-footer row'>"+
-                                    "<div class='col-3 form-inline'>"+
+                                    "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                                     "<a onclick='like(this);'><i class='fa fa-heart'style='color: red; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
-                                    "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
+                                    "<p style='margin: 0px; margin-left:9px;'value="+value.pno+">"+value.likeCount+"</p>"+
                                     "</div>"+
                                     "<div class='col-3 form-inline' style='padding: 0px;'>"+
                                     "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                                    "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
+                                    "<p style='margin: 0px;margin-left:9px;'>"+value.replyCount+"</p>"+
                                     "</div>"+
                                     "</div>"+
                                     "</div>"+
@@ -1609,15 +1212,8 @@ a{
          var category = $("#category").val();
          console.log(sel);
          console.log(selectC);
-         console.log(category);
-         if(sel == '남자'){
-        	 sel = 'M'
-         }else{
-        	 sel = 'W'
-         }
-         console.log(sel);
-         console.log(selectC);
-         console.log(category);
+
+
          	
          var $inputWrap = $("#inputWrap");
          
@@ -1631,7 +1227,16 @@ a{
                $("#loading").remove();
                $("#inputWrap").children().remove();
                var $input
-
+			   if(data.length == 0){
+				   if(sel == 'M'){
+					   sel='남자';
+				   }else if(sel == 'W'){
+					   sel='여자';
+				   }
+				   
+				   $inputWrap.append("<div class='col-md-12 mt-5' style='margin-left:300px;'><h5>"+sel+" | "+selectC.toUpperCase()+" | "+category+" 의 검색결과가 존재하지 않습니다.</h5></div>")
+			   }
+               
                if(data.length == 1){
             	  console.log(data);
                   var loginUser = "${loginUser.mno}";
@@ -1661,13 +1266,13 @@ a{
                      "</a>"+
                      "</div>"+
                      "<div class='card-footer row'>"+
-                     "<div class='col-3 form-inline'>"+
+                     "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                      "<a onclick=unLike(); style='cursor:pointer;'><i class='far fa-heart'style='color: gray; font-size: 30px;'></i></a>"+
-                     "<p style='margin: 0px;margin-left:5px;'>"+data[0].likeCount+"</p>"+	
+                     "<p style='margin: 0px;margin-left:9px;'>"+data[0].likeCount+"</p>"+	
                      "</div>"+
                      "<div class='col-3 form-inline' style='padding: 0px;'>"+
                      "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                     "<p style='margin: 0px;margin-left:5px;'>"+data[0].replyCount+"</p>"+
+                     "<p style='margin: 0px;margin-left:9px;'>"+data[0].replyCount+"</p>"+
                      "</div>"+
                      "</div>"+
                      "</div>"+
@@ -1700,13 +1305,13 @@ a{
                              "</a>"+
                              "</div>"+
                              "<div class='card-footer row'>"+
-                             "<div class='col-3 form-inline'>"+
-                             "<a onclick='like(this);'><i class='far fa-heart'style='color: gray; font-size: 30px;'></i><input type='hidden' value="+data[0].pno+" id='hiddenpno'/><input type='hidden' value="+data[0].mno+" id='hiddenmno'/></a>"+
-                             "<p style='margin: 0px; margin-left:5px;'value="+data[0].pno+">"+data[0].likeCount+"</p>"+
+                             "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
+                             "<a onclick='filterLike(this);'><i class='far fa-heart'style='color: gray; font-size: 30px;'></i><input type='hidden' value="+data[0].pno+" id='hiddenpno'/><input type='hidden' value="+data[0].mno+" id='hiddenmno'/></a>"+
+                             "<p style='margin: 0px; margin-left:9px;'value="+data[0].pno+">"+data[0].likeCount+"</p>"+
                              "</div>"+
                              "<div class='col-3 form-inline' style='padding: 0px;'>"+
                              "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                             "<p style='margin: 0px;margin-left:5px;'>"+data[0].replyCount+"</p>"+
+                             "<p style='margin: 0px;margin-left:9px;'>"+data[0].replyCount+"</p>"+
                               "</div>"+
                              "</div>"+
                              "</div>"+
@@ -1739,13 +1344,13 @@ a{
                              "</a>"+
                             "</div>"+
                             "<div class='card-footer row'>"+
-                            "<div class='col-3 form-inline'>"+
-                            "<a onclick='like(this);'><i class='fa fa-heart'style='color: red; font-size: 30px;'></i><input type='hidden' value="+data[0].pno+" id='hiddenpno'/><input type='hidden' value="+data[0].mno+" id='hiddenmno'/></a>"+
-                            "<p style='margin: 0px; margin-left:5px;'value="+data[0].pno+">"+data[0].likeCount+"</p>"+
+                            "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
+                            "<a onclick='filterLike(this);'><i class='fa fa-heart'style='color: red; font-size: 30px;'></i><input type='hidden' value="+data[0].pno+" id='hiddenpno'/><input type='hidden' value="+data[0].mno+" id='hiddenmno'/></a>"+
+                            "<p style='margin: 0px; margin-left:9px;'value="+data[0].pno+">"+data[0].likeCount+"</p>"+
                             "</div>"+
                             "<div class='col-3 form-inline' style='padding: 0px;'>"+
                             "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                            "<p style='margin: 0px;margin-left:5px;'>"+data[0].replyCount+"</p>"+
+                            "<p style='margin: 0px;margin-left:9px;'>"+data[0].replyCount+"</p>"+
                             "</div>"+
                             "</div>"+
                             "</div>"+
@@ -1780,13 +1385,13 @@ a{
                         "</a>"+
                         "</div>"+
                         "<div class='card-footer row'>"+
-                        "<div class='col-3 form-inline'>"+
+                        "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                         "<a onclick='filterLike(this);'><i class='far fa-heart'style='color: gray; font-size: 30px;'></i><input type='hidden' value="+data[0].pno+" id='hiddenpno'/><input type='hidden' value="+data[0].mno+" id='hiddenmno'/></a>"+
-                        "<p style='margin: 0px; margin-left:5px;'value="+data[0].pno+">"+data[0].likeCount+"</p>"+
+                        "<p style='margin: 0px; margin-left:9px;'value="+data[0].pno+">"+data[0].likeCount+"</p>"+
                         "</div>"+
                         "<div class='col-3 form-inline' style='padding: 0px;'>"+
                         "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                        "<p style='margin: 0px;margin-left:5px;'>"+data[0].replyCount+"</p>"+
+                        "<p style='margin: 0px;margin-left:9px;'>"+data[0].replyCount+"</p>"+
                         "</div>"+
                         "</div>"+
                         "</div>"+
@@ -1819,13 +1424,13 @@ a{
                         "</a>"+
                         "</div>"+
                         "<div class='card-footer row'>"+
-                        "<div class='col-3 form-inline'>"+
+                        "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                         "<a onclick='filterLike(this);'><i class='fa fa-heart'style='color: red; font-size: 30px;'></i><input type='hidden' value="+data[0].pno+" id='hiddenpno'/><input type='hidden' value="+data[0].mno+" id='hiddenmno'/></a>"+
-                        "<p style='margin: 0px; margin-left:5px;'value="+data[0].pno+">"+data[0].likeCount+"</p>"+
+                        "<p style='margin: 0px; margin-left:9px;'value="+data[0].pno+">"+data[0].likeCount+"</p>"+
                         "</div>"+
                         "<div class='col-3 form-inline' style='padding: 0px;'>"+
                         "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                        "<p style='margin: 0px;margin-left:5px;'>"+data[0].replyCount+"</p>"+
+                        "<p style='margin: 0px;margin-left:9px;'>"+data[0].replyCount+"</p>"+
                         "</div>"+
                         "</div>"+
                         "</div>"+
@@ -1857,13 +1462,13 @@ a{
                          "</a>"+
                          "</div>"+
                          "<div class='card-footer row'>"+
-                         "<div class='col-3 form-inline'>"+
+                         "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                          "<a onclick='filterLike(this);'><i class='far fa-heart'style='color: gray; font-size: 30px;'></i><input type='hidden' value="+data[0].pno+" id='hiddenpno'/><input type='hidden' value="+data[0].mno+" id='hiddenmno'/></a>"+
-                         "<p style='margin: 0px; margin-left:5px;'value="+data[0].pno+">"+data[0].likeCount+"</p>"+
+                         "<p style='margin: 0px; margin-left:9px;'value="+data[0].pno+">"+data[0].likeCount+"</p>"+
                          "</div>"+
                          "<div class='col-3 form-inline' style='padding: 0px;'>"+
                          "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                         "<p style='margin: 0px;margin-left:5px;'>"+data[0].replyCount+"</p>"+
+                         "<p style='margin: 0px;margin-left:9px;'>"+data[0].replyCount+"</p>"+
                          "</div>"+
                          "</div>"+
                          "</div>"+
@@ -1895,13 +1500,13 @@ a{
                          "</a>"+
                          "</div>"+
                          "<div class='card-footer row'>"+
-                         "<div class='col-3 form-inline'>"+
+                         "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                          "<a onclick='filterLike(this);'><i class='fa fa-heart'style='color: red; font-size: 30px;'></i><input type='hidden' value="+data[0].pno+" id='hiddenpno'/><input type='hidden' value="+data[0].mno+" id='hiddenmno'/></a>"+
-                         "<p style='margin: 0px; margin-left:5px;'value="+data[0].pno+">"+data[0].likeCount+"</p>"+
+                         "<p style='margin: 0px; margin-left:9px;'value="+data[0].pno+">"+data[0].likeCount+"</p>"+
                          "</div>"+
                          "<div class='col-3 form-inline' style='padding: 0px;'>"+
                          "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                         "<p style='margin: 0px;margin-left:5px;'>"+data[0].replyCount+"</p>"+
+                         "<p style='margin: 0px;margin-left:9px;'>"+data[0].replyCount+"</p>"+
                          "</div>"+
                          "</div>"+
                          "</div>"+
@@ -1942,13 +1547,13 @@ a{
                          "</a>"+
                          "</div>"+
                          "<div class='card-footer row'>"+
-                         "<div class='col-3 form-inline'>"+
+                         "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                          "<a onclick=unLike(); style='cursor:pointer;'><i class='far fa-heart'style='color: gray; font-size: 30px;'></i></a>"+
-                         "<p style='margin: 0px;margin-left:5px;'>"+value.likeCount+"</p>"+
+                         "<p style='margin: 0px;margin-left:9px;'>"+value.likeCount+"</p>"+
                          "</div>"+
                          "<div class='col-3 form-inline' style='padding: 0px;'>"+
                          "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                         "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
+                         "<p style='margin: 0px;margin-left:9px;'>"+value.replyCount+"</p>"+
                          "</div>"+
                          "</div>"+
                          "</div>"+
@@ -1983,13 +1588,13 @@ a{
                          "</a>"+
                          "</div>"+
                          "<div class='card-footer row'>"+
-                         "<div class='col-3 form-inline'>"+
+                         "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                          "<a onclick='filterLike(this);'><i class='far fa-heart'style='color: gray; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
-                         "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
+                         "<p style='margin: 0px; margin-left:9px;'value="+value.pno+">"+value.likeCount+"</p>"+
                          "</div>"+
                          "<div class='col-3 form-inline' style='padding: 0px;'>"+
                          "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                         "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
+                         "<p style='margin: 0px;margin-left:9px;'>"+value.replyCount+"</p>"+
                          "</div>"+
                          "</div>"+
                          "</div>"+
@@ -2022,13 +1627,13 @@ a{
                         "</a>"+
                         "</div>"+
                         "<div class='card-footer row'>"+
-                        "<div class='col-3 form-inline'>"+
+                        "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                         "<a onclick='filterLike(this);'><i class='fa fa-heart'style='color: red; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
-                        "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
+                        "<p style='margin: 0px; margin-left:9px;'value="+value.pno+">"+value.likeCount+"</p>"+
                         "</div>"+
                         "<div class='col-3 form-inline' style='padding: 0px;'>"+
                         "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                        "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
+                        "<p style='margin: 0px;margin-left:9px;'>"+value.replyCount+"</p>"+
                         "</div>"+
                         "</div>"+
                         "</div>"+
@@ -2061,13 +1666,13 @@ a{
                             "</a>"+
                             "</div>"+
                             "<div class='card-footer row'>"+
-                            "<div class='col-3 form-inline'>"+
+                            "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                             "<a onclick='filterLike(this);'><i class='far fa-heart'style='color: gray; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
-                            "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
+                            "<p style='margin: 0px; margin-left:9px;'value="+value.pno+">"+value.likeCount+"</p>"+
                             "</div>"+
                             "<div class='col-3 form-inline' style='padding: 0px;'>"+
                             "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                            "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
+                            "<p style='margin: 0px;margin-left:9px;'>"+value.replyCount+"</p>"+
                             "</div>"+
                             "</div>"+
                             "</div>"+
@@ -2100,13 +1705,13 @@ a{
                             "</a>"+
                             "</div>"+
                             "<div class='card-footer row'>"+
-                            "<div class='col-3 form-inline'>"+
+                            "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                             "<a onclick='filterLike(this);'><i class='fa fa-heart'style='color: red; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
-                            "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
+                            "<p style='margin: 0px; margin-left:9px;'value="+value.pno+">"+value.likeCount+"</p>"+
                             "</div>"+
                             "<div class='col-3 form-inline' style='padding: 0px;'>"+
                             "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                            "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
+                            "<p style='margin: 0px;margin-left:9px;'>"+value.replyCount+"</p>"+
                             "</div>"+
                             "</div>"+
                             "</div>"+
@@ -2138,13 +1743,13 @@ a{
                              "</a>"+
                              "</div>"+
                              "<div class='card-footer row'>"+
-                             "<div class='col-3 form-inline'>"+
+                             "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                              "<a onclick='filterLike(this);'><i class='far fa-heart'style='color: gray; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
-                             "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
+                             "<p style='margin: 0px; margin-left:9px;'value="+value.pno+">"+value.likeCount+"</p>"+
                              "</div>"+
                              "<div class='col-3 form-inline' style='padding: 0px;'>"+
                              "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                             "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
+                             "<p style='margin: 0px;margin-left:9px;'>"+value.replyCount+"</p>"+
                              "</div>"+
                              "</div>"+
                              "</div>"+
@@ -2176,13 +1781,13 @@ a{
                              "</a>"+
                              "</div>"+
                              "<div class='card-footer row'>"+
-                             "<div class='col-3 form-inline'>"+
+                             "<div class='col-3 form-inline'style='padding:0px; margin-left:10px;'>"+
                              "<a onclick='filterLike(this);'><i class='fa fa-heart'style='color: red; font-size: 30px;'></i><input type='hidden' value="+value.pno+" id='hiddenpno'/><input type='hidden' value="+value.mno+" id='hiddenmno'/></a>"+
-                             "<p style='margin: 0px; margin-left:5px;'value="+value.pno+">"+value.likeCount+"</p>"+
+                             "<p style='margin: 0px; margin-left:9px;'value="+value.pno+">"+value.likeCount+"</p>"+
                              "</div>"+
                              "<div class='col-3 form-inline' style='padding: 0px;'>"+
                              "<i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i>"+
-                             "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
+                             "<p style='margin: 0px;margin-left:9px;'>"+value.replyCount+"</p>"+
                              "</div>"+
                              "</div>"+
                              "</div>"+
@@ -2206,178 +1811,7 @@ a{
          });
             
       }
-         /* 
-                  console.log("데이터 한개임 !!!");
-                  if(data[0].loginLike == 0){
-                     $input = "<div class='col-md-4 mt-3'>"+
-                      "<div class='component' style='width:360px; height:80px; margin-bottom:500px;'>"+ 
-                      "<div class='card' style='overflow:hidden;'>"+
-                      "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
-                      "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
-                      "<img src='${pageContext.request.contextPath}/resources/assets/img/배너일.png' style='width: 80px; height: 50px; margin-left: 20px;' />" +
-                      "</div>"+
-                      "<div class='col-6' style='width: 50%; height: 50px; margin-left: 30px;'>"+
-                      "<span style='margin-bottom: 0px; margin-top: 23px;'>"+data[0].nickName+"<br>"+data[0].enrollDate+"</span>"+
-                      "</div>"+
-                      "<div class='col-3'style='width: 20%; height: 50px; margin-top: 5px; padding-right: 10px; padding-left: 10px; padding-bottom: 5px;'>"+
-                      "<button class='btn btn-light'>"+
-                       "<span style='font-size: 1.2em'>+Fan</span>"+
-                      "</button>"+
-                      "</div>"+
-                      "</div>"+
-                      "<div class='card-body' style='height: 400px; padding: 0px;'>"+
-                      "<a href='pInfo.do?id=1' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                      "<img class='card-img' src="+data[0].imgPath+"/"+data[0].renameImg+" alt='dog' style='height: 100%;'>"+
-                      "</a>"+
-                      "</div>"+
-                      "<div class='card-footer row'>"+
-                      "<div class='col-3 form-inline'>"+
-                      "<a href=''><i class='far fa-heart'style='color: gray; font-size: 30px;'></i> </a>"+
-                      "<p style='margin: 0px;margin-left:5px;'>"+data[0].likeCount+"</p>"+
-                      "</div>"+
-                      "<div class='col-3 form-inline' style='padding: 0px;'>"+
-                      "<a href=''><i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i></a>"+
-                      "<p style='margin: 0px;margin-left:5px;'>"+data[0].replyCount+"</p>"+
-                      "</div>"+
-                      "</div>"+
-                      "</div>"+
-                      "</div>"+
-                      "</div>"; 
-                     
-                  }else{
-                  
-                  
-                  $input = "<div class='col-md-4 mt-3'>"+
-                            "<div class='component'>"+ 
-                            "<div class='card' style='overflow:hidden;'>"+
-                            "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
-                            "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
-                            "<img src='${pageContext.request.contextPath}/resources/assets/img/배너일.png' style='width: 80px; height: 50px; margin-left: 20px;' />" +
-                            "</div>"+
-                            "<div class='col-6' style='width: 50%; height: 50px; margin-left: 30px;'>"+
-                            "<span style='margin-bottom: 0px; margin-top: 23px;'>"+data[0].nickName+"<br>"+data[0].enrollDate+"</span>"+
-                            "</div>"+
-                            "<div class='col-3'style='width: 20%; height: 50px; margin-top: 5px; padding-right: 10px; padding-left: 10px; padding-bottom: 5px;'>"+
-                            "<button class='btn btn-light'>"+
-                             "<span style='font-size: 1.2em'>+Fan</span>"+
-                            "</button>"+
-                            "</div>"+
-                            "</div>"+
-                            "<div class='card-body' style='height: 400px; padding: 0px;'>"+
-                            "<a href='pInfo.do?id=1' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                            "<img class='card-img' src="+data[0].imgPath+"/"+data[0].renameImg+" alt='dog' style='height: 100%;'>"+
-                            "</a>"+
-                            "</div>"+
-                            "<div class='card-footer row'>"+
-                            "<div class='col-3 form-inline'>"+
-                            "<a href=''><i class='fa fa-heart'style='color: red; font-size: 30px;'></i> </a>"+
-                            "<p style='margin: 0px; margin-left:5px;'>"+data[0].likeCount+"</p>"+
-                            "</div>"+
-                            "<div class='col-3 form-inline' style='padding: 0px;'>"+
-                            "<a href=''><i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i></a>"+
-                            "<p style='margin-left:5px;margin: 0px;'>"+data[0].replyCount+"</p>"+
-                            "</div>"+
-                            "</div>"+
-                            "</div>"+
-                            "</div>"+
-                            "</div>";
-                  }
-                  $inputWrap.append($input);
-                  $("#fourWrap").append($inputWrap);
-                     
-               }else{
-               
-               $.each(data,function(index, value){
-                  if(value.loginLike == 0){
-                     $input = "<div class='col-md-4 mt-3'>"+
-                      "<div class='component'>"+ 
-                      "<div class='card' style='overflow:hidden;'>"+
-                      "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
-                      "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
-                      "<img src='${pageContext.request.contextPath}/resources/assets/img/배너일.png' style='width: 80px; height: 50px; margin-left: 20px;' />" +
-                      "</div>"+
-                      "<div class='col-6' style='width: 50%; height: 50px; margin-left: 30px;'>"+
-                      "<span style='margin-bottom: 0px; margin-top: 23px;'>"+value.nickName+"<br>"+value.enrollDate+"</span>"+
-                      "</div>"+
-                      "<div class='col-3'style='width: 20%; height: 50px; margin-top: 5px; padding-right: 10px; padding-left: 10px; padding-bottom: 5px;'>"+
-                      "<button class='btn btn-light'>"+
-                       "<span style='font-size: 1.2em'>+Fan</span>"+
-                      "</button>"+
-                      "</div>"+
-                      "</div>"+
-                      "<div class='card-body' style='height: 400px; padding: 0px;'>"+
-                      "<a href='pInfo.do?id=1' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                      "<img class='card-img' src="+value.imgPath+"/"+value.renameImg+" alt='dog' style='height: 100%;'>"+
-                      "</a>"+
-                      "</div>"+
-                      "<div class='card-footer row'>"+
-                      "<div class='col-3 form-inline'>"+
-                      "<a href=''><i class='far fa-heart'style='color: gray; font-size: 30px;'></i> </a>"+
-                      "<p style='margin: 0px;margin-left:5px;'>"+value.likeCount+"</p>"+
-                      "</div>"+
-                      "<div class='col-3 form-inline' style='padding: 0px;'>"+
-                      "<a href=''><i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i></a>"+
-                      "<p style='margin: 0px;margin-left:5px;'>"+value.replyCount+"</p>"+
-                      "</div>"+
-                      "</div>"+
-                      "</div>"+
-                      "</div>"+
-                      "</div>"; 
-                     
-                  }else{
-                  
-                  
-                  $input = "<div class='col-md-4 mt-3'>"+
-                            "<div class='component'>"+ 
-                            "<div class='card' style='overflow:hidden;'>"+
-                            "<div class='form-inline' style='width:100%; height:80px; margin:0px; color:black;'>" +
-                            "<div class='col-2'style='width: 30%; height: 50px; padding: 0px;'>"+
-                            "<img src='${pageContext.request.contextPath}/resources/assets/img/배너일.png' style='width: 80px; height: 50px; margin-left: 20px;' />" +
-                            "</div>"+
-                            "<div class='col-6' style='width: 50%; height: 50px; margin-left: 30px;'>"+
-                            "<span style='margin-bottom: 0px; margin-top: 23px;'>"+value.nickName+"<br>"+value.enrollDate+"</span>"+
-                            "</div>"+
-                            "<div class='col-3'style='width: 20%; height: 50px; margin-top: 5px; padding-right: 10px; padding-left: 10px; padding-bottom: 5px;'>"+
-                            "<button class='btn btn-light'>"+
-                             "<span style='font-size: 1.2em'>+Fan</span>"+
-                            "</button>"+
-                            "</div>"+
-                            "</div>"+
-                            "<div class='card-body' style='height: 400px; padding: 0px;'>"+
-                            "<a href='pInfo.do?id=1' style='border-bottom: 0px !important; text-decoration: none black;'>"+
-                            "<img class='card-img' src="+value.imgPath+"/"+value.renameImg+" alt='dog' style='height: 100%;'>"+
-                            "</a>"+
-                            "</div>"+
-                            "<div class='card-footer row'>"+
-                            "<div class='col-3 form-inline'>"+
-                            "<a href=''><i class='fa fa-heart'style='color: red; font-size: 30px;'></i> </a>"+
-                            "<p style='margin: 0px; margin-left:5px;'>"+value.likeCount+"</p>"+
-                            "</div>"+
-                            "<div class='col-3 form-inline' style='padding: 0px;'>"+
-                            "<a href=''><i class='far fa-comment' aria-hidden='true' style='color: gray; font-size: 30px;'></i></a>"+
-                            "<p style='margin-left:5px;margin: 0px;'>"+value.replyCount+"</p>"+
-                            "</div>"+
-                            "</div>"+
-                            "</div>"+
-                            "</div>"+
-                            "</div>";
-                     }
-                  
-                      $inputWrap.append($input);
-               });
-               $("#fourWrap").append($inputWrap);
-               }
-               man(category);
-               console.log("성공"); 
-               
-               
-            },
-            error : function() {
-               console.log("실패");
-            }
-         });
-      }
-       */
+
       function man(category) {
          
          console.log("안녕하e");
@@ -2575,7 +2009,6 @@ a{
           videoId: result,
           events: {
             'onReady': onPlayerReady
-            //,'onStateChange': onPlayerStateChange
           }
         }); 
               },
@@ -2585,14 +2018,11 @@ a{
             });
       }
 
-      // 4. The API will call this function when the video player is ready.
       function onPlayerReady(event) {
         event.target.playVideo();
       }
 
-      // 5. The API calls this function when the player's state changes.
-      //    The function indicates that when playing a video (state=1),
-      //    the player should play for six seconds and then stop.
+
       var done = false;
       function onPlayerStateChange(event) {
         if (event.data == YT.PlayerState.PLAYING && !done) {

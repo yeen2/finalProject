@@ -145,7 +145,7 @@
 					
 					<!-- 1. 게시물 작성자 정보-->
 					<div id="pWriter" class="pWriter" style="height: 70px; margin-bottom: 5px;">
-						<input type="hidden" value="${p.mno }">
+						<input type="hidden" value="${p.mno }" class="pmno">
 						<!-- 프로필 사진 -->
 						<div style="display: inline-block; width: 60px; height: 60px; border-radius: 50%; margin-right: 20px;">
 							<img class="writerImg" style="width: 100%; height: 100%; border-radius: 50%; margin-bottom:35px;"
@@ -157,20 +157,20 @@
 								<span class="writerNickname" style="font-weight: bold; font-size: 1.3em; color: black; margin-right: 20px;">${p.nickName}</span>
 								<!-- 팬추가 -->
 								<c:if test="${p.fanCheck == 0}">
-									<button type="button" class="btn btn-dark btn-sm fBtn" id="addFan">
+									<button type="button" class="btn btn-dark btn-sm fBtn addFan" >
 										<i class="fa fa-plus"></i><b>Fan</b>
 									</button>
-									<button class="btn btn-dark btn-sm fBtn" id="removeFan" style="display: none;">
+									<button class="btn btn-dark btn-sm fBtn removeFan" style="display: none;">
 										<i style="width: 40px;" class="fas fa-check"></i>
 									</button>
 								</c:if>
 								
 								<!-- 팬제거 -->	
 								<c:if test="${p.fanCheck == 1}">
-									<button class="btn btn-dark btn-sm fBtn" id="removeFan">
+									<button class="btn btn-dark btn-sm fBtn removeFan">
 										<i style="width: 40px;" class="fas fa-check"></i>
 									</button>
-									<button type="button" class="btn btn-dark btn-sm fBtn" id="addFan" style="display: none;">
+									<button type="button" class="btn btn-dark btn-sm fBtn addFan" style="display: none;">
 										<i class="fa fa-plus"></i><b>Fan</b>
 									</button>
 								</c:if>
@@ -192,7 +192,7 @@
 					
 					<!-- 포스팅 이미지 -->
 					<div style="width: 400px; height: 500px; margin-bottom: 20px; margin-top: 20px;" class="postingImg">
-						<input type="hidden" value="${p.pno }">
+						<input type="hidden" value="${p.pno }" class="pno">
 						<img class="img-fluid rounded pImg" style="width: 100%; height: 100%;"
 							src="${ pageContext.servletContext.contextPath }/resources/upload/posting/${p.renameImg}" alt="">
 					</div>
@@ -374,37 +374,37 @@
 		// 팬추가
 		$(document).on("click",".fBtn", function () {
 			
-			console.log('버튼클릭');
-			
-			var nowFanCheck = $(this).attr('id');
+			var thisthis = $(this);
+
+			var nowFanCheck = $(this).hasClass('addFan');
 			var pmno = $(this).parent().parent().parent().children().eq(0).val();
-			
-			console.log(pmno);
 			
 			if(loginUser == null || loginUser == ""){
 				alert("로그인 후 이용 가능하세요");
 				return;
 			}else{ //로그인 했을때
 				
-				if(nowFanCheck == 'addFan'){
-					insertFan(pmno);
+				if(nowFanCheck){
+					insertFan(pmno, thisthis);
 				}else {
-					deleteFan(pmno);
+					deleteFan(pmno, thisthis);
 				}
 			}
 		});
 	
 		// insert 팬
-		function insertFan(value){
-			var meNo = value;
+		function insertFan(pmno, thisthis){
+			var meNo = pmno;
+
 			$.ajax({
 				url:"mpInsertFan.do",
 				data:{meNo:meNo, youNo:loginUser},
 				type:"post",
 				success:function(result){
 					if(result == 1){
-						$("#addFan").hide();
-						$("#removeFan").show();
+
+						thisthis.parent().children('.addFan').hide();
+						thisthis.parent().children('.removeFan').show();
 						sock.send(meNo);
 						
 					}else{
@@ -418,16 +418,19 @@
 		}
 		
 		// delete 팬
-		function deleteFan(value){
-			var meNo = value;
+		function deleteFan(pmno, thisthis){
+			var meNo = pmno;
+			
 			$.ajax({
 				url:"mpDeleteFan.do",
 				data:{meNo:meNo, youNo:loginUser},
 				type:"post",
 				success:function(result){
+	
 					if(result == 1){
-						$("#removeFan").hide();
-						$("#addFan").show();
+						thisthis.parent().children('.addFan').show();
+						thisthis.parent().children('.removeFan').hide();
+
 					}else{
 						console.log("실패");
 					}

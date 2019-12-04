@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="java.util.*, java.text.*" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%
@@ -19,6 +20,25 @@
 		String a = sdf.format(cal.getTime());
 		m[i] = a;
 		//System.out.println(m[i]);
+	}
+	
+	// 오늘자 6일전까지
+	Date nowTime2 = new Date();
+	
+	SimpleDateFormat sdf2 = new SimpleDateFormat("MM-dd");
+	
+	String day = sdf2.format(nowTime2);
+	
+	Calendar cal2 = Calendar.getInstance();
+	
+	sdf.format(cal.getTime());
+	// 오늘자 기준 6개월
+	String[] d = new String[5];
+	for(int i=0; i<5; i++){
+		cal2.add(cal.DAY_OF_MONTH,-1);
+		String a = sdf2.format(cal2.getTime());
+		d[i] = a;
+		//System.out.println(d[i]);
 	}
 	
 %>
@@ -115,7 +135,7 @@
 									<div class="h4 mb-0">
 									<c:forEach items="${totalCount}" var="c" varStatus="status">
 									<c:if test="${status.index eq 3}">
-										<span class="count">${c.totalCount}</span>원
+											<fmt:formatNumber value="${c.totalCount}" pattern="#,##0원" />
 									</c:if>	
 									</c:forEach>
 									</div>
@@ -391,16 +411,18 @@
 				            datasets: [{
 				                data: count,
 				                backgroundColor: [
-				                                    "rgb(96, 198, 207)",
-				                                    "rgb(152, 156, 255)",
+				                                    "#000",
+				                                    "rgba(0,0,0,0.07)",
 				                                    "#ef5350",
-				                                    "rgba(0,0,0,0.07)"
+				                                    "rgba(0, 194, 146,0.5)",
+				                                    "rgb(152, 156, 255)"
 				                                ],
 				                hoverBackgroundColor: [
-				                                    "rgb(96, 198, 207)",
-				                                    "rgb(152, 156, 255)",
+				                                    "#000",
+				                                    "rgba(0,0,0,0.07)",
 				                                    "#ef5350",
-				                                    "rgba(0,0,0,0.07)"
+				                                    "rgba(0, 194, 146,0.5)",
+				                                    "rgb(152, 156, 255)"
 				                                ]
 
 				                            } ],
@@ -441,23 +463,13 @@
 					console.log(data[0]);
 					console.log(data[1]);
 					
-					// console.log(data[index]);
-					var num =[];
-					for(var i in data){
-						num.push(data.month1);
-						num.push(data.month2);
-						num.push(data.month3);
-						num.push(data.month4);
-						num.push(data.month5);
-						num.push(data.month6);
-					}
-					 
+				 	
 				    var ctx = document.getElementById( "sales-chart" );
 				    ctx.height = 350;
 				    var myChart = new Chart( ctx, {
 				        type: 'line',
 				        data: {
-				            labels: [ "11/26","11/27","11/28","11/29","11/30", "12/01"],
+				            labels: [ "<%=d[4]%>","<%=d[3]%>","<%=d[2]%>","<%=d[1]%>","<%=d[0]%>", "<%= day %>"],
 				            type: 'line',
 				            defaultFontFamily: 'Montserrat',
 				            datasets: [ {

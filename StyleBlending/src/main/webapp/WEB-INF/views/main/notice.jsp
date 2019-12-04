@@ -394,7 +394,7 @@ i{
 						<div class="form-row">
 							<div class="form-group col-sm-12">
 								<label>내용</label>
-								<textarea class="form-control" id="p_content" name='content'></textarea>
+								<textarea class="form-control" id="p_content" name='p_content'></textarea>
 								<script type="text/javascript">
 									CKEDITOR.replace('p_content',{
 										height : 300
@@ -402,13 +402,13 @@ i{
 								</script>
 							</div>
 						</div>
-						<div class="modal-footer"style="margin:auto;">
-							<button class="btn btn-white btn-lg" type="button"
+						<div class="modal-footer"style="margin:auto;  ">
+							<button class="btn btn-white btn-lg" type="button"onfocus="this.blur()" 
 								data-dismiss="modal" id="reset1" style="background:white;
     color: black;
     border-radius: 50px;
     "><span>취소</span></button>
-							<button type="submit" class="btn btn-white btn-lg" style="background: white;
+							<button type="submit" id="con" class="btn btn-white btn-lg" onfocus="this.blur()" style="background: white;
     color: black;
     border-radius: 50px;
     
@@ -418,8 +418,26 @@ i{
 								$(document).ready(function() {
 									$("#reset1").click(function() {
 										$("#form1")[0].reset();
-										$(".cke_wysiwyg_frame cke_reset").val("");
-									});
+										CKEDITOR.instances.p_content.setData("");
+ 							
+										
+									}); 
+								});
+							</script>
+							<script type="text/javascript">
+								$(document).ready(function() {
+									$("#con").click(function() {
+										if(CKEDITOR.instances.p_content.getData().length < 10){
+											alert("내용을 10자이상 적으세요",function(){
+												setTimeout(function(){
+													CKEDITOR.instances.p_content.setDate("");
+												}, 100);
+												CKEDITOR.instances.p_content.focus();
+											},"warning");
+											return false;
+										}
+										
+									}); 
 								});
 							</script>
 						</div>

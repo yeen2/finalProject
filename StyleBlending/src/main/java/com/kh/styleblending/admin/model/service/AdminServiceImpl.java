@@ -202,6 +202,18 @@ public class AdminServiceImpl implements AdminService{
 		// 색깔별 순위
 		return aDao.selectColorRank();
 	}
+
+	@Override
+	public int getNoticeListCount() {
+		// 공지사항 총 갯수
+		return aDao.getNoticeListCount();
+	}
+
+	@Override
+	public ArrayList<Notice> selectNoticeAdminList(PageInfo pi) {
+		// 공지사항 목록 조회용
+		return aDao.selectNoticeAdminList(pi);
+	}
 	
 	@Override
 	public ArrayList<Notice> selectNoticeList() {

@@ -426,8 +426,15 @@ select sum(d1) "day1",sum(d2) "day2",sum(d3) "day3",sum(d4) "day4",sum(d5) "day5
         ]]>
 	</select>
 	
+	<select id="getNoticeListCount" resultType="_int">
+		select count(*)
+		from notice
+		where isdelete='N'
+	</select>
+	
 	<select id="selectNoticeList" resultMap="NoticeResultSet">
 		select * from notice where isdelete='N'
+		order by n_no desc
 	</select>
 	 
 	   
