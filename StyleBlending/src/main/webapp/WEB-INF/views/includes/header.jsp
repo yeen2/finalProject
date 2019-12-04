@@ -719,13 +719,17 @@ function select(){
 									}
 									
 									if(hashCheck == 0){
-										var $hashtag = "<a style='color:black;' href='pNavSearch.do?type=2&keyword=" + value.hashtag + "'>"
+										var hashtag1 = value.hashtag;
+										var hashtag2 = value.hashtag.length;
+										var hashtagCut = hashtag1.substring(1, hashtag2);
+										
+										var $hashtag = "<a style='color:black;' href='pNavSearch.do?type=2&keyword=" + hashtagCut + "'>"
 										+"<div id='addSearch' class='hashHash' value='" + value.pno + "'>"
 								    	+"<div id='addSearchImg'>"
 							    		+"<i class='fas fa-hashtag'></i>"
 								    	+"</div>"
 								    	+"<div id='addSearchNick'>"
-							    		+"<p>" + value.hashtag + "</p>"
+							    		+"<p>" + hashtagCut + "</p>"
 								    	+"</div>"
 								    	+"</div>"
 								   		+"</a>";
