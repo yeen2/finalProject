@@ -40,7 +40,7 @@
     <!-- /#left-panel -->
     
  
-        <div class="content">
+        <div class="content" style="padding-top:50px;">
             <div class="animated fadeIn">
                	<div class="card-header" style="background:white;">
                      <nav>
@@ -56,32 +56,26 @@
                           <div class="tab-content pl-3 p-1" id="nav-tabContent">
                           	  <!-- 광고목록 -->
                               <div class="tab-pane fade show active" id="nav-home" role="tabpanel" >
-                              	 <div class="row">
-		                          	<div class="col-sm-12 col-md-6" style="padding:20px;">
-		                          		<div class="dataTables_length" id="bootstrap-data-table_length">
-		                          			<label style="display:inline-flex";>Show 
-		                          				<select name="boardLimit" class="form-control form-control-sm" onchange="pageSet(value);">
-		                          					<option value="5" <c:if test="${pi.boardLimit eq '5'}">selected</c:if>>5</option>
-		                          					<option value="10" <c:if test="${pi.boardLimit eq '10'}">selected</c:if>>10</option>
-		                          					<option value="20" <c:if test="${pi.boardLimit eq '20'}">selected</c:if>>20</option>
-		                          					<option value="30" <c:if test="${pi.boardLimit eq '30'}">selected</c:if>>30</option>
-		                          				</select> entries
-		                          			</label>
-		                          		</div>
-		                          	</div>
-		                          	
-		                          	<div class="col-sm-12 col-md-6">
-		                          		<div id="bootstrap-data-table_filter" class="dataTables_filter">
-		                          			<label style="display:inline-flex; padding:15px;">Search: &nbsp;
-		                          				<input type="search" id="adName" class="form-control form-control-sm col-sm-10" placeholder="업체명으로 검색" aria-controls="bootstrap-data-table" value="${keyword }">
-		                          			</label>
-				                        	<button type="button" id="adEndBtn" data-toggle="modal" data-target="#adEndModal" class="btn btn-outline-danger btn-sm" style="float:right; margin-right:10px; margin-top:15px;">마감</button>
-				                        	<button type="button" id="adStartBtn" data-toggle="modal" data-target="#adStartModal"  class="btn btn-outline-primary btn-sm" style="float:right; margin-right:10px; margin-top:15px;">
-				                        		<i class="fa fa-magic"></i>등록
-				                        	</button>
-		                          		</div>
-		                          	</div>
-                         	 	</div>
+                              	<div class="row">
+                                   <div class="col-md-10 offset-md-1" style="padding:20px;">
+                                         <label style="display:inline-flex; padding-right:20px; ">Show 
+                                            <select name="boardLimit" class="form-control form-control-sm" onchange="pageSet(value);">
+                                               <option value="5" <c:if test="${pi.boardLimit eq '5'}">selected</c:if>>5</option>
+                                               <option value="10" <c:if test="${pi.boardLimit eq '10'}">selected</c:if>>10</option>
+                                               <option value="20" <c:if test="${pi.boardLimit eq '20'}">selected</c:if>>20</option>
+                                               <option value="30" <c:if test="${pi.boardLimit eq '30'}">selected</c:if>>30</option>
+                                            </select> entries
+                                         </label>
+                                   
+                                         <label style="display:inline-flex; padding:15px;">Search: &nbsp;
+                                            <input type="search" id="adName" class="form-control form-control-sm col-sm-10" placeholder="업체명으로 검색" aria-controls="bootstrap-data-table" value="${keyword }">
+                                         </label>
+                                       <button type="button" id="adEndBtn" data-toggle="modal" data-target="#adEndModal" class="btn btn-outline-danger btn-sm" style="float:right; margin-right:10px; margin-top:15px;">마감</button>
+                                       <button type="button" id="adStartBtn" data-toggle="modal" data-target="#adStartModal"  class="btn btn-outline-primary btn-sm" style="float:right; margin-right:10px; margin-top:15px;">
+                                          <i class="fa fa-magic"></i>등록
+                                       </button>
+                                   </div>
+                                </div>
                               	
                               	<div class=" table-stats order-table ov-h ">                            	
 	                                <table class="table">
@@ -126,7 +120,7 @@
 	                                    <tbody class="hiddenTable"></tbody>
 	                                </table>
 	                                
-	                                <div class="row">
+	                                <div class="row" style="margin:auto;">
 		                                <div class="col-sm-4" style="margin-left:10px;">
 		                                	Showing ${pi.currentPage } to ${pi.endPage } of ${pi.listCount } entries		
 		                                </div>

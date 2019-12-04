@@ -79,7 +79,7 @@
     </aside>
     <!-- /#left-panel -->
         
-       <div class="content">
+       <div class="content" style="padding-top:50px;">
             <div class="animated fadeIn ">
                 <div class="row">
                 	
