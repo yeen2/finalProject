@@ -22,6 +22,25 @@
 		//System.out.println(m[i]);
 	}
 	
+	// 오늘자 6일전까지
+	Date nowTime2 = new Date();
+	
+	SimpleDateFormat sdf2 = new SimpleDateFormat("MM-dd");
+	
+	String day = sdf2.format(nowTime2);
+	
+	Calendar cal2 = Calendar.getInstance();
+	
+	sdf.format(cal.getTime());
+	// 오늘자 기준 6개월
+	String[] d = new String[5];
+	for(int i=0; i<5; i++){
+		cal2.add(cal.DAY_OF_MONTH,-1);
+		String a = sdf2.format(cal2.getTime());
+		d[i] = a;
+		//System.out.println(d[i]);
+	}
+	
 %>
 <!-- 차트 보이게 cdn x-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
@@ -444,40 +463,13 @@
 					console.log(data[0]);
 					console.log(data[1]);
 					
-				 
-					/* var date = new Date();
-					var dd = date.getDate();
-					var mm = date.getMonth() + 1; //January is 0!
-					var yyyy = date.getFullYear();
-
-					if (dd < 10) {
-					  dd = '0' + dd;
-					}
-
-					if (mm < 10) {
-					  mm = '0' + mm;
-					}
-
-					date = mm + '/' + dd ; */
-					
-				 	var date = new Date();
-				 	date.setDate(date.getDate()-5);
-				 	console.log(date);
-					var result = [date.toLocaleString()];
-				 	for(var i=0; i<5; i++){
-				 			date.setDate(date.getDate() + 1); // 1일전 넣기
-				 			//date = mm + '/' + (dd--) ;
-				 			result.push(date.toLocaleString());
-				 	}
-				 	  
-				 	console.log(result);
 				 	
 				    var ctx = document.getElementById( "sales-chart" );
 				    ctx.height = 350;
 				    var myChart = new Chart( ctx, {
 				        type: 'line',
 				        data: {
-				            labels: result,
+				            labels: [ "<%=d[4]%>","<%=d[3]%>","<%=d[2]%>","<%=d[1]%>","<%=d[0]%>", "<%= day %>"],
 				            type: 'line',
 				            defaultFontFamily: 'Montserrat',
 				            datasets: [ {
