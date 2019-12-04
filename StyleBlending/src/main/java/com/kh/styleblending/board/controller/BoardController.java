@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -435,7 +436,7 @@ public class BoardController {
 
 		ArrayList<BoardReply> list = bService.selectBoardReplyList(bno);
 		
-		System.out.println("rlsit : " + list);
+		//System.out.println("rlsit : " + list);
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 
 		return gson.toJson(list);
@@ -449,7 +450,7 @@ public class BoardController {
 		int result = bService.insertBoardReply(r);
 		
 		//System.out.println("Insert result : " + result);
-		System.out.println("Insert r : " + r);
+		//System.out.println("Insert r : " + r);
 
 		if (result > 0) {
 			return "success";
@@ -539,15 +540,16 @@ public class BoardController {
 
 	// 신고
 	@RequestMapping("insertbDeclare.do")
-	public ModelAndView insertbDeclare(Declare d, ModelAndView mv) {
+	public ModelAndView insertbDeclare(Declare d, ModelAndView mv ,HttpSession session) {
 
 		int bno = d.getBno();
 
 		int result = bService.insertbDeclare(d);
-		// System.out.println(d);
+		
 		if (result > 0) {
-			mv.addObject("msg", "게시물을 신고").setViewName("redirect:bdetail.do?bno="+bno);
-			// System.out.println(result);
+			session.setAttribute("msg", "게시물 신고하였습니다.");
+			mv.setViewName("redirect:bdetail.do?bno="+bno);
+			
 		} else {
 			mv.addObject("msg", "게시물 신고를 실패하였습니다.").setViewName("common/error");
 		}
