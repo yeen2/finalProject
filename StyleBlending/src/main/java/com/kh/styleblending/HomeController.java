@@ -263,15 +263,17 @@ public class HomeController {
 		
 
 
-
-
-
-
-
-
-
+	// 공지사항 이동
+	@RequestMapping("noticePage.do")
+	public String noticePage() {
+		return "main/notice";
+	}
 	
-	
+	@RequestMapping("adPage.do")
+	public String adPage() {
+		return "member/adPage";
+		
+	}
 	
 	
 	

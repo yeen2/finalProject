@@ -76,13 +76,12 @@
     <!-- /#left-panel -->
     
     <!-- Content -->
-    <div class="content">
+    <div class="content" style="padding-top:50px;">
         <!-- Animated -->
         <div class="animated fadeIn">
                   <!-- Widgets  -->
             <div class="row">
              
-                 
                 <div class="col-sm-6 col-lg-3">
 					<div class="card text-white bg-flat-color-6">
 						<div class="card-body">
