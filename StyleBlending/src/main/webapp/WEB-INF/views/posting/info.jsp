@@ -211,9 +211,15 @@
 				<hr>
 				<!-- 삭제버튼  -->
 				<c:if test="${loginUser.mno == p.mno }">
-					<span id="pDeleteBtn">삭제하기</span>
+					<span id="pDeleteBtn" style="font-weight: bold; color: red;">삭제하기</span>
 					<hr>
 				</c:if>
+				<!-- 관리자일때 관리자-신고하기가는 버튼 -->
+				<c:if test="${loginUser.nickName == '관리자' }">
+					<a href="aDeclare.do" style="color: red;">관리자 신고페이지로</a>
+					<hr>
+				</c:if>
+				
 				
 				<!-- 댓글 -->
 				<p>View all <b id="rCount">${ p.replyCount}</b> comments</p>

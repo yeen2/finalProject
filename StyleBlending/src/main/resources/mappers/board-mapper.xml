@@ -237,7 +237,7 @@
 <!-- 댓글 -->
 <select id="selectBoardReplyList" resultMap="BoardReplyResultSet">
 
-	select r.*, m.nickName,  m.rename_img, m.m_no mmno
+	select r.*, m.nickName, m.rename_img, m.m_no mmno 
 	from b_reply r
 	join member m on(m.m_no = r.m_no)
 	where b_no=#{bno} and r.isdelete='N'
@@ -248,12 +248,7 @@
 	join member m on(m.m_no = r.m_no)
 	where b_no=#{bno} and r.isdelete='N'
 	order by r.br_no desc -->
-	
-	<!-- select b.* , m.rename_img
-    from B_REPLY b
-    left join Member m on(m.m_no = b.m_no)
-    where b.m_no=#{mno} and b.b_no=#{bno} and b.isdelete='N'
-    order by b.br_no desc -->
+
 </select>
 
 <insert id="insertBoardReply">
