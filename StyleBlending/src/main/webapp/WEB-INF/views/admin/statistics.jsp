@@ -51,7 +51,7 @@
 <jsp:include page="header.jsp" />
 
 <!-- Left Panel -->
-    <aside id="left-panel" class="left-panel" style="padding-top:20px;">
+    <aside id="left-panel" class="left-panel" style="padding-top:20px;margin-top:35px;">
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">

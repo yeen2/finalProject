@@ -74,7 +74,7 @@
                         	</div>
                        	</div>
                   
-                         <div class=" table-stats order-table ov-h col-md-10 offset-md-1">                            	
+                         <div class=" table-stats order-table ov-h col-md-12">                            	
                              <table class="table">
                                  <thead>
                                      <tr >

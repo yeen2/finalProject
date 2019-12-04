@@ -4,6 +4,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+	
+</style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Style Blending</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -51,10 +54,10 @@
      <div id="right-panel" class="right-panel">
 
 	 <!-- Header-->
-     <header id="header" class="header" >
+     <header id="header" class="header" style="height:90px;">
          <div class="top-left">
              <div class="navbar-header" >
-                 <a class="navbar-brand" href="./"><img class="mr-2" height="30" width="50" src ="${pageContext.request.contextPath}/resources/assets/img/logo5.PNG" alt="Logo"><b style="color:white;">Style Blending</b></a>
+                 <a class="navbar-brand" style="margin-top:13px;" href="./"><img class="mr-2" height="40" width="50" src ="${pageContext.request.contextPath}/resources/assets/img/logo5.PNG" alt="Logo"><b style="color:white;">Style Blending</b></a>
                  <a class="navbar-brand hidden" href="./"><img src="${pageContext.request.contextPath}/resources/admin_temp/images/logo.svg" alt="Logo"></a>
                  <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
              </div>
@@ -64,7 +67,7 @@
 
                  <div class="user-area dropdown float-right">
                      <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                         <img class="user-avatar rounded-circle" src="${pageContext.request.contextPath}/resources/upload/member/${loginUser.renameImg}" alt="User Avatar">
+                         <img style="margin-top:30px;width:60px;height:60px;" class="user-avatar rounded-circle" src="${pageContext.request.contextPath}/resources/upload/member/${loginUser.renameImg}" alt="User Avatar">
                      </a>
 
                      <div class="user-menu dropdown-menu">

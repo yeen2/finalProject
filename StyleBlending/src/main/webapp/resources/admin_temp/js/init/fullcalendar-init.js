@@ -3,7 +3,7 @@
     "use strict";
 
     var CalendarApp = function() {
-        this.$body = $("body")
+        //this.$body = $("body")
         this.$modal = $('#event-modal'),
         this.$event = ('#external-events div.external-event'),
         this.$calendar = $('#calendar'),
@@ -132,7 +132,7 @@
 
         var defaultEvents =  [{
                 title: 'Hey!',
-                start: new Date($.now() + 158000000),
+                start: new Date($.now() - 79000000), // 79000000 이게 하루전
                 className: 'bg-dark'
             }, {
                 title: 'See John Deo',
@@ -140,8 +140,8 @@
                 end: today,
                 className: 'bg-danger'
             }, {
-                title: 'Buy a Theme',
-                start: new Date($.now() + 338000000),
+                title: '샤넬 광고등록',
+                start: new Date($.now() - 338000000),
                 className: 'bg-primary'
             }];
 
