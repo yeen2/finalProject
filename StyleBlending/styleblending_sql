@@ -1732,17 +1732,17 @@ insert into category values(47,'BIKE','기타.png');
 -- 결제/광고더미
 -- 승인중
 insert into pay values(seq_pay.nextval, 3, 390000, sysdate, default);
-insert into ad values(seq_ad.nextval, 3, seq_pay.currval, 'CHANEL', 'https://www.youtube.com/watch?v=PfLljQfSEus&=PLFXuqwLfy2oSx0AGQsH87ZXNu_k01sC5t&', '샤넬.jpg', '샤넬.jpg', '/resources/upload/advertisment/', '19/11/30', '19/11/30', default, 2);
+insert into ad values(seq_ad.nextval, 3, seq_pay.currval, 'CHANEL', 'https://www.youtube.com/watch?v=PfLljQfSEus&=PLFXuqwLfy2oSx0AGQsH87ZXNu_k01sC5t&', 'chanel.jpg', 'chanel.jpg', '/resources/upload/advertisment/', '19/11/30', '19/11/30', default, 2);
 
 -- 승인대기
 insert into pay values(seq_pay.nextval, 2, 300000, sysdate, default);
-insert into ad values(seq_ad.nextval, 2, seq_pay.currval, '아이더', 'https://www.youtube.com/watch?v=VuHCYe_bCaY', '아이더.PNG', '아이더.PNG', '/resources/upload/advertisment/', sysdate, default, default, default);
+insert into ad values(seq_ad.nextval, 2, seq_pay.currval, '아이더', 'https://www.youtube.com/watch?v=VuHCYe_bCaY', 'eider.PNG', 'eider.PNG', '/resources/upload/advertisment/', sysdate, default, default, default);
 insert into pay values(seq_pay.nextval, 4, 360000, sysdate, default);
-insert into ad values(seq_ad.nextval, 4, seq_pay.currval, '나이키', 'https://www.youtube.com/watch?v=rKo-vh1GNM8', '나이키.png', '나이키.png', '/resources/upload/advertisment/', '19/11/28', default, default, default);
+insert into ad values(seq_ad.nextval, 4, seq_pay.currval, '나이키', 'https://www.youtube.com/watch?v=rKo-vh1GNM8', 'nike.png', 'nike.png', '/resources/upload/advertisment/', '19/11/28', default, default, default);
 insert into pay values(seq_pay.nextval, 3, 170000, sysdate, default);
-insert into ad values(seq_ad.nextval, 3, seq_pay.currval, '널디', 'https://www.youtube.com/watch?v=VZIWvBjdMaY', '널디.PNG', '널디.PNG', '/resources/upload/advertisment/', '19/11/27', default, default, default);
+insert into ad values(seq_ad.nextval, 3, seq_pay.currval, '널디', 'https://www.youtube.com/watch?v=VZIWvBjdMaY', 'nerdy.PNG', 'nerdy.PNG', '/resources/upload/advertisment/', '19/11/27', default, default, default);
 insert into pay values(seq_pay.nextval, 3, 260000, sysdate, default);
-insert into ad values(seq_ad.nextval, 3, seq_pay.currval, 'Champion', 'https://www.youtube.com/watch?v=hYc2GuxahzU', '챔피온.PNG', '챔피온.PNG', '/resources/upload/advertisment/', '19/12/01', default, default, default);
+insert into ad values(seq_ad.nextval, 3, seq_pay.currval, 'Champion', 'https://www.youtube.com/watch?v=hYc2GuxahzU', 'champion.PNG', 'champion.PNG', '/resources/upload/advertisment/', '19/12/01', default, default, default);
 
 -- 종료된 광고
 insert into pay values(seq_pay.nextval, 2, 245000, sysdate, default);
