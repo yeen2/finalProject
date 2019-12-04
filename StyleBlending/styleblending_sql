@@ -1253,7 +1253,7 @@ insert into notice values (seq_notice.nextval,'스타일블랜딩 광고 결제�
 
 insert into notice values (seq_notice.nextval,'스타일블랜딩 개인정보처리 안내','<p>안녕하세요, 스타일블랜딩입니다.</p>
 
-<p>스타일블랜딩을 이용해주시고 아껴주시는 고객 여러분께 항상 감사 드리며, 금번에 서비스 내역 변경에 따라 개인정보처리방침을 개정되어 안내 말씀드립니다. 망고플레이트는 고객 여러분의 개인정보를 무엇보다 중요하게 생각하며 안전하게 관리하고 있습니다.</p>
+<p>스타일블랜딩을 이용해주시고 아껴주시는 고객 여러분께 항상 감사 드리며, 금번에 서비스 내역 변경에 따라 개인정보처리방침을 개정되어 안내 말씀드립니다. 스타일블랜딩은 고객 여러분의 개인정보를 무엇보다 중요하게 생각하며 안전하게 관리하고 있습니다.</p>
 
 <p>감사합니다.</p>
 
@@ -1261,7 +1261,7 @@ insert into notice values (seq_notice.nextval,'스타일블랜딩 개인정보�
 
 insert into notice values (seq_notice.nextval,'스타일블랜딩 개인정보처리 안내','<p>안녕하세요, 스타일블랜딩입니다.</p>
 
-<p>스타일블랜딩을 이용해주시고 아껴주시는 고객 여러분께 항상 감사 드리며, 금번에 서비스 내역 변경에 따라 개인정보처리방침을 개정되어 안내 말씀드립니다. 망고플레이트는 고객 여러분의 개인정보를 무엇보다 중요하게 생각하며 안전하게 관리하고 있습니다.</p>
+<p>스타일블랜딩을 이용해주시고 아껴주시는 고객 여러분께 항상 감사 드리며, 금번에 서비스 내역 변경에 따라 개인정보처리방침을 개정되어 안내 말씀드립니다. 스타일블랜딩은 고객 여러분의 개인정보를 무엇보다 중요하게 생각하며 안전하게 관리하고 있습니다.</p>
 
 <p>새롭게 바뀐 개인정보처리방침의 변경사항을 안내해 드리오니 서비스 이용에 참고 바랍니다.</p>
 <p>감사합니다.</p>
@@ -1860,7 +1860,7 @@ insert into board values(seq_board.nextval, 6 , '맛있는거 먹고싶네요', 
 insert into board values(seq_board.nextval, 12 , '바빳던 11월이 벌써 끝났네요', '2019년도 마지막달도 행복하게 보내세요~',default,sysdate, sysdate,default,default);
 insert into board values(seq_board.nextval, 13 , '오늘 치킨먹을까?', '오늘 치킨은 60계 간장!치킨으로 당첨!!',default,sysdate, sysdate,default,default);
 insert into board values(seq_board.nextval, 14 , '바쁘다', '다들 즐거운 주말 보내세요',default,sysdate, sysdate,default,default);
-insert into board values(seq_board.nextval, 15 , '오늘 시험이라니..', '',default,sysdate, sysdate,default,default);
+insert into board values(seq_board.nextval, 15 , '오늘 시험이라니..', 'ㅏㅏㅏㅏ오늘 시험이라니이이ㅣㅣㅣㅣㅣ',default,sysdate, sysdate,default,default);
 insert into board values(seq_board.nextval, 16 , '오늘도 코딩', '뼈속 까지 코딩!!',default,sysdate, sysdate,default,default);
 
 
