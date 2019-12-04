@@ -56,7 +56,7 @@
 
 			</div>
 			<div id="btnArea" style="margin-bottom: 30px; text-align: center;">
-				<button type="submit" class="btn btn-light btn-lg" id="btncheck">작성</button>
+				<button type="submit" class="btn btn-light btn-lg" id="btncheck" onclick="return writereturn()">작성</button>
 				<button type="button" class="btn btn-light" id="btnList"
 					style="float: right;" onclick="location.href='blist.do';">목록</button>
 			</div>
@@ -73,6 +73,15 @@
 		height:500,
 		filebrowserUploadUrl : "/styleblending/imageUpload.do",
 	}); 
+	
+	function writereturn(){
+		if($("#content").val().trim() == "" ){
+			alert("작성할 내용을 입력해주세요.");
+			return false;
+		}
+	}
+	
+	
 	</script>	
 	
 	<script type="text/javascript">
