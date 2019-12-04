@@ -30,9 +30,7 @@ margin:0px;
 	<div class="form-group" style="height: 303px;">
 		<img style="height:303px; width:360px; " src="${pageContext.request.contextPath}${param.img}${param.originalImg}"></img>
 	</div>
-	<div class="form-group col-12">
-		<div style="width: 360px; height: 21px;background: #e3e3e3; border-top: 1px solid #e3e3e3;">
-		<input type="checkbox">
+	<div class="form-group	">		<div style="width: 360px; height: 21px;background: #e3e3e3; border-top: 1px solid #e3e3e3;">
 		<a href="" onclick="javascript:window.close();" style="text-decoration:none; color:black" id="">
 			<i class="fa fa-times fa-lg pull-right" style="margin-right:10px; margin-top: 3px;"></i>
 			<span class="pull-right" style="font-weight: 800; margin-left: 10px; color:black;">닫기</span>

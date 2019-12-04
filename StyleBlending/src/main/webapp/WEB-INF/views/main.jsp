@@ -2001,7 +2001,7 @@ a{
                 }
                 
                 console.log("dkdkdkdk"+data.imgPath);
-                window.open("${pageContext.request.contextPath}/resources/assets/ad.jsp?img="+data.imgPath+"&originalImg="+data.renameImg,'','width=345px, height=321px, left=700px, top=300px, toolbar=0, status=yes, menubars=0, scrollbars=0, resizable=0, location=0, directories=0');
+                window.open("${pageContext.request.contextPath}/resources/assets/ad.jsp?img="+data.imgPath+"&originalImg="+data.renameImg,'','width=380px, height=353px, left=700px, top=300px, toolbar=0, status=yes, menubars=0, scrollbars=0, resizable=0, location=0, directories=0');
              
          player = new YT.Player('player', {
           height: '1000',
