@@ -512,7 +512,7 @@
 							$replyDiv = $("<div class='form-inline replyDiv' style='margin-right:150px;'></div>");
 							
 							$imgDiv = $("<div class='form-group imgDiv'></div>");
-							$img = $("<img class='reply_img' style='border-radius: 2.5em; height: 62px; width: 60px; margin-right: 10px;'>").attr("src","${pageContext.request.contextPath}/resources/upload/member/${ loginUser.renameImg }");
+							$img = $("<img class='reply_img' style='border-radius: 2.5em; height: 62px; width: 60px; margin-right: 10px;'>").attr("src","${pageContext.request.contextPath}/resources/upload/member/" + value.renameImg );
 							
 							$modifyDiv = $("<div class='form-inline modifyDiv' style='display:none; margin-top:10px;'></div>");
 							$contentDiv = $("<div class='form-group contentDiv'></div>");
