@@ -217,9 +217,11 @@ public class MyPageController {
 	@RequestMapping("mpUpdatePf.do")
 	public ModelAndView updateProfile(Member m, ModelAndView mv, HttpSession session) {
 		String location = m.getLocation();
-		String[] locationArr = location.split(" ");
-		location = locationArr[0] + " " + locationArr[1];
-		m.setLocation(location);
+		if(location != "") {
+			String[] locationArr = location.split(" ");
+			location = locationArr[0] + " " + locationArr[1];
+			m.setLocation(location);
+		}
 		
 		Member mem = mpService.updateProfile(m);
 		

@@ -150,7 +150,7 @@
 
 			<a class="navbar-brand d-flex align-items-center"
 				href="${pageContext.request.contextPath}"> <img
-				src="${pageContext.request.contextPath}/resources/assets/img/final_logo.PNG"
+				src="${pageContext.request.contextPath}/resources/assets/img/logo5.PNG"
 				class="mr-2" height="50" width="50"> Style Blending
 			</a>
 
@@ -719,13 +719,17 @@ function select(){
 									}
 									
 									if(hashCheck == 0){
-										var $hashtag = "<a style='color:black;' href='pNavSearch.do?type=2&keyword=" + value.hashtag + "'>"
+										var hashtag1 = value.hashtag;
+										var hashtag2 = value.hashtag.length;
+										var hashtagCut = hashtag1.substring(1, hashtag2);
+										
+										var $hashtag = "<a style='color:black;' href='pNavSearch.do?type=2&keyword=" + hashtagCut + "'>"
 										+"<div id='addSearch' class='hashHash' value='" + value.pno + "'>"
 								    	+"<div id='addSearchImg'>"
 							    		+"<i class='fas fa-hashtag'></i>"
 								    	+"</div>"
 								    	+"<div id='addSearchNick'>"
-							    		+"<p>" + value.hashtag + "</p>"
+							    		+"<p>" + hashtagCut + "</p>"
 								    	+"</div>"
 								    	+"</div>"
 								   		+"</a>";
