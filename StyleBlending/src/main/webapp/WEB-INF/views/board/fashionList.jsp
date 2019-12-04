@@ -125,7 +125,7 @@ body {padding-top: 20px;}
 			<br>
 			<div class="form-group" style="float: left; width: 200px;">
 				<select class="custom-select" onchange="location.href=this.value">
-					<option>분류</option>
+					<option value="">분류</option>
 					<option value="blist.do">자유게시판</option>
 					<option selected value="fblist.do">패션정보게시판</option>
 				</select>
@@ -202,10 +202,21 @@ body {padding-top: 20px;}
 							<option value="content" ${ cSelected }>내용</option>	
 					</select>
 					
-					<button class="btn btn-primary btn-sm" id="searchBtn" type="submit" 
+					<button class="btn btn-primary btn-sm" id="searchBtn" type="submit"  onclick="return subreturn()"
 						style="float: left; margin-left: 8px; height:38px;">검색하기</button>
 				</form>
 			</div>
+
+			<!-- 검색이 공백일때 클릭 안되게끔 -->
+		<script>
+			function subreturn(){
+				if($("#searchInput").val().trim() == ""){
+					alert("검색내용을 입력해주세요");
+					return false;
+				}
+					
+			}
+		</script>
 
 		<div id="readBtn">
 			<c:if test="${ loginUser.email eq 'admin'  }">
@@ -219,42 +230,46 @@ body {padding-top: 20px;}
 		<div class="pagingArea" style="margin-top: 50px; margin-bottom: 30px;">
 			<ul class="pagination" style="justify-content: center;">
 				<li class="page-item disabled">
-					<!-- 이전 --> <!-- 수정중 --> 
+					<!-- 이전 -->
 					<c:if test="${ pi.currentPage eq 1 }">
-						<i class="fas fa-long-arrow-alt-left"> </i>
+						<i class="fas fa-long-arrow-alt-left"></i>
 					</c:if> 
 					<c:if test="${ pi.currentPage ne 1 }">
 						<c:url value="fblist.do" var="before">
 							<c:param name="currentPage" value="${ pi.currentPage-1 }"/>
 						</c:url>
-						<a class="page-link" href="${ before }"> <i class="fas fa-long-arrow-alt-left"></i></a>
+						<a class="page-link" href="${ before }"><i class="fas fa-long-arrow-alt-left"></i></a>
 					</c:if>
 				</li>
 				<!-- 페이지  -->
 				<c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
 					<li class="page-item active">
+						
 						<c:if test="${ p eq pi.currentPage }">
 							<a class="page-link" href="#a">${ p }</a>
-						</c:if> 
+						</c:if>
+						 
 						<c:if test="${ p ne pi.currentPage }">
 							<c:url value="fblist.do" var="page">
-								<c:param name="currentPage" value="${ p }" />
+								<c:param name="currentPage" value="${ p }"/>
 							</c:url>
+							
 							<a class="page-link" href="${ page }">${ p }</a>
 						</c:if>
+						
 					</li>
 				</c:forEach>
 
 				<!-- 다음 -->
 				<li class="page-item">
 					<c:if test="${ pi.currentPage eq pi.maxPage }">
-						<i class="fas fa-long-arrow-alt-right"> </i>
+						<i class="fas fa-long-arrow-alt-right"></i>
 					</c:if> 
 					<c:if test="${ pi.currentPage ne pi.maxPage }">
 						<c:url value="fblist.do" var="last">
 							<c:param name="currentPage" value="${ pi.currentPage+1 }"/>
 						</c:url>
-						<a class="page-link" href="${ last }"> <i class="fas fa-long-arrow-alt-right"></i></a>
+						<a class="page-link" href="${ last }"><i class="fas fa-long-arrow-alt-right"></i></a>
 					</c:if>
 				</li>
 			</ul>

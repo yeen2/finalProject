@@ -434,7 +434,8 @@ public class BoardController {
 	public String replyList(int bno) {
 
 		ArrayList<BoardReply> list = bService.selectBoardReplyList(bno);
-
+		
+		System.out.println("rlsit : " + list);
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 
 		return gson.toJson(list);
@@ -446,8 +447,9 @@ public class BoardController {
 	public String insertReply(BoardReply r) {
 
 		int result = bService.insertBoardReply(r);
-
-		// System.out.println("result : " + result);
+		
+		//System.out.println("Insert result : " + result);
+		System.out.println("Insert r : " + r);
 
 		if (result > 0) {
 			return "success";

@@ -172,7 +172,7 @@ a{
             <ul id="ticker2" style="height: 230px">
                <li
                   style="font-family: Gulim; font-size: large; margin-bottom: 10px;"><i
-                  class="fa fa-search"></i>&nbsp;급상승 겁색어</li>
+                  class="fa fa-search"></i>&nbsp;급상승 검색어</li>
             </ul>
 
 
