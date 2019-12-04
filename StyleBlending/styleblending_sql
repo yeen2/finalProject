@@ -801,7 +801,7 @@ REFERENCES posting (
 ALTER TABLE b_reply ADD CONSTRAINT FK_member_TO_b_reply_2 FOREIGN KEY (
 	m_no
 )
-REFERENCES board (
+REFERENCES member (
 	m_no
 );
 
@@ -1349,7 +1349,7 @@ insert into style values(seq_style.nextval,6,'1','로맨틱크라운','white');
 insert into style values(seq_style.nextval,6,'17','유니폼브릿지','white');
 insert into style values(seq_style.nextval,7,'5','하프크라이즈','gray');
 insert into style values(seq_style.nextval,7,'21','나이키','black');
-insert into style values(seq_style.nextval,8,'5','아디다스','black');
+insert into style values(seq_style.nextval,8,'5','샤넬','black');
 insert into style values(seq_style.nextval,8,'17','커버낫','white');
 insert into style values(seq_style.nextval,9,'17','에잇세컨즈','brown');
 insert into style values(seq_style.nextval,9,'20','반스','gray');
@@ -1358,7 +1358,7 @@ insert into style values(seq_style.nextval,10,'17','모디파이드','white');
 insert into style values(seq_style.nextval,11,'1','지프','black');
 insert into style values(seq_style.nextval,11,'17','모드나인','brown');
 insert into style values(seq_style.nextval,12,'1','나이키','black');
-insert into style values(seq_style.nextval,12,'17','아디다스','brown');
+insert into style values(seq_style.nextval,12,'17','샤넬','brown');
 insert into style values(seq_style.nextval,13,'5','커버낫','black');
 insert into style values(seq_style.nextval,13,'17','마하그리드','brown');
 insert into style values(seq_style.nextval,14,'2','내셔널지오그래픽','green');
@@ -1371,7 +1371,7 @@ insert into style values(seq_style.nextval,17,'2','로맨틱크라운','white');
 insert into style values(seq_style.nextval,17,'21','유니폼브릿지','black');
 insert into style values(seq_style.nextval,18,'2','하프크라이즈','gray');
 insert into style values(seq_style.nextval,18,'17','나이키','white');
-insert into style values(seq_style.nextval,19,'16','아디다스','aqua');
+insert into style values(seq_style.nextval,19,'16','샤넬','aqua');
 insert into style values(seq_style.nextval,19,'23','커버낫','black');
 insert into style values(seq_style.nextval,20,'30','에잇세컨즈','pink');
 insert into style values(seq_style.nextval,20,'42','반스','white');
@@ -1675,7 +1675,7 @@ INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,5,1 ,'댓글1', sysdate, default)
 INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,4,2,'댓글2', sysdate, default);
 INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,3,3 ,'댓글3', sysdate, default);
 INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,2,4 ,'댓글4', sysdate, default);
-INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,1,5'댓글5', sysdate, default);
+INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,1,5,'댓글5', sysdate, default);
 INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,6, 6,'댓글6', sysdate, default);
 INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,7,7 ,'댓글7', sysdate, default);
 INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,8,8 ,'댓글8', sysdate, default);
@@ -1812,14 +1812,14 @@ insert into pay values(seq_pay.nextval, 3, 390000, sysdate, default);
 insert into ad values(seq_ad.nextval, 3, seq_pay.currval, 'CHANEL', 'https://www.youtube.com/watch?v=PfLljQfSEus&=PLFXuqwLfy2oSx0AGQsH87ZXNu_k01sC5t&', 'chanel.jpg', 'chanel.jpg', '/resources/upload/advertisment/', '19/11/30', '19/11/30', default, 2);
 
 -- 승인대기
-insert into pay values(seq_pay.nextval, 2, 300000, sysdate, default);
-insert into ad values(seq_ad.nextval, 2, seq_pay.currval, '아이더', 'https://www.youtube.com/watch?v=VuHCYe_bCaY', 'eider.PNG', 'eider.PNG', '/resources/upload/advertisment/', sysdate, default, default, default);
 insert into pay values(seq_pay.nextval, 4, 360000, sysdate, default);
 insert into ad values(seq_ad.nextval, 4, seq_pay.currval, '나이키', 'https://www.youtube.com/watch?v=rKo-vh1GNM8', 'nike.png', 'nike.png', '/resources/upload/advertisment/', '19/11/28', default, default, default);
 insert into pay values(seq_pay.nextval, 3, 170000, sysdate, default);
 insert into ad values(seq_ad.nextval, 3, seq_pay.currval, '널디', 'https://www.youtube.com/watch?v=VZIWvBjdMaY', 'nerdy.PNG', 'nerdy.PNG', '/resources/upload/advertisment/', '19/11/27', default, default, default);
 insert into pay values(seq_pay.nextval, 3, 260000, sysdate, default);
 insert into ad values(seq_ad.nextval, 3, seq_pay.currval, 'Champion', 'https://www.youtube.com/watch?v=hYc2GuxahzU', 'champion.PNG', 'champion.PNG', '/resources/upload/advertisment/', '19/12/01', default, default, default);
+insert into pay values(seq_pay.nextval, 17, 290000, sysdate, default);
+insert into ad values(seq_ad.nextval, 17, seq_pay.currval, '엠엘비', 'https://www.youtube.com/watch?v=WsmjDVFQe4A', '엠엘비.PNG', '엠엘비.PNG', '/resources/upload/advertisment/', '19/11/20', default, default, default);
 
 -- 종료된 광고
 insert into pay values(seq_pay.nextval, 2, 245000, sysdate, default);
