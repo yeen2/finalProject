@@ -1,35 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-
 
 	<footer class="footer-1 bg-light text-dark" style="margin-top: 100px;">
 		<div class="container">
 			<div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
 				<div class="links">
 					<ul class="footer-menu list-unstyled d-flex flex-row text-center text-md-left">
-						<li><a href="${pageContext.request.contextPath}/WEB-INF/views/includes/notice.jsp" target="_blank">공지사항</a></li>
-						<li><a href="https://bootstrapbay.com/about" target="_blank">사이트소개</a></li>
-						<li><a href="https://bootstrapbay.com/blog/" target="_blank">광고문의</a></li>
-						<li><a href="https://bootstrapbay.com/terms" target="_blank">비즈니스</a></li>
-						
+						<li><a href="noticePage.do" target="_blank" style="text-decoration:none;">공지사항</a></li>
+						<li><a href="adPage.do" target="_blank" id="adBtn123" style="text-decoration:none;">광고문의</a></li>
 					</ul>
 				</div>
 				<div class="social mt-4 mt-md-0">
 					<a class="twitter btn btn-outline-primary btn-icon"
-						href="https://twitter.com/bootstrapbay" target="_blank"> 
+						href="https://twitter.com/bootstrapbay" target="_blank" style="pointer-events:none;"> 
 						<i class="fab fa-twitter"></i> 
 						<span class="sr-only">
 						View our Twitter Profile</span>
 					</a> 
 					<a class="facebook btn btn-outline-primary btn-icon"
 							href="https://www.facebook.com/bootstrapbayofficial/"
-							target="_blank"> 
+							target="_blank" style="pointer-events:none;"> 
 						<i class="fab fa-facebook"></i> 
 						<span class="sr-only">View our Facebook Profile <span>
 					</a> 
 					<a class="github btn btn-outline-primary btn-icon"
-							href="https://github.com/bootstrapbay" target="_blank"> 
+							href="https://github.com/bootstrapbay" target="_blank" style="pointer-events:none;"> 
 						<i class="fab fa-github"></i> 
 						<span class="sr-only">View our GitHub Profile</span>
 					</a>
@@ -64,5 +61,15 @@
 	    }
 	});</script>
  -->
+ 
+ <script>
+ 	$("#adBtn123").click(function(){
+ 		if(${loginUser == null}){
+ 			alert("로그인 후 이용가능합니다.");
+ 			return false;
+ 		}
+ 	});
+ </script>
+ 
  </body>
 </html>
