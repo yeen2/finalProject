@@ -10,7 +10,7 @@
 
 <jsp:include page="header.jsp" />
 <!-- Left Panel -->
-    <aside id="left-panel" class="left-panel" style="padding-top:20px;margin-top:35px;">
+    <aside id="left-panel" class="left-panel" style="padding-top:20px;">
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
@@ -74,7 +74,7 @@
                         	</div>
                        	</div>
                   
-                         <div class=" table-stats order-table ov-h col-md-10 offset-md-1">                            	
+                         <div class=" table-stats order-table ov-h col-md-12">                            	
                              <table class="table">
                                  <thead>
                                      <tr >

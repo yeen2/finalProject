@@ -47,11 +47,7 @@
 <jsp:include page="header.jsp" />
     
 <!-- Left Panel -->
-<<<<<<< HEAD
-    <aside id="left-panel" class="left-panel" style="padding-top:50px;">
-=======
     <aside id="left-panel" class="left-panel" style="padding-top:20px; margin-top:36px;">
->>>>>>> branch 'dev' of https://github.com/yeen2/finalProject.git
         <nav class="navbar navbar-expand-sm navbar-default">
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">

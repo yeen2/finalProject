@@ -89,6 +89,7 @@
 	                                        <tr>
 	                                        	<th></th>
 	                                            <th class="serial">No.</th>
+	                                            <th>신청인</th>
 	                                            <th>업체명</th>
 	                                            <th>신청일자</th>
 	                                            <th>등록일자</th>
@@ -103,6 +104,7 @@
                                         			<input name="checkRow" type="checkbox" id="checkRow" value="${a.adno}${a.status}"/>
                                         		</td>
 	                                            <td class="serial">${a.adno}</td>
+	                                            <td>${a.email }</td>
 	                                            <td>${a.name }</td>
 	                                            <td> ${a.enrollDate } </td>
 	                                            <td> ${a.startDate } </td>
