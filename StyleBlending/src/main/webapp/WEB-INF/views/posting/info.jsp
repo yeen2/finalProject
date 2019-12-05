@@ -223,7 +223,8 @@
 				
 				
 				<!-- 댓글 -->
-				<p>View all <b id="rCount">${ p.replyCount}</b> comments</p>
+				<p>View all <b id="rCount"></b> comments</p>
+				<%-- <p>View all <b id="rCount">${ p.replyCount}</b> comments</p> --%>
 				<br>
 				
 				<!-- for문 돌릴떄, 전index랑 같으면  -->
@@ -897,7 +898,8 @@
 				success:function(data){
 					
 					//console.log(data);
-
+					$("#rCount").text(data.length);
+					
 					$replyForm = $("#replyForm");
 					$replyForm.html("");
 
