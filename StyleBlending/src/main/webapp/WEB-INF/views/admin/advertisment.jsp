@@ -208,7 +208,8 @@
 				                        <div class="card">
 				                            <img class="card-img-top" src="${pageContext.request.contextPath}${startAd.imgPath}${startAd.renameImg}" alt="Card image cap">
 				                            <div class="card-body">
-				                                <h4 class="card-title mb-3"><b>${startAd.name}</b></h4>
+				                            	 <c:set var = "string2" value = "${fn:toLowerCase(startAd.name)}" />
+				                                <h4 class="card-title mb-3"><b>${string2}</b></h4>
 				                                 <p class="card-text">${startAd.startDate}~ </p>
 				                            </div>
 				                        </div>

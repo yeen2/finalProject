@@ -421,7 +421,7 @@
     "use strict";
 
     var CalendarApp = function() {
-        //this.$body = $("body")
+        this.$body = $("body")
         this.$modal = $('#event-modal'),
         this.$event = ('#external-events div.external-event'),
         this.$calendar = $('#calendar'),
@@ -549,11 +549,11 @@
         var today = new Date($.now());
 
         var defaultEvents =  [{
-                title: 'Hey!',
-                start: new Date($.now() - 79000000), // 79000000 이게 하루전
+                title: '커버낫 광고등록',
+                start: new Date($.now() - 1343000000), // 79000000 이게 하루전
                 className: 'bg-dark'
             }, {
-                title: 'See John Deo',
+                title: '광고등록',
                 start: today,
                 end: today,
                 className: 'bg-danger'
@@ -561,7 +561,11 @@
                 title: '샤넬 광고등록',
                 start: new Date($.now() - 338000000),
                 className: 'bg-primary'
-            }];
+            }, {
+                title: '캉골 광고등록',
+                start: new Date($.now() - 2054000000),
+                className: 'bg-primary'
+                }];
 
         var $this = this;
         $this.$calendarObj = $this.$calendar.fullCalendar({

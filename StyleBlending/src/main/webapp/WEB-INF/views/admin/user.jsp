@@ -94,7 +94,7 @@
                                                 </div>
                                             </td>
                                             <td>${m.email}</td>
-                                            <td> <span class="name">${m.nickName }</span> </td>
+                                            <td> <span>${m.nickName }</span> </td>
                                             <td> <span>${m.enrollDate }</span> </td>
                                             <td>
                                             	<c:if test="${m.isDelete eq 'Y' }">
