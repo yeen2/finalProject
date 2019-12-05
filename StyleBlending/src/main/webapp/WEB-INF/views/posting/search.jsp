@@ -157,12 +157,22 @@
 								<span class="writerNickname" style="font-weight: bold; font-size: 1.3em; color: black; margin-right: 20px;">${p.nickName}</span>
 								<!-- 팬추가 -->
 								<c:if test="${p.fanCheck == 0}">
-									<button type="button" class="btn btn-dark btn-sm fBtn addFan" >
-										<i class="fa fa-plus"></i><b>Fan</b>
-									</button>
-									<button class="btn btn-dark btn-sm fBtn removeFan" style="display: none;">
-										<i style="width: 40px;" class="fas fa-check"></i>
-									</button>
+									<c:choose>
+										<c:when test="${p.mno == loginUser.mno}">
+											<button class="btn btn-dark btn-sm fBtn removeFan" disabled="disabled">
+												<i style="width: 40px;" class="fas fa-check"></i>
+											</button>
+										</c:when>
+										<c:otherwise>
+											<button type="button" class="btn btn-dark btn-sm fBtn addFan">
+												<i class="fa fa-plus"></i><b>Fan</b>
+											</button>
+											<button class="btn btn-dark btn-sm fBtn removeFan" style="display: none;">
+												<i style="width: 40px;" class="fas fa-check"></i>
+											</button>
+										</c:otherwise>
+									</c:choose>
+
 								</c:if>
 								
 								<!-- 팬제거 -->	

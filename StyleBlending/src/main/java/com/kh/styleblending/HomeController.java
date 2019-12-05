@@ -216,7 +216,8 @@ public class HomeController {
 			String setfrom = "jang32880634@gmail.com";
 			//String tomail = request.getParameter(email); // 받는 사람 이메일
 			String title = "[StyleBlending] " + m.getNickName() + "님 요청하신 비밀번호 보내드립니다~"; // 제목
-			String content = "새로운 비밀번호는 " + randomPass + "입니다. 로그인 하신 후, 비밀번호는 새로 변경해 주세요~"; // 내용
+			String content = "새로운 비밀번호는 " + randomPass + "입니다. 로그인 하신 후, 비밀번호는 새로 변경해 주세요~"
+							+"http://192.168.30.34:8070/styleblending"; // 내용
 	
 			try {
 				MimeMessage message = mailSender.createMimeMessage();
