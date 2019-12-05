@@ -78,7 +78,7 @@
 		                                 <tr>
 		                                    <td>${n.nno }</td>
 		                                    <td>${n.title }</td>
-		                                    <td><textarea style="border:none; resize:none; row:100px" readonly id="contentResult">${n.content }</textarea></td>
+		                                    <td><p style="border:none; resize:none; row:100px" readonly id="contentResult">${n.content }</p></td>
 		                                    <td>${loginUser.email }</td>
 		                                    <td>${n.enrollDate }</td>
 		                                </tr>
