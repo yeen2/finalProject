@@ -78,7 +78,7 @@
 		                                 <tr>
 		                                    <td>${n.nno }</td>
 		                                    <td>${n.title }</td>
-		                                    <td>${n.content }</td>
+		                                    <td><textarea style="border:none; resize:none; row:100px" readonly id="contentResult">${n.content }</textarea></td>
 		                                    <td>${loginUser.email }</td>
 		                                    <td>${n.enrollDate }</td>
 		                                </tr>
@@ -146,5 +146,14 @@
                 </div>
             </div><!-- .animated -->
         </div><!-- .content -->
+        
+        <script>
+        $(function(){
+        	
+	        var str = document.getElementById("contentResult").value;
+	        str = str.replace(/(?:\r\n|\r|\n)/g, '<br />');
+	        document.getElementById("contentResult").value = str;
+        });
+        </script>
 
       <jsp:include page="footer.jsp" />

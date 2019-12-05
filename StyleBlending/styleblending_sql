@@ -883,7 +883,7 @@ insert into member values(seq_member.nextval,default,null,'user43','pass43','kim
 insert into member values(seq_member.nextval,default,null,'user44','pass44','보람쨩','수고하셨습니다~~~','서울시 강남구','kh_teacher.jpg','kh_teacher.jpg','/resources/upload/member/',sysdate,null,null,default);
 insert into member values(seq_member.nextval,default,null,'user45','pass45','나는 예은','우리팀원들 짱짱>_<','부산광역시 해운대구','kh_jang.jpg','kh_jang.jpg','/resources/upload/member/',sysdate,null,null,default);
 insert into member values(seq_member.nextval,default,null,'user46','pass46','나는 종배','자기소개가 없습니다.','서울시 광진구','kh_lee.jpg','kh_lee.jpg','/resources/upload/member/',sysdate,null,null,default);
-insert into member values(seq_member.nextval,default,null,'user47','pass47','나는 혜은','자기소개가 없습니다.','서울시 성동구','kh_jung.jpg','kh_jung.jpg','/resources/upload/member/',sysdate,null,null,default);
+insert into member values(seq_member.nextval,default,null,'user47','pass47','나는 혜은','오늘 뭐입조?!','서울시 성동구','kh_jung.jpg','kh_jung.jpg','/resources/upload/member/',sysdate,null,null,default);
 insert into member values(seq_member.nextval,default,null,'user48','pass48','나는 성환','자기소개가 없습니다.','경기도 성남시','kh_kim.jpg','kh_kim.jpg','/resources/upload/member/',sysdate,null,null,default);
 insert into member values(seq_member.nextval,default,null,'user49','pass49','나는 정호','자기소개가 없습니다.','경기도 고양시','kh_han.jpg','kh_han.jpg','/resources/upload/member/',sysdate,null,null,default);
 insert into member values(seq_member.nextval,default,null,'user50','pass50','나는 봉운','봉봉2.','경기도 안산시','kh_han.jpg','kh_han.jpg','/resources/upload/member/',sysdate,null,null,default);
@@ -1785,7 +1785,7 @@ insert into hash values(seq_hash.nextval,74,'#팀장부심');
 -- 포스팅 신고 insert
 insert into declare values(seq_declare.nextval,4,2,'비방',null,sysdate,1,1);
 insert into declare values(seq_declare.nextval,5,3,'도배',null,sysdate,1,1);
-insert into declare values(seq_declare.nextval,17,3,'도배',null,'19/12/01',1,1);
+insert into declare values(seq_declare.nextval,46,3,'도배',null,'19/12/01',1,1);
 insert into declare values(seq_declare.nextval,4,40,'도배',null,'19/11/15',1,1);
 
 -- 자유게시판 insert
@@ -1839,9 +1839,9 @@ INSERT INTO b_reply VALUES(SEQ_B_REPLY.nextval,12, 26,'댓글25', sysdate, defau
  
 
 -- 자유게시판 신고  insert
-insert into declare values(seq_declare.nextval,20,3,'비방',null,sysdate,1,2);
-insert into declare values(seq_declare.nextval,25,5,'비방',null,sysdate,1,2);
-insert into declare values(seq_declare.nextval,8,9,'도배',null,'19/11/15',1,2);
+insert into declare values(seq_declare.nextval,49,3,'비방',null,sysdate,1,2);
+insert into declare values(seq_declare.nextval,50,5,'개인정보침해','개인정보 보호가 필요합니다',sysdate,1,2);
+insert into declare values(seq_declare.nextval,8,9,'도배','도배가 너무 심하네요','19/11/15',1,2);
 
 
 -- 패션정보게시판 더미 
@@ -1958,13 +1958,13 @@ insert into ad values(seq_ad.nextval, 3, seq_pay.currval, '널디', 'https://www
 insert into pay values(seq_pay.nextval, 3, 260000, sysdate, default);
 insert into ad values(seq_ad.nextval, 3, seq_pay.currval, 'Champion', 'https://www.youtube.com/watch?v=hYc2GuxahzU', 'champion.PNG', 'champion.PNG', '/resources/upload/advertisment/', '19/12/01', default, default, default);
 insert into pay values(seq_pay.nextval, 17, 290000, sysdate, default);
-insert into ad values(seq_ad.nextval, 17, seq_pay.currval, '엠엘비', 'https://www.youtube.com/watch?v=WsmjDVFQe4A', '엠엘비.PNG', '엠엘비.PNG', '/resources/upload/advertisment/', '19/11/20', default, default, default);
+insert into ad values(seq_ad.nextval, 17, seq_pay.currval, '엠엘비', 'https://www.youtube.com/watch?v=WsmjDVFQe4A', 'mlb.PNG', 'mlb.PNG', '/resources/upload/advertisment/', '19/11/20', default, default, default);
 
 -- 종료된 광고
 insert into pay values(seq_pay.nextval, 2, 245000, sysdate, default);
 insert into ad values(seq_ad.nextval, 2, seq_pay.currval, '커버낫', 'https://www.youtube.com/watch?v=rKo-vh1GNM8', '커버낫.PNG', '커버낫.PNG', '/resources/upload/advertisment/', '19/11/19', '19/11/19', '19/11/26', 3);
 insert into pay values(seq_pay.nextval, 5, 110000, sysdate, default);
-insert into ad values(seq_ad.nextval, 5, seq_pay.currval, '캉골', 'https://www.youtube.com/watch?v=rKo-vh1GNM8', '캉골.PNG', '캉골.PNG', '/resources/upload/advertisment/', '19/11/10', '19/11/11', '19/11/28', 3);
+insert into ad values(seq_ad.nextval, 5, seq_pay.currval, '캉골', 'https://www.youtube.com/watch?v=rKo-vh1GNM8', '캉골.PNG', '캉골.PNG', '/resources/upload/advertisment/', '19/11/10', '19/11/11', '19/11/18', 3);
 insert into pay values(seq_pay.nextval, 4, 290000, sysdate, default);
 insert into ad values(seq_ad.nextval, 4, seq_pay.currval, '겐조', 'https://www.youtube.com/watch?v=rKo-vh1GNM8', '겐조.PNG', '겐조.PNG', '/resources/upload/advertisment/', '19/10/31', '19/11/01', '19/11/08', 3);
 insert into pay values(seq_pay.nextval, 3, 380000, sysdate, default);
