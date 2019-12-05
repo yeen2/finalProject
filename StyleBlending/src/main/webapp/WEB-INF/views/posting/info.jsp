@@ -236,6 +236,7 @@
 							닉네임
 							<h5 class="mt-0 replyForm_nickname"></h5>
 							댓글내용
+							
 							<span class="replyForm_content"></span>
 							<br>
 							<span class="replyForm_likecount"></span>
