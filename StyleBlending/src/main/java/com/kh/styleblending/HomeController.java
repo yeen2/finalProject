@@ -263,16 +263,33 @@ public class HomeController {
 		
 
 
-	// 공지사항 이동
+	// footer 공지사항 이동
 	@RequestMapping("noticePage.do")
 	public String noticePage() {
 		return "main/notice";
 	}
 	
+	// footer 광고문의 이동
 	@RequestMapping("adPage.do")
 	public String adPage() {
 		return "member/adPage";
 		
+	}
+	
+	// 카카오로그인
+	@RequestMapping("kakaoLogin.do")
+	public ModelAndView kakaoLogin(HttpSession session, ModelAndView mv, String email, String id, String nickName) {
+		
+		Member mem = mService.kakaoLogin(email, id, nickName);
+		
+		if(mem != null) {
+			session.setAttribute("loginUser", mem);
+			mv.setViewName("redirect:main.do");
+		}else {
+			mv.addObject("msg", "카카오 로그인 실패").setViewName("common/login");
+		}
+		
+		return mv;
 	}
 	
 	

@@ -79,6 +79,41 @@ public class MemberServiceImpl implements MemberService{
 		
 		return m;
 	}
+
+	
+	@Override
+	public Member kakaoLogin(String email, String id, String nickName) {
+		DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+		def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
+		// PROPAGATION_REQUIRED : 기존에 트랜잭션이 없으면 새로 만들고 있으면 기존꺼라 같이 묶여라
+		
+		// 트랜잭션 상태를 관리하는 객체
+		TransactionStatus status = transactionManager.getTransaction(def);
+		
+		try {
+			sqlSession.getConnection().setAutoCommit(false);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		int result1 = mDao.selectKakao(id);
+		Member mem = new Member();
+		
+		if(result1 > 0) {
+			mem = mDao.getMember(email);
+		}else {
+			int result2 = mDao.insertKakao(email, id, nickName);
+			if(result2 > 0) {
+				transactionManager.commit(status);
+				mem = mDao.getMember(email);
+			}else {
+				transactionManager.rollback(status);
+			}
+		}
+		
+		return mem;
+		
+	}
 	
 	
 }

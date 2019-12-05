@@ -22,7 +22,8 @@ public interface MemberService {
 	// 6. 자동로그인시, id로 정보 가져오기
 	Member getMember(String email);
 	
-
+	// 7. 카카오로그인
+	Member kakaoLogin(String email, String id, String nickName);
 
 	
 }
