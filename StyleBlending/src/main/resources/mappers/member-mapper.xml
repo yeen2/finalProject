@@ -70,6 +70,17 @@
 		where email=#{email}
 	</select>
 
+	<insert id="insertKakao">
+		insert into member
+		values(seq_member.nextval, 'sns', #{id}, #{email}, 'k*a*k*a*o*Lo*gin*St*yl*e9*1*0*2*9', #{nickName}, 
+				default, null, default, default, '/resources/upload/member/', sysdate, null, null, default)
+	</insert>
+	
+	<select id="selectKakao" resultType="_int">
+		select count(*) 
+		from member 
+		where snsid=#{id}
+	</select>
 
 
 

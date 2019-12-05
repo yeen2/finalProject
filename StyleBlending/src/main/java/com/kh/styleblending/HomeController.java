@@ -216,7 +216,8 @@ public class HomeController {
 			String setfrom = "jang32880634@gmail.com";
 			//String tomail = request.getParameter(email); // 받는 사람 이메일
 			String title = "[StyleBlending] " + m.getNickName() + "님 요청하신 비밀번호 보내드립니다~"; // 제목
-			String content = "새로운 비밀번호는 " + randomPass + "입니다. 로그인 하신 후, 비밀번호는 새로 변경해 주세요~"; // 내용
+			String content = "새로운 비밀번호는 " + randomPass + "입니다. 로그인 하신 후, 비밀번호는 새로 변경해 주세요~"
+							+"http://192.168.30.34:8070/styleblending/loginForm.do"; // 내용
 	
 			try {
 				MimeMessage message = mailSender.createMimeMessage();
@@ -263,16 +264,33 @@ public class HomeController {
 		
 
 
-	// 공지사항 이동
+	// footer 공지사항 이동
 	@RequestMapping("noticePage.do")
 	public String noticePage() {
 		return "main/notice";
 	}
 	
+	// footer 광고문의 이동
 	@RequestMapping("adPage.do")
 	public String adPage() {
 		return "member/adPage";
 		
+	}
+	
+	// 카카오로그인
+	@RequestMapping("kakaoLogin.do")
+	public ModelAndView kakaoLogin(HttpSession session, ModelAndView mv, String email, String id, String nickName) {
+		
+		Member mem = mService.kakaoLogin(email, id, nickName);
+		
+		if(mem != null) {
+			session.setAttribute("loginUser", mem);
+			mv.setViewName("redirect:main.do");
+		}else {
+			mv.addObject("msg", "카카오 로그인 실패").setViewName("common/login");
+		}
+		
+		return mv;
 	}
 	
 	

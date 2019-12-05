@@ -28,6 +28,7 @@
 	.replyForm_nickname:hover {cursor: pointer; color: #0080FF;}
 	.replyForm_content{
 		height: 100px;
+		color:#FA5858;
 	}
 	.rrBtn{
 		color:gray;
@@ -222,7 +223,8 @@
 				
 				
 				<!-- 댓글 -->
-				<p>View all <b id="rCount">${ p.replyCount}</b> comments</p>
+				<p>View all <b id="rCount"></b> comments</p>
+				<%-- <p>View all <b id="rCount">${ p.replyCount}</b> comments</p> --%>
 				<br>
 				
 				<!-- for문 돌릴떄, 전index랑 같으면  -->
@@ -420,7 +422,6 @@
 					<h5 class="card-header">Location</h5>
 					<div class="card-body">
 						<div id="map" style="height: 300px;"></div>
-						<span>${p.location }</span> 
 					</div>
 				</div>
 				
@@ -897,7 +898,8 @@
 				success:function(data){
 					
 					//console.log(data);
-
+					$("#rCount").text(data.length);
+					
 					$replyForm = $("#replyForm");
 					$replyForm.html("");
 
@@ -1208,14 +1210,14 @@
 					        objectType: 'feed',
 					        content: {
 					          title: '${c.cafe_name}',
-					          description: '#StyleBlending,#ootd,#데일리룩,#${c.cafe_name},#${c.address},#${c.favorite}',
+					          description: '#StyleBlending,#ootd,#데일리룩,#${p.location},#${c.address},#${c.favorite}',
 					         /*  imageUrl: 'http://mud-kage.kakao.co.kr/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png', */
-					         imageUrl: 'http://mud-kage.kakao.co.kr/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
+					         imageUrl: 'https://ibb.co/Sv6cYJc',
 					         link: {
 					            /* mobileWebUrl: 'http://192.168.30.186:8030/LugarFresco/cafeInfo.ca?c_no=${c.c_no}',
 					            webUrl: 'http://192.168.30.186:8030/LugarFresco/cafeInfo.ca?c_no=${c.c_no}' */
-					            mobileWebUrl: 'http://localhost:8070/styleblending/pInfo.do?id=${p.pno}',
-					            webUrl: 'http://localhost:8070/styleblending/pInfo.do?id=${p.pno}' 
+					            mobileWebUrl: 'http://192.168.30.34:8070/styleblending/pInfo.do?id=${p.pno}',
+					            webUrl: 'http://192.168.30.34:8070/styleblending/pInfo.do?id=${p.pno}' 
 					          }
 					        },
 					        social: {
@@ -1227,15 +1229,15 @@
 					          {
 					            title: '웹으로 보기',
 					            link: {
-					              mobileWebUrl: 'http://localhost:8070/styleblending/pInfo.do?id=${p.pno}',
-					              webUrl: 'http://localhost:8070/styleblending/pInfo.do?id=${p.pno}'
+					              mobileWebUrl: 'http://192.168.30.34:8070/styleblending/pInfo.do?id=${p.pno}',
+					              webUrl: 'http://192.168.30.34:8070/styleblending/pInfo.do?id=${p.pno}'
 					            }
 					          },
 					          {
 					            title: '앱으로 보기',
 					            link: {
-					              mobileWebUrl: 'http://localhost:8070/styleblending/pInfo.do?id=${p.pno}',
-					              webUrl: 'http://localhost:8070/styleblending/pInfo.do?id=${p.pno}'
+					              mobileWebUrl: 'http://192.168.30.34:8070/styleblending/pInfo.do?id=${p.pno}',
+					              webUrl: 'http://192.168.30.34:8070/styleblending/pInfo.do?id=${p.pno}'
 					            }
 					          }
 					        ]
@@ -1280,7 +1282,7 @@
 								// 인포윈도우로 장소에 대한 설명을 표시합니다
 								var infowindow = new kakao.maps.InfoWindow(
 										{
-											content : '<div style="width:150px;text-align:center;padding:6px 0;">${p.location}</div>'
+											content : '<div style="width:300px;text-align:center;padding:6px 0;">${p.location}</div>'
 										});
 								infowindow.open(map, marker);
 	

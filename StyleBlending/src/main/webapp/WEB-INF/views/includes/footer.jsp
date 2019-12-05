@@ -34,10 +34,13 @@
 			</div>
 			<div class="copyright text-center">
 				<hr/>
-				<p class="small"> &copy; 2019, made with 
+				<p class="small"> &copy; 2019/12/05, made with 
 					<span class="text-danger">
 					<i class="fas fa-heart"></i></span> 
 					by styleblending
+					<br>
+					장예은 <i class="fas fa-smile"></i> 정혜은 <i class="fas fa-smile"></i> 
+					김성환 <i class="fas fa-smile"></i> 이종배 <i class="fas fa-smile"></i> 한정호
 				</p>
 			</div>
 		</div>

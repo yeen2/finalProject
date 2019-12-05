@@ -44,6 +44,19 @@ public class MemberDao {
 	public Member selectSearchPass(String email) {
 		return sqlSession.selectOne("memberMapper.selectSearchPass", email);
 	}
+
+	public int insertKakao(String email, String id, String nickName) {
+		HashMap<String, String> map = new HashMap<>();
+		map.put("email", email);
+		map.put("id", id);
+		map.put("nickName", nickName);
+		
+		return sqlSession.insert("memberMapper.insertKakao", map);
+	}
+	
+	public int selectKakao(String id) {
+		return sqlSession.selectOne("memberMapper.selectKakao", id);
+	}
 	
 	
 	

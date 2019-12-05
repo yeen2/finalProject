@@ -77,8 +77,8 @@
 				</div>
 				
 				<div style="margin-top:35px;">
-					<button type="button"id="kakaoBtn" style="border: none; background-color: white;">
-						<img id="kakao-login-btn" src="https://kauth.kakao.com/public/widget/login/kr/kr_02_medium.png" style="cursor: pointer"></button>
+					<button type="button"id="kakaoBtn" style="border: none; background-color: white;" onclick="loginWithKakao();">
+						<img id="kakao-login-btn" src="resources/assets/img/kakao_login_btn_medium.png" style="cursor: pointer"></button>
 					
 				</div>
 
@@ -201,51 +201,46 @@
 	</script>
 	 
     <%-- 카카오 로그인 api --%>
-    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
-    <script>
-		$(document).ready(function(){
-			Kakao.init("43c418db70d8c1c6392316577a947ee1");
-			function getKakaotalkUserProfile(){
-				
-				Kakao.API.request({
-					url: '/v2/user/me',
-					success: function(res) {
-						var email = res.kakao_account.email;
-						var id = res.id;
-						var nickName = res.properties.nickname;
-						var nnn = null;
-						location.href="${pageContext.request.contextPath}/kakaoLogin.me?nickName=" + nickName + "&email=" + email + "&id=" + id + "&nnn=" + nnn;
-						
-						Kakao.Auth.logout();
-					},
-					fail: function(error) {
-						console.log(error);
-					}
-				});
-			}
-			function createKakaotalkLogin(){
-				var loginBtn = $("#kakaoBtn");
-				loginBtn.click(function(){
-					Kakao.Auth.loginForm({
-						persistAccessToken: true,
-						persistRefreshToken: true,
-						success: function(authObj) {
-							getKakaotalkUserProfile();
-							
-						},
-						fail: function(err) {
-							console.log(err);
-						}
-					});
-				});
-			}
-			if(Kakao.Auth.getRefreshToken()!=undefined&&Kakao.Auth.getRefreshToken().replace(/ /gi,"")!=""){
-				createKakaotalkLogout();
-				getKakaotalkUserProfile();
-			}else{
-				createKakaotalkLogin();
-			}
-		});
+    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <script type="text/javascript">
+    
+	  //<![CDATA[
+	    // 사용할 앱의 JavaScript 키를 설정해 주세요.
+	    Kakao.init('31cf6de7a2c86437e847970902031c17');
+	    function loginWithKakao() {
+	      // 로그인 창을 띄웁니다.
+	      Kakao.Auth.loginForm({
+	        success: function(authObj) {
+	        	console.log("카카오 성공");
+	          getKakaotalkUserProfile();
+	        },
+	        fail: function(err) {
+	        	console.log("카카오 실패");
+	        }
+	      });
+	    };
+	    
+	    function getKakaotalkUserProfile(){
+			
+			Kakao.API.request({
+				url: '/v2/user/me',
+				success: function(res) {
+					var email = res.kakao_account.email;
+					var id = res.id;
+					var nickName = res.properties.nickname;
+					
+					location.href="kakaoLogin.do?nickName=" + nickName + "&email=" + email + "&id=" + id;
+					
+					Kakao.Auth.logout();
+					
+				},
+				fail: function(error) {
+					console.log(error);
+				}
+			});
+		};
+	  //]]>
+		
 	</script>
 	
 	<%-- 네이버 로그인 --%>
